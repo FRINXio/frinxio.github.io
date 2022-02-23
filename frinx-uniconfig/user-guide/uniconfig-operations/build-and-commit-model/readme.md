@@ -23,7 +23,7 @@ comparison to Immediate Commit Model:
 
 ## Configuration
 
-Configurations related to UniConfig transactions is placed in the
+Configuration related to UniConfig transactions is placed in the
 'config/lighty-uniconfig-config.json' file under 'transactions'
 container. Note that build-and-commit model is enabled if
 'uniconfigTransactionEnabled' is set to 'true' value (default value).

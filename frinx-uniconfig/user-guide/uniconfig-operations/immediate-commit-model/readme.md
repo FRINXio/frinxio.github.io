@@ -26,7 +26,7 @@ using the Immediate Commit Model.
 
 
 ## Configuration
-Configurations related to UniConfig transactions is placed in the
+Configuration related to UniConfig transactions is placed in the
 'config/lighty-uniconfig-config.json' file under 'transactions'
 container.
 A user can turn off the Immediate Commit Model and use only the
