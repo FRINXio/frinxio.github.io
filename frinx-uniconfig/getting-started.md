@@ -14,6 +14,8 @@ in a container, standalone or as part of our automation solution FRINX
 Machine. UniConfig has a built-in data store that can be run in memory
 or with an external database.
 
+![UniConfig features](uc_features.png)
+
 ## UniConfig key feature overview
 
 -   Retrieves and stores current startup and running configuration from
@@ -138,6 +140,20 @@ Replace [frinx-licence-secret-token] with your unique token. The token is unique
 !!!
 For more information on the different arguments run the startup script with the **-h** flag
 !!!
+
+## OpenAPI
+
+UniConfig distributions contain '.yaml' file that generates list of all
+usable RPCs and their examples. You can view it locally or on our hosted version that always shows
+latest OpenAPI version.
+
+**File can be found here:**
+
+```
+/uniconfig-x.x.x.frinx/openapi
+```
+
+[!ref text="OpenAPI"](../user-guide/operational-procedures/openapi/)
 
 ## Offline Activation
 
