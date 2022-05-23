@@ -586,7 +586,7 @@ Such operation must be executed using input JSON.
 
 It is possible to define aliases in UniConfig shell. For this purpose, there is a json file named shell-aliases in the 
 UniConfig distribution. This file is possible to find on the path Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config 
-after building and unpacking of the UniConfig distribution. This file contains some samples.
+after unpacking of the UniConfig distribution. This file contains some samples.
 
 ``` shell-aliases.json with default samples
 /*
@@ -609,8 +609,8 @@ Asterisk symbol is a placeholder. We can dynamically add an alias value
 
 ### Aliases creation
 
-It is not possible to create aliases dynamically, only before start the UniConfig distribution. Creation of aliases has
-some rules:
+It is not possible to create aliases dynamically, only before starting of the UniConfig distribution. Creation of aliases 
+has some rules:
 
 1. Alias name has to be unique and cannot contain whitespaces
 2. Command can contain wildcard (*). In this case user will be prompted to add value
