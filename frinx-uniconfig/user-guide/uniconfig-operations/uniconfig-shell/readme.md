@@ -614,3 +614,86 @@ In this case output in console is empty but content of output.txt file could loo
 ```
 
 ## Aliases
+
+It is possible to define aliases in UniConfig shell. For this purpose, there is a json file named shell-aliases in the 
+UniConfig distribution. This file is possible to find on the path Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config 
+after unpacking of the UniConfig distribution. This file contains some samples.
+
+``` shell-aliases.json with default samples
+/*
+Example: "alias": "command1 command2 * command3 *"
+Alias name must be a simple word without spaces
+Asterisk symbol is a placeholder. We can dynamically add an alias value
+*/
+{
+  "configuration-mode": {
+    "diff": "request calculate-diff target-nodes/node *"
+  },
+  "request": {
+    "shh": "show-history"
+  },
+  "show": {
+    "lbr": "logging-status broker restconf"
+  }
+}
+```
+
+### Aliases creation
+
+It is not possible to create aliases dynamically, only before starting of the UniConfig distribution. Creation of aliases 
+has some rules:
+
+1. Alias name has to be unique and cannot contain whitespaces
+2. Command can contain wildcard (*). In this case user will be prompted to add value
+3. Alias is only visible in a mode under which it was defined in the shell-aliases file
+
+### Examples
+
+- Example - execution of the alias 'diff xr5':
+
+```
+uniconfig>configuration-mode 
+config>diff xr5
+{
+  "node-results": {
+    "node-result": [
+      {
+        "node-id": "xr5",
+        "status": "complete"
+      }
+    ]
+  },
+  "overall-status": "complete"
+}
+config>
+```
+
+- Example - execution of the alias 'lbr':
+
+```
+uniconfig>show
+show>lbr 
+{
+  "broker-identifier": "restconf",
+  "is-logging-broker-enabled": false
+}
+show>
+
+```
+
+- Example - execution of the alias 'shh':
+
+```
+uniconfig>request
+request>show-history 
+----- History of commands -----
+18-05-2022 14:13:09 : show
+18-05-2022 14:13:18 : lbr
+18-05-2022 14:17:43 : exit
+18-05-2022 14:17:48 : request
+18-05-2022 14:17:57 : shcs
+18-05-2022 14:18:10 : shcs n1
+18-05-2022 14:18:25 : show-history
+request>
+
+```
