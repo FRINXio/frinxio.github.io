@@ -1,14 +1,20 @@
 # UniConfig Shell
 
-UniConfig shell provides SSH server API for communication with UniConfig using command-line interface. Using shell,
-it is possible to read operational data of devices, manipulate configuration of devices, templates, or unistore
-nodes, invoke device or UniConfig operations, or read/change some UniConfig settings.
-Most of the shell interface is auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
+UniConfig shell is a Command Line Interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including:
+
+* reading operational data of devices
+* manipulating device configuration
+* manipulating configuration templates
+* manipulating data stored in unistore
+* invoking device or UniConfig operations
+* manipulating global UniConfig settings
+
+Uniconfig shell is model driven and thus its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
 RPC/action operations).
 
 ## Configuration
 
-By default, UniConfig shell is disabled. To enable it, flag 'cliShell/sshServer/enabled' must be set to 'true'
+By default, UniConfig shell is disabled. To enable it, configuration parameter 'cliShell/sshServer/enabled' must be set to 'true'
 in the 'config/lighty-uniconfig-config.json' file.
 
 All available settings and descriptions are displayed in the following JSON snippet.
@@ -37,7 +43,7 @@ All available settings and descriptions are displayed in the following JSON snip
     }
 ```
 
-After starting UniConfig, SSH server with UniConfig shell is started listening on port 2022 and loopback interface.
+After starting UniConfig, SSH server will listen for connections on port 2022 and loopback interface.
 
 ## Navigation in the shell
 
@@ -80,7 +86,7 @@ data.)
 
 ## Root mode
 
-* Root mode represents initial mode that is provided to user after successful authentication.
+* Root mode represents initial mode that is available to a user after successful authentication.
 * Example: login into UniConfig shell:
 
 ```shell Connecting to UniConfig shell using SSH client
@@ -100,8 +106,8 @@ show                      (reading data from device)
 show-history (show history [max number of commands])
 ```
 
-* Command 'exit' is used for leaving of the whole UniConfig shell interface (disconnecting SSH client).
-* Example - leaving UniConfig shell:
+* Command 'exit' is used for exiting UniConfig shell interface altogether (disconnecting SSH client).
+* Example - exiting UniConfig shell:
 
 ```shell Leaving UniConfig shell
 uniconfig>exit
@@ -111,13 +117,13 @@ Connection to 127.0.0.1 closed.
 ```
 
 !!!
-Currently, only username/password single-user authentication is supported based on configuration
+Currently, only username/password single-user authentication is supported according to configuration
 in the 'config/lighty-uniconfig-config.json'.
 !!!
 
 ### Accessing sub-modes
 
-* This mode supplies gateway for opening configuration, show, and request operational modes.
+* Root mode acts as a gateway for opening configuration, show, and request operational modes.
 * Example - switching into Configuration mode:
 
 ```shell Opening configuration mode
@@ -156,9 +162,9 @@ List of invoked commands are persisted across UniConfig restarts and SSH connect
 
 * After opening Configuration mode, a new UniConfig transaction is created. All operations that are invoked from
   the configuration mode are executed in scope of created transaction.
-* Transaction is automatically closed after leaving of configuration mode ('exit' or 'quit' command).
+* Transaction is automatically closed after leaving the Configuration mode ('exit' or 'quit' command).
 * If user invokes 'commit' or 'checked-commit', transaction is automatically refreshed (user stays in the configuration
-  mode with newly created transaction).
+  mode with a newly created transaction).
 
 ```shell Configuration mode overview
 config>
@@ -176,8 +182,8 @@ diff (alias for 'request calculate-diff target-nodes/node *')
 
 ### Show configuration
 
-* Show operation can be used for displaying selected subtrees.
-* Subtree path can be constructed interactively with help from shell suggestions / auto-completion mechanism.
+* Show operation can be used to display selected subtrees.
+* Subtree path can be constructed interactively with help of shell suggestions / auto-completion mechanism.
   Construction of the path works the same way in the Show, Delete, and Set operations.
 
 * Example - displaying configuration of selected container:
@@ -225,8 +231,8 @@ config>show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 config
 
 ### Delete configuration
 
-* Delete operation is used for removal of selected subtree.
-* Example - removal of container:
+* Delete operation removes a selected subtree.
+* Example - removal of a container:
 
 ```shell Construction of path with help from suggestions
 config>delete uniconfig iosxr
@@ -268,12 +274,12 @@ config>show uniconfig iosxr network-instances network-instance default
 
 * Set operation can be used for:
 
-1. Setting value of single leaf.
-2. Setting values of multiple leaves in the single shell operation.
-3. Setting list of values of leaf-list.
-4. Replacing the whole subtree using provided JSON snippet.
+1. Setting value of a single leaf.
+2. Setting values of multiple leaves in a single shell operation.
+3. Setting list of values for a leaf-list.
+4. Replacing the whole subtree using a JSON snippet.
 
-* Example - setting value of single leaf:
+* Example - setting value of a single leaf:
 
 ```shell Providing datatype hints at selected leaf
 config>set uniconfig iosxr lacp config system-priority
@@ -319,10 +325,10 @@ config>show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 hold-tim
 }
 ```
 
-* JSON snippet can be written to selected data-tree node by entering 'json' sub-mode. In the 'json', user can type
-  multiple lines that must conform JSON formatting. At the end, user can confirm set operation with input json
-  using pattern 'w!' + newline or cancel set operation using 'q!' + newline pattern.
-* Example - replacing configuration of interface using provided JSON snippet:
+* JSON snippet can be written to a selected data-tree node by entering 'json' sub-mode. In the 'json' su-mode, user can type
+  multiple lines that must represent a well-formed JSON document. At the end, user can confirm the set operation 
+  using pattern 'w!' + newline or to cancel the set operation with 'q!' + newline pattern.
+* Example - replacing configuration of an interface using a JSON snippet:
 
 ```shell Replacing 'config' container under interface using provided JSON snippet
 config>set uniconfig iosxr interfaces interface GigabitEthernet0/0/0/1 config json
@@ -376,7 +382,7 @@ config>show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/1
 
 ### Execute UniConfig operation
 
-* Command 'request' us used for execution of UniConfig operations such as 'commit' or 'calculate-diff'
+* Command 'request' is used to execute UniConfig operations such as 'commit' or 'calculate-diff'
   in the UniConfig transaction.
 * User can fill in input parameters and values interactively or via provided JSON snippet.
 
@@ -447,11 +453,11 @@ config>request sync-from-network check-timestamp true target-nodes/node iosxr
 
 ## Show operational mode
 
-* Show mode allows user to:
+* Show mode allows users to:
 
-1. Display operational data placed on UniConfig - e.g., logging status, list of open transactions, or list of acquired
+1. Display operational data of UniConfig itself - e.g., logging status, list of open transactions, or list of acquired
    subscriptions.
-2. Display operational data on NETCONF or CLI device.
+2. Display operational data of network devices.
 
 ```shell Overview of Show operational mode
 show>
@@ -472,7 +478,7 @@ lbr      (alias for 'logging-status broker restconf')
 ```
 
 
-* After opening Show mode, a new UniConfig transaction is open. Transaction is closed after leaving this mode.
+* After opening Show mode, a new UniConfig transaction is opened. Transaction is closed after leaving this mode.
 
 
 ```shell Opening Show operational mode
@@ -518,10 +524,10 @@ show>transactions transaction-data
 
 ## Request operational mode
 
-* Request mode allows user to:
+* Request mode allows users to:
 
-1. Invoke selected UniConfig requests that reads or alter UniConfig operation.
-2. Invoke RPCs or actions that are provided by devices or southbound mount-points.
+1. Invoke selected UniConfig requests that read or alter UniConfig settings.
+2. Invoke RPCs or actions that are provided by network devices or other southbound mount-points.
 
 * User can fill in input parameters and values interactively or via provided JSON snippet.
 * After opening Request mode, a new UniConfif transaction is open. Transaction is closed after leaving this mode.
@@ -576,13 +582,13 @@ w!
 ```
 
 !!!
-UniConfig shell doesn't support interactive typing of input arguments to RPC/action that contains 'list' YANG element.
-Such operation must be executed using input JSON.
+UniConfig shell doesn't support interactive typing of input arguments for RPC/action that contains 'list' YANG element.
+Such operations must be executed using input JSON.
 !!!
 
 ## Pipe operations
-UniConfig shell supports pipe operations similar to unix pipes.
-When command is followed by pipe sign: |, output of command will be passed to selected pipe operation.
+UniConfig shell supports pipe operations that are similar to unix shell/bash pipes.
+When a command is followed by pipe sign: |, output of that command will be passed to a selected pipe operation.
 - Example:
 ```shell Execution of grep pipe operation:
 config>show uniconfig R1 interface-configurations interface-configuration | grep netmask
@@ -597,7 +603,7 @@ Supported pipe operations are:
 4. brief - displays root elements in the short table format
 
 ## Redirection of output
-Result of command can be redirected to file using ">" sign followed by file name.
+Result of a command execution can be redirected to a file using ">" sign followed by file name.
 - Example
 ```shell Redirection of output to file
 config>show uniconfig R1 interface-configurations interface-configuration act\ GigabitEthernet0/0/0/1 > '/home/output.txt' 
@@ -616,8 +622,8 @@ In this case output in console is empty but content of output.txt file could loo
 ## Aliases
 
 It is possible to define aliases in UniConfig shell. For this purpose, there is a json file named shell-aliases in the 
-UniConfig distribution. This file is possible to find on the path Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config 
-after unpacking of the UniConfig distribution. This file contains some samples.
+UniConfig distribution. This file can be found under Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config 
+after unpacking of the UniConfig distribution. This file contains some sample aliases.
 
 ``` shell-aliases.json with default samples
 /*
@@ -640,12 +646,12 @@ Asterisk symbol is a placeholder. We can dynamically add an alias value
 
 ### Aliases creation
 
-It is not possible to create aliases dynamically, only before starting of the UniConfig distribution. Creation of aliases 
+It is not possible to create aliases dynamically, only before Uniconfig is started. Creation of aliases 
 has some rules:
 
 1. Alias name has to be unique and cannot contain whitespaces
-2. Command can contain wildcard (*). In this case user will be prompted to add value
-3. Alias is only visible in a mode under which it was defined in the shell-aliases file
+2. Command can contain a wildcard (*). In this case user will be prompted to add value
+3. Alias is only visible in the mode under which it was defined
 
 ### Examples
 
