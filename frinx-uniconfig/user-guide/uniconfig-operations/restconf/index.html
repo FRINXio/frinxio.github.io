@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.709205304003">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.709210183706">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.3.0.709205304003" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.3.0.709210183706" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.3.0.709205304003" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.3.0.709210183706" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.3.0.709205304003" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.3.0.709205304003" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.3.0.709210183706" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.3.0.709210183706" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -2112,6 +2112,73 @@ or
 
     }
 }</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="escaping-keys-in-uri">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#escaping-keys-in-uri">#</doc-anchor-trigger>
+        <span>Escaping keys in URI</span>
+    </h2>
+</doc-anchor-target>
+<p>Following characters must be escaped, if they are contained in a list key value:
+&#x27;:&#x27;, &#x27;/&#x27;, &#x27;?&#x27;, &#x27;#&#x27;, &#x27;[&#x27;, &#x27;]&#x27;, &#x27;@&#x27;, &#x27;!&#x27;, &#x27;$&#x27;, &#x27;&amp;&#x27;, &#x27;&#x27;&#x27;, &#x27;(&#x27;, &#x27;)&#x27;, &#x27;*&#x27;, &#x27;+&#x27;, &#x27;,&#x27;, &#x27;;&#x27;, &#x27;=&#x27;.</p>
+<p>There are 2 ways how to escape special characters in a key value: by encoding reserved UTF-8 characters using &#x27;%HH&#x27;
+patten or using key delimiter.</p>
+<doc-anchor-target id="encoding-reserved-characters">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#encoding-reserved-characters">#</doc-anchor-trigger>
+        <span>Encoding reserved characters</span>
+    </h3>
+</doc-anchor-target>
+<p>RESTCONF RFC-8040 natively allows to specify reserved characters in a key value, if they are encoded using
+&#x27;%HH&#x27; pattern, where &#x27;HH&#x27; refers to hexadecimal representation of UTF-8 character.</p>
+<p>The following request demonstrates encoding of special characters in the &#x27;ge0/0/1&#x27; interface name.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Read interface (escaped interface name)</div>
+<pre class="language-bash"><code v-pre class="language-bash">    curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device/configuration/frinx-openconfig-interfaces:interfaces/interface=ge0%2F0%2F1 \
+--header 'Accept: application/json'</code></pre>
+</doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Mappings between special characters and UTF-8 codes can be found on following site:
+<a href="https://www.urlencoder.org/">https://www.urlencoder.org/</a></p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="demarcation-of-key-using-delimiter">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#demarcation-of-key-using-delimiter">#</doc-anchor-trigger>
+        <span>Demarcation of key using delimiter</span>
+    </h3>
+</doc-anchor-target>
+<p>UniConfig allows to specify delimiter used for demarcation of list key value. Afterwards, all special characters
+inside key are automatically escaped.</p>
+<p>By default, key delimiter is disabled. It must be specified in the &#x27;config/lighty-uniconfig-config.json&#x27; file:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Configuration of keyDelimiter</div>
+<pre class="language-json"><code v-pre class="language-json">    // RESTCONF and web server settings
+    &quot;restconf&quot;: {
+        // delimiter used for escaping of list keys in URI (for example, '%22')
+        // if it is set to 'null' (default), keys cannot be escaped and must be directly encoded according to RFC-8040
+        &quot;keyDelimiter&quot;: &quot;%22&quot;
+    }</code></pre>
+</doc-codeblock></div>
+<p>The following request demonstrates demarcation of interface name &#x27;ge0/0/1&#x27; using &#x27;%22&#x27; delimiter.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Read interface (escaped interface name)</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device/configuration/frinx-openconfig-interfaces:interfaces/interface=%22ge0/0/1%22 \
+--header 'Accept: application/json'
+```&gt;&gt;&gt;&gt;&gt;&gt;&gt; b208d862 (Encoding key values)</code></pre>
 </doc-codeblock></div>
 
                                 
