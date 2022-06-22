@@ -12,26 +12,24 @@
     <meta name="generator" content="Retype 2.3.0">
 
     <!-- Primary Meta Tags -->
-    <title>Dry-run manager | Frinx Docs</title>
-    <meta name="title" content="Dry-run manager | Frinx Docs">
-    <meta name="description" content="The RPC will resolve the diff between actual and intended configuration of nodes by using UniConfig Node Manager. Changes for CLI nodes are" />
+    <title>Admin State | Frinx Docs</title>
+    <meta name="title" content="Admin State | Frinx Docs">
+    <meta name="description" content="Admin state is used to lock, unlock or southbound-lock devices. Modification of data on those devices is then allowed or forbidden" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/dryrun-manager/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/admin-state/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/dryrun-manager/">
-    <meta property="og:title" content="Dry-run manager | Frinx Docs">
-    <meta property="og:description" content="The RPC will resolve the diff between actual and intended configuration of nodes by using UniConfig Node Manager. Changes for CLI nodes are">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/dryrun-manager/rpc_dry-run-rpc_dryrun_commit.svg">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/admin-state/">
+    <meta property="og:title" content="Admin State | Frinx Docs">
+    <meta property="og:description" content="Admin state is used to lock, unlock or southbound-lock devices. Modification of data on those devices is then allowed or forbidden">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/dryrun-manager/">
-    <meta property="twitter:title" content="Dry-run manager | Frinx Docs">
-    <meta property="twitter:description" content="The RPC will resolve the diff between actual and intended configuration of nodes by using UniConfig Node Manager. Changes for CLI nodes are">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/dryrun-manager/rpc_dry-run-rpc_dryrun_commit.svg">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/admin-state/">
+    <meta property="twitter:title" content="Admin State | Frinx Docs">
+    <meta property="twitter:description" content="Admin state is used to lock, unlock or southbound-lock devices. Modification of data on those devices is then allowed or forbidden">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -250,61 +248,46 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="dry-run-manager" class="break-words">
+<doc-anchor-target id="admin-state" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#dry-run-manager">#</doc-anchor-trigger>
-        <span>Dry-run manager</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#admin-state">#</doc-anchor-trigger>
+        <span>Admin State</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="rpc-dryrun-commit">
+<p>Admin state is used to lock, unlock or southbound-lock devices.
+Modification of data on those devices is then allowed or forbidden
+accordingly. Currently, there are three states that are supported:</p>
+<ul>
+<li>LOCKED - When a device is administratively locked, it is not possible
+to modify its configuration, and no changes are ever pushed to the device.</li>
+<li>UNLOCKED - Device is assumed to be operational. All changes are attempted
+to be sent southbound. This is the default when a new device is created.</li>
+<li>SOUTHBOUND_LOCKED - It is possible to configure the device, but no changes
+are sent to the device. Admin mode is useful when pre provisioning devices.</li>
+</ul>
+<p>This state is automatically added to the device during installation. The user
+can further specify what state the device should be in, via:</p>
+<p><strong>&quot;uniconfig-config:admin-state&quot;: &quot;unlocked&quot;</strong></p>
+<p>The state variable should be from one of the above-mentioned options.</p>
+<p>If the user wants to change the state after the installation, an RPC for
+changing that state is available.</p>
+<doc-anchor-target id="rpc-example">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-dryrun-commit">#</doc-anchor-trigger>
-        <span>RPC dryrun-commit</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-example">#</doc-anchor-trigger>
+        <span>RPC Example</span>
     </h2>
 </doc-anchor-target>
-<p>The RPC will resolve the diff between actual and intended configuration
-of nodes by using UniConfig Node Manager. Changes for CLI nodes are
-applied by using cli-dryrun mountpoint which only stores translated CLI
-commands to the cli-dry-run journal. After all changes are applied, the
-cli-dryrun journal is read and an RPC output is created and returned. It
-works similarly with NETCONF devices, but it outputs NETCONF messages
-instead of CLI commands. RPC input contains a list of UniConfig nodes
-for which to execute the dry run. Output of the RPC describes the
-results of the operation and matches all input nodes. It also contains a
-list of commands, and NETCONF messages for the given nodes. If RPC is
-called with empty list of target nodes, dryrun operation is executed on
-all modified nodes in the UniConfig transaction. If one node failed for
-any reason the RPC will be failed entirely.</p>
-<p><figure class="content-center">
-    <img src="rpc_dry-run-rpc_dryrun_commit.svg" alt="RPC dryrun commit" />
-    <figcaption class="caption">RPC dryrun commit</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="rpc-examples">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="successful-example">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC input contains the target node and the output contains a list of
-commands which would be sent to the device if the RPC commit or
-checked-commit was called.</p>
+<p>RPC input contains the device name and the state that it should be change to.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:change-admin-state' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
+        &quot;node-id&quot;: &quot;vnf20&quot;,
+        &quot;admin-state&quot;: &quot;southbound_locked&quot;
     }
 }'</code></pre>
 </doc-codeblock></div>
@@ -312,280 +295,38 @@ checked-commit was called.</p>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration&quot;: &quot;&lt;rpc message-id=\&quot;m-23\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;lock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/lock&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-24\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;get-config&gt;\n&lt;source&gt;\n&lt;candidate/&gt;\n&lt;/source&gt;\n&lt;filter xmlns:ns0=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot; ns0:type=\&quot;subtree\&quot;&gt;\n&lt;interface-configurations xmlns=\&quot;http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\&quot;&amp;gt;\n&amp;lt;interface-configuration&amp;gt;\n&amp;lt;active&amp;gt;act&amp;lt;/active&amp;gt;\n&amp;lt;interface-name&amp;gt;GigabitEthernet0/0/0/1&amp;lt;/interface-name&amp;gt;\n&amp;lt;/interface-configuration&amp;gt;\n&amp;lt;/interface-configurations&amp;gt;\n&amp;lt;/filter&amp;gt;\n&amp;lt;/get-config&amp;gt;\n&amp;lt;/rpc&amp;gt;\n&lt;rpc message-id=\&quot;m-25\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;edit-config&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;config&gt;\n&lt;interface-configurations xmlns=\&quot;http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\&quot;&amp;gt;\n&amp;lt;interface-configuration&amp;gt;\n&amp;lt;active&amp;gt;act&amp;lt;/active&amp;gt;\n&amp;lt;interface-name&amp;gt;GigabitEthernet0/0/0/1&amp;lt;/interface-name&amp;gt;\n&amp;lt;mtus/&amp;gt;\n&amp;lt;/interface-configuration&amp;gt;\n&amp;lt;/interface-configurations&amp;gt;\n&amp;lt;/config&amp;gt;\n&amp;lt;/edit-config&amp;gt;\n&amp;lt;/rpc&amp;gt;\n&lt;rpc message-id=\&quot;m-26\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;commit/&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-27\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;unlock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/unlock&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-28\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;lock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/lock&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-29\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;commit/&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-30\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;unlock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/unlock&gt;\n&lt;/rpc&gt;\n&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration&quot;: &quot;2019-09-13T09:03:34.072: configure terminal\n2019-09-13T09:03:34.073: interface GigabitEthernet0/0/0/1fghgfhfh\nno shutdown\nroot\n\n2019-09-13T09:03:34.073: commit\n2019-09-13T09:03:34.074: end\n&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        }
+        &quot;status&quot;: &quot;complete&quot;
     }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="successful-example-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful example</span>
-    </h3>
+<doc-anchor-target id="rpc-failed-example">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-failed-example">#</doc-anchor-trigger>
+        <span>RPC Failed Example</span>
+    </h1>
 </doc-anchor-target>
-<p>RPC input does not contain target nodes, dryrun is executed with all
-modified nodes.</p>
+<p>Device is in <strong>locked</strong> admin-state and the user tries to modify data on the device.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw ' {
-     &quot;output&quot;: {
-         &quot;node-results&quot;: {
-             &quot;node-result&quot;: [
-                 {
-                     &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                     &quot;configuration&quot;: &quot;&lt;rpc message-id=\&quot;m-23\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;lock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/lock&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-24\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;get-config&gt;\n&lt;source&gt;\n&lt;candidate/&gt;\n&lt;/source&gt;\n&lt;filter xmlns:ns0=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot; ns0:type=\&quot;subtree\&quot;&gt;\n&lt;interface-configurations xmlns=\&quot;http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\&quot;&amp;gt;\n&amp;lt;interface-configuration&amp;gt;\n&amp;lt;active&amp;gt;act&amp;lt;/active&amp;gt;\n&amp;lt;interface-name&amp;gt;GigabitEthernet0/0/0/1&amp;lt;/interface-name&amp;gt;\n&amp;lt;/interface-configuration&amp;gt;\n&amp;lt;/interface-configurations&amp;gt;\n&amp;lt;/filter&amp;gt;\n&amp;lt;/get-config&amp;gt;\n&amp;lt;/rpc&amp;gt;\n&lt;rpc message-id=\&quot;m-25\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;edit-config&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;config&gt;\n&lt;interface-configurations xmlns=\&quot;http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\&quot;&amp;gt;\n&amp;lt;interface-configuration&amp;gt;\n&amp;lt;active&amp;gt;act&amp;lt;/active&amp;gt;\n&amp;lt;interface-name&amp;gt;GigabitEthernet0/0/0/1&amp;lt;/interface-name&amp;gt;\n&amp;lt;mtus/&amp;gt;\n&amp;lt;/interface-configuration&amp;gt;\n&amp;lt;/interface-configurations&amp;gt;\n&amp;lt;/config&amp;gt;\n&amp;lt;/edit-config&amp;gt;\n&amp;lt;/rpc&amp;gt;\n&lt;rpc message-id=\&quot;m-26\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;commit/&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-27\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;unlock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/unlock&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-28\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;lock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/lock&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-29\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;commit/&gt;\n&lt;/rpc&gt;\n&lt;rpc message-id=\&quot;m-30\&quot; xmlns=\&quot;urn:ietf:params:xml:ns:netconf:base:1.0\&quot;&gt;\n&lt;unlock&gt;\n&lt;target&gt;\n&lt;candidate/&gt;\n&lt;/target&gt;\n&lt;/unlock&gt;\n&lt;/rpc&gt;\n&quot;,
-                     &quot;configuration-status&quot;: &quot;complete&quot;
-                 },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration&quot;: &quot;2019-09-13T09:03:34.072: configure terminal\n2019-09-13T09:03:34.073: interface GigabitEthernet0/0/0/1fghgfhfh\nno shutdown\nroot\n\n2019-09-13T09:03:34.073: commit\n2019-09-13T09:03:34.074: end\n&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC input contains the target node and the output contains a list of
-commands which would be sent to the device if the RPC commit or
-checked-commit was called. One node does not support dry-run.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request PUT 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=/configuration/confdConfig/ssh/clientAliveCountMax' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;]
-        }
-    }
+    &quot;clientAliveCountMax&quot;: 4
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;error-message&quot;: &quot;Node does not support dry-run&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                }
-            ]
-        }
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC input contains the target node and the output contains a list of
-commands which would be sent to the device if the RPC commit or
-checked-commit was called. One node has a bad configuration.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-configuration-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;,
-                    &quot;error-message&quot;: &quot;Supplied value \&quot;GigabitEthernet0/0/0/1gfhjk\&quot; does not match required pattern \&quot;^(?:(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm))$\&quot;\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration&quot;: &quot;2019-09-13T08:37:28.331: configure terminal\n2019-09-13T08:37:28.536: interface GigabitEthernet0/0/0/1\nshutdown\nroot\n\n2019-09-13T08:37:28.536: commit\n2019-09-13T08:37:28.536: end\n&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                }
-            ]
-        }
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-2">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC input contains the target node and the output contains a list of
-commands which would be sent to a device if the RPC commit or
-checked-commit was called. One node does not support dry-run (IOSXR) and
-one is not in the unified topology (IOSXRN). There is one extra node,
-which has not been mounted yet (AAA).</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;,&quot;AAA&quot;]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;AAA&quot;,
-                            &quot;error-message&quot;: &quot;Node has not been mounted yet.&quot;,
-                            &quot;error-type&quot;: &quot;no-connection&quot;,
-                            &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                            &quot;error-message&quot;: &quot;Node does not support dry-run.&quot;,
-                            &quot;error-type&quot;: &quot;no-connection&quot;,
-                            &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                            &quot;error-message&quot;: &quot;Unified mountpoint not found.&quot;,
-                            &quot;error-type&quot;: &quot;no-connection&quot;,
-                            &quot;configuration-status&quot;: &quot;fail&quot;
-                }
-            ]
-        }
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-3">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-3">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC input contains a target node and the output contains a list of
-commands which would be sent to a device if the RPC commit or
-checked-commit was called. One node has not been mounted yet (AAA).</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;,&quot;AAA&quot;]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;AAA&quot;,
-                    &quot;error-message&quot;: &quot;Node has not been mounted yet.&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                }
-            ]
-        }
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-4">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-4">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there weren&#x27;t any
-touched nodes, the request will result in an error.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;,
-        &quot;overall-status&quot;: &quot;fail&quot;
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-message&quot;: &quot;4af87c96-e49b-4e62-9217-316fe966d3d1: The commit RPC returned FAIL status. \n The node: '' is currently in admin-state LOCKED.&quot;,
+                &quot;error-tag&quot;: &quot;bad-element&quot;,
+                &quot;error-type&quot;: &quot;rpc&quot;
+            }
+        ]
     }
 }</code></pre>
 </doc-codeblock></div>
@@ -598,20 +339,20 @@ touched nodes, the request will result in an error.</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/uniconfig-operations/device-discovery/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/uniconfig-operations/utilities/yang-packager/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Device Discovery</span>
+                                                <span class="block mt-1">YANG packager</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/uniconfig-operations/immediate-commit-model/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Immediate Commit Model</span>
+                                                <span class="block mt-1">Build-​and-​Commit Model</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -658,6 +399,6 @@ touched nodes, the request will result in an error.</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Dry-run manager", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Admin State", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
