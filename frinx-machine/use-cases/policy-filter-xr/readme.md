@@ -5,7 +5,17 @@ of some of our system tasks. It filters through the interfaces of the
 device, returns the name of the interface based on its description
 provided by the user and applies chosen policy on that interface.
 
+## Device and input info
+
 **Supported device**: ios-xr
+
+This workflow can be tested on these devices: **ISOXR653_1, ISOXR653_2, ISOXR663_1**
+
+When inserting the data into the input we recommend using: **/Cisco-IOS-XR-ifmgr-cfg:interface-configurations** in the URI.
+
+For testing purposes you can use **FrinxDescription** as *Description* and **Custom_policy_map** as *Policy_map_name*.
+
+*Please make sure that testing device has already been installed before running this workflow.*
 
 !!!danger
 Policy creation isn't part of this workflow. The chosen policy must
