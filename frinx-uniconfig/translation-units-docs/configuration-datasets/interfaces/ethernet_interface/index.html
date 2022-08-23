@@ -6,10 +6,10 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710412253286">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.714567060052">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 2.3.0">
+    <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
     <title>Ethernet interface | Frinx Docs</title>
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.3.0.710412253286" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.714567060052" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.3.0.710412253286" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.3.0.710412253286" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.3.0.710412253286" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.714567060052" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.714567060052" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.714567060052" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -316,6 +316,8 @@
                 &quot;frinx-huawei-if-extension:flow-stat-interval&quot;: &quot;&quot;,
                 &quot;frinx-huawei-if-extension:ip-binding-vpn-instance&quot;: &quot;&quot;,
                 &quot;frinx-huawei-if-extension:trust-dscp&quot;: &quot;&quot;,
+                &quot;frinx-saos-if-extension:speed-type&quot;: &quot;&quot;,
+                &quot;frinx-saos-if-extension:negotiation-auto&quot;: &quot;&quot;,
             },
             &quot;hold-time&quot;: {
                 &quot;config&quot;: {
@@ -382,6 +384,7 @@
                                 &quot;direction&quot;: &quot;&quot;
                             },
                             &quot;frinx-huawei-if-extension:ip-binding-vpn-instance&quot;: &quot;&quot;,
+                            &quot;name&quot;: &quot;&quot;,
                         },
                         &quot;frinx-openconfig-vlan:vlan&quot;: {
                             &quot;config&quot;: {
@@ -409,6 +412,12 @@
                             &quot;config&quot;: {
                                 &quot;load-interval&quot;: &quot;&quot;
                             }
+                        },
+                        &quot;frinx-saos-if-extension:relay-agent&quot;: {
+                            &quot;config&quot;: {
+                                &quot;cid-string&quot;: &quot;&quot;,
+                                &quot;virtual-switch-name&quot;: &quot;&quot;
+                            }
                         }
                     }
                 ]
@@ -425,6 +434,8 @@
             &quot;frinx-openconfig-if-ethernet:ethernet&quot;: {
                 &quot;config&quot;: {
                     &quot;port-speed&quot;: &quot;&quot;,
+                    &quot;frinx-cisco-if-extension:lacp-rate&quot;: &quot;&quot;, // &quot;FAST&quot; or &quot;NORMAL&quot;
+                    &quot;frinx-cisco-if-extension:lacp-port-priority&quot;: , // Values between 0 and 65535
                     &quot;frinx-openconfig-if-aggregate:aggregate-id&quot;: &quot;&quot;,
                     &quot;frinx-lacp-lag-member:lacp-mode&quot;: &quot;&quot;,
                     &quot;frinx-lacp-lag-member:interval&quot;: &quot;&quot;,
@@ -503,8 +514,20 @@
                             },
                     }
                 ]
+            },
+            &quot;frinx-saos-if-extension:pm-instances&quot;: {
+                &quot;pm-instance&quot;: [
+                    {
+                        &quot;name&quot;: &quot;&quot;,
+                        &quot;config&quot;: {
+                            &quot;name&quot;: &quot;&quot;,
+                            &quot;port-type&quot;: &quot;&quot;,
+                            &quot;bin-count&quot;: &quot;&quot;,
+                            &quot;profile-type&quot;: &quot;&quot;
+                        }
+                    }
+                ]
             }
-
         }
     ]
 }</code></pre>
@@ -609,6 +632,8 @@ interface
  channel-group  mode 
  media-type  
  speed 
+ lacp port-priority 
+ lacp rate normal | fast
  shutdown | no shutdown
  storm-control  level 
  lldp transmit | no lldp transmit
@@ -627,6 +652,8 @@ interface
 <p>is a conversion of<br />
 <em>no shutdown</em> is a conversion of  set <em>true</em><br />
 <em>shutdown</em> is a conversion of  set <em>false</em><br />
+<em>normal</em> is a conversion of &quot;&quot; set <em>&quot;NORMAL&quot;</em><br />
+<em>fast</em> is a conversion of &quot;&quot; set <em>&quot;FAST&quot;</em><br />
 <em>lldp transmit</em> is a conversion of  set <em>true</em><br />
 <em>no lldp transmit</em> is a conversion of  set <em>false</em><br />
 <em>lldp receive</em> is a conversion of  set <em>true</em><br />
@@ -1097,22 +1124,64 @@ mstp disable port
 rstp disable port  is a conversion of  set to false<br />
 mstp enable port  is a conversion of  set to true<br />
 mstp disable port  is a conversion of  set to false</p>
+<pre>
+port set port  auto-neg on
+port set port  auto-neg off
+port set port  speed 
+</pre>
+<p>port set port  auto-neg on is a conversion of  set to true<br />
+port set port  auto-neg off is a conversion of  set to false<br />
+can be auto, ten, hundred, gigabit, ten-gig</p>
 <doc-anchor-target id="unit-10">
     <h5>
         <doc-anchor-trigger class="header-anchor-trigger" to="#unit-10">#</doc-anchor-trigger>
         <span>Unit</span>
     </h5>
 </doc-anchor-target>
-<p>Link to github : <a href="">saos-unit</a></p>
+<p>Link to github : <a href="https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-6-interface">saos-unit</a></p>
+<doc-anchor-target id="ciena-saos-8">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ciena-saos-8">#</doc-anchor-trigger>
+        <span>Ciena SAOS 8</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="cli-12">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-12">#</doc-anchor-trigger>
+        <span>CLI</span>
+    </h4>
+</doc-anchor-target>
+<pre>
+dhcp l2-relay-agent set sub-port  vs  cid-string 
+</pre>
+<pre>
+pm create   pm-instance  profile-type  bin-count 
+</pre>
+<p>can be between 0 and 96</p>
+<pre>
+port set port  auto-neg on
+port set port  auto-neg off
+port set port  speed 
+</pre>
+<p>port set port  auto-neg on is a conversion of  set to true<br />
+port set port  auto-neg off is a conversion of  set to false<br />
+can be auto, ten, hundred, gigabit, ten-gig, forty-gig, hundred-gig</p>
+<doc-anchor-target id="unit-11">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#unit-11">#</doc-anchor-trigger>
+        <span>Unit</span>
+    </h5>
+</doc-anchor-target>
+<p>Link to github : <a href="https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-8-interface">saos-unit</a></p>
 <doc-anchor-target id="arris-cer-arris-e6000">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#arris-cer-arris-e6000">#</doc-anchor-trigger>
         <span>Arris CER (Arris E6000)</span>
     </h3>
 </doc-anchor-target>
-<doc-anchor-target id="cli-12">
+<doc-anchor-target id="cli-13">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-12">#</doc-anchor-trigger>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-13">#</doc-anchor-trigger>
         <span>CLI</span>
     </h4>
 </doc-anchor-target>
@@ -1126,9 +1195,9 @@ interface
 <hr />
 <p><em>no shutdown</em> is a conversion of  set <em>true</em><br />
 <em>shutdown</em> is a conversion of  set <em>false</em></p>
-<doc-anchor-target id="unit-11">
+<doc-anchor-target id="unit-12">
     <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#unit-11">#</doc-anchor-trigger>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#unit-12">#</doc-anchor-trigger>
         <span>Unit</span>
     </h5>
 </doc-anchor-target>

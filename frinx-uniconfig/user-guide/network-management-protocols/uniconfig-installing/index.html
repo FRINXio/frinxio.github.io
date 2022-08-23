@@ -6,10 +6,10 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.710412253286">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.714567060052">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 2.3.0">
+    <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
     <title>Device installation | Frinx Docs</title>
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.3.0.710412253286" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.714567060052" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.3.0.710412253286" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.3.0.710412253286" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.3.0.710412253286" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.714567060052" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.714567060052" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.714567060052" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -488,8 +488,13 @@ from single group. By default, keepalive strategy is used.</p>
 <p>Following parameters adjust maintaining of CLI session state.
 None of these parameters are mandatory (default values will be used).</p>
 <ul>
-<li><strong>cli-topology:max-connection-attempts</strong> - Maximum number of initial connection attempts (default value: 1).</li>
-<li><strong>cli-topology:max-reconnection-attempts</strong> - Maximum number of reconnection attempts (default value: 1).</li>
+<li><strong>cli-topology:max-connection-attempts</strong> - Maximum number of initial connection attempts
+(default value: 1). If there are unstable devices in the network it might be useful
+to provide <code v-pre>max-connection-attempts</code> higher than the default value. It would try to connect
+<code v-pre>n</code> times before throwing an ssh connection exception.</li>
+<li><strong>cli-topology:max-reconnection-attempts</strong> - Maximum number of reconnection attempts
+(default value: 1). <code v-pre>max-reconnection-attempts</code> is not that necessary to set. Uniconfig does
+not keep idle sessions open longer than it is necessary.</li>
 </ul>
 <doc-anchor-target id="keepalive-strategies">
     <h3>
@@ -500,15 +505,46 @@ None of these parameters are mandatory (default values will be used).</p>
 <p><strong>1. Keepalive reconnection strategy</strong></p>
 <ul>
 <li><strong>cli-topology:keepalive-delay</strong> - Delay between sending of
-keepalive messages over CLI session. Default value: 60 seconds.</li>
+keepalive messages over CLI session. The value should not be set higher than
+the execution of the longest operation. Default value: 60 seconds.</li>
 <li><strong>cli-topology:keepalive-timeout</strong> - This parameter defines how
-much time CLI layer should wait for response to keepalive message
+much time the CLI layer should wait for a response to keepalive message
 before the session is closed. Default value: 60 seconds.</li>
 <li><strong>cli-topology:keepalive-initial-delay</strong> - This parameter defines
 how much time CLI layer waits for establishment of new CLI session
 before the first reconnection attempt is launched. Default value:
 120 seconds.</li>
 </ul>
+<p>The keepalive parameters have two main functions:</p>
+<ul>
+<li>keep the idle session open</li>
+<li>timeout commands which would block the session forever</li>
+</ul>
+<doc-anchor-target id="example-of-using-the-connection-and-keepalive-parameters-together">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-of-using-the-connection-and-keepalive-parameters-together">#</doc-anchor-trigger>
+        <span>Example of using the connection and keepalive parameters together</span>
+    </h3>
+</doc-anchor-target>
+<p>For this example let us assume that we are dealing with a prod-like device, which would mean that
+some devices might have a large config. We would set these parameters:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">    max-connection-attempts=3
+    max-reconnection-attempts=3
+    keepalive-delay=120
+    keepalive-timeout=120</code></pre>
+</doc-codeblock></div>
+<p>Connection attempts would give us more flexibility if we work with unstable devices. It would
+try to ssh 3 times instead of 1 (default value). We should also keep in mind that the process of
+connecting to a device would take longer because of extra ssh attempts.</p>
+<p>Keepalive commands can be set less than time of the installation, because keepalive commands can
+fit in between of the installation process. An important thing to keep in mind is to set sum of
+keepalive-delay and keepalive-timeout parameters higher than time of execution of the configuration
+show command. Otherwise, it could time out during writing out of the configuration to the console.
+For each type of device it is a different command (<code v-pre>configuration show brief</code> for Ciena devices,
+<code v-pre>show run</code> for Cisco devices, etc.).
+Assumption is that it should not take more than 240 seconds (sum of keepalive params) to show the
+whole configuration. This can be appropriately adjusted to our circumstances.</p>
 <p><strong>2. Lazy reconnection strategy</strong></p>
 <ul>
 <li><strong>command-timeout</strong> - Maximal time (in seconds) for command
