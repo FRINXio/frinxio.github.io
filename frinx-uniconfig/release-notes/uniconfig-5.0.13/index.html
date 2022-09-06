@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.714567060052">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.715765229061">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,31 +14,31 @@
     <!-- Primary Meta Tags -->
     <title>Uniconfig 5.0.13 Release Notes | Frinx Docs</title>
     <meta name="title" content="Uniconfig 5.0.13 Release Notes | Frinx Docs">
-    <meta name="description" content="Automation of adding release notes to documetation" />
+    <meta name="description" content="Add jsonb-filter in UC client" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/release_notes_5.0.13/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.13/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/release_notes_5.0.13/">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.13/">
     <meta property="og:title" content="Uniconfig 5.0.13 Release Notes | Frinx Docs">
-    <meta property="og:description" content="Automation of adding release notes to documetation">
+    <meta property="og:description" content="Add jsonb-filter in UC client">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/release_notes_5.0.13/">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.13/">
     <meta property="twitter:title" content="Uniconfig 5.0.13 Release Notes | Frinx Docs">
-    <meta property="twitter:description" content="Automation of adding release notes to documetation">
+    <meta property="twitter:description" content="Add jsonb-filter in UC client">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.714567060052" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.715765229061" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.714567060052" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.715765229061" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.714567060052" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.715765229061" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -260,6 +260,8 @@
     </h2>
 </doc-anchor-target>
 <ul>
+<li><p>Add jsonb-filter in UC client</p>
+</li>
 <li><p>Automation of adding release notes to documetation</p>
 </li>
 <li><p>API for bulk addition of templates</p>
@@ -270,6 +272,8 @@
 </li>
 <li><p>JSONB filtering core</p>
 </li>
+<li><p>Upgrade-from-network as part of sync-from-network</p>
+</li>
 </ul>
 <doc-anchor-target id="bug-fixes">
     <h2>
@@ -278,6 +282,8 @@
     </h2>
 </doc-anchor-target>
 <ul>
+<li><p>Cancellation of initial NETCONF RPCs after request timeout</p>
+</li>
 <li><p>Fixed parsing XML-endoded leaf with instance-identifier to list</p>
 </li>
 <li><p>Fixed synchronization of notification listeners</p>
@@ -320,20 +326,6 @@
 </li>
 <li><p>YangPackager does not catch broken submodules</p>
 </li>
-</ul>
-<doc-anchor-target id="other">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
-    </h2>
-</doc-anchor-target>
-<ul>
-<li><p>Add jsonb-filter in UC client</p>
-</li>
-<li><p>Upgrade-from-network as part of sync-from-network</p>
-</li>
-<li><p>Cancellation of initial NETCONF RPCs after request timeout</p>
-</li>
 <li><p>Refresh schema context for netconf southbound if device was upgraded</p>
 </li>
 <li><p>Make mountpoint service call listeners from different thread</p>
@@ -348,11 +340,11 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-4.2.3/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.12/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Uni​Config 4.​2.​3</span>
+                                                <span class="block mt-1">Uniconfig 5.​0.​12 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
