@@ -12,36 +12,34 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>RPC revert-changes | Frinx Docs</title>
-    <meta name="title" content="RPC revert-changes | Frinx Docs">
-    <meta name="description" content="This RPC revert changes that were configured within one transaction. If a user wants to revert single transaction or multiple transactions, he" />
+    <title>TLS encryption for Postgres database | Frinx Docs</title>
+    <meta name="title" content="TLS encryption for Postgres database | Frinx Docs">
+    <meta name="description" content="By default all the communication to the database is not encrypted. In deployments where UniConfig is running separately from database, the traffic..." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/rpc_revert-changes/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/postgres-tls/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/rpc_revert-changes/">
-    <meta property="og:title" content="RPC revert-changes | Frinx Docs">
-    <meta property="og:description" content="This RPC revert changes that were configured within one transaction. If a user wants to revert single transaction or multiple transactions, he">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/rpc_revert-changes/rpc_revert-changes.png">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/postgres-tls/">
+    <meta property="og:title" content="TLS encryption for Postgres database | Frinx Docs">
+    <meta property="og:description" content="By default all the communication to the database is not encrypted. In deployments where UniConfig is running separately from database, the traffic...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/rpc_revert-changes/">
-    <meta property="twitter:title" content="RPC revert-changes | Frinx Docs">
-    <meta property="twitter:description" content="This RPC revert changes that were configured within one transaction. If a user wants to revert single transaction or multiple transactions, he">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/rpc_revert-changes/rpc_revert-changes.png">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/postgres-tls/">
+    <meta property="twitter:title" content="TLS encryption for Postgres database | Frinx Docs">
+    <meta property="twitter:description" content="By default all the communication to the database is not encrypted. In deployments where UniConfig is running separately from database, the traffic...">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.716030940384" rel="stylesheet" />
+    <link href="../../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.716030940384" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.716030940384" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.716030940384" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.716030940384" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.716030940384" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.716030940384" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.716030940384" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -56,10 +54,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -72,7 +70,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -188,7 +186,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -250,362 +248,81 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="rpc-revert-changes" class="break-words">
+<doc-anchor-target id="tls-encryption-for-postgres-database" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-revert-changes">#</doc-anchor-trigger>
-        <span>RPC revert-changes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#tls-encryption-for-postgres-database">#</doc-anchor-trigger>
+        <span>TLS encryption for Postgres database</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC revert changes that were configured within one transaction. If
-a user wants to revert single transaction or multiple transactions, he
-must find out transaction-ids and paste them into the body of RPC. The
-transaction-id is part of the transaction-metadata, that is created by a
-transaction tracker after commit/checked-commit RPC.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>RPC revert-changes updates data only in the CONFIGURATION Snapshot. If
-we want to write reverted data to the device, we must use RPC commit
-after RPC revert-changes.</p>
-        </div>
-    </div>
-</div>
-<p><figure class="content-center">
-    <img src="rpc_revert-changes.png" alt="RPC revert-changes" />
-    <figcaption class="caption">RPC revert-changes</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="ignore-non-existent-nodes">
+<p>By default all the communication to the database is not encrypted.
+In deployments where UniConfig is running separately from database, the traffic might be visible to unwanted eyes. Here are the steps to enabling TLS encryption for communication with the database.</p>
+<doc-anchor-target id="generating-self-signed-certificate-using-openssl">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#ignore-non-existent-nodes">#</doc-anchor-trigger>
-        <span>Ignore non-existent nodes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#generating-self-signed-certificate-using-openssl">#</doc-anchor-trigger>
+        <span>Generating self-signed certificate using OpenSSL</span>
     </h2>
 </doc-anchor-target>
-<p>If a user wants to revert multiple transactions, some transactions
-metadata may contain nodes that do not currently exist in UniConfig. In
-this case, the RPC fails. The user has a choice of two options:</p>
-<ol>
-<li>remove transaction that contain non-existent nodes from the request
-body</li>
-<li>add &#x27;ignore-non-existing-nodes&#x27; parameter to the RPC request body
-with a value of &#x27;true&#x27; (default: &#x27;false&#x27;)</li>
-</ol>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>If the user does not use the &#x27;ignore-non-existing-nodes&#x27; parameter,
-the default value &#x27;false&#x27; is automatically used.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="rpc-examples">
+<p>If you already have SSL keys generated, you need to convert them to proper format,
+see <doc-anchor-trigger to="#Converting-SSL-keys-to-proper-format">Converting SSL keys to proper format</doc-anchor-trigger>, otherwise you need to generate them.</p>
+<doc-anchor-target id="converting-ssl-keys-to-proper-format">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#converting-ssl-keys-to-proper-format">#</doc-anchor-trigger>
+        <span>Converting SSL keys to proper format</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="successful-examples">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-examples">#</doc-anchor-trigger>
-        <span>Successful examples</span>
-    </h3>
+<p>The proper format for the SSL keys is the following:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">Client certificate: PEM encoded X509v3 certificate
+Root certificate: PEM encoded X509v3 certificate
+Key file: PKCS-8 encoded in DER format or PKCS-12 key</code></pre>
+</doc-codeblock></div>
+<p>The command which needs to be used to convert the keys properly may differ based on the format of the keys in which they are available. They can be converted using OpenSSL version 1.1.1, from command line <code v-pre>openssl</code> command. OpenSSL documentation provides examples for the most common cases.</p>
+<p>To convert to PKCS-8 DER binary format, consult the documentation here: <a href="https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs8.html">PKCS-8</a></p>
+<p>To convert to PKCS-12 format, consult the documentation here: <a href="https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs12.html">PKCS-12</a></p>
+<doc-anchor-target id="enabling-tls-for-the-database-connection">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#enabling-tls-for-the-database-connection">#</doc-anchor-trigger>
+        <span>Enabling TLS for the database connection</span>
+    </h2>
 </doc-anchor-target>
-<p>Before reverting a transaction we need to know its ID. We will use the
-GET request to display all stored transaction-metadata.</p>
+<p>The configuration file that must be modified can
+be found on the following path relative to the UniConfig root directory:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://192.168.56.11:8181/rests/data/transaction-log:transactions-metadata' \
---header 'Accept: application/json'</code></pre>
+<pre class="language-none"><code v-pre class="language-none">vim config/lighty-uniconfig-config.json</code></pre>
 </doc-codeblock></div>
+<p>Then edit the <strong>configuration</strong> section in <strong>dbPersistence</strong> section.</p>
+<p>Example:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;transactions-metadata&quot;: {
-        &quot;transaction-metadata&quot;: [
-            {
-                &quot;transaction-id&quot;: &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                &quot;username&quot;: &quot;admin&quot;,
-                &quot;metadata&quot;: [
-                    {
-                        &quot;node-id&quot;: &quot;xr6&quot;,
-                        &quot;diff&quot;: [
-                            {
-                                &quot;path&quot;: &quot;/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether1/description&quot;,
-                                &quot;data-after&quot;: &quot;{\n  \&quot;Cisco-IOS-XR-ifmgr-cfg:description\&quot;: \&quot;bundle-ether1-description-create\&quot;\n}&quot;
-                            },
-                            {
-                                &quot;path&quot;: &quot;/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether2/description&quot;,
-                                &quot;data-before&quot;: &quot;{\n  \&quot;Cisco-IOS-XR-ifmgr-cfg:description\&quot;: \&quot;bundle-ether2-description-before\&quot;\n}&quot;
-                                                    &quot;data-after&quot;: &quot;{\n  \&quot;Cisco-IOS-XR-ifmgr-cfg:description\&quot;: \&quot;bundle-ether2-description-after\&quot;\n}&quot;
-                            },
-                        ],
-                        &quot;topology&quot;: &quot;uniconfig&quot;
-                    }
-                ],
-                &quot;commit-time&quot;: &quot;2021-Mar-09 10:53:59.102 +0100&quot;
-            },
-            &quot;transaction-id&quot;: &quot;869df9d6-9025-4849-b30b-9db4d8fb26ec&quot;,
-            &quot;username&quot;: &quot;admin&quot;,
-            &quot;metadata&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;xr5&quot;,
-                    &quot;diff&quot;: [
-                        {
-                            &quot;path&quot;: &quot;/frinx-openconfig-interfaces:interfaces/interface=Loopback123/config&quot;,
-                            &quot;data-before&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:softwareLoopback\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;name\&quot;: \&quot;Loopback123\&quot;\n  }\n}&quot;,
-                            &quot;data-after&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:softwareLoopback\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;description\&quot;: \&quot;test-description\&quot;,\n    \&quot;name\&quot;: \&quot;Loopback123\&quot;\n  }\n}&quot;
-                        }
-                    ],
-                    &quot;topology&quot;: &quot;uniconfig&quot;
-                }
-            ],
-            &quot;commit-time&quot;: &quot;2021-Mar-09 11:06:58.000 +0100&quot;
-        },
-        {
-            &quot;transaction-id&quot;: &quot;2c4c1eb5-185a-4204-8021-2ea05ba2c2c1&quot;,
-            &quot;username&quot;: &quot;admin&quot;,
-            &quot;metadata&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;R1&quot;,
-                    &quot;diff&quot;: [
-                        {
-                            &quot;path&quot;: &quot;/frinx-openconfig-interfaces:interfaces/interface=Bundle-Ether1&quot;,
-                            &quot;data-after&quot;: &quot;{\n  \&quot;interface\&quot;: [\n    {\n      \&quot;name\&quot;: \&quot;Bundle-Ether1\&quot;,\n      \&quot;config\&quot;: {\n        \&quot;type\&quot;: \&quot;iana-if-type:ieee8023adLag\&quot;,\n        \&quot;enabled\&quot;: false,\n        \&quot;name\&quot;: \&quot;Bundle-Ether1\&quot;\n      }\n    }\n  ]\n}&quot;
-                        }
-                    ],
-                    &quot;topology&quot;: &quot;uniconfig&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;xr5&quot;,
-                    &quot;diff&quot;: [
-                        {
-                            &quot;path&quot;: &quot;/frinx-openconfig-interfaces:interfaces/interface=Loopback1/config&quot;,
-                            &quot;data-before&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:softwareLoopback\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;name\&quot;: \&quot;Loopback1\&quot;\n  }\n}&quot;,
-                        }
-                    ],
-                    &quot;topology&quot;: &quot;uniconfig&quot;
-                }
-            ],
-            &quot;commit-time&quot;: &quot;2021-Mar-09 11:10:54.104 +0100&quot;
-        }
-    ]
-}</code></pre>
+<pre class="language-json"><code v-pre class="language-json">  &quot;connection&quot;: {
+    &quot;dbName&quot;: &quot;uniconfig&quot;,
+    &quot;username&quot;: &quot;uniremote&quot;,
+    &quot;password&quot;: &quot;unipass&quot;,
+    &quot;initialDbPoolSize&quot;: 5,
+    &quot;maxDbPoolSize&quot;: 20,
+    &quot;maxIdleConnections&quot;: 5,
+    &quot;socketReadTimeout&quot;: 20,
+    &quot;maxWaitTime&quot;: 30000,
+    &quot;enabledTls&quot;: true,
+    &quot;tlsClientCert&quot;: &quot;./client.pks&quot;,
+    &quot;tlsClientKey&quot;: &quot;./client.key&quot;,
+    &quot;tlsCaCert&quot;: &quot;./ca.pks&quot;,
+    &quot;sslPassword&quot;: &quot;&quot;,
+    &quot;databaseLocations&quot;: [
+      {
+        &quot;host&quot;: &quot;127.0.0.1&quot;,
+        &quot;port&quot;: 26257
+      }
+    ],
+    &quot;repairSchemaHistory&quot;: false
+  }</code></pre>
 </doc-codeblock></div>
-<p>Reverting changes of the single transaction.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-transactions&quot;: {
-            &quot;transaction&quot;: [
-                &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;
-            ]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;revert-output&quot;: {
-            &quot;result&quot;: [
-                {
-                    &quot;transaction-id&quot;: &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<p>Reverting changes of multiple transactions.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-transactions&quot;: {
-            &quot;transaction&quot;: [
-                &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                &quot;869df9d6-9025-4849-b30b-9db4d8fb26ec&quot;
-            ]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;revert-output&quot;: {
-            &quot;result&quot;: [
-                {
-                    &quot;transaction-id&quot;: &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                    &quot;status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;transaction-id&quot;: &quot;869df9d6-9025-4849-b30b-9db4d8fb26ec&quot;,
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<p>Reverting changes of multiple transactions, where the transaction with
-id &#x27;2c4c1eb5-185a-4204-8021-2ea05ba2c2c1&#x27; contains non-existent node
-&#x27;R1&#x27;. In this case &#x27;ignore-non-existing-nodes&#x27; with a value of &#x27;true&#x27; is
-used, and therefore the RPC will be successful.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;ignore-non-existing-nodes&quot;: true,
-        &quot;target-transactions&quot;: {
-            &quot;transaction&quot;: [
-                &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                &quot;2c4c1eb5-185a-4204-8021-2ea05ba2c2c1&quot;
-            ]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;revert-output&quot;: {
-            &quot;result&quot;: [
-                {
-                    &quot;transaction-id&quot;: &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                    &quot;status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;transaction-id&quot;: &quot;2c4c1eb5-185a-4204-8021-2ea05ba2c2c1&quot;,
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed example</span>
-    </h3>
-</doc-anchor-target>
-<p>This is a case when revert-changes request contains a non-existent
-transaction in the request body.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-transactions&quot;: {
-            &quot;transaction&quot;: [
-                &quot;82b4e916-e1ed-4a54-97bc-067699842af6&quot;
-            ]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;revert-output&quot;: {
-            &quot;result&quot;: [
-                {
-                    &quot;transaction-id&quot;: &quot;82b4e916-e1ed-4a54-97bc-067699842af6&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Failed to find transaction in log with ID: 82b4e916-e1ed-4a54-97bc-067699842af6&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<p>Reverting changes of multiple transactions, where the transaction
-metadata with id &#x27;2c4c1eb5-185a-4204-8021-2ea05ba2c2c1&#x27; contains
-non-existent node. In this case &#x27;ignore-non-existing-nodes&#x27; with a value
-of &#x27;false&#x27; is used, and therefore the RPC fails.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;ignore-non-existing-nodes&quot;: false,
-        &quot;target-transactions&quot;: {
-            &quot;transaction&quot;: [
-                &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                &quot;2c4c1eb5-185a-4204-8021-2ea05ba2c2c1&quot;
-            ]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;revert-output&quot;: {
-            &quot;result&quot;: [
-                {
-                    &quot;transaction-id&quot;: &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                },
-                {
-                    &quot;transaction-id&quot;: &quot;2c4c1eb5-185a-4204-8021-2ea05ba2c2c1&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Transactions metadata 2c4c1eb5-185a-4204-8021-2ea05ba2c2c1 contain non-existent uniconfig nodes: [R1]&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
+<p>The TLS related fields are the following:</p>
+<p><code v-pre>enabledTls</code> - setting to <code v-pre>true</code> enables TLS encryption, default is <code v-pre>false</code></p>
+<p><code v-pre>tlsClientCert</code> - specify the <strong>relative</strong> path to the Client certificate from the root UniConfig directory</p>
+<p><code v-pre>tlsClientKey</code> - specify the <strong>relative</strong> path to the Client key from the root UniConfig directory, this can be PKCS-12 or PKCS-8 format</p>
+<p><code v-pre>tlsCaCert</code> - specify the <strong>relative</strong> path to the root CA certificate from the root UniConfig directory</p>
+<p><code v-pre>sslPassword</code> - if the <code v-pre>tlsClientKey</code> file is encrypted with password, specify it here. It is needed for PKCS-12 keys and for encrypted PKCS-8 keys, this will be ignored for the unencrypted keys.</p>
+<p>Do not forget to adjust other database connection parameters accordingly.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -615,20 +332,20 @@ of &#x27;false&#x27; is used, and therefore the RPC fails.</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/operational-procedures/openapi/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Transaction Log</span>
+                                                <span class="block mt-1">Open​API</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/transaction-tracker/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/operational-procedures/tls/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Transaction tracker</span>
+                                                <span class="block mt-1">TLS-​based Authentication</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -675,6 +392,6 @@ of &#x27;false&#x27; is used, and therefore the RPC fails.</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "RPC revert-changes", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "TLS encryption for Postgres database", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
