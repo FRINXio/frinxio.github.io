@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.716030940384">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.716465351792">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.716030940384" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.716465351792" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.716030940384" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.716465351792" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.716030940384" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.716030940384" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.716465351792" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.716465351792" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -273,10 +273,15 @@ device without committing of this changes.</li>
 the view of constraints and consistency.
 This phase can be skipped with &quot;do-validate&quot; flag.</li>
 <li>Confirmed commit - It is used for locking of device configuration,
-so no other transaction can touch this device.</li>
+so no other transaction can touch this device. This phase can be skipped with &quot;do-confirmed-commit&quot; flag.</li>
 <li>Confirming commit (submit configuration) - Persisting all changes on
 devices and in the PostgreSQL database. UniConfig transaction is
 closed.</li>
+<li>Rollback - It is used for restoring of configuration to previous state, if the configuration process fails.
+When configuring more devices in a single transaction and the process fails on one particular device,
+the rollback procedure will be applied to all touched devices. This is done by auto rollback procedure,
+which is by default turned on. It can be switched off by setting up &#x27;do-rollback&#x27; flag in input of<br />
+Commit RPC request. Then only failed devices will be rollbacked.</li>
 </ol>
 <p><figure class="content-center">
     <img src="rpc_commit-rpc_commit.svg" alt="RPC commit" />
@@ -435,6 +440,48 @@ will be invoked.</p>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;output&quot;: {
         &quot;overall-status&quot;: &quot;complete&quot;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
+        <span>Successful Example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC commit input has 2 target nodes and the flag to disable confirmed-commit phase. The output describes the result
+of the commit.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;do-confirmed-commit&quot;: false,
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;overall-status&quot;: &quot;complete&quot;,
+        &quot;node-results&quot;: {
+            &quot;node-result&quot;: [
+                {
+                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
+                    &quot;configuration-status&quot;: &quot;complete&quot;
+                },
+                {
+                    &quot;node-id&quot;: &quot;IOSXR&quot;,
+                    &quot;configuration-status&quot;: &quot;complete&quot;
+                }
+            ]
+        },
     }
 }</code></pre>
 </doc-codeblock></div>
@@ -768,6 +815,56 @@ been mounted yet (AAA).</p>
 <doc-anchor-target id="failed-example-7">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-7">#</doc-anchor-trigger>
+        <span>Failed Example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC commit input has 2 target nodes and the output describes the result
+of the commit. One node has failed because of wrong configuration (R2).
+In this case validation, confirm-commit and auto-rollback was switched off.
+Because auto-rollback is switched off, configuration of R1 device was successful.
+However this can be done only, if validation and confirm-commit phase was successful or skipped,
+otherwise configuration of R1 device would also fail.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;R1&quot;, &quot;R2&quot;]
+        },
+        &quot;do-rollback&quot; : false,
+        &quot;do-validate&quot; : false,
+        &quot;do-confirmed-commit&quot; : false
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;node-results&quot;: {
+            &quot;node-result&quot;: [
+                {
+                    &quot;node-id&quot;: &quot;R1&quot;,
+                    &quot;configuration-status&quot;: &quot;complete&quot;
+                },
+                {
+                    &quot;node-id&quot;: &quot;R2&quot;,
+                    &quot;configuration-status&quot;: &quot;fail&quot;,
+                    &quot;error-message&quot;: &quot;RemoteDevice{vnf212}: RPC during tx failed. Error messages: [/alias[name='^new']/expansion is not configured]\n&quot;,
+                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
+                }
+            ]
+        },
+        &quot;overall-status&quot;: &quot;fail&quot;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-8">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-8">#</doc-anchor-trigger>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
