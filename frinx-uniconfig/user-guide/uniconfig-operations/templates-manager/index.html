@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.716466618219">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.717078118539">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.716466618219" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.717078118539" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.716466618219" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.716466618219" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.716466618219" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.717078118539" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -1355,6 +1355,8 @@ for better performance. If specified templates already exist, their configuratio
 <li><strong>template-name</strong>:Name of the created template.</li>
 <li><strong>yang-repository</strong>: YANG schema repository used for parsing of template configuration. Default value: &#x27;latest&#x27;.</li>
 <li><strong>template-configuration</strong>: Whole template configuration.</li>
+<li><strong>tags</strong>: List of template tags that are written on the specified paths in all created templates.
+Specified tag type must be prefixed with &#x27;template-tags&#x27; module name based on RFC-8040 formatting of identityref.</li>
 </ul>
 <p>Only template-name and template-configuration are mandatory fields.</p>
 <doc-anchor-target id="examples">
@@ -1578,6 +1580,85 @@ of transaction.</p>
         </div>
     </div>
 </div>
+<p>Creation of 2 templates with separately specified template tags - &#x27;replace&#x27; tag is added to &#x27;/acl/category&#x27; and
+&#x27;/services/group=default/types&#x27; elements, while &#x27;create&#x27; is added to &#x27;/services&#x27; element.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-manager:create-multiple-templates' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  &quot;input&quot;: {
+    &quot;templates&quot;: [
+      {
+        &quot;template-name&quot;: &quot;Template-name1&quot;,
+        &quot;yang-repository&quot;: &quot;schema1&quot;,
+        &quot;template-configuration&quot;: {
+          &quot;acl&quot;: {
+            &quot;rules&quot;: [
+              {
+                &quot;name&quot;: &quot;test-name&quot;,
+                &quot;category&quot;: [
+                  &quot;*&quot;
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        &quot;template-name&quot;: &quot;Template-name2&quot;,
+        &quot;template-configuration&quot;: {
+          &quot;services&quot;: {
+            &quot;group&quot;: [
+              {
+                &quot;name&quot;: &quot;default&quot;,
+                &quot;id&quot;: 0,
+                &quot;type&quot;: &quot;internal&quot;,
+                &quot;types&quot;: [
+                  &quot;test&quot;
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    &quot;tags&quot;: [
+      {
+        &quot;tag&quot;: &quot;template-tags:replace&quot;,
+        &quot;paths&quot;: [
+          &quot;/acl/category&quot;,
+          &quot;/services/group=default/types&quot;
+        ]
+      },
+      {
+        &quot;tag&quot;: &quot;template-tags:create&quot;,
+        &quot;paths&quot;: [
+          &quot;/services&quot;
+        ]
+      }
+    ]
+  }
+}</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;overall-status&quot;: &quot;complete&quot;,
+    &quot;node-result&quot;: [
+      {
+        &quot;node-id&quot;: &quot;Template-name1&quot;,
+        &quot;status&quot;: &quot;complete&quot;
+      },
+      {
+        &quot;node-id&quot;: &quot;Template-name2&quot;,
+        &quot;status&quot;: &quot;complete&quot;
+      }
+    ]
+  }
+}</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->

@@ -12,33 +12,36 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>User Guide | Frinx Docs</title>
-    <meta name="title" content="User Guide | Frinx Docs">
-    <meta name="description" content="See examples in api_tests or a VRF IP management sample use case in postman collection." />
+    <title>RPC bulk-edit | Frinx Docs</title>
+    <meta name="title" content="RPC bulk-edit | Frinx Docs">
+    <meta name="description" content="Bulk-edit operation can be used for modification of multiple configuration subtrees under multiple target nodes" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniresource/user-guide/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniresource/user-guide/">
-    <meta property="og:title" content="User Guide | Frinx Docs">
-    <meta property="og:description" content="See examples in api_tests or a VRF IP management sample use case in postman collection.">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/">
+    <meta property="og:title" content="RPC bulk-edit | Frinx Docs">
+    <meta property="og:description" content="Bulk-edit operation can be used for modification of multiple configuration subtrees under multiple target nodes">
+    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/execution_of_bulk_edit_rpc.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniresource/user-guide/">
-    <meta property="twitter:title" content="User Guide | Frinx Docs">
-    <meta property="twitter:description" content="See examples in api_tests or a VRF IP management sample use case in postman collection.">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/">
+    <meta property="twitter:title" content="RPC bulk-edit | Frinx Docs">
+    <meta property="twitter:description" content="Bulk-edit operation can be used for modification of multiple configuration subtrees under multiple target nodes">
+    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/execution_of_bulk_edit_rpc.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.717078118539" rel="stylesheet" />
+    <link href="../../../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.717078118539" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.717078118539" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -53,10 +56,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -69,7 +72,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -185,7 +188,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -247,30 +250,259 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="user-guide" class="break-words">
+<doc-anchor-target id="rpc-bulk-edit" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#user-guide">#</doc-anchor-trigger>
-        <span>User Guide</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-bulk-edit">#</doc-anchor-trigger>
+        <span>RPC bulk-edit</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="api">
+<p>Bulk-edit operation can be used for modification of multiple configuration subtrees under multiple target nodes
+from &#x27;uniconfig&#x27;, &#x27;templates&#x27; or &#x27;unistore&#x27; topology (the same list of modifications are applied to all listed
+target nodes). Bulk-edit operation is executed atomically - either all modifications are applied on all target nodes
+successfully or operation fails, and configuration is not touched in the UniConfig transaction. This RPC also benefits
+from parallel processing of changes per target node.</p>
+<p><figure class="content-center">
+    <img src="execution_of_bulk_edit_rpc.svg" alt="RPC bulk-edit" />
+    <figcaption class="caption">RPC bulk-edit</figcaption>
+</figure>
+</p>
+<doc-anchor-target id="rpc-input">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#api">#</doc-anchor-trigger>
-        <span>API</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-input">#</doc-anchor-trigger>
+        <span>RPC input</span>
     </h2>
 </doc-anchor-target>
-<p>See examples in
-<a href="https://github.com/FRINXio/resource-manager/tree/master/api-tests">api_tests</a>
-or a VRF IP management sample use case in <a href="https://www.getpostman.com/collections/514d68c6e43f1628d715">postman
-collection</a>.</p>
-<doc-anchor-target id="ui">
+<p>RPC input specifies list of target nodes and list of modifications that must be applied under target nodes:</p>
+<p>Description of input fields:</p>
+<ul>
+<li><strong>topology-id</strong> (mandatory): Identifier of the topology which contains all target nodes.
+Currently supported topologies: uniconfig, templates, unistore.</li>
+<li><strong>node-id</strong> (optional): List of target nodes identifiers residing in the specified topology. If this field is not
+specified, or it is empty, RPC is executed on all available nodes in the specified topology.</li>
+<li><strong>edit</strong> (mandatory with at least 1 entry): List of modifications. Each modification is uniquely identified
+by &#x27;path&#x27; key. Modifications are applied in the preserved user-defined order.</li>
+</ul>
+<p>Description of fields in the edit entry:</p>
+<ul>
+<li><strong>path</strong> (mandatory): Path encoded using RFC-8040 format. It must be specified as relative path to root
+&#x27;configuration&#x27; container. If this leaf contains single character &#x27;/&#x27;, path point to whole configuration.</li>
+<li><strong>operation</strong> (mandatory): Operation that must be executed on the specified path. Supported operations
+are &#x27;merge&#x27;, &#x27;replace&#x27;, and &#x27;remove&#x27;. Operations &#x27;merge&#x27; and &#x27;replace&#x27; requires to also specify input &#x27;data&#x27;.</li>
+<li><strong>data</strong> (optional): Content of the replaced or merged data without wrapping parent element
+(the last element of the path is not declared in the &#x27;data&#x27;, see examples, how to correctly specify content
+of this leaf in different use-cases).</li>
+</ul>
+<p>Supported operations:</p>
+<ul>
+<li><strong>merge</strong>: The supplied value is merged with the target data node.</li>
+<li><strong>replace</strong>: The supplied value is used to replace the target data node.</li>
+<li><strong>remove</strong>: Delete the target node if it currently exists.</li>
+</ul>
+<doc-anchor-target id="rpc-output">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#ui">#</doc-anchor-trigger>
-        <span>UI</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-output">#</doc-anchor-trigger>
+        <span>RPC output</span>
     </h2>
 </doc-anchor-target>
-<p>See UniResource frontend project on
-<a href="https://github.com/FRINXio/frinx-frontend/tree/main/packages/frinx-uniresource-ui">github</a></p>
+<p>RPC output contains global status of executed operation and per-node status.</p>
+<p>Description of output fields:</p>
+<ul>
+<li><strong>overall-status</strong>: Status of operation. If RPC execution fails on at least 1 of the target nodes,
+overall status is set to &#x27;fail&#x27;. Otherwise, it is set to &#x27;complete&#x27;.</li>
+<li><strong>error-message</strong>: &quot;Described reason of the failure. This field is used if there is some structural error
+in the RPC input that does not relate to 1 specific target node.&quot;</li>
+<li><strong>node-result</strong>: Results of the RPC execution divided per target node (&#x27;node-id&#x27; is the key of the list).</li>
+</ul>
+<p>Description of fields in the node-result entry:</p>
+<ul>
+<li><strong>node-id</strong>: Identifier of the target node.</li>
+<li><strong>status</strong>: Status of bulk-edit operation on this node. Value is set to &#x27;complete&#x27;, only if all modifications have
+been successfully written into UniConfig transaction (including other nodes). Otherwise, value is set to &#x27;fail&#x27;.</li>
+<li><strong>error-message</strong>: Described reason of the failure. This field appears in the output only if RPC execution failed
+on this target node.</li>
+<li><strong>error-type</strong>: Categorized type of the error.</li>
+</ul>
+<doc-anchor-target id="rpc-examples">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
+        <span>RPC examples</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="successful-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>The following request demonstrates application of 6 modifications to 4 templates:</p>
+<ol>
+<li>Replacing value of the &#x27;description&#x27; leaf.</li>
+<li>Removing &#x27;snmp&#x27; container.</li>
+<li>Replacing whole &#x27;ssh&#x27; container.</li>
+<li>Merging configuration of &#x27;routing-protocol&#x27; list entry.</li>
+<li>Merging whole &#x27;tree&#x27; list with specified multiple list entries.</li>
+<li>Replacing leaf-list &#x27;services&#x27; by provided array of strings.</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/subtree-manager:bulk-edit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: UNICONFIGTXID=7bb3fbdf-23b0-488e-8d59-8d0b2757da73' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;topology-id&quot;: &quot;templates&quot;,
+        &quot;node-id&quot;: [
+            &quot;tpl_1&quot;,
+            &quot;tpl_2&quot;,
+            &quot;tpl_3&quot;,
+            &quot;tpl_4&quot;
+        ],
+        &quot;edit&quot;: [
+            {
+                &quot;path&quot;: &quot;/groups/group=test/description&quot;,
+                &quot;operation&quot;: &quot;replace&quot;,
+                &quot;data&quot;: &quot;test&quot;
+            },
+            {
+                &quot;path&quot;: &quot;/snmp/config&quot;,
+                &quot;operation&quot;: &quot;remove&quot;
+            },
+            {
+                &quot;path&quot;: &quot;/system/netconf/ssh&quot;,
+                &quot;operation&quot;: &quot;replace&quot;,
+                &quot;data&quot;: {
+                    &quot;ip&quot;: &quot;10.10.10.10&quot;,
+                    &quot;enabled&quot;: false,
+                    &quot;port&quot;: 2243
+                }
+            },
+            {
+                &quot;path&quot;: &quot;/routing-protocol/routing-protocol=test&quot;,
+                &quot;operation&quot;: &quot;merge&quot;,
+                &quot;data&quot;: {
+                    &quot;@&quot;: {
+                        &quot;template-tags:operation&quot;: &quot;create&quot;
+                    },
+                    &quot;name&quot;: &quot;test&quot;
+                }
+            },
+            {
+                &quot;path&quot;: &quot;/snmp/view=internet/tree&quot;,
+                &quot;operation&quot;: &quot;merge&quot;,
+                &quot;data&quot;: [
+                    {
+                        &quot;oid&quot;: &quot;1.4&quot;,
+                        &quot;included&quot;: true
+                    },
+                    {
+                        &quot;oid&quot;: &quot;1.5&quot;,
+                        &quot;included&quot;: false
+                    }
+                ]
+            },
+            {
+                &quot;path&quot;: &quot;/router/services&quot;,
+                &quot;operation&quot;: &quot;replace&quot;,
+                &quot;data&quot;: [
+                    &quot;dhcp&quot;,
+                    &quot;rarp&quot;
+                ]
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>Response contains overall status &#x27;complete&#x27; and per-node status &#x27;complete&#x27; - all modifications have been successfully
+written into the UniConfig transaction.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;overall-status&quot;: &quot;complete&quot;,
+        &quot;node-result&quot;: [
+            {
+                &quot;node-id&quot;: &quot;tpl_1&quot;,
+                &quot;status&quot;: &quot;complete&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;tpl_2&quot;,
+                &quot;status&quot;: &quot;complete&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;tpl_3&quot;,
+                &quot;status&quot;: &quot;complete&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;tpl_4&quot;,
+                &quot;status&quot;: &quot;complete&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
+        <span>Failed example</span>
+    </h3>
+</doc-anchor-target>
+<p>The next example demonstrates execution of bulk-edit operation that fails on parsing of one of the paths
+using YANG schemas of device &#x27;dev02&#x27;.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/subtree-manager:bulk-edit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: UNICONFIGTXID=7bb3fbdf-23b0-488e-8d59-8d0b2757da73' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;node-id&quot;: [
+            &quot;dev01&quot;,
+            &quot;dev02&quot;
+        ],
+        &quot;topology-id&quot;: &quot;uniconfig&quot;,
+        &quot;edit&quot;: [
+            {
+                &quot;path&quot;: &quot;/dhcp/profile=test-profile&quot;,
+                &quot;operation&quot;: &quot;replace&quot;,
+                &quot;data&quot;: {
+                    &quot;name&quot;: &quot;test-profile&quot;,
+                    &quot;description&quot;: &quot;test&quot;
+                }
+            },
+            {
+                &quot;path&quot;: &quot;/settings&quot;,
+                &quot;operation&quot;: &quot;remove&quot;
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>RPC response contains overall status &#x27;fail&#x27;. There is 1 error message in the result of &#x27;dev02&#x27;. Note that &#x27;dev01&#x27;
+result also contains &#x27;fail&#x27; status because modifications have not been written to this node since another node (&#x27;dev02&#x27;)
+during execution of operation failed.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;overall-status&quot;: &quot;fail&quot;,
+        &quot;node-result&quot;: [
+            {
+                &quot;node-id&quot;: &quot;dev01&quot;,
+                &quot;status&quot;: &quot;fail&quot;,
+                &quot;error-type&quot;: &quot;uniconfig-error&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;dev02&quot;,
+                &quot;status&quot;: &quot;fail&quot;,
+                &quot;error-message&quot;: &quot;Failed to parse path: Could not parse path 'network-topology:network-topology/topology=uniconfig/node=dev02/frinx-uniconfig-topology:configuration/dhcp/profile=test-profile'. Offset: '108': Reason: List entry '(test-ns?revision=2018-09-12)dhcp' requires key or value predicate to be present&quot;,
+                &quot;error-type&quot;: &quot;uniconfig-error&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -280,20 +512,20 @@ collection</a>.</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniresource/introduction/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">FRINX Uni​Resource introduction</span>
+                                                <span class="block mt-1">Subtree Manager</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniresource/pools/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-diff/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Pools</span>
+                                                <span class="block mt-1">RPC calculate-​subtree-​diff</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -340,6 +572,6 @@ collection</a>.</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "User Guide", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "RPC bulk-edit", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
