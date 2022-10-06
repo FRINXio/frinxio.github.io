@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.717078118539">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718351365178">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.717078118539" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.718351365178" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.718351365178" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.717078118539" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.717078118539" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.718351365178" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.718351365178" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -759,6 +759,255 @@ item.</p>
         }
     }
 }'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="patch-restsdataidentifierapply-tagstrue">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#patch-restsdataidentifierapply-tagstrue">#</doc-anchor-trigger>
+        <span>PATCH /rests/data/&lt;identifier&gt;?apply-tags=true</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>The patch request with parameter apply-tags=true allows to use tags.</li>
+<li>Tags allows us to use differrent operation for separate elements instead of
+merging whole content as without tags.</li>
+<li>The following tags are supported: merge, replace, delete, create and update.</li>
+<li>Usage of these tags are explained in Templates manager : <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/#tags">here</a>.</li>
+</ul>
+<p>The following example shows PATCH request used for modification of interfaces
+on IOS XE device including creating, deleting, and replacing interface configuration.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">PATCH RPC Request with apply-tags parameter</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request PATCH 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces?apply-tags=true' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;frinx-openconfig-interfaces:interfaces&quot;: {
+        &quot;interface&quot;: [
+            {
+                &quot;name&quot;: &quot;Loopback0&quot;,
+                &quot;config&quot;: {
+                    &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                    &quot;enabled&quot;: true,
+                    &quot;name&quot;: &quot;Loopback0&quot;
+                },
+                &quot;@&quot;: {
+                    &quot;operation&quot;: &quot;delete&quot;
+                }
+            },
+            {
+                &quot;name&quot;: &quot;Loopback1&quot;,
+                &quot;config&quot;: {
+                    &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                    &quot;enabled&quot;: true,
+                    &quot;name&quot;: &quot;Loopback1&quot;
+                },
+                &quot;@&quot;: {
+                    &quot;operation&quot;: &quot;replace&quot;
+                }
+            },
+            {
+                &quot;name&quot;: &quot;Loopback2&quot;,
+                &quot;config&quot;: {
+                    &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                    &quot;enabled&quot;: true,
+                    &quot;name&quot;: &quot;Loopback2&quot;
+                },
+                &quot;@&quot;: {
+                    &quot;operation&quot;: &quot;create&quot;
+                }
+            },
+            {
+                &quot;name&quot;: &quot;Loopback61&quot;,
+                &quot;config&quot;: {
+                    &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                    &quot;enabled&quot;: false,
+                    &quot;name&quot;: &quot;Loopback61&quot;
+                }
+            },
+            {
+                &quot;name&quot;: &quot;GigabitEthernet1&quot;,
+                &quot;config&quot;: {
+                    &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+                    &quot;enabled&quot;: true,
+                    &quot;name&quot;: &quot;GigabitEthernet1&quot;
+                },
+                &quot;subinterfaces&quot;: {
+                    &quot;subinterface&quot;: [
+                        {
+                            &quot;index&quot;: 0,
+                            &quot;frinx-openconfig-if-ip:ipv4&quot;: {
+                                &quot;addresses&quot;: {
+                                    &quot;address&quot;: [
+                                        {
+                                            &quot;ip&quot;: &quot;192.168.1.253&quot;,
+                                            &quot;config&quot;: {
+                                                &quot;prefix-length&quot;: 24,
+                                                &quot;ip&quot;: &quot;192.168.1.253&quot;
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                &quot;name&quot;: &quot;GigabitEthernet2&quot;,
+                &quot;config&quot;: {
+                    &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+                    &quot;enabled&quot;: false,
+                    &quot;name&quot;: &quot;GigabitEthernet2&quot;
+                }
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">GET RPC Request before PATCH</div>
+<pre class="language-bash"><code v-pre class="language-bash">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Response</div>
+<pre class="language-bash"><code v-pre class="language-bash">    {
+        &quot;frinx-openconfig-interfaces:interfaces&quot;: {
+            &quot;interface&quot;: [
+                {
+                    &quot;name&quot;: &quot;Loopback0&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                        &quot;enabled&quot;: true,
+                        &quot;name&quot;: &quot;Loopback0&quot;
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;Loopback1&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                        &quot;enabled&quot;: false,
+                        &quot;name&quot;: &quot;Loopback1&quot;
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;Loopback61&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                        &quot;enabled&quot;: false,
+                        &quot;name&quot;: &quot;Loopback61&quot;
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;GigabitEthernet1&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+                        &quot;enabled&quot;: true,
+                        &quot;name&quot;: &quot;GigabitEthernet1&quot;
+                    },
+                    &quot;subinterfaces&quot;: {
+                        &quot;subinterface&quot;: [
+                            {
+                                &quot;index&quot;: 0,
+                                &quot;frinx-openconfig-if-ip:ipv4&quot;: {
+                                    &quot;addresses&quot;: {
+                                        &quot;address&quot;: [
+                                            {
+                                                &quot;ip&quot;: &quot;192.168.1.253&quot;,
+                                                &quot;config&quot;: {
+                                                    &quot;prefix-length&quot;: 24,
+                                                    &quot;ip&quot;: &quot;192.168.1.253&quot;
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;GigabitEthernet2&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+                        &quot;enabled&quot;: false,
+                        &quot;name&quot;: &quot;GigabitEthernet2&quot;
+                    }
+                }
+            ]
+        }
+    }</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">GET RPC Request after PATCH</div>
+<pre class="language-bash"><code v-pre class="language-bash">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Response</div>
+<pre class="language-bash"><code v-pre class="language-bash">    {
+        &quot;frinx-openconfig-interfaces:interfaces&quot;: {
+            &quot;interface&quot;: [
+                {
+                    &quot;name&quot;: &quot;Loopback1&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                        &quot;enabled&quot;: true,
+                        &quot;name&quot;: &quot;Loopback1&quot;
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;Loopback61&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                        &quot;enabled&quot;: false,
+                        &quot;name&quot;: &quot;Loopback61&quot;
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;Loopback2&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:softwareLoopback&quot;,
+                        &quot;enabled&quot;: true,
+                        &quot;name&quot;: &quot;Loopback2&quot;
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;GigabitEthernet2&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+                        &quot;enabled&quot;: false,
+                        &quot;name&quot;: &quot;GigabitEthernet2&quot;
+                    }
+                },
+                {
+                    &quot;name&quot;: &quot;GigabitEthernet1&quot;,
+                    &quot;config&quot;: {
+                        &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
+                        &quot;enabled&quot;: true,
+                        &quot;name&quot;: &quot;GigabitEthernet1&quot;
+                    },
+                    &quot;subinterfaces&quot;: {
+                        &quot;subinterface&quot;: [
+                            {
+                                &quot;index&quot;: 0,
+                                &quot;frinx-openconfig-if-ip:ipv4&quot;: {
+                                    &quot;addresses&quot;: {
+                                        &quot;address&quot;: [
+                                            {
+                                                &quot;ip&quot;: &quot;192.168.1.253&quot;,
+                                                &quot;config&quot;: {
+                                                    &quot;prefix-length&quot;: 24,
+                                                    &quot;ip&quot;: &quot;192.168.1.253&quot;
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="post-restsoperationsmodulenamerpcname">
     <h4>
