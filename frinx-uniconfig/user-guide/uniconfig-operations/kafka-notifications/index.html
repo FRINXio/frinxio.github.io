@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718351963994">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718704676718">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Kafka Notifications | Frinx Docs</title>
     <meta name="title" content="Kafka Notifications | Frinx Docs">
-    <meta name="description" content="NETCONF devices are capable of generating NETCONF notifications. UniConfig is able to collect these notifications and creates its own" />
+    <meta name="description" content="NETCONF devices are able to produce NETCONF notifications. UniConfig can collect these notifications and create its own" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/">
     <meta property="og:title" content="Kafka Notifications | Frinx Docs">
-    <meta property="og:description" content="NETCONF devices are capable of generating NETCONF notifications. UniConfig is able to collect these notifications and creates its own">
+    <meta property="og:description" content="NETCONF devices are able to produce NETCONF notifications. UniConfig can collect these notifications and create its own">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/cluster.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/">
     <meta property="twitter:title" content="Kafka Notifications | Frinx Docs">
-    <meta property="twitter:description" content="NETCONF devices are capable of generating NETCONF notifications. UniConfig is able to collect these notifications and creates its own">
+    <meta property="twitter:description" content="NETCONF devices are able to produce NETCONF notifications. UniConfig can collect these notifications and create its own">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/cluster.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.718351963994" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.718704676718" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.718351963994" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.718704676718" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.718351963994" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.718351963994" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.718704676718" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.718704676718" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -262,20 +262,20 @@
         <span>Introduction</span>
     </h2>
 </doc-anchor-target>
-<p>NETCONF devices are capable of generating NETCONF notifications.
-UniConfig is able to collect these notifications and creates its own
-UniConfig notifications about specific events. Kafka is used for
-publishing of these notifications from NETCONF devices and UniConfig.
-Currently, there are these types of notifications:</p>
+<p>NETCONF devices are able to produce NETCONF notifications.
+UniConfig can collect these notifications and create its own
+UniConfig notifications about specific events. Kafka is used to publish
+these notifications from NETCONF devices and UniConfig.</p>
+<p>The following notification types are available:</p>
 <ul>
 <li>NETCONF notifications</li>
-<li>notifications about transactions</li>
-<li>audit logs (RESTCONF notifications)</li>
-<li>data-change-events</li>
-<li>connection notifications</li>
+<li>Notifications about transactions</li>
+<li>Audit logs (RESTCONF notifications)</li>
+<li>Data-change events</li>
+<li>Connection notifications</li>
 </ul>
-<p>Each type of notifications is stored in its own topic in kafka. Besides
-that, all notifications are stored in one table in database.</p>
+<p>Each notification type is stored in its own topic in Kafka. Additionally,
+all notifications are stored in one table in the database.</p>
 <p><figure class="content-center">
     <img src="cluster.svg" alt="notifications-in-cluster" />
     <figcaption class="caption">notifications-in-cluster</figcaption>
@@ -287,41 +287,38 @@ that, all notifications are stored in one table in database.</p>
         <span>Kafka</span>
     </h2>
 </doc-anchor-target>
-<p>Apache Kafka is a publish-subscribe based durable messaging system. A
-messaging system sends messages between processes, applications, and
-servers. Apache Kafka is a software where topics can be defined (think
-of a topic as a category), applications can add, process and reprocess
-records.</p>
-<p>In our specific case UniConfig is publisher of notifications. Each type
-of notifications is stored in separate topic and therefore can be
-subscribed to independently. Names of topics and connection data are
-configurable in lighty-uniconfig-config.json file.</p>
+<p>Apache Kafka is a publish–subscribe-based, durable messaging system
+that sends messages between processes, applications and servers.
+Within Kafka, you can define topics (think categories) and applications
+can add, process and reprocess records.</p>
+<p>In our specific case, UniConfig is publishes notifications. Each type
+of notification is stored in a separate topic and therefore can be
+subscribed to independently. The names of topics and connection data are
+configurable in the <em>lighty-uniconfig-config.json</em> file.</p>
 <doc-anchor-target id="netconf-notifications">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#netconf-notifications">#</doc-anchor-trigger>
         <span>NETCONF notifications</span>
     </h2>
 </doc-anchor-target>
-<p><a href="https://tools.ietf.org/html/rfc5277">RFC 5277</a> document defines a
-mechanism where the NETCONF client indicates interest in receiving event
-notifications from a NETCONF server by creating a subscription to
-receive event notifications. The NETCONF server replies to indicate
+<p><a href="https://tools.ietf.org/html/rfc5277">RFC 5277</a> defines a
+mechanism where the NETCONF client indicates an interest in receiving event
+notifications from a NETCONF server by subscribing to
+receive event notifications. The NETCONF server replies
 whether the subscription request was successful and, if it was
-successful, begins sending the event notifications to the NETCONF client
-as the events occur within the system. These event notifications will
-continue to be sent until either the NETCONF session is terminated or
-the subscription terminates for some other reason.</p>
-<p>NETCONF notifications have categories called streams. While subscribing
-it is required to choose which streams should be received. Default
-stream is called NETCONF.</p>
+successful, starts sending event notifications to the NETCONF client
+as events occur within the system. These event notifications are
+sent until either the NETCONF session or the subscription is terminated.</p>
+<p>NETCONF notifications are categorised as so-called streams. The subscriber
+must choose which streams to receive. The default stream is named <em>NETCONF</em>.</p>
 <doc-anchor-target id="notifications-about-transactions">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#notifications-about-transactions">#</doc-anchor-trigger>
         <span>Notifications about transactions</span>
     </h2>
 </doc-anchor-target>
-<p>This type of notifications is generated after each commit in UniConfig.
-It contains:</p>
+<p>This type of notification is generated after each commit in UniConfig.
+It contains the following:</p>
 <ul>
 <li>transaction id</li>
 <li>calculate diff result</li>
@@ -333,7 +330,7 @@ It contains:</p>
         <span>Audit logs (RESTCONF notifications)</span>
     </h2>
 </doc-anchor-target>
-<p>This type of notifications is generated after each RESTCONF operation.</p>
+<p>This type of notification is generated after each RESTCONF operation.</p>
 <p><strong>It contains:</strong></p>
 <ul>
 <li>transaction id</li>
@@ -356,16 +353,16 @@ It contains:</p>
 </ul>
 </li>
 </ul>
-<p>Response body does not need to be included in notification. It can be
-configured using <em>includeResponseBody</em> parameter in
-lighty-uniconfig-config.json file.</p>
+<p>The response body does not need to be included in notifications. It can be
+configured using the <em>includeResponseBody</em> parameter in
+the <em>lighty-uniconfig-config.json</em> file.</p>
 <doc-anchor-target id="shell-notifications">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#shell-notifications">#</doc-anchor-trigger>
         <span>Shell notifications</span>
     </h2>
 </doc-anchor-target>
-<p>This type of notifications is generated after each shell operation.</p>
+<p>This type of notification is generated after each shell operation.</p>
 <p><strong>It contains:</strong></p>
 <ul>
 <li>transaction id</li>
@@ -428,21 +425,29 @@ subscribed subtrees.</p>
         &quot;edit&quot;: [
             {
                 &quot;subtree-path&quot;: &quot;/process=p3&quot;,
-                &quot;data-after&quot;: &quot;{\n  \&quot;process\&quot;: [\n    {\n      \&quot;uid\&quot;: \&quot;p3\&quot;\n    }\n  ]\n}&quot;
+                &quot;data-after&quot;: &quot;{\n  \&quot;process\&quot;: [\n    {\n      \&quot;uid\&quot;: \&quot;p3\&quot;\n    }\n  ]\n}&quot;,
+                &quot;operation&quot;:&quot;CREATE&quot;,
+                &quot;node-id&quot;: &quot;node&quot;
             },
             {
                 &quot;subtree-path&quot;: &quot;/process=p2&quot;,
-                &quot;data-before&quot;: &quot;{\n  \&quot;process\&quot;: [\n    {\n      \&quot;uid\&quot;: \&quot;p2\&quot;\n    }\n  ]\n}&quot;
+                &quot;data-before&quot;: &quot;{\n  \&quot;process\&quot;: [\n    {\n      \&quot;uid\&quot;: \&quot;p2\&quot;\n    }\n  ]\n}&quot;,
+                &quot;operation&quot;:&quot;DELETE&quot;,
+                &quot;node-id&quot;: &quot;node&quot;
             },
             {
                 &quot;subtree-path&quot;: &quot;/process=p1/address/bus-size&quot;,
                 &quot;data-after&quot;: &quot;{\n  \&quot;config:bus-size\&quot;: 2048\n}&quot;,
-                &quot;data-before&quot;: &quot;{\n  \&quot;config:bus-size\&quot;: 1024\n}&quot;
+                &quot;data-before&quot;: &quot;{\n  \&quot;config:bus-size\&quot;: 1024\n}&quot;,
+                &quot;operation&quot;:&quot;UPDATE&quot;,
+                &quot;node-id&quot;: &quot;node&quot;
             },
             {
                 &quot;subtree-path&quot;: &quot;/process=p1/address/bus-id&quot;,
                 &quot;data-after&quot;: &quot;{\n  \&quot;config:bus-id\&quot;: \&quot;0xFFFF\&quot;\n}&quot;,
-                &quot;data-before&quot;: &quot;{\n  \&quot;config:bus-id\&quot;: \&quot;0x451FE\&quot;\n}&quot;
+                &quot;data-before&quot;: &quot;{\n  \&quot;config:bus-id\&quot;: \&quot;0x451FE\&quot;\n}&quot;,
+                &quot;operation&quot;:&quot;UPDATE&quot;,
+                &quot;node-id&quot;: &quot;node&quot;
             }
         ]
     }
@@ -453,7 +458,7 @@ Body contains:</p>
 <ul>
 <li>subscription-id: Identifier of the subscription that triggers generation of data-change-event.
 Subscription identifier makes association of subscriptions and received data-changes-events easier than using
-combination of multiple fields such as node identifier, topology identifier, and subtree path.</li>
+combination of multiple fields such as node identifier, topology identifier and subtree path.</li>
 <li>transaction-id: Identifier of committed transaction that triggered data-change-event after commit or checked-commit
 UniConfig operations.</li>
 <li>edit - List of captured modifications done in the committed transaction.</li>
@@ -466,6 +471,8 @@ specified during subscription.</li>
 represents created data.</li>
 <li>data-after: JSON representation of subtree data including done changes. If this fields is not present, then
 &#x27;data-before&#x27; represents removed data.</li>
+<li>operation: Operation type of the data change event.</li>
+<li>node-id: Node identifier of the data change event.</li>
 </ul>
 <doc-anchor-target id="connection-notifications">
     <h2>
@@ -684,7 +691,7 @@ lighty-uniconfig-config.json file.</p>
 </doc-anchor-target>
 <p>NETCONF device may have the :interleave capability that indicates
 support to interleave other NETCONF operations within a notification
-subscription. This means the NETCONF server can receive, process, and
+subscription. This means the NETCONF server can receive, process and
 respond to NETCONF requests on a session with an active notification
 subscription. However, not all devices support this capability, so the
 common approach for devices &#x27;with&#x27; and &#x27;without&#x27; interleave
@@ -704,18 +711,19 @@ corresponding subscription is closed.</p>
         <span>Subscription to data-change events</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="creation-of-new-subscription">
+<doc-anchor-target id="creating-a-new-subscription">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#creation-of-new-subscription">#</doc-anchor-trigger>
-        <span>Creation of new subscription</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-a-new-subscription">#</doc-anchor-trigger>
+        <span>Creating a new subscription</span>
     </h3>
 </doc-anchor-target>
 <p>Subscription to data-change-events can be created using &#x27;create-data-change-subscription&#x27; RPC. After subscription
-is done, UniConfig starts to listen to data-change-events on selected nodes and subtrees, and distribute corresponding
+is done, UniConfig starts to listen to data-change-events on selected nodes and subtrees and distribute corresponding
 messages to dedicated Kafka topic.</p>
 <p>RPC input contains:</p>
 <ul>
-<li>node-id: Identifier of node from which data-change-events are generated.</li>
+<li>node-id: Identifier for the node from which data-change-events are generated. This field is optional. If not given,
+a global subscription is created and data-change-events are generated for all nodes under the topology.</li>
 <li>topology-id: Identifier of topology where specified node is placed.</li>
 <li>subtree-path: Path to subtree from which user would like to receive data-change-events. Default path equals to &#x27;/&#x27;</li>
 <li>captured data-change-events from whole node configuration.</li>
@@ -761,10 +769,32 @@ subtree &#x27;/interfaces&#x27;.</p>
   }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="removal-of-subscription">
+<p>Example: Creating a subscription to the <em>uniconfig</em> topology and to the whole <em>/interfaces</em> configuration
+subtree.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:create-data-change-subscription' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;topology-id&quot;: &quot;uniconfig&quot;,
+        &quot;subtree-path&quot;: &quot;/interfaces&quot;,
+        &quot;data-change-scope&quot;: &quot;SUBTREE&quot;
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;subscription-id&quot;: &quot;1920770c-671d-4d2e-8126-6309ab73ff10&quot;
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="removing-a-subscription">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#removal-of-subscription">#</doc-anchor-trigger>
-        <span>Removal of subscription</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#removing-a-subscription">#</doc-anchor-trigger>
+        <span>Removing a subscription</span>
     </h3>
 </doc-anchor-target>
 <p>Existing subscription can be removed using &#x27;delete-data-change-subscription&#x27; RPC and provided subscription-id.
@@ -790,7 +820,7 @@ doesn&#x27;t contain body. RPC will return 404, if subscription with provided id
 </doc-anchor-target>
 <p>The RPC &#x27;show-subscription-data&#x27; can be used for displaying information about created subscription. RPC input contains
 identifier of target subscription.</p>
-<p>RPC output for existing subscription contains &#x27;topology-id&#x27;, &#x27;node-id&#x27;, &#x27;subtree-path&#x27;, and &#x27;data-change-scope&#x27; - the
+<p>RPC output for existing subscription contains &#x27;topology-id&#x27;, &#x27;node-id&#x27;, &#x27;subtree-path&#x27; and &#x27;data-change-scope&#x27; - the
 same fields that can also be specified in the &#x27;create-data-change-subscription&#x27; RPC input.
 If subscription with specified ID doesn&#x27;t exist, RPC will return 404 status code with standard RESTCONF error container.</p>
 <p>Example: showing information about</p>
@@ -815,8 +845,8 @@ If subscription with specified ID doesn&#x27;t exist, RPC will return 404 status
     }
 }</code></pre>
 </doc-codeblock></div>
-<p>It is also possible to fetch all created subscriptions under specific node by sending GET request
-to &#x27;data-change-subscriptions&#x27; list under &#x27;node&#x27; list item (operational data).</p>
+<p>It is also possible to fetch all created subscriptions under a specific node or topology by sending a GET request
+to the &#x27;data-change-subscriptions&#x27; list under the &#x27;node&#x27; list item (operational data).</p>
 <p>Example (there are 2 subscriptions under &#x27;device1&#x27; node):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">GET request</div>
@@ -836,6 +866,28 @@ to &#x27;data-change-subscriptions&#x27; list under &#x27;node&#x27; list item (
             &quot;subscription-id&quot;: &quot;3b3ad917-f1a1-4cc4-83b9-3c8b62929b81&quot;,
             &quot;subtree-path&quot;: &quot;/ospf&quot;,
             &quot;data-change-scope&quot;: &quot;ONE&quot;
+        }
+    ]
+}</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">GET request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/data-change-subscriptions?content=nonconfig' \
+--header 'Accept: application/json'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">GET response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;data-change-events:data-change-subscriptions&quot;: [
+        {
+            &quot;subscription-id&quot;: &quot;4058acac-1a2a-4c49-abe9-bcdbd14fe933&quot;,
+            &quot;subtree-path&quot;: &quot;/events:event&quot;,
+            &quot;data-change-scope&quot;: &quot;SUBTREE&quot;
+        },
+        {
+            &quot;subscription-id&quot;: &quot;a2561773-c02e-403c-a090-fe6542926fed&quot;,
+            &quot;subtree-path&quot;: &quot;/events:event&quot;,
+            &quot;data-change-scope&quot;: &quot;BASE&quot;
         }
     ]
 }</code></pre>
@@ -940,7 +992,7 @@ the request or fail the request if retries are exhausted.</li>
 <li>deliveryTimeout - configuration of the upper bound on the time to report
 success or failure after a call to <strong>send()</strong> returns (in ms). This limits
 the total time that a record will be delayed prior to sending, the
-time to await acknowledgement from the broker (if expected), and the
+time to await acknowledgement from the broker (if expected) and the
 time allowed for retriable send failures.</li>
 </ul>
 <p><strong>There are two properties related to the thread pool executor which is needed to

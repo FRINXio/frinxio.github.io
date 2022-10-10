@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718351963994">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718704676718">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>UniConfig Shell | Frinx Docs</title>
     <meta name="title" content="UniConfig Shell | Frinx Docs">
-    <meta name="description" content="UniConfig shell is a Command Line Interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including:" />
+    <meta name="description" content="UniConfig shell is a command-line interface for Uniconfig." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/" />
@@ -23,25 +23,27 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">
     <meta property="og:title" content="UniConfig Shell | Frinx Docs">
-    <meta property="og:description" content="UniConfig shell is a Command Line Interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including:">
+    <meta property="og:description" content="UniConfig shell is a command-line interface for Uniconfig.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/scrolling_example.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">
     <meta property="twitter:title" content="UniConfig Shell | Frinx Docs">
-    <meta property="twitter:description" content="UniConfig shell is a Command Line Interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including:">
+    <meta property="twitter:description" content="UniConfig shell is a command-line interface for Uniconfig.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/scrolling_example.png">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.718351963994" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.718704676718" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.718351963994" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.718704676718" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.718351963994" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.718351963994" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.718704676718" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.718704676718" defer></script>
+    <link href="../../../../resources/css/katex.css?v=2.4.0" rel="stylesheet" />
+    <script id="katex-js" type="text/javascript" src="../../../../resources/js/katex.js?v=2.4.0" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,16 +258,16 @@
         <span>UniConfig Shell</span>
     </h1>
 </doc-anchor-target>
-<p>UniConfig shell is a Command Line Interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including:</p>
+<p>UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including the following:</p>
 <ul>
 <li>reading operational data of devices</li>
 <li>manipulating device configuration</li>
 <li>manipulating configuration templates</li>
-<li>manipulating data stored in unistore</li>
+<li>manipulating data stored in Unistore</li>
 <li>invoking device or UniConfig operations</li>
 <li>manipulating global UniConfig settings</li>
 </ul>
-<p>Uniconfig shell is model driven and thus its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
+<p>As Uniconfig shell is model-driven, its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
 RPC/action operations).</p>
 <doc-anchor-target id="configuration">
     <h2>
@@ -1105,6 +1107,243 @@ request&gt;show-history
 request&gt;
 </code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="callbacks">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#callbacks">#</doc-anchor-trigger>
+        <span>Callbacks</span>
+    </h2>
+</doc-anchor-target>
+<p>Callbacks include sending POST and GET requests to the remote server and invoking user scripts from UniConfig shell.</p>
+<p>Requirements for using callbacks:
+For using callbacks it is needed:</p>
+<ol>
+<li>Necessary YANG modules - YANG modules that are required for the correct callbacks.</li>
+<li>Configuration - Update &#x27;config/lighty-uniconfig-config.json&#x27;.</li>
+<li>Update repository - Add the necessary YANG modules (see 1.) into &#x27;latest&#x27; or a specific &#x27;user-repository&#x27;, and
+define remote endpoints and scripts in a YANG file or create a new one for callbacks. For definition of remote
+endpoints, the <a href="mailto:%27frinx-callpoint@2022-06-22.yang">&#x27;frinx-callpoint@2022-06-22.yang</a>&#x27; extension must be used.</li>
+<li>UniStore node - Create a UniStore node using &#x27;latest&#x27; or a specific &#x27;user-repository&#x27; containing
+the necessary YANG modules (see 1.) and a YANG file with defined endpoints and scripts.</li>
+</ol>
+<doc-anchor-target id="necessary-yang-modules">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#necessary-yang-modules">#</doc-anchor-trigger>
+        <span>Necessary YANG modules</span>
+    </h3>
+</doc-anchor-target>
+<p>The following YANG modules are required:</p>
+<ul>
+<li><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a> (not needed for scripts)</li>
+<li><a href="mailto:tailf-common@2018-11-12.yang">tailf-common@2018-11-12.yang</a></li>
+<li><a href="mailto:tailf-meta-extensions@2017-03-08.yang">tailf-meta-extensions@2017-03-08.yang</a></li>
+<li><a href="mailto:tailf-cli-extensions@2018-09-15.yang">tailf-cli-extensions@2018-09-15.yang</a></li>
+</ul>
+<doc-anchor-target id="configuration-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#configuration-1">#</doc-anchor-trigger>
+        <span>Configuration</span>
+    </h3>
+</doc-anchor-target>
+<p>By default, callbacks are disabled and the remote server URI is empty. To enable callbacks, set the configuration parameter
+&#x27;callbacks/enabled&#x27; to &#x27;true&#x27; and set the remote server URI in the &#x27;config/lighty-uniconfig-config.json&#x27; file.</p>
+<p>All available settings and descriptions are displayed in the following JSON snippet.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">UniConfig callbacks configuration (config/lighty-uniconfig-config.json)</div>
+<pre class="language-json"><code v-pre class="language-json">    &quot;callbacks&quot;: {
+        // flag that determines whether callbacks will work
+        &quot;enabled&quot;: true,
+        // remote server settings
+        &quot;remoteServer&quot;: {
+            // remote server uri
+            &quot;serverUri&quot;: &quot;https://remote.server.io&quot;,
+            // basic authentication that will be used in http requests
+            &quot;username&quot;: &quot;admin&quot;,
+            &quot;password&quot;: &quot;admin&quot;
+        }
+    }</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="update-repository">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#update-repository">#</doc-anchor-trigger>
+        <span>Update repository</span>
+    </h3>
+</doc-anchor-target>
+<p>First, create or update the YANG repository by using the <a href="mailto:%27frinx-callpoint@2022-06-22.yang">&#x27;frinx-callpoint@2022-06-22.yang</a>&#x27; extension
+displayed in the following snippet. There is only one extension &#x27;url&#x27; with the argument &#x27;point&#x27;.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title"><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></div>
+<pre class="language-none"><code v-pre class="language-none">module frinx-callpoint {
+    yang-version 1.1;
+    namespace &quot;http://frinx.io/callpoint&quot;;
+    prefix callpoint;
+
+    revision 2022-06-22 {
+        description &quot;Initial revision&quot;;
+    }
+
+    extension url {
+        argument point;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="add-callpoint-get-request">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#add-callpoint-get-request">#</doc-anchor-trigger>
+        <span>Add callpoint (GET request)</span>
+    </h4>
+</doc-anchor-target>
+<p>The following snippet shows how to create a callpoint in the frinx-test YANG file using the
+<a href="mailto:%27frinx-callpoint@2022-06-22.yang">&#x27;frinx-callpoint@2022-06-22.yang</a>&#x27; extension.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">example of using of the <a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a> in YANG file</div>
+<pre class="language-none"><code v-pre class="language-none">module frinx-test {
+    yang-version 1.1;
+    namespace &quot;http://frinx.io/frinx-test&quot;;
+
+    import frinx-callpoint { prefix &quot;fcal&quot;; }
+
+    container test {
+        container get-request {
+            fcal:url /data/from/remote;
+        }
+    }</code></pre>
+</doc-codeblock></div>
+<p>The argument for the &#x27;url&#x27; extension is &#x27;/data/from/remote&#x27;, which appended to the remote server URI
+configured in the &#x27;config/lighty-uniconfig-config.json&#x27;. The final address for the remote callpoint is
+&#x27;https://remote.server.io/data/from/remote&#x27;.</p>
+<doc-anchor-target id="add-action-post-request">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#add-action-post-request">#</doc-anchor-trigger>
+        <span>Add action (POST request)</span>
+    </h4>
+</doc-anchor-target>
+<p>In the snippet below, you can see how to create an action in the frinx-test YANG file using the
+<a href="mailto:%27frinx-callpoint@2022-06-22.yang">&#x27;frinx-callpoint@2022-06-22.yang</a>&#x27; extension. It is also necessary to import &#x27;tailf-common.yang&#x27;. The action consists of:</p>
+<ol>
+<li>Action name defined by &#x27;tailf:action&#x27;.</li>
+<li>Suffix of the remote endpoint defined by &#x27;fcal:url&#x27;.</li>
+<li>Input that contains the body of the request (optional).</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">example of using of the <a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a> in YANG file</div>
+<pre class="language-none"><code v-pre class="language-none">module frinx-test {
+    yang-version 1.1;
+    namespace &quot;http://frinx.io/frinx-test&quot;;
+
+    import frinx-callpoint { prefix &quot;fcal&quot;; }
+    import tailf-common { prefix &quot;tailf&quot;; }
+
+    container post-request {
+        tailf:action test-action {
+            fcal:url /invoke/remote/test-action;
+            input {
+                container body {
+                    leaf data {
+                        type string;
+                    }
+                }
+            }
+        }
+    }</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="add-script">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#add-script">#</doc-anchor-trigger>
+        <span>Add script</span>
+    </h4>
+</doc-anchor-target>
+<p>The following snippet shows how to create a script in the frinx-test YANG file using
+&#x27;tailf-common.yang&#x27;. It is not necessary to import the <a href="mailto:%27frinx-callpoint@2022-06-22.yang">&#x27;frinx-callpoint@2022-06-22.yang</a>&#x27; extension. The script consists of:</p>
+<ol>
+<li>Script name defined by &#x27;tailf:action&#x27;.</li>
+<li>Path to the script defined by &#x27;tailf:exec&#x27;.</li>
+<li>Arguments of the script defined by &#x27;tailf:exec&#x27;.</li>
+</ol>
+<p>Arguments can be dynamic (i.e., the user can pass values to them) or static (flags). Arguments should be created following
+these conventions:</p>
+<ol>
+<li>Each argument must contain a name (e.g. -n, -j).</li>
+<li>Dynamic arguments must be enclosed in &#x27;<span class="math">(...)'. For example, '</span>(name)&#x27;.</li>
+<li>Flags are simple words without whitespace. For example, VIP, UPPER, upper.</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">example of using of the <a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a> in YANG file</div>
+<pre class="language-none"><code v-pre class="language-none">module frinx-test {
+    yang-version 1.1;
+    namespace &quot;http://frinx.io/frinx-test&quot;;
+
+    import tailf-common { prefix &quot;tailf&quot;; }
+
+    container script {
+        tailf:action test-script {
+            tailf:exec '/tmp/test_script.sh' {
+                tailf:args '-n $(name) -j $(job) -v VIP';
+            }
+        }
+    }</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="unistore-node">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#unistore-node">#</doc-anchor-trigger>
+        <span>UniStore node</span>
+    </h3>
+</doc-anchor-target>
+<p>A UniStore node can be created by RestConf or UniConfig shell. If a repository is explicitly defined by the query
+parameter &#x27;?uniconfig-schema-repository=repository-name&#x27;, this repository must contain all necessary YANG
+modules. If a repository name is not defined when the UniStore node is created, all necessary YANG modules
+must be in the &#x27;latest&#x27; schema repository.</p>
+<doc-anchor-target id="examples-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#examples-1">#</doc-anchor-trigger>
+        <span>Examples</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Example - callpoint invocation in the shell:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">callpoint invocation</div>
+<pre class="language-none"><code v-pre class="language-none">uniconfig&gt;show
+show&gt;unistore node1 test get-request
+{
+  &quot;response&quot;: {
+    &quot;value&quot;: &quot;some-value&quot;
+  }
+}
+show&gt;</code></pre>
+</doc-codeblock></div>
+<ul>
+<li>Example - action invocation in the shell:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">action invocation</div>
+<pre class="language-none"><code v-pre class="language-none">uniconfig&gt;request 
+request&gt;unistore node1 post-request test-action body data &quot;some-data&quot;
+{
+  &quot;response&quot;: {
+    &quot;value&quot;: &quot;some-data was processed&quot;
+  }
+}
+request&gt;</code></pre>
+</doc-codeblock></div>
+<ul>
+<li>Example - user script execution in the shell:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">user script execution</div>
+<pre class="language-none"><code v-pre class="language-none">uniconfig&gt;request 
+request&gt;unistore node1 script test-script /tmp/test_script.sh 
+VIP    job    name
+request&gt;unistore node1 script test-script /tmp/test_script.sh job &quot;FRINX&quot; 
+VIP    name
+unistore node1 script test-script /tmp/test_script.sh job &quot;FRINX&quot; VIP
+Name: 
+Job: Frinx
+is VIP
+
+Exit code: 0
+request&gt;</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -1174,6 +1413,6 @@ request&gt;
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "UniConfig Shell", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "UniConfig Shell", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true }</script>
 </body>
 </html>

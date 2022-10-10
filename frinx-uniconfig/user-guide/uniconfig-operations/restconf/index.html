@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718351963994">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718704676718">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>UniConfig - Sending and receiving data (RESTCONF) | Frinx Docs</title>
     <meta name="title" content="UniConfig - Sending and receiving data (RESTCONF) | Frinx Docs">
-    <meta name="description" content="RESTCONF is described in RESTCONF RFC 8040. Simple said, RESTCONF represents a REST API to access datastores and UniConfig operations." />
+    <meta name="description" content="RESTCONF is described in RESTCONF RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/restconf/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/restconf/">
     <meta property="og:title" content="UniConfig - Sending and receiving data (RESTCONF) | Frinx Docs">
-    <meta property="og:description" content="RESTCONF is described in RESTCONF RFC 8040. Simple said, RESTCONF represents a REST API to access datastores and UniConfig operations.">
+    <meta property="og:description" content="RESTCONF is described in RESTCONF RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/restconf/">
     <meta property="twitter:title" content="UniConfig - Sending and receiving data (RESTCONF) | Frinx Docs">
-    <meta property="twitter:description" content="RESTCONF is described in RESTCONF RFC 8040. Simple said, RESTCONF represents a REST API to access datastores and UniConfig operations.">
+    <meta property="twitter:description" content="RESTCONF is described in RESTCONF RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.718351963994" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.718704676718" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.718351963994" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.718704676718" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.718351963994" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.718351963994" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.718704676718" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.718704676718" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -261,8 +261,8 @@
     </h2>
 </doc-anchor-target>
 <p>RESTCONF is described in <a href="https://tools.ietf.org/html/rfc8040">RESTCONF RFC
-8040</a>. Simple said, RESTCONF
-represents a REST API to access datastores and UniConfig operations.</p>
+8040</a>. Put simply, RESTCONF
+represents a REST API for accessing datastores and UniConfig operations.</p>
 <doc-anchor-target id="datastores">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#datastores">#</doc-anchor-trigger>
@@ -271,10 +271,8 @@ represents a REST API to access datastores and UniConfig operations.</p>
 </doc-anchor-target>
 <p>There are two datastores:</p>
 <ol>
-<li><strong>Config</strong>: Contains data representing the intended state, it is
-possible to read and write it via RESTCONF.</li>
-<li><strong>Operational</strong>: Contains data representing the actual state, it is
-possible to only read it via RESTCONF.</li>
+<li><strong>Config</strong>: Contains data representing the intended state. Possible to read and write via RESTCONF.</li>
+<li><strong>Operational</strong>: Contains data representing the actual state. Possible only to read via RESTCONF.</li>
 </ol>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
@@ -301,7 +299,7 @@ RESTCONF listens on port 8181 for HTTP requests.</p>
     </h3>
 </doc-anchor-target>
 <p>RESTCONF supports: <strong>OPTIONS</strong>, <strong>GET</strong>, <strong>PUT</strong>, <strong>POST</strong>, <strong>PATCH</strong>,
-and <strong>DELETE</strong> operations. Request and response data can either be in
+and <strong>DELETE</strong> operations. Request and response data can be either in
 the XML or JSON format.</p>
 <ul>
 <li>XML structures according to YANG are defined at:
@@ -311,17 +309,17 @@ the XML or JSON format.</p>
 </ul>
 <p>Data in the request must set the <strong>Content-Type</strong> field correctly in the
 HTTP header with the allowed value of the media type. The media type of
-the requested data has to be set in the <strong>Accept</strong> field. Get the media
+the requested data must be set in the <strong>Accept</strong> field. Get the media
 types for each resource by calling the OPTIONS operation.</p>
 <p>Most of the paths use <a href="https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL:Concepts#Instance_Identifier">Instance
 Identifier</a>.
-<strong>&lt;identifier&gt;</strong> is used in the explanation of the operations and has
-to keep these rules:</p>
+<strong>&lt;identifier&gt;</strong> is used in the explanation of the operations and must
+adhere to these rules:</p>
 <ul>
 <li>Identifier must start with &lt;moduleName&gt;:&lt;nodeName&gt;&gt; where
 &lt;moduleName&gt; is a name of the YANG module and &lt;nodeName&gt; is the
 name of a node in the module. If the next node name is placed in the
-same namespace like the previous one, it is sufficient to just use
+same namespace as the previous one, it is sufficient to just use
 &lt;nodeName&gt; after the first definition of
 &lt;moduleName&gt;:&lt;nodeName&gt;. Each &lt;nodeName&gt; has to be separated
 by /.</li>
@@ -2309,6 +2307,62 @@ Default value is &#x27;false&#x27; - nodes attributes are displayed in the GET r
    }
 }</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="callbacks-http-client">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#callbacks-http-client">#</doc-anchor-trigger>
+        <span>Callbacks (http-client)</span>
+    </h3>
+</doc-anchor-target>
+<p>Callbacks include sending GET (call-point) and POST (action) requests to the remote server. They are implemented mainly for UniConfig Shell,
+but it is also possible to use the RESTCONF for UniStore nodes with the URI prefix:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Http-client</div>
+<pre class="language-none"><code v-pre class="language-none">http://localhost:8181/rests/http-client/...</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="examples-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#examples-1">#</doc-anchor-trigger>
+        <span>Examples</span>
+    </h4>
+</doc-anchor-target>
+<p>Example - call-point invocation in RESTCONF</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Call-point request</div>
+<pre class="language-none"><code v-pre class="language-none">curl --location --request GET 'http://localhost:8181/rests/http-client/network-topology:network-topology/topology=unistore/node=node1/configuration/test/get-request'</code></pre>
+</doc-codeblock></div>
+<p>Response:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Call-point response</div>
+<pre class="language-none"><code v-pre class="language-none">{
+  &quot;response&quot;: {
+    &quot;value&quot;: &quot;some-value&quot;
+  }
+}</code></pre>
+</doc-codeblock></div>
+<p>Example - action invocation in RESTCONF</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Action request</div>
+<pre class="language-none"><code v-pre class="language-none">curl --location --request POST 'http://localhost:8181/rests/http-client/network-topology:network-topology/topology=unistore/node=node1/configuration/post-request/test-action' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;body&quot;: {
+            &quot;data&quot;: &quot;some-data&quot;
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>Response:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Action response</div>
+<pre class="language-none"><code v-pre class="language-none">{
+  &quot;response&quot;: {
+    &quot;value&quot;: &quot;some-data was processed&quot;
+  }
+}</code></pre>
+</doc-codeblock></div>
+<p>Callbacks must be configured before use. For more details, see our <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/#callbacks">User guide</a>.</p>
 
                                 
                                 <!-- Required only on API pages -->
