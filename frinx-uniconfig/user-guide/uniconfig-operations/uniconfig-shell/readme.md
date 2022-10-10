@@ -714,11 +714,17 @@ For using callbacks it is needed:
 
 1. Necessary YANG modules - YANG modules that are required for the correct callbacks working.
 2. Configuration - update 'config/lighty-uniconfig-config.json'.
-3. Update repository - add 'necessary YANG modules' from point 1 into 'latest' or specific 'user-repository' and
-define remote endpoints and scripts in some YANG file or create new one for callbacks. For definition of remote 
-endpoints 'frinx-callpoint@2022-06-22.yang' extension must be used.
-4. UniStore node - create UniStore node with using 'latest' or specific 'user-repository' that should contain
-'necessary YANG modules' from point 1 and YANG file with defined endpoints and scripts.
+3. Update repository - add 'necessary YANG modules' from point 1 into at least one YANG repository in the cache
+directory and define remote endpoints and scripts in some YANG file or create new one for callbacks. For definition of 
+remote endpoints 'frinx-callpoint@2022-06-22.yang' extension must be used.
+4. UniStore node - create UniStore node with using YANG repository that contains 'necessary YANG modules' 
+from point 1 and YANG file with defined endpoints and scripts.
+
+!!!
+The Point 4 is optional in the UniConfig shell because the UniConfig creates dummy UniStore nodes for all repositories 
+that meet conditions in point 3. In this case, the dummy UniStore node name is the same as YANG repository name. In the 
+RestConf the point 4 is mandatory.
+!!!
 
 ### Necessary YANG modules
 
