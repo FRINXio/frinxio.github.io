@@ -6,42 +6,39 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718715882262">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718789204491">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Device Inventory | Frinx Docs</title>
-    <meta name="title" content="Device Inventory | Frinx Docs">
-    <meta name="description" content="Devices are stored in a Device Inventory. From here they can be dynamically installed and uninstalled." />
+    <title>Developer Guide | Frinx Docs</title>
+    <meta name="title" content="Developer Guide | Frinx Docs">
+    <meta name="description" content="Resource Manager currently depends on a project called symphony." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniflow/inventory/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-resource-manager/developer-guide/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniflow/inventory/">
-    <meta property="og:title" content="Device Inventory | Frinx Docs">
-    <meta property="og:description" content="Devices are stored in a Device Inventory. From here they can be dynamically installed and uninstalled.">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniflow/inventory/fm_install.gif">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-resource-manager/developer-guide/">
+    <meta property="og:title" content="Developer Guide | Frinx Docs">
+    <meta property="og:description" content="Resource Manager currently depends on a project called symphony.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniflow/inventory/">
-    <meta property="twitter:title" content="Device Inventory | Frinx Docs">
-    <meta property="twitter:description" content="Devices are stored in a Device Inventory. From here they can be dynamically installed and uninstalled.">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniflow/inventory/fm_install.gif">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-resource-manager/developer-guide/">
+    <meta property="twitter:title" content="Developer Guide | Frinx Docs">
+    <meta property="twitter:description" content="Resource Manager currently depends on a project called symphony.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.718715882262" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.718789204491" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.718715882262" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.718789204491" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.718715882262" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.718715882262" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.718789204491" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -250,197 +247,232 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="device-inventory" class="break-words">
+<doc-anchor-target id="developer-guide" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#device-inventory">#</doc-anchor-trigger>
-        <span>Device Inventory</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#developer-guide">#</doc-anchor-trigger>
+        <span>Developer Guide</span>
     </h1>
 </doc-anchor-target>
-<p>Devices are stored in a Device Inventory. From here they can be
-dynamically installed and uninstalled.</p>
-<doc-anchor-target id="adding-device-to-inventory">
+<doc-anchor-target id="dependency-on-symphony">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-device-to-inventory">#</doc-anchor-trigger>
-        <span>Adding device to inventory</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-on-symphony">#</doc-anchor-trigger>
+        <span>Dependency on symphony</span>
     </h2>
 </doc-anchor-target>
-<p>To add new device to invetory, click on the <strong>Add device</strong> button in the
-<strong>Device inventory</strong> tab.</p>
-<p><figure class="content-center">
-    <img src="fm_install.gif" alt="FM Install" />
-    <figcaption class="caption">FM Install</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="json-examples">
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-yellow-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-yellow-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
+                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Resource Manager currently depends on a project called symphony.</p>
+        </div>
+    </div>
+</div>
+<p>This project is not publicly accessible and without access to it,
+Resource Manager cannot be built. In that case, use pre built docker images
+from dockerhub.</p>
+<doc-anchor-target id="folder-structure">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#json-examples">#</doc-anchor-trigger>
-        <span>JSON examples</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#folder-structure">#</doc-anchor-trigger>
+        <span>Folder structure</span>
     </h2>
 </doc-anchor-target>
-<p>To adding a new device toggle the &quot;Blueprints&quot; switch in the form and
-choose the blueprint that you want to use.</p>
-<p>New devices are added by JSON code snippets. They are similar to <a href="../blueprints/">Blueprints</a>
-with one addition: <strong>device_id</strong> must be specified in the snippet.</p>
-<doc-anchor-target id="cisco-classic-ios-cli">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-classic-ios-cli">#</doc-anchor-trigger>
-        <span>Cisco classic IOS (cli)</span>
-    </h3>
+<ul>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/ent">ent</a> -
+ORM schema and generated code for the DB</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/ent/schema">ent/schema</a>
+<ul>
+<li>ORM schema</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/graph/graphql">graph/graphql</a>
+<ul>
+<li>graphQL schema and generated code for graphQL server</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/graph/graphhttp">graph/graphhttp</a>
+<ul>
+<li>graphQL server</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/pools">pools</a>
+<ul>
+<li>core codebase for pools and resoruce allocation</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/viewer">viewer</a>
+<ul>
+<li>multitenancy, RBAC and DB connection management</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/psql">psql</a>
+<ul>
+<li>psql DB connection provider</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/logging">logging</a>
+<ul>
+<li>logging framework</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/api-tests">api-tests</a>
+<ul>
+<li>integration tests</li>
+</ul>
+</li>
+<li><a href="https://github.com/FRINXio/resource-manager/tree/master/pkg">pkg</a> -
+helm chart for Resource Manager</li>
+</ul>
+<doc-anchor-target id="build">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#build">#</doc-anchor-trigger>
+        <span>Build</span>
+    </h2>
 </doc-anchor-target>
+<p>It is advised to build Resource Manager as a docker image using
+<a href="https://github.com/FRINXio/resource-manager/blob/master/Dockerfile">Dockerfile</a>
+and run it as a docker container.</p>
+<p>The reason is that Resource Manager uses wasmer and pre built js and python
+engines for wasm. These are not part of the codebase and thus simply
+running Resource Manager would fail, unless you provide these resources e.g.
+by copying them out of Resource Manager built docker image.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-yellow-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-yellow-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
+                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Resource Manager utilizes wire to generate wiring code between major</p>
+        </div>
+    </div>
+</div>
+<p>components. Regenerating wiring is not part of standard build process !
+After modifying any of the <strong>wire.go</strong> files perform:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;cli&quot;:{
-        &quot;cli-topology:host&quot;:&quot;192.168.1.25&quot;,
-        &quot;cli-topology:port&quot;:&quot;22&quot;,
-        &quot;cli-topology:transport-type&quot;:&quot;ssh&quot;,
-        &quot;cli-topology:device-type&quot;:&quot;ios&quot;,
-        &quot;cli-topology:device-version&quot;:&quot;15.4&quot;,
-        &quot;cli-topology:username&quot;:&quot;USERNAME&quot;,
-        &quot;cli-topology:password&quot;:&quot;PASSWORD&quot;,
-        &quot;cli-topology:journal-size&quot;:500,
-        &quot;cli-topology:dry-run-journal-size&quot;:180,
-        &quot;cli-topology:parsing-engine&quot;:&quot;tree-parser&quot;
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none">    wire ./...</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="cisco-ios-xr-netconf">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-ios-xr-netconf">#</doc-anchor-trigger>
-        <span>Cisco IOS XR (netconf)</span>
-    </h3>
+<doc-anchor-target id="graphql-schema">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#graphql-schema">#</doc-anchor-trigger>
+        <span>GraphQL schema</span>
+    </h2>
+</doc-anchor-target>
+<p>Resource Manager exposes graphQL API and this is the
+<a href="https://github.com/FRINXio/resource-manager/blob/master/graph/graphql/schema/schema.graphql">schema</a>.</p>
+<doc-anchor-target id="built-in-strategies">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#built-in-strategies">#</doc-anchor-trigger>
+        <span>Built in strategies</span>
+    </h2>
+</doc-anchor-target>
+<p>Resource Manager provides a number of built in strategies for built in
+resource types and are loaded into Resource Manager at startup.</p>
+<p><a href="https://github.com/FRINXio/resource-manager/tree/master/pools/allocating_strategies/strategies">Built in strategies code
+base</a></p>
+<p><a href="https://github.com/FRINXio/resource-manager/tree/master/pools/allocating_strategies/strategies/src/tests">Built in strategies unit
+tests</a></p>
+<p>These strategies need to be tested/built and packaged for Resource Manager.
+This test/build process in scrips section of
+<a href="https://github.com/FRINXio/resource-manager/blob/master/pools/allocating_strategies/strategies/package.json">package.json</a>
+while the packaging part can be found in
+<a href="https://github.com/FRINXio/resource-manager/blob/master/pools/allocating_strategies/generate.go">generate.go</a>.</p>
+<p>Resource types associated with these strategies can be found in
+<a href="https://github.com/FRINXio/resource-manager/blob/master/pools/allocating_strategies/load_builtin_resources.go">load_builtin_resources.go</a>.</p>
+<doc-anchor-target id="unit-tests">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#unit-tests">#</doc-anchor-trigger>
+        <span>Unit tests</span>
+    </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;netconf&quot;:{
-        &quot;netconf-node-topology:host&quot;:&quot;10.0.0.1&quot;,
-        &quot;netconf-node-topology:port&quot;:830,
-        &quot;netconf-node-topology:tcp-only&quot;:false,
-        &quot;netconf-node-topology:username&quot;:&quot;USERNAME&quot;,
-        &quot;netconf-node-topology:password&quot;:&quot;PASSWORD&quot;,
-        &quot;netconf-node-topology:session-timers&quot;: {
-            &quot;netconf-node-topology:keepalive-delay&quot;:5
-        },
-        &quot;netconf-node-topology:other-parameters&quot;: {
-            &quot;netconf-node-topology:dry-run-journal-size&quot;:180
-        },
-        &quot;uniconfig-config:uniconfig-native-enabled&quot;:true,
-        &quot;uniconfig-config:blacklist&quot;:{
-            &quot;uniconfig-config:path&quot;:[
-                &quot;openconfig-interfaces:interfaces&quot;,
-                &quot;ietf-interfaces:interfaces&quot;,
-                &quot;openconfig-vlan:vlans&quot;,
-                &quot;openconfig-routing-policy:routing-policy&quot;,
-                &quot;openconfig-lldp:lldp&quot;,
-                &quot;Cisco-IOS-XR-l2vpn-cfg:l2vpn&quot;,
-                &quot;Cisco-IOS-XR-group-cfg:groups&quot;,
-                &quot;openconfig-acl:acl&quot;,
-                &quot;openconfig-network-instance:network-instances&quot;
-            ]
-        }
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none">./unit-test.sh</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="junos-cli">
+<doc-anchor-target id="integration-tests">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#integration-tests">#</doc-anchor-trigger>
+        <span>Integration tests</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="api-tests">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#junos-cli">#</doc-anchor-trigger>
-        <span>JUNOS (cli)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#api-tests">#</doc-anchor-trigger>
+        <span>API tests</span>
     </h3>
 </doc-anchor-target>
+<p>There&#x27;s a number of <a href="https://github.com/FRINXio/resource-manager/tree/master/api-tests">api
+tests</a>
+available and can be executed using
+<a href="https://github.com/FRINXio/resource-manager/blob/master/integration-test.sh">integration-test.sh</a>.
+These tests need to be executed against Resource Manager running as a black
+box (ideally as a container).</p>
+<doc-anchor-target id="wasmer">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#wasmer">#</doc-anchor-trigger>
+        <span>Wasmer</span>
+    </h3>
+</doc-anchor-target>
+<p>There&#x27;s a number of tests testing core components that require wasmer,
+quickjs and python packages to be available. It is recommended to run
+these tests in a docker container.</p>
+<p>Example execution:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;cli&quot;:{
-        &quot;cli-topology:host&quot;:&quot;10.103.5.208&quot;,
-        &quot;cli-topology:port&quot;:&quot;22&quot;,
-        &quot;cli-topology:transport-type&quot;:&quot;ssh&quot;,
-        &quot;cli-topology:device-type&quot;:&quot;junos&quot;,
-        &quot;cli-topology:device-version&quot;:&quot;17.3&quot;,
-        &quot;cli-topology:username&quot;:&quot;USERNAME&quot;,
-        &quot;cli-topology:password&quot;:&quot;PASSWORD&quot;,
-        &quot;cli-topology:journal-size&quot;:150,
-        &quot;uniconfig-config:install-uniconfig-node-enabled&quot;:false
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none">export WASMER_BIN=~/.wasmer/bin/wasmer
+export WASMER_JS=~/.wasmer/globals/wapm_packages/_/quickjs@0.0.3/build/qjs.wasm
+export WASMER_PY=~/.wasmer/globals/wapm_packages/_/python@0.1.0/bin/python.wasm
+export WASMER_PY_LIB=~/.wasmer/globals/wapm_packages/_/python@0.1.0/lib/
+go test -run Integration ./pools/...</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="calix-netconf">
+<doc-anchor-target id="additional-info">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#calix-netconf">#</doc-anchor-trigger>
-        <span>CALIX (netconf)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#additional-info">#</doc-anchor-trigger>
+        <span>Additional info</span>
     </h3>
 </doc-anchor-target>
+<doc-anchor-target id="telementry">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#telementry">#</doc-anchor-trigger>
+        <span>Telementry</span>
+    </h4>
+</doc-anchor-target>
+<p>Support for tracing (distributed tracing). Streams data into a collector
+such as Jaeger. Default is Nop. See main parameters or
+telementry/config.go for further details to enable jaeger tracing</p>
+<doc-anchor-target id="health">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#health">#</doc-anchor-trigger>
+        <span>Health</span>
+    </h4>
+</doc-anchor-target>
+<p>Basic health info of the app (also checks if mysql connection is
+healthy)</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;netconf&quot;:{
-        &quot;netconf-node-topology:host&quot;:&quot;10.19.0.16&quot;,
-        &quot;netconf-node-topology:port&quot;:830,
-        &quot;netconf-node-topology:session-timers&quot;: {
-            &quot;netconf-node-topology:keepalive-delay&quot;:0
-        },
-        &quot;netconf-node-topology:tcp-only&quot;:false,
-        &quot;netconf-node-topology:username&quot;:&quot;USERNAME&quot;,
-        &quot;netconf-node-topology:password&quot;:&quot;PASSWORD&quot;,
-        &quot;uniconfig-config:uniconfig-native-enabled&quot;:true,
-        &quot;uniconfig-config:install-uniconfig-node-enabled&quot;:true,
-        &quot;uniconfig-config:blacklist&quot;:{
-            &quot;uniconfig-config:path&quot;:[],
-            &quot;uniconfig-config:extension&quot;:[]
-        }
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none"># server can serve requests
+http://localhost:8884/healthz/liveness
+# server works fine
+http://localhost:8884/healthz/readiness</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="nokia-netconf">
+<doc-anchor-target id="metrics">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#nokia-netconf">#</doc-anchor-trigger>
-        <span>Nokia (netconf)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#metrics">#</doc-anchor-trigger>
+        <span>Metrics</span>
     </h3>
 </doc-anchor-target>
+<p>Prometheus style metrics are exposed at:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;netconf&quot;:{
-        &quot;netconf-node-topology:host&quot;:&quot;10.19.0.18&quot;,
-        &quot;netconf-node-topology:port&quot;:2830,
-        &quot;netconf-node-topology:session-timers&quot;: {
-            &quot;netconf-node-topology:keepalive-delay&quot;:10
-        },
-        &quot;netconf-node-topology:tcp-only&quot;:false,
-        &quot;netconf-node-topology:username&quot;:&quot;USERNAME&quot;,
-        &quot;netconf-node-topology:password&quot;:&quot;PASSWORD&quot;,
-        &quot;uniconfig-config:uniconfig-native-enabled&quot;:true,
-        &quot;uniconfig-config:install-uniconfig-node-enabled&quot;:true,
-        &quot;uniconfig-config:blacklist&quot;:{
-            &quot;uniconfig-config:path&quot;:[]
-        },
-        &quot;netconf-node-topology:yang-module-capabilities&quot;:{
-            &quot;capability&quot;:[
-                &quot;urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;amp;revision=2010-09-24&quot;,
-                &quot;urn:ietf:params:xml:ns:netconf:base:1.0?module=ietf-netconf&amp;amp;revision=2011-06-01&quot;
-            ]
-        },
-        &quot;netconf-node-topology:customization-factory&quot;:&quot;netconf-customization-alu&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="ciena-cli">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#ciena-cli">#</doc-anchor-trigger>
-        <span>Ciena (cli)</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;cli&quot;:{
-        &quot;cli-topology:host&quot;:&quot;localhost&quot;,
-        &quot;cli-topology:port&quot;:&quot;51022&quot;,
-        &quot;cli-topology:transport-type&quot;:&quot;ssh&quot;,
-        &quot;cli-topology:device-type&quot;:&quot;saos&quot;,
-        &quot;cli-topology:device-version&quot;:&quot;8&quot;,
-        &quot;cli-topology:username&quot;:&quot;USERNAME&quot;,
-        &quot;cli-topology:password&quot;:&quot;PASSWORD&quot;,
-        &quot;cli-topology:journal-size&quot;:150,
-        &quot;cli-topology:dry-run-journal-size&quot;:180,
-        &quot;cli-topology:keepalive-delay&quot;:45,
-        &quot;cli-topology:keepalive-timeout&quot;:45
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none">http://localhost:8884/metrics</code></pre>
 </doc-codeblock></div>
 
                                 
@@ -451,23 +483,16 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniflow/blueprints/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-resource-manager/architecture/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Device Blueprints</span>
+                                                <span class="block mt-1">Resource Manager architecture</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniflow/workflow-builder/">
-                                            <span>
-                                                <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Workflow Builder</span>
-                                            </span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
-                                        </a>
                                     </div>
                                 </nav>
                             </footer>
@@ -511,6 +536,6 @@ with one addition: <strong>device_id</strong> must be specified in the snippet.<
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Device Inventory", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Developer Guide", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

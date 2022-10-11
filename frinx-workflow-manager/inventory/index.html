@@ -6,41 +6,42 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718715882262">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718789204491">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>FRINX UniResource introduction | Frinx Docs</title>
-    <meta name="title" content="FRINX UniResource introduction | Frinx Docs">
-    <meta name="description" content="FRINX UniResource was developed for network operators and infrastructure engineers to manage their physical and logical assets and resources." />
+    <title>Device Inventory | Frinx Docs</title>
+    <meta name="title" content="Device Inventory | Frinx Docs">
+    <meta name="description" content="Devices are stored in a Device Inventory. From here they can be dynamically installed and uninstalled." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniresource/introduction/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-workflow-manager/inventory/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniresource/introduction/">
-    <meta property="og:title" content="FRINX UniResource introduction | Frinx Docs">
-    <meta property="og:description" content="FRINX UniResource was developed for network operators and infrastructure engineers to manage their physical and logical assets and resources.">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniresource/introduction/uniresource_resource_types.png">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-workflow-manager/inventory/">
+    <meta property="og:title" content="Device Inventory | Frinx Docs">
+    <meta property="og:description" content="Devices are stored in a Device Inventory. From here they can be dynamically installed and uninstalled.">
+    <meta property="og:image" content="https://docs.frinx.io/frinx-workflow-manager/inventory/fm_install.gif">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniresource/introduction/">
-    <meta property="twitter:title" content="FRINX UniResource introduction | Frinx Docs">
-    <meta property="twitter:description" content="FRINX UniResource was developed for network operators and infrastructure engineers to manage their physical and logical assets and resources.">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniresource/introduction/uniresource_resource_types.png">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-workflow-manager/inventory/">
+    <meta property="twitter:title" content="Device Inventory | Frinx Docs">
+    <meta property="twitter:description" content="Devices are stored in a Device Inventory. From here they can be dynamically installed and uninstalled.">
+    <meta property="twitter:image" content="https://docs.frinx.io/frinx-workflow-manager/inventory/fm_install.gif">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.718715882262" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.718789204491" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.718715882262" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.718789204491" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.718715882262" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.718789204491" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.718789204491" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -249,176 +250,198 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="frinx-uniresource-introduction" class="break-words">
+<doc-anchor-target id="device-inventory" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#frinx-uniresource-introduction">#</doc-anchor-trigger>
-        <span>FRINX UniResource introduction</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#device-inventory">#</doc-anchor-trigger>
+        <span>Device Inventory</span>
     </h1>
 </doc-anchor-target>
-<p>FRINX UniResource was developed for network operators and infrastructure
-engineers to manage their physical and logical assets and resources.
-Examples for assets are locations, equipment, ports and services.
-Examples for resources are IP addresses, VLAN IDs and other consumables
-required for operating data services. UniResource was developed
-specifically to address the needs of network and infrastructure
-engineers working with communication networks. FRINX UniResource
-provides GUI and a GraphQL based API to create, read, update and delete
-assets. UniResource can be deployed standalone or as part of FRINX
-Machine.</p>
-<doc-anchor-target id="features">
+<p>Devices are stored in a Device Inventory. From here they can be
+dynamically installed and uninstalled.</p>
+<doc-anchor-target id="adding-device-to-inventory">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#features">#</doc-anchor-trigger>
-        <span>Features</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-device-to-inventory">#</doc-anchor-trigger>
+        <span>Adding device to inventory</span>
     </h2>
 </doc-anchor-target>
-<p>Following list contains features inherent to UniResouce.</p>
-<doc-anchor-target id="resource-type-management">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#resource-type-management">#</doc-anchor-trigger>
-        <span>Resource type management</span>
-    </h3>
-</doc-anchor-target>
-<p>Resource type is a blueprint for how to represent a resource instance. A
-resource type is essentially a set of property types, where each
-property type defines:</p>
-<ul>
-<li>Name: name of the property</li>
-<li>Type: int, string, float etc.</li>
-</ul>
-<p>Example resource types:</p>
-<ul>
-<li><strong>VLAN</strong>
-<ul>
-<li>Property type
-<ul>
-<li>Name: vlan</li>
-<li>Type: int</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Route distinguisher</strong>
-<ul>
-<li>Property type
-<ul>
-<li>Name: RD</li>
-<li>Type: String</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Location</strong>
-<ul>
-<li>Property type
-<ul>
-<li>Name: Latitude</li>
-<li>Type: float</li>
-</ul>
-</li>
-<li>Property type
-<ul>
-<li>Name: Longitude</li>
-<li>Type: float</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>UniResouce is flexible enough to enable user defined resource types
-without requiring code compilation or any other non-runtime task. With
-regard to resource types, this requires keeping the schema flexible
-enough so that users can define their own types and properties and thus
-create their own model.</p>
-<doc-anchor-target id="resource-management">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#resource-management">#</doc-anchor-trigger>
-        <span>Resource management</span>
-    </h3>
-</doc-anchor-target>
-<p>A resource is an instance of a resource type consisting of a number of
-properties.</p>
-<p>Example resources based on resource types from previous section:</p>
-<ul>
-<li><strong>VLAN_1</strong>
-<ul>
-<li>Property
-<ul>
-<li>Name: vlan</li>
-<li>Value: 44</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Route distinguisher_1</strong>
-<ul>
-<li>Property
-<ul>
-<li>Name: RD</li>
-<li>Value: 0:64222:100:172.16.1.0</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Location_1</strong>
-<ul>
-<li>Property
-<ul>
-<li>Name: Latitude</li>
-<li>Value: 0.0</li>
-</ul>
-</li>
-<li>Property
-<ul>
-<li>Name: Longitude</li>
-<li>Value: 0.0</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>To add new device to invetory, click on the <strong>Add device</strong> button in the
+<strong>Device inventory</strong> tab.</p>
 <p><figure class="content-center">
-    <img src="uniresource_resource_types.png" alt="Resource types" />
-    <figcaption class="caption">Resource types</figcaption>
+    <img src="fm_install.gif" alt="FM Install" />
+    <figcaption class="caption">FM Install</figcaption>
 </figure>
 </p>
-<doc-anchor-target id="flexible-design">
+<doc-anchor-target id="json-examples">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#json-examples">#</doc-anchor-trigger>
+        <span>JSON examples</span>
+    </h2>
+</doc-anchor-target>
+<p>To adding a new device toggle the &quot;Blueprints&quot; switch in the form and
+choose the blueprint that you want to use.</p>
+<p>New devices are added by JSON code snippets. They are similar to <a href="../blueprints/">Blueprints</a>
+with one addition: <strong>device_id</strong> must be specified in the snippet.</p>
+<doc-anchor-target id="cisco-classic-ios-cli">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#flexible-design">#</doc-anchor-trigger>
-        <span>Flexible design</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-classic-ios-cli">#</doc-anchor-trigger>
+        <span>Cisco classic IOS (cli)</span>
     </h3>
 </doc-anchor-target>
-<p>One of the main non-functional goals of the UniResouce is flexibility.
-We are designing UniResouce to support an array of use cases without the
-need for modifications. To achieve flexibility we are allowing:</p>
-<ul>
-<li>Custom resource type definition without changes in the DB schema</li>
-<li>Custom allocation logic without the need to modify the backend code</li>
-<li>Custom pool grouping to represent logical network parts (subnet,
-region, datacenter etc.)</li>
-</ul>
-<doc-anchor-target id="multitenancy-and-rbac">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#multitenancy-and-rbac">#</doc-anchor-trigger>
-        <span>Multitenancy and RBAC</span>
-    </h3>
-</doc-anchor-target>
-<p>Multitenancy and Role Based Access Control is supported by UniResource.</p>
-<p>A simple RBAC model is implemented where only super-users (based on
-their role and user groups) can manipulate resource types, resource
-pools and labels. Regular users will only be able to read the above
-entities, allocate and free resources.</p>
-<p>UniResource does not manage list tenants/users/roles/groups and relies
-on external ID provider. Following headers are expected by UniResource
-graphQL server:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">    x-tenant-id:        name or ID of a tenant. This name is also used as part of PSQL DB instance name.
-    from:               name or ID of current user.
-    x-auth-user-roles:  list of roles associated with current user.
-    x-auth-user-groups: list of groups associated with current user.</code></pre>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;cli&quot;:{
+        &quot;cli-topology:host&quot;:&quot;192.168.1.25&quot;,
+        &quot;cli-topology:port&quot;:&quot;22&quot;,
+        &quot;cli-topology:transport-type&quot;:&quot;ssh&quot;,
+        &quot;cli-topology:device-type&quot;:&quot;ios&quot;,
+        &quot;cli-topology:device-version&quot;:&quot;15.4&quot;,
+        &quot;cli-topology:username&quot;:&quot;USERNAME&quot;,
+        &quot;cli-topology:password&quot;:&quot;PASSWORD&quot;,
+        &quot;cli-topology:journal-size&quot;:500,
+        &quot;cli-topology:dry-run-journal-size&quot;:180,
+        &quot;cli-topology:parsing-engine&quot;:&quot;tree-parser&quot;
+    }
+}</code></pre>
 </doc-codeblock></div>
-<p>UniResource does not store any information about users or tenants in the
-database, <strong>except the name or ID of a tenant provided in <code v-pre>x-tenant-id</code>
-header</strong>.</p>
+<doc-anchor-target id="cisco-ios-xr-netconf">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-ios-xr-netconf">#</doc-anchor-trigger>
+        <span>Cisco IOS XR (netconf)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;netconf&quot;:{
+        &quot;netconf-node-topology:host&quot;:&quot;10.0.0.1&quot;,
+        &quot;netconf-node-topology:port&quot;:830,
+        &quot;netconf-node-topology:tcp-only&quot;:false,
+        &quot;netconf-node-topology:username&quot;:&quot;USERNAME&quot;,
+        &quot;netconf-node-topology:password&quot;:&quot;PASSWORD&quot;,
+        &quot;netconf-node-topology:session-timers&quot;: {
+            &quot;netconf-node-topology:keepalive-delay&quot;:5
+        },
+        &quot;netconf-node-topology:other-parameters&quot;: {
+            &quot;netconf-node-topology:dry-run-journal-size&quot;:180
+        },
+        &quot;uniconfig-config:uniconfig-native-enabled&quot;:true,
+        &quot;uniconfig-config:blacklist&quot;:{
+            &quot;uniconfig-config:path&quot;:[
+                &quot;openconfig-interfaces:interfaces&quot;,
+                &quot;ietf-interfaces:interfaces&quot;,
+                &quot;openconfig-vlan:vlans&quot;,
+                &quot;openconfig-routing-policy:routing-policy&quot;,
+                &quot;openconfig-lldp:lldp&quot;,
+                &quot;Cisco-IOS-XR-l2vpn-cfg:l2vpn&quot;,
+                &quot;Cisco-IOS-XR-group-cfg:groups&quot;,
+                &quot;openconfig-acl:acl&quot;,
+                &quot;openconfig-network-instance:network-instances&quot;
+            ]
+        }
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="junos-cli">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#junos-cli">#</doc-anchor-trigger>
+        <span>JUNOS (cli)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;cli&quot;:{
+        &quot;cli-topology:host&quot;:&quot;10.103.5.208&quot;,
+        &quot;cli-topology:port&quot;:&quot;22&quot;,
+        &quot;cli-topology:transport-type&quot;:&quot;ssh&quot;,
+        &quot;cli-topology:device-type&quot;:&quot;junos&quot;,
+        &quot;cli-topology:device-version&quot;:&quot;17.3&quot;,
+        &quot;cli-topology:username&quot;:&quot;USERNAME&quot;,
+        &quot;cli-topology:password&quot;:&quot;PASSWORD&quot;,
+        &quot;cli-topology:journal-size&quot;:150,
+        &quot;uniconfig-config:install-uniconfig-node-enabled&quot;:false
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="calix-netconf">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#calix-netconf">#</doc-anchor-trigger>
+        <span>CALIX (netconf)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;netconf&quot;:{
+        &quot;netconf-node-topology:host&quot;:&quot;10.19.0.16&quot;,
+        &quot;netconf-node-topology:port&quot;:830,
+        &quot;netconf-node-topology:session-timers&quot;: {
+            &quot;netconf-node-topology:keepalive-delay&quot;:0
+        },
+        &quot;netconf-node-topology:tcp-only&quot;:false,
+        &quot;netconf-node-topology:username&quot;:&quot;USERNAME&quot;,
+        &quot;netconf-node-topology:password&quot;:&quot;PASSWORD&quot;,
+        &quot;uniconfig-config:uniconfig-native-enabled&quot;:true,
+        &quot;uniconfig-config:install-uniconfig-node-enabled&quot;:true,
+        &quot;uniconfig-config:blacklist&quot;:{
+            &quot;uniconfig-config:path&quot;:[],
+            &quot;uniconfig-config:extension&quot;:[]
+        }
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="nokia-netconf">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#nokia-netconf">#</doc-anchor-trigger>
+        <span>Nokia (netconf)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;netconf&quot;:{
+        &quot;netconf-node-topology:host&quot;:&quot;10.19.0.18&quot;,
+        &quot;netconf-node-topology:port&quot;:2830,
+        &quot;netconf-node-topology:session-timers&quot;: {
+            &quot;netconf-node-topology:keepalive-delay&quot;:10
+        },
+        &quot;netconf-node-topology:tcp-only&quot;:false,
+        &quot;netconf-node-topology:username&quot;:&quot;USERNAME&quot;,
+        &quot;netconf-node-topology:password&quot;:&quot;PASSWORD&quot;,
+        &quot;uniconfig-config:uniconfig-native-enabled&quot;:true,
+        &quot;uniconfig-config:install-uniconfig-node-enabled&quot;:true,
+        &quot;uniconfig-config:blacklist&quot;:{
+            &quot;uniconfig-config:path&quot;:[]
+        },
+        &quot;netconf-node-topology:yang-module-capabilities&quot;:{
+            &quot;capability&quot;:[
+                &quot;urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;amp;revision=2010-09-24&quot;,
+                &quot;urn:ietf:params:xml:ns:netconf:base:1.0?module=ietf-netconf&amp;amp;revision=2011-06-01&quot;
+            ]
+        },
+        &quot;netconf-node-topology:customization-factory&quot;:&quot;netconf-customization-alu&quot;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="ciena-cli">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ciena-cli">#</doc-anchor-trigger>
+        <span>Ciena (cli)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;cli&quot;:{
+        &quot;cli-topology:host&quot;:&quot;localhost&quot;,
+        &quot;cli-topology:port&quot;:&quot;51022&quot;,
+        &quot;cli-topology:transport-type&quot;:&quot;ssh&quot;,
+        &quot;cli-topology:device-type&quot;:&quot;saos&quot;,
+        &quot;cli-topology:device-version&quot;:&quot;8&quot;,
+        &quot;cli-topology:username&quot;:&quot;USERNAME&quot;,
+        &quot;cli-topology:password&quot;:&quot;PASSWORD&quot;,
+        &quot;cli-topology:journal-size&quot;:150,
+        &quot;cli-topology:dry-run-journal-size&quot;:180,
+        &quot;cli-topology:keepalive-delay&quot;:45,
+        &quot;cli-topology:keepalive-timeout&quot;:45
+    }
+}</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -428,20 +451,20 @@ header</strong>.</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniflow/workflow-builder/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-workflow-manager/blueprints/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Workflow Builder</span>
+                                                <span class="block mt-1">Device Blueprints</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniresource/user-guide/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-workflow-manager/workflow-builder/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">User Guide</span>
+                                                <span class="block mt-1">Workflow Builder</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -488,6 +511,6 @@ header</strong>.</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "FRINX UniResource introduction", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Device Inventory", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

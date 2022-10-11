@@ -6,41 +6,41 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718715882262">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.718789204491">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Workflow Builder | Frinx Docs</title>
-    <meta name="title" content="Workflow Builder | Frinx Docs">
-    <meta name="description" content="Workflow Builder is the graphical interface of UniFlow used to create, modify and manage workflows." />
+    <title>FRINX Resource Manager introduction | Frinx Docs</title>
+    <meta name="title" content="FRINX Resource Manager introduction | Frinx Docs">
+    <meta name="description" content="FRINX Resource Manager was developed for network operators and infrastructure engineers to manage their physical and logical assets and resources." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniflow/workflow-builder/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-resource-manager/introduction/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniflow/workflow-builder/">
-    <meta property="og:title" content="Workflow Builder | Frinx Docs">
-    <meta property="og:description" content="Workflow Builder is the graphical interface of UniFlow used to create, modify and manage workflows.">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniflow/workflow-builder/createnew.gif">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-resource-manager/introduction/">
+    <meta property="og:title" content="FRINX Resource Manager introduction | Frinx Docs">
+    <meta property="og:description" content="FRINX Resource Manager was developed for network operators and infrastructure engineers to manage their physical and logical assets and resources.">
+    <meta property="og:image" content="https://docs.frinx.io/frinx-resource-manager/introduction/resource_manager_resource_types.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniflow/workflow-builder/">
-    <meta property="twitter:title" content="Workflow Builder | Frinx Docs">
-    <meta property="twitter:description" content="Workflow Builder is the graphical interface of UniFlow used to create, modify and manage workflows.">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniflow/workflow-builder/createnew.gif">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-resource-manager/introduction/">
+    <meta property="twitter:title" content="FRINX Resource Manager introduction | Frinx Docs">
+    <meta property="twitter:description" content="FRINX Resource Manager was developed for network operators and infrastructure engineers to manage their physical and logical assets and resources.">
+    <meta property="twitter:image" content="https://docs.frinx.io/frinx-resource-manager/introduction/resource_manager_resource_types.png">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.718715882262" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.718789204491" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.718715882262" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.718789204491" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.718715882262" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.718789204491" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -249,490 +249,176 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="workflow-builder" class="break-words">
+<doc-anchor-target id="frinx-resource-manager-introduction" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#workflow-builder">#</doc-anchor-trigger>
-        <span>Workflow Builder</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#frinx-resource-manager-introduction">#</doc-anchor-trigger>
+        <span>FRINX Resource Manager introduction</span>
     </h1>
 </doc-anchor-target>
-<p>Workflow Builder is the graphical interface of UniFlow used to create, modify and manage workflows.</p>
-<doc-anchor-target id="creating-new-workflow">
+<p>FRINX Resource Manager was developed for network operators and infrastructure
+engineers to manage their physical and logical assets and resources.
+Examples for assets are locations, equipment, ports and services.
+Examples for resources are IP addresses, VLAN IDs and other consumables
+required for operating data services. Resource Manager was developed
+specifically to address the needs of network and infrastructure
+engineers working with communication networks. FRINX Resource Manager
+provides GUI and a GraphQL based API to create, read, update and delete
+assets. Resource Manager can be deployed standalone or as part of FRINX
+Machine.</p>
+<doc-anchor-target id="features">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-new-workflow">#</doc-anchor-trigger>
-        <span>Creating new workflow</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#features">#</doc-anchor-trigger>
+        <span>Features</span>
     </h2>
 </doc-anchor-target>
-<p>To create a new workflow click on the <strong>Create</strong> button in the <strong>Create workflow</strong> tab and
-fill in workflow general parameters. Then you can proceed with adding tasks &lt;workflow-builder-adding-tasks&gt;.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Parameter <strong>Name</strong> is required and must be unique. Keep in mind that the name cannot be changed later.
-Other parameters are optional and can be changed anytime.</p>
-        </div>
-    </div>
-</div>
-<p><figure class="content-center">
-    <img src="createnew.gif" alt="Create new workflow" />
-    <figcaption class="caption">Create new workflow</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="editing-existing-workflow">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#editing-existing-workflow">#</doc-anchor-trigger>
-        <span>Editing existing workflow</span>
-    </h2>
+<p>Following list contains features inherent to Resource Manager.</p>
+<doc-anchor-target id="resource-type-management">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#resource-type-management">#</doc-anchor-trigger>
+        <span>Resource type management</span>
+    </h3>
 </doc-anchor-target>
-<p>To edit an already existing workflow, find the workflow in the <strong>Definitions</strong> tab, click on it and then click on the <strong>Edit</strong> button.
-A diagram of the workflow will be rendered on the canvas. Now you can restructure the workflow, add new tasks, remove tasks or edit the workflow information and parameters.</p>
-<p><figure class="content-center">
-    <img src="edit.gif" alt="Workflow edit" />
-    <figcaption class="caption">Workflow edit</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="adding-tasks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-tasks">#</doc-anchor-trigger>
-        <span>Adding tasks</span>
-    </h2>
-</doc-anchor-target>
-<p>To add new task on canvas, find the task in the left menu and click the <code v-pre>+</code> icon.</p>
-<p><figure class="content-center">
-    <img src="add_task.gif" alt="Add task" />
-    <figcaption class="caption">Add task</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="removing-tasks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#removing-tasks">#</doc-anchor-trigger>
-        <span>Removing tasks</span>
-    </h2>
-</doc-anchor-target>
-<p>To remove a task, click on the three dots next to a task and press the <code v-pre>Remove task</code> button.</p>
-<p><figure class="content-center">
-    <img src="delete.gif" alt="Delete task" />
-    <figcaption class="caption">Delete task</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="task-parameters">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#task-parameters">#</doc-anchor-trigger>
-        <span>Task parameters</span>
-    </h2>
-</doc-anchor-target>
-<p>To edit or add task parameters, double-click on the task that is placed on the canvas.
-Input parameters can be declared as:</p>
+<p>Resource type is a blueprint for how to represent a resource instance. A
+resource type is essentially a set of property types, where each
+property type defines:</p>
 <ul>
-<li>Input provided by user, e.g.:</li>
+<li>Name: name of the property</li>
+<li>Type: int, string, float etc.</li>
 </ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">`${workflow.input.&lt;name&gt;}`</code></pre>
-</doc-codeblock></div>
+<p>Example resource types:</p>
 <ul>
-<li>Variable provided by other task, e.g.:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">`${&lt;taskRefName&gt;.output.result}`</code></pre>
-</doc-codeblock></div>
+<li><strong>VLAN</strong>
 <ul>
-<li>Statically defined, e.g.:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">`https://example.com/api/user`</code></pre>
-</doc-codeblock></div>
-<p>For full documentation of tasks see: <a href="https://netflix.github.io/conductor/configuration/taskdef/">https://netflix.github.io/conductor/configuration/taskdef/</a>.</p>
-<doc-anchor-target id="system-tasks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#system-tasks">#</doc-anchor-trigger>
-        <span>System tasks</span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="fork--join">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#fork--join">#</doc-anchor-trigger>
-        <span>Fork &amp; Join</span>
-    </h3>
-</doc-anchor-target>
-<p>The &#x27;Fork&#x27; function is used to schedule a parallel set of tasks.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>A <strong>Join</strong> task MUST follow <strong>Fork</strong> task.</p>
-        </div>
-    </div>
-</div>
-<p><figure class="content-center">
-    <img src="forkjoin.png" alt="Fork and Join" />
-    <figcaption class="caption">Fork and Join</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="decision">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#decision">#</doc-anchor-trigger>
-        <span>Decision</span>
-    </h3>
-</doc-anchor-target>
-<p>A decision task is similar to an <strong>if...else</strong> statement in a programming language. The task takes 2 parameters:</p>
+<li>Property type
 <ul>
-<li>name of the parameter in the task input whose value will be evaluated (default is <code v-pre>param</code>)</li>
-<li>value that will be compared with <code v-pre>param</code> (or other specified input variable)</li>
+<li>Name: vlan</li>
+<li>Type: int</li>
 </ul>
-<p>If <strong>param</strong> and <strong>is equal to</strong> are evaluated as equal, the workflow will continue to <strong>If</strong> branch,
-otherwise the workflow will continue in <strong>else</strong> branch.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p><strong>Else</strong> branch is optional and can be empty.</p>
-        </div>
-    </div>
-</div>
-<p><figure class="content-center">
-    <img src="decide.png" alt="Decision" />
-    <figcaption class="caption">Decision</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="lambda">
+</li>
+</ul>
+</li>
+<li><strong>Route distinguisher</strong>
+<ul>
+<li>Property type
+<ul>
+<li>Name: RD</li>
+<li>Type: String</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Location</strong>
+<ul>
+<li>Property type
+<ul>
+<li>Name: Latitude</li>
+<li>Type: float</li>
+</ul>
+</li>
+<li>Property type
+<ul>
+<li>Name: Longitude</li>
+<li>Type: float</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Resource Manager is flexible enough to enable user defined resource types
+without requiring code compilation or any other non-runtime task. With
+regard to resource types, this requires keeping the schema flexible
+enough so that users can define their own types and properties and thus
+create their own model.</p>
+<doc-anchor-target id="resource-management">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#lambda">#</doc-anchor-trigger>
-        <span>Lambda</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#resource-management">#</doc-anchor-trigger>
+        <span>Resource management</span>
     </h3>
 </doc-anchor-target>
-<p>Lambda Task helps execute ad hoc logic at Workflow run-time, using javax &amp; <strong>Nashorn</strong> Javascript evaluator engine.
-This is particularly helpful in running simple evaluations in the Conductor server, instead of creating Workers.</p>
+<p>A resource is an instance of a resource type consisting of a number of
+properties.</p>
+<p>Example resources based on resource types from previous section:</p>
+<ul>
+<li><strong>VLAN_1</strong>
+<ul>
+<li>Property
+<ul>
+<li>Name: vlan</li>
+<li>Value: 44</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Route distinguisher_1</strong>
+<ul>
+<li>Property
+<ul>
+<li>Name: RD</li>
+<li>Value: 0:64222:100:172.16.1.0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Location_1</strong>
+<ul>
+<li>Property
+<ul>
+<li>Name: Latitude</li>
+<li>Value: 0.0</li>
+</ul>
+</li>
+<li>Property
+<ul>
+<li>Name: Longitude</li>
+<li>Value: 0.0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <p><figure class="content-center">
-    <img src="lambda.png" alt="Lambda" />
-    <figcaption class="caption">Lambda</figcaption>
+    <img src="resource_manager_resource_types.png" alt="Resource types" />
+    <figcaption class="caption">Resource types</figcaption>
 </figure>
 </p>
-<p>The task output can then be referenced in downstream tasks like:</p>
+<doc-anchor-target id="flexible-design">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#flexible-design">#</doc-anchor-trigger>
+        <span>Flexible design</span>
+    </h3>
+</doc-anchor-target>
+<p>One of the main non-functional goals of the Resource Manager is flexibility.
+We are designing Resource Manager to support an array of use cases without the
+need for modifications. To achieve flexibility we are allowing:</p>
+<ul>
+<li>Custom resource type definition without changes in the DB schema</li>
+<li>Custom allocation logic without the need to modify the backend code</li>
+<li>Custom pool grouping to represent logical network parts (subnet,
+region, datacenter etc.)</li>
+</ul>
+<doc-anchor-target id="multitenancy-and-rbac">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#multitenancy-and-rbac">#</doc-anchor-trigger>
+        <span>Multitenancy and RBAC</span>
+    </h3>
+</doc-anchor-target>
+<p>Multitenancy and Role Based Access Control is supported by Resource Manager.</p>
+<p>A simple RBAC model is implemented where only super-users (based on
+their role and user groups) can manipulate resource types, resource
+pools and labels. Regular users will only be able to read the above
+entities, allocate and free resources.</p>
+<p>Resource Manager does not manage list tenants/users/roles/groups and relies
+on external ID provider. Following headers are expected by Resource Manager
+graphQL server:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">${lambda_a211.output.result.testvalue}</code></pre>
+<pre class="language-none"><code v-pre class="language-none">    x-tenant-id:        name or ID of a tenant. This name is also used as part of PSQL DB instance name.
+    from:               name or ID of current user.
+    x-auth-user-roles:  list of roles associated with current user.
+    x-auth-user-groups: list of groups associated with current user.</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="http">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#http">#</doc-anchor-trigger>
-        <span>HTTP</span>
-    </h3>
-</doc-anchor-target>
-<p>An HTTP system task is used to make calls to another microservice over HTTP.
-You can use <strong>GET</strong>, <strong>PUT</strong>, <strong>POST</strong>, <strong>DELETE</strong> Methods and also you can set your custom header.</p>
-<p><figure class="content-center">
-    <img src="http.png" alt="HTTP" />
-    <figcaption class="caption">HTTP</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="terminate">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#terminate">#</doc-anchor-trigger>
-        <span>TERMINATE</span>
-    </h3>
-</doc-anchor-target>
-<p>Task that can terminate a workflow with a given status and modify the workflow&#x27;s output with a given parameter.
-It can act as a &quot;return&quot; statement for conditions where you simply want to terminate your workflow.
-For example, if you have a decision where the first condition is met, you want to execute some tasks, otherwise you want to finish your workflow.</p>
-<div class="table-wrapper scrollbar overflow-hidden">
-<table class="comfortable">
-<thead>
-<tr>
-<th>name</th>
-<th>description</th>
-<th>notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>terminationStatus</td>
-<td>can only accept “COMPLETED” or “FAILED”</td>
-<td>task cannot be optional</td>
-</tr>
-<tr>
-<td>workflowOutput</td>
-<td>Expected workflow output</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><figure class="content-center">
-    <img src="terminate.png" alt="TERMINATE" />
-    <figcaption class="caption">TERMINATE</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="event">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#event">#</doc-anchor-trigger>
-        <span>EVENT</span>
-    </h3>
-</doc-anchor-target>
-<p>Event task provides ability to publish an event (message) to either
-Conductor or an external eventing system like SQS. Event tasks are
-useful for creating event based dependencies for workflows and tasks.</p>
-<p><figure class="content-center">
-    <img src="event.png" alt="EVENT" />
-    <figcaption class="caption">EVENT</figcaption>
-</figure>
-</p>
-<p>When producing an event with Conductor as sink, the event name follows
-the structure:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">conductor:&lt;workflow_name&gt;:&lt;task_reference_name&gt;</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="wait">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#wait">#</doc-anchor-trigger>
-        <span>WAIT</span>
-    </h3>
-</doc-anchor-target>
-<p>A wait task is implemented as a gate that remains in <strong>IN_PROGRESS</strong> state
-unless marked as <strong>COMPLETED</strong> or <strong>FAILED</strong> by an external trigger. To use
-a wait task, set the task type as <strong>WAIT</strong></p>
-<p><figure class="content-center">
-    <img src="wait.png" alt="WAIT" />
-    <figcaption class="caption">WAIT</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="jsonjq">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#jsonjq">#</doc-anchor-trigger>
-        <span>jsonJQ</span>
-    </h3>
-</doc-anchor-target>
-<p>jsonJQ is like sed for JSON data - it is especially useful for filtering
-JSON data.</p>
-<p><figure class="content-center">
-    <img src="jsonjq.png" alt="jsonJQ" />
-    <figcaption class="caption">jsonJQ</figcaption>
-</figure>
-</p>
-<p>Example of jsonJQ query expression could be:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">.[&quot;frinx-uniconfig-topology:configuration&quot;][&quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations&quot;] . &quot;interface-configuration&quot; | select(. != null) | .[] | select(.description == &quot;${workflow.input.Description}&quot;) | {interface: .&quot;interface-name&quot;}</code></pre>
-</doc-codeblock></div>
-<p workflow.input.Description="">It searches through the whole config and under the
-<strong>&quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations&quot;</strong> model we find the
-interface with a description that the user inputs
-<strong>$</strong>. The task would return the name
-interface with fitting description.</p>
-<doc-anchor-target id="kafka-publish">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#kafka-publish">#</doc-anchor-trigger>
-        <span>Kafka publish</span>
-    </h3>
-</doc-anchor-target>
-<p>Kafka is a distributed publish-subscribe messaging system and a robust
-queue that can handle a high volume of data and enables you to pass
-messages from one end-point to another.</p>
-<p><figure class="content-center">
-    <img src="kafka.png" alt="Kafka" />
-    <figcaption class="caption">Kafka</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="subworkflows">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#subworkflows">#</doc-anchor-trigger>
-        <span>Subworkflows</span>
-    </h2>
-</doc-anchor-target>
-<p>Subworkflows act as a regular tasks inside a parent workflow.
-Subworkflows can be expanded to view the tasks they contain (or other
-nested subworkflows) by clicking the three dots next to the subworkflow
-and then clicking the <code v-pre>Expand</code> button. Expanded subworkflows can be then
-edited the same way as parent workflow.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p><strong>Simple tasks</strong> differs in color shade from <strong>Subworkflow</strong> tasks and
-cannot be expanded.</p>
-        </div>
-    </div>
-</div>
-<p><figure class="content-center">
-    <img src="expand.gif" alt="Expand" />
-    <figcaption class="caption">Expand</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="linking-tasks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#linking-tasks">#</doc-anchor-trigger>
-        <span>Linking tasks</span>
-    </h2>
-</doc-anchor-target>
-<p>To connect tasks or subworkflows into execution flow, drag and drop
-respective <strong>Out</strong> and <strong>In</strong> endpoints on nodes, like this: <strong>Out</strong>
--&gt; <strong>In</strong></p>
-<p><figure class="content-center">
-    <img src="linking.gif" alt="Linking tasks" />
-    <figcaption class="caption">Linking tasks</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="unlinking-tasks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#unlinking-tasks">#</doc-anchor-trigger>
-        <span>Unlinking tasks</span>
-    </h2>
-</doc-anchor-target>
-<p>To remove the link, double-click on the link.</p>
-<p><figure class="content-center">
-    <img src="unlinking.gif" alt="Unlinking tasks" />
-    <figcaption class="caption">Unlinking tasks</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="adding-workflow-information">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-workflow-information">#</doc-anchor-trigger>
-        <span>Adding workflow information</span>
-    </h2>
-</doc-anchor-target>
-<p>To provide additional workflow information, click on <strong>Actions</strong> in the
-upper right-hand corner and then click <strong>Edit workflow</strong>.</p>
-<doc-anchor-target id="output-parameters">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#output-parameters">#</doc-anchor-trigger>
-        <span>Output parameters</span>
-    </h2>
-</doc-anchor-target>
-<p>We can specify custom output parameters of a workflow, by using JSON
-templates to generate the output of the workflow. If not specified, the
-output is defined as the output of the last executed task.</p>
-<p>Let&#x27;s say we have a task with taskReferenceName: <code v-pre>task1</code> which returns
-<code v-pre>summary</code> and we want output of the worklow to be output of this
-specific task only. The outputParameter value named e.g. <code v-pre>finalResult</code>
-will be:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">${task1.output.summary}</code></pre>
-</doc-codeblock></div>
-<p>For full documentation of workflow parameters and definition read
-<a href="https://netflix.github.io/conductor/configuration/workflowdef/">https://netflix.github.io/conductor/configuration/workflowdef/</a>.</p>
-<doc-anchor-target id="defaults--description">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#defaults--description">#</doc-anchor-trigger>
-        <span>Defaults &amp; Description</span>
-    </h2>
-</doc-anchor-target>
-<p>Here, we can define default values and descriptions for workflow inputs.
-Each input value declared as <code v-pre>${workflow.input...}</code> will appear in a
-dropdown list of available input parameters.</p>
-<doc-anchor-target id="save-and-execute-workflow">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#save-and-execute-workflow">#</doc-anchor-trigger>
-        <span>Save and execute workflow</span>
-    </h2>
-</doc-anchor-target>
-<p>To <strong>Save</strong> workflow, click on the <strong>Actions</strong> button in the upper right
-corner and select <strong>Save workflow</strong>. Then you can find the workflow in the
-<strong>Explore workflows</strong> section under <strong>Definitions</strong> tab.</p>
-<p>To <strong>Execute</strong> workflow directly from the builder, click on the
-<strong>Save and execute</strong> button in the upper right corner. You will be
-prompted to provide input parameters.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p><strong>Executing</strong> workflow will also save the workflow.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="import-and-export-of-workflows">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#import-and-export-of-workflows">#</doc-anchor-trigger>
-        <span>Import and export of workflows</span>
-    </h2>
-</doc-anchor-target>
-<p>To import workflow, click the setting icon and then select the <strong>Import</strong>
-button. Only <strong>valid</strong> JSON definition of the workflow will be imported.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Imported workflow will not be saved until you <strong>Save</strong> or <strong>Execute</strong>
-it.</p>
-        </div>
-    </div>
-</div>
-<p><figure class="content-center">
-    <img src="import_export.gif" alt="Import/Export workflow" />
-    <figcaption class="caption">Import/Export workflow</figcaption>
-</figure>
-</p>
-<p>To export and save the workflow in JSON format into your filesystem,
-click on <strong>Export</strong> button.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>In order to choose a location to which you want to export the
-workflow, you have to have it enabled in your browser settings.
-Default location is Downloads folder.</p>
-        </div>
-    </div>
-</div>
+<p>Resource Manager does not store any information about users or tenants in the
+database, <strong>except the name or ID of a tenant provided in <code v-pre>x-tenant-id</code>
+header</strong>.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -742,20 +428,20 @@ Default location is Downloads folder.</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniflow/inventory/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-workflow-manager/workflow-builder/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Device Inventory</span>
+                                                <span class="block mt-1">Workflow Builder</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniresource/introduction/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-resource-manager/user-guide/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">FRINX Uni​Resource introduction</span>
+                                                <span class="block mt-1">User Guide</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -802,6 +488,6 @@ Default location is Downloads folder.</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Workflow Builder", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "FRINX Resource Manager introduction", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
