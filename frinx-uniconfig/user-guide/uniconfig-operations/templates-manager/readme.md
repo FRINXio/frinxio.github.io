@@ -707,6 +707,34 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 }'
 ```
 
+### Auto-upgrading of templates
+
+This feature is used to automatically upgrade all stored templates using the old YANG repository
+to the latest YANG repository with help from the version-drop procedure. For the auto-upgrading process to work,
+the latest YANG repository must already be configured.
+The upgrade process must be explicitly enabled in the configuration file and occurs when UniConfig is started.
+
+There is also an option to back up templates before the upgrade with the standard rotation procedure.
+The names of backed-up templates follow the pattern '{template-name}_backup_{index}', where '{template-name}' represents the name
+of the original template and '{index}' represents the backup index. The most recent backup index is always '0' and older
+ones are rotated by incrementing the corresponding index. If a backed-up template reaches the configured
+limit (maximum number of backups), it is permanently removed from the database.
+
+Overview of available settings ('config/lighty-uniconfig-config.json'):
+
+```json default auto-upgrading settings
+{
+    "templates": {
+        "enabledTemplatesUpgrading": false,
+        "backupTemplatesLimit": 7
+    }
+}
+```
+
+- **enabledTemplatesUpgrading** - Enables the auto-upgrading process at UniConfig startup. If disabled, the other setting is ignored.
+- **backupTemplatesLimit** - Maximum number of stored backup templates. If exceeded, older templates are removed during the
+  rotation procedure. If set to 0, templates are not backed up at all.
+
 ## Application of template
 
 Template can be applied to UniConfig nodes using 'apply-template' RPC.
@@ -1022,13 +1050,17 @@ curl --location --request PUT 'http://localhost:8181/rests/operations/template-m
 ## RPC create-multiple-templates
 
 One or more new templates can be created by this RPC. Templates are parsed and written in parallel
-for better performance. If specified templates already exist, their configuration is replaced. 
+for better performance. If specified templates already exist, their configuration is replaced.
+Execution of RPC is atomic - either all templates are successfully created or no changes are made
+in the UniConfig transaction.
 
 Description of input RPC fields:
 
 - **template-name**:Name of the created template.
 - **yang-repository**: YANG schema repository used for parsing of template configuration. Default value: 'latest'.
 - **template-configuration**: Whole template configuration.
+- **tags**: List of template tags that are written on the specified paths in all created templates.
+  Specified tag type must be prefixed with 'template-tags' module name based on RFC-8040 formatting of identityref.
 
 Only template-name and template-configuration are mandatory fields.
 
@@ -1160,11 +1192,6 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
 }
 ```
 
-!!!
-Template 'Template-name2' contains valid YANG repository, but process failed before starting writing of templates -
-there is also status 'fail'.
-!!!
-
 Failed to parse template configuration.
 
 ```bash RPC Request
@@ -1207,7 +1234,8 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
         "node-result": [
             {
                 "node-id": "Template-name1",
-                "status": "complete"
+                "status": "fail",
+                "error-type": "uniconfig-error"
             },
             {
                 "node-id": "Template-name2",
@@ -1220,8 +1248,82 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
 }
 ```
 
-!!!
-Template 'Template-name1' has already been written to transaction - because of this reason, its status is 'complete'.
-UniConfig does not revert successfully created/replaced templates since this RPC is executed in the scope
-of transaction.
-!!!
+Creation of 2 templates with separately specified template tags - 'replace' tag is added to '/acl/category' and
+'/services/group=default/types' elements, while 'create' is added to '/services' element.
+
+```bash RPC request
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-manager:create-multiple-templates' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "input": {
+    "templates": [
+      {
+        "template-name": "Template-name1",
+        "yang-repository": "schema1",
+        "template-configuration": {
+          "acl": {
+            "rules": [
+              {
+                "name": "test-name",
+                "category": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "template-name": "Template-name2",
+        "template-configuration": {
+          "services": {
+            "group": [
+              {
+                "name": "default",
+                "id": 0,
+                "type": "internal",
+                "types": [
+                  "test"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "tags": [
+      {
+        "tag": "template-tags:replace",
+        "paths": [
+          "/acl/category",
+          "/services/group=default/types"
+        ]
+      },
+      {
+        "tag": "template-tags:create",
+        "paths": [
+          "/services"
+        ]
+      }
+    ]
+  }
+}
+```
+
+```json RPC response
+{
+  "output": {
+    "overall-status": "complete",
+    "node-result": [
+      {
+        "node-id": "Template-name1",
+        "status": "complete"
+      },
+      {
+        "node-id": "Template-name2",
+        "status": "complete"
+      }
+    ]
+  }
+}
+```

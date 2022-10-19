@@ -3,17 +3,15 @@
 ## Overview
 
 RESTCONF is described in [RESTCONF RFC
-8040](https://tools.ietf.org/html/rfc8040). Simple said, RESTCONF
-represents a REST API to access datastores and UniConfig operations.
+8040](https://tools.ietf.org/html/rfc8040). Put simply, RESTCONF
+represents a REST API for accessing datastores and UniConfig operations.
 
 ### Datastores
 
 There are two datastores:
 
-1. **Config**: Contains data representing the intended state, it is
-    possible to read and write it via RESTCONF.
-2. **Operational**: Contains data representing the actual state, it is
-    possible to only read it via RESTCONF.
+1. **Config**: Contains data representing the intended state. Possible to read and write via RESTCONF.
+2. **Operational**: Contains data representing the actual state. Possible only to read via RESTCONF.
 
 !!!
 Each request must start with the URI */rests/*. By default,
@@ -23,7 +21,7 @@ RESTCONF listens on port 8181 for HTTP requests.
 ### REST Operations
 
 RESTCONF supports: **OPTIONS**, **GET**, **PUT**, **POST**, **PATCH**,
-and **DELETE** operations. Request and response data can either be in
+and **DELETE** operations. Request and response data can be either in
 the XML or JSON format.
 
 - XML structures according to YANG are defined at:
@@ -33,18 +31,18 @@ the XML or JSON format.
 
 Data in the request must set the **Content-Type** field correctly in the
 HTTP header with the allowed value of the media type. The media type of
-the requested data has to be set in the **Accept** field. Get the media
+the requested data must be set in the **Accept** field. Get the media
 types for each resource by calling the OPTIONS operation.
 
 Most of the paths use [Instance
 Identifier](https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL:Concepts#Instance_Identifier).
-**\<identifier\>** is used in the explanation of the operations and has
-to keep these rules:
+**\<identifier\>** is used in the explanation of the operations and must
+adhere to these rules:
 
 - Identifier must start with \<moduleName\>:\<nodeName\>\> where
     \<moduleName\> is a name of the YANG module and \<nodeName\> is the
     name of a node in the module. If the next node name is placed in the
-    same namespace like the previous one, it is sufficient to just use
+    same namespace as the previous one, it is sufficient to just use
     \<nodeName\> after the first definition of
     \<moduleName\>:\<nodeName\>. Each \<nodeName\> has to be separated
     by /.
@@ -414,6 +412,251 @@ curl --location --request PATCH 'http://localhost:8181/rests/data/network-topolo
         }
     }
 }'
+```
+
+#### PATCH /rests/data/\<identifier\>?apply-tags=true
+
+- The patch request with parameter apply-tags=true allows to use tags.
+- Tags allows us to use differrent operation for separate elements instead of
+    merging whole content as without tags.
+- The following tags are supported: merge, replace, delete, create and update.
+- Usage of these tags are explained in Templates manager : [here](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/#tags).
+
+The following example shows PATCH request used for modification of interfaces
+on IOS XE device including creating, deleting, and replacing interface configuration.
+
+```bash PATCH RPC Request with apply-tags parameter
+curl --location --request PATCH 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces?apply-tags=true' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "frinx-openconfig-interfaces:interfaces": {
+        "interface": [
+            {
+                "name": "Loopback0",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": true,
+                    "name": "Loopback0"
+                },
+                "@": {
+                    "operation": "delete"
+                }
+            },
+            {
+                "name": "Loopback1",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": true,
+                    "name": "Loopback1"
+                },
+                "@": {
+                    "operation": "replace"
+                }
+            },
+            {
+                "name": "Loopback2",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": true,
+                    "name": "Loopback2"
+                },
+                "@": {
+                    "operation": "create"
+                }
+            },
+            {
+                "name": "Loopback61",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": false,
+                    "name": "Loopback61"
+                }
+            },
+            {
+                "name": "GigabitEthernet1",
+                "config": {
+                    "type": "iana-if-type:ethernetCsmacd",
+                    "enabled": true,
+                    "name": "GigabitEthernet1"
+                },
+                "subinterfaces": {
+                    "subinterface": [
+                        {
+                            "index": 0,
+                            "frinx-openconfig-if-ip:ipv4": {
+                                "addresses": {
+                                    "address": [
+                                        {
+                                            "ip": "192.168.1.253",
+                                            "config": {
+                                                "prefix-length": 24,
+                                                "ip": "192.168.1.253"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "GigabitEthernet2",
+                "config": {
+                    "type": "iana-if-type:ethernetCsmacd",
+                    "enabled": false,
+                    "name": "GigabitEthernet2"
+                }
+            }
+        ]
+    }
+}'
+```
+
+```bash GET RPC Request before PATCH
+http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces
+```
+
+``` bash Response
+    {
+        "frinx-openconfig-interfaces:interfaces": {
+            "interface": [
+                {
+                    "name": "Loopback0",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": true,
+                        "name": "Loopback0"
+                    }
+                },
+                {
+                    "name": "Loopback1",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": false,
+                        "name": "Loopback1"
+                    }
+                },
+                {
+                    "name": "Loopback61",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": false,
+                        "name": "Loopback61"
+                    }
+                },
+                {
+                    "name": "GigabitEthernet1",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": true,
+                        "name": "GigabitEthernet1"
+                    },
+                    "subinterfaces": {
+                        "subinterface": [
+                            {
+                                "index": 0,
+                                "frinx-openconfig-if-ip:ipv4": {
+                                    "addresses": {
+                                        "address": [
+                                            {
+                                                "ip": "192.168.1.253",
+                                                "config": {
+                                                    "prefix-length": 24,
+                                                    "ip": "192.168.1.253"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "GigabitEthernet2",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": false,
+                        "name": "GigabitEthernet2"
+                    }
+                }
+            ]
+        }
+    }
+```
+
+```bash GET RPC Request after PATCH
+http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces
+```
+
+``` bash Response
+    {
+        "frinx-openconfig-interfaces:interfaces": {
+            "interface": [
+                {
+                    "name": "Loopback1",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": true,
+                        "name": "Loopback1"
+                    }
+                },
+                {
+                    "name": "Loopback61",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": false,
+                        "name": "Loopback61"
+                    }
+                },
+                {
+                    "name": "Loopback2",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": true,
+                        "name": "Loopback2"
+                    }
+                },
+                {
+                    "name": "GigabitEthernet2",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": false,
+                        "name": "GigabitEthernet2"
+                    }
+                },
+                {
+                    "name": "GigabitEthernet1",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": true,
+                        "name": "GigabitEthernet1"
+                    },
+                    "subinterfaces": {
+                        "subinterface": [
+                            {
+                                "index": 0,
+                                "frinx-openconfig-if-ip:ipv4": {
+                                    "addresses": {
+                                        "address": [
+                                            {
+                                                "ip": "192.168.1.253",
+                                                "config": {
+                                                    "prefix-length": 24,
+                                                    "ip": "192.168.1.253"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
 ```
 
 #### POST /rests/operations/\<moduleName\>:\<rpcName\>
@@ -1497,7 +1740,7 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 ### Callbacks (http-client)
 
 Callbacks include sending GET (call-point) and POST (action) requests to the remote server. They are implemented mainly for UniConfig Shell,
-but it is also possible to use it by the RESTCONF for UniStore nodes by using URI prefix:
+but it is also possible to use the RESTCONF for UniStore nodes with the URI prefix:
 
 ``` Http-client
 http://localhost:8181/rests/http-client/...
@@ -1505,7 +1748,7 @@ http://localhost:8181/rests/http-client/...
 
 #### Examples
 
-Example - call-point invocation in the RESTCONF
+Example - call-point invocation in RESTCONF
 
 ``` Call-point request
 curl --location --request GET 'http://localhost:8181/rests/http-client/network-topology:network-topology/topology=unistore/node=node1/configuration/test/get-request'
@@ -1520,7 +1763,7 @@ Response:
 }
 ```
 
-Example - action invocation in the RESTCONF
+Example - action invocation in RESTCONF
 
 ``` Action request
 curl --location --request POST 'http://localhost:8181/rests/http-client/network-topology:network-topology/topology=unistore/node=node1/configuration/post-request/test-action' \
@@ -1544,4 +1787,4 @@ Response:
 }
 ```
 
-Callbacks must be configured before use. For more details go [here](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/#callbacks).
+Callbacks must be configured before use. For more details, see our [User guide](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/#callbacks).
