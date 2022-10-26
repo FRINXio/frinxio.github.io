@@ -1,15 +1,15 @@
 # UniConfig Shell
 
-UniConfig shell is a Command Line Interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including:
+UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including the following:
 
 * reading operational data of devices
 * manipulating device configuration
 * manipulating configuration templates
-* manipulating data stored in unistore
+* manipulating data stored in Unistore
 * invoking device or UniConfig operations
 * manipulating global UniConfig settings
 
-Uniconfig shell is model driven and thus its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
+As Uniconfig shell is model-driven, its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
 RPC/action operations).
 
 ## Configuration
@@ -738,10 +738,9 @@ The following YANG modules are required:
 ### Configuration
 
 By default, callbacks are disabled and the remote server URI is empty. To enable callbacks, set the configuration parameter 
+
 'callbacks/enabled' to 'true' and set the remote server URI in the 'config/lighty-uniconfig-config.json' 
 file.
-
-All available settings and descriptions are displayed in the following JSON snippet:
 
 ```json UniConfig callbacks configuration (config/lighty-uniconfig-config.json)
     "callbacks": {
@@ -760,7 +759,7 @@ All available settings and descriptions are displayed in the following JSON snip
 
 ### Update repository
 
-First you need to create or update the YANG repository using the 'frinx-callpoint@2022-06-22.yang' extension that is 
+First, create or update the YANG repository by using the 'frinx-callpoint@2022-06-22.yang' extension 
 displayed in the following snippet. There is only one extension 'url' with the argument 'point'.
 
 ``` frinx-callpoint@2022-06-22.yang
@@ -779,12 +778,13 @@ module frinx-callpoint {
 }
 ```
 
-#### Add call-point (GET request)
 
-In the following snippet you can see how to create a call-point in the frinx-test YANG file by using the
+#### Add callpoint (GET request)
+
+The following snippet shows how to create a callpoint in the frinx-test YANG file using the 
 'frinx-callpoint@2022-06-22.yang' extension.
 
-``` example of using the frinx-callpoint@2022-06-22.yang in a YANG file
+``` example of using of the frinx-callpoint@2022-06-22.yang in YANG file
 module frinx-test {
     yang-version 1.1;
     namespace "http://frinx.io/frinx-test";
@@ -842,14 +842,14 @@ The following snippet shows how to create a script in the frinx-test YANG file b
 2. Path to the script defined by 'tailf:exec'.
 3. Arguments of the script defined by 'tailf:exec'.
 
-Arguments can be dynamic (meaning the user can pass values to them) or static (flags). The following conventions must be followed 
-when creating an argument:
+Arguments can be dynamic (i.e., the user can pass values to them) or static (flags). Arguments should be created following
+these conventions:
 
-1. Each argument must contain a name (e.g., -n, -j).
-2. Dynamic argument must be enclosed in '$(...)' (e.g., '$(name)'.).
-3. Flags are simple words without whitespace (e.g., VIP, UPPER, upper).
+1. Each argument must contain a name (e.g. -n, -j).
+2. Dynamic arguments must be enclosed in '$(...)'. For example, '$(name)'.
+3. Flags are simple words without whitespace. For example, VIP, UPPER, upper.
 
-``` example of using frinx-callpoint@2022-06-22.yang in a YANG file
+``` example of using of the frinx-callpoint@2022-06-22.yang in YANG file
 module frinx-test {
     yang-version 1.1;
     namespace "http://frinx.io/frinx-test";
@@ -867,16 +867,16 @@ module frinx-test {
 
 ### UniStore node
 
-A UniStore node can be created by RestConf or UniConfig shell. If the user explicit defines a repository by using the query 
+A UniStore node can be created by RestConf or UniConfig shell. If a repository is explicitly defined by the query 
 parameter '?uniconfig-schema-repository=repository-name', this repository must contain all necessary YANG 
-modules. If the user does not define a repository name when creating the UniStore node, all necessary YANG modules 
+modules. If a repository name is not defined when the UniStore node is created, all necessary YANG modules 
 must be in the 'latest' schema repository.
 
 ### Examples
 
-- Example - call-point invocation in the shell:
+- Example - callpoint invocation in the shell:
 
-``` call-point invocation
+``` callpoint invocation
 uniconfig>show
 show>unistore node1 test get-request
 {
