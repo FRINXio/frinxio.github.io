@@ -805,7 +805,7 @@ configured in 'config/lighty-uniconfig-config.json'. The final address for the r
 #### Add action (POST request)
 
 The following snippet shows how to create an action in the frinx-test YANG file by using the
-'frinx-callpoint@2022-06-22.yang' extension. Here it is also needed to import 'tailf-common.yang'. The action consists of:
+'frinx-callpoint@2022-06-22.yang' extension. It is also necessary to import 'tailf-common.yang'. The action consists of:
 
 1. Action name defined by 'tailf:action'.
 2. Suffix of the remote endpoint defined by 'fcal:url'.
