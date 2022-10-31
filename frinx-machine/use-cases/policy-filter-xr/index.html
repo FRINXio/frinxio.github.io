@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.719918040142">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.720531859946">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Policy filter XR | Frinx Docs</title>
     <meta name="title" content="Policy filter XR | Frinx Docs">
-    <meta name="description" content="This workflow is using UniConfig to showcase the filtering capabilities of some of our system tasks. It filters through the interfaces of the" />
+    <meta name="description" content="This workflow uses UniConfig to showcase the filtering capabilities of some of our system tasks. It filters through the interfaces of the" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-machine/use-cases/policy-filter-xr/" />
@@ -23,24 +23,24 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-machine/use-cases/policy-filter-xr/">
     <meta property="og:title" content="Policy filter XR | Frinx Docs">
-    <meta property="og:description" content="This workflow is using UniConfig to showcase the filtering capabilities of some of our system tasks. It filters through the interfaces of the">
+    <meta property="og:description" content="This workflow uses UniConfig to showcase the filtering capabilities of some of our system tasks. It filters through the interfaces of the">
     <meta property="og:image" content="https://docs.frinx.io/frinx-machine/use-cases/policy-filter-xr/policy_filter_search.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-machine/use-cases/policy-filter-xr/">
     <meta property="twitter:title" content="Policy filter XR | Frinx Docs">
-    <meta property="twitter:description" content="This workflow is using UniConfig to showcase the filtering capabilities of some of our system tasks. It filters through the interfaces of the">
+    <meta property="twitter:description" content="This workflow uses UniConfig to showcase the filtering capabilities of some of our system tasks. It filters through the interfaces of the">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-machine/use-cases/policy-filter-xr/policy_filter_search.png">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.719918040142" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.720531859946" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.719918040142" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.720531859946" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.719918040142" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.720531859946" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -255,11 +255,11 @@
         <span>Policy filter XR</span>
     </h1>
 </doc-anchor-target>
-<p>This workflow is using UniConfig to showcase the filtering capabilities
+<p>This workflow uses UniConfig to showcase the filtering capabilities
 of some of our system tasks. It filters through the interfaces of the
 device, returns the name of the interface based on its description
 provided by the user and applies chosen policy on that interface.</p>
-<p><strong>Supported device</strong>: ios-xr</p>
+<p><strong>Supported device</strong>: ios-xr -&gt; IOSXR653_1, IOSXR653_2 &amp; IOSXR663_1 not IOS01 &amp; IOS02</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-red-500"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -272,8 +272,8 @@ provided by the user and applies chosen policy on that interface.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Policy creation isn&#x27;t part of this workflow. The chosen policy must
-exist on the device before running the workflow.</p>
+<p>Policy creation is not part of this workflow. The chosen policy must
+exist on the device before running this workflow.</p>
         </div>
     </div>
 </div>
@@ -294,8 +294,8 @@ exist on the device before running the workflow.</p>
         <span>Sync &amp; Replace</span>
     </h2>
 </doc-anchor-target>
-<p>We consider it best practice for all the workflows that interact with
-devices to start with tasks &quot;Sync from network&quot; and &quot;Replace config with
+<p>We consider it best practice for all workflows that interact with
+devices to start with the tasks &quot;Sync from network&quot; and &quot;Replace config with
 oper&quot;. This ensures that the internal databases of the FRINX Machine are
 in sync with the latest configuration of the device. The input of these
 tasks is simply the name of the node(device).</p>
@@ -305,9 +305,9 @@ tasks is simply the name of the node(device).</p>
         <span>Read device data</span>
     </h2>
 </doc-anchor-target>
-<p>The next part is the reading of the device config. In
-<strong>UNICONFIG_read_structured_device_data</strong> task, you can specify part
-of the config that you want to read with URI. In this case, we leave the
+<p>The next part is reading the device config. In the
+<strong>UNICONFIG_read_structured_device_data</strong> task, you can specify which part
+of the config you want to read with URI. In this case, we leave the
 &quot;URI&quot; input field empty.</p>
 <doc-anchor-target id="jsonjq-filter">
     <h2>
@@ -316,13 +316,13 @@ of the config that you want to read with URI. In this case, we leave the
     </h2>
 </doc-anchor-target>
 <p>jsonJQ is one of our system tasks that is very useful for filtering
-data. This is the query expression we use:</p>
+data. We use the following query expression:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">.[&quot;frinx-uniconfig-topology:configuration&quot;][&quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations&quot;] . &quot;interface-configuration&quot; | select(. != null) | .[] | select(.description == &quot;${workflow.input.Description}&quot;) | {interface: .&quot;interface-name&quot;}</code></pre>
 </doc-codeblock></div>
-<p>We search through the whole config and under the
+<p>We search through the whole config, and under the
 <strong>Cisco-IOS-XR-ifmgr-cfg:interface-configurations</strong> model we find the
-interface with a description that the user inputs. The task returns the
+interface with a description given by the user. The task returns the
 name of that interface.</p>
 <doc-anchor-target id="lambda">
     <h2>
@@ -333,12 +333,12 @@ name of that interface.</p>
 <p>Lambda is a generic task that can process any JS code. In this case, we
 use it to parse the output of the jsonJQ task. jsonJQ returns the name
 of the interface in a standard decoded format, e.g: &quot;TenGigE0/0/0/0&quot;.
-But we will be using that interface in URI which means it must be
-encoded. We achieve that with a simple JS script:</p>
+However, we will be using that interface in URI, which means it must be
+encoded. We can achieve that using a simple JS script:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">{return(encodeURIComponent($.lambdaValue));}</code></pre>
 </doc-codeblock></div>
-<p>As an example we take interface name <strong>TenGigE0/0/0/0</strong> and encode it to
+<p>As an example, we take the interface name <strong>TenGigE0/0/0/0</strong> and encode it to
 <strong>TenGigE0%2F0%2F0%2F0</strong>.</p>
 <doc-anchor-target id="write--commit">
     <h2>
@@ -355,7 +355,7 @@ apply a policy to the interface filtered based on its description.</p>
     </h2>
 </doc-anchor-target>
 <p><figure class="content-center">
-    <img src="policy_filter_input.png" alt="Input" />
+    <img src="policy_filter_input_data.png" alt="Input" />
     <figcaption class="caption">Input</figcaption>
 </figure>
 </p>
@@ -377,10 +377,12 @@ apply a policy to the interface filtered based on its description.</p>
     </h2>
 </doc-anchor-target>
 <p><figure class="content-center">
-    <img src="policy_filter_run.gif" alt="Running the workflow" />
+    <img src="run_wf_uniconfig_policy_filter_xr.gif" alt="Running the workflow" />
     <figcaption class="caption">Running the workflow</figcaption>
 </figure>
 </p>
+<p>IOSXR653_1
+test_map_custom</p>
 
                                 
                                 <!-- Required only on API pages -->
