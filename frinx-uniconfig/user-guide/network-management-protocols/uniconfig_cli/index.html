@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.720531859946">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.721321038596">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.720531859946" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.721321038596" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.720531859946" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.721321038596" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.720531859946" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.720531859946" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.721321038596" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.721321038596" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -504,8 +504,10 @@ reconciliation on the CLI layer when using Uniconfig.</p>
     </h2>
 </doc-anchor-target>
 <p>There are multiple RPCs that can be used for sending of commands to CLI
-session and optionally waiting for command output. To use all of these
-RPCs, it is required to have installed CLI device in &#x27;Connected&#x27; state.</p>
+session and optionally waiting for command output. CLI layer also provides
+one additional RPC for computation of configuration coverage by cli-units.
+To use all of these RPCs, it is required to have installed CLI device in
+&#x27;Connected&#x27; state.</p>
 <doc-anchor-target id="rpc-execute-and-read">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-execute-and-read">#</doc-anchor-trigger>
@@ -926,6 +928,131 @@ static route and committing of made change.</p>
 <pre class="language-none"><code v-pre class="language-none">{
     &quot;output&quot;: {
         &quot;status&quot;: &quot;ok&quot;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="rpc-config-coverage">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-config-coverage">#</doc-anchor-trigger>
+        <span>RPC: config-coverage</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="description-4">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#description-4">#</doc-anchor-trigger>
+        <span>Description</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>RPC reads the entire device configuration, determines the coverage
+of the configuration by translation units and returns simple or
+complex output. User sets preferred output in RPC input. Simple output
+is default.</li>
+<li>Simple output contains one string that consists of all lines of the
+device configuration. Each line starts with &#x27;+&#x27; if it is covered or
+&#x27;-&#x27; if not and end with &#x27;\n&#x27; marker.</li>
+<li>Complex output contains a list of commands where each entry of the list
+contains fields &#x27;command&#x27; with specific command, flag &#x27;covered&#x27; that
+can be true or false and &#x27;non-parsable-parts&#x27; that is visible only
+in the case that command is not covered and contains list of command
+parts that are not covered. If all parts of the command are not covered,
+then list contains just one word &#x27;ALL&#x27; what means that whole command
+is not covered.</li>
+</ul>
+<doc-anchor-target id="simple-output-example">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#simple-output-example">#</doc-anchor-trigger>
+        <span>Simple output example</span>
+    </h4>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --request POST 'http://127.0.0.1:8181/rests/operations/network-topology:network-topology/topology=cli/node=saos/yang-ext:mount/cli-unit-generic:config-coverage' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;with-details&quot;: false
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>RPC reply:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">{
+    &quot;output&quot;: {
+        &quot;simple-output&quot;: &quot;+ access-list create acl-profile act-test default-filter-action deny\n
+        + vlan create vlan 104,147\n
+        + vlan create vlan 190-193,200\n
+        - log flash add filter default ldp-mgr info\n
+        + port set port 5 acceptable-frame-type all\n
+        + port set port 16 max-frame-size 9216 description FREE resolved-cos-remark-l2 true\n
+        - traffic-services queuing congestion-avoidance-profile create profile Q1-BE green-lower-threshold 10\n
+        + traffic-services queuing egress-port-queue-group set queue 0 port 8 eir 1000000 ebs 768 scheduler-weight 40 congestion-avoidance-profile Q0-BE\n&quot;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="complex-output-example">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#complex-output-example">#</doc-anchor-trigger>
+        <span>Complex output example</span>
+    </h4>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --request POST 'http://127.0.0.1:8181/rests/operations/network-topology:network-topology/topology=cli/node=saos/yang-ext:mount/cli-unit-generic:config-coverage' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;with-details&quot;: true
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>RPC reply:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">{
+    &quot;output&quot;: {
+        &quot;complex-output&quot;: [
+            {
+                &quot;covered&quot;: true,
+                &quot;command&quot;: &quot;access-list create acl-profile act-test default-filter-action deny&quot;
+            },    
+            {
+                &quot;covered&quot;: true,
+                &quot;command&quot;: &quot;vlan create vlan 104,147&quot;
+            },
+            {
+                &quot;covered&quot;: true,
+                &quot;command&quot;: &quot;vlan create vlan 190-193,200&quot;
+            },
+            {
+                &quot;covered&quot;: false,
+                &quot;non-covered-parts&quot;: [
+                    &quot;ALL&quot;
+                ],
+                &quot;command&quot;: &quot;log flash add filter default ldp-mgr info&quot;
+            },
+            {
+                &quot;covered&quot;: true,
+                &quot;command&quot;: &quot;port set port 5 acceptable-frame-type all&quot;
+            },    
+            {
+                &quot;covered&quot;: true,
+                &quot;command&quot;: &quot;port set port 16 max-frame-size 9216 description FREE resolved-cos-remark-l2 true&quot;
+            },   
+            {
+                &quot;covered&quot;: false,
+                &quot;non-covered-parts&quot;: [
+                    &quot;congestion-avoidance-profile&quot;,
+                    &quot;create&quot;,
+                    &quot;profile&quot;,
+                    &quot;Q1-BE&quot;,
+                    &quot;green-lower-threshold&quot;,
+                    &quot;10&quot;
+                ],
+                &quot;command&quot;: &quot;traffic-services queuing congestion-avoidance-profile create profile Q1-BE green-lower-threshold 10&quot;
+            },
+            {
+                &quot;covered&quot;: true,
+                &quot;command&quot;: &quot;traffic-services queuing egress-port-queue-group set queue 0 port 8 eir 1000000 ebs 768 scheduler-weight 40 congestion-avoidance-profile Q0-BE&quot;
+            }
+        ]
     }
 }</code></pre>
 </doc-codeblock></div>
