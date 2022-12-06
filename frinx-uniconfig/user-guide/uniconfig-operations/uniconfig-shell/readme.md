@@ -713,7 +713,7 @@ Callbacks include sending POST and GET requests to the remote server and invokin
 For using callbacks it is needed:
 
 1. Necessary YANG modules - YANG modules that are required for the correct callbacks working.
-2. Configuration - update 'config/lighty-uniconfig-config.json'.
+2. Configuration - enable callbacks in the 'config/lighty-uniconfig-config.json' and set remote server and access token.
 3. Update repository - add 'necessary YANG modules' from point 1 into at least one YANG repository in the cache
 directory and define remote endpoints and scripts in some YANG file or create new one for callbacks. For definition of 
 remote endpoints 'frinx-callpoint@2022-06-22.yang' extension must be used.
@@ -737,25 +737,87 @@ These YANG modules are required:
 
 ### Configuration
 
-By default, callbacks are disabled and remote server URI is empty. To enable it, configuration parameter 
-'callbacks/enabled' must be set to 'true' and remote server URI must be set in the 'config/lighty-uniconfig-config.json' 
-file.
+By default, callbacks are disabled and host and port of remote server is empty in 'config/lighty-uniconfig-config.json'. 
+To enable it, configuration parameter 'callbacks/enabled' must be set to 'true'. It is also necessary set host and port 
+of remote server and store access token to the UniConfig database. 
 
-All available settings and descriptions are displayed in the following JSON snippet.
+Host and port of remote server can be set in three ways:
+
+1. before start UniConfig in the 'config/lighty-uniconfig-config.json' file. Port is optional.
+
+```json UniConfig callbacks/remote-server configuration (config/lighty-uniconfig-config.json)
+...
+// remote server settings
+"remoteServer": {
+    // remote server hostname / IP address
+    "host": "127.0.0.1",
+    // port on which remote server listens
+    "port": 9000
+}
+...
+```
+
+2. after start UniConfig by PUT request
+
+```update remote server by PUT request
+  curl --location --request PUT 'http://127.0.0.1:8181/rests/data/callbacks:callbacks-settings' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+      "callbacks-settings": {
+          "remote-server": {
+              "host": "127.0.0.5",
+              "port": 9000
+          }
+      }
+  }'
+```
+
+3. after start UniConfig by cli-shell
+
+```update remote server by cli-shell
+  uniconfig>configuration-mode 
+  config>set settings callbacks-settings remote-server host 127.0.0.5 port 9000
+  config>request commit 
+```
+
+Access token can be stored in the UniConfig database in two ways:
+
+1. after start UniConfig by PUT request
+
+```update access token by PUT request
+  curl --location --request PUT 'http://127.0.0.1:8181/rests/data/callbacks:callbacks-settings/access-token' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+      "access-token": "token"
+  }'
+```
+
+2. after start UniConfig by cli-shell
+
+```update access token by cli-shell
+  uniconfig>configuration-mode 
+  config>set settings callbacks-settings access-token token
+  config>request commit
+```
+
+All available settings and descriptions for callbacks are displayed in the following JSON snippet.
 
 ```json UniConfig callbacks configuration (config/lighty-uniconfig-config.json)
-    "callbacks": {
-        // flag that determines whether callbacks will work
-        "enabled": true,
-        // remote server settings
-        "remoteServer": {
-            // remote server uri
-            "serverUri": "https://remote.server.io",
-            // basic authentication that will be used in http requests
-            "username": "admin",
-            "password": "admin"
-        }
+"callbacks": {
+    // flag that determines whether callbacks will work
+    "enabled": true,
+    // remote server settings
+    "remoteServer": {
+        // remote server hostname / IP address
+        "host": "127.0.0.1",
+        // port on which remote server listens
+        "port": 9000
     }
+}
 ```
 
 ### Update repository
