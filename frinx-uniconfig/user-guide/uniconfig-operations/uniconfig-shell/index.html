@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.722072138058">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.723631049697">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.722072138058" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.723631049697" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.722072138058" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.723631049697" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.722072138058" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.722072138058" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.723631049697" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.723631049697" defer></script>
     <link href="../../../../resources/css/katex.css?v=2.4.0" rel="stylesheet" />
     <script id="katex-js" type="text/javascript" src="../../../../resources/js/katex.js?v=2.4.0" defer></script>
 </head>
@@ -1114,17 +1114,35 @@ request&gt;
     </h2>
 </doc-anchor-target>
 <p>Callbacks include sending POST and GET requests to the remote server and invoking user scripts from UniConfig shell.</p>
-<p>Requirements for using callbacks:
-For using callbacks it is needed:</p>
+<p>Requirements for using callbacks:</p>
 <ol>
 <li>Necessary YANG modules - YANG modules that are required for the correct callbacks.</li>
 <li>Configuration - Update &#x27;config/lighty-uniconfig-config.json&#x27;.</li>
-<li>Update repository - Add the necessary YANG modules (see 1.) into &#x27;latest&#x27; or a specific &#x27;user-repository&#x27;, and
+<li>Update repository - Add the necessary YANG modules (see 1.) into at least one YANG repository, and
 define remote endpoints and scripts in a YANG file or create a new one for callbacks. For definition of remote
 endpoints, the <a href="mailto:%27frinx-callpoint@2022-06-22.yang">&#x27;frinx-callpoint@2022-06-22.yang</a>&#x27; extension must be used.</li>
-<li>UniStore node - Create a UniStore node using &#x27;latest&#x27; or a specific &#x27;user-repository&#x27; containing
-the necessary YANG modules (see 1.) and a YANG file with defined endpoints and scripts.</li>
+<li>UniStore node - Create a UniStore node using a YANG repository that contains the necessary YANG modules (see 1.)
+and a YANG file with defined endpoints and scripts.</li>
 </ol>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Point 4 is optional in UniConfig shell, because UniConfig creates dummy UniStore nodes for all repositories
+that meet the conditions set out in point 3. In this case, the dummy UniStore node name is the same as the YANG repository name. In
+RestConf, point 4 is mandatory.</p>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="necessary-yang-modules">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#necessary-yang-modules">#</doc-anchor-trigger>
@@ -1208,8 +1226,8 @@ displayed in the following snippet. There is only one extension &#x27;url&#x27; 
         }
     }</code></pre>
 </doc-codeblock></div>
-<p>The argument for the &#x27;url&#x27; extension is &#x27;/data/from/remote&#x27;, which appended to the remote server URI
-configured in the &#x27;config/lighty-uniconfig-config.json&#x27;. The final address for the remote callpoint is
+<p>The argument for the &#x27;url&#x27; extension is &#x27;/data/from/remote&#x27;, which is appended to the remote server URI
+configured in &#x27;config/lighty-uniconfig-config.json&#x27;. Thus the final address for the remote callpoint is
 &#x27;https://remote.server.io/data/from/remote&#x27;.</p>
 <doc-anchor-target id="add-action-post-request">
     <h4>
@@ -1259,7 +1277,7 @@ configured in the &#x27;config/lighty-uniconfig-config.json&#x27;. The final add
 <li>Path to the script defined by &#x27;tailf:exec&#x27;.</li>
 <li>Arguments of the script defined by &#x27;tailf:exec&#x27;.</li>
 </ol>
-<p>Arguments can be dynamic (i.e., the user can pass values to them) or static (flags). Arguments should be created following
+<p>Arguments can be dynamic (i.e., the user can pass values to them) or static (flags). Arguments should follow
 these conventions:</p>
 <ol>
 <li>Each argument must contain a name (e.g. -n, -j).</li>

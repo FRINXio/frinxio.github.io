@@ -12,24 +12,24 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Uniconfig 5.0.17 Release Notes | Frinx Docs</title>
-    <meta name="title" content="Uniconfig 5.0.17 Release Notes | Frinx Docs">
-    <meta name="description" content="Swagger - filter path CRUD customization" />
+    <title>Uniconfig 5.0.19 Release Notes | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.0.19 Release Notes | Frinx Docs">
+    <meta name="description" content="Fixed hardcoded part and added one more if condition to receiver transceiver data for IOS-XE (#493)" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.17/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.19/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.17/">
-    <meta property="og:title" content="Uniconfig 5.0.17 Release Notes | Frinx Docs">
-    <meta property="og:description" content="Swagger - filter path CRUD customization">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.19/">
+    <meta property="og:title" content="Uniconfig 5.0.19 Release Notes | Frinx Docs">
+    <meta property="og:description" content="Fixed hardcoded part and added one more if condition to receiver transceiver data for IOS-XE (#493)">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.17/">
-    <meta property="twitter:title" content="Uniconfig 5.0.17 Release Notes | Frinx Docs">
-    <meta property="twitter:description" content="Swagger - filter path CRUD customization">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.19/">
+    <meta property="twitter:title" content="Uniconfig 5.0.19 Release Notes | Frinx Docs">
+    <meta property="twitter:description" content="Fixed hardcoded part and added one more if condition to receiver transceiver data for IOS-XE (#493)">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -247,10 +247,10 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="uniconfig-5017-release-notes" class="break-words">
+<doc-anchor-target id="uniconfig-5019-release-notes" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5017-release-notes">#</doc-anchor-trigger>
-        <span>Uniconfig 5.0.17 Release Notes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5019-release-notes">#</doc-anchor-trigger>
+        <span>Uniconfig 5.0.19 Release Notes</span>
     </h1>
 </doc-anchor-target>
 <doc-anchor-target id="new-features">
@@ -260,11 +260,15 @@
     </h2>
 </doc-anchor-target>
 <ul>
-<li><p>Swagger - filter path CRUD customization</p>
+<li><p>Fixed hardcoded part and added one more if condition to receiver transceiver data for IOS-XE (#493)</p>
 </li>
-<li><p>Implemented invalid schema repository cleaner</p>
+<li><p>Stable XR6 XR66 devices (#471)</p>
 </li>
-<li><p>Units-coverage RPC</p>
+<li><p>Implementation of storing failed installations into DB (stable 5.0.x)</p>
+</li>
+<li><p>Implemented TU for adding/removing users for Saos6 (#438)</p>
+</li>
+<li><p>Implemented TU for collecting transceiver information for IOS-XE (#439)</p>
 </li>
 </ul>
 <doc-anchor-target id="bug-fixes">
@@ -274,35 +278,19 @@
     </h2>
 </doc-anchor-target>
 <ul>
-<li><p>Commit fails if one of the touched node was uninstalled</p>
+<li><p>Downgraded sshd to 2.8.0</p>
 </li>
-<li><p>Swagger - fix CRUD filter generation</p>
+<li><p>Fix uninstall -&gt; install transition</p>
 </li>
-<li><p>Triggered commit hook if revert is successful</p>
+<li><p>Swagger: fix generation of operational APIs (5.0.X)</p>
 </li>
-<li><p>Fixed decryption of passwords in CLI layer (#301)</p>
+<li><p>Fix CVEs</p>
 </li>
-<li><p>Add support for fetch=count with jsonpath filtering (#282)</p>
+<li><p>Fixed reading public key from NETCONF device (NPE)</p>
 </li>
-<li><p>Fix suppressed Jackson CVEs</p>
+<li><p>Fixed distribution of mount failure from GNMi layer</p>
 </li>
-<li><p>Bump Apache commons-text to 1.10.0</p>
-</li>
-<li><p>Swagger - Fix GET operation generation for list nodes</p>
-</li>
-<li><p>Bump protobuf-java to 3.21.7</p>
-</li>
-<li><p>Changed order of executed commands for saos8 (#280)</p>
-</li>
-<li><p>Additional fix for dce global subscription in client.</p>
-</li>
-<li><p>Improve JSON parser error message</p>
-</li>
-<li><p>Changed the way of getting vlan name and egress-tpid</p>
-</li>
-<li><p>Localhost throws 500</p>
-</li>
-<li><p>Swagger: Fix operational API generation</p>
+<li><p>Swagger: Fix path filtering</p>
 </li>
 </ul>
 <doc-anchor-target id="improvements">
@@ -312,17 +300,37 @@
     </h2>
 </doc-anchor-target>
 <ul>
-<li><p>Replacing parallelStreams with more predictable alternatives</p>
+<li><p>expose gnmi parameters</p>
 </li>
-<li><p>Swagger - add option to disable GET request generation for concrete list nodes</p>
+<li><p>add overallStatus to multiple-nodes-rpc-output</p>
 </li>
-<li><p>Add request timeout to gnmi session</p>
+<li><p>Improved error message when connection cannot be created</p>
 </li>
-<li><p>Create modulesWithIgnoredNamespace list</p>
+<li><p>Exposed DOMMountPointService configuration</p>
 </li>
-<li><p>Support install-multiple-nodes for gnmi</p>
+<li><p>Optimization of mountpoint notifications</p>
 </li>
-<li><p>Swagger: Add content query parameter</p>
+<li><p>Added logs into DOM Mountpoint Service</p>
+</li>
+</ul>
+<doc-anchor-target id="other">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><p>Configurable re-sending cli commands</p>
+</li>
+<li><p>Fixed mount point creation for CLI topology</p>
+</li>
+<li><p>Removed unified-topology.yang</p>
+</li>
+<li><p>Refactored unified layer and mounting/unmounting process - updates</p>
+</li>
+<li><p>Refactored unified layer and mounting/unmounting process</p>
+</li>
+<li><p>Added logging level for shell to the logback.xml</p>
 </li>
 </ul>
 
@@ -334,20 +342,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.16/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.18/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Uniconfig 5.​0.​16 Release Notes</span>
+                                                <span class="block mt-1">Uniconfig 5.​0.​18 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.18/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Uniconfig 5.​0.​18 Release Notes</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -394,6 +402,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Uniconfig 5.0.17 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.0.19 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
