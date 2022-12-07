@@ -25,7 +25,7 @@ Description of fields in the edit entry:
 
 * **path** (mandatory): Path encoded using the RFC-8040 format. Specified as relative path to root
   'configuration' container. If this leaf contains a single character '/', the path points to the whole configuration.
-  If this path contains list node without key, operation will apply to all list node elements.
+  If this path contains a list node without key, the operation is applied to all list node elements.
 * **operation** (mandatory): Operation that must be executed on the specified path. Supported operations
   are 'merge', 'replace', and 'remove'. Operations 'merge' and 'replace' requires to also specify input 'data'.
 * **data** (optional): Content of the replaced or merged data without wrapping parent element
