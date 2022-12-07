@@ -1,15 +1,15 @@
 # UniConfig Shell
 
-UniConfig shell is a Command Line Interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including:
+UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including the following:
 
 * reading operational data of devices
 * manipulating device configuration
 * manipulating configuration templates
-* manipulating data stored in unistore
+* manipulating data stored in Unistore
 * invoking device or UniConfig operations
 * manipulating global UniConfig settings
 
-Uniconfig shell is model driven and thus its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
+As Uniconfig shell is model-driven, its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
 RPC/action operations).
 
 ## Configuration
@@ -822,7 +822,7 @@ Available settings and descriptions for callbacks are displayed in the following
 
 ### Update repository
 
-First, you must create or update the YANG repository by using the 'frinx-callpoint@2022-06-22.yang' extension 
+First, create or update the YANG repository by using the 'frinx-callpoint@2022-06-22.yang' extension 
 displayed in the following snippet. There is only one extension, 'url', with the argument 'point'.
 
 ``` frinx-callpoint@2022-06-22.yang
@@ -933,16 +933,17 @@ module frinx-test {
 
 ### UniStore node
 
-UniStore nodes can be created by RestConf or UniConfig shell. If a repository is explicitly defined by using the query 
-parameter '?uniconfig-schema-repository=repository-name', the repository must contain all necessary YANG 
-modules. If no repository name is defined when the UniStore node is created, all necessary YANG modules must be in the
-'latest' schema repository.
+
+A UniStore node can be created by RestConf or UniConfig shell. If a repository is explicitly defined by the query 
+parameter '?uniconfig-schema-repository=repository-name', this repository must contain all necessary YANG 
+modules. If a repository name is not defined when the UniStore node is created, all necessary YANG modules 
+must be in the 'latest' schema repository.
 
 ### Examples
 
-- Example - call-point invocation in the shell:
+- Example - callpoint invocation in the shell:
 
-``` call-point invocation
+``` callpoint invocation
 uniconfig>show
 show>unistore node1 test get-request
 {
