@@ -29,8 +29,8 @@ The configuration of nodes consists of the following phases:
    Commit RPC request. Then only failed devices will be rollbacked. 
 
 !!!
-There is a flag for skipping unreachable nodes at the time of commit RPC is sent. If "skip-unreachable-nodes" is set 
-to True, nodes that are not reachable will be skipped and others will be configured. Default value is false.
+The 'skip-unreachable-nodes' flag controls whether unreachable nodes are skipped when the RPC commit is sent. If set
+to 'true', nodes that are not reachable are skipped and others are configured. The default value is 'false'.
 !!!
 
 ![RPC commit](RPC_commit-RPC_commit.svg)
@@ -199,7 +199,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Successful Example
 
-RPC commit input has 2 target nodes and the flag to skip unreachable nodes. The output describes the result
+RPC commit input has two target nodes and the flag to skip unreachable nodes. The output describes the result
 of the commit.
 
 ```bash RPC Request
