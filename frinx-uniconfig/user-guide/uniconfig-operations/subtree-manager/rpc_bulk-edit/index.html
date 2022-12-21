@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.723636094112">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.724945594117">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.723636094112" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.724945594117" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.723636094112" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.723636094112" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.723636094112" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.724945594117" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -285,7 +285,8 @@ by the &#x27;path&#x27; key. Modifications are applied in the preserved user-def
 <p>Description of fields in the edit entry:</p>
 <ul>
 <li><strong>path</strong> (mandatory): Path encoded using the RFC-8040 format. Specified as relative path to root
-&#x27;configuration&#x27; container. If this leaf contains a single character &#x27;/&#x27;, the path points to the whole configuration.</li>
+&#x27;configuration&#x27; container. If this leaf contains a single character &#x27;/&#x27;, the path points to the whole configuration.
+If this path contains a list node without key, the operation is applied to all list node elements.</li>
 <li><strong>operation</strong> (mandatory): Operation that must be executed on the specified path. Supported operations
 are &#x27;merge&#x27;, &#x27;replace&#x27;, and &#x27;remove&#x27;. Operations &#x27;merge&#x27; and &#x27;replace&#x27; requires to also specify input &#x27;data&#x27;.</li>
 <li><strong>data</strong> (optional): Content of the replaced or merged data without wrapping parent element
@@ -308,7 +309,7 @@ of this leaf in different use-cases).</li>
 <p>Description of output fields:</p>
 <ul>
 <li><strong>overall-status</strong>: Status of operation. If RPC execution fails on at least one of the target nodes,
-the overall status is set to &#x27;fail&#x27;. Otherwise status is set to &#x27;complete&#x27;.</li>
+the overall status is set to &#x27;fail&#x27;. Otherwise, status is set to &#x27;complete&#x27;.</li>
 <li><strong>error-message</strong>: &quot;Reason for the failure. Used if there is a structural error
 in the RPC input that does not relate to one specific target node.&quot;</li>
 <li><strong>node-result</strong>: Results of RPC execution divided per target node (&#x27;node-id&#x27; is the key of the list).</li>
@@ -317,7 +318,7 @@ in the RPC input that does not relate to one specific target node.&quot;</li>
 <ul>
 <li><strong>node-id</strong>: Identifier for the target node.</li>
 <li><strong>status</strong>: Status of bulk-edit operation on this node. This value is set to &#x27;complete&#x27; only if all modifications have
-been successfully written into UniConfig transaction (including other nodes). Otherwise the value is set to &#x27;fail&#x27;.</li>
+been successfully written into UniConfig transaction (including other nodes). Otherwise, the value is set to &#x27;fail&#x27;.</li>
 <li><strong>error-message</strong>: Reason for the failure. This field appears in the output only if RPC execution failed
 on this target node.</li>
 <li><strong>error-type</strong>: Categorized error type.</li>
@@ -359,6 +360,11 @@ on this target node.</li>
             &quot;tpl_4&quot;
         ],
         &quot;edit&quot;: [
+            {
+                &quot;path&quot;: &quot;/sfc:service-node-groups/service-node-group/type&quot;,
+                &quot;operation&quot;: &quot;replace&quot;,
+                &quot;data&quot;: &quot;test&quot;
+            },
             {
                 &quot;path&quot;: &quot;/groups/group=test/description&quot;,
                 &quot;operation&quot;: &quot;replace&quot;,

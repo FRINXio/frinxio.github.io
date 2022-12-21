@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.723636094112">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.724945594117">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../../resources/css/retype.css?v=2.4.0.723636094112" rel="stylesheet" />
+    <link href="../../../../../../resources/css/retype.css?v=2.4.0.724945594117" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../../resources/js/config.js?v=2.4.0.723636094112" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../../resources/js/config.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../../resources/js/lunr.js?v=2.4.0.723636094112" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../../resources/js/prism.js?v=2.4.0.723636094112" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../../resources/js/lunr.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../../resources/js/prism.js?v=2.4.0.724945594117" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -291,6 +291,20 @@
                         }
                     }
                 ]
+            },
+            &quot;frinx-saos-vlan-extension:relay-agent&quot;: {
+                &quot;config&quot;: {
+                    &quot;enable&quot;: ,    // true or false
+                    &quot;ports&quot;: [
+                        {
+                            &quot;port-name&quot;: &quot;&quot;,
+                            &quot;config&quot;: {
+                                &quot;port-name&quot;: &quot;&quot;,
+                                &quot;trust-mode&quot;: &quot;&quot;
+                            }
+                        }
+                    ]
+                }
             }
         }
     ]
@@ -360,8 +374,14 @@ bridge
 <pre>vlan create vlan 
 vlan set vlan  name 
 vlan set vlan  egress-tpid 
-ring-protection virtual-ring add ring  vid </pre>
-<p>should be pure numeric, converted from oc-vlan-types:TPID_TYPES from openconfig</p>
+ring-protection virtual-ring add ring  vid 
+dhcp l2-relay-agent create vlan 
+dhcp l2-relay-agent enable | disable vlan 
+dhcp l2-relay-agent set vlan  port  trust-mode </pre>
+<p>should be pure numeric, converted from oc-vlan-types:TPID_TYPES from openconfig<br />
+<em>enable</em> is a conversion of  to <em>true</em><br />
+<em>disable</em> is a conversion of  to <em>false</em><br />
+is an enumeration trust-mode - options are <em>client-trusted</em>, <em>server-trusted</em>, <em>dualrole-trusted</em> and <em>untrusted</em></p>
 
                                 
                                 <!-- Required only on API pages -->

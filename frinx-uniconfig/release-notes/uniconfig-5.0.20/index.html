@@ -12,33 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Generated API libs | Frinx Docs</title>
-    <meta name="title" content="Generated API libs | Frinx Docs">
-    <meta name="description" content="Swagger is a framework backed by a large ecosystem of tools that helps developers to work with RESTful Web services. The Swagger toolset" />
+    <title>Uniconfig 5.0.20 Release Notes | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.0.20 Release Notes | Frinx Docs">
+    <meta name="description" content="Support for GetInstalledNodes in UC client - 5.0.x" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/generated-api-libs/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.20/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/generated-api-libs/">
-    <meta property="og:title" content="Generated API libs | Frinx Docs">
-    <meta property="og:description" content="Swagger is a framework backed by a large ecosystem of tools that helps developers to work with RESTful Web services. The Swagger toolset">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.20/">
+    <meta property="og:title" content="Uniconfig 5.0.20 Release Notes | Frinx Docs">
+    <meta property="og:description" content="Support for GetInstalledNodes in UC client - 5.0.x">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/generated-api-libs/">
-    <meta property="twitter:title" content="Generated API libs | Frinx Docs">
-    <meta property="twitter:description" content="Swagger is a framework backed by a large ecosystem of tools that helps developers to work with RESTful Web services. The Swagger toolset">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.20/">
+    <meta property="twitter:title" content="Uniconfig 5.0.20 Release Notes | Frinx Docs">
+    <meta property="twitter:description" content="Support for GetInstalledNodes in UC client - 5.0.x">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.724945594117" rel="stylesheet" />
+    <link href="../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.724945594117" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.724945594117" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -53,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -69,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -185,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -247,105 +247,90 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="generated-api-libs" class="break-words">
+<doc-anchor-target id="uniconfig-5020-release-notes" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#generated-api-libs">#</doc-anchor-trigger>
-        <span>Generated API libs</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5020-release-notes">#</doc-anchor-trigger>
+        <span>Uniconfig 5.0.20 Release Notes</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="swagger">
+<doc-anchor-target id="new-features">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#swagger">#</doc-anchor-trigger>
-        <span>Swagger</span>
-    </h2>
-</doc-anchor-target>
-<p>Swagger is a framework backed by a large ecosystem of tools that helps
-developers to work with RESTful Web services. The Swagger toolset
-includes support for automated documentation, code generation, and
-test-case generation.</p>
-<p>Following files provide OpenAPI files for FRINX ODL’s REST interface (in
-context of uniconfig topology, unified topology and southbound topology)
-which can be used with Swagger tools.</p>
-<doc-anchor-target id="how-to-launch-swagger-ui">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#how-to-launch-swagger-ui">#</doc-anchor-trigger>
-        <span>How to launch Swagger-UI</span>
-    </h2>
-</doc-anchor-target>
-<ol>
-<li><p>Download swagger-uniconfig-4.2.4.frinx.zip (The first download link
-bellow)</p>
-</li>
-<li><p>Unzip the file</p>
-</li>
-<li><p>Go to the directory which you extracted the file in</p>
-</li>
-<li><p>Run following command in your terminal:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">sudo docker run -p 80:8080 -e SWAGGER_JSON=/foo/uniconfig.yaml -v $PWD:/foo swaggerapi/swagger-ui</code></pre>
-</doc-codeblock></div>
-</li>
-<li><p>Open your browser and visit: localhost</p>
-</li>
-</ol>
-<hr />
-<doc-anchor-target id="uniconfig-openapi-v2">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-openapi-v2">#</doc-anchor-trigger>
-        <span>UniConfig OpenAPI v2</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>OpenAPI document generated from Uniconfig model + OpenConfig models</li>
+<li><p>Support for GetInstalledNodes in UC client - 5.0.x</p>
+</li>
+<li><p>Add getJSONOutput to UniConfig client</p>
+</li>
+<li><p>Added some commands for collecting data for IOS-XE (#515)</p>
+</li>
+<li><p>Skip unreachable nodes at commit</p>
+</li>
 </ul>
-<p><strong>Download document here:</strong></p>
-<p><a href="https://license.frinx.io/download/swagger-uniconfig-4.2.4.frinx.zip"><a href="https://license.frinx.io/download/swagger-uniconfig-4.2.4.frinx.zip">https://license.frinx.io/download/swagger-uniconfig-4.2.4.frinx.zip</a></a></p>
-<hr />
-<doc-anchor-target id="uniconfig-python-and-go-clients">
+<doc-anchor-target id="bug-fixes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-python-and-go-clients">#</doc-anchor-trigger>
-        <span>UniConfig Python and Go clients</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>Client code library, generated from OpenAPI definition,
-encapsulating REST calls no available for external applications
-interacting with Uniconfig</li>
+<li><p>Fixed leafref version-drop</p>
+</li>
+<li><p>Suppress Netty FP CVEs</p>
+</li>
+<li><p>Fixed quit command in the shell</p>
+</li>
+<li><p>Fixed pattern handling and XPath extension parsing</p>
+</li>
+<li><p>Fixed parsing of seconds in XR native metadata unit</p>
+</li>
+<li><p>Swagger: fix generation of action nodes (5.0.X)</p>
+</li>
+<li><p>Swagger: fix no key lists generation (5.0.X)</p>
+</li>
+<li><p>Fixed locking of nodes from TX with enabled dedicated sessions (#523)</p>
+</li>
+<li><p>Fix bug in bulk edit operation</p>
+</li>
+<li><p>Swagger: fix generation of operation children from config container</p>
+</li>
 </ul>
-<p><strong>Download</strong> Python code library:</p>
-<p><a href="https://license.frinx.io/download/swagger-uniconfig-python-4.2.4.frinx.zip"><a href="https://license.frinx.io/download/swagger-uniconfig-python-4.2.4.frinx.zip">https://license.frinx.io/download/swagger-uniconfig-python-4.2.4.frinx.zip</a></a></p>
-<p><strong>Download</strong> Go code library:</p>
-<p><a href="https://license.frinx.io/download/swagger-uniconfig-go-4.2.4.frinx.zip"><a href="https://license.frinx.io/download/swagger-uniconfig-go-4.2.4.frinx.zip">https://license.frinx.io/download/swagger-uniconfig-go-4.2.4.frinx.zip</a></a></p>
-<hr />
-<doc-anchor-target id="southbound-openapi-v2">
+<doc-anchor-target id="improvements">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#southbound-openapi-v2">#</doc-anchor-trigger>
-        <span>Southbound OpenAPI v2</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>OpenAPI document generated from Cli topology + Netconf topology
-models</li>
+<li><p>Change overallStatus when skiping unreachable nodes</p>
+</li>
+<li><p>handle user parameters input in GnmiDefaultParametersService</p>
+</li>
+<li><p>Removed &#x27;reconcile&#x27; mountpoint parameter (#572)</p>
+</li>
+<li><p>Disable verification of supported query parameters (5.0.x) (#549)</p>
+</li>
+<li><p>Swagger: toggle generation of POST apis for containers</p>
+</li>
+<li><p>Bulk-edit rpc improvements</p>
+</li>
 </ul>
-<p><strong>Download</strong> document here:</p>
-<p><a href="https://license.frinx.io/download/swagger-southbound-4.2.4.frinx.zip"><a href="https://license.frinx.io/download/swagger-southbound-4.2.4.frinx.zip">https://license.frinx.io/download/swagger-southbound-4.2.4.frinx.zip</a></a></p>
-<hr />
-<doc-anchor-target id="southbound-python-and-go-clients">
+<doc-anchor-target id="other">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#southbound-python-and-go-clients">#</doc-anchor-trigger>
-        <span>Southbound Python and Go clients</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>Client code library, generated from OpenAPI definition,
-encapsulating REST calls no available for external applications
-interacting with southbound (cli and netconf topology)</li>
+<li><p>Swagger: fix npe in custom operational path (5.0.X)</p>
+</li>
+<li><p>Added only-vlan parser, upgraded trunk-vlans for huawei (#528)</p>
+</li>
+<li><p>Callbacks authentication</p>
+</li>
 </ul>
-<p><strong>Download</strong> Python code library:</p>
-<p><a href="https://license.frinx.io/download/swagger-southbound-python-4.2.4.frinx.zip"><a href="https://license.frinx.io/download/swagger-southbound-python-4.2.4.frinx.zip">https://license.frinx.io/download/swagger-southbound-python-4.2.4.frinx.zip</a></a></p>
-<p><strong>Download</strong> Go code library:</p>
-<p><a href="https://license.frinx.io/download/swagger-southbound-go-4.2.4.frinx.zip"><a href="https://license.frinx.io/download/swagger-southbound-go-4.2.4.frinx.zip">https://license.frinx.io/download/swagger-southbound-go-4.2.4.frinx.zip</a></a></p>
-<hr />
 
                                 
                                 <!-- Required only on API pages -->
@@ -353,6 +338,27 @@ interacting with southbound (cli and netconf topology)</li>
                             </div>
                             <footer class="clear-both">
                             
+                                <nav class="flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.19/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
+                                                <span class="block mt-1">Uniconfig 5.​0.​19 Release Notes</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
+                                                <span class="block mt-1">Translation Units</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -394,6 +400,6 @@ interacting with southbound (cli and netconf topology)</li>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Generated API libs", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.0.20 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
