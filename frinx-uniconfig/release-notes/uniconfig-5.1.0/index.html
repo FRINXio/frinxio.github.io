@@ -12,33 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Logging (syslog) | Frinx Docs</title>
-    <meta name="title" content="Logging (syslog) | Frinx Docs">
-    <meta name="description" content="Link to github : xr-unit" />
+    <title>Uniconfig 5.1.0 Release Notes | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.1.0 Release Notes | Frinx Docs">
+    <meta name="description" content="Support for GetInstalledNodes in UC client" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/logging/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.0/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/logging/">
-    <meta property="og:title" content="Logging (syslog) | Frinx Docs">
-    <meta property="og:description" content="Link to github : xr-unit">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.0/">
+    <meta property="og:title" content="Uniconfig 5.1.0 Release Notes | Frinx Docs">
+    <meta property="og:description" content="Support for GetInstalledNodes in UC client">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/logging/">
-    <meta property="twitter:title" content="Logging (syslog) | Frinx Docs">
-    <meta property="twitter:description" content="Link to github : xr-unit">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.0/">
+    <meta property="twitter:title" content="Uniconfig 5.1.0 Release Notes | Frinx Docs">
+    <meta property="twitter:description" content="Support for GetInstalledNodes in UC client">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.726059946937" rel="stylesheet" />
+    <link href="../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.726059946937" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -53,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -69,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -185,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -247,117 +247,196 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="logging-syslog" class="break-words">
+<doc-anchor-target id="uniconfig-510-release-notes" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#logging-syslog">#</doc-anchor-trigger>
-        <span>Logging (syslog)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-510-release-notes">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.0 Release Notes</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="url">
+<doc-anchor-target id="new-features">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#url">#</doc-anchor-trigger>
-        <span>URL</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
     </h2>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">frinx-logging:logging/interfaces/interface=
-
-## OPENCONFIG YANG
-
-[YANG models](https://github.com/FRINXio/openconfig/tree/master/logging/src/main/yang)
-
-```javascript
-{
-    &quot;interface&quot;: [
-        {
-            &quot;interface-id&quot;: &quot;&quot;,
-            &quot;config&quot;: {
-                &quot;interface-id&quot;: &quot;&quot;,
-                &quot;enabled-logging-for-event&quot;: [
-                    {
-                        &quot;event-name&quot;: &quot;frinx-event-types:LINK_UP_DOWN&quot;
-                    }
-                ]
-            }
-        }
-    ]
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="os-configuration-commands">
+<ul>
+<li><p>Support for GetInstalledNodes in UC client</p>
+</li>
+<li><p>Add getJSONOutput to UniConfig client</p>
+</li>
+<li><p>Added some commands for collecting data for IOS-XE (#527)</p>
+</li>
+<li><p>Skip unreachable nodes at commit</p>
+</li>
+<li><p>Fixed hardcoded part and added one more if condition to receiver transceiver data for IOS-XE (#490)</p>
+</li>
+<li><p>added implementation of XR6 and XR6.6 devices as native units</p>
+</li>
+<li><p>Implementation of storing failed installations into DB (main)</p>
+</li>
+<li><p>Implemented TU for adding/removing users for Saos6 (#360)</p>
+</li>
+<li><p>Implemented TU for collecting transceiver information for IOS-XE (#437)</p>
+</li>
+<li><p>Implemented TU for collecting all the information in NTP MCS for Saos6 and Saos8 (#352)</p>
+</li>
+<li><p>Implemented low priority fields for collecting inventory for SAOS6 CEN(ring) (#341)</p>
+</li>
+</ul>
+<doc-anchor-target id="bug-fixes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#os-configuration-commands">#</doc-anchor-trigger>
-        <span>OS Configuration Commands</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="cisco-ios-xr-534">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-ios-xr-534">#</doc-anchor-trigger>
-        <span>Cisco IOS XR 5.3.4</span>
-    </h3>
+<ul>
+<li><p>Fixed synchronization in datastore transaction</p>
+</li>
+<li><p>Stop reporting metrics into log/logs.log and stdout (#598)</p>
+</li>
+<li><p>Fixed reconcile SQL migration file</p>
+</li>
+<li><p>Fix CVE-2021-37533</p>
+</li>
+<li><p>Add migration for removing node-extension:reconcile</p>
+</li>
+<li><p>Fixed leafref version-drop</p>
+</li>
+<li><p>Suppress Netty FP CVEs</p>
+</li>
+<li><p>Fixed quit command in the shell</p>
+</li>
+<li><p>Fixed pattern handling and XPath extension parsing</p>
+</li>
+<li><p>Fixed parsing of seconds in XR native metadata unit</p>
+</li>
+<li><p>Swagger: fix generation of action nodes</p>
+</li>
+<li><p>Swagger: fix no key lists generation</p>
+</li>
+<li><p>Fixed locking of nodes from TX with enabled dedicated sessions (#522)</p>
+</li>
+<li><p>Fix bug in bulk edit operation</p>
+</li>
+<li><p>Swagger: fix generation of operation children from config container</p>
+</li>
+<li><p>Downgraded sshd to 2.8.0</p>
+</li>
+<li><p>Fix uninstall -&gt; install transition</p>
+</li>
+<li><p>Fix : bad package for GnmiDefaultParametersService</p>
+</li>
+<li><p>Swagger: fix generation of operational APIs</p>
+</li>
+<li><p>Fixed hardcoded part and added one more if condition to receiver transceiver data for IOS-XE (#490)</p>
+</li>
+<li><p>Fix CVEs</p>
+</li>
+<li><p>Fixed reading public key from NETCONF device (NPE)</p>
+</li>
+<li><p>Fixed distribution of mount failure from GNMi layer</p>
+</li>
+<li><p>Swagger: Fix path filtering</p>
+</li>
+<li><p>Bump units versions to 5.1.0-SNAPSHOT</p>
+</li>
+<li><p>Swagger: Fix generation of arguments in path</p>
+</li>
+<li><p>Fix Logback and cleanup POMs</p>
+</li>
+<li><p>Fixed cleanup of existing MP during mount-node RPC</p>
+</li>
+<li><p>Swagger: fix generation of choice nodes</p>
+</li>
+<li><p>Fixed encryption of sensitive info passed via template variables (#326)</p>
+</li>
+<li><p>fix Jsonb filter element filtering</p>
+</li>
+<li><p>Swagger - Fix request generation</p>
+</li>
+<li><p>Fixed passing leaf-list in shell callbacks</p>
+</li>
+</ul>
+<doc-anchor-target id="improvements">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h2>
 </doc-anchor-target>
-<doc-anchor-target id="cli">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli">#</doc-anchor-trigger>
-        <span>CLI</span>
-    </h4>
+<ul>
+<li><p>Change overallStatus when skiping unreachable nodes</p>
+</li>
+<li><p>handle user parameters input in GnmiDefaultParametersService</p>
+</li>
+<li><p>Removed &#x27;reconcile&#x27; mountpoint parameter (#573)</p>
+</li>
+<li><p>Disable verification of supported query parameters (5.1.x) (#550)</p>
+</li>
+<li><p>Swagger: toggle generation of POST apis for containers</p>
+</li>
+<li><p>Bulk-edit rpc improvements</p>
+</li>
+<li><p>expose gnmi parameters</p>
+</li>
+<li><p>add overallStatus to multiple-nodes-rpc-output</p>
+</li>
+<li><p>Improved error message when connection cannot be created</p>
+</li>
+<li><p>Exposed DOMMountPointService configuration</p>
+</li>
+<li><p>Optimization of mountpoint notifications</p>
+</li>
+<li><p>Added logs into DOM Mountpoint Service</p>
+</li>
+<li><p>Swagger: Custom operational path</p>
+</li>
+<li><p>Improved reporting of parsing issues in RESTCONF</p>
+</li>
+<li><p>Bump logback</p>
+</li>
+<li><p>Swagger - Improve start file</p>
+</li>
+<li><p>Changed order of some commands for SAOS8 (#348)</p>
+</li>
+<li><p>Swagger: generate augmentations in respective modules</p>
+</li>
+<li><p>Expose request-timeout parameter</p>
+</li>
+<li><p>Bump dependency-check to 7.3.0</p>
+</li>
+<li><p>readEntireConfig toString returns plain content</p>
+</li>
+<li><p>Reading mount configuration in the uniconfig-client</p>
+</li>
+<li><p>Swagger: generate augmentations in respective modules</p>
+</li>
+</ul>
+<doc-anchor-target id="other">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
+    </h2>
 </doc-anchor-target>
-<pre>
-interface 
- logging events link-status
-</pre>
-<doc-anchor-target id="unit">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#unit">#</doc-anchor-trigger>
-        <span>Unit</span>
-    </h5>
-</doc-anchor-target>
-<p>Link to github : <a href="https://github.com/FRINXio/cli-units/tree/master/ios-xr/logging">xr-unit</a></p>
-<doc-anchor-target id="cisco-ios-xr-623">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-ios-xr-623">#</doc-anchor-trigger>
-        <span>Cisco IOS XR 6.2.3</span>
-    </h3>
-</doc-anchor-target>
-<doc-anchor-target id="cli-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-1">#</doc-anchor-trigger>
-        <span>CLI</span>
-    </h4>
-</doc-anchor-target>
-<pre>
-interface 
- logging events link-status
-</pre>
-<doc-anchor-target id="unit-1">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#unit-1">#</doc-anchor-trigger>
-        <span>Unit</span>
-    </h5>
-</doc-anchor-target>
-<p>Link to github : <a href="https://github.com/FRINXio/unitopo-units/tree/master/xr/xr-6/xr-6-logging-unit">xr-unit</a></p>
-<doc-anchor-target id="cisco-ios-xr-661">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-ios-xr-661">#</doc-anchor-trigger>
-        <span>Cisco IOS XR 6.6.1</span>
-    </h3>
-</doc-anchor-target>
-<doc-anchor-target id="cli-2">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-2">#</doc-anchor-trigger>
-        <span>CLI</span>
-    </h4>
-</doc-anchor-target>
-<pre>
-interface 
- logging events link-status
-</pre>
-<doc-anchor-target id="unit-2">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#unit-2">#</doc-anchor-trigger>
-        <span>Unit</span>
-    </h5>
-</doc-anchor-target>
-<p>Link to github : <a href="https://github.com/FRINXio/unitopo-units/tree/master/xr/xr-6.6/xr-6.6-logging-unit">xr-unit</a></p>
+<ul>
+<li><p>Swagger: fix npe in custom operational path</p>
+</li>
+<li><p>Added only-vlan parser, upgraded trunk-vlans for huawei (#444)</p>
+</li>
+<li><p>Callbacks authentication</p>
+</li>
+<li><p>Configurable re-sending cli commands</p>
+</li>
+<li><p>Fixed mount point creation for CLI topology</p>
+</li>
+<li><p>Removed unified-topology.yang</p>
+</li>
+<li><p>Refactored unified layer and mounting/unmounting process - updates</p>
+</li>
+<li><p>Refactored unified layer and mounting/unmounting process</p>
+</li>
+<li><p>Added logging level for shell to the logback.xml</p>
+</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -367,20 +446,20 @@ interface
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/translation-units-docs/configuration-datasets/l2-cft/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.21/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">L​2-​Cft (Layer 2 Control Frame Forwarding)</span>
+                                                <span class="block mt-1">Uniconfig 5.​0.​21 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/translation-units-docs/configuration-datasets/privilege/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Privilege</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -427,6 +506,6 @@ interface
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Logging (syslog)", level: 4, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.0 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
