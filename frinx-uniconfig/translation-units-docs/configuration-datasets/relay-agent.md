@@ -52,7 +52,7 @@ dhcp l2-relay-agent unset replace-option82
 
 ##### Unit
 
-Link to github : [saos6-unit](https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-6-relay-agent)
+Link to GitHub : [saos6-unit](https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-6-relay-agent)
 
 ### SAOS 8
 
@@ -76,6 +76,6 @@ dhcp l2-relay-agent unset replace-option82
 
 ##### Unit
 
-Link to github : [saos8-unit](https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-8-relay-agent)
+Link to GitHub : [saos8-unit](https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-8-relay-agent)
 
 
