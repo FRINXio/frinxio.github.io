@@ -141,7 +141,7 @@ radius
 
 ##### Unit
 
-Link to github : [huawei-unit](https://github.com/FRINXio/cli-units/tree/master/huawei/aaa)
+Link to GitHub : [huawei-unit](https://github.com/FRINXio/cli-units/tree/master/huawei/aaa)
 
 ### SAOS 6
 
@@ -156,6 +156,6 @@ aaa
 
 ##### Unit
 
-Link to github : [saos6-unit](https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-6-aaa)
+Link to GitHub : [saos6-unit](https://github.com/FRINXio/cli-units/tree/master/saos/saos-6/saos-6-aaa)
 
 
