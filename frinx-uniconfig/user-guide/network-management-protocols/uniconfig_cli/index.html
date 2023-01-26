@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.726059946937">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.728039199770">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.726059946937" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.728039199770" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.728039199770" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.726059946937" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.728039199770" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.728039199770" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -374,7 +374,7 @@ CLI</li>
 <p>The plugin itself is responsible for defining the mapping between YANG
 and CLI. However, the translation layer into which it plugs in is what
 handles the heavy lifting for it e.g. transactions, rollback, config
-data storage, reconciliation etc. Additionally, the SPIs of the
+data storage etc. Additionally, the SPIs of the
 translation layer are very simple to implement because the translation
 plugin only needs to focus on the translations between YANG &lt;-\ CLI.</p>
 <doc-anchor-target id="units">
@@ -472,31 +472,6 @@ device when R(ead) operation is requested.</li>
 <li><strong>RPCs</strong> stand on their own and can encapsulate any command(s) on
 the device.</li>
 </ul>
-<doc-anchor-target id="reconciliation">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#reconciliation">#</doc-anchor-trigger>
-        <span>Reconciliation</span>
-    </h2>
-</doc-anchor-target>
-<p>There might be situations where there are inconsistencies between actual
-configuration on the device and the state cached in Frinx UniConfig.
-That&#x27;s why a reconciliation mechanism was developed to:</p>
-<ul>
-<li>Allows the mountpoint to sync its state when first connecting to the
-device.</li>
-<li>Allows apps/users to request synchronization when an inconsistent
-state is expected e.g. manual configuration of the device.</li>
-</ul>
-<p>Reconciliation is performed when issuing any READ operation. If the data
-coming from device is different compared to mountpoint cache, the cache
-will be updated automatically.</p>
-<p>Initial reconciliation (after connection has been established) takes
-place automatically on the CLI layer. However it can be disabled with
-attribute &quot;node-extension:reconcile&quot; set to false when installing a
-device. Uniconfig performs its own reconciliation when devices are
-connected so if both the Uniconfig and CLI layer reconcile, the install
-process is unnecessarily prolonged. That&#x27;s why it is advised to turn off
-reconciliation on the CLI layer when using Uniconfig.</p>
 <doc-anchor-target id="rpcs-provided-by-cli-layer">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpcs-provided-by-cli-layer">#</doc-anchor-trigger>

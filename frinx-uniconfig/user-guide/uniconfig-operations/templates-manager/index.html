@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.726059946937">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.728039199770">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.726059946937" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.728039199770" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.728039199770" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.726059946937" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.726059946937" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.728039199770" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.728039199770" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -968,6 +968,58 @@ PLAIN-PATCH RESTCONF method.</p>
     }
 }</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="rpc-get-template-nodes">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-get-template-nodes">#</doc-anchor-trigger>
+        <span>RPC get-template-nodes</span>
+    </h2>
+</doc-anchor-target>
+<p>This RPC returns all templates from the template topology. No input body
+is required.</p>
+<doc-anchor-target id="successful-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>There are no templates in the template topology.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:get-template-nodes' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response</div>
+<pre class="language-bash"><code v-pre class="language-bash">{
+    &quot;output&quot;: {}
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>There is a template called &#x27;test-template&#x27; in the template topology.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:get-template-nodes' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response</div>
+<pre class="language-bash"><code v-pre class="language-bash">{
+    &quot;output&quot;: {
+        &quot;nodes&quot;: [
+            &quot;test-template&quot;
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="upgrading-template-to-latest-yang-repository">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#upgrading-template-to-latest-yang-repository">#</doc-anchor-trigger>
@@ -1509,7 +1561,7 @@ Specified tag type must be prefixed with &#x27;template-tags&#x27; module name b
             {
                 &quot;node-id&quot;: &quot;Template-name1&quot;,
                 &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                &quot;error-message&quot;: &quot;Failed to find schema repository: schema-1
+                &quot;error-message&quot;: &quot;Failed to find schema repository: schema-1&quot;,
                 &quot;status&quot;: &quot;fail&quot;
             },
             {
