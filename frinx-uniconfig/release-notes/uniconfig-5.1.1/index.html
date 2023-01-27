@@ -12,34 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>cable FIBER-NODE | Frinx Docs</title>
-    <meta name="title" content="cable FIBER-NODE | Frinx Docs">
-    <meta name="description" content="YANG models" />
+    <title>Uniconfig 5.1.1 Release Notes | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.1.1 Release Notes | Frinx Docs">
+    <meta name="description" content="make replace request on correct node for gnmi" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/cable/cable_fiber_node/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.1/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/cable/cable_fiber_node/">
-    <meta property="og:title" content="cable FIBER-NODE | Frinx Docs">
-    <meta property="og:description" content="YANG models">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.1/">
+    <meta property="og:title" content="Uniconfig 5.1.1 Release Notes | Frinx Docs">
+    <meta property="og:description" content="make replace request on correct node for gnmi">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/cable/cable_fiber_node/">
-    <meta property="twitter:title" content="cable FIBER-NODE | Frinx Docs">
-    <meta property="twitter:description" content="YANG models">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.1/">
+    <meta property="twitter:title" content="Uniconfig 5.1.1 Release Notes | Frinx Docs">
+    <meta property="twitter:description" content="make replace request on correct node for gnmi">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.728139983993" rel="stylesheet" />
+    <link href="../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.728139983993" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.728139983993" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.728139983993" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.728139983993" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.728139983993" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.728139983993" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -54,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -70,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -186,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -248,87 +247,89 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="cable-fiber-node" class="break-words">
+<doc-anchor-target id="uniconfig-511-release-notes" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cable-fiber-node">#</doc-anchor-trigger>
-        <span>cable FIBER-NODE</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-511-release-notes">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.1 Release Notes</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="url">
+<doc-anchor-target id="new-features">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#url">#</doc-anchor-trigger>
-        <span>URL</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
     </h2>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">frinx-openconfig-cable:cable/fiber-nodes/fiber-node=</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="openconfig-yang">
+<ul>
+<li><p>make replace request on correct node for gnmi</p>
+</li>
+<li><p>Implemented some new commands for Huawei TU (#580) (#639)</p>
+</li>
+<li><p>Add GetTemplateNodes RPC and add support to Client</p>
+</li>
+<li><p>Implementation of MIB parser using ANTLR grammar</p>
+</li>
+</ul>
+<doc-anchor-target id="bug-fixes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#openconfig-yang">#</doc-anchor-trigger>
-        <span>OPENCONFIG YANG</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
     </h2>
 </doc-anchor-target>
-<p><a href="https://github.com/FRINXio/openconfig/tree/master/cable/src/main/yang">YANG models</a></p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">{
-    &quot;fiber-node&quot;: [
-        {
-            &quot;id&quot;: &quot;&quot;,
-            &quot;config&quot;: {
-                &quot;id&quot;: &quot;&quot;,
-            },
-            &quot;cable-channels&quot;: {
-                &quot;cable-channel&quot;: [
-                    {
-                        &quot;type&quot;: &quot;&quot;,
-                        &quot;config&quot;: {
-                            &quot;name&quot;: &quot;&quot;
-                        }
-                    },
-                    {
-                        &quot;type&quot;: &quot;&quot;,
-                        &quot;config&quot;: {
-                            &quot;name&quot;: &quot;&quot;
-                        }
-                    }
-                ]
-            }
-        }
-    ]
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="os-configuration-commands">
+<ul>
+<li><p>Fixed NPE for JSONCodecFactoryLoader</p>
+</li>
+<li><p>Fixed deserialization of uniconfig instance record read from DB (#700)</p>
+</li>
+<li><p>Fixed encryption of leaves marked using deviations</p>
+</li>
+<li><p>Fix vulnerabilities by changing base docker image</p>
+</li>
+<li><p>Stop cleaning YANG repos associated to persisted nodes</p>
+</li>
+<li><p>Fix vulnerabilities by changing base docker image</p>
+</li>
+<li><p>Swagger: fix actions using custom operational path</p>
+</li>
+<li><p>Suppressed CVE-2021-4277 (#613)</p>
+</li>
+</ul>
+<doc-anchor-target id="improvements">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#os-configuration-commands">#</doc-anchor-trigger>
-        <span>OS Configuration Commands</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="ios-xe-16">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#ios-xe-16">#</doc-anchor-trigger>
-        <span>IOS XE 16</span>
-    </h3>
+<ul>
+<li><p>Swagger: mandatory indicator</p>
+</li>
+<li><p>Improved registration of unexpected YANGs downloaded from device</p>
+</li>
+<li><p>Add compare-config RPC.</p>
+</li>
+<li><p>Changed logging level: Unable to map identifier to capability</p>
+</li>
+<li><p>Skipping unknown fields in GET request</p>
+</li>
+<li><p>Added an RPC input to enable error handling for execute-and-read RPC (#668)</p>
+</li>
+<li><p>Fetch Kafka settings to client.</p>
+</li>
+<li><p>gnmi support for upgrade-from-network RPC</p>
+</li>
+<li><p>add gnmi protocol to get-installed-nodes RPC</p>
+</li>
+<li><p>Swagger: add drop-down for topology-id parameter</p>
+</li>
+</ul>
+<doc-anchor-target id="other">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
+    </h2>
 </doc-anchor-target>
-<doc-anchor-target id="cli">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli">#</doc-anchor-trigger>
-        <span>CLI</span>
-    </h4>
-</doc-anchor-target>
-<pre>
-cable fiber-node 
-   
-   
-</pre>
-<p>and  are in commands input with whitespace dividing name and number (Downstream-Cable 1/0/16)</p>
-<doc-anchor-target id="unit">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#unit">#</doc-anchor-trigger>
-        <span>Unit</span>
-    </h5>
-</doc-anchor-target>
-<p>Link to github : <a href="https://github.com/FRINXio/cli-units/tree/master/cable/fiber-node">ios-xe-unit</a></p>
+<ul>
+<li>PUT and DELETE operations for callbacks</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -338,20 +339,20 @@ cable fiber-node
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/translation-units-docs/configuration-datasets/cable/cable_downstream_profile/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.0/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">cable DOWNSTREAM CONTROLLER-​PROFILE</span>
+                                                <span class="block mt-1">Uniconfig 5.​1.​0 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/translation-units-docs/configuration-datasets/cable/cable_rpd/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">cable RPD</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -398,6 +399,6 @@ cable fiber-node
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "cable FIBER-NODE", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.1 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
