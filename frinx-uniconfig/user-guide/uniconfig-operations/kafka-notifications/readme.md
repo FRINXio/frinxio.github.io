@@ -78,9 +78,13 @@ This type of notification is generated after each RESTCONF operation.
 The response body does not need to be included in notifications. It can be
 configured using the *includeResponseBody* parameter in
 the *application.properties* file. Also, the calculation difference result can be part
-of the notification if it has been set to *true* using the *includeCalculateDiffResult* parameter
-in the *application.properties* file. There are 3 examples of notifications with the response body
-and the calculation difference result. The first is for created data:
+of the notification if the *includeCalculateDiffResult* parameter is set to *true* 
+in the *application.properties* file.
+
+There are three examples of notifications with the response body and the calculation
+difference result.
+
+The first example is for created data:
 
 ```json
 {
@@ -123,7 +127,7 @@ and the calculation difference result. The first is for created data:
 }
 ```
 
-Next one is for deleted data:
+The second example is for deleted data:
 
 ```json
 {
@@ -166,7 +170,7 @@ Next one is for deleted data:
 }
 ```
 
-And last one is for updated data:
+The third example is for updated data:
 
 ```json
 {
@@ -481,9 +485,9 @@ parameter, this record also supports optional parameters:
 - *start-time* - must be specified if user wants to enable replay and
   it should start at the time specified.
 - *stop time* - used with the optional replay feature to indicate the
-  newest notifications of interest. If stopTime is not present, the
+  newest notifications of interest. If stopTime is not specified,
   notifications will continue until the subscription is terminated.
-  Must be used with and be later than *start-time*. Values in the
+  Must be used with and set to be later than *start-time*. Values in the
   future are valid.
 
 !!!
@@ -494,7 +498,7 @@ existing subscriptions for this stream.
 ## Monitoring system - processing NETCONF subscriptions
 
 Inside UniConfig, NETCONF notification subscriptions are processed in an
-infinite loop within monitoring system. An iteration of the monitoring
+infinite loop within the monitoring system. An iteration of the monitoring
 system loop consists of following steps:
 
 1. Check global setting for NETCONF notifications
@@ -502,9 +506,9 @@ system loop consists of following steps:
 
 2. Release cancelled subscriptions
 
-3. Query free subscriptions from DB and for each:
-    1. create notification session (create mountpoint and register listeners)
-    2. lock subscription (set UniConfig instance)
+3. Query free subscriptions from DB, and for each one:
+    1. Create a notification session (create mountpoint and register listeners)
+    2. Lock the subscription (set UniConfig instance)
 
 !!!
 There is a hard limit for how many sessions can a single UniConfig node
@@ -545,15 +549,14 @@ RPC input contains:
 - node-id: Identifier for the node from which data-change-events are generated. This field is optional. If not given,
   a global subscription is created and data-change-events are generated for all nodes under the topology.
 - topology-id: Identifier of topology where specified node is placed.
-- subtree-path: Path to subtree from which user would like to receive data-change-events. Default path equals to '/'
+- subtree-path: Path to the subtree from which the user would like to receive data-change-events. Default path is '/'
 - captured data-change-events from whole node configuration.
 - data-change-scope: Data-tree scope that specified how granular data-change-events should be captured and propagated
   to Kafka. There are 3 options ('SUBTREE' is default value):
-    - 'SUBTREE': Represents a change of the node or any of or any of its child nodes, direct and nested.
-      This scope is superset of ONE and BASE.
+    - 'SUBTREE': Represents a change of the node or any of its child nodes, direct and nested.
+      This scope is a superset of ONE and BASE.
     - 'ONE': Represent a change (addition, replacement, or deletion) of the node on the subtree-path or one of its
-      direct
-      children elements.
+      direct child elements.
     - 'BASE': Represents only a direct change of the node on subtree-path, such as replacement of a node,
       addition or deletion.
 
@@ -769,66 +772,64 @@ under *notifications* property. Whole configuration looks like this:
 }
 ```
 
-All notifications and also monitoring system can be enabled and disabled
-by *enabled* flag.
+All notifications and the monitoring system can be enabled or disabled
+with the *enabled* flag.
 
-**There are 3 properties related to monitoring system:**
+**Three (3) properties related to the monitoring system:**
 
-- subscriptionsMonitoringInterval - how often is monitoring system
-  loop running and trying to acquire free subscriptions, value is in
-  seconds and default is 5
-- maxSubscriptionsPerInterval - maximum number of free subscriptions
-  that can be acquired in single monitoring system loop iteration,
-  when there is fewer free subscription than this value, only this
-  smaller amount will be processed (even zero if there are none), if
-  the number of free subscriptions is higher or equal to this value,
-  only specified amount will be acquired, the rest can be acquired
-  in next iterations of monitoring system loop or by other UniConfig
-  instances in cluster, default value for this property is 10
-- maxNetconfSubscriptionsHardLimit - hard limit for how many
-  subscriptions can a single UniConfig node handle
+- subscriptionsMonitoringInterval - How often the monitoring system
+  loop is run and attempts to acquire free subscriptions. The value is
+  given in seconds, the default value is 5.
+- maxSubscriptionsPerInterval - The maximum number of free subscriptions
+  that can be acquired in a single iteration of the monitoring system
+  loop. If the number of free subscriptions is smaller than this value,
+  all free subscriptions are processed. If the number of free subscriptions
+  is larger than this value, only the specified number of subscriptions are
+  acquired. The rest can be acquired during the next iterations of the
+  monitoring system loop or by other UniConfing instances in the cluster.
+  The default value is 10.
+- maxNetconfSubscriptionsHardLimit - Maximum number of subscriptions that 
+  a single UniConfig node can handle.
 
-**There are 3 properties related to monitoring system in clustered
-environment:**
+**Three (3) properties related to the monitoring system in clustered
+environments:**
 
-- rebalanceOnUCNodeGoingDownGracePeriod - grace period for a
-  UniConfig node going down. Other nodes will not restart the
-  subscriptions until the grace period passes from when a dead
-  Uniconfig node has been seen last. Default = 120 seconds.
-- optimalNetconfSubscriptionsApproachingMargin - the lower margin to
-  calculate optimal range start. Default = 0.05
-- optimalNetconfSubscriptionsReachedMargin - the higher margin to
-  calculate optimal range end. Default = 0.10
+- rebalanceOnUCNodeGoingDownGracePeriod - Grace period for a
+  UniConfig node going down. Other nodes will not restart
+  subscriptions until the grace period has passed after a dead
+  Uniconfig node was last seen. The default value is 120 seconds.
+- optimalNetconfSubscriptionsApproachingMargin - The lower margin to
+  calculate optimal range start. The default value is 0.05.
+- optimalNetconfSubscriptionsReachedMargin - The higher margin to
+  calculate optimal range end. The default value is 0.10.
 
-**There are three properties related to the timeout of messages to Kafka**
+**Three (3) properties related to the timeout of messages to Kafka**
 
-- blockingTimeout - configuration of how long the **send()** method and the
-  creation of connection for reading of metadata methods will block (in ms).
-- requestTimeout - configuration of how long will the producer wait for
-  the acknowledgement of a request (in ms). If the acknowledgement
-  is not received before the timeout elapses, the producer will resend
-  the request or fail the request if retries are exhausted.
-- deliveryTimeout - configuration of the upper bound on the time to report
-  success or failure after a call to **send()** returns (in ms). This limits
-  the total time that a record will be delayed prior to sending, the
-  time to await acknowledgement from the broker (if expected) and the
-  time allowed for retriable send failures.
+- blockingTimeout - How long the **send()** method and the creation of
+  a connection for reading metadata methods will block (in ms).
+- requestTimeout - How long the producer waits for acknowledgement of a
+  request (in ms). If no acknowledgement is received before the timeout
+  period is over, the producer will resend the request or, if retries are
+  exhausted, fail it.
+- deliveryTimeout - The upper bound on the time to report success or failure
+  after a call to **send()** returns (in ms). Sets a limit on the total time
+  that a record will be delayed prior to sending, the time to wait for
+  acknowledgement from the broker (if expected) and the time allowed for
+  retriable send failures.
 
-**There are two properties related to the thread pool executor which is needed to
+**Two (2) properties related to the thread pool executor required to
 send messages to Kafka**
 
-- maxThreadPoolSize - the maximum thread pool size in the executor.
-- queueCapacity - the maximum capacity of the work queue in the executor.
+- maxThreadPoolSize - The maximum thread pool size in the executor.
+- queueCapacity - The maximum capacity for the work queue in the executor.
 
-**There are two properties that are used to limit number of records in
-database in notifications table:**
+**Two (2) properties used to limit the number of records in the notifications table in the database:**
 
-- maxCount - if number of records in notifications table exceeds
-  specified number then oldest record in this table will be deleted,
-  this way there will never be more records in database than
-  specified value, default is 10 000
-- maxAge - if record is older than specified value it will be
-  deleted, value is in hours and default is 100
+- maxCount - Maximum number of records in the notifications table. If the
+  number of records exceeds this value, the oldest record in the table is
+  deleted. The default value is 10,000.
+- maxAge - Maximum age of a record in the notifications table (in hours).
+  Records older than this value are deleted. The default value is 100.
 
 These properties are under *notificationDbTreshold*. Both of these are
 implemented using database triggers. Triggers are running on inserts to
