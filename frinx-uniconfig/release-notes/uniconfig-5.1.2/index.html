@@ -12,24 +12,24 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>UniConfig 4.2.7 | Frinx Docs</title>
-    <meta name="title" content="UniConfig 4.2.7 | Frinx Docs">
-    <meta name="description" content="[NEW FEATURES]" />
+    <title>Uniconfig 5.1.2 Release Notes | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.1.2 Release Notes | Frinx Docs">
+    <meta name="description" content="Implementation of RPD TUs for CER(Arris)" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-4.2.7/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.2/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-4.2.7/">
-    <meta property="og:title" content="UniConfig 4.2.7 | Frinx Docs">
-    <meta property="og:description" content="[NEW FEATURES]">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.2/">
+    <meta property="og:title" content="Uniconfig 5.1.2 Release Notes | Frinx Docs">
+    <meta property="og:description" content="Implementation of RPD TUs for CER(Arris)">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-4.2.7/">
-    <meta property="twitter:title" content="UniConfig 4.2.7 | Frinx Docs">
-    <meta property="twitter:description" content="[NEW FEATURES]">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.2/">
+    <meta property="twitter:title" content="Uniconfig 5.1.2 Release Notes | Frinx Docs">
+    <meta property="twitter:description" content="Implementation of RPD TUs for CER(Arris)">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -247,434 +247,149 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="uniconfig-427" class="break-words">
+<doc-anchor-target id="uniconfig-512-release-notes" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-427">#</doc-anchor-trigger>
-        <span>UniConfig 4.2.7</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-512-release-notes">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.2 Release Notes</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="uniconfig">
+<doc-anchor-target id="new-features">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig">#</doc-anchor-trigger>
-        <span>Uniconfig</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
     </h2>
 </doc-anchor-target>
-<p><strong>[NEW FEATURES]</strong></p>
 <ul>
-<li>Implementation of transaction-tracker (transaction-log): tracking of
-successfully committed data.</li>
-<li>Implementation of revert-changes RPC: reverting transaction that is
-stored in transaction-log and identified by unique UUID.</li>
-<li>Introduction of UniConfig transactions - dedicated/shared
-transactions concept: multiple users can use UniConfig safely from
-isolated transactions. UniConfig RPCs are part of UniConfig
-transactions - information about transaction-id is passed from the
-RESTCONF layer into the UniConfig layer.</li>
-<li>Introduction of install-node, uninstall-node, mount-node, and
-unmount-node RPCs - a new way to install nodes into UniConfig with
-split concepts of installation and mounting. Mounting is always done
-on demand and the mountpoint is alive as long as some transaction is
-using this mountpoint.</li>
-<li>Making UniConfig instance stateless - data is separated from
-UniConfig (PostgreSQL database) and UniConfig doesn&#x27;t keep
-persistent connection to devices. Data and connection recovery is
-not done by UniConfig instances anymore (coordination, monitoring,
-and recovery process is not orchestrated by UniConfig). From the
-view of data-tree, UniConfig is used only as a cache layer on top of
-PostgreSQL database and caching is done only in the scope of
-transaction.</li>
-<li>Using commit RPC for committing snapshots and templates.</li>
-<li>Using distributed advisory locks provided by PostgreSQL for locking
-of UniConfig nodes during commit/checked-commit operation. If
-another transaction perfors commit at the same time, it will fail
-before execution of the second commit.</li>
-<li>Validation of conflicts between different transactions: added
-data-tree and config fingerprint validation before commit /
-checked-commit RPC invocation.</li>
-<li>Integration of fingerprint validation to templates - writing of
-fingerprint of modified templates to database and verification of
-fingerprint before commit.</li>
-<li>Added UniConfig transaction-id as fingerprint for devices not
-supporting it.</li>
-<li>UniConfig shell prototype: SSH server, RPC operations, simple read
-operation.</li>
-<li>Implementation of get-installed-nodes RPC: used for listing
-installed UniConfig nodes.</li>
-</ul>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused Karaf features.</li>
-<li>Handling reordering of list entries in the calculate-diff - instead
-of sending delete+replace operations to the southbound layer.</li>
-<li>Improving the existing algorithm that collapses diff from honeycomb
-(parallel streams).</li>
-<li>Improved error messages during application of template.</li>
-<li>Improved error messages - using serialized form of
-YangInstanceIdentifier in logs or error messages, if possible.</li>
-<li>Removed data-tree cache layers on CLI and NETCONF layers - UniConfig
-directly writes data to CLI/NETCONF mountpoints - it simplifies
-syncing process too.</li>
-<li>Adjusted persistence of mount information - node with the same ID
-may be present in both CLI/NETCONF topologies - and node only from
-one topology at the same time can be used for installation on
-UniConfig layer (configuration is synced and parsed).</li>
-<li>Changed native-CLI architecture - UniConfig calls native-CLI
-readers/writers directly using BI API - BA translation layer
-provided by Honeycomb is redundant.</li>
-<li>Removed snapshot limit - it is not used anymore since snapshots are
-stored in the database and this database should manage its storage
-limits.</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>Fixed rollback operation after commit/checked-commit.</li>
-<li>Fixed sync-from-network for unavailable nodes - Comparison of config
-fingerprints failed for nodes that are unavailable because reading
-of fingerprint failed.</li>
-<li>Fixed version-drop in copy RPC.</li>
-<li>Fixed writing ordered-map nodes during string substitution process
-(application of template).</li>
-<li>Fixed commit output: if the configuration of one of the nodes fails
-at any phase, then the outputs for all nodes will always contain a
-rollback flag.</li>
-<li>Fixed losing of some tags in DOM nodes (application of template)</li>
-<li>Fixed dry-run commit - Dry-run commit should trash journal of nodes
-that haven&#x27;t been &#x27;touched&#x27;.</li>
-<li>Fixed calculate-diff - Removing the whole list node with all list
-entries.</li>
-<li>Fixed transfering of template tag from template to uniconfig
-topology at apply-template RPC (it should not happen).</li>
-<li>Mark sync operation failed on empty config.</li>
-<li>Fixed reading of uniconfig-native flag - unboxing of null Boolean to
-boolean.</li>
-<li>Fixed creation/removal of dry-run Unified mountpoint -
-synchronization problems.</li>
-</ul>
-<doc-anchor-target id="controller">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#controller">#</doc-anchor-trigger>
-        <span>Controller</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[NEW FEATURES]</strong></p>
-<ul>
-<li>Integration of UniConfig transaction manager with database and
-datastore transactions - used for management of shared/dedicated
-transactions.</li>
-<li>Integration of JSONB filtering of configuration on the level of
-DAOs.</li>
-<li>Persistence of snapshots in PostgreSQL.</li>
-<li>Persistence of logging configuration in PostgreSQL.</li>
-<li>Persistence of templates in PostgreSQL.</li>
-<li>Persistence of transaction-log in PostgreSQL.</li>
-<li>Separated persistence of UniConfig nodes and representing
-mountpoints.</li>
-<li>Validation and locking of templates and UniConfig nodes on the level
-of UniConfig transaction.</li>
-<li>Stop submitting datastore transactions - it must be closed -
-datastore is used only as cache.</li>
-<li>Introduction of embedded PostgreSQL for testing purposes - it can be
-enabled from the UniConfig configuration file.</li>
-<li>Integration of Flyway library to Uniconfig: easier upgrading of
-database schema and migration of data.</li>
-<li>Implemented standalone DOM broker - stopping to use
-clustered/distributed DOM brokers.</li>
-<li>Extending RPC service by custom parameters that can be passed from
-RPC caller to RPC implementation.</li>
-<li>Exposed simple container merge utility.</li>
-<li>Allow users to specify attributes without module-name (template
-tags).</li>
-<li>Allow positional information in YangInstanceIdentifier (useful for
-operations under ordered lists).</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>Fixed order in which database writers are called (adding priority to
-DatabaseWriter API).</li>
-<li>Fixed creation of DocumentedException from XML (document may include
-redundant namespaces).</li>
-<li>Fixed leaked DB connection on health-check operation.</li>
-<li>Making the database layer more thread safe (using &#x27;SELECT FOR
-UPDATE&#x27; in some queries).</li>
-<li>Fixed race-conditions in 3-phase datastore commit.</li>
-<li>Fixed searching for fallback context on nodes that were not mounted
-(uniconfig-native).</li>
-<li>Added synchronization when generating BA-&gt;BI codecs.</li>
-<li>Fixed storing of the default schema repository into PostgreSQL.</li>
-<li>Fixed disappeared tag from template data-tree.</li>
-<li>Fixed data-tree modifications: merge-&gt;put-&gt;delete operation chain.</li>
-<li>Added workaround for &#x27;metadata not available&#x27; data-tree bug.</li>
-</ul>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused Karaf features.</li>
-<li>Ensuring parents by merge: avoiding ridiculous errors when data-tree
-allows to write data to nodes which parent is missing.</li>
-<li>Generalisation of NETCONF repository into YANG repository.</li>
-<li>Replaced asynchronous DB API by synchronous DB API - JDBC
-connections are synchronous.</li>
-<li>Breaking PUT modifications to specific modifications in the
-data-tree: improving &#x27;optimistic lock&#x27; granularity.</li>
-<li>Removed unnecessary dependencies of xtend maven plugin.</li>
-<li>Optimized creation of uniconfig-native schemas.</li>
-<li>Preserving order of list/leaf-leaf elements in the data-tree.</li>
-</ul>
-<doc-anchor-target id="swagger">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#swagger">#</doc-anchor-trigger>
-        <span>Swagger</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>Fixed bug caused by swagger-uniconfig-go.</li>
-</ul>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Make openAPI generated for uniconfig more useful.</li>
-<li>Added Unified layer models to swagger dependencies.</li>
-</ul>
-<doc-anchor-target id="translation-units-framework">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#translation-units-framework">#</doc-anchor-trigger>
-        <span>Translation units framework</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[NEW FEATURES]</strong></p>
-<ul>
-<li>Added native-CLI binding-independent API.</li>
-</ul>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused artifacts.</li>
-<li>Optimized chunk cache - do not store entire writer in chunk cache,
-so GC can take care of writers as soon as possible.</li>
-<li>Detection of complex reordering of list entries in diff output.</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>Fixed commit rollback failing: the bug was caused by an attempt to
-execute an inverse command of an unsuccessful command.</li>
-</ul>
-<doc-anchor-target id="cli">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli">#</doc-anchor-trigger>
-        <span>CLI</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused Karaf features.</li>
-<li>Exposed binding-independent data support to native-CLI API.</li>
-<li>Exposed services for direct device access to MP.</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>Replace maxConnectionAttempts with maxReconnectionAttempts when
-reconnecting to the device after the first connection attempt is
-successful.</li>
-<li>Replaced transactionChain (not working correctly) with direct
-dataBroker transactions.</li>
-<li>Fixed device type checking - when a device was mounted with the
-wrong type, the generic symbol (&quot;<em>&quot;) was implicitly used as the
-type. The device was installed on all layers, but
-uniconfig/configuration was empty. Now we have to use correct device
-type or</em>.</li>
-<li>Fixed disabled CLI journaling (default value).</li>
-</ul>
-<doc-anchor-target id="netconf">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#netconf">#</doc-anchor-trigger>
-        <span>NETCONF</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[NEW FEATURES]</strong></p>
-<ul>
-<li>Added maxReconnectionAttempts functionality into NETCONF client.</li>
-</ul>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused Karaf features.</li>
-<li>Improved error message from parsing of NETCONF RPC response.</li>
-<li>Removed akka actor dependency from NetconfCacheLoader.</li>
-<li>Enable md-sal persistence accross sessions in NETCONF testtool.</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li><p>Fixed writing of netconf namespace prefix (&#x27;Namespace
-<a href="urn:ietf:params:xml:ns:netconf:base:1.0">urn:ietf:params:xml:ns:netconf:base:1.0</a> was not bound, please fix
-the caller&#x27;).</p>
+<li><p>Implementation of RPD TUs for CER(Arris)</p>
 </li>
-<li><p>Fixed reading of the whole list/leaf-list from the device - it was
-reading the whole parent structure, not only the dedicated list.</p>
+<li><p>Implementation of Cable-Mac Oper TUs for CER(Arris)</p>
 </li>
-<li><p>Moving state to unable-to-connect after failed schema context
-building from device YANGs.</p>
+<li><p>Replace paths feature</p>
 </li>
-<li>
-<dl>
-<dt>Switched order in which mountpoint and OPER data is created - mountpoint should be created before OPER data with connected</dt>
-<dd><p>status is written to datastore, because mount-node RPC relies on
-OPER information only.</p>
-</dd>
-</dl>
-</li>
-<li><p>Fixed deadlock that may occur on removal of Unified MP.</p>
+<li><p>Implementation of cable-upstream TUs for CER(Arris)</p>
 </li>
 </ul>
-<doc-anchor-target id="restconf">
+<doc-anchor-target id="bug-fixes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#restconf">#</doc-anchor-trigger>
-        <span>RESTCONF</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[NEW FEATURES]</strong></p>
-<ul>
-<li>Added support for RESTCONF PATCH method that includes tags.</li>
-<li>Integration of UniConfig dedicated/shared transaction to RESTCONF -
-cookie with transaction-id property, create-transaction RPC, and
-close-transaction RPC.</li>
-<li>Introduction of jsonb-filter query parameter used for filtering of
-data committed to database.</li>
-</ul>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused Karaf features.</li>
-<li>Using RFC8040 format for errors thrown from the transaction system.</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>Fixed RESTCONF response/request logging.</li>
-<li>Fixed reading of all available RPC operations.</li>
-<li>Fixed NPE that is caused by Subject.getPrincipal() - extraction of
-authentication data from AAA.</li>
-<li>Fixed serialization of ordered leaf list with attributes.</li>
-<li>Fixed connection leak - read-only transaction was not always closed.</li>
-<li>Fixed parsing of elements without module name: If there are some
-conflicts between children elements - multiple elements with the
-same name but in different modules exist - then we should return a
-proper error message.</li>
-<li>Fixed use of fields query parameters with uniconfig-native nodes.</li>
-</ul>
-<doc-anchor-target id="netconf-translation-units">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#netconf-translation-units">#</doc-anchor-trigger>
-        <span>NETCONF translation units</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused Karaf features.</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>Fixed writer dependency in XR623 ISIS translation unit.</li>
-<li>Ignored &#x27;ios-xr lacp period 200&#x27; command - only &#x27;lacp period short&#x27;
-is supported.</li>
-</ul>
-<doc-anchor-target id="cli-translation-units">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-translation-units">#</doc-anchor-trigger>
-        <span>CLI translation units</span>
-    </h2>
-</doc-anchor-target>
-<p><strong>[NEW FEATURES]</strong></p>
-<ul>
-<li>IOS XE: created a distinct module for IOS-XE in cli-units.</li>
-<li>IOS XE: added ios-xe 15 and 17 to ios-xe module.</li>
-<li>IOS XE: translation units - SNMP, LACP, privilege command,
-interfaces, l2protocol, evc, route-map, bgp and network-instance
-modules, vrf definition, fhrp version, ip commands, neighbor,
-ethernet cfm mip, negotiation auto.</li>
-<li>IOS XE: additions - media-type command, port-security commands, BDI
-type recognition, ethernet cfm mip command, cft commands, commands
-for bgp, prefix-list command, fhrp delay, bfd-template,
-split-horizon group in bridge-domain, added fallOverMode for vrf
-neighbor, IPv6 prefix-lists with prefix lengths, routing-policy,
-ipv6 vrrp, added synchronization and moved default-information in
-BGP, table-map, ip community-list command, redistribute command, bgp
-and interface commands, ipv6 commands, rewrite command, snmp trap,
-support for multiple l2protocols,.</li>
-<li>SAOS6: translation units: Ingress ACL.</li>
-<li>SASO6: additions - commands for delete untagged attributes, unset
-description command, parsing ranges in ring protection.</li>
-<li>SONiC: created init and interfaces unit.</li>
-<li>Huawei: translation units - interfaces.</li>
-<li>Huawei: additions - global config reader and writer for bgp,
-neighbor config reader and writer, new augmentation fields for
-global and neighbor configurations.</li>
-</ul>
-<p><strong>[IMPROVEMENTS]</strong></p>
-<ul>
-<li>Removed unused Karaf features.</li>
-<li>Movef service-policy from IOS/interface to IOS/QoS.</li>
-<li>IOS XE: make sure all &#x27;GigabitEthernet&#x27; interfaces are treated as
-physical, don&#x27;t send unnecessary commands in interface unit, only
-send storm-control commands when needed, moved service instances and
-encapsulation in service instance in ios-xe/interface, edit readers
-and writers for bridge-domain, edited LLDP to not parse when default
-is set, speed up mounting</li>
-<li>SAOS6: use the same template for service as for profile schedulers.</li>
-<li>SAOS6/8: added quotes into description.</li>
-</ul>
-<p><strong>[FIXES]</strong></p>
-<ul>
-<li>IOS XE: fixed writing interface config, fixed unwanted
-lldp/cdp/switchport vlan commands commands, fixed IPv6 config writer
-template, fixed mounting of IOS XE (configuration metadata), fixed
-bridge-domain regex, fixed reading VLANs, fixed storm-control regex,
-fixed NPE in GlobalAfiSafiConfigWriter, fixed BgpAfiSafiChecks,
-fixed CommunityListConfigReader and L3VrfReader, fixed
-IndexOutOfBoundsException in BgpActionsConfigReader.</li>
-<li>IOS-XR: delete methods should always be readBefore, fixed calling
-get on a null value, fixed delete of mpls-te.</li>
-<li>SAOS6: fixed virtual-circuit ethernet delete, fixed reading Virtual
-Ring data, fixed reading the range of vlans in virtual ring
-commands, reading default interface.</li>
-</ul>
-<doc-anchor-target id="openconfig">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#openconfig">#</doc-anchor-trigger>
-        <span>Openconfig</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>removed unused Karaf features from openconfig</li>
-<li>fixed Openconfig bug with nested augmentations (fixed resolving
-augmentations path)</li>
-<li>frinx-cisco-if-extension: added negotiation auto, added support for
-multiple l2protocols, added support for rewert commands, vrf
-forwarding, ip commands, fixed L2protocol description, split-horizon
-group in bridge-domain, chaed bridge-domain type to string, fhrp
-delay, fixed bad order of augmentation in
-frinx-cisco-if-extension.yang, bridge-domain, added grouping for
-L2protocol for Service instance, added grouping for L2protocol for
-Service instance, move encapsulation in service instance, move
-service instances, created augmentation for service instances, cft
-cisco specific commands, added port-security,</li>
-<li>frinx-bgp-extension: added bgp extension for Huawei device,
-local-as-group, route-maps in redistribute commands, BGP neighbor,
-table-map in BGP, synchronization and moved default-information in
-BGP, added bgp fall-over mode, neighbor &lt;ip-add&gt; as-override,
-default-information originate,</li>
-<li>frinx-cisco-ipvsix-extension: added yang extension for global ipv6
-commands.</li>
-<li>frinx-openconfig-bgp-types: extracted typedefs for community union
-type.</li>
-<li>frinx-cisco-vrrp-extension: added ipv6 vrrp augmentation, added
-vrrp-group augmentation,</li>
-<li>frinx-openconfig-bgp-policy-extension: added community-list type,</li>
-<li>frinx-cisco-routing-policy-extension: prefix lengths in prefix-list,
-sequence-id, forwarding-action, route-map</li>
-<li>frinx-openconfig-fhrp: fhrp version</li>
-<li>frinx-bfd-extension: bfd-template-config</li>
-<li>frinx-oam: added ethernet cfm mip</li>
-<li>frinx-openconfig-lacp: added ON lacp mode</li>
-<li>frinx-qos-extension: moved service-policy from IOS/interface to
-IOS/QoS</li>
-<li>frinx-snmp: added snmp-view config</li>
-<li>created frinx-openconfig-evc module</li>
-<li>created frinx-privilege module</li>
+<li><p>Added new control to check if cached prompt is invalid (#812)</p>
+</li>
+<li><p>Fixed writer of cable upstream interface</p>
+</li>
+<li><p>Fix delete request in replace-paths</p>
+</li>
+<li><p>Fixed schema context building</p>
+</li>
+<li><p>Changed log level in mockito-configuration to INFO</p>
+</li>
+<li><p>Fix wrong groupIds</p>
+</li>
+<li><p>Java based migration (#746)</p>
+</li>
+<li><p>Java based migration for huawei config - review 2</p>
+</li>
+<li><p>Java based migration for huawei config - review</p>
+</li>
+<li><p>Java based migration for huawei config</p>
+</li>
+<li><p>Bulk-edit - removed the version comparison before version drop procedure</p>
+</li>
+<li><p>Bump dependencycheck.version, update suppress for CVE-2022-41915, CVE-2022-41881</p>
+</li>
+</ul>
+<doc-anchor-target id="improvements">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><p>Swagger: regular expressions with example values</p>
+</li>
+<li><p>Replace com.google.common.base.Optional with java.util.Optional</p>
+</li>
+<li><p>Update README.md running uniconfig from IDE</p>
+</li>
+<li><p>Add Dependency Upgrades to release notes</p>
+</li>
+<li><p>Unify antlr4 version</p>
+</li>
+<li><p>Bump dependency-check, cleanup unused suppressions</p>
+</li>
+<li><p>Adopt Mockito 5</p>
+</li>
+<li><p>Enable dependabot updates</p>
+</li>
+<li><p>Updated list of supported Unicode blocks (RegexUtils)</p>
+</li>
+<li><p>README - Update Running from IDE section</p>
+</li>
+<li><p>Extended TreeConfigParser to handle arris device&#x27;s behavior for cable-upstreams</p>
+</li>
+<li><p>Migrate codebase to Java 17 &amp; bump dependencies &amp; clean maven structure</p>
+</li>
+<li><p>Added calc-diff result to audit logs</p>
+</li>
+<li><p>Change isInstalled method implementation in uniconfig-client</p>
+</li>
+<li><p>Remove license token from README.md and run_uniconfig.sh script.</p>
+</li>
+<li><p>Remove license server</p>
+</li>
+<li><p>Added read option to bulk-edit RPC</p>
+</li>
+<li><p>Bump sshd to 2.9.2</p>
+</li>
+<li><p>Prefer &#x27;latest&#x27; repository in latest repository update process</p>
+</li>
+<li><p>Change status code if transaction is not valid. (#699)</p>
+</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><p>Bump commons-lang3 from 3.7 to 3.12.0</p>
+</li>
+<li><p>Bump org.eclipse.jdt.annotation from 2.1.0 to 2.2.700</p>
+</li>
+<li><p>Bump commons-dbcp2 from 2.7.0 to 2.9.0</p>
+</li>
+<li><p>Bump maven-enforcer-plugin from 3.1.0 to 3.2.1</p>
+</li>
+<li><p>Bump embedded-postgres from 1.2.10 to 2.0.3</p>
+</li>
+<li><p>Bump objenesis from 2.1 to 3.3</p>
+</li>
+<li><p>Bump properties-maven-plugin from 1.0.0 to 1.1.0</p>
+</li>
+<li><p>Bump netty.version from 4.1.86.Final to 4.1.89.Final</p>
+</li>
+<li><p>Bump byte-buddy.version from 1.12.22 to 1.13.0</p>
+</li>
+<li><p>Bump okhttp.version from 4.9.1 to 4.10.0</p>
+</li>
+<li><p>Bump disruptor from 3.3.10 to 3.4.4</p>
+</li>
+<li><p>Bump jackson-bom from 2.14.1 to 2.14.2</p>
+</li>
+<li><p>Bump jna.version from 4.5.0 to 5.13.0</p>
+</li>
+<li><p>Bump perfmark-api from 0.25.0 to 0.26.0</p>
+</li>
+<li><p>Bump grpc.version from 1.51.1 to 1.53.0</p>
+</li>
+<li><p>Bump antlr4-maven-plugin from 4.10.1 to 4.11.1</p>
+</li>
+<li><p>Bump httpclient from 4.5.13 to 4.5.14</p>
+</li>
 </ul>
 
                                 
@@ -685,20 +400,20 @@ IOS/QoS</li>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-4.2.8/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.1/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Uni​Config 4.​2.​8</span>
+                                                <span class="block mt-1">Uniconfig 5.​1.​1 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-4.2.6/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Uni​Config 4.​2.​6</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -745,6 +460,6 @@ IOS/QoS</li>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "UniConfig 4.2.7", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.2 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
