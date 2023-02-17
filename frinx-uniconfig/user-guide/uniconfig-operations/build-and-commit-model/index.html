@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.729782865743">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.729969942630">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.729782865743" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.729969942630" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.729782865743" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.729969942630" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.729782865743" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.729782865743" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.729969942630" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.729969942630" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -598,8 +598,8 @@ uniconfig topology, junos node in the transaction with ID
         <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Trying to use non-existing UniConfig transaction results in 403 status
-code (Forbidden access).</p>
+<p>Trying to use non-existing UniConfig transaction results in 422 status
+code (Unprocessable Entity).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">GET Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=junos/configuration/frinx-openconfig-interfaces:interfaces/interface=fxp0' \
@@ -607,13 +607,13 @@ code (Forbidden access).</p>
 --header 'Cookie: UNICONFIGTXID=d7ff736e-8efa-4cc5-9d27-b7f560a76ff4'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">GET Response, Status: 403</div>
+<div class="codeblock-title">GET Response, Status: 422</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;errors&quot;: {
         &quot;error&quot;: [
             {
                 &quot;error-message&quot;: &quot;Unknown uniconfig transaction: d7ff736e-8efa-4cc5-9d27-b7f560a76ff4&quot;,
-                &quot;error-tag&quot;: &quot;access-denied&quot;,
+                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
                 &quot;error-type&quot;: &quot;protocol&quot;
             }
         ]
@@ -830,13 +830,13 @@ JSON body containing error message.</p>
 --header 'Cookie: UNICONFIGTXID=2ab7cfc3-dedc-4444-8431-6e9cf94fad3b'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 403</div>
+<div class="codeblock-title">RPC Response, Status: 422</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;errors&quot;: {
         &quot;error&quot;: [
             {
                 &quot;error-message&quot;: &quot;Uniconfig transaction 3819fbaa-6bd4-4c79-bc4e-68f70cf97903 has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;access-denied&quot;,
+                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
                 &quot;error-type&quot;: &quot;protocol&quot;
             }
         ]
@@ -1191,7 +1191,7 @@ verification can be done on &#x27;xr6_2&#x27;.</p>
 --header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --header 'Cookie: UNICONFIGTXID=5e8ab9d0-803a-40d6-9f0a-92e47524bab8; JSESSIONID=node0jlfqlo2ggxgxe9fv0y6y5ogh7.node0'</code></pre>
 </doc-codeblock></div>
-<p>Response - Status 403 Forbidden:</p>
+<p>Response - Status 422 Unprocessable Entity:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response</div>
 <pre class="language-none"><code v-pre class="language-none">{
@@ -1199,7 +1199,7 @@ verification can be done on &#x27;xr6_2&#x27;.</p>
         &quot;error&quot;: [
             {
                 &quot;error-message&quot;: &quot;Uniconfig transaction 5e8ab9d0-803a-40d6-9f0a-92e47524bab8 has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;access-denied&quot;,
+                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
                 &quot;error-type&quot;: &quot;protocol&quot;
             }
         ]
@@ -1215,7 +1215,7 @@ verification can be done on &#x27;xr6_2&#x27;.</p>
 --header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --header 'Cookie: UNICONFIGTXID=73f85310-a20a-46b9-beaf-d2ac98cc74cc; JSESSIONID=node0jlfqlo2ggxgxe9fv0y6y5ogh7.node0'</code></pre>
 </doc-codeblock></div>
-<p>Response - Status 403 Forbidden:</p>
+<p>Response - Status 422 Unprocessable Entity:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response</div>
 <pre class="language-none"><code v-pre class="language-none">{
@@ -1223,7 +1223,7 @@ verification can be done on &#x27;xr6_2&#x27;.</p>
         &quot;error&quot;: [
             {
                 &quot;error-message&quot;: &quot;Uniconfig transaction 73f85310-a20a-46b9-beaf-d2ac98cc74cc has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;access-denied&quot;,
+                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
                 &quot;error-type&quot;: &quot;protocol&quot;
             }
         ]
