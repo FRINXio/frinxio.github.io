@@ -6,3 +6,7 @@ distribution subdirectory named 'utils' after building and unpacking UniConfig d
 ## YANG Packager
 
 [!ref text="YANG Packager"](../utilities/yang-packager)
+
+## Difference between OpenAPI specifications
+
+[!ref text="Difference between OpenAPI specifications"](../utilities/openapi-diff)
