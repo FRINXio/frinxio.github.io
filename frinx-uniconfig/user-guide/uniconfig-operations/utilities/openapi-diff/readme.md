@@ -62,7 +62,7 @@ Open openapi_diff/openapi_diff.html in web browser to view all the differences b
 ### Usage with non-existent input path
 
 This example shows basic usage of the script where some specified input directories do not exist. Open a terminal
-and '../utils' directory, and run the following command:
+and the '../utils' directory, and run the following command:
 
 ```console
 ./show_swagger_diff.sh -n non/existent/path
