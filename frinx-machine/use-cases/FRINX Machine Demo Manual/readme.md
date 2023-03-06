@@ -225,6 +225,101 @@ For different ports, you can see different devices with other run commands in me
 ![FRINX Machine dashboard](output_journal_commands.png)
 ![FRINX Machine dashboard](output_journal_commands_3.png)
 
+## Demo: Building a workflow which sends a message to Slack
+
+Now let’s look how to build a workflow. The workflow we’re about build will make a http request, parse desired part of the http response, and post the result in a slack workspace.
+
+1) Click on **“Create workflow”** section in the main page of FRINX Machine.
+
+![FRINX Machine dashboard](create_workflow.png)
+
+2) In the **Name** type the name of your workflow (please keep in mind that name
+of the workflow cannot be later changed and must be unique.). **Description**
+stands for additional info of the workflow - you can leave it blank. Once the
+workflow is created **Label** can help organizing workflows in **Explore workflows**,
+but you can leave it blank as well. After inserting all data click on **Save changes**.
+
+![FRINX Machine dashboard](create_new_workflow.png)
+
+**“Restartable”** – when checked, in case the workflow fails, in the FRINX UI there
+will be an option to restart the workflow with same inputs without starting it all
+over and without creating a new workflow ID. In this case you can leave it
+checked.
+
+After saving the changes you will be redirected to canvas. Here we will add tasks
+and sub workflows in our workflow.
+
+![FRINX Machine dashboard](canvas.png)
+
+3) Click **“+”** on the **http** and **labmda** under **System tasks** and **Post_to_Slack**
+under **Workflows**. All tasks and subworkflows are added on same place in the
+canvas so you need to move them to see them. For connecting all parts of the
+workflow hover over OUT/IN where + sign will appear. Connect all parts in this
+way: START - http - lamda - Post_to_Slack - END. As you can see each task and
+workflow has its own set of characters after its name - these are reference
+aliases and work as unique identifier.
+
+![FRINX Machine dashboard](tasks.png)
+
+Above every task/workflow you can see 2 squares:
+
+**Edit:**
+
+![FRINX Machine dashboard](update.png)
+
+**Remove/Expand:**
+
+![FRINX Machine dashboard](remove_expand.png)
+
+4) **http - edit**. This task provides multiple methods for working with data from
+web pages. In this case we will make a http GET request to fetch data which we
+will parse. Click on **edit** above http task. On the right side you can see General
+Settings and Input Parameters. Leave **General Setting** the way they are and
+click on **Input Parameters**.
+Insert: https://jsonplaceholder.typicode.com/todos/${workflow.input.selector}
+in the **URI** and leave other columns unchanged. This set of data will get data
+from JSON database based on selectors input. Now click on **“Save Changes”**.
+
+![FRINX Machine dashboard](http_task.png)
+
+5) **lambda - edit**. Lambda takes data from previous http task and returns
+parsed data (message text) from JSON Click on **Input parameters** and in the
+**Lambda value** insert: ${http_<unique_id>.output.body}. In our example the
+name is **http_6MZR**. In the **Script expression** copy-paste: return
+JSON.parse($.lambdaValue). Click on **“Save Changes”**.
+
+![FRINX Machine dashboard](lambda_task_edit.png)
+
+6) **Post_to_Slack - edit**. Post_to_Slack is a workflow that can be used
+standalone or as a part of other workflows. This workflow works as sender of
+messages to specific destination in Slack.
+Click on **Input parameters** and in the **slack_webhook_id** insert:
+T02BFFVUQ/B04MQ2PRWQ1/xw9pWOAm0e4OMPfPxmrI1Jbp.
+In the **message_text** insert: ${lambda_<unique_id>.output.result.title}. Click
+on **“Save Changes”**.
+
+![FRINX Machine dashboard](post_to_slack_edit.png)
+
+7) In the upper right corner of the workflow builder click on **“Save and execute”**.
+Now the workflow is ready to be executed. Insert a number between 1 - 200 in
+the **selector** and press **Execute**.
+
+![FRINX Machine dashboard](execute.png)
+
+8) Click on **“Executed workflow in detail”**. Here you can see that workflow was
+executed and every task was completed successfully.
+
+![FRINX Machine dashboard](wf_run_detail.png)
+
+The output (demo Latin JSON) of the workflow in the Slack:
+
+![FRINX Machine dashboard](slack_output.png)
+
+You can join the slack channel where the message from this workflow is sent
+and check if it was sent successfully:
+https://join.slack.com/share/enQtNDg2ODM4MDgyMjY3My0zYjdhOTNjMTkxYTk3OTRhMGY3MjQ5YWNmYTJlNGRiNTkwZTNmNGVjMGQ2MGY3ODkwMzY2MmY0ODIwN2ZkMjJj
+(Entry to this channel may be limited just for @elisapolystar.com accounts.)
+
 ## Demo: Creating a loopback address on devices stored in the inventory
 
 This workflow creates a loopback interface on all devices installed in the inventory or on all devices filtered by labels. Labels are markers that serve as a differentiator.
