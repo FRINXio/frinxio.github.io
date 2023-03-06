@@ -311,7 +311,7 @@ Enter the following settings:
 
 **General and Service**
 
-**VPN Attachment:** GNS00001002
+**VPN Attachment:** GNS00001005
 
 **BTM Circuit Reference:** CES00000000-05
 
@@ -325,7 +325,7 @@ Enter the following settings:
 
 **Routing Protocol:**
 
-- Select **+ Create Static Protocol**.
+- Select **+ Create Static Protocol** and **Configure BGP**.
 
 **Static Routing LAN:** 10.0.0.0/8
 
@@ -354,8 +354,6 @@ Select **Save Changes**.
 ### Step 3.
 
 Select **Commit Changes**.
-
-![FRINX Machine dashboard](sites_network_accesses_2.png)
 
 Wait until all tasks are completed.
 
