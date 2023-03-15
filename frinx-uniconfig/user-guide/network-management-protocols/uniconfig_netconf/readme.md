@@ -747,12 +747,12 @@ curl -X DELETE \
 
 The last element of the URL is the name of the mount-point.
 
-NETCONF test-tool
+NETCONF TESTTOOL
 -----------------
 
-### Test-tool overview
+### Testtool overview
 
-NETCONF test-tool is the Java application that:
+NETCONF testtool is the Java application that:
 
 -   Can be used for simulation of 1 or more NETCONF devices (it is
     suitable for scale testing).
@@ -760,7 +760,7 @@ NETCONF test-tool is the Java application that:
 -   Provides broad configuration options of simulated devices.
 -   Supports YANG notifications.
 
-NETCONF test-tool is available at netconf repository of ODL
+NETCONF testtool is available at netconf repository of ODL
 (<https://git.opendaylight.org/gerrit/admin/repos/netconf under
 'netconf/tools/netconf-testtool' module. After building of this module
 using maven (just invoke command 'mvn clean install' in this directory),
@@ -768,11 +768,11 @@ the java executable can be found in appeared 'target' directory with
 name 'netconf-testtool-[version]-executable.jar' (version placeholder
 depends on used release).
 
-NETCONF test-tool is also available at frinx artifactory <https://artifactory.frinx.io/>. 
+Up-to-date NETCONF testtool is also available at frinx artifactory <https://artifactory.frinx.io/>. 
 
 ### Starting of the test-tool
 
-After NETCONF test-tool has been built, it can be used using the
+After NETCONF testtool has been built, it can be used using the
 following command:
 
 ```
@@ -785,9 +785,9 @@ java -Djava.security.egd=file:/dev/./urandom \
      --device-count DEVICE-COUNT \
      --starting-port STARTING-PORT \
      --schemas-dir SCHEMAS-DIR \
-     --debug ENABLED-DEBUGGING
+     --debug ENABLE-DEBUGGING
 ```
-See placeholders explained below ...
+Please see used fields and placeholders explained below ...
 
 Multi line example with values replacing placeholders e.g.: 
 ```
@@ -834,13 +834,13 @@ ps aux | grep java
 ```
 
 
-Description of the used fields and placeholders:
+Description of some of the used fields and placeholders:
 
 -   **SCHEMAS-DIR** - Path to the directory that contains YANG schemas
     used for simulation of all NETCONF devices.
--   **DEVICE-NETCONF** - Number of NETCONF devices that should be
+-   **DEVICE-COUNT** - Number of NETCONF devices that should be
     simulated at once.
--   **ENABLED-DEBUGGING** - It should be set to 'true', if you want to
+-   **ENABLE-DEBUGGING** - It should be set to 'true', if you want to
     see detailed debugging messages from simulation of NETCONF device
     (for example, received and sent RPC messages); otherwise it should
     be set to 'false' (INFO logging level is used).
