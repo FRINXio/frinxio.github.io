@@ -817,7 +817,9 @@ One liner example:
 ```
 java -Djava.security.egd=file:/dev/./urandom -Xmx1G -jar netconf-testtool.jar --ssh true --md-sal true --device-count 10 --starting-port 17830 --schemas-dir schema-1987709419
 ```
-The output of our example:
+The following snippet shows output from successfully simulated NETCONF
+device (notice the last line that shows hint, on which TCP ports
+simulated devices have been started):
 ```12:33:32.840 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Starting 10, SSH simulated devices starting on port 17830
 12:33:32.852 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Loading models from directory.
 12:33:42.490 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - using PersistentMdsalOperationProvider.
@@ -960,27 +962,7 @@ Notes:
 1. while you use --md-sal true devices are started with empty datastore. You can put initial config via netconf session or via uniconfig operations.
 2. --md-sal true --md-sal-persistent true will preserves datastore content across netconf sessions
 3. --initial-config-xml-file data.xml overrides --md-sal true and send hardcoded response to get-config.
-4. --initial-config-xml-file data.xml --notification-file notif.xml notification support
-Note:
-  File  data.xml  should  look  like  this: '<config  xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"><interface-configurations>...
-   </interface-configurations></config>'
-    Note:
-      File   notif.xml   should   look   like   this: '<notifications><notification><times>0</times><delay>0</delay><content><![CDATA
-   [<eventTime>XXXX</eventTime>]]></content></notification></notifications>'
-
-
-The following snippet shows output from successfully simulated NETCONF
-device (notice the last line that shows hint, on which TCP ports
-simulated devices have been started):
-
-```
-16:31:12.136 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Starting 1, SSH simulated devices starting on port 36000
-16:31:12.164 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Loading models from directory.
-16:31:12.662 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - using MdsalOperationProvider.
-16:31:12.766 [main] INFO  o.a.s.c.u.s.b.BouncyCastleSecurityProviderRegistrar - getOrCreateProvider(BC) created instance of org.bouncycastle.jce.provider.BouncyCastleProvider
-16:31:12.843 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_BACKLOG' for channel '[id: 0xb366d5d3]'
-16:31:12.933 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - All simulated devices started successfully from port 36000 to 36000
-```
+4. --notification-file notif.xml notification support
 
 ### Prepare init config via Uniconfig for versa simulated netconf-testtool device
 1. start Uniconfig - in cache folder there must be present the folder default with required yang models
@@ -1113,7 +1095,7 @@ curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology
 
 ### Increasing the maximum number of opened files
 
-Since NETCONF test-tool can be used for simulation of large number of
+Since NETCONF testtool can be used for simulation of large number of
 NETCONF devices, it requires opening a lot of TCP sockets that listen on
 different TCP ports. In Linux systems TCP socket is also represented as
 file - from this reason such simulations can easily exhaust configured
