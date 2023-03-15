@@ -1131,6 +1131,27 @@ depends on occupation by other applications and operating system too).
 Configured value should not reach the one that applies for all users -
 "cat /proc/sys/fs/file-max".
 
+see also /etc/sysctl.conf:
+```
+#
+## /etc/sysctl.conf
+## Increase Outbound Connections
+## Good for a service mesh and proxies like 
+## Nginx/Envoy/HAProxy/Varnish and applications that
+## need long-lived connections.
+## Careful not to set the range wider as you will impact
+## running application ports in heavy usage situations.
+net.ipv4.ip_local_port_range = 12000 65535
+
+## Increase Inbound Connections
+## Allows for +1M more FDs
+## An FD is an integer value used as a traffic I/O pointer 
+## on a connection with a Client.  
+## The FD Int value is used to traffic packets between 
+## User and Kernel Space.
+fs.file-max = 1048576
+```
+
 How does the FRINX UniConfig distribution use NETCONF?
 ------------------------------------------------------
 
