@@ -777,6 +777,7 @@ following command:
 
 ```
 java -Djava.security.egd=file:/dev/./urandom \
+     --agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8000 \
      -Xmx1G \
      -jar netconf-testtool-[version]-executable.jar \
      --ssh SSH \
@@ -786,13 +787,54 @@ java -Djava.security.egd=file:/dev/./urandom \
      --schemas-dir SCHEMAS-DIR \
      --debug ENABLED-DEBUGGING
 ```
+See placeholders explained below ...
 
-one liner example with values replacing placeholders e.g.:
+Multi line example with values replacing placeholders e.g.: 
 ```
-java -Xmx1G -jar netconf-testtool-[version]-executable.jar --schemas-dir SCHEMAS-DIR --device-count DEVICE-COUNT --debug ENABLED-DEBUGGING --starting-port STARTING-PORT --ssh SSH --md-sal MD-SAL
+java -Djava.security.egd=file:/dev/./urandom \
+     -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8000 \
+     -Xmx1G \
+     -jar netconf-testtool-5.1.5-20230310.105106-8-executable.jar \
+     --ssh true \
+     --md-sal true \
+     --device-count 10 \
+     --starting-port 17830 \
+     --schemas-dir schema-1987709419 \
+     --debug true
+```
+Usually no need to debug (it can be omitted) and long jar executable can be renamed:
+```
+java -Djava.security.egd=file:/dev/./urandom \
+     -Xmx1G \
+     -jar netconf-testtool.jar \
+     --ssh true \
+     --md-sal true \
+     --device-count 10 \
+     --starting-port 17830 \
+     --schemas-dir schema-1987709419
+```
+One liner example:
+```
+java -Djava.security.egd=file:/dev/./urandom -Xmx1G -jar netconf-testtool.jar --ssh true --md-sal true --device-count 10 --starting-port 17830 --schemas-dir schema-1987709419
+```
+The output of our example:
+```12:33:32.840 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Starting 10, SSH simulated devices starting on port 17830
+12:33:32.852 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Loading models from directory.
+12:33:42.490 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - using PersistentMdsalOperationProvider.
+12:33:42.491 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - data will be persisted across sessions
+12:33:42.575 [main] INFO  o.a.s.c.u.s.b.BouncyCastleSecurityProviderRegistrar - getOrCreateProvider(BC) created instance of org.bouncycastle.jce.provider.BouncyCastleProvider
+12:33:42.625 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_BACKLOG' for channel '[id: 0x3fb75375]'
+...
+12:33:42.714 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - All simulated devices started successfully from port 17830 to 17839
+```
+You can check occupied ports and netconf-testool process like this:
+```
+sudo ss -tlp
+ps aux | grep java
 ```
 
-Description of the used fields:
+
+Description of the used fields and placeholders:
 
 -   **SCHEMAS-DIR** - Path to the directory that contains YANG schemas
     used for simulation of all NETCONF devices.
