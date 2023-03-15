@@ -768,11 +768,25 @@ the java executable can be found in appeared 'target' directory with
 name 'netconf-testtool-[version]-executable.jar' (version placeholder
 depends on used release).
 
+NETCONF test-tool is also available at frinx artifactory <https://artifactory.frinx.io/>. 
+
 ### Starting of the test-tool
 
 After NETCONF test-tool has been built, it can be used using the
 following command:
 
+```
+java -Xmx1G  
+     -jar netconf-testtool-[version]-executable.jar  
+     --schemas-dir SCHEMAS-DIR  
+     --device-count DEVICE-COUNT  
+     --debug ENABLED-DEBUGGING  
+     --starting-port STARTING-PORT  
+     --ssh SSH  
+     --md-sal MD-SAL
+```
+
+one liner:
 ```
 java -Xmx1G -jar netconf-testtool-[version]-executable.jar --schemas-dir SCHEMAS-DIR --device-count DEVICE-COUNT --debug ENABLED-DEBUGGING --starting-port STARTING-PORT --ssh SSH --md-sal MD-SAL
 ```
