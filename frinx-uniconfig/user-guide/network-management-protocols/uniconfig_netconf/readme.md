@@ -776,17 +776,18 @@ After NETCONF test-tool has been built, it can be used using the
 following command:
 
 ```
-java -Xmx1G  
-     -jar netconf-testtool-[version]-executable.jar  
-     --schemas-dir SCHEMAS-DIR  
-     --device-count DEVICE-COUNT  
-     --debug ENABLED-DEBUGGING  
-     --starting-port STARTING-PORT  
+java -Djava.security.egd=file:/dev/./urandom \  
+     -Xmx1G \ 
+     -jar netconf-testtool-[version]-executable.jar \  
      --ssh SSH  
      --md-sal MD-SAL
+     --device-count DEVICE-COUNT  
+     --starting-port STARTING-PORT  
+     --schemas-dir SCHEMAS-DIR  
+     --debug ENABLED-DEBUGGING  
 ```
 
-one liner:
+one liner with real values e.g.:
 ```
 java -Xmx1G -jar netconf-testtool-[version]-executable.jar --schemas-dir SCHEMAS-DIR --device-count DEVICE-COUNT --debug ENABLED-DEBUGGING --starting-port STARTING-PORT --ssh SSH --md-sal MD-SAL
 ```
