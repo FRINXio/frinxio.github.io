@@ -770,7 +770,7 @@ depends on used release).
 
 Up-to-date NETCONF testtool is also available at frinx artifactory <https://artifactory.frinx.io/>. 
 
-### Starting of the test-tool
+### Starting of the NETCONF testtool
 
 After NETCONF testtool has been built, it can be used using the
 following command:
@@ -956,6 +956,18 @@ named arguments:
                          buggy device behavior.
 
 ```
+Notes:
+1. while you use --md-sal true devices are started with empty datastore. You can put initial config via netconf session or via uniconfig operations.
+2. --md-sal true --md-sal-persistent true will preserves datastore content across netconf sessions
+3. --initial-config-xml-file data.xml overrides --md-sal true and send hardcoded response to get-config.
+4. --initial-config-xml-file data.xml --notification-file notif.xml notification support
+Note:
+  File  data.xml  should  look  like  this: '<config  xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"><interface-configurations>...
+   </interface-configurations></config>'
+    Note:
+      File   notif.xml   should   look   like   this: '<notifications><notification><times>0</times><delay>0</delay><content><![CDATA
+   [<eventTime>XXXX</eventTime>]]></content></notification></notifications>'
+
 
 The following snippet shows output from successfully simulated NETCONF
 device (notice the last line that shows hint, on which TCP ports
@@ -968,6 +980,86 @@ simulated devices have been started):
 16:31:12.766 [main] INFO  o.a.s.c.u.s.b.BouncyCastleSecurityProviderRegistrar - getOrCreateProvider(BC) created instance of org.bouncycastle.jce.provider.BouncyCastleProvider
 16:31:12.843 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_BACKLOG' for channel '[id: 0xb366d5d3]'
 16:31:12.933 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - All simulated devices started successfully from port 36000 to 36000
+```
+
+### Prepare init config via Uniconfig for versa simulated netconf-testtool device
+1. start Uniconfig - in cache folder there must be present the folder default with required yang models
+2. start netconf-testool with schema-dir folder of versa yang models 
+```
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8000 -Xmx1G -jar testtool.jar --schemas-dir schema-1987709419 --device-count 1 --debug false --starting-port 36000 --ssh true --md-sal true
+```
+3. install device
+```
+curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "node-id": "testtool-setup",
+        "netconf": {
+            "netconf-node-topology:host": "10.19.0.20",
+            "netconf-node-topology:port": 36000,
+            "netconf-node-topology:keepalive-delay": 5,
+            "netconf-node-topology:max-connection-attempts": 1,
+            "netconf-node-topology:connection-timeout-millis": 60000,
+            "netconf-node-topology:default-request-timeout-millis": 60000,
+            "netconf-node-topology:tcp-only": false,
+            "netconf-node-topology:username": "admin",
+            "netconf-node-topology:password": "admin",
+            "netconf-node-topology:sleep-factor": 1.0,
+            "uniconfig-config:install-uniconfig-node-enabled": false,
+            "uniconfig-config:uniconfig-native-enabled": false
+        }
+    }
+}'
+```
+4. send init config to the netconf-testtool device via uniconfig
+```
+curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=testtool-setup/yang-ext:mount/system' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "system:system": {
+        "identification": {
+            "latitude": "31.202149",
+            "name": "Site2Branch2",
+            "longitude": "-96.666829",
+            "location": "Somewhere"
+        },
+        "users": [
+            {
+                "name": "admin",
+                "login": "shell",
+                "role": "admin"
+            },
+            {
+                "name": "versa",
+                "login": "shell",
+                "role": "admin"
+            }
+        ],
+        "ssh": {
+            "client-alive-count-max": 0,
+            "client-alive-interval": 300
+        },
+        "time-zone": "America/Los_Angeles",
+        "services": {
+            "ssh": "enabled",
+            "sftp": "disabled",
+            "www": "enabled"
+        },
+        "session": {
+            "reevaluate-reverse-flow": false,
+            "tcp-send-reset": false,
+            "check-tcp-syn": false,
+            "tcp-secure-reset": false,
+            "tcp-adjust-mss": {
+                "enable": true,
+                "interface-types": "tunnel"
+            }
+        }
+    }
+}'
 ```
 
 ### Increasing the maximum number of opened files
