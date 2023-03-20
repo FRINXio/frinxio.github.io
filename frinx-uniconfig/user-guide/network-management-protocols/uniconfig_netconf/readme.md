@@ -308,7 +308,7 @@ BODY
     {
         "key-credential": [
                 {
-                        "netconf-keystore:key-id": "versa2",
+                        "netconf-keystore:key-id": "my_device_key",
                         "netconf-keystore:private-key": "-----BEGIN RSA PRIVATE KEY-----
 MIICXAIBAAKBgQClEX+nOWXIn51qQffvi1FxM97AQvjdd8Upol1uJxoWzDnQ67h+
 lP9nEnamehPjL3JNsdJOQwWhNE4hVKm4ZC+7PfxGyY4a+sZ3Q+t2KzLlY/i59UUb
@@ -334,7 +334,7 @@ y9cQdzgIn9Yjgp4vt8ECQAD/bkgp3g7+boKcYvKO4uEpzr9bzgDhu1Q66TwApO0k
 **JSON file example**
 
 ```
-{"netconf-keystore:keystore":{"key-credential":[{"key-id":"versa2","passphrase":"jKNzkicDKmVrpOehbo/Jtw==",
+{"netconf-keystore:keystore":{"key-credential":[{"key-id":"my_device_key","passphrase":"jKNzkicDKmVrpOehbo/Jtw==",
 "private-key":"kjTlzs/EpFAQA6xLjmye5uvWdUtpQyD0oQKan49EIdlXhpk76FO8QU7kptJpqG8XhREOKkDQpOFw1FYIi92e2czIFS9N8OlOMsXtc
 0GEoYTG+vjkOAx6PIqjelVTcB1doF5YvmZwR3D7aLBSA8EnatWjJ0lPkP6Tq0jFh0qVLURTgAACbx+JkbSYJ45w/+HAwaIBWzcPtcQH3H6rqoMaux5Z7
 C3+XIZRQJszdyj429qlHnordSSe/5mAY1WbrN9YPxpqd87MHLAAn1cdiPXyx3MEPPStAqzDrCThRSK4ViEER/YL1XcKEWpnHIApVlrqaow91m+4cJ3N+
