@@ -964,9 +964,9 @@ Notes:
 3. --initial-config-xml-file data.xml overrides --md-sal true and send hardcoded response to get-config.
 4. --notification-file notif.xml notification support
 
-### Prepare init config via Uniconfig for versa simulated netconf-testtool device
-1. start Uniconfig - in cache folder there must be present the folder default with required yang models
-2. start netconf-testool with schema-dir folder of versa yang models 
+### Prepare init config via Uniconfig for simulated netconf-testtool device
+1. start Uniconfig - in cache folder there can be present the folder with device yang models to preload them faster
+2. start netconf-testool with schema-dir folder of device yang models 
 ```
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8000 -Xmx1G -jar testtool.jar --schemas-dir schema-1987709419 --device-count 1 --debug false --starting-port 36000 --ssh true --md-sal true
 ```
@@ -1015,7 +1015,7 @@ curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology
                 "role": "admin"
             },
             {
-                "name": "versa",
+                "name": "my_device",
                 "login": "shell",
                 "role": "admin"
             }
