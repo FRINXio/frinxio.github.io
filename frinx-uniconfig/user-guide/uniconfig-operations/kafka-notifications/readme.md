@@ -325,7 +325,7 @@ Edit entry fields:
   'data-before' represents removed data.
 - operation: Operation type of the data change event.
 - node-id: Node identifier of the data change event.
-- topology-id: Topology on which the node exists. It can be uniconfig or unistore.
+- topology-id: Topology where the node exists. Can be either 'uniconfig' or 'unistore'.
 
 ## Connection notifications
 
