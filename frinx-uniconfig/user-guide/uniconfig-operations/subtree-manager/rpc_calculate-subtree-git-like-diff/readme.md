@@ -9,21 +9,21 @@ Supported features:
 
 RPC input contains data-tree paths ('source-path' and 'target-path') and data locations
 ('source-datastore' and 'target-datastore').
-Data location is the enumeration of two possible values 'OPERATIONAL' and 'CONFIGURATION'.
+Data location is the enumeration of two possible values, 'OPERATIONAL' and 'CONFIGURATION'.
 The default value of 'source-datastore' is 'OPERATIONAL' and
 default value of 'target-datastore' is 'CONFIGURATION'.
 
-The output of the RPC contains differences between source and target subtrees formatted in a git-like style.
+RPC output contains differences between source and target subtrees formatted in a git-like style.
 The changes are grouped by root entities in the configuration.
 
 ![RPC calculate-subtree-git-like-diff](RPC_calculate-subtree-git-like-diff-RPC_calculate_subtree_git_like_diff.svg)
 
 ## RPC Examples
 
-### Successful example: computed difference
+### Successful example: Computed difference
 
-RPC calculate-subtree-git-like-diff input has path to two interfaces
-that are on different nodes. Both data locations are placed in the
+RPC calculate-subtree-git-like-diff input includes the path to two interfaces
+on different nodes. Both data locations are placed in the
 CONFIGURATION datastore. Output contains a list of all the changes.
 Multiple changes that occur under the same root element are merged together.
 
@@ -51,9 +51,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful example: without difference
+### Successful example: No difference
 
-The following output demonstrates a situation, when there are no changes
+The following output demonstrates a situation with no changes
 between specified subtrees.
 
 ```bash RPC Request
@@ -77,9 +77,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed example: missing mandatory field
+### Failed example: Missing mandatory field
 
-RPC input does not contain mandatory target path.
+RPC input does not contain the mandatory target path.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-subtree-git-like-diff' \
