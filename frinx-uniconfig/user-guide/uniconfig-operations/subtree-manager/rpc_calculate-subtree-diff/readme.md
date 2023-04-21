@@ -9,17 +9,17 @@ Supported features:
 
 RPC input contains data-tree paths ('source-path' and 'target-path') and data locations
 ('source-datastore' and 'target-datastore').
-Data location is the enumeration of two possible values 'OPERATIONAL' and 'CONFIGURATION'.
+Data location is the enumeration of two possible values, 'OPERATIONAL' and 'CONFIGURATION'.
 The default value of 'source-datastore' is 'OPERATIONAL' and
 default value of 'target-datastore' is 'CONFIGURATION'.
 
-Output of the RPC contains list of differences between source and target subtrees.
+RPC output contains a list of differences between source and target subtrees.
 
 ![RPC calculate-subtree-dif](RPC_calculate_subtree_diff-RPC_calculate_subtree_diff.svg)
 
 ## RPC Examples
 
-### Successful example: computed difference
+### Successful example: Computed difference
 
 RPC calculate-subtree-diff input has a path to two different testtool
 devices with different YANG schemas. Output contains a list of statements
@@ -512,9 +512,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }
 ```
 
-### Successful example: without difference
+### Successful example: No difference
 
-The following output demonstrates a situation, when there are no changes
+The following output demonstrates a situation with no changes
 between specified subtrees.
 
 ```bash RPC Request
@@ -538,7 +538,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed example: invalid value of input field
+### Failed example: Invalid value in input field
 
 RPC calculate-subtree-diff has an improperly defined datastore (AAA)
 within the input. Output describes the Allowed values [CONFIGURATION,
@@ -573,9 +573,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }
 ```
 
-### Failed example: missing mandatory field
+### Failed example: Missing mandatory field
 
-RPC input does not contain mandatory source path.
+RPC input does not contain the mandatory source path.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:calculate-subtree-diff' \
