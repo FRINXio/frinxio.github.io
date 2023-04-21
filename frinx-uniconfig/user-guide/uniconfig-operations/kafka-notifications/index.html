@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.733593465843">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.735393541025">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.733593465843" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.735393541025" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.733593465843" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.735393541025" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.733593465843" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.733593465843" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.735393541025" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.735393541025" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -554,27 +554,31 @@ subscribed subtrees.</p>
         &quot;subtree-path&quot;: &quot;/process=p3&quot;,
         &quot;data-after&quot;: &quot;{\n  \&quot;process\&quot;: [\n    {\n      \&quot;uid\&quot;: \&quot;p3\&quot;\n    }\n  ]\n}&quot;,
         &quot;operation&quot;: &quot;CREATE&quot;,
-        &quot;node-id&quot;: &quot;node&quot;
+        &quot;node-id&quot;: &quot;node&quot;,
+        &quot;topology-id&quot;: &quot;uniconfig&quot;
       },
       {
         &quot;subtree-path&quot;: &quot;/process=p2&quot;,
         &quot;data-before&quot;: &quot;{\n  \&quot;process\&quot;: [\n    {\n      \&quot;uid\&quot;: \&quot;p2\&quot;\n    }\n  ]\n}&quot;,
         &quot;operation&quot;: &quot;DELETE&quot;,
-        &quot;node-id&quot;: &quot;node&quot;
+        &quot;node-id&quot;: &quot;node&quot;,
+        &quot;topology-id&quot;: &quot;uniconfig&quot;
       },
       {
         &quot;subtree-path&quot;: &quot;/process=p1/address/bus-size&quot;,
         &quot;data-after&quot;: &quot;{\n  \&quot;config:bus-size\&quot;: 2048\n}&quot;,
         &quot;data-before&quot;: &quot;{\n  \&quot;config:bus-size\&quot;: 1024\n}&quot;,
         &quot;operation&quot;: &quot;UPDATE&quot;,
-        &quot;node-id&quot;: &quot;node&quot;
+        &quot;node-id&quot;: &quot;node&quot;,
+        &quot;topology-id&quot;: &quot;uniconfig&quot;
       },
       {
         &quot;subtree-path&quot;: &quot;/process=p1/address/bus-id&quot;,
         &quot;data-after&quot;: &quot;{\n  \&quot;config:bus-id\&quot;: \&quot;0xFFFF\&quot;\n}&quot;,
         &quot;data-before&quot;: &quot;{\n  \&quot;config:bus-id\&quot;: \&quot;0x451FE\&quot;\n}&quot;,
         &quot;operation&quot;: &quot;UPDATE&quot;,
-        &quot;node-id&quot;: &quot;node&quot;
+        &quot;node-id&quot;: &quot;node&quot;,
+        &quot;topology-id&quot;: &quot;uniconfig&quot;
       }
     ]
   }
@@ -600,6 +604,7 @@ represents created data.</li>
 &#x27;data-before&#x27; represents removed data.</li>
 <li>operation: Operation type of the data change event.</li>
 <li>node-id: Node identifier of the data change event.</li>
+<li>topology-id: Topology where the node exists. Can be either &#x27;uniconfig&#x27; or &#x27;unistore&#x27;.</li>
 </ul>
 <doc-anchor-target id="connection-notifications">
     <h2>

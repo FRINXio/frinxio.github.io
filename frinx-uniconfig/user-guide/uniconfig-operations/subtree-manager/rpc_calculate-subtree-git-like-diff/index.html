@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.733593465843">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.735393541025">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC calculate-subtree-git-like-diff | Frinx Docs</title>
     <meta name="title" content="RPC calculate-subtree-git-like-diff | Frinx Docs">
-    <meta name="description" content="This RPC creates diff between actual topology subtrees and intended topology subtrees. Subtrees can be specified under different nodes, it" />
+    <meta name="description" content="This RPC creates a diff between the source topology subtrees and target topology subtrees. Supported features:" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-git-like-diff/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-git-like-diff/">
     <meta property="og:title" content="RPC calculate-subtree-git-like-diff | Frinx Docs">
-    <meta property="og:description" content="This RPC creates diff between actual topology subtrees and intended topology subtrees. Subtrees can be specified under different nodes, it">
+    <meta property="og:description" content="This RPC creates a diff between the source topology subtrees and target topology subtrees. Supported features:">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-git-like-diff/rpc_calculate-subtree-git-like-diff-rpc_calculate_subtree_git_like_diff.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-git-like-diff/">
     <meta property="twitter:title" content="RPC calculate-subtree-git-like-diff | Frinx Docs">
-    <meta property="twitter:description" content="This RPC creates diff between actual topology subtrees and intended topology subtrees. Subtrees can be specified under different nodes, it">
+    <meta property="twitter:description" content="This RPC creates a diff between the source topology subtrees and target topology subtrees. Supported features:">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-git-like-diff/rpc_calculate-subtree-git-like-diff-rpc_calculate_subtree_git_like_diff.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.733593465843" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.735393541025" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.733593465843" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.735393541025" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.733593465843" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.733593465843" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.735393541025" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.735393541025" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,13 +256,21 @@
         <span>RPC calculate-subtree-git-like-diff</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC creates diff between actual topology subtrees and intended
-topology subtrees. Subtrees can be specified under different nodes, it
-only compares data hierarchy and values. RPC input contains paths
-(&#x27;source-path&#x27; and &#x27;target-path&#x27;) and data location (&#x27;source-datastore&#x27;
-and &#x27;target-datastore&#x27;). Data location is enumeration with two possible
-values &#x27;OPERATIONAL&#x27; or &#x27;CONFIGURATION&#x27;. The output of the RPC is a
-difference between two subtrees which are is in a git-like style.</p>
+<p>This RPC creates a diff between the source topology subtrees and target topology subtrees.
+Supported features:</p>
+<ul>
+<li>Comparison of subtrees under same network-topology node.</li>
+<li>Comparison of subtrees between different network-topology nodes that use same YANG schemas.</li>
+<li>Comparison of subtrees with different revisions of YANGs schema that are syntactically compatible
+(for example, different software versions of devices).</li>
+</ul>
+<p>RPC input contains data-tree paths (&#x27;source-path&#x27; and &#x27;target-path&#x27;) and data locations
+(&#x27;source-datastore&#x27; and &#x27;target-datastore&#x27;).
+Data location is the enumeration of two possible values, &#x27;OPERATIONAL&#x27; and &#x27;CONFIGURATION&#x27;.
+The default value of &#x27;source-datastore&#x27; is &#x27;OPERATIONAL&#x27; and
+default value of &#x27;target-datastore&#x27; is &#x27;CONFIGURATION&#x27;.</p>
+<p>RPC output contains differences between source and target subtrees formatted in a git-like style.
+The changes are grouped by root entities in the configuration.</p>
 <p><figure class="content-center">
     <img src="rpc_calculate-subtree-git-like-diff-rpc_calculate_subtree_git_like_diff.svg" alt="RPC calculate-subtree-git-like-diff" />
     <figcaption class="caption">RPC calculate-subtree-git-like-diff</figcaption>
@@ -274,18 +282,16 @@ difference between two subtrees which are is in a git-like style.</p>
         <span>RPC Examples</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="successful-example">
+<doc-anchor-target id="successful-example-computed-difference">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful example</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-computed-difference">#</doc-anchor-trigger>
+        <span>Successful example: Computed difference</span>
     </h3>
 </doc-anchor-target>
-<p>RPC calculate-subtree-git-like-diff input has path to two interfaces
-that are on different nodes. Both data locations are placed in the
-CONFIGURATION datastore. Output contains a list of all the changes on
-different paths. Multiple changes that occur under the same root element
-are merged together. Every change has at least a source or a target
-path, or both if some data are updated on that path.</p>
+<p>RPC calculate-subtree-git-like-diff input includes the path to two interfaces
+on different nodes. Both data locations are placed in the
+CONFIGURATION datastore. Output contains a list of all the changes.
+Multiple changes that occur under the same root element are merged together.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-subtree-git-like-diff' \
@@ -304,26 +310,20 @@ path, or both if some data are updated on that path.</p>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;output&quot;: {
-        &quot;status&quot;: &quot;complete&quot;,
         &quot;changes&quot;: [
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;target-path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=XR6/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces&quot;,
-                &quot;source-path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=XR5/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces&quot;,
-                &quot;data&quot;: &quot;  {\n    \&quot;frinx-openconfig-interfaces:interfaces\&quot;: {\n      \&quot;interface\&quot;: [\n        {\n          \&quot;key\&quot;:\&quot;MgmtEth0/0/CPU0/0\&quot;,\n          \&quot;subinterfaces\&quot;: {\n            \&quot;subinterface\&quot;: [\n              {\n                \&quot;key\&quot;:\&quot;0\&quot;,\n                \&quot;frinx-openconfig-if-ip:ipv4\&quot;: {\n                  \&quot;addresses\&quot;: {\n                    \&quot;address\&quot;: [\n-                     {\n-                       \&quot;ip\&quot;:\&quot;192.168.1.212\&quot;,\n-                       \&quot;config\&quot;: {\n-                         \&quot;prefix-length\&quot;:\&quot;24\&quot;,\n-                         \&quot;ip\&quot;:\&quot;192.168.1.212\&quot;\n-                       }\n-                     },\n+                     {\n+                       \&quot;ip\&quot;:\&quot;192.168.1.214\&quot;,\n+                       \&quot;config\&quot;: {\n+                         \&quot;prefix-length\&quot;:\&quot;27\&quot;,\n+                         \&quot;ip\&quot;:\&quot;192.168.1.214\&quot;\n+                       }\n+                     }\n                    ]\n                  }\n                },\n                \&quot;config\&quot;: {\n                  \&quot;enabled\&quot;: {\n                    \&quot;actual\&quot;: {\n                      \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;false\&quot;\n                    },\n                    \&quot;intended\&quot;: {\n                      \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;true\&quot;\n                    }\n                  },\n-                 \&quot;frinx-openconfig-interfaces:index\&quot;:\&quot;15\&quot;,\n+                 \&quot;frinx-openconfig-interfaces:index\&quot;:\&quot;0\&quot;\n                }\n              }\n            ]\n          },\n          \&quot;config\&quot;: {\n-           \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;false\&quot;,\n+           \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;true\&quot;\n          }\n        }\n      ]\n    }\n  }\n&quot;
-            }
+            &quot;  {\n    \&quot;frinx-openconfig-interfaces:interfaces\&quot;: {\n      \&quot;interface\&quot;: [\n        {\n          \&quot;key\&quot;:\&quot;MgmtEth0/0/CPU0/0\&quot;,\n          \&quot;subinterfaces\&quot;: {\n            \&quot;subinterface\&quot;: [\n              {\n                \&quot;key\&quot;:\&quot;0\&quot;,\n                \&quot;frinx-openconfig-if-ip:ipv4\&quot;: {\n                  \&quot;addresses\&quot;: {\n                    \&quot;address\&quot;: [\n-                     {\n-                       \&quot;ip\&quot;:\&quot;192.168.1.212\&quot;,\n-                       \&quot;config\&quot;: {\n-                         \&quot;prefix-length\&quot;:\&quot;24\&quot;,\n-                         \&quot;ip\&quot;:\&quot;192.168.1.212\&quot;\n-                       }\n-                     },\n+                     {\n+                       \&quot;ip\&quot;:\&quot;192.168.1.214\&quot;,\n+                       \&quot;config\&quot;: {\n+                         \&quot;prefix-length\&quot;:\&quot;27\&quot;,\n+                         \&quot;ip\&quot;:\&quot;192.168.1.214\&quot;\n+                       }\n+                     }\n                    ]\n                  }\n                },\n                \&quot;config\&quot;: {\n                  \&quot;enabled\&quot;: {\n                    \&quot;actual\&quot;: {\n                      \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;false\&quot;\n                    },\n                    \&quot;intended\&quot;: {\n                      \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;true\&quot;\n                    }\n                  },\n-                 \&quot;frinx-openconfig-interfaces:index\&quot;:\&quot;15\&quot;,\n+                 \&quot;frinx-openconfig-interfaces:index\&quot;:\&quot;0\&quot;\n                }\n              }\n            ]\n          },\n          \&quot;config\&quot;: {\n-           \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;false\&quot;,\n+           \&quot;frinx-openconfig-interfaces:enabled\&quot;:\&quot;true\&quot;\n          }\n        }\n      ]\n    }\n  }\n&quot;
         ]
     }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="successful-example-1">
+<doc-anchor-target id="successful-example-no-difference">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful example</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-no-difference">#</doc-anchor-trigger>
+        <span>Successful example: No difference</span>
     </h3>
 </doc-anchor-target>
-<p>The following output demonstrates a situation, when there are no changes
-on different subtrees.</p>
+<p>The following output demonstrates a situation with no changes
+between specified subtrees.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-subtree-git-like-diff' \
@@ -342,17 +342,16 @@ on different subtrees.</p>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;output&quot;: {
-        &quot;status&quot;: &quot;complete&quot;
     }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="failed-example">
+<doc-anchor-target id="failed-example-missing-mandatory-field">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed example</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-missing-mandatory-field">#</doc-anchor-trigger>
+        <span>Failed example: Missing mandatory field</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input does not contain target node YIID, so RPC can not be executed.</p>
+<p>RPC input does not contain the mandatory target path.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-subtree-git-like-diff' \
@@ -367,44 +366,17 @@ on different subtrees.</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;status&quot;: &quot;fail&quot;,
-        &quot;error-message&quot;: &quot;target-path is not specified in input request&quot;,
-        &quot;error-type&quot;: &quot;uniconfig-error&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC input does not contain target datastore type, so RPC can not be
-executed.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-subtree-git-like-diff' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot; : {
-        &quot;source-path&quot;: [&quot;/network-topology:network-topology/network-topology:topology=uniconfig/network-topology:node=R1/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/frinx-openconfig-interfaces:interface=GigabitEthernet0%2F0%2F0%2F0&quot;],
-        &quot;target-path&quot;: [&quot;/network-topology:network-topology/network-topology:topology=uniconfig/network-topology:node=R2/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/frinx-openconfig-interfaces:interface=GigabitEthernet0%2F0%2F0%2F0&quot;],
-        &quot;source-datastore&quot;: &quot;CONFIGURATION&quot;
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;status&quot;: &quot;fail&quot;,
-        &quot;error-message&quot;: &quot;target-datastore is not specified in input request&quot;,
-        &quot;error-type&quot;: &quot;uniconfig-error&quot;
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Field target-path is not specified in input request&quot;,
+        &quot;error-tag&quot;: &quot;invalid-value&quot;,
+        &quot;error-type&quot;: &quot;application&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 
