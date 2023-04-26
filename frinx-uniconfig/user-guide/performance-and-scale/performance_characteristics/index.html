@@ -12,34 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>NETCONF Unified Translation Unit | Frinx Docs</title>
-    <meta name="title" content="NETCONF Unified Translation Unit | Frinx Docs">
-    <meta name="description" content="Unified translation units are located in https://github.com/FRINXio/unitopo-units repository." />
+    <title>Performance characteristics | Frinx Docs</title>
+    <meta name="title" content="Performance characteristics | Frinx Docs">
+    <meta name="description" content="This page contains reference performance characteristics for Uniconfig." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/developer-guide/netconf-translation-unit/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/performance-and-scale/performance_characteristics/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/developer-guide/netconf-translation-unit/">
-    <meta property="og:title" content="NETCONF Unified Translation Unit | Frinx Docs">
-    <meta property="og:description" content="Unified translation units are located in https://github.com/FRINXio/unitopo-units repository.">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/performance-and-scale/performance_characteristics/">
+    <meta property="og:title" content="Performance characteristics | Frinx Docs">
+    <meta property="og:description" content="This page contains reference performance characteristics for Uniconfig.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/developer-guide/netconf-translation-unit/">
-    <meta property="twitter:title" content="NETCONF Unified Translation Unit | Frinx Docs">
-    <meta property="twitter:description" content="Unified translation units are located in https://github.com/FRINXio/unitopo-units repository.">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/performance-and-scale/performance_characteristics/">
+    <meta property="twitter:title" content="Performance characteristics | Frinx Docs">
+    <meta property="twitter:description" content="This page contains reference performance characteristics for Uniconfig.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.735837016641" rel="stylesheet" />
+    <link href="../../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.735837016641" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.735837016641" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.735837016641" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.735837016641" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.735837016641" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.735837016641" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -54,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -70,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -186,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -248,227 +247,210 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="netconf-unified-translation-unit" class="break-words">
+<doc-anchor-target id="performance-characteristics" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#netconf-unified-translation-unit">#</doc-anchor-trigger>
-        <span>NETCONF Unified Translation Unit</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#performance-characteristics">#</doc-anchor-trigger>
+        <span>Performance characteristics</span>
     </h1>
 </doc-anchor-target>
-<p>Unified translation units are located in
-<a href="https://github.com/FRINXio/unitopo-units">https://github.com/FRINXio/unitopo-units</a> repository.</p>
-<p>Kotlin is used as preferred programming language in NETCONF translation
-units because it provides <a href="https://kotlinlang.org/docs/reference/type-aliases.html">type
-aliases</a> and
-better
-<a href="https://kotlinlang.org/docs/reference/null-safety.html">null-safety</a>.</p>
-<doc-anchor-target id="translateunit">
+<p>This page contains reference performance characteristics for Uniconfig.</p>
+<p>We try to answer the question how fast can a certain number of devices with a certain amount of configuration
+be installed and fully synced by</p>
+<ul>
+<li>a single Uniconfig instance</li>
+<li>3-node Uniconfig deployment with load balancer</li>
+</ul>
+<p>The unit of measurement is: Number of configuration lines / per single CPU core / per minute.
+This number can then be roughly applied to any other similar device being installed by uniconfig.</p>
+<doc-anchor-target id="cli-devices">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#translateunit">#</doc-anchor-trigger>
-        <span>TranslateUnit</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-devices">#</doc-anchor-trigger>
+        <span>CLI devices</span>
     </h2>
 </doc-anchor-target>
-<p>Translate unit class must implement interface
-<strong>io.frinx.unitopo.registry.spi.TranslateUnit</strong>. Naming convention for
-translate unit class is just name Unit. Translate unit class is usually
-instantiated, initialized and closed from Blueprint.</p>
-<p>Implementation of TranslateUnit must be registered into
-<strong>TranslationUnitCollector</strong> and must provide set of supported underlay
-YANG models. Snippet below shows registration of
-<a href="https://github.com/FRINXio/unitopo-units/blob/master/junos/junos-17/junos-17-interface-unit/src/main/kotlin/io/frinx/unitopo/unit/junos/interfaces/Unit.kt">Unit</a>
-for junos device version 17.3.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-kotlin"><code v-pre class="language-kotlin">class Unit(private val registry: TranslationUnitCollector) : TranslateUnit {
-    private var reg: TranslationUnitCollector.Registration? = null
-
-    fun init() {
-        reg = registry.registerTranslateUnit(this)
-    }
-
-    fun close() {
-        reg?.let { reg!!.close() }
-    }
-
-    override fun getUnderlayYangSchemas() = setOf(
-            UnderlayInterfacesYangInfo.getInstance())</code></pre>
-</doc-codeblock></div>
-<p>Implementation of TranslateUnit must implement these methods:</p>
-<p><strong>toString(): String</strong></p>
-<p>Return unique string among all translation units which will be used as
-ID for the translation unit (e.g. &quot;IOS XR Interface (OpenConfig)
-translate unit&quot;)</p>
-<p><strong>getYangSchemas(): Set</strong></p>
-<p>Return YANG models containing composite nodes handled by
-handlers(readers/writers). It must return empty Set if no handlers are
-implemented.</p>
-<p><strong>getUnderlayYangSchemas(): Set</strong></p>
-<p>Return YANG module informations about underlay models used in the
-translation unit. These YANG modules describes configuration of NETCONF
-capable device.</p>
-<p><strong>getRpcs(underlayAccess: UnderlayAccess): Set&gt;</strong></p>
-<p>Return RPC services implemented in the translation unit. Default
-implementation returns an emptySet. Parameter <strong>underlayAccess</strong>
-represents object containing methods for communication with a device via
-NETCONF and should be passed to readers/writers.</p>
-<p><strong>provideHandlers(rRegistry: ModifiableReaderRegistryBuilder,</strong>
-<strong>wRegistry: ModifiableWriterRegistryBuilder,</strong> <strong>underlayAccess:
-UnderlayAccess): Unit</strong></p>
-<p>Handlers(readers/writers) need to be registered in this method.
-<strong>underlayAccess</strong> represents object containing methods for communication
-with a device via NETCONF and should be passed to readers/writers.</p>
-<p>How to register readers/writers is described in
-CLI Translation Unit &lt;cli-translation-unit&gt;</p>
-<doc-anchor-target id="readers">
+<p>There are 2 main families of CLI devices: those using Cisco style configuration (configuration in sections)
+and devices that use one-line style of configuration (without sections) such as Ciena SAOS 8.</p>
+<p>It is important to distinguish performance characteristics of these 2 families.</p>
+<doc-anchor-target id="netconf-devices">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#readers">#</doc-anchor-trigger>
-        <span>Readers</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#netconf-devices">#</doc-anchor-trigger>
+        <span>Netconf devices</span>
     </h2>
 </doc-anchor-target>
-<p>Readers are handlers responsible for reading and parsing the data coming
-from a device.</p>
-<p>There are 2 types of readers: Reader and ListReader. Reader can be used
-to handle container or argument nodes and ListReader should handle list
-nodes from YANG.</p>
-<ul>
-<li>Both types need to implement <strong>readCurrentAttributes</strong> to fill the
-builder with appropriate values</li>
-<li>ListReader needs to also implement <strong>getAllIds()</strong> where it
-retrieves a key for each item to be present in current list. After
-the list is received, framework will invoke
-<strong>readCurrentAttributes</strong> for each item from getAllIds</li>
-</ul>
-<doc-anchor-target id="mandatory-interfaces-to-implement">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mandatory-interfaces-to-implement">#</doc-anchor-trigger>
-        <span>Mandatory interfaces to implement</span>
-    </h3>
+<p>// TBD</p>
+<doc-anchor-target id="tree-like-style-of-configuration">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#tree-like-style-of-configuration">#</doc-anchor-trigger>
+        <span>Tree-like style of configuration</span>
+    </h2>
 </doc-anchor-target>
-<p>Each reader needs to implement one of these interfaces based on type of
-target node in YANG.For more information about methods please read
-javadocs.</p>
-<p><strong>ConfigListReaderCustomizer</strong> - implement this interface if target
-composite node in YANG is list and represents config data.</p>
-<p><strong>ConfigReaderCustomizer</strong> - implement this interface if target
-composite node in YANG is container or augmentation and represents
-config data.</p>
-<p><strong>OperListReaderCustomizer</strong> - implement this interface if target
-composite node in YANG is list and represents operational data.</p>
-<p><strong>OperReaderCustomizer</strong> - implement this interface if target composite
-node in YANG is container or augmentation and represents operational
-data.</p>
-<doc-anchor-target id="base-readers">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#base-readers">#</doc-anchor-trigger>
-        <span>Base Readers</span>
-    </h3>
+<p>Cisco style of confituration (IOS, IOS-XR etc.)</p>
+<p>// TBD</p>
+<doc-anchor-target id="one-line-style-of-configuration-devices-saos-performance-tests">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#one-line-style-of-configuration-devices-saos-performance-tests">#</doc-anchor-trigger>
+        <span>One-line style of configuration devices (SAOS) performance tests</span>
+    </h2>
 </doc-anchor-target>
-<p>Each base reader for netconf readers should be generic. The generic
-marks the data element within device YANG that is being parsed into. The
-base reader should contain abstract methods:</p>
+<p>Important caveats:</p>
 <ul>
-<li><strong>fun readIid(&lt;args&gt;): InstanceIdentifier&lt;T&gt;</strong> - each child
-reader should fill in the device specific InstanceIdentifier that
-points to the information needed for this reader. Arguments may vary
-and they are used to be more specific IID (e.g. when creating an IID
-to gather information about a specific interface, you may want to
-pass interface name as argument).</li>
-<li><strong>fun readData(data: T?, configBuilder: ConfigBuilder, &lt;args&gt;)</strong>
-<ul>
-<li>this method is used to transform OpenConfig data (contained in
-ConfigBuilder) into device data (T) using .</li>
+<li>Measurement were performed on simulated devices = no device overhead</li>
+<li>Measurement were performed on a local network = no network overhead</li>
+<li>Measured on Uniconfig version 5.0.12</li>
+<li>Simulated devices were of two flawors: half with small configuration and the half with big configuration</li>
 </ul>
+<p>Tests:</p>
+<ul>
+<li>
+<ol type="A">
+<li>Single node deployment of Uniconfig resources: CPU 4 cores and RAM 4 GB</li>
+</ol>
+</li>
+<li>
+<ol type="A" start="2">
+<li>3 node deployment of Uniconfig - resources per node: CPU 4 cores and RAM 4 GB</li>
+</ol>
+</li>
+<li>
+<ol type="A" start="3">
+<li>3 node deployment of Uniconfig - resources per node: CPU 6 cores and RAM 4 GB</li>
+</ol>
 </li>
 </ul>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Naming of the methods should be unified in order to be easily parsed
-by auto-generated documentation.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="writers">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#writers">#</doc-anchor-trigger>
-        <span>Writers</span>
-    </h2>
-</doc-anchor-target>
-<p>A writer needs to implement all 3 methods: Write, Update, Delete in
-order to fully support default rollback mechanism of the framework</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Time showed that update like 1. delete, 2. write is anti-pattern and
-should not be used. There is just one case where it is necessary: when
-re-writing list entry, you must first delete the previous entry, then
-write the new one, otherwise the previous entry would still be present
-and the new entry will be added to the list.</p>
-        </div>
-    </div>
-</div>
-<p>A writer can properly work only if there is a reader for the same
-composite node.</p>
-<p>The framework provides safe methods to use when handling data on device:</p>
-<ul>
-<li><strong>safePut</strong> deletes or adds managed data. Does not touch data that
-was previously on the device and is not handled by the writer.</li>
-<li><strong>safeMerge</strong> stores just the changed data into device. Does not
-touch data that was previously on the device and is not handled by
-the writer.</li>
-<li><strong>safeDelete</strong> removes data from the device only if the managed node
-does not contain any other information (even one not handled by the
-writer)</li>
-</ul>
-<doc-anchor-target id="mandatory-interfaces-to-implement-1">
+<doc-anchor-target id="device-installation--synchronization">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mandatory-interfaces-to-implement-1">#</doc-anchor-trigger>
-        <span>Mandatory interfaces to implement</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#device-installation--synchronization">#</doc-anchor-trigger>
+        <span>Device installation &amp; synchronization</span>
     </h3>
 </doc-anchor-target>
-<p>Each writer needs to implement one of these interfaces based on type of
-target node in YANG. Unlike mandatory interfaces for reading, only
-interfaces for writing config data are available (because it is not
-possible to write operational data). For more information about methods
-please read javadocs.</p>
-<p><strong>ListWriterCustomizer</strong> - implement this interface if target composite
-node in YANG is list. An implementation needs to be registered as
-GenericListWriter.</p>
-<p><strong>WriterCustomizer</strong> - implement this interface if target composite node
-in YANG is container or augmentation. An implementation needs to be
-registered as GenericWriter.</p>
-<doc-anchor-target id="base-writers">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">                    &quot;input&quot;: { 
+                        &quot;cli&quot;: {
+                            &quot;cli-topology:device-type&quot;: &quot;saos&quot;,
+                            &quot;cli-topology:device-version&quot;: &quot;6&quot;,
+                            &quot;cli-topology:dry-run-journal-size&quot;: 180,
+                            &quot;cli-topology:host&quot;: &quot;172.16.62.119&quot;,
+                            &quot;cli-topology:journal-size&quot;: 500,
+                            &quot;cli-topology:keepalive-delay&quot;: &quot;900&quot;,
+                            &quot;cli-topology:keepalive-timeout&quot;: &quot;3600&quot;,
+                            &quot;cli-topology:parsing-engine&quot;: &quot;one-line-parser&quot;,
+                            &quot;cli-topology:password&quot;: &quot;*****&quot;,
+                            &quot;cli-topology:port&quot;: &quot;22&quot;,
+                            &quot;cli-topology:transport-type&quot;: &quot;ssh&quot;,
+                            &quot;cli-topology:username&quot;: &quot;*****&quot;,
+                            &quot;node-extension:reconcile&quot;: false,
+                            &quot;uniconfig-config:install-uniconfig-node-enabled&quot;: true
+                        },
+                        &quot;node-id&quot;: &quot;ASN-RC0002-DS119&quot;
+                    }
+
+                    &quot;input&quot;: { 
+                        &quot;cli&quot;: {
+                            &quot;cli-topology:device-type&quot;: &quot;saos&quot;,
+                            &quot;cli-topology:device-version&quot;: &quot;8&quot;,
+                            &quot;cli-topology:dry-run-journal-size&quot;: 180,
+                            &quot;cli-topology:host&quot;: &quot;172.16.84.86&quot;,
+                            &quot;cli-topology:journal-size&quot;: 500,
+                            &quot;cli-topology:keepalive-delay&quot;: &quot;900&quot;,
+                            &quot;cli-topology:keepalive-timeout&quot;: &quot;3600&quot;,
+                            &quot;cli-topology:parsing-engine&quot;: &quot;one-line-parser&quot;,
+                            &quot;cli-topology:password&quot;: &quot;*****&quot;,
+                            &quot;cli-topology:port&quot;: &quot;22&quot;,
+                            &quot;cli-topology:transport-type&quot;: &quot;ssh&quot;,
+                            &quot;cli-topology:username&quot;: &quot;*****&quot;,
+                            &quot;node-extension:reconcile&quot;: false,
+                            &quot;uniconfig-config:install-uniconfig-node-enabled&quot;: true
+                        },
+                        &quot;node-id&quot;: &quot;ASN-RC0002-CS598&quot;
+                    }</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="test-a---one-node-uniconfig">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#base-writers">#</doc-anchor-trigger>
-        <span>Base Writers</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#test-a---one-node-uniconfig">#</doc-anchor-trigger>
+        <span>Test A - one node Uniconfig</span>
     </h3>
 </doc-anchor-target>
-<p>Each base writer should be generic and contain abstract methods:</p>
-<ul>
-<li><strong>fun getIid(id: InstanceIdentifier&lt;Config&gt;):
-InstanceIdentifier&lt;T&gt;</strong> -this method returns InstanceIdentifier
-that points to a node where data should be written</li>
-<li><strong>fun getData(data: Config): T</strong> - this method transforms OpenConfig
-data into device specific data (T)</li>
-</ul>
+<p>Devices running SAOS operating system (Ciena) and similar</p>
+<p>Inputs:<br />
+375 x SAOS 6 devices configuration:
+8834 json lines = 1510 cli config lines (brief config)</p>
+<p>375 x SAOS 8 devices configuration:
+277375 json lines = 30705  cli config lines (brief config)</p>
+<p>Evaluation:
+750 devices were registered in 7.5 hours on single node Uniconfig using 4 cores<br />
+Average one device instalation duration = (7.5 * 60 minutes) / 750 devices = 0.6 minutes<br />
+Average number of json lines per device = (8834 + 277375)/2 = 143104 lines<br />
+lines of json / per core / per minute = 143104 lines / 4 cores / 0.6 minutes = 59626<br />
+Average number of cli lines per device = (1510 + 30705)/2 = 16107,5 lines<br />
+lines of cli / per core / per minute = 16107,5 lines / 4 cores / 0.6 minutes = 6711</p>
+<p>Installation &amp; sync rate:</p>
+<p><strong>59,626</strong> <em>lines of json / per core / per minute</em></p>
+<p>or</p>
+<p><strong>6,711</strong> <em>lines of raw cli configuration / per core / per minute</em></p>
+<blockquote>
+<p>A single uniconfig node is capable of installing (and fully syncing)
+<strong>100 Ciena (SAOS 8) devices with 15k lines of configuration</strong> (~ 123k lines of formatted json in Uniconfig)
+in <strong>55 minutes</strong> using <strong>4 CPU cores</strong></p>
+</blockquote>
+<p>Recommended batch size for parallel installation in such case would be about 50 devices per batch as the parallelism is limited by the number of available cores.</p>
+<doc-anchor-target id="test-b---3-nodes-of-uniconfig-with-load-balancer">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#test-b---3-nodes-of-uniconfig-with-load-balancer">#</doc-anchor-trigger>
+        <span>Test B - 3 nodes of Uniconfig with load balancer</span>
+    </h3>
+</doc-anchor-target>
+<p>Devices running SAOS operating system (Ciena) and similar</p>
+<p>Inputs:<br />
+750 x SAOS 6 devices configuration:
+8834 json lines = 1510 cli config lines (brief config)</p>
+<p>750 x SAOS 8 devices configuration:
+277375 json lines = 30705  cli config lines (brief config)</p>
+<p>Evaluation for 4 core deployment:
+1500 devices were registered in 5.5 hours on 3 node Uniconfig deployment each using 4 cores<br />
+Average one device instalation duration = (5.5 * 60 minutes) / 1500 devices = 0.22 minutes<br />
+Average number of json lines per device = (8834 + 277375)/2 = 143104 lines<br />
+lines of json / per core / per minute = 143104 lines / 3<em>4 cores / 0.22 minutes = 54206<br />
+Average number of cli lines per device = (1510 + 30705)/2 = 16107,5 lines<br />
+lines of cli / per core / per minute = 16107,5 lines / 3</em>4 cores / 0.22 minutes = 6101</p>
+<p>Installation &amp; sync rate:</p>
+<p><strong>54,206</strong> <em>lines of json / per core / per minute</em></p>
+<p>or</p>
+<p><strong>6,101</strong> <em>lines of raw cli configuration / per core / per minute</em></p>
+<blockquote>
+<p>A 3 nodes of uniconfig with loadbalancer are capable of installing (and fully syncing)
+<strong>100 Ciena (SAOS 8) devices with 15k lines of configuration</strong> (~ 123k lines of formatted json in Uniconfig)
+in <strong>19 minutes</strong> using <strong>12 CPU cores</strong></p>
+</blockquote>
+<p>Recommended batch size for parallel installation in such case would be about 150 devices per batch as the parallelism is limited by the number of available cores.</p>
+<doc-anchor-target id="test-c---3-nodes-of-uniconfig-with-load-balancer">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#test-c---3-nodes-of-uniconfig-with-load-balancer">#</doc-anchor-trigger>
+        <span>Test C - 3 nodes of Uniconfig with load balancer</span>
+    </h3>
+</doc-anchor-target>
+<p>Devices running SAOS operating system (Ciena) and similar</p>
+<p>Inputs:<br />
+750 x SAOS 6 devices configuration:
+8834 json lines = 1510 cli config lines (brief config)</p>
+<p>750 x SAOS 8 devices configuration:
+277375 json lines = 30705  cli config lines (brief config)</p>
+<p>Evaluation for 6 core deployment:
+1500 devices were registered in 3.7 hours on 3 node Uniconfig deployment each using 6 cores<br />
+Average one device instalation duration = (3.7 * 60 minutes) / 1500 devices = 0.148 minutes<br />
+Average number of json lines per device = (8834 + 277375)/2 = 143104 lines<br />
+lines of json / per core / per minute = 143104 lines / 3<em>6 cores / 0.148 minutes = 53717<br />
+Average number of cli lines per device = (1510 + 30705)/2 = 16107,5 lines<br />
+lines of cli / per core / per minute = 16107,5 lines / 3</em>6 cores / 0.148 minutes = 6046</p>
+<p>Installation &amp; sync rate:</p>
+<p><strong>53,717</strong> <em>lines of json / per core / per minute</em></p>
+<p>or</p>
+<p><strong>6,046</strong> <em>lines of raw cli configuration / per core / per minute</em></p>
+<blockquote>
+<p>A 3 nodes of uniconfig with loadbalancer are capable of installing (and fully syncing)
+<strong>100 Ciena (SAOS 8) devices with 15k lines of configuration</strong> (~ 123k lines of formatted json in Uniconfig)
+in <strong>13 minutes</strong> using <strong>18 CPU cores</strong></p>
+</blockquote>
+<p>Recommended batch size for parallel installation in such case would be about 150 devices per batch as the parallelism is limited by the number of available cores.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -478,20 +460,20 @@ data into device specific data (T)</li>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/developer-guide/cli-translation-unit/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/operational-procedures/uniconfig-clustering/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Implementing CLI Translation Unit</span>
+                                                <span class="block mt-1">Uni​Config Clustering</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/developer-guide/native-cli-units/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/monitoring/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Native-​CLI translation units</span>
+                                                <span class="block mt-1">Monitoring</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -538,6 +520,6 @@ data into device specific data (T)</li>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "NETCONF Unified Translation Unit", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Performance characteristics", level: 4, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
