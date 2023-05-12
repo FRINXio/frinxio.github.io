@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.735837016641">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.737192673145">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.735837016641" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.737192673145" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.735837016641" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.737192673145" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.735837016641" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.735837016641" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.737192673145" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.737192673145" defer></script>
     <link href="../../../../resources/css/katex.css?v=2.4.0" rel="stylesheet" />
     <script id="katex-js" type="text/javascript" src="../../../../resources/js/katex.js?v=2.4.0" defer></script>
 </head>
@@ -260,12 +260,12 @@
 </doc-anchor-target>
 <p>UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including the following:</p>
 <ul>
-<li>reading operational data of devices</li>
-<li>manipulating device configuration</li>
-<li>manipulating configuration templates</li>
-<li>manipulating data stored in Unistore</li>
-<li>invoking device or UniConfig operations</li>
-<li>manipulating global UniConfig settings</li>
+<li>Reading operational data of devices</li>
+<li>Manipulating device configuration</li>
+<li>Manipulating configuration templates</li>
+<li>Manipulating data stored in Unistore</li>
+<li>Invoking device or UniConfig operations</li>
+<li>Manipulating global UniConfig settings</li>
 </ul>
 <p>As Uniconfig shell is model-driven, its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available
 RPC/action operations).</p>
@@ -275,76 +275,63 @@ RPC/action operations).</p>
         <span>Configuration</span>
     </h2>
 </doc-anchor-target>
-<p>By default, UniConfig shell is disabled. To enable it, configuration parameter &#x27;cliShell/sshServer/enabled&#x27; must be set to &#x27;true&#x27;
+<p>By default, UniConfig shell is disabled. To enable it, the configuration parameter &#x27;cliShell/sshServer/enabled&#x27; must be set to &#x27;true&#x27;
 in the &#x27;config/lighty-uniconfig-config.json&#x27; file.</p>
-<p>All available settings and descriptions are displayed in the following JSON snippet.</p>
+<p>All available settings and descriptions are displayed in the following snippet.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">UniConfig shell configuration (config/lighty-uniconfig-config.json)</div>
-<pre class="language-json"><code v-pre class="language-json">    &quot;cliShell&quot;: {
-        &quot;sshServer&quot;: {
-            // Flag that determines if ssh server will be started or not.
-            &quot;enabled&quot;: false,
-            // Port bind to ssh server.
-            &quot;port&quot;: 2022,
-            // IP address bind to ssh server.
-            &quot;inetAddress&quot;: &quot;127.0.0.1&quot;,
-            // Basic username + password authentication.
-            &quot;usernamePasswordAuth&quot;: {
-                &quot;username&quot;: &quot;admin&quot;,
-                &quot;password&quot;: &quot;secret&quot;
-            }
-        },
-        // Flag that determines if uniconfig-shell provides scrolling of output
-        &quot;enableScrolling&quot;: false,
-        // Number of history items to keep in memory
-        &quot;historySize&quot;: 500,
-        // Number of history items to keep in the history file
-        &quot;historyFileSize&quot;: 1000
-    }</code></pre>
+<div class="codeblock-title">UniConfig shell configuration (config/application.properties)</div>
+<pre class="language-properties"><code v-pre class="language-properties"># CLI shell config
+cli-shell.default-unistore-node-id=system
+cli-shell.enable-scrolling=false
+cli-shell.history-size=500
+cli-shell.history-file-size=1000
+cli-shell.ssh-server.enabled=false
+cli-shell.ssh-server.port=2022
+cli-shell.ssh-server.inet-address=127.0.0.1
+cli-shell.ssh-server.username-password-auth.username=admin
+cli-shell.ssh-server.username-password-auth.password=secret</code></pre>
 </doc-codeblock></div>
-<p>After starting UniConfig, SSH server will listen for connections on port 2022 and loopback interface.</p>
-<doc-anchor-target id="navigation-in-the-shell">
+<p>After starting UniConfig, the SSH server will listen for connections on port 2022 and loopback interface.</p>
+<doc-anchor-target id="navigating-in-the-shell">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#navigation-in-the-shell">#</doc-anchor-trigger>
-        <span>Navigation in the shell</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#navigating-in-the-shell">#</doc-anchor-trigger>
+        <span>Navigating in the shell</span>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>Every command line starts with command prompt that ends with &#x27;&gt;&#x27; character. Identifier of the command prompt changes
-based on current shell mode and state of the execution in this mode.</li>
-<li>Commands &#x27;exit&#x27; and &#x27;quit&#x27; appear in all shell modes. Command &#x27;exit&#x27; returns state to the parent state, command &#x27;quit&#x27;
-returns state to the nearest parent mode (e.g., configuration mode, root mode, operational show mode). If the current
-state of shell represents some mode, commands &#x27;quit&#x27; and &#x27;exit&#x27; have the same effect - returning to the parent mode.</li>
-<li>Typed command can be sent to the UniConfig using ENTER key. After that, UniConfig processes the command and may
-send response to the console depending on the command behaviour. All commands are processed synchronously - user
+<li>Every command line starts with a command prompt that ends with the &#x27;&gt;&#x27; character. The identifier of the command prompt changes
+based on the current shell mode and the state of the execution in this mode.</li>
+<li>The commands &#x27;exit&#x27; and &#x27;quit&#x27; appear in all shell modes. The &#x27;exit&#x27; command returns the state to the parent state, &#x27;quit&#x27;
+returns the state to the nearest parent mode (e.g., configuration mode, root mode, operational show mode). If the current
+state of the shell represents some mode, &#x27;quit&#x27; and &#x27;exit&#x27; have the same effect - returning to the parent mode.</li>
+<li>Typed commands can be sent to the UniConfig using the ENTER key. After that, UniConfig processes the command and may
+send a response to the console depending on the command behaviour. All commands are processed synchronously - a user
 cannot execute multiple commands in parallel in the same SSH session.</li>
-<li>CTRL-A and CTRL-E can be used for moving cursor on the current line to the beginning of the line, or the end of the
-line, respectively.</li>
-<li>CTRl-L is used for clearing of the shell screen.</li>
-<li>Arrow keys UP/DOWN are used for loading of the previous or more recent command in the command history.</li>
-<li>To cancel current line and moving to the blank line, user can use CTRL+C shortcut.</li>
-<li>Key TAB can be used for loading of the available suggestions in the current context. By hitting TAB again, user can
-navigate through suggested commands using arrow keys and select some of them using ENTER. Submode with suggestions
-can be left using CTRL-E shortcut. Text in the brackets contain description of the next command.</li>
+<li>CTRL-A and CTRL-E move the cursor to the beginning or end of the current line.</li>
+<li>CTRL-L clears the shell screen.</li>
+<li>Arrow keys UP/DOWN are used to load previous commands in the command history.</li>
+<li>CTRL+C cancels the current line and moves to a new blank line.</li>
+<li>The TAB key can be used to load suggestions in the current context. Hit TAB again to navigate
+through suggested commands using the arrow keys and select some of them using ENTER. Submode with suggestions
+can be left with the shortcut CTRL-E. The text in the brackets contains a description of the next command.</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Loading available suggestions under &#x27;show uniconfig iosxr&#x27; command</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr
-&gt;                                                                            (output to file)
-evpn                                       (Top level configuration containers for EVPN data)
-interfaces        (Top level container for interfaces, including configuration
-and state data.)
-logging                                               (Enclosing container for logging data.)
-network-instances                       (The L2, L3, or L2+L3 forwarding instances that are…)
-oam                                 (Top level configuration container for ethernet OAM data)
-snmp                                    (Enclosing container for snmp interface-specific
-data.)
-|</code></pre>
+<div class="codeblock-title">Loading available suggestions in &#x27;uniconfig-topology-vnf21&gt;&#x27; under &#x27;show&#x27; command</div>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-vnf21&gt;show 
+&gt;                                                (output to file)   interfaces                             (Interfaces configuration)
+SNMP-NOTIFICATION-MIB                                               nacm               (Parameters for NETCONF Access Control Model.)
+SNMP-TARGET-MIB                                                     ntp                                           (NTP configuration)
+SNMP-VIEW-BASED-ACM-MIB                                             redundancy                             (Redundancy Configuration)
+aaa                                              (AAA management)   service-node-groups (Service Node Gateway Services Configuration)
+alarms                                      (Alarm configuration)   snmp    (Simple Network Management Protocol (SNMP) configuration)
+alias                                     (Create command alias.)   system                      (System configuration and statistics)
+confdConfig                                (ConfD configuration.)   |                                                          (pipe)
+event                                             (Event scripts)</code></pre>
 </doc-codeblock></div>
 <ul>
-<li>If displayed output is longer than the current length of command-line window, output is displayed with scrolling
-capability. ENTER is used for displaying next line, while SPACE is used for displaying next page. Character &#x27;q&#x27;
-can be used to leave scrolling mode. It is possible to scroll only in the one direction - towards end of output.</li>
+<li>If the displayed output is longer than the length of the command-line window, the output is displayed with scrolling
+capability. Use ENTER to display the next line and SPACE to display the next page. Use the &#x27;q&#x27; key
+to leave scrolling mode. You can only scroll only in one direction - towards the end of the output.</li>
 </ul>
 <p><figure class="content-center">
     <img src="scrolling_example.png" alt="Scrolling through long output" />
@@ -374,7 +361,6 @@ uniconfig&gt;</code></pre>
 <pre class="language-bash"><code v-pre class="language-bash">uniconfig&gt;
 configuration-mode      (opening configuration mode)
 exit
-request                          (execution of RPCs)
 show                      (reading data from device)
 show-history (show history [max number of commands])</code></pre>
 </doc-codeblock></div>
@@ -403,7 +389,7 @@ Connection to 127.0.0.1 closed.</code></pre>
         </div>
         <div class="pr-5 ml-3 w-full">
 <p>Currently, only username/password single-user authentication is supported according to configuration
-in the &#x27;config/lighty-uniconfig-config.json&#x27;.</p>
+in the &#x27;application.properties&#x27;.</p>
         </div>
     </div>
 </div>
@@ -414,7 +400,7 @@ in the &#x27;config/lighty-uniconfig-config.json&#x27;.</p>
     </h3>
 </doc-anchor-target>
 <ul>
-<li>Root mode acts as a gateway for opening configuration, show, and request operational modes.</li>
+<li>Root mode acts as a gateway for opening configuration and show modes.</li>
 <li>Example - switching into Configuration mode:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -477,25 +463,44 @@ config&gt;</code></pre>
 <li>UniConfig RPC operations such as commit or calculate-diff.</li>
 </ol>
 <ul>
-<li>After opening Configuration mode, a new UniConfig transaction is created. All operations that are invoked from
-the configuration mode are executed in scope of created transaction.</li>
-<li>Transaction is automatically closed after leaving the Configuration mode (&#x27;exit&#x27; or &#x27;quit&#x27; command).</li>
-<li>If user invokes &#x27;commit&#x27; or &#x27;checked-commit&#x27;, transaction is automatically refreshed (user stays in the configuration
+<li>After opening Configuration mode, a new UniConfig transaction is created. All operations invoked from
+the configuration mode are executed in the scope of the created transaction.</li>
+<li>The transaction is automatically closed after leaving the Configuration mode (&#x27;exit&#x27; or &#x27;quit&#x27; command).</li>
+<li>If &#x27;commit&#x27; or &#x27;checked-commit&#x27; is invoked, the transaction is automatically refreshed (the user stays in configuration
 mode with a newly created transaction).</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Configuration mode overview</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;
 others
-delete                                     (delete operation)
+callbacks                           (operations on callbacks)
 exit                                  (return to parent mode)
 quit                                    (return to root mode)
 request                                   (execution of RPCs)
-set                                           (set operation)
-show                                         (show operation)
+settings                             (operations on settings)
 show-history          (show history [max number of commands])
+template-topology       (operations on the template topology)
+uniconfig-topology     (operations on the uniconfig topology)
+unistore-topology       (operations on the unistore topology)
 aliases
 diff (alias for 'request calculate-diff target-nodes/node *')</code></pre>
+</doc-codeblock></div>
+<p>Commands like SET / SHOW / DELETE are now available only on a specific device and are not accessible in root configuration mode.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">set / show / delete commands overview</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology test-node-1
+uniconfig-topology-test-node-1&gt;
+SNMP-NOTIFICATION-MIB                                               nacm               (Parameters for NETCONF Access Control Model.)
+SNMP-TARGET-MIB                                                     ntp                                           (NTP configuration)
+SNMP-VIEW-BASED-ACM-MIB                                             quit                                        (return to root mode)
+aaa                                              (AAA management)   redundancy                             (Redundancy Configuration)
+alarms                                      (Alarm configuration)   service-node-groups (Service Node Gateway Services Configuration)
+alias                                     (Create command alias.)   set                                               (set operation)
+confdConfig                                (ConfD configuration.)   show                                  (show data in current path)
+delete                                         (delete operation)   show-history              (show history [max number of commands])
+event                                             (Event scripts)   snmp    (Simple Network Management Protocol (SNMP) configuration)
+exit                                      (return to parent mode)   system                      (System configuration and statistics)
+interfaces                             (Interfaces configuration)</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="show-configuration">
     <h3>
@@ -507,50 +512,58 @@ diff (alias for 'request calculate-diff target-nodes/node *')</code></pre>
 <li><p>Show operation can be used to display selected subtrees.</p>
 </li>
 <li><p>Subtree path can be constructed interactively with help of shell suggestions / auto-completion mechanism.
-Construction of the path works the same way in the Show, Delete, and Set operations.</p>
+Construction of the path works the same way for SET / SHOW/ DELETE operations.</p>
 </li>
-<li><p>Example - displaying configuration of selected container:</p>
+<li><p>Example - displaying the configuration of a selected container:</p>
 </li>
 </ul>
+<ol>
+<li>The user must first go into a specific topology on a specific device:</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Show operation: available topologies or root configuration containers</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show
-settings            (settings)   uniconfig (uniconfig topology)
-template   (template topology)   unistore   (unistore topology)</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Show operation: selection of installed node</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig
+<div class="codeblock-title">move to a specific topology</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology
 nodes
-iosxr    iosxr2</code></pre>
+test-node-1   test-node-2</code></pre>
 </doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">move to a specific device</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology test-node-1
+uniconfig-topology-test-node-1&gt;</code></pre>
+</doc-codeblock></div>
+<ol start="2">
+<li>After this, the show operation is available:</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Show operation: selection of root data container</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr
-&gt;                                                                            (output to file)
-evpn                                       (Top level configuration containers for EVPN data)
-interfaces        (Top level container for interfaces, including configuration
-and state data.)
-logging                                               (Enclosing container for logging data.)
-network-instances                       (The L2, L3, or L2+L3 forwarding instances that are…)
-oam                                 (Top level configuration container for ethernet OAM data)
-snmp                                    (Enclosing container for snmp interface-specific
-data.)</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-test-node-1&gt;show 
+&gt;                                                (output to file)   interfaces                             (Interfaces configuration)
+SNMP-NOTIFICATION-MIB                                               nacm               (Parameters for NETCONF Access Control Model.)
+SNMP-TARGET-MIB                                                     ntp                                           (NTP configuration)
+SNMP-VIEW-BASED-ACM-MIB                                             redundancy                             (Redundancy Configuration)
+aaa                                              (AAA management)   service-node-groups (Service Node Gateway Services Configuration)
+alarms                                      (Alarm configuration)   snmp    (Simple Network Management Protocol (SNMP) configuration)
+alias                                     (Create command alias.)   system                      (System configuration and statistics)
+confdConfig                                (ConfD configuration.)   |                                                          (pipe)
+event                                             (Event scripts)</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Show operation: selection of interface id</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr interfaces interface
-&gt;     (output to file)   GigabitEthernet0/0/0/2   MgmtEth0/0/CPU0/0
-GigabitEthernet0/0/0/0   GigabitEthernet0/0/0/3   |               (pipe)
-GigabitEthernet0/0/0/1   GigabitEthernet0/0/0/4</code></pre>
+<div class="codeblock-title">Show operation: selection of a specific virtual network interface</div>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-test-node-1&gt;show interfaces vni 
+&gt; (output to file)   vni-0/4              vni-0/6              vni-0/8              |           (pipe)
+vni-0/10             vni-0/5              vni-0/7              vni-0/9</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Show operation: invocation of command</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 config
+<div class="codeblock-title">Show operation: invocation of a command</div>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-test-node-1&gt;show interfaces vni vni-0/10 
 {
-  &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
-  &quot;enabled&quot;: false,
-  &quot;name&quot;: &quot;GigabitEthernet0/0/0/0&quot;
+  &quot;name&quot;: &quot;vni-0/10&quot;,
+  &quot;ether-options&quot;: {
+    &quot;link-mode&quot;: &quot;auto&quot;,
+    &quot;link-speed&quot;: &quot;10m&quot;
+  },
+  &quot;description&quot;: &quot;sample description&quot;,
+  &quot;enable&quot;: true
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="delete-configuration">
@@ -561,42 +574,52 @@ GigabitEthernet0/0/0/1   GigabitEthernet0/0/0/4</code></pre>
 </doc-anchor-target>
 <ul>
 <li>Delete operation removes a selected subtree.</li>
-<li>Example - removal of a container:</li>
+<li>Example - removing a container:</li>
 </ul>
+<ol>
+<li>The user must first go into a specific topology on a specific device:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">move to a specific topology</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology
+nodes
+test-node-1   test-node-2</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">move to a specific device</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology test-node-1
+uniconfig-topology-test-node-1&gt;</code></pre>
+</doc-codeblock></div>
+<ol start="2">
+<li>After this, the delete operation is available:</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Construction of path with help from suggestions</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;delete uniconfig iosxr
-evpn                                       (Top level configuration containers for EVPN data)
-interfaces        (Top level container for interfaces, including configuration
-and state data.)
-logging                                               (Enclosing container for logging data.)
-network-instances                       (The L2, L3, or L2+L3 forwarding instances that are…)
-oam                                 (Top level configuration container for ethernet OAM data)
-snmp                                    (Enclosing container for snmp interface-specific
-data.)</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-test-node-1&gt;delete 
+SNMP-NOTIFICATION-MIB                                               interfaces                             (Interfaces configuration)
+SNMP-TARGET-MIB                                                     nacm               (Parameters for NETCONF Access Control Model.)
+SNMP-VIEW-BASED-ACM-MIB                                             ntp                                           (NTP configuration)
+aaa                                              (AAA management)   redundancy                             (Redundancy Configuration)
+alarms                                      (Alarm configuration)   service-node-groups (Service Node Gateway Services Configuration)
+alias                                     (Create command alias.)   snmp    (Simple Network Management Protocol (SNMP) configuration)
+confdConfig                                (ConfD configuration.)   system                      (System configuration and statistics)
+event                                             (Event scripts)</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Delete &#x27;config&#x27; container under &#x27;network-instance&#x27; with key value &#x27;default&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;delete uniconfig iosxr network-instances network-instance default config
-config&gt;</code></pre>
+<div class="codeblock-title">Delete &#x27;ether-options&#x27; container under &#x27;vni&#x27; with key value &#x27;vni-0/10&#x27;</div>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-test-node-1&gt;delete interfaces vni vni-0/10 ether-options
+uniconfig-topology-test-node-1&gt;</code></pre>
 </doc-codeblock></div>
+<ol start="3">
+<li>The user must quit to configuration mode, commit using request mode and return to the device on the topology:</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Verify state of &#x27;network-instance&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr network-instances network-instance default
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-test-node-1&gt;show interfaces vni vni-0/10 
 {
-  &quot;name&quot;: &quot;default&quot;,
-  &quot;protocols&quot;: {
-    &quot;protocol&quot;: [
-      {
-        &quot;identifier&quot;: &quot;frinx-openconfig-policy-types:STATIC&quot;,
-        &quot;name&quot;: &quot;default&quot;,
-        &quot;config&quot;: {
-          &quot;identifier&quot;: &quot;frinx-openconfig-policy-types:STATIC&quot;,
-          &quot;name&quot;: &quot;default&quot;
-        }
-      }
-    ]
-  }
+  &quot;name&quot;: &quot;vni-0/10&quot;,
+  &quot;description&quot;: &quot;sample description&quot;,
+  &quot;enable&quot;: true
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="set-configuration">
@@ -609,27 +632,31 @@ config&gt;</code></pre>
 <li>Set operation can be used for:</li>
 </ul>
 <ol>
-<li>Setting value of a single leaf.</li>
+<li>Setting the value of a single leaf.</li>
 <li>Setting values of multiple leaves in a single shell operation.</li>
-<li>Setting list of values for a leaf-list.</li>
+<li>Setting a list of values for a leaf-list.</li>
 <li>Replacing the whole subtree using a JSON snippet.</li>
 </ol>
 <ul>
-<li>Example - setting value of a single leaf:</li>
+<li>Example - setting the value of a single leaf:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">move to specified device</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology iosxr</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Providing datatype hints at selected leaf</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;set uniconfig iosxr lacp config system-priority
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set lacp config system-priority
 (type: uint16, constraints: [Range: [[0..65535]]])</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Setting value of LACP &#x27;system-priority&#x27; to &#x27;100&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;set uniconfig iosxr lacp config system-priority 100
-config&gt;</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set lacp config system-priority 100
+uniconfig-topology-iosxr&gt;</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Displaying changed LACP configuration</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr lacp config
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;show lacp config
 {
   &quot;system-priority&quot;: 100
 }</code></pre>
@@ -638,23 +665,27 @@ config&gt;</code></pre>
 <li>Example - setting values of multiple leaves: under &#x27;hold-time&#x27; container:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">move to specified device</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology iosxr</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Displaying hint for value of the leaf &#x27;up&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;set uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 hold-time config up
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set interfaces interface GigabitEthernet0/0/0/0 hold-time config up
 (type: uint32, constraints: [Range: [[0..4294967295]]])</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Setting value of the leaf &#x27;up&#x27; and displaying hint for value of the leaf &#x27;down&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;set uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 hold-time config up 20 down
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set interfaces interface GigabitEthernet0/0/0/0 hold-time config up 20 down
 (type: uint32, constraints: [Range: [[0..4294967295]]])</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Setting values of the leaves &#x27;up&#x27; and &#x27;down&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;set uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 hold-time config up 20 down 15
-config&gt;</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set interfaces interface GigabitEthernet0/0/0/0 hold-time config up 20 down 15
+uniconfig-topology-iosxr&gt;</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Verification of the &#x27;hold-time&#x27; configuration</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 hold-time
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/0 hold-time
 {
   &quot;config&quot;: {
     &quot;up&quot;: 20,
@@ -669,8 +700,12 @@ using pattern &#x27;w!&#x27; + newline or to cancel the set operation with &#x27
 <li>Example - replacing configuration of an interface using a JSON snippet:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">move to specified device</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology iosxr</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Replacing &#x27;config&#x27; container under interface using provided JSON snippet</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;set uniconfig iosxr interfaces interface GigabitEthernet0/0/0/1 config json
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set interfaces interface GigabitEthernet0/0/0/1 config json
 {
 &gt;   &quot;config&quot;: {
 &gt;     &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
@@ -682,7 +717,7 @@ w!</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Verification of Set operation</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/1
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;show interfaces interface GigabitEthernet0/0/0/1
 {
   &quot;name&quot;: &quot;GigabitEthernet0/0/0/1&quot;,
     &quot;config&quot;: {
@@ -697,7 +732,7 @@ w!</code></pre>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Cancellation of the Set operation and leaving &#x27;json&#x27; sub-mode</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;set uniconfig iosxr interfaces interface GigabitEthernet0/0/0/1 config json
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set interfaces interface GigabitEthernet0/0/0/1 config json
 {
 &gt;   &quot;config&quot;: {
 &gt;     &quot;type&quot;: &quot;iana-if-type:ethernetCsmacd&quot;,
@@ -709,7 +744,7 @@ q!</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Verification of the cancelled Set operation</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig iosxr interfaces interface GigabitEthernet0/0/0/1
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;show interfaces interface GigabitEthernet0/0/0/1
 {
   &quot;name&quot;: &quot;GigabitEthernet0/0/0/1&quot;,
   &quot;config&quot;: {
@@ -728,6 +763,7 @@ q!</code></pre>
 <ul>
 <li>Command &#x27;request&#x27; is used to execute UniConfig operations such as &#x27;commit&#x27; or &#x27;calculate-diff&#x27;
 in the UniConfig transaction.</li>
+<li>The command is available in configuration-mode.</li>
 <li>User can fill in input parameters and values interactively or via provided JSON snippet.</li>
 </ul>
 <ul>
@@ -770,7 +806,8 @@ target-nodes/node
     ]
   },
   &quot;overall-status&quot;: &quot;complete&quot;
-}</code></pre>
+}
+[24.04.2023, 09:25:31]</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Displaying available &#x27;sync-from-network&#x27; RPC paramaters:</div>
@@ -794,8 +831,99 @@ target-nodes/node
     ]
   },
   &quot;overall-status&quot;: &quot;complete&quot;
-}</code></pre>
+}
+[24.04.2023, 09:26:48]</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="request-operational-mode">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#request-operational-mode">#</doc-anchor-trigger>
+        <span>Request operational mode</span>
+    </h2>
+</doc-anchor-target>
+<p>This command has been merged with request configuration mode and is now only available
+in configuration-mode.</p>
+<ul>
+<li>Request mode allows users to:</li>
+</ul>
+<ol>
+<li>Invoke selected UniConfig requests that read or alter UniConfig settings.</li>
+<li>Invoke RPCs or actions that are provided by network devices or other southbound mount-points.</li>
+</ol>
+<ul>
+<li>The user can fill in input parameters and values interactively or via a provided JSON snippet.</li>
+<li>The transaction is passed from configuration-mode.</li>
+</ul>
+<ul>
+<li>Example - invocation of RPC &#x27;execute-and-read&#x27; with typed input parameters:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Displaying available RPCs provided by device &#x27;iosxr&#x27;</div>
+<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr
+operations
+clear-journal
+execute (Simple execution of single or multiple commands on remote terminal. Multiple comma…)
+execute-and-expect (Form of the 'execute-and-read' RPC that can contain 'expect(..)' patter…)
+execute-and-read (Execution of the sequence of commands specified in the input. These comma…)
+execute-and-read-until
+read-journal</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Displaying available &#x27;execute-and-read&#x27; RPC parameters</div>
+<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr execute-and-read
+&gt;                                                                            (output to file)
+command        (Input configuration snippet (one or multiple commands separated by newline).)
+json                                                                             (JSON input)
+wait-for-output-timer (If no output is received during this time, then execute next command…)
+|                                                                                      (pipe)</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Execution of &#x27;execute-and-read&#x27; RPC with two arguments - &#x27;wait-for-output-timer&#x27; and &#x27;command&#x27;</div>
+<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr execute-and-read wait-for-output-timer 2 command &quot;show users&quot;
+{
+   &quot;output&quot;: &quot;Mon May 16 07:28:30.405 UTC
+   Line            User                 Service  Conns   Idle        Location
+*  vty0            cisco                ssh          0  00:00:00     192.168.1.42&quot;
+}
+[24.04.2023, 09:34:21]</code></pre>
+</doc-codeblock></div>
+<ul>
+<li>Example - execution of the same RPC &#x27;execute-and-read&#x27; using input JSON:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Execution of &#x27;execute-and-read&#x27; RPC with input JSON snippet:</div>
+<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr execute-and-read json
+  {
+&gt;     &quot;input&quot;: {
+&gt;         &quot;command&quot;: &quot;show users&quot;,
+&gt;         &quot;wait-for-output-timer&quot;: 2
+&gt;     }
+&gt; }
+w!
+{
+   &quot;output&quot;: &quot;Mon May 16 07:37:55.256 UTC
+   Line            User                 Service  Conns   Idle        Location
+*  vty0            cisco                ssh          0  00:00:00     192.168.1.42&quot;
+}
+[24.04.2023, 09:36:48]</code></pre>
+</doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>UniConfig shell does not support interactive typing of input arguments for an RPC/action that contains the &#x27;list&#x27; YANG element.
+Such operations must be executed using input JSON.</p>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="show-operational-mode">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#show-operational-mode">#</doc-anchor-trigger>
@@ -829,7 +957,7 @@ aliases
 lbr      (alias for 'logging-status broker restconf')</code></pre>
 </doc-codeblock></div>
 <ul>
-<li>After opening Show mode, a new UniConfig transaction is opened. Transaction is closed after leaving this mode.</li>
+<li>After opening Show mode, a new UniConfig transaction is opened. The transaction is closed after leaving this mode.</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Opening Show operational mode</div>
@@ -874,92 +1002,6 @@ show&gt;</code></pre>
   }
 ]</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="request-operational-mode">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#request-operational-mode">#</doc-anchor-trigger>
-        <span>Request operational mode</span>
-    </h2>
-</doc-anchor-target>
-<ul>
-<li>Request mode allows users to:</li>
-</ul>
-<ol>
-<li>Invoke selected UniConfig requests that read or alter UniConfig settings.</li>
-<li>Invoke RPCs or actions that are provided by network devices or other southbound mount-points.</li>
-</ol>
-<ul>
-<li>User can fill in input parameters and values interactively or via provided JSON snippet.</li>
-<li>After opening Request mode, a new UniConfif transaction is open. Transaction is closed after leaving this mode.</li>
-</ul>
-<ul>
-<li>Example - invocation of RPC &#x27;execute-and-read&#x27; with typed input parameters:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Displaying available RPCs provided by device &#x27;iosxr&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr
-operations
-clear-journal
-execute (Simple execution of single or multiple commands on remote terminal. Multiple comma…)
-execute-and-expect (Form of the 'execute-and-read' RPC that can contain 'expect(..)' patter…)
-execute-and-read (Execution of the sequence of commands specified in the input. These comma…)
-execute-and-read-until
-read-journal</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Displaying available &#x27;execute-and-read&#x27; RPC parameters</div>
-<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr execute-and-read
-&gt;                                                                            (output to file)
-command        (Input configuration snippet (one or multiple commands separated by newline).)
-json                                                                             (JSON input)
-wait-for-output-timer (If no output is received during this time, then execute next command…)
-|                                                                                      (pipe)</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Execution of &#x27;execute-and-read&#x27; RPC with two arguments - &#x27;wait-for-output-timer&#x27; and &#x27;command&#x27;</div>
-<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr execute-and-read wait-for-output-timer 2 command &quot;show users&quot;
-{
-   &quot;output&quot;: &quot;Mon May 16 07:28:30.405 UTC
-   Line            User                 Service  Conns   Idle        Location
-*  vty0            cisco                ssh          0  00:00:00     192.168.1.42&quot;
-}</code></pre>
-</doc-codeblock></div>
-<ul>
-<li>Example - execution of the same RPC &#x27;execute-and-read&#x27; using input JSON:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Execution of &#x27;execute-and-read&#x27; RPC with input JSON snippet:</div>
-<pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr execute-and-read json
-  {
-&gt;     &quot;input&quot;: {
-&gt;         &quot;command&quot;: &quot;show users&quot;,
-&gt;         &quot;wait-for-output-timer&quot;: 2
-&gt;     }
-&gt; }
-w!
-{
-   &quot;output&quot;: &quot;Mon May 16 07:37:55.256 UTC
-   Line            User                 Service  Conns   Idle        Location
-*  vty0            cisco                ssh          0  00:00:00     192.168.1.42&quot;
-}</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>UniConfig shell doesn&#x27;t support interactive typing of input arguments for RPC/action that contains &#x27;list&#x27; YANG element.
-Such operations must be executed using input JSON.</p>
-        </div>
-    </div>
-</div>
 <doc-anchor-target id="pipe-operations">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#pipe-operations">#</doc-anchor-trigger>
@@ -967,13 +1009,17 @@ Such operations must be executed using input JSON.</p>
     </h2>
 </doc-anchor-target>
 <p>UniConfig shell supports pipe operations that are similar to unix shell/bash pipes.
-When a command is followed by pipe sign: |, output of that command will be passed to a selected pipe operation.</p>
+When a command is followed by pipe sign: |, the output of that command will be passed to a selected pipe operation.</p>
 <ul>
 <li>Example:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">move to specified device</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology R1</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Execution of grep pipe operation:</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig R1 interface-configurations interface-configuration | grep netmask
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-R1&gt;show interface-configurations interface-configuration | grep netmask
 
     &quot;netmask&quot;: &quot;255.255.255.0&quot;</code></pre>
 </doc-codeblock></div>
@@ -992,15 +1038,19 @@ When a command is followed by pipe sign: |, output of that command will be passe
         <span>Redirection of output</span>
     </h2>
 </doc-anchor-target>
-<p>Result of a command execution can be redirected to a file using &quot;&gt;&quot; sign followed by file name.</p>
+<p>The output of an executed command can be redirected to a file using the &quot;&gt;&quot; sign followed by a filename.</p>
 <ul>
 <li>Example</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">Redirection of output to file</div>
-<pre class="language-bash"><code v-pre class="language-bash">config&gt;show uniconfig R1 interface-configurations interface-configuration act\ GigabitEthernet0/0/0/1 &gt; '/home/output.txt' </code></pre>
+<div class="codeblock-title">move to specified device</div>
+<pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology R1</code></pre>
 </doc-codeblock></div>
-<p>In this case output in console is empty but content of output.txt file could look like this:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Redirection of output to file</div>
+<pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-R1&gt;show interface-configurations interface-configuration act\ GigabitEthernet0/0/0/1 &gt; '/home/output.txt' </code></pre>
+</doc-codeblock></div>
+<p>In this case, output in the console is empty but the content of the output.txt file is a follows:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Redirection output</div>
 <pre class="language-none"><code v-pre class="language-none">{
@@ -1017,9 +1067,9 @@ When a command is followed by pipe sign: |, output of that command will be passe
         <span>Aliases</span>
     </h2>
 </doc-anchor-target>
-<p>It is possible to define aliases in UniConfig shell. For this purpose, there is a json file named shell-aliases in the
-UniConfig distribution. This file can be found under Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config
-after unpacking of the UniConfig distribution. This file contains some sample aliases.</p>
+<p>You can define aliases in UniConfig shell. For this purpose, there is a json file named shell-aliases in the
+UniConfig distribution. The file can be found under Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config
+after unpacking the UniConfig distribution. The file contains some sample aliases.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">shell-aliases.json with default samples</div>
 <pre class="language-none"><code v-pre class="language-none">/*
@@ -1045,12 +1095,11 @@ Asterisk symbol is a placeholder. We can dynamically add an alias value
         <span>Aliases creation</span>
     </h3>
 </doc-anchor-target>
-<p>It is not possible to create aliases dynamically, only before Uniconfig is started. Creation of aliases
-has some rules:</p>
+<p>It is not possible to create aliases dynamically, only before Uniconfig is started. The following rules apply:</p>
 <ol>
-<li>Alias name has to be unique and cannot contain whitespaces</li>
-<li>Command can contain a wildcard (*). In this case user will be prompted to add value</li>
-<li>Alias is only visible in the mode under which it was defined</li>
+<li>The alias name must be unique and cannot contain whitespaces.</li>
+<li>The command can contain a wildcard (*). In this case the user will be prompted to add a value.</li>
+<li>The alias is only visible in the mode where it was defined.</li>
 </ol>
 <doc-anchor-target id="examples">
     <h3>
@@ -1075,6 +1124,7 @@ config&gt;diff xr5
   },
   &quot;overall-status&quot;: &quot;complete&quot;
 }
+[24.04.2023, 09:31:32]
 config&gt;</code></pre>
 </doc-codeblock></div>
 <ul>
@@ -1114,10 +1164,10 @@ request&gt;
     </h2>
 </doc-anchor-target>
 <p>Callbacks include sending POST and GET requests to the remote server and invoking user scripts from the UniConfig shell.</p>
-<p>The following are required to use callbacks:</p>
+<p>The following is required to use callbacks:</p>
 <ol>
 <li>Necessary YANG modules - YANG modules that are required by the callbacks.</li>
-<li>Configuration - Enable callbacks in &#x27;config/lighty-uniconfig-config.json&#x27; and set the remote server and access token.</li>
+<li>Configuration - Enable callbacks in &#x27;config/application.properties&#x27; and set the remote server and access token.</li>
 <li>Update repository - Add the necessary YANG modules from step 1 into at least one YANG repository in the cache
 directory, and either define remote endpoints and scripts in a YANG file or create a new one for callbacks. For definition of
 remote endpoints, use the <a href="mailto:%27frinx-callpoint@2022-06-22.yang">&#x27;frinx-callpoint@2022-06-22.yang</a>&#x27; extension.</li>
@@ -1167,19 +1217,14 @@ To enable callbacks, the configuration parameter &#x27;callbacks/enabled&#x27; m
 for the remote server and store an access token in the UniConfig database.</p>
 <p>The host and port for the remote server can be set in three ways:</p>
 <ol>
-<li>Before starting Uniconfig, in the &#x27;config/lighty-uniconfig-config.json&#x27; file. The port number is optional:</li>
+<li>Before starting Uniconfig, in the &#x27;config/application.properties&#x27; file. The port number is optional:</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">UniConfig callbacks/remote-server configuration (config/lighty-uniconfig-config.json)</div>
-<pre class="language-json"><code v-pre class="language-json">...
-// remote server settings
-&quot;remoteServer&quot;: {
-    // remote server hostname / IP address
-    &quot;host&quot;: &quot;127.0.0.1&quot;,
-    // port on which remote server listens
-    &quot;port&quot;: 9000
-}
-...</code></pre>
+<div class="codeblock-title">UniConfig callbacks configuration (config/application.proprties)</div>
+<pre class="language-properties"><code v-pre class="language-properties"># Callbacks config
+callbacks.enabled=true
+callbacks.remote-server.host=127.0.0.1
+callbacks.remote-server.port=8443</code></pre>
 </doc-codeblock></div>
 <ol start="2">
 <li>After starting UniConfig, with a PUT request:</li>
@@ -1231,20 +1276,13 @@ for the remote server and store an access token in the UniConfig database.</p>
   config&gt;set settings callbacks-settings access-token token
   config&gt;request commit</code></pre>
 </doc-codeblock></div>
-<p>Available settings and descriptions for callbacks are displayed in the following JSON snippet.</p>
+<p>Available settings and descriptions for callbacks are displayed in the following snippet.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">UniConfig callbacks configuration (config/lighty-uniconfig-config.json)</div>
-<pre class="language-json"><code v-pre class="language-json">&quot;callbacks&quot;: {
-    // flag that determines whether callbacks will work
-    &quot;enabled&quot;: true,
-    // remote server settings
-    &quot;remoteServer&quot;: {
-        // remote server hostname / IP address
-        &quot;host&quot;: &quot;127.0.0.1&quot;,
-        // port on which remote server listens
-        &quot;port&quot;: 9000
-    }
-}</code></pre>
+<div class="codeblock-title">UniConfig callbacks configuration (config/application.proprties)</div>
+<pre class="language-properties"><code v-pre class="language-properties"># Callbacks config
+callbacks.enabled=true
+callbacks.remote-server.host=127.0.0.1
+callbacks.remote-server.port=8443</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="update-repository">
     <h3>
@@ -1389,22 +1427,22 @@ must be in the &#x27;latest&#x27; schema repository.</p>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">callpoint invocation</div>
-<pre class="language-none"><code v-pre class="language-none">uniconfig&gt;show
-show&gt;unistore node1 test get-request
+<pre class="language-none"><code v-pre class="language-none">config&gt;callbacks repository-name
+callbacks-repository-name&gt;show test get-request
 {
   &quot;response&quot;: {
     &quot;value&quot;: &quot;some-value&quot;
   }
 }
-show&gt;</code></pre>
+callbacks-repository-name&gt;</code></pre>
 </doc-codeblock></div>
 <ul>
 <li>Example - action invocation in the shell:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">action invocation</div>
-<pre class="language-none"><code v-pre class="language-none">uniconfig&gt;request 
-request&gt;unistore node1 post-request test-action body data &quot;some-data&quot;
+<pre class="language-none"><code v-pre class="language-none">config&gt;request 
+request&gt;callbacks repository-name post-request test-action body data &quot;some-data&quot;
 {
   &quot;response&quot;: {
     &quot;value&quot;: &quot;some-data was processed&quot;
@@ -1417,12 +1455,12 @@ request&gt;</code></pre>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">user script execution</div>
-<pre class="language-none"><code v-pre class="language-none">uniconfig&gt;request 
-request&gt;unistore node1 script test-script /tmp/test_script.sh 
+<pre class="language-none"><code v-pre class="language-none">config&gt;request 
+request&gt;callbacks repository-name script test-script /tmp/test_script.sh 
 VIP    job    name
-request&gt;unistore node1 script test-script /tmp/test_script.sh job &quot;FRINX&quot; 
+request&gt;callbacks repository-name script test-script /tmp/test_script.sh job &quot;FRINX&quot; 
 VIP    name
-unistore node1 script test-script /tmp/test_script.sh job &quot;FRINX&quot; VIP
+request&gt;callbacks repository-name test-script /tmp/test_script.sh job &quot;FRINX&quot; VIP
 Name: 
 Job: Frinx
 is VIP
