@@ -1558,7 +1558,13 @@ http://localhost:8181/rests/data/network-topology:network-topology/topology=unic
 According to YANG standard there are constraints for leafrefs.
 These constraints are not validated by default. Leafref validation
 can be enabled using checkForReferences query parameter with value
-set to true.
+set to true and configuration parameter *leafref validation* has to
+be set to true in the *application.properties* file.
+Setting is disabled(set to false), by default.
+
+```
+transactions.leafref-validation-enabled=false
+```
 
 ### Example:
 
