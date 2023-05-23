@@ -20,6 +20,6 @@ FRINX Machine.
 
 FRINX Workflow Manager uses Netflix's Conductor for task/workflow orchestration.
 We recommend to take a look at their
-[Documentation](https://netflix.github.io/conductor/configuration/taskdef/)
+[Documentation](https://conductor.netflix.com/documentation/api/index.html)
 as an introduction to Tasks, Workflows, Definitions and an overall
 prerequisite to working with FRINX Workflow Manager.
