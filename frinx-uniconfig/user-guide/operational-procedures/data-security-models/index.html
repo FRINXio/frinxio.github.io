@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.737192673145">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.738873788215">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.737192673145" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.738873788215" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.737192673145" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.737192673145" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.737192673145" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.738873788215" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -483,25 +483,26 @@ All UniConfig instances in the cluster must use the same key-pair.</p>
 <p>Example:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">settings</div>
-<pre class="language-json"><code v-pre class="language-json">&quot;crypto&quot;: {
-    &quot;encryptExtensionId&quot;: &quot;frinx-encrypt:encrypt&quot;,
-    &quot;netconfReferenceModuleName&quot;: &quot;system&quot;,
-    &quot;netconfEncryptedPathsModuleName&quot;: &quot;encrypted-paths&quot;
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none">crypto.encrypt-enabled=true
+crypto.encrypt-extension-id=frinx-encrypt:encrypt
+crypto.netconf-reference-module-name=system
+crypto.netconf-encrypted-paths-module-name=encrypted-paths</code></pre>
 </doc-codeblock></div>
 <ul>
-<li>encryptExtensionId - If this setting is not defined, then encryption is disabled despite of other
+<li>encrypt-enabled - If this setting is false, then encryption is disabled despite other settings or install-node
+parameters. If this setting is true, then encryption is enabled. The default value is true.</li>
+<li>encrypt-extension-id - If this setting is not defined, then encryption is disabled despite other
 settings or install-node parameters. The value must have the format [module-name]:[extension-name] and specifies
 extension used for marking of encrypted leaves/leaf-lists in YANG modules. Corresponding YANG module, that contain
-this extension, can be part of device/unistore YANG schemas or it can be side-loaded during installation of NETCONF
+this extension, can be part of device/unistore YANG schemas, or it can be side-loaded during installation of NETCONF
 device as imported module from &#x27;default&#x27; repository.</li>
-<li>netconfReferenceModuleName - Name of the module for which NETCONF client looks for during mounting process. If
+<li>netconf-reference-module - Name of the module for which NETCONF client looks for during mounting process. If
 UniConfig finds module with this name in the list of received capabilities, then it uses its revision in the lookup
 process for correct YANG module with encrypted paths (using deviations).</li>
-<li>netconfEncryptedPathsModuleName - Name of the module which contains deviations with paths to encrypted
+<li>netconf-encrypted-paths-module-name - Name of the module which contains deviations with paths to encrypted
 leaves/leaf-lists. There could be multiple revisions of this file prepared in the &#x27;default&#x27; NETCONF repository.
-NETCONF client in the UniConfig chooses the correct revision based on &#x27;netconfReferenceModuleName&#x27; setting.
-Together, &#x27;netconfReferenceModuleName&#x27; and &#x27;netconfEncryptedPathsModuleName&#x27; can be used for auto-loading
+NETCONF client in the UniConfig chooses the correct revision based on &#x27;netconf-reference-module-name&#x27; setting.
+Together, netconf-reference-module-name&#x27; and &#x27;netconf-encrypted-paths-module-name&#x27; can be used for autoload
 of encrypted paths for different versions of devices.</li>
 </ul>
 <div class="flex mb-6">
@@ -523,6 +524,83 @@ installation of device (&#x27;netconfReferenceModuleName&#x27; and matching of r
         </div>
     </div>
 </div>
+<doc-anchor-target id="change-encryption-status">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#change-encryption-status">#</doc-anchor-trigger>
+        <span>Change encryption status</span>
+    </h3>
+</doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>For proper working of this RPC it is necessary to enable notifications with this parameter:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">settings</div>
+<pre class="language-none"><code v-pre class="language-none">notifications.enabled=true</code></pre>
+</doc-codeblock></div>
+        </div>
+    </div>
+</div>
+<ul>
+<li>Encryption can be enabled or disabled with the parameter:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">settings</div>
+<pre class="language-none"><code v-pre class="language-none">crypto.encrypt-enabled=true</code></pre>
+</doc-codeblock></div>
+<ul>
+<li>The value of this parameter can be changed with the &#x27;change-encryption-status&#x27; RPC request.</li>
+</ul>
+<p>Following request is used to enable encryption:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC request: change-encryption-status to enable</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;encryption-enabled&quot;: true
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>After calling this command, all Uniconfig instances will set this parameter using the notification service
+to the value which is sent via RPC, in this case it will be set to value true.</p>
+<p>Following request is used to disable encryption:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC request: change-encryption-status to disable</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;encryption-enabled&quot;: false
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>To check the functionality of this RPC, after calling install-device RPC we can request
+the password of the node, which when encryption is enabled will be returned encrypted,
+and when it is disabled password will be plain text.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">GET request: get netconf-node-topology:password with enabled encryption</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=dev01/netconf-node-topology:password' \
+--header 'Accept: application/json'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">GET response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;netconf-node-topology:password&quot;: &quot;rsa_gFXLXIxbeA9Vt8p0+JlprK1YUznBjk9DHRVlZ6Bm2nP0Fi/jUjsAUsGU814QyAZhXBiK6MY7ul75bE1EEI4uj0PlWT4xFYTXaKaMwgdHSCOnE/I6CGakuzGVGgzztKcSA/AsP8/bgXO0Rellw/S6z9U6h8blIG4Ff73GJOr53slWqoqMvAaXgSQtSbYB0EsPey1YqcukKuZnufJAazbHNHuxU1TFxcN/Cn1vTUEr8IATCAohfO7k5MOn0Ds/gYKt63RBO6000gcSP5PS9LRWhucSdLYc4b2+3soz0VXUCGEMPNSrmDXyWKUftI1S3qLfHthHoGEN1YXKGll5ccxW9g==&quot;
+}</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="device-installation">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#device-installation">#</doc-anchor-trigger>
@@ -534,7 +612,7 @@ installation of device (&#x27;netconfReferenceModuleName&#x27; and matching of r
 <li>uniconfig-config:crypto - It allows specifying path to public key on device - &#x27;public-key-path&#x27; (leaf with RFC-8040
 path) and cipher type (by default, RSA is used) - &#x27;public-key-cipher-type&#x27;. If path to public key is specified, and it
 exists on device, then Global-device encryption model is used. Otherwise, Global-only encryption model is selected.</li>
-<li>netconf-node-topology:yang-module-capabilities - If auto-loading of YANG module with encrypted paths is not used
+<li>netconf-node-topology:yang-module-capabilities - If autoload of YANG module with encrypted paths is not used
 and device itself doesn&#x27;t specify encrypted leaves, then it is necessary to side-load YANG module with encrypted
 paths. This parameter is relevant only on NETCONF nodes. Side-loaded modules must be expressed in the format
 of NETCONF capabilities.</li>
@@ -578,7 +656,7 @@ of NETCONF capabilities.</li>
 <p>During installation, UniConfig tries to download public key from device. Public key can be verified using GET request:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">GET request: reading synced public key from device</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/crypto:crypto?content=nonconfig' \
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/crypto:crypto?content=nonconfig' \
 --header 'Accept: application/json'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -603,7 +681,7 @@ is used by UniConfig to see if posted data is encrypted already or needs to be e
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">GET request: reading encrypted leaf</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/config/secret' \
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/config/secret' \
 --header 'Accept: application/json'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -1177,7 +1255,7 @@ of hashed values. Use following GET request:</p>
 <div class="codeblock-title">GET response</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;hash&quot;: {
-        &quot;algorithm&quot;: &quot;SHA-512&quot;,
+        &quot;algorithm&quot;: &quot;SHA-512&quot;
     }
 }</code></pre>
 </doc-codeblock></div>

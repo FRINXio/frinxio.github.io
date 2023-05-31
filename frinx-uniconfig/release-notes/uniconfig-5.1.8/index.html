@@ -12,33 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Hot Standby Router Protocol (HSRP) | Frinx Docs</title>
-    <meta name="title" content="Hot Standby Router Protocol (HSRP) | Frinx Docs">
-    <meta name="description" content="Link to github : xr-unit" />
+    <title>Uniconfig 5.1.8 Release Notes | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.1.8 Release Notes | Frinx Docs">
+    <meta name="description" content="Add change-encryption-status rpc (#1259) - UNIC-1090" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/hsrp/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.8/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/hsrp/">
-    <meta property="og:title" content="Hot Standby Router Protocol (HSRP) | Frinx Docs">
-    <meta property="og:description" content="Link to github : xr-unit">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.8/">
+    <meta property="og:title" content="Uniconfig 5.1.8 Release Notes | Frinx Docs">
+    <meta property="og:description" content="Add change-encryption-status rpc (#1259) - UNIC-1090">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/translation-units-docs/configuration-datasets/hsrp/">
-    <meta property="twitter:title" content="Hot Standby Router Protocol (HSRP) | Frinx Docs">
-    <meta property="twitter:description" content="Link to github : xr-unit">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.8/">
+    <meta property="twitter:title" content="Uniconfig 5.1.8 Release Notes | Frinx Docs">
+    <meta property="twitter:description" content="Add change-encryption-status rpc (#1259) - UNIC-1090">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.738873788215" rel="stylesheet" />
+    <link href="../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.738873788215" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -53,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -69,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -185,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -247,82 +247,161 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="hot-standby-router-protocol-hsrp" class="break-words">
+<doc-anchor-target id="uniconfig-518-release-notes" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#hot-standby-router-protocol-hsrp">#</doc-anchor-trigger>
-        <span>Hot Standby Router Protocol (HSRP)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-518-release-notes">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.8 Release Notes</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="url">
+<doc-anchor-target id="new-features">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#url">#</doc-anchor-trigger>
-        <span>URL</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
     </h2>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">frinx-openconfig-hsrp:hsrp/interfaces/interface=
-
-## OPENCONFIG YANG
-
-[YANG models](https://github.com/FRINXio/openconfig/tree/master/hsrp/src/main/yang)
-
-```javascript
-{
-    &quot;interface&quot;: [
-        {
-            &quot;interface-id&quot;: &quot;&quot;,
-            &quot;config&quot;: {
-                &quot;interface-id&quot;: &quot;&quot;
-                &quot;minimum-delay&quot;: ,
-                &quot;reload-delay&quot;: 
-            },
-            &quot;hsrp-group&quot;: [
-                &quot;address-family&quot;: &quot;ipv4&quot;,
-                &quot;virtual-router-id&quot;:,
-                &quot;config&quot;: {
-                    &quot;address-family&quot;: &quot;ipv4&quot;,
-                    &quot;virtual-router-id&quot;: ,
-                    &quot;version&quot;: ,
-                    &quot;priority&quot;: 
-                }
-            ]
-        }
-    ]
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="os-configuration-commands">
+<ul>
+<li><p>Add change-encryption-status rpc (#1259) - UNIC-1090</p>
+</li>
+<li><p>Added some commands for collecting slot data for IOS-XE - VZ-734</p>
+</li>
+</ul>
+<doc-anchor-target id="bug-fixes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#os-configuration-commands">#</doc-anchor-trigger>
-        <span>OS Configuration Commands</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="cisco-ios-xr-534">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cisco-ios-xr-534">#</doc-anchor-trigger>
-        <span>Cisco IOS XR 5.3.4</span>
-    </h3>
+<ul>
+<li><p>Swagger: Fix path filtering ignoring cruds in lists - UNIC-1315</p>
+</li>
+<li><p>Fix failing shell tests (#1285)</p>
+</li>
+<li><p>Compare decrypted strings in calculate-diff procedure (#1266) - UNIC-1173</p>
+</li>
+<li><p>Changed execution order of commands for CPE ZTP provision for SAOS8</p>
+</li>
+</ul>
+<doc-anchor-target id="improvements">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h2>
 </doc-anchor-target>
-<doc-anchor-target id="cli">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli">#</doc-anchor-trigger>
-        <span>CLI</span>
-    </h4>
+<ul>
+<li><p>Improved error output when two transactions want to update same data … (#1238)</p>
+</li>
+<li><p>Swagger: Improve OpenAPI difference calculation - UNIC-1298</p>
+</li>
+<li><p>Provide option for reading mount-point info - UNIC-1097</p>
+</li>
+<li><p>Refactored InstanceIdentifierContext (#1249) - UNIC-1211</p>
+</li>
+<li><p>Add option to gnmi-topology to read specific data - PANT-72</p>
+</li>
+<li><p>Add unsuported keys for cli connection (#1203)</p>
+</li>
+<li><p>Add JIRA tag to release notes - UNIC-1243</p>
+</li>
+<li><p>Optimize LeafRef context build. - UNIC-988</p>
+</li>
+<li><p>Build LeafRef Tree in background. - UNIC-988</p>
+</li>
+<li><p>Separated reader/writer for IUCs from main classes for Arris Commscope</p>
+</li>
+<li><p>Unify annotation usage in uniconfig codebase</p>
+</li>
+<li><p>support error info (#1201) - UNIC-1136</p>
+</li>
+<li><p>Rewrite RestConf module DI (#1202) - UNIC-1101</p>
+</li>
+</ul>
+<doc-anchor-target id="other">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
+    </h2>
 </doc-anchor-target>
-<pre>
-router hsrp
- interface 
-  hsrp delay minimum  reload 
-  address-family ipv4
-   hsrp  version 
-    priority 
-</pre>
-<doc-anchor-target id="unit">
-    <h5>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#unit">#</doc-anchor-trigger>
-        <span>Unit</span>
-    </h5>
+<ul>
+<li>Create a new set of installation parameters</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
+    </h2>
 </doc-anchor-target>
-<p>Link to github : <a href="https://github.com/FRINXio/cli-units/tree/master/ios-xr/hsrp">xr-unit</a></p>
+<ul>
+<li><p>build(deps): bump maven-plugin-plugin from 3.8.2 to 3.9.0</p>
+</li>
+<li><p>build(deps-dev): bump flyway-core from 9.17.0 to 9.19.1</p>
+</li>
+<li><p>build(deps): bump kotlinx-coroutines-core from 1.7.0 to 1.7.1</p>
+</li>
+<li><p>build(deps): bump checkstyle from 10.11.0 to 10.12.0</p>
+</li>
+<li><p>build(deps): bump triemap from 1.3.0 to 1.3.1</p>
+</li>
+<li><p>build(deps): bump embedded-postgres-binaries-linux-amd64 from 13.10.0 to 13.11.0 (#1274)</p>
+</li>
+<li><p>build(deps): bump embedded-postgres from 2.0.3 to 2.0.4 (#1270)</p>
+</li>
+<li><p>build(deps): bump jackson-databind from 2.15.0 to 2.15.1 (#1264)</p>
+</li>
+<li><p>build(deps): bump protobuf.version from 3.23.0 to 3.23.1 (#1273)</p>
+</li>
+<li><p>build(deps-dev): bump maven-plugin-annotations from 3.8.2 to 3.9.0 (#1265)</p>
+</li>
+<li><p>build(deps): bump maven-source-plugin from 3.2.1 to 3.3.0 (#1271)</p>
+</li>
+<li><p>build(deps): bump maven-assembly-plugin from 3.5.0 to 3.6.0 (#1272)</p>
+</li>
+<li><p>build(deps): bump spring.boot.version from 3.0.6 to 3.0.7 (#1269)</p>
+</li>
+<li><p>build(deps): bump netty.version from 4.1.92.Final to 4.1.93.Final</p>
+</li>
+<li><p>build(deps): bump git-commit-id-maven-plugin from 5.0.0 to 6.0.0</p>
+</li>
+<li><p>build(deps): bump spring-jdbc from 6.0.8 to 6.0.9</p>
+</li>
+<li><p>build(deps): bump antlr4.version from 4.12.0 to 4.13.0 (#1256)</p>
+</li>
+<li><p>build(deps): bump checkstyle from 10.10.0 to 10.11.0 (#1254)</p>
+</li>
+<li><p>build(deps): bump guice.version from 5.1.0 to 7.0.0 (#1253)</p>
+</li>
+<li><p>build(deps): bump jackson-bom from 2.15.0 to 2.15.1</p>
+</li>
+<li><p>build(deps-dev): bump swagger-parser from 1.0.65 to 1.0.66</p>
+</li>
+<li><p>build(deps): bump swagger-core from 2.2.9 to 2.2.10</p>
+</li>
+<li><p>build(deps): bump jersey.version from 3.1.1 to 3.1.2</p>
+</li>
+<li><p>build(deps): bump maven-checkstyle-plugin from 3.2.2 to 3.3.0</p>
+</li>
+<li><p>build(deps): bump maven.core.version from 3.9.1 to 3.9.2 (#1215)</p>
+</li>
+<li><p>build(deps): bump maven-remote-resources-plugin from 3.0.0 to 3.1.0</p>
+</li>
+<li><p>build(deps): bump build-helper-maven-plugin from 3.3.0 to 3.4.0</p>
+</li>
+<li><p>build(deps): bump json-smart from 2.4.10 to 2.4.11</p>
+</li>
+<li><p>build(deps): bump protobuf.version from 3.22.4 to 3.23.0</p>
+</li>
+<li><p>build(deps): bump sshd.version from 2.9.2 to 2.10.0</p>
+</li>
+<li><p>build(deps): bump opentelemetry-api from 1.25.0 to 1.26.0 (#1195)</p>
+</li>
+<li><p>build(deps): bump maven-failsafe-plugin from 3.0.0 to 3.1.0 (#1196)</p>
+</li>
+<li><p>build(deps): bump maven-surefire-plugin from 3.0.0 to 3.1.0 (#1197)</p>
+</li>
+<li><p>build(deps): bump kotlinx-coroutines-core from 1.6.4 to 1.7.0 (#1198)</p>
+</li>
+<li><p>build(deps): bump grpc.version from 1.54.1 to 1.55.1 (#1199)</p>
+</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -332,20 +411,20 @@ router hsrp
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/translation-units-docs/configuration-datasets/evpn/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.7/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Ethernet Virtual Private Network (EVPN)</span>
+                                                <span class="block mt-1">Uniconfig 5.​1.​7 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/translation-units-docs/configuration-datasets/l2-cft/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">L​2-​Cft (Layer 2 Control Frame Forwarding)</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -392,6 +471,6 @@ router hsrp
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Hot Standby Router Protocol (HSRP)", level: 4, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.8 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
