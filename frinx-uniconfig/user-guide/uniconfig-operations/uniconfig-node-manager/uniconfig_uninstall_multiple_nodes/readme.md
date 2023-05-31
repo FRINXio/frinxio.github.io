@@ -30,26 +30,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 ```
 
 ```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": [
-            {
-                "status": "complete",
-                "node-id": "R2"
-            },
-            {
-                "status": "complete",
-                "node-id": "R1"
-            }
-        ]
-    }
-}
 ```
 
 ### Successful example
 
-RPC input contains devices (R1 and R2) and R2 is installed on two
-different protocols.
+RPC input contains devices (R1 and R2) and R2 is installed on two different protocols.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
@@ -76,30 +61,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 ```
 
 ```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": [
-            {
-                "status": "complete",
-                "node-id": "R2"
-            },
-            {
-                "status": "complete",
-                "node-id": "R2"
-            },
-            {
-                "status": "complete",
-                "node-id": "R1"
-            }
-        ]
-    }
-}
 ```
 
 ### Successful example
 
-RPC input contains two devices (R1 and R2) and R2 is already uninstalled
-on CLI protocol.
+RPC input contains two devices (R1 and R2) and R2 is already uninstalled on CLI protocol.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
@@ -121,18 +87,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 404
 {
-    "output": {
-        "node-results": [
+    "errors": {
+        "error": [
             {
-                "status": "fail",
-                "error-message": "Node hasn't been installed on Uniconfig layer",
-                "node-id": "R2"
-            },
-            {
-                "status": "complete",
-                "node-id": "R1"
+                "error-tag": "data-missing",
+                "error-app-tag": "UniconfigError",
+                "error-info": "R2",
+                "error-message": "Node has already been removed from Uniconfig",
+                "error-type": "application"
             }
         ]
     }
@@ -162,13 +126,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "node-results": [
+    "errors": {
+        "error": [
             {
-                "status": "fail",
-                "error-message": "Field 'node-id' must be specified in the RPC input"
+                "error-tag": "missing-element",
+                "error-app-tag": "UniconfigError",
+                "error-message": "Field 'node-id' must be specified in the RPC input",
+                "error-type": "application"
             }
         ]
     }
