@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.738873788215">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.740150984365">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Device Discovery | Frinx Docs</title>
     <meta name="title" content="Device Discovery | Frinx Docs">
-    <meta name="description" content="RPC device-discovery is used for verification of reachable devices in a network. The user can check a single IP address in IPv4 format, a" />
+    <meta name="description" content="RPC device-discovery is used to verify reachable devices in a network. You can either check a single IP address in IPv4 format, a" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/device-discovery/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/device-discovery/">
     <meta property="og:title" content="Device Discovery | Frinx Docs">
-    <meta property="og:description" content="RPC device-discovery is used for verification of reachable devices in a network. The user can check a single IP address in IPv4 format, a">
+    <meta property="og:description" content="RPC device-discovery is used to verify reachable devices in a network. You can either check a single IP address in IPv4 format, a">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/device-discovery/">
     <meta property="twitter:title" content="Device Discovery | Frinx Docs">
-    <meta property="twitter:description" content="RPC device-discovery is used for verification of reachable devices in a network. The user can check a single IP address in IPv4 format, a">
+    <meta property="twitter:description" content="RPC device-discovery is used to verify reachable devices in a network. You can either check a single IP address in IPv4 format, a">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.738873788215" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.740150984365" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.740150984365" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.738873788215" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.738873788215" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.740150984365" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.740150984365" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,64 +254,60 @@
         <span>Device Discovery</span>
     </h1>
 </doc-anchor-target>
-<p>RPC device-discovery is used for verification of reachable devices in a
-network. The user can check a single IP address in IPv4 format, a
-network or a range of addresses. The ICMP protocol is used to check the
-availability of the device. The user can also specify a specific port
-(TCP or UDP) or a range of ports which are checked if they are open. The
-input consists of a list of all the IP addresses that should be checked
+<p>RPC device-discovery is used to verify reachable devices in a
+network. You can either check a single IP address in IPv4 format, a
+network or a range of addresses. Additionally, you can also specify
+a port or range of ports (TCP or UDP) that are checked if they are open.
+The ICMP protocol is used to check the availability devices.</p>
+<p>The input consists of a list of all IP addresses that should be checked
 (IPv4 or IPv6, a single IP address or a network with a prefix, or a
-range of IP addresses). It also contains the desired TCP/UDP ports, that
-should be checked if they are open or not on the addresses. The output
-of the RPC contains the result, which shows if the IP addresses are
-reachable via the ICMP protocol. Next, every IP address contains a list
-of all the open TCP/UDP ports.</p>
-<p>To test it properly you have to get your IP and add it to the
-configuration JSON file. The configuration file is located under</p>
-<p><strong>~/FRINX-machine/config/uniconfig/frinx/uniconfig/config/lighty-uniconfig-config.json</strong></p>
-<p>when running UniConfig stand-alone the config file is in the config
-folder:</p>
-<p><strong>/opt/uniconfig-frinx/config/lighty-uniconfig-config.json.</strong></p>
-<p>Execute the command <strong>ifconfig</strong> in the terminal and look for an
-interface. If you use a VPN, it&#x27;s probably called <strong>tun0</strong>, if not, try
-a different interface. From there, copy the <strong>inet</strong> in the interface
-and paste it in the file.</p>
+range of IP addresses). Additionally, it contains the TCP/UDP ports that
+should be checked whether they are open or not on the given addresses.</p>
+<p>The output of the RPC shows if the IP addresses are reachable via the
+ICMP protocol. For every IP address, a list of open TCP/UPD ports is
+also included.</p>
+<p>For testing, you need to add your IP address to the configuration JSON file.
+The configuration file is located under</p>
+<p><strong>~/FRINX-machine/config/uniconfig/frinx/uniconfig/config/application.properties</strong></p>
+<p>When running UniConfig stand-alone, the config file is in the config folder:</p>
+<p><strong>/opt/uniconfig-frinx/config/application.properties</strong></p>
+<p>Execute the <strong>ifconfig</strong> command  in the terminal and look for an
+interface. If you are using a VPN, the interface is often called <strong>tun0</strong>.
+If not, look for a different interface. Copy <strong>inet</strong> from the interface and
+paste it into the file.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">JSON Snippet</div>
-<pre class="language-json"><code v-pre class="language-json">{
-&quot;deviceDiscovery&quot;:{
-        // A parameter that specifies the local address from which the scanning will be ran.
-        &quot;localAddress&quot;: &quot;10.255.246.107&quot;,
-        // A parameter that specifies the maximum pool size by the executor.
-        // If left empty, the default will be CPU_COUNT * 8.
-        //&quot;maxPoolSize&quot;: 20,
-        // A parameter that specifies the maximum limit of IP addresses that the service can process in one request.
-        &quot;addressCheckLimit&quot;: 254
-    },
-}</code></pre>
+<div class="codeblock-title">Snippet</div>
+<pre class="language-properties"><code v-pre class="language-properties">device-discovery.local-address=
+device-discovery.initial-pool-size=1
+device-discovery.max-pool-size=20
+device-discover-keepalive-time=60
+device-discovery.address-check-limit=254</code></pre>
 </doc-codeblock></div>
-<p>The JSON snippet contains two additional parameters.</p>
+<p>The snippet contains two additional parameters.</p>
 <ul>
-<li>The first one (&quot;maxPoolSize&quot;) contains the value of the size of the
-executor that will be used. If the amount of addresses in the
+<li><strong>initial-pool-size</strong> of the thread pool that is used by the executor.</li>
+<li><strong>&quot;max-pool-size&quot;</strong> specifies the size of the
+executor that is used. If the amount of addresses in the
 request is high, consider raising the value.</li>
-<li>The second one (&quot;addressCheckLimit&quot;) contains the value of how many
-addresses should be checked. If the addresses that are specified in
-the request are higher, the request will not be successful.</li>
+<li><strong>kepalive-time</strong> specifies the time (in seconds) before the execution
+of a specified task is timed out.</li>
+<li><strong>&quot;addressCheckLimit&quot;</strong> specifies how many
+addresses are checked. If more addresses are specified in
+the request, the request will not be successful.</li>
 </ul>
-<p>When you would like to discover hosts and ports in listening state in a
-network, be sure not to add the network and broadcast address of that
-network. For example if you want to check a network &quot;192.168.1.0/24&quot;,
-you can either use:</p>
+<p>If you want to discover hosts and ports in listening state in a
+network, do not add the network and broadcast address of that
+network. For example, if you want to check the network &quot;192.168.1.0/24&quot;,
+you can use one of the following:</p>
 <ul>
 <li>&quot;network&quot;: &quot;192.168.1.0/24&quot;</li>
 <li>&quot;start-ipv4-address&quot;: &quot;192.168.1.1&quot;, &quot;end-ipv4-address&quot;:
 &quot;192.168.1.254&quot;</li>
 </ul>
-<p>If you specify the range via a network statement, the network address
+<p>If you specify the range using a network statement, the network address
 and broadcast address will not be included in the discovery process. If
-you specify the range via the range statements, the user has to make
-sure that only hosts addresses are included in the specified range.</p>
+you specify the range via range statements, make sure that only hosts
+addresses are included in the specified range.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
@@ -324,10 +320,10 @@ sure that only hosts addresses are included in the specified range.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains a network with the prefix /29. The addresses in the
-network and the desired ports are checked for availability.The output
-contains if any addresses in the network are reachable and all the open
-TCP/UDP ports.</p>
+<p>RPC input contains a network with the prefix /29. Addresses in the
+network and desired ports are checked for availability. The output
+contains reachable addresses in the network and all open TCP/UDP
+ports.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/device-discovery:discover' \
@@ -364,41 +360,94 @@ TCP/UDP ports.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;device&quot;: [
-            {
-                &quot;host&quot;: &quot;192.168.1.1&quot;,
-                &quot;available-udp-ports&quot;: [
-                    50,
-                    51,
-                    52,
-                    53,
-                    69
-                ],
-                &quot;is-host-reachable&quot;: true
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.2&quot;,
-                &quot;is-host-reachable&quot;: true
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.3&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.4&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.5&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.6&quot;,
-                &quot;is-host-reachable&quot;: false
-            }
+  &quot;output&quot;: {
+    &quot;device&quot;: [
+      {
+        &quot;host&quot;: &quot;192.168.1.1&quot;,
+        &quot;available-udp-ports&quot;: [
+          50,
+          51,
+          52,
+          69
+        ],
+        &quot;unavailable-tcp-ports&quot;: [
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88
+        ],
+        &quot;available-tcp-ports&quot;: [
+          80,
+          443
+        ],
+        &quot;is-host-reachable&quot;: true
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.2&quot;,
+        &quot;is-host-reachable&quot;: false
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.3&quot;,
+        &quot;unavailable-tcp-ports&quot;: [
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          443
+        ],
+        &quot;is-host-reachable&quot;: true,
+        &quot;unavailable-udp-ports&quot;: [
+          50,
+          51,
+          52,
+          53,
+          69
         ]
-    }
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.4&quot;,
+        &quot;is-host-reachable&quot;: false
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.5&quot;,
+        &quot;is-host-reachable&quot;: false
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.6&quot;,
+        &quot;unavailable-tcp-ports&quot;: [
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88
+        ],
+        &quot;available-tcp-ports&quot;: [
+          80,
+          443
+        ],
+        &quot;is-host-reachable&quot;: true,
+        &quot;unavailable-udp-ports&quot;: [
+          50,
+          51,
+          52,
+          53,
+          69
+        ]
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
@@ -407,9 +456,9 @@ TCP/UDP ports.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains a range of addresses. The addresses and the desired
-ports are checked for availability. The output contains if any addresses
-are reachable and all the open TCP/UDP ports.</p>
+<p>RPC input contains a range of addresses. The addresses and desired
+ports are checked for availability. The output contains reachable addresses
+and all open TCP/UDP ports.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/device-discovery:discover' \
@@ -447,49 +496,102 @@ are reachable and all the open TCP/UDP ports.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;device&quot;: [
-            {
-                &quot;host&quot;: &quot;192.168.1.1&quot;,
-                &quot;available-udp-ports&quot;: [
-                    50,
-                    51,
-                    52,
-                    53,
-                    69
-                ],
-                &quot;is-host-reachable&quot;: true
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.2&quot;,
-                &quot;is-host-reachable&quot;: true
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.3&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.4&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.5&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.6&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.7&quot;,
-                &quot;is-host-reachable&quot;: false
-            },
-            {
-                &quot;host&quot;: &quot;192.168.1.8&quot;,
-                &quot;is-host-reachable&quot;: false
-            }
+  &quot;output&quot;: {
+    &quot;device&quot;: [
+      {
+        &quot;host&quot;: &quot;192.168.1.1&quot;,
+        &quot;available-udp-ports&quot;: [
+          50,
+          51,
+          52,
+          69
+        ],
+        &quot;unavailable-tcp-ports&quot;: [
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88
+        ],
+        &quot;available-tcp-ports&quot;: [
+          80,
+          443
+        ],
+        &quot;is-host-reachable&quot;: true
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.2&quot;,
+        &quot;is-host-reachable&quot;: false
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.3&quot;,
+        &quot;unavailable-tcp-ports&quot;: [
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          443
+        ],
+        &quot;is-host-reachable&quot;: true,
+        &quot;unavailable-udp-ports&quot;: [
+          50,
+          51,
+          52,
+          53,
+          69
         ]
-    }
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.4&quot;,
+        &quot;is-host-reachable&quot;: false
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.5&quot;,
+        &quot;is-host-reachable&quot;: false
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.6&quot;,
+        &quot;unavailable-tcp-ports&quot;: [
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88
+        ],
+        &quot;available-tcp-ports&quot;: [
+          80,
+          443
+        ],
+        &quot;is-host-reachable&quot;: true,
+        &quot;unavailable-udp-ports&quot;: [
+          50,
+          51,
+          52,
+          53,
+          69
+        ]
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.7&quot;,
+        &quot;is-host-reachable&quot;: false
+      },
+      {
+        &quot;host&quot;: &quot;192.168.1.8&quot;,
+        &quot;is-host-reachable&quot;: false
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-2">
@@ -498,9 +600,9 @@ are reachable and all the open TCP/UDP ports.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains the host name and the desired ports that should be
-checked for availability. The output contains if the host is reachable
-and all the open TCP/UDP ports.</p>
+<p>RPC input contains the host name and ports that are checked for
+availability. The output shows if the host is reachable as well
+as all open TCP/UDP ports.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/device-discovery:discover' \
@@ -537,25 +639,35 @@ and all the open TCP/UDP ports.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;device&quot;: [
-            {
-                &quot;host&quot;: &quot;46.229.232.182&quot;,
-                &quot;available-udp-ports&quot;: [
-                    50,
-                    51,
-                    52,
-                    53,
-                    69
-                ],
-                &quot;available-tcp-ports&quot;: [
-                    80,
-                    443
-                ],
-                &quot;is-host-reachable&quot;: true
-            }
-        ]
-    }
+  &quot;output&quot;: {
+    &quot;device&quot;: [
+      {
+        &quot;host&quot;: &quot;46.229.232.182&quot;,
+        &quot;available-udp-ports&quot;: [
+          50,
+          51,
+          52,
+          53,
+          69
+        ],
+        &quot;unavailable-tcp-ports&quot;: [
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88
+        ],
+        &quot;available-tcp-ports&quot;: [
+          80,
+          443
+        ],
+        &quot;is-host-reachable&quot;: true
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
@@ -620,7 +732,7 @@ and all the open TCP/UDP ports.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains an IP range where the start point is greater than end
+<p>RPC input contains an IP range where the start point is greater than the end
 point.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
