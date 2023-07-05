@@ -8,7 +8,7 @@ order: 8000
 ## Overview
 
 NETCONF is an Internet Engineering Task Force (IETF) protocol used for
-configuration and monitoring devices in the network. It can be used to
+configuration and monitoring of devices in a network. It can be used to
 “create, recover, update, and delete configurations of network devices”.
 The base NETCONF protocol is described in
 [RFC-6241](https://tools.ietf.org/html/rfc6241).
@@ -283,23 +283,23 @@ $ ssh cisco@192.168.1.216
 
 ### PKI Data persistence in NETCONF
 
-* The PKI data is used for authentication of NETCONF sessions using provided RSA private key.
-  The corresponding public key must be stored on device side.
-* Keys are identified using unique 'key-id'. The key identifier can be specified in the
+* PKI data is used for authentication of NETCONF sessions with the provided RSA private key.
+  The corresponding public key must be stored on the device side.
+* Keys are identified using a unique 'key-id'. This key identifier can be specified in the
   NETCONF installation request.
-* The keys can be managed using 'remove-keystore-entry' and 'add-keystore-entry' operations.
-  These RPC calls are part of the UniConfig transaction - the changes are not applied until
-  they are committed by user or immediate commit model is used for invocation of the operation.
-* The keys are stored in the UniConfig database. In the clustered environment, all nodes
+* Keys can be managed using the 'remove-keystore-entry' and 'add-keystore-entry' operations.
+  These RPC calls are part of the UniConfig transaction. Changes are not applied until
+  they are committed by the user or the immediate commit model is used to invoke the operation.
+* Keys are stored in the UniConfig database. In a clustered environment, all nodes
   share the same set of keys.
 
 #### Registration of the new key
 
-The following request demonstrates registration of the new RSA private with the key-id 'key1'.
-The private key must be specified in the PKCS#8 format. The passphrase is optional, and it must
+The following request demonstrates how to register a new RSA private key with a key-id of 'key1'.
+The private key must be specified in the PKCS#8 format. The passphrase is optional and must
 be specified only if the private key is encrypted.
 
-Multiple keys can be registered at once if user provides list of the 'key-credential' on the input.
+Multiple keys can be registered at once if the user provides a list of the 'key-credential' in the input.
 
 ```bash
 
@@ -382,10 +382,8 @@ curl --location 'http://127.0.0.1:8181/rests/data/netconf-keystore:keystore/key-
 }
 ```
 
-!!!
-You can see that both 'passphrase' and 'private-key' are additionally encrypted by UniConfig encryption system
-in order to protect confidential data.
-!!!
+**Note:** Both 'passphrase' and 'private-key' are additionally encrypted by the UniConfig encryption system
+to protect confidential data.
 
 ### Keepalive settings
 
