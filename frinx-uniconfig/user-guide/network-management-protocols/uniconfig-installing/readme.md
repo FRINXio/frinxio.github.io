@@ -649,7 +649,7 @@ remote agent.
 - **node-id** - Name of node that represents device / mount-point in
   the topology.
 - **snmp-topology:host** - IP address or domain-name of target
-  device that running an SNMP agent.
+  device where SNMP agent is running.
 - **snmp-topology:port** - SNMP port on which SNMP agent is listening 
   to incoming connections.
 
@@ -670,7 +670,7 @@ remote agent.
 ### Authentication parameters
 
 - **snmp-topology:community-string** - UniConfig currently supports only
-  security string as authentication method that is connected with V1 and
+  security string as authentication method that is used with V1 and
   V2c.
 
 ### Others

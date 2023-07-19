@@ -62,6 +62,22 @@ UniConfig currently supports read operation, with plans to add write operation i
 
 ## GET request
 
-```bash
-curl --location 'http://localhost:8181/rests/data/network-topology:network-topology/topology=topology-snmp/node=agent1/yang-ext:mount/SNMPv2-SMI:iso'
+```bash Reading snmpV2 container
+curl --location 'http://localhost:8181/rests/data/network-topology:network-topology/topology=topology-snmp/node=agent1/yang-ext:mount/yang-ext:mount/SNMPv2-SMI:iso/org/dod/internet/snmpV2'
+```
+
+```json Sample response
+{
+  "snmpV2": {
+    "snmpModules": {
+      "SNMPv2-MIB:snmpMIB": {
+        "snmpMIBObjects": {
+          "snmpSet": {
+            "snmpSetSerialNo": "0"
+          }
+        }
+      }
+    }
+  }
+}
 ```
