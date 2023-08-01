@@ -1,6 +1,6 @@
 ## Monitoring using Metrics
 
-Uniconfig exposes multiple metrics to monitor the traffic and other useful values to monitor its performance.
+UniConfig exposes multiple metrics to monitor the traffic and other useful values to monitor its performance.
 Output can be in form of plaintext log messages in the log file **metrics.log** in the **log** directory in the **root** of the distribution
 or in the form of raw data in CSV format from which it can be further processed by the 3rd party visualization tools.
 CSV files are located in the **metrics** directory in the **root** of the distribution.
@@ -9,7 +9,7 @@ CSV files are located in the **metrics** directory in the **root** of the distri
 - Gauge - reports instantanious value at a point in time (for example queue size)
 - Meter - measures total count of event occurences, total mean rate, mean rates for past 1, 5 and 15 minutes time windows 
 
-## List of notable metrics exposed by Uniconfig
+## List of notable metrics exposed by UniConfig
 
 - **Gauges**
     - io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size - The number of tasks in the queue waiting for execution

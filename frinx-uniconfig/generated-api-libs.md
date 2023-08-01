@@ -12,7 +12,7 @@ includes support for automated documentation, code generation, and
 test-case generation.
 
 Following files provide OpenAPI files for FRINX ODL’s REST interface (in
-context of uniconfig topology, unified topology and southbound topology)
+context of UniConfig topology, unified topology and southbound topology)
 which can be used with Swagger tools.
 
 ## How to launch Swagger-UI

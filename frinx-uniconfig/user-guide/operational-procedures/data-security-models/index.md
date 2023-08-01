@@ -257,7 +257,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:ch
     }
 }'
 ```
-After calling this command, all Uniconfig instances will set this parameter using the notification service 
+After calling this command, all UniConfig instances will set this parameter using the notification service 
 to the value which is sent via RPC, in this case it will be set to value true.
 
 Following request is used to disable encryption:
@@ -272,6 +272,22 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:ch
     }
 }'
 ```
+
+Following request is used to check actual encryption status:
+
+```bash POST request: get encryption-enabled-actual-status
+ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json'
+```
+
+```json POST response
+{
+  "output": {
+    "encryption-enabled-actual-status": true
+  }
+}
+```
 To check the functionality of this RPC, after calling install-device RPC we can request 
 the password of the node, which when encryption is enabled will be returned encrypted, 
 and when it is disabled password will be plain text.
@@ -285,6 +301,56 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 {
     "netconf-node-topology:password": "rsa_gFXLXIxbeA9Vt8p0+JlprK1YUznBjk9DHRVlZ6Bm2nP0Fi/jUjsAUsGU814QyAZhXBiK6MY7ul75bE1EEI4uj0PlWT4xFYTXaKaMwgdHSCOnE/I6CGakuzGVGgzztKcSA/AsP8/bgXO0Rellw/S6z9U6h8blIG4Ff73GJOr53slWqoqMvAaXgSQtSbYB0EsPey1YqcukKuZnufJAazbHNHuxU1TFxcN/Cn1vTUEr8IATCAohfO7k5MOn0Ds/gYKt63RBO6000gcSP5PS9LRWhucSdLYc4b2+3soz0VXUCGEMPNSrmDXyWKUftI1S3qLfHthHoGEN1YXKGll5ccxW9g=="
 }
+```
+
+### Change encryption keys (private and public)
+
+In case it is necessary to change the encryption keys, there is RPC change-encryption-keys.
+The process of changing encryption keys requires rebooting one of the instances of UniConfig or enabling a 
+new instance of UniConfig after calling change-encryption-keys RPC 
+(rotation of encrypted data in the database for new encryption keys occurs when UniConfig 
+is started if RPC change-encryption-keys is executed). During key rotation, if some data in the database cannot be 
+decrypted with the old key, those data will remain unchanged. 
+
+```bash RPC request: change-encryption-keys to new public and private keys
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    "input": {
+        "new-encryption-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAypJ4HB0kpxTvvEtOlT1jmtqTU2iY3m6VRx+xRJfP9UuGMT0qBC8/D5a/MRgTeSyJtZbmn8Jvu5ZNefDcHOgtv0yZ+BqRdew5sXd7xdzFAN0dgaBdvEAT9HXn+dKI9HGh7CMjH3JV1eNRwPLu5u3CbYiIrV3UM/2ogiZwsQsBHZcprbGlpdRa6yy+AXdB61BEGvdBQDvT0ND0q36sQkpG9qQokDxk77HyFx6b3YS8O+LXeb+Aka71sF/voTEhbMiUIF6jaWosoWYse4B0hZ2P0i+3CPtScgCA3n9XCcGXKj6g9wY/tEywsCfnS03KRTpVhpIjZb/xMKEcMOVl2BFA1wIDAQAB",
+        "new-decryption-private-key":"MIIEowIBAAKCAQEAypJ4HB0kpxTvvEtOlT1jmtqTU2iY3m6VRx+xRJfP9UuGMT0qBC8/D5a/MRgTeSyJtZbmn8Jvu5ZNefDcHOgtv0yZ+BqRdew5sXd7xdzFAN0dgaBdvEAT9HXn+dKI9HGh7CMjH3JV1eNRwPLu5u3CbYiIrV3UM/2ogiZwsQsBHZcprbGlpdRa6yy+AXdB61BEGvdBQDvT0ND0q36sQkpG9qQokDxk77HyFx6b3YS8O+LXeb+Aka71sF/voTEhbMiUIF6jaWosoWYse4B0hZ2P0i+3CPtScgCA3n9XCcGXKj6g9wY/tEywsCfnS03KRTpVhpIjZb/xMKEcMOVl2BFA1wIDAQABAoIBAQCSwKWPCHXjLUG4UX4uk/iy2KJejKoiik5O5mDP5oNbm0kuJrdnrKqsqnL8KAsDgAaLrTSKjJvRdEPQkXOE5ZcuvVnV6blzip0JOhxK7XMy+v1DSWBe3rUWJszVqXZaUHAT2Ci7wWL5vuMdO2Fjnt955q3Nmun+eEc5cou1VtmKCwvCIG857+FTzTdlmWcdDXTWIqbE7/OyuLcBYGmqlXnKLGx9+devRDNMwg3vTNDAeDY6b5WJWVtZjIaHLzMtXr3Rjkposu1eF8yFcGVW9AQpwecGsiMmCVOYwIKxGTe0xNOrw2LUnuAcD8unUTpI4y7MRM4tZexhG8+Pb4wSpyjhAoGBAPaMZZUdfVQ/8zQpqgxSYtbYHR3luYO2mDLEgTx7K3whuOFFIr3NrfOMUxhRmCATYZHfLSDVbym7eFn2f5+9XXlB14z8R61wiCpHWtxKyl/Ai4yWcIqxjGgWf0iCe0BDVZuPihM9cTRFDwK/P5BtsU8afH0ufggr4KuhNDxjHyRvAoGBANJWfkcxwq+k5wYn5oEwutyK95LJRx3NcBSdWX5Xb4TVxRQDeLGOEkIm/jochafJg8qkTMZJHXIycD/GNGZuXr16jJZtJix+fpmJ8yHj667QVVd9HWkOmifCfTJVTW5TJVKSKYW5EoX3xja8fgZ0sUiCWEJghCr/+/PhpN7zEW4ZAoGAHh9DHffPYya5CQt6Gi1KpCMdU5TImJ4LdFBr1b7arjzUgLlYqEXj1di0Ikl9w5V6mz7gHZ3WCgw8hQlHyHVzYSg5NKFyBG+2QywansWIejBlHFUZBOjyVZlCDdLbShuv7uSXowgjt5YkYlqJYpT0T8zVntm6TjdGKNH2NtaJbIMCgYA85jwTou2qa0VUe/L6TsCboETEJDDKCTQ9U72Ynfo07Kvt+n9UcT0KGD4dVyq/hNH6tw1fj8XNzZrAbEO5sJUPqU7RMvMNiOZg0BcsJdCUQc+j0B7WzxqFDoOvMhGEMuCogpcxF3+seCvUp0iZ1+mIg+zH8yfxR0KMvzU8NAZE6QKBgFuv6zSsGOCqm7pTdb4YWsd944ZtXWQ3YTFUWl+iRsUJ2le3FLXVZ06oLPLQZyNHzhCr0FRxsmyAXaKZ0JTULYpq5ee63RJFnp5+gxJNNdvzxlw9e29uMz+/o1sRB6tqj2ZunrOtf1W0khKJ1y7U0PAYa0ha9LwERWeoemJqggQ7"
+    }
+}'
+```
+
+* The default value of 'new-encryption-cipher-type' parameter is value 'RSA', so there is no need to add this parameter to the request body.
+
+To check if UniConfig needs to be restarted or if a new UniConfig instance needs to be added,
+the following query can be run:
+
+```bash POST request: get need-rotation-of-encryption-certificate
+ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-keys' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json'
+```
+
+```json POST response
+{
+  "output": {
+    "need-rotation-of-encryption-certificate": true
+  }
+}
+```
+
+After key rotation when UniConfig is started, the data encrypted using the old key will be overwritten 
+with the new encryption keys and all other UniConfig instances in the cluster will use the new keys for encryption.
+
+* During key rotation, UniConfig reads and updates encrypted configurations in batch groups.
+The size of these groups can be set with the parameter:
+
+```settings
+crypto.encryption-rotation-batch-size=10
 ```
 
 ### Device installation
