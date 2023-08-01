@@ -26,7 +26,7 @@ Grafana in FRINX Machine monitors multitude of metrics. At this time, these are:
 - Node monitoring
 - Swarm monitoring
 - SSL monitoring
-- Uniconfig-controller monitoring
+- UniConfig-controller monitoring
 - Workflows monitoring
 
 ### Device Monitoring
