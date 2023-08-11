@@ -44,79 +44,81 @@ curl --location --request GET 'http://192.168.56.11:8181/rests/data/transaction-
 
 ```json RPC Response, Status: 200
 {
-    "transactions-metadata": {
-        "transaction-metadata": [
-            {
-                "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
-                "username": "admin",
-                "metadata": [
-                    {
-                        "node-id": "xr6",
-                        "diff": [
-                            {
-                                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether1/description",
-                                "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether1-description-create\"\n}"
-                            },
-                            {
-                                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether2/description",
-                                "data-before": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-before\"\n}"
-                                                    "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-after\"\n}"
-                            },
-                        ],
-                        "topology": "uniconfig"
-                    }
-                ],
-                "commit-time": "2021-Mar-09 10:53:59.102 +0100"
-            },
-            "transaction-id": "869df9d6-9025-4849-b30b-9db4d8fb26ec",
-            "username": "admin",
-            "metadata": [
-                {
-                    "node-id": "xr5",
-                    "diff": [
-                        {
-                            "path": "/frinx-openconfig-interfaces:interfaces/interface=Loopback123/config",
-                            "data-before": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"name\": \"Loopback123\"\n  }\n}",
-                            "data-after": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"description\": \"test-description\",\n    \"name\": \"Loopback123\"\n  }\n}"
-                        }
-                    ],
-                    "topology": "uniconfig"
-                }
+  "transactions-metadata": {
+    "transaction-metadata": [
+      {
+        "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
+        "username": "admin",
+        "metadata": [
+          {
+            "node-id": "xr6",
+            "diff": [
+              {
+                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether1/description",
+                "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether1-description-create\"\n}"
+              },
+              {
+                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether2/description",
+                "data-before": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-before\"\n}",
+                "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-after\"\n}"
+              }
             ],
-            "commit-time": "2021-Mar-09 11:06:58.000 +0100"
-        },
-        {
-            "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1",
-            "username": "admin",
-            "metadata": [
-                {
-                    "node-id": "R1",
-                    "diff": [
-                        {
-                            "path": "/frinx-openconfig-interfaces:interfaces/interface=Bundle-Ether1",
-                            "data-after": "{\n  \"interface\": [\n    {\n      \"name\": \"Bundle-Ether1\",\n      \"config\": {\n        \"type\": \"iana-if-type:ieee8023adLag\",\n        \"enabled\": false,\n        \"name\": \"Bundle-Ether1\"\n      }\n    }\n  ]\n}"
-                        }
-                    ],
-                    "topology": "uniconfig"
-                },
-                {
-                    "node-id": "xr5",
-                    "diff": [
-                        {
-                            "path": "/frinx-openconfig-interfaces:interfaces/interface=Loopback1/config",
-                            "data-before": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"name\": \"Loopback1\"\n  }\n}",
-                        }
-                    ],
-                    "topology": "uniconfig"
-                }
+            "topology": "uniconfig"
+          }
+        ],
+        "commit-time": "2021-Mar-09 10:53:59.102 +0100"
+      },
+      {
+        "transaction-id": "869df9d6-9025-4849-b30b-9db4d8fb26ec",
+        "username": "admin",
+        "metadata": [
+          {
+            "node-id": "xr5",
+            "diff": [
+              {
+                "path": "/frinx-openconfig-interfaces:interfaces/interface=Loopback123/config",
+                "data-before": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"name\": \"Loopback123\"\n  }\n}",
+                "data-after": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"description\": \"test-description\",\n    \"name\": \"Loopback123\"\n  }\n}"
+              }
             ],
-            "commit-time": "2021-Mar-09 11:10:54.104 +0100"
-        }
+            "topology": "uniconfig"
+          }
+        ],
+        "commit-time": "2021-Mar-09 11:06:58.000 +0100"
+      },
+      {
+        "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1",
+        "username": "admin",
+        "metadata": [
+          {
+            "node-id": "R1",
+            "diff": [
+              {
+                "path": "/frinx-openconfig-interfaces:interfaces/interface=Bundle-Ether1",
+                "data-after": "{\n  \"interface\": [\n    {\n      \"name\": \"Bundle-Ether1\",\n      \"config\": {\n        \"type\": \"iana-if-type:ieee8023adLag\",\n        \"enabled\": false,\n        \"name\": \"Bundle-Ether1\"\n      }\n    }\n  ]\n}"
+              }
+            ],
+            "topology": "uniconfig"
+          },
+          {
+            "node-id": "xr5",
+            "diff": [
+              {
+                "path": "/frinx-openconfig-interfaces:interfaces/interface=Loopback1/config",
+                "data-before": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"name\": \"Loopback1\"\n  }\n}"
+              }
+            ],
+            "topology": "uniconfig"
+          }
+        ],
+        "commit-time": "2021-Mar-09 11:10:54.104 +0100"
+      }
     ]
+  }
 }
 ```
 
-Reverting changes of the single transaction.
+Reverting changes of a single transaction.
 
 ```bash RPC Request
 curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
@@ -134,19 +136,6 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 ```
 
 ```json RPC Response, Status: 200
-{
-    "output": {
-        "revert-output": {
-            "result": [
-                {
-                    "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
 ```
 
 Reverting changes of multiple transactions.
@@ -168,23 +157,6 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 ```
 
 ```json RPC Response, Status: 200
-{
-    "output": {
-        "revert-output": {
-            "result": [
-                {
-                    "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
-                    "status": "complete"
-                },
-                {
-                    "transaction-id": "869df9d6-9025-4849-b30b-9db4d8fb26ec",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
 ```
 
 Reverting changes of multiple transactions, where the transaction with
@@ -210,23 +182,6 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 ```
 
 ```json RPC Response, Status: 200
-{
-    "output": {
-        "revert-output": {
-            "result": [
-                {
-                    "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
-                    "status": "complete"
-                },
-                {
-                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
 ```
 
 ### Failed example
@@ -249,20 +204,19 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 404
 {
-    "output": {
-        "revert-output": {
-            "result": [
-                {
-                    "transaction-id": "82b4e916-e1ed-4a54-97bc-067699842af6",
-                    "status": "fail",
-                    "error-message": "Failed to find transaction in log with ID: 82b4e916-e1ed-4a54-97bc-067699842af6",
-                    "error-type": "uniconfig-error"
-                }
-            ]
-        },
-        "overall-status": "fail"
+    "errors": {
+        "error": [
+            {
+                "error-tag": "data-missing",
+                "error-info": {
+                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
+                },
+                "error-type": "application",
+                "error-message": "Failed to find transaction in log with ID: 82b4e916-e1ed-4a54-97bc-067699842af6"
+            }
+        ]
     }
 }
 ```
@@ -289,25 +243,19 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 404
 {
-    "output": {
-        "revert-output": {
-            "result": [
-                {
-                    "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
-                    "status": "fail",
-                    "error-type": "uniconfig-error"
+    "errors": {
+        "error": [
+            {
+                "error-tag": "data-missing",
+                "error-info": {
+                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
                 },
-                {
-                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1",
-                    "status": "fail",
-                    "error-message": "Transactions metadata 2c4c1eb5-185a-4204-8021-2ea05ba2c2c1 contain non-existent uniconfig nodes: [R1]",
-                    "error-type": "uniconfig-error"
-                }
-            ]
-        },
-        "overall-status": "fail"
+                "error-message": "Transaction metadata 2c4c1eb5-185a-4204-8021-2ea05ba2c2c1 contains non-existent uniconfig nodes: [R1]",
+                "error-type": "application"
+            }
+        ]
     }
 }
 ```
