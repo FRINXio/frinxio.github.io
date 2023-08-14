@@ -12,24 +12,24 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>NETCONF Unified Translation Unit | Frinx Docs</title>
-    <meta name="title" content="NETCONF Unified Translation Unit | Frinx Docs">
-    <meta name="description" content="Unified translation units are located in https://github.com/FRINXio/unitopo-units repository." />
+    <title>Uniconfig 5.2.0 Release Notes | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.2.0 Release Notes | Frinx Docs">
+    <meta name="description" content="Parse NOTIFICATION-TYPE from MIB schemas. (#1545) - UNIC-1382" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/developer-guide/netconf-translation-unit/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.0/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/developer-guide/netconf-translation-unit/">
-    <meta property="og:title" content="NETCONF Unified Translation Unit | Frinx Docs">
-    <meta property="og:description" content="Unified translation units are located in https://github.com/FRINXio/unitopo-units repository.">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.0/">
+    <meta property="og:title" content="Uniconfig 5.2.0 Release Notes | Frinx Docs">
+    <meta property="og:description" content="Parse NOTIFICATION-TYPE from MIB schemas. (#1545) - UNIC-1382">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/developer-guide/netconf-translation-unit/">
-    <meta property="twitter:title" content="NETCONF Unified Translation Unit | Frinx Docs">
-    <meta property="twitter:description" content="Unified translation units are located in https://github.com/FRINXio/unitopo-units repository.">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.0/">
+    <meta property="twitter:title" content="Uniconfig 5.2.0 Release Notes | Frinx Docs">
+    <meta property="twitter:description" content="Parse NOTIFICATION-TYPE from MIB schemas. (#1545) - UNIC-1382">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -39,7 +39,6 @@
     <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.745317138208" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
     <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.745317138208" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.745317138208" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -248,226 +247,185 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="netconf-unified-translation-unit" class="break-words">
+<doc-anchor-target id="uniconfig-520-release-notes" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#netconf-unified-translation-unit">#</doc-anchor-trigger>
-        <span>NETCONF Unified Translation Unit</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-520-release-notes">#</doc-anchor-trigger>
+        <span>Uniconfig 5.2.0 Release Notes</span>
     </h1>
 </doc-anchor-target>
-<p>Unified translation units are located in
-<a href="https://github.com/FRINXio/unitopo-units">https://github.com/FRINXio/unitopo-units</a> repository.</p>
-<p>Kotlin is used as preferred programming language in NETCONF translation
-units because it provides <a href="https://kotlinlang.org/docs/reference/type-aliases.html">type
-aliases</a> and
-better
-<a href="https://kotlinlang.org/docs/reference/null-safety.html">null-safety</a>.</p>
-<doc-anchor-target id="translateunit">
+<doc-anchor-target id="new-features">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#translateunit">#</doc-anchor-trigger>
-        <span>TranslateUnit</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
     </h2>
 </doc-anchor-target>
-<p>Translate unit class must implement interface
-<strong>io.frinx.unitopo.registry.spi.TranslateUnit</strong>. Naming convention for
-translate unit class is just name Unit. Translate unit class is usually
-instantiated, initialized and closed from Blueprint.</p>
-<p>Implementation of TranslateUnit must be registered into
-<strong>TranslationUnitCollector</strong> and must provide set of supported underlay
-YANG models. Snippet below shows registration of
-<a href="https://github.com/FRINXio/unitopo-units/blob/master/junos/junos-17/junos-17-interface-unit/src/main/kotlin/io/frinx/unitopo/unit/junos/interfaces/Unit.kt">Unit</a>
-for junos device version 17.3.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-kotlin"><code v-pre class="language-kotlin">class Unit(private val registry: TranslationUnitCollector) : TranslateUnit {
-    private var reg: TranslationUnitCollector.Registration? = null
-
-    fun init() {
-        reg = registry.registerTranslateUnit(this)
-    }
-
-    fun close() {
-        reg?.let { reg!!.close() }
-    }
-
-    override fun getUnderlayYangSchemas() = setOf(
-            UnderlayInterfacesYangInfo.getInstance())</code></pre>
-</doc-codeblock></div>
-<p>Implementation of TranslateUnit must implement these methods:</p>
-<p><strong>toString(): String</strong></p>
-<p>Return unique string among all translation units which will be used as
-ID for the translation unit (e.g. &quot;IOS XR Interface (OpenConfig)
-translate unit&quot;)</p>
-<p><strong>getYangSchemas(): Set</strong></p>
-<p>Return YANG models containing composite nodes handled by
-handlers(readers/writers). It must return empty Set if no handlers are
-implemented.</p>
-<p><strong>getUnderlayYangSchemas(): Set</strong></p>
-<p>Return YANG module informations about underlay models used in the
-translation unit. These YANG modules describes configuration of NETCONF
-capable device.</p>
-<p><strong>getRpcs(underlayAccess: UnderlayAccess): Set&gt;</strong></p>
-<p>Return RPC services implemented in the translation unit. Default
-implementation returns an emptySet. Parameter <strong>underlayAccess</strong>
-represents object containing methods for communication with a device via
-NETCONF and should be passed to readers/writers.</p>
-<p><strong>provideHandlers(rRegistry: ModifiableReaderRegistryBuilder,</strong>
-<strong>wRegistry: ModifiableWriterRegistryBuilder,</strong> <strong>underlayAccess:
-UnderlayAccess): Unit</strong></p>
-<p>Handlers(readers/writers) need to be registered in this method.
-<strong>underlayAccess</strong> represents object containing methods for communication
-with a device via NETCONF and should be passed to readers/writers.</p>
-<p>How to register readers/writers is described in
-CLI Translation Unit &lt;cli-translation-unit&gt;</p>
-<doc-anchor-target id="readers">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#readers">#</doc-anchor-trigger>
-        <span>Readers</span>
-    </h2>
-</doc-anchor-target>
-<p>Readers are handlers responsible for reading and parsing the data coming
-from a device.</p>
-<p>There are 2 types of readers: Reader and ListReader. Reader can be used
-to handle container or argument nodes and ListReader should handle list
-nodes from YANG.</p>
 <ul>
-<li>Both types need to implement <strong>readCurrentAttributes</strong> to fill the
-builder with appropriate values</li>
-<li>ListReader needs to also implement <strong>getAllIds()</strong> where it
-retrieves a key for each item to be present in current list. After
-the list is received, framework will invoke
-<strong>readCurrentAttributes</strong> for each item from getAllIds</li>
-</ul>
-<doc-anchor-target id="mandatory-interfaces-to-implement">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mandatory-interfaces-to-implement">#</doc-anchor-trigger>
-        <span>Mandatory interfaces to implement</span>
-    </h3>
-</doc-anchor-target>
-<p>Each reader needs to implement one of these interfaces based on type of
-target node in YANG.For more information about methods please read
-javadocs.</p>
-<p><strong>ConfigListReaderCustomizer</strong> - implement this interface if target
-composite node in YANG is list and represents config data.</p>
-<p><strong>ConfigReaderCustomizer</strong> - implement this interface if target
-composite node in YANG is container or augmentation and represents
-config data.</p>
-<p><strong>OperListReaderCustomizer</strong> - implement this interface if target
-composite node in YANG is list and represents operational data.</p>
-<p><strong>OperReaderCustomizer</strong> - implement this interface if target composite
-node in YANG is container or augmentation and represents operational
-data.</p>
-<doc-anchor-target id="base-readers">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#base-readers">#</doc-anchor-trigger>
-        <span>Base Readers</span>
-    </h3>
-</doc-anchor-target>
-<p>Each base reader for netconf readers should be generic. The generic
-marks the data element within device YANG that is being parsed into. The
-base reader should contain abstract methods:</p>
-<ul>
-<li><strong>fun readIid(&lt;args&gt;): InstanceIdentifier&lt;T&gt;</strong> - each child
-reader should fill in the device specific InstanceIdentifier that
-points to the information needed for this reader. Arguments may vary
-and they are used to be more specific IID (e.g. when creating an IID
-to gather information about a specific interface, you may want to
-pass interface name as argument).</li>
-<li><strong>fun readData(data: T?, configBuilder: ConfigBuilder, &lt;args&gt;)</strong>
-<ul>
-<li>this method is used to transform OpenConfig data (contained in
-ConfigBuilder) into device data (T) using .</li>
-</ul>
+<li><p>Parse NOTIFICATION-TYPE from MIB schemas. (#1545) - UNIC-1382</p>
+</li>
+<li><p>Add rpc change-encryption-keys (#1441) - UNIC-1239</p>
+</li>
+<li><p>support for gnmi-notifications - Notification + Subscription service (#1109) - UNIC-1184</p>
+</li>
+<li><p>UNIC-1308</p>
+</li>
+<li><p>SNMP topology (#1438) - UNIC-1202</p>
+</li>
+<li><p>UNIC-1202</p>
+</li>
+<li><p>UNIC-1202</p>
+</li>
+<li><p>UNIC-1202</p>
+</li>
+<li><p>UNIC-1202</p>
 </li>
 </ul>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Naming of the methods should be unified in order to be easily parsed
-by auto-generated documentation.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="writers">
+<doc-anchor-target id="bug-fixes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#writers">#</doc-anchor-trigger>
-        <span>Writers</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
     </h2>
 </doc-anchor-target>
-<p>A writer needs to implement all 3 methods: Write, Update, Delete in
-order to fully support default rollback mechanism of the framework</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Time showed that update like 1. delete, 2. write is anti-pattern and
-should not be used. There is just one case where it is necessary: when
-re-writing list entry, you must first delete the previous entry, then
-write the new one, otherwise the previous entry would still be present
-and the new entry will be added to the list.</p>
-        </div>
-    </div>
-</div>
-<p>A writer can properly work only if there is a reader for the same
-composite node.</p>
-<p>The framework provides safe methods to use when handling data on device:</p>
 <ul>
-<li><strong>safePut</strong> deletes or adds managed data. Does not touch data that
-was previously on the device and is not handled by the writer.</li>
-<li><strong>safeMerge</strong> stores just the changed data into device. Does not
-touch data that was previously on the device and is not handled by
-the writer.</li>
-<li><strong>safeDelete</strong> removes data from the device only if the managed node
-does not contain any other information (even one not handled by the
-writer)</li>
+<li><p>fix_regex_matching_of_identity - UNIC-1375</p>
+</li>
+<li><p>Fixed generation of commit diff notifications</p>
+</li>
+<li><p>Fix identityRef parsing (#1502) - UNIC-1356</p>
+</li>
+<li><p>Swagger: Fix generation of operational data from Uniconfig schemas - UNIC-1280</p>
+</li>
+<li><p>Fixed unmounting of node that is in connecting state - UNIC-1281</p>
+</li>
 </ul>
-<doc-anchor-target id="mandatory-interfaces-to-implement-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mandatory-interfaces-to-implement-1">#</doc-anchor-trigger>
-        <span>Mandatory interfaces to implement</span>
-    </h3>
+<doc-anchor-target id="improvements">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h2>
 </doc-anchor-target>
-<p>Each writer needs to implement one of these interfaces based on type of
-target node in YANG. Unlike mandatory interfaces for reading, only
-interfaces for writing config data are available (because it is not
-possible to write operational data). For more information about methods
-please read javadocs.</p>
-<p><strong>ListWriterCustomizer</strong> - implement this interface if target composite
-node in YANG is list. An implementation needs to be registered as
-GenericListWriter.</p>
-<p><strong>WriterCustomizer</strong> - implement this interface if target composite node
-in YANG is container or augmentation. An implementation needs to be
-registered as GenericWriter.</p>
-<doc-anchor-target id="base-writers">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#base-writers">#</doc-anchor-trigger>
-        <span>Base Writers</span>
-    </h3>
-</doc-anchor-target>
-<p>Each base writer should be generic and contain abstract methods:</p>
 <ul>
-<li><strong>fun getIid(id: InstanceIdentifier&lt;Config&gt;):
-InstanceIdentifier&lt;T&gt;</strong> -this method returns InstanceIdentifier
-that points to a node where data should be written</li>
-<li><strong>fun getData(data: Config): T</strong> - this method transforms OpenConfig
-data into device specific data (T)</li>
+<li><p>Cleanup dependencies in uniconfig module (#1542) - UNIC-1381</p>
+</li>
+<li><p>Add gnmi subscription parameters (#1505) - UNIC-1369</p>
+</li>
+<li><p>UNIC-1369</p>
+</li>
+<li><p>Merged mdsal-dom-api into sal-dom-api module (#1543)</p>
+</li>
+<li><p>fix connection manager (#1532)</p>
+</li>
+<li><p>Constants refactoring (#1511) - UNIC-1257</p>
+</li>
+<li><p>Caching of calculate-diff response in transaction</p>
+</li>
+<li><p>Shell explicit show in config state (#1484) - UNIC-1325</p>
+</li>
+<li><p>Shell caching data (#1480) - UNIC-1357</p>
+</li>
+<li><p>SNMP refactoring of snmp-topology (#1472) - UNIC-1343</p>
+</li>
+<li><p>Prevented sending command for rpd-index, ucam and dcam attributes if there is no change for CER rpd interfaces</p>
+</li>
+<li><p>Changing use case of prompt stylization - UNIC-977</p>
+</li>
+<li><p>Enabling and cleaning up SHELL checkstyles (#1451) - UNIC-1345</p>
+</li>
+<li><p>Unifying, renaming and increasing readability of UC-shell - UNIC-977</p>
+</li>
+<li><p>Add mutable transaction to Shell (#1399) - UNIC-1312</p>
+</li>
+<li><p>Swagger: Unit tests - UNIC-1186</p>
+</li>
+<li><p>Removed sal-common-impl module (#1426)</p>
+</li>
+<li><p>Merged mdsal-dom-spi to sal-dom-spi module (#1415)</p>
+</li>
+<li><p>add ValueCase to gnmi codec - UNIC-1113</p>
+</li>
+</ul>
+<doc-anchor-target id="api">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#api">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4BB;</span> API</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li>Refactor connection-manager RPCs (#1423) - UNIC-1283</li>
+</ul>
+<doc-anchor-target id="other">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li>Read All data type on specific paths</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><p>build(deps): bump com.puppycrawl.tools:checkstyle from 10.12.1 to 10.12.2 (#1561)</p>
+</li>
+<li><p>build(deps): bump ch.qos.logback:logback-classic from 1.4.8 to 1.4.9 (#1562)</p>
+</li>
+<li><p>build(deps): bump jmh-core.version from 1.36 to 1.37 (#1558)</p>
+</li>
+<li><p>build(deps): bump grpc.version from 1.57.0 to 1.57.1 (#1559)</p>
+</li>
+<li><p>build(deps): bump com.google.guava:guava from 32.1.1-jre to 32.1.2-jre (#1557)</p>
+</li>
+<li><p>build(deps): bump maven.core.version from 3.9.3 to 3.9.4 (#1560)</p>
+</li>
+<li><p>build(deps): bump org.codehaus.mojo:properties-maven-plugin from 1.1.0 to 1.2.0 (#1522)</p>
+</li>
+<li><p>build(deps-dev): bump org.apache.commons:commons-lang3 from 3.12.0 to 3.13.0 (#1523)</p>
+</li>
+<li><p>build(deps): bump bouncycastle.version from 1.75 to 1.76 (#1521)</p>
+</li>
+<li><p>build(deps-dev): bump org.flywaydb:flyway-core from 9.21.0 to 9.21.1 (#1520)</p>
+</li>
+<li><p>build(deps): bump org.jetbrains.kotlinx:kotlinx-coroutines-core from 1.7.2 to 1.7.3 (#1519)</p>
+</li>
+<li><p>build(deps): bump jersey.version from 3.1.2 to 3.1.3 (#1518)</p>
+</li>
+<li><p>build(deps): bump grpc.version from 1.56.1 to 1.57.0 (#1517)</p>
+</li>
+<li><p>build(deps): bump netty.version from 4.1.95.Final to 4.1.96.Final (#1516)</p>
+</li>
+<li><p>build(deps): bump ch.qos.logback:logback-classic from 1.4.6 to 1.4.8 (#1483)</p>
+</li>
+<li><p>build(deps): bump org.junit.jupiter:junit-jupiter from 5.9.3 to 5.10.0 (#1479)</p>
+</li>
+<li><p>build(deps): bump org.apache.kafka:kafka-clients from 3.5.0 to 3.5.1 (#1476)</p>
+</li>
+<li><p>build(deps): bump org.xmlunit:xmlunit-legacy from 2.6.1 to 2.9.1 (#1478)</p>
+</li>
+<li><p>build(deps): bump spring-jdbc from 6.0.10 to 6.0.11 (#1434)</p>
+</li>
+<li><p>build(deps): bump spring.boot.version from 3.1.1 to 3.1.2 (#1475)</p>
+</li>
+<li><p>build(deps-dev): bump org.flywaydb:flyway-core from 9.20.0 to 9.21.0 (#1474)</p>
+</li>
+<li><p>build(deps): bump netty.version from 4.1.94.Final to 4.1.95.Final (#1477)</p>
+</li>
+<li><p>build(deps): bump maven.core.version from 3.9.2 to 3.9.3 (#1358)</p>
+</li>
+<li><p>build(deps): bump kotlinx-coroutines-core from 1.7.1 to 1.7.2 (#1392)</p>
+</li>
+<li><p>build(deps): bump kotlin.version from 1.8.22 to 1.9.0 (#1391)</p>
+</li>
+<li><p>build(deps): bump protobuf.version from 3.23.2 to 3.23.4 (#1395)</p>
+</li>
+<li><p>build(deps): bump swagger-core from 2.2.14 to 2.2.15 (#1405)</p>
+</li>
+<li><p>build(deps): bump json-smart from 2.4.11 to 2.5.0 (#1404)</p>
+</li>
+<li><p>build(deps): bump opentelemetry-api from 1.27.0 to 1.28.0 (#1406)</p>
+</li>
 </ul>
 
                                 
@@ -478,20 +436,20 @@ data into device specific data (T)</li>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/developer-guide/cli-translation-unit/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.11/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Implementing CLI Translation Unit</span>
+                                                <span class="block mt-1">Uniconfig 5.​1.​11 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/developer-guide/native-cli-units/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Native-​CLI translation units</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -538,6 +496,6 @@ data into device specific data (T)</li>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "NETCONF Unified Translation Unit", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.2.0 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
