@@ -24,13 +24,13 @@ The following appenders are used:
 2. 'logs': Used for writing all logs to the output file on path
     'log/logs.log'. The rolling file appender is applied.
 3. 'netconf-notifications', 'netconf-messages', 'netconf-events', and
-    'cli-messages': Sifting appenders that split logs per node ID that
+    'cli-messages', 'gnmi-messages': Sifting appenders that split logs per node ID that
     is set in the marker of the logs. Logs are written to different
     subdirectories under 'log' directory and they are identified by
     their node ID. The rolling file appender is applied.
 4. 'restconf': Appender used for writing of RESTCONF messages into
     'log/restconf.log' file. The rolling file appender is applied.
-
+5. 'gnmi': Appender used for writing of Logs related to gNMI topology. 
 ### Loggers
 
 There are 2 groups of loggers:
@@ -40,13 +40,13 @@ There are 2 groups of loggers:
     level is set by default to 'INFO'. For debugging purposes it is
     handy to change logging threshold to 'TRACE' or 'DEBUG' level.
     Covered layers: UniConfig, Unified, Controller, RESTCONF, CLI,
-    NETCONF. Used appenders: 'STDOUT' and 'logs'.
+    NETCONF, gNMI. Used appenders: 'STDOUT' and 'logs'.
 2. Loggers used for logging brokers: These loggers should not be
     changed since the state of logging can be changed using RPC calls.
     Classpaths point to specific classes that represent implementations
     of logging brokers, the logging level is set to 'TRACE'. Used
     appenders: 'netconf-notifications', 'netconf-messages',
-    'netconf-events', 'cli-messages', and 'restconf'.
+    'netconf-events', 'cli-messages', 'gnmi-messages' and 'restconf'.
 
 ### Updating Configuration
 
@@ -87,7 +87,13 @@ of UniConfig:
 <logger name="org.opendaylight.restconf" level="DEBUG"/>
 <logger name="org.opendaylight.aaa" level="INFO"/>
 
-
+<!-- gNMI part -->
+<logger name="io.uniconfig.gnmi" level="INFO" additivity="false">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="logs"/>
+    <appender-ref ref="gnmi"/>
+</logger>
+    
 <!-- controller part -->
 <logger name="org.opendaylight.daexim" level="INFO"/>
 <logger name="org.opendaylight.controller" level="INFO"/>
@@ -356,6 +362,107 @@ the NETCONF stream.
 11:09:00.832 DEBUG org.opendaylight.netconf.logging.brokers.NetconfEventsLoggingBroker - node1: Connector for node created successfully
 ```
 
+#### gNMI Messages
+
+- A broker is used for logging of all gNMI SET/GET messages incoming or
+    outgoing, except the gNMI notifications.
+- Per-device logging is supported, logs for gNMI messages are
+    stored under the directory 'log/gnmi-messages' and named by the
+    '[node-id].log' pattern.
+
+**Example: - Sending gNMI SET request and receiving response**
+
+```
+12:12:28.658 TRACE io.uniconfig.gnmi.logging.brokers.GnmiMessagesLoggingBroker - Message-id: 1693479982709, sending gNMI SET message:
+replace {
+  path {
+    elem {
+      name: "openconfig-network-instance:network-instances"
+    }
+    elem {
+      name: "network-instance"
+      key {
+        key: "name"
+        value: "default"
+      }
+    }
+    elem {
+      name: "protocols"
+    }
+    elem {
+      name: "protocol"
+      key {
+        key: "identifier"
+        value: "BGP"
+      }
+      key {
+        key: "name"
+        value: "bgp"
+      }
+    }
+    elem {
+      name: "bgp"
+    }
+    elem {
+      name: "global"
+    }
+    elem {
+      name: "logging-options"
+    }
+    elem {
+      name: "config"
+    }
+  }
+  val {
+    json_ietf_val: "{\"config\":{\"log-neighbor-state-changes\":true}}"
+  }
+}
+
+12:12:28.878 TRACE io.uniconfig.gnmi.logging.brokers.GnmiMessagesLoggingBroker - Message-id: 1693479982709, received gNMI SET message:
+response {
+  path {
+    elem {
+      name: "openconfig-network-instance:network-instances"
+    }
+    elem {
+      name: "network-instance"
+      key {
+        key: "name"
+        value: "default"
+      }
+    }
+    elem {
+      name: "protocols"
+    }
+    elem {
+      name: "protocol"
+      key {
+        key: "identifier"
+        value: "BGP"
+      }
+      key {
+        key: "name"
+        value: "bgp"
+      }
+    }
+    elem {
+      name: "bgp"
+    }
+    elem {
+      name: "global"
+    }
+    elem {
+      name: "logging-options"
+    }
+    elem {
+      name: "config"
+    }
+  }
+  op: REPLACE
+}
+timestamp: 1692266952617002464
+```
+
 ### Supported Logging Settings
 
 Current logging broker settings are stored in the Operational datastore
@@ -402,6 +509,14 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/logging-status?c
                 "broker-identifier": "netconf_events",
                 "is-logging-broker-enabled": true,
                 "is-logging-enabled-on-all-devices": true
+            },
+            {
+                "broker-identifier": "gnmi_messages",
+                "logging-enabled-on-all-devices": true,
+                "logging-broker-enabled": true,
+                "gnmi-logging:message-types": [
+                    "SET"
+                ]
             }
         ],
         "global": {
@@ -450,6 +565,11 @@ RESTCONF-specific settings:
     (names of the headers) which content is hidden in the logs. Names of
     the HTTP headers are not case-sensitive.
 
+GNMI-specific settings:
+
+- **gnmi-logging:message-types** - gNMI message types that are enabled to be logged. 
+    Names of the message types must be specified using upper-case format.
+
 Global settings that are common in all logging brokers:
 
 - **hidden-types** - Value of leaf or leaf-list that uses one of these
@@ -462,7 +582,7 @@ By default, all logging brokers are disabled and logging is disabled on
 all devices, the user must explicitly specify a list of devices for
 which per-device logging is enabled. Also, RESTCONF-specific filtering
 is not configured, all HTTP requests and responses are fully logged, no
-content is dismissed.
+content is dismissed. By default, only SET gNMI message type is set to be logged.
 
 Initial logging configuration can be adjusted by adding the
 'loggingController' configuration into the
@@ -827,6 +947,37 @@ A positive response is shown in the output:
 {
     "output": {
         "message": "List of hidden HTTP methods have been successfully updated",
+        "status": "complete"
+    }
+}
+```
+
+#### Setting gNMI message types
+
+- An RPC is used for overwriting the list of supported gNMI message types.
+- This RPC modifies behavior of only 'gnmi messages' logging behaviour.
+
+**Example: - Setting SET and GET message types**
+
+```bash
+curl --location --request POST 'http://localhost:8181/rests/operations/gnmi-logging:set-message-types' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "message-types": [
+            "SET", "GET"
+        ]
+    }
+}'
+```
+
+A positive response is shown in the output:
+
+```json
+{
+    "output": {
+        "message": "List of message types have been successfully updated",
         "status": "complete"
     }
 }
