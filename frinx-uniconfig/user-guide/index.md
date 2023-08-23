@@ -20,3 +20,8 @@ This section lists various APIs used interact with UniConfig.
 
 UniConfig operations are actions that are usually inherent to UniConfig
 and work on their own when set up properly.
+
+## SDK
+
+Uniconfig provides a full blown Java based SDK. All Uniconfig operations
+available over RESTconf are also available when using the SDK.
