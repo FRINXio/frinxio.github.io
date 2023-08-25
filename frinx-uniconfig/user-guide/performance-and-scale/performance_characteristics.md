@@ -19,7 +19,44 @@ It is important to distinguish performance characteristics of these 2 families.
 
 ## Netconf devices
 
-// TBD
+We use netconf-testtool to simulate devices.
+
+Important caveats:
+- Measurement were performed on simulated devices = no device overhead
+- Measured on Uniconfig version 5.2.1
+- Simulated devices were with small configuration (~ 200 json lines)
+
+Tests:
+- D. Single node deployment of Uniconfig resources: CPU 12 cores and RAM 4 GB
+
+### Device installation & synchronization 
+```
+{  
+    "input": {  
+        "nodes": [  
+            {  
+                "node-id": "node-20820",  
+                "netconf": {  
+                    "netconf-node-topology:host": "10.19.0.253",  
+                    "netconf-node-topology:port": "20820",  
+                    "netconf-node-topology:keepalive-delay": 5,  
+                    "netconf-node-topology:tcp-only": "False",  
+                    "netconf-node-topology:username": "admin",  
+                    "netconf-node-topology:password": "admin",  
+                    "netconf-node-topology:dry-run-journal-size": 100,  
+                    "netconf-node-topology:enabled-notifications": "False",  
+                    "uniconfig-config:install-uniconfig-node-enabled": "True",  
+                    "uniconfig-config:uniconfig-native-enabled": "True",  
+                    "netconf-node-topology:max-connection-attempts": 1,  
+                    "netconf-node-topology:connection-timeout-millis": 60000,  
+                    "netconf-node-topology:default-request-timeout-millis": 60000,  
+                    "netconf-node-topology:sleep-factor": "1.0"  
+                }  
+            }  
+        ]  
+    }  
+}  
+```
 
 ## Tree-like style of configuration
 Cisco style of confituration (IOS, IOS-XR etc.)
@@ -181,3 +218,47 @@ or
 
 
 Recommended batch size for parallel installation in such case would be about 150 devices per batch as the parallelism is limited by the number of available cores.
+
+
+### Test D - one node Uniconfig
+
+Inputs:  
+5000 x Netconf devices simulated:
+203 json lines
+
+Evaluation 1:
+5000 devices were registered in 16.5 minutes on single node Uniconfig using 12 cores  
+Average one device instalation duration = 16.5 minutes / 5000 devices = 0,0033 minutes  
+Average number of json lines per device = 203 lines  
+lines of json / per core / per minute = 203 lines / 12 cores / 0,0033 minutes = 5126
+
+Installation & sync rate:
+
+**5,126** *lines of json / per core / per minute*
+
+> A single uniconfig node is capable of installing (and fully syncing)
+> **5000 netconf devices with config of 0.2k lines each of formatted json (in Uniconfig)
+> in **16.5 minutes** using **12 CPU cores**
+
+5 threads were used and *connection-manager:install-multiple-nodes* RPC was used (with 20 devices each).
+
+
+Evaluation 2:
+5000 devices were updated in 12.4 minutes on single node Uniconfig using 12 cores  
+Update process consisted of RPCs: Create transaction, Apply template, Calculate diff, Commit
+After apply template each configuration was increased from 203 to 1282 json lines
+Average one device update duration = 12.4 minutes / 5000 devices = 0,00248 minutes  
+Average number of json lines per device = 1282 lines  
+lines of json / per core / per minute = 1282 lines / 12 cores / 0,00248 minutes = 43077
+
+Update rate:
+
+**43,077** *lines of json / per core / per minute*
+
+> A single uniconfig node is capable of updating (and fully syncing)
+> **5000 netconf devices with initial config of 0.2k json lines each (of formatted json in Uniconfig)
+> in **12.4 minutes** using **12 CPU cores**
+> After update each device has config of 1.2k json lines each
+
+20 threads were used. No delay among successive updating RPCs
+
