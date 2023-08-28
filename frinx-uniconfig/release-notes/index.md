@@ -1,6 +1,5 @@
 # Release notes
 
-- [Release notes for UniConfig test-release-notes](../release-notes/uniconfig-test-release-notes.md)
 - [Release notes for UniConfig 5.1.12](../release-notes/uniconfig-5.1.12.md)
 - [Release notes for UniConfig 5.2.0](../release-notes/uniconfig-5.2.0.md)
 - [Release notes for UniConfig 5.1.11](../release-notes/uniconfig-5.1.11.md)
