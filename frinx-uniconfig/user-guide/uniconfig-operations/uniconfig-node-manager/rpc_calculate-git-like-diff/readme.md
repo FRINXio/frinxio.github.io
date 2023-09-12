@@ -3,10 +3,9 @@
 This RPC creates a diff between the actual UniConfig topology nodes and
 the intended UniConfig topology nodes. The RPC input contains a list of
 UniConfig nodes to calculate the diff. Output of the RPC contains a list
-of statements representing the diff after the commit in a git-like
-style. It checks for every touched node in the transaction if target
-nodes are not specified in the input. If one node failed for any reason,
-the RPC will fail entirely.
+of statements representing the diff in a git-like style.
+It checks for every touched node in the transaction if target nodes are
+not specified in the input. If some node fails, the RPC will fail entirely.
 
 ![RPC calculate-git-like-diff](RPC_calculate-git-like-diff-RPC_calculate_git_like_diff.svg)
 
@@ -14,10 +13,61 @@ the RPC will fail entirely.
 
 ### Successful Example
 
-The RPC calculate-diff input has no target nodes specified so it will
-look for all touched nodes in the transaction, and the output will
-contain a list of all changes on different paths. Multiple changes that
-occur under the same path are merged together.
+The RPC calculate-git-like-diff input has two target nodes and the
+output contains a list of statements representing the diff.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1","R2"]
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 200
+{
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "R1",
+          "topology": "uniconfig",
+          "updated-data": [
+            {
+              "path": "network-topology:network-topology/topology=uniconfig/node=R1/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config",
+              "data-actual": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:ethernetCsmacd\",\n    \"enabled\": true,\n    \"name\": \"GigabitEthernet0/0/0/0\"\n  }\n}",
+              "data-intended": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:ethernetCsmacd\",\n    \"enabled\": false,\n    \"name\": \"GigabitEthernet0/0/0/0dfhdfghd\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "node-id": "R2",
+          "topology": "unistore",
+          "updated-data": [
+            {
+              "path": "network-topology:network-topology/topology=unistore/node=R2/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config",
+              "data-actual": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:ethernetCsmacd\",\n    \"enabled\": false,\n    \"name\": \"GigabitEthernet0/0/0/0\"\n  }\n}",
+              "data-intended": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:ethernetCsmacd\",\n    \"enabled\": false,\n    \"name\": \"GigabitEthernet0/0/0/0dfhdfghd\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### Successful Example
+
+The RPC calculate-git-like-diff input has no target nodes specified,
+so it will look for all touched nodes in the transaction, and the output
+will contain a list of all changes on different paths. Multiple changes
+that occur under the same path are merged together.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
@@ -33,30 +83,156 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "XR5",
-                    "status": "complete",
-                    "changes": [
-                        {
-                            "data": "  {\n    \"frinx-openconfig-interfaces:interfaces\": {\n      \"interface\": [\n        {\n          \"key\":\"MgmtEth0/0/CPU0/0\",\n          \"subinterfaces\": {\n            \"subinterface\": [\n              {\n                \"key\":\"0\",\n                \"frinx-openconfig-if-ip:ipv4\": {\n                  \"addresses\": {\n                    \"address\": [\n                      {\n                        \"key\":\"192.168.1.214\",\n-                       \"frinx-openconfig-if-ip:config\": {\n-                         \"prefix-length\":\"24\",\n-                         \"ip\":\"192.168.1.214\"\n-                       },\n+                       \"frinx-openconfig-if-ip:config\": {\n+                         \"prefix-length\":\"27\",\n+                         \"ip\":\"192.168.1.214\"\n+                       }\n                      }\n                    ]\n                  }\n                },\n-               \"frinx-openconfig-interfaces:config\": {\n-                 \"index\":\"0\"\n-               },\n+               \"frinx-openconfig-interfaces:config\": {\n+                 \"index\":\"15\"\n+               }\n              }\n            ]\n          },\n-         \"frinx-openconfig-interfaces:config\": {\n-           \"name\":\"MgmtEth0/0/CPU0/0\",\n-           \"type\":\"iana-if-type:other\",\n-           \"enabled\":\"true\"\n-         },\n+         \"frinx-openconfig-interfaces:config\": {\n+           \"name\":\"MgmtEth0/0/CPU0/0\",\n+           \"type\":\"iana-if-type:other\",\n+           \"enabled\":\"false\"\n+         }\n        }\n      ]\n    }\n  }\n",
-                            "path": "/network-topology:network-topology/topology=uniconfig/node=XR5/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces"
-                        }
-                    ]
-                }
-            ]
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "R1",
+          "topology": "uniconfig",
+          "deleted-data": [
+            {
+              "path": "/network-topology:network-topology/topology=uniconfig/node=R1/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config",
+              "data": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:ethernetCsmacd\",\n    \"enabled\": false,\n    \"name\": \"GigabitEthernet0/0/0/0\"\n  }\n}"
+            }
+          ]
         },
-        "overall-status": "complete"
+        {
+          "node-id": "R2",
+          "topology": "uniconfig",
+          "deleted-data": [
+            {
+              "path": "/network-topology:network-topology/topology=uniconfig/node=R2/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config",
+              "data": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:ethernetCsmacd\",\n    \"enabled\": false,\n    \"name\": \"GigabitEthernet0/0/0/0\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "node-id": "R3",
+          "topology": "unistore",
+          "reordered-lists": [
+            {
+              "path": "/network-topology:network-topology/topology=unistore/node=R3/frinx-uniconfig-topology:configuration/routing-policy:routing-policy/policy-definitions/policy-definition=route_policy_1/statements/statement",
+              "actual-list-keys": "[\"name=1\", \"name=3\", \"name=2\"]",
+              "intended-list-keys": "[\"name=1\", \"name=2\", \"name=3\"]"
+            }
+          ]
+        }
+      ]
     }
+  }
+}
+```
+
+### Successful Example
+
+The RPC calculate-git-like-diff input has target node and there is no diff.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1"]
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 200
+{
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "R1",
+          "topology-id": "uniconfig"
+        }
+      ]
+    }
+  }
 }
 ```
 
 ### Failed Example
 
-If the RPC input does not contain the target nodes and there weren't any
-touched nodes, the request will result in an error.
+The RPC calculate-git-like-diff input has target node. Nodes 'R2' has not
+been installed yet. The output describes the result of the calculate-diff
+RPC.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1"]
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 404
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Node 'R1' hasn't been installed in Uniconfig database",
+        "error-info": {
+          "node-id": "R1",
+          "topology-id": "uniconfig"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Failed Example
+
+The RPC calculate-git-like-diff input has two target nodes.
+One of the nodes,'R1', has not been installed yet. The output
+describes the result of the calculate-git-like-diff RPC.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1","R2"]
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 404
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Node is not installed.",
+        "error-info": {
+          "node-id": "R1",
+          "topology-id": "uniconfig"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Failed Example
+
+If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
@@ -70,11 +246,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes.",
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "missing-element",
+        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes."
+      }
+    ]
+  }
 }
 ```

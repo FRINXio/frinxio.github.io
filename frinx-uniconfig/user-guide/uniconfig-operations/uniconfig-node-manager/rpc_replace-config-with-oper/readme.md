@@ -25,36 +25,19 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
+            "node": ["R1","R2"]
         }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "status": "complete"
-                }
-            ]
-        }
-    }
-}
+```RPC Response, Status: 200
 ```
 
 ### Successful Example
 
-The RPC input does not contain the target nodes, all touched nodes will
-be invoked.
+If the RPC input does not contain the target nodes, configuration of all
+touched nodes will be replaced by operational state.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \
@@ -68,70 +51,48 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
+```RPC Response, Status: 200
+```
+
+### Failed Example
+
+RPC input contains a list of the target nodes. Node 'R1' has not been
+installed yet. The RPC output contains the result of the operation.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1","R2"]
+        }
     }
+}'
+```
+
+```json RPC Response, Status: 404
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Node is not installed",
+        "error-info": {
+          "node-id": "R1"
+        }
+      }
+    ]
+  }
 }
 ```
 
 ### Failed Example
 
-RPC input contains a list of the target nodes. One node has not been
-mounted yet (AAA). The RPC output contains the result of the operation.
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "target-nodes": {
-            "node": ["IOSXR","AAA"]
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "fail"
-                },
-                {
-                    "node-id": "AAA",
-                    "status": "fail",
-                    "error-type": "uniconfig-error",
-                    "error-message": "Node is missing in uniconfig topology OPERATIONAL datastore."
-                }
-            ]
-        }
-    }
-}
-```
-
-### Failed Example
-
-If the RPC input does not contain the target nodes and there weren't any
-touched nodes, the request will result in an error.
+If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \
@@ -145,11 +106,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes.",
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "missing-element",
+        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes."
+      }
+    ]
+  }
 }
 ```
