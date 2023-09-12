@@ -1,17 +1,16 @@
 # RPC sync-to-network
 
-This RPC is a combination of sync-from-network and commit RPCs. If one of these RPCs fails
-the RPC will fail without any changes made.
+This RPC is a combination of sync-from-network and commit RPCs.
+If one of these RPCs fails the RPC will fail without any changes made.
 
 The purpose of this RPC is to synchronize configuration from the
-UniConfig nodes in the Configuration datastore of UniConfig
-transaction to network devices. The RPC input contains a list of the UniConfig nodes
-which are to be updated on a network device. Output of the
-RPC describes the result of sync-to-network and matches all input
-nodes. Calling RPC with empty list of target nodes results in syncing
-configuration of all nodes that have been modified in the UniConfig
-transaction. If one node failed for any reason, the RPC will fail
-entirely.
+UniConfig nodes in the Configuration datastore of UniConfig transaction
+to network devices. The RPC input contains a list of the UniConfig nodes
+which are to be updated on a network device. Output of the RPC describes
+the result of sync-to-network and matches all input nodes. Calling RPC
+with empty list of target nodes results in syncing configuration of all
+nodes that have been modified in the UniConfig transaction. If some node
+fails, the RPC fails entirely.
 
 It is necessary for admin-state of UniConfig nodes, specified in the input,
 to be set to "unlocked".
@@ -29,36 +28,19 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
+            "node": ["R1","R2"]
         }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
+```RPC Response, Status: 200
 ```
 
-### Failed Example
+### Successful Example
 
-If the RPC input does not contain the target nodes and there weren't any
-touched nodes, the request will result in an error.
+If the RPC input does not contain the target nodes, operation will be
+invoked on top of all touched nodes in the transaction.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
@@ -72,13 +54,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes.",
-        "overall-status": "fail"
-    }
-}
+```RPC Response, Status: 200
 ```
 
 ### Failed Example
@@ -94,33 +70,34 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
+            "node": ["R1","R2"]
         }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 409
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "fail",
-                    "error-message": "Node is currently in admin-state 'SouthboundLocked'.",
-                    "error-type": "device-processing-error"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "status": "fail",
-                    "error-message": "Node is currently in admin-state 'Locked'.",
-                    "error-type": "device-processing-error"
-                }
-            ]
-        },
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "lock-denied",
+        "error-message": "Node is currently in admin-state 'SouthboundLocked'.",
+        "error-info": {
+          "node-id": "R1"
+        }
+      },
+      {
+        "error-type": "application",
+        "error-tag": "lock-denied",
+        "error-message": "Node is currently in admin-state 'Locked'.",
+        "error-info": {
+          "node-id": "R2"
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -135,31 +112,92 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
+            "node": ["R1","R2"]
         }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 409
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "fail",
-                    "error-type": "device-processing-error"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "status": "fail",
-                    "error-message": "Node is currently in admin-state 'SouthboundLocked'.",
-                    "error-type": "device-processing-error"
-                }
-            ]
-        },
-        "overall-status": "fail"
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "lock-denied",
+        "error-message": "Node is currently in admin-state 'SouthboundLocked'.",
+        "error-info": {
+          "node-id": "R2"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Failed Example
+
+RPC input contains 2 nodes, the first one 'R1' is valid,
+the second one 'R2' has not been installed yet. If there is
+at least one invalid node, operation will fail.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1","R2"]
+        }
     }
+}'
+```
+
+```json RPC Response, Status: 404
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Node 'R2' hasn't been installed in Uniconfig database",
+        "error-info": {
+          "node-id": "R2"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Failed Example
+
+If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 400
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "missing-element",
+        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes."
+      }
+    ]
+  }
 }
 ```

@@ -25,35 +25,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
+            "node": ["R1","R2"]
         }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
+```RPC Response, Status: 200
 ```
 
 
-RPC input does not contain the target nodes, all touched nodes will be
-invoked.
+If RPC input does not contain the target nodes, all touched nodes
+in the transaction will be synced.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -67,18 +50,13 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete"
-    }
-}
+```RPC Response, Status: 200
 ```
 
 ### Failed Example
 
 RPC input contains a list of nodes where the configuration should be
-refreshed. One node has not been mounted yet (AAA).
+refreshed. Node 'R2' has not been installed yet.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -87,38 +65,33 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "target-nodes": {
-            "node": ["IOSXR","AAA"]
+            "node": ["R1","R2"]
         }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 404
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "AAA",
-                    "status": "fail",
-                    "error-type": "no-connection",
-                    "error-message": "Unified mountpoint not found."
-                }
-            ]
-        },
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Node 'R2' hasn't been installed in Uniconfig database",
+        "error-info": {
+          "node-id": "R2"
+        }
+      }
+    ]
+  }
 }
 ```
 
 ### Failed Example
 
-If the RPC input does not contain the target nodes and there weren't any
-touched nodes, the request will result in an error.
+If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -132,11 +105,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes.",
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "missing-element",
+        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes."
+      }
+    ]
+  }
 }
 ```

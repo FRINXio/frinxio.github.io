@@ -32,8 +32,8 @@ Validate RPC is shown in the figure bellow.
 
 ### Successful Example
 
-RPC validate input has 1 target node and the output describes the result
-of the validation.
+RPC validate input has 2 target nodes and the output describes
+the result of the successful validation.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -41,33 +41,111 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-            "target-nodes": {
-                    "node": ["IOSXRN"]
-            }
+        "target-nodes": {
+            "node": ["R1","R2]
+        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
+```RPC Response, Status: 200
+```
+
+### Successful Example
+
+If the RPC input does not contain the target nodes, all touched node
+in the transaction will be validated.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+        }
     }
+}'
+```
+
+```RPC Response, Status: 200
+```
+
+### Failed Example
+
+RPC commit input has 1 target node and the output describes the
+result of the validation. Node has failed because validation failed.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1"]
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 500
+{
+  "errors": {
+    "node-result": [
+      {
+        "error-type": "application",
+        "error-tag": "validation-failed",
+        "error-message": "RemoteDevice{R1}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n",
+        "error-info": {
+          "node-id": "R1"
+        }
+      }
+    ]
+  }
 }
 ```
 
 ### Failed Example
 
-RPC commit input has 1 target node and the output describes the result
-of the validation. Node has failed because failed validation.
+RPC input contains 2 nodes, the first one 'R1' is valid,
+the second one 'R2' has not been installed yet. If there is
+one invalid node, Uniconfig will be evaluated nodes with fail.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1","R2"]
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 404
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Node 'R2' hasn't been installed in Uniconfig database",
+        "error-info": {
+          "node-id": "R2"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Failed Example
+
+If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -75,27 +153,22 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-            "target-nodes": {
-                    "node": ["IOSXRN"]
-            }
+        "target-nodes": {
+        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "status": "fail",
-                    "error-message": "RemoteDevice{IOSXRN}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n",
-                    "error-type": "uniconfig-error"
-                }
-            ]
-        },
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "missing-element",
+        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes."
+      }
+    ]
+  }
 }
 ```
