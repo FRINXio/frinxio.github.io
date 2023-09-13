@@ -1,8 +1,7 @@
 # RPC check-installed-nodes
 
-This RPC checks if the devices given in the input are installed or not.
-It checks for the database content of every device and if there is some,
-then the device is installed.
+This RPC checks if devices included in the input are installed by looking for the database content
+of each device. If content is found, the device is installed.
 
 ## RPC Examples
 
@@ -101,7 +100,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Failed Example
 
-RPC input doesn't specify any nodes.
+RPC input does not specify any nodes.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
@@ -132,7 +131,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Failed Example
 
-RPC input is missing target-nodes container.
+RPC input is missing the target-nodes container.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
