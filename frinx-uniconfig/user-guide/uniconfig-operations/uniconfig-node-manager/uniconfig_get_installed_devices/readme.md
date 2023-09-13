@@ -1,11 +1,11 @@
 # RPC get-installed-nodes
 
-This RPC returns all installed devices from a selected topology.
+This RPC returns all installed devices from a specified topology.
+
 If no topology is specified, the output may contain devices from
-multiple topologies (CLI, NETCONF, gNMI). 
-In this case devices must be installed with install request parameter
-"uniconfig-config:install-uniconfig-node-enabled" set to "true".
-Rpc with no topology is looking for nodes installed under UNICONFIG topology
+multiple topologies (CLI, NETCONF, gNMI). In this case, devices must be
+installed with the install request parameter "uniconfig-config:install-uniconfig-node-enabled"
+set to "true". The RPC with no topology looks for nodes installed under the UNICONFIG topology
 by default.
 
 ## RPC Examples
