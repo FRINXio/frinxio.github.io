@@ -105,7 +105,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Failed Example
 
-RPC input doesn't specify node-id.
+RPC input does not specify node-id.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
