@@ -182,7 +182,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Failed Example
 
-RPC input doesn't specify node-id.
+RPC input does not specify node-id.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
@@ -242,7 +242,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Failed Example
 
-RPC input contains two devices using same node-id.
+RPC input contains two devices using the same node-id.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
