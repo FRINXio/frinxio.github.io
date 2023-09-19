@@ -235,7 +235,7 @@ Installation & sync rate:
 **5,126** *lines of json / per core / per minute*
 
 > A single uniconfig node is capable of installing (and fully syncing)
-> **5000 netconf devices with config of 0.2k lines each of formatted json (in Uniconfig)
+> **5000 netconf devices with config of 0.2k lines each of formatted json (in Uniconfig)**
 > in **16.5 minutes** using **12 CPU cores**
 
 5 threads were used and *connection-manager:install-multiple-nodes* RPC was used (with 20 devices each).
@@ -254,7 +254,7 @@ Update rate:
 **43,077** *lines of json / per core / per minute*
 
 > A single uniconfig node is capable of updating (and fully syncing)
-> **5000 netconf devices with initial config of 0.2k json lines each (of formatted json in Uniconfig)
+> **5000 netconf devices with initial config of 0.2k json lines each (of formatted json in Uniconfig)**
 > in **12.4 minutes** using **12 CPU cores**
 > After update each device has config of 1.2k json lines each
 
