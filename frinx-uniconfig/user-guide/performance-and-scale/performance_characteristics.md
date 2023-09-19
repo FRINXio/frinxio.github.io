@@ -17,52 +17,10 @@ and devices that use one-line style of configuration (without sections) such as 
 
 It is important to distinguish performance characteristics of these 2 families. 
 
-## Netconf devices
-
-We use netconf-testtool to simulate devices.
-
-Important caveats:
-- Measurement were performed on simulated devices = no device overhead
-- Measured on Uniconfig version 5.2.1
-- Simulated devices were with small configuration (~ 200 json lines)
-
-Tests:
-- D. Single node deployment of Uniconfig resources: CPU 12 cores and RAM 4 GB
-
-### Device installation & synchronization 
-```
-{  
-    "input": {  
-        "nodes": [  
-            {  
-                "node-id": "node-20820",  
-                "netconf": {  
-                    "netconf-node-topology:host": "10.19.0.253",  
-                    "netconf-node-topology:port": "20820",  
-                    "netconf-node-topology:keepalive-delay": 5,  
-                    "netconf-node-topology:tcp-only": "False",  
-                    "netconf-node-topology:username": "admin",  
-                    "netconf-node-topology:password": "admin",  
-                    "netconf-node-topology:dry-run-journal-size": 100,  
-                    "netconf-node-topology:enabled-notifications": "False",  
-                    "uniconfig-config:install-uniconfig-node-enabled": "True",  
-                    "uniconfig-config:uniconfig-native-enabled": "True",  
-                    "netconf-node-topology:max-connection-attempts": 1,  
-                    "netconf-node-topology:connection-timeout-millis": 60000,  
-                    "netconf-node-topology:default-request-timeout-millis": 60000,  
-                    "netconf-node-topology:sleep-factor": "1.0"  
-                }  
-            }  
-        ]  
-    }  
-}  
-```
-
 ## Tree-like style of configuration
 Cisco style of confituration (IOS, IOS-XR etc.)
 
 // TBD
-
 
 ## One-line style of configuration devices (SAOS) performance tests
 
@@ -219,8 +177,48 @@ or
 
 Recommended batch size for parallel installation in such case would be about 150 devices per batch as the parallelism is limited by the number of available cores.
 
+## Netconf devices
 
-### Test D - one node Uniconfig
+We use netconf-testtool to simulate devices.
+
+Important caveats:
+- Measurement were performed on simulated devices = no device overhead
+- Measured on Uniconfig version 5.2.1
+- Simulated devices were with small configuration (~ 200 json lines)
+
+Tests:
+- A. Single node deployment of Uniconfig resources: CPU 12 cores and RAM 4 GB
+
+### Device installation & synchronization 
+```
+{  
+    "input": {  
+        "nodes": [  
+            {  
+                "node-id": "node-20820",  
+                "netconf": {  
+                    "netconf-node-topology:host": "10.19.0.253",  
+                    "netconf-node-topology:port": "20820",  
+                    "netconf-node-topology:keepalive-delay": 5,  
+                    "netconf-node-topology:tcp-only": "False",  
+                    "netconf-node-topology:username": "admin",  
+                    "netconf-node-topology:password": "admin",  
+                    "netconf-node-topology:dry-run-journal-size": 100,  
+                    "netconf-node-topology:enabled-notifications": "False",  
+                    "uniconfig-config:install-uniconfig-node-enabled": "True",  
+                    "uniconfig-config:uniconfig-native-enabled": "True",  
+                    "netconf-node-topology:max-connection-attempts": 1,  
+                    "netconf-node-topology:connection-timeout-millis": 60000,  
+                    "netconf-node-topology:default-request-timeout-millis": 60000,  
+                    "netconf-node-topology:sleep-factor": "1.0"  
+                }  
+            }  
+        ]  
+    }  
+}  
+```
+
+### Test A - one node Uniconfig
 
 Inputs:  
 5000 x Netconf devices simulated:
@@ -261,4 +259,3 @@ Update rate:
 > After update each device has config of 1.2k json lines each
 
 20 threads were used. No delay among successive updating RPCs
-
