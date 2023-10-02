@@ -657,3 +657,80 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
     }
 }'
 ```
+
+## Installing SNMP agent
+
+### Identification of remote agent
+
+List of basic connection parameters that are used for identification of
+remote agent.
+
+- **node-id** - Name of node that represents device / mount-point in
+  the topology.
+- **snmp-topology:host** - IP address or domain-name of target
+  device where SNMP agent is running.
+- **snmp-topology:port** - SNMP port on which SNMP agent is listening 
+  to incoming connections.
+
+### SNMP parameters
+
+- **snmp-topology:transport-type** - UniConfig currently supports UDP
+  for SNMP communication, with plans to add TCP support in the future.
+- **snmp-topology:snmp-version** - UniConfig currently supports V1 and
+  V2c version of the SNMP, with plans to add V3 support in the future.
+- **snmp-topology:connection-retries** - Sets the number of retries to 
+  be performed before a request is timed out. Default value is 0.
+- **snmp-topology:request-timeout** - Timeout in milliseconds before 
+  a confirmed request is resent or timed out. Default value is 3000.
+- **snmp-topology:get-bulk-size** - The maximum number of values 
+  that can be returned in a single response to the get-bulk operation.
+  Default value is 50.
+
+### Authentication parameters
+
+- **snmp-topology:community-string** - UniConfig currently supports only
+  security string as authentication method that is used with V1 and
+  V2c.
+
+### Others
+
+- **snmp-topology:mib-repository** - Name of the MIB repository that contains
+  MIB files.
+
+### Example request
+
+```bash
+curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Content-Type: application/json' \
+--data '{
+    "input": {
+        "node-id": "agent1",
+        "snmp": {
+            "snmp-topology:host": "192.168.1.225",
+            "snmp-topology:port": 161,
+            "snmp-topology:transport-type": "udp",
+            "snmp-topology:snmp-version": "v2c",
+            "snmp-topology:community-string": "public",
+            "snmp-topology:connection-retries": 1,
+            "snmp-topology:request-timeout": 5000,
+            "snmp-topology:get-bulk-size": "900",
+            "snmp-topology:mib-repository": "repo1"
+        }
+    }
+}'
+```
+
+## Uninstalling SNMP agent
+
+### Example request
+
+```bash
+curl --location 'http://localhost:8181/rests/operations/connection-manager:uninstall-node' \
+--header 'Content-Type: application/json' \
+--data '{
+    "input": {
+        "node-id": "agent1",
+        "connection-type": "snmp"
+    }
+}'
+```
