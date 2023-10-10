@@ -611,7 +611,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-chan
 }'
 ```
 
-```json RPC response
+```json RPC response, Status: 200
 {
   "output": {
     "subscription-id": "1920770c-671d-4d2e-8126-6309ab73ff10"
@@ -629,6 +629,8 @@ doesn't contain body. RPC will return 404, if subscription with provided identif
 
 Example: removal of subscription with ID '8e82453d-4ea8-4c26-a74e-50d855a721fa':
 
+#### Successful Example
+
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:delete-data-change-subscription' \
 --header 'Content-Type: application/json' \
@@ -637,6 +639,35 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-chan
     "subscription-id": "8e82453d-4ea8-4c26-a74e-50d855a721fa"
   }
 }'
+```
+
+```RPC response, Status: 200
+```
+
+#### Failed Example
+
+```bash RPC Request
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:delete-data-change-subscription' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "input": {
+    "subscription-id": "8e82453d-4ea8-4c26-a74e-50d8bad-id721fa"
+  }
+}'
+```
+
+```json RPC response, Status: 400
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Subscription with specified identifier doesn't exist"
+      }
+    ]
+  }
+}
 ```
 
 ### Showing information about subscription
@@ -650,6 +681,8 @@ If subscription with specified ID doesn't exist, RPC will return 404 status code
 
 Example: showing information about
 
+#### Successful Example
+
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:show-subscription-data' \
 --header 'Content-Type: application/json' \
@@ -660,14 +693,40 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-chan
 }
 ```
 
-```json RPC response
+```json RPC response, Status: 200
 {
-    "output": {
-        "subtree-path": "/interfaces",
-        "topology-id": "uniconfig",
-        "data-change-scope": "SUBTREE",
-        "node-id": "device1"
-    }
+  "output": {
+    "subtree-path": "/interfaces",
+    "topology-id": "uniconfig",
+    "data-change-scope": "SUBTREE",
+    "node-id": "device1"
+  }
+}
+```
+
+#### Failed Example
+
+```bash RPC Request
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:show-subscription-data' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "input": {
+    "subscription-id": "8e82453d-4ea8-4c26-a74e-50d8bad-id721fa"
+  }
+}
+```
+
+```json RPC response, Status: 400
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Subscription with specified ID does not exist"
+      }
+    ]
+  }
 }
 ```
 
@@ -681,20 +740,20 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 --header 'Accept: application/json'
 ```
 
-```json GET response
+```json GET response, Status: 200
 {
-    "data-change-events:data-change-subscriptions": [
-        {
-            "subscription-id": "8e82453d-4ea8-4c26-a74e-50d855a721fa",
-            "subtree-path": "/interfaces",
-            "data-change-scope": "SUBTREE"
-        },
-        {
-            "subscription-id": "3b3ad917-f1a1-4cc4-83b9-3c8b62929b81",
-            "subtree-path": "/ospf",
-            "data-change-scope": "ONE"
-        }
-    ]
+  "data-change-events:data-change-subscriptions": [
+    {
+      "subscription-id": "8e82453d-4ea8-4c26-a74e-50d855a721fa",
+      "subtree-path": "/interfaces",
+      "data-change-scope": "SUBTREE"
+    },
+    {
+      "subscription-id": "3b3ad917-f1a1-4cc4-83b9-3c8b62929b81",
+      "subtree-path": "/ospf",
+      "data-change-scope": "ONE"
+    }
+  ]
 }
 ```
 
@@ -703,20 +762,20 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 --header 'Accept: application/json'
 ```
 
-```json GET response
+```json GET response, Status: 200
 {
-    "data-change-events:data-change-subscriptions": [
-        {
-            "subscription-id": "4058acac-1a2a-4c49-abe9-bcdbd14fe933",
-            "subtree-path": "/events:event",
-            "data-change-scope": "SUBTREE"
-        },
-        {
-            "subscription-id": "a2561773-c02e-403c-a090-fe6542926fed",
-            "subtree-path": "/events:event",
-            "data-change-scope": "BASE"
-        }
-    ]
+  "data-change-events:data-change-subscriptions": [
+    {
+      "subscription-id": "4058acac-1a2a-4c49-abe9-bcdbd14fe933",
+      "subtree-path": "/events:event",
+      "data-change-scope": "SUBTREE"
+    },
+    {
+      "subscription-id": "a2561773-c02e-403c-a090-fe6542926fed",
+      "subtree-path": "/events:event",
+      "data-change-scope": "BASE"
+    }
+  ]
 }
 ```
 
