@@ -1,47 +1,48 @@
 # Upgrading template to latest yang repository
 
-Template can be upgraded to latest YANG repository using 'upgrade-template' RPC.
-This procedure consists of:
+Templates can be upgraded to the latest YANG repository using the `upgrade-template` RPC.
 
-1. **Read template** - Reading of template configuration from
-   'templates' topology in Configuration datastore.
-2. **Version-drop** - Conversion of template into target schema context
-   that is created by specified yang-repository. Because of this feature,
-   it is possible to change template between different versions of devices
+This procedure consists of the following steps:
+
+1. **Read template** - Reads a template configuration from the
+   *templates* topology in the *Configuration* datastore.
+2. **Version-drop** - Converts a template into a target schema context
+   created by the specified yang-repository. Because of this feature,
+   it is possible to change templates between different versions of devices
    with different revisions of YANG schemas but with similar structure.
-   Version-drop is also aware of 'ignoredDataOnWriteByExtensions'
+   Version-drop is also aware of the `ignoredDataOnWriteByExtensions`
    RESTCONF filtering mechanism.
 3. **Removal of previous template / writing new template** - If
-   'upgraded-template-name' is not specified in RPC input,
-   previous template will be deleted and replaced by new one.
-   If it is specified, previous template will not be deleted.
+   `upgraded-template-name` is not specified in the RPC input,
+   the previous template is deleted and replaced by a new one.
+   If specified, the previous template will not be deleted.
 
-Description of input RPC fields:
+RPC input fields:
 
 - **template-name**: Name of the existing input template. This field is mandatory.
 - **upgraded-template-name**: Name of upgraded/new template. This field is optional.
 - **yang-repository**: Name of YANG repository against
   which version-dropping is used. This field is optional.
-  If no yang-repository is specified, latest yang repository will be used.
+  If no yang-repository is specified, the latest yang repository is used.
 
-Description of output RPC fields:
+RPC output fields:
 
-- Successful response: returns http status code 200 without fields.
+- Successful response: Returns HTTP status code 200 with no fields.
 
-- Failed response: returns http status code 400-500 and error with
-  fields shown below:
-- **error-type** : Type of the error.
-- **error-tag** : Tag of the error, also determining http status code.
-- **error-message** : Description of the error that occurred during
+- Failed response: Returns HTTP status code 400-500 and an error with
+  the following fields:
+   - **error-type** : Type of the error.
+   - **error-tag** : Tag of the error, also determining HTTP status code.
+   - **error-message** : Description of the error that occurred during
   application of template.
-- **error-info** : Additional information related to error. For example,
+   - **error-info** : Additional information related to the error. For example:
   node identification, topology identification.
 
   No fields are used, only HTTP response codes [200 - OK, 404 - Fail]
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:upgrade-template' \
@@ -56,22 +57,22 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 }'
 ```
 
-### Auto-upgrading of templates
+### Auto-upgrading templates
 
-This feature is used to automatically upgrade all stored templates using the old
+This feature is used to automatically upgrade all stored templates that use the old
 YANG repository to the latest YANG repository with help from the version-drop procedure.
-For the auto-upgrading process to work, the latest YANG repository must already be configured.
+For the auto-upgrade process to succeed, the latest YANG repository must already be configured.
 The upgrade process must be explicitly enabled in the configuration file and occurs
 when UniConfig is started.
 
-There is also an option to back up templates before the upgrade with the standard rotation procedure.
+Additionally, there is an option to back up templates before the upgrade with the standard rotation procedure.
 The names of backed-up templates follow the pattern '{template-name}_backup_{index}',
 where '{template-name}' represents the name of the original template and'{index}'
 represents the backup index. The most recent backup index is always '0' and older ones
 are rotated by incrementing the corresponding index. If a backed-up template reaches
 the configured limit (maximum number of backups), it is permanently removed from the database.
 
-Overview of available settings ('application.properties'):
+Available settings ('application.properties'):
 
 ```properties UniConfig templates configuration (config/application.properties)
 # Template settings
@@ -81,7 +82,7 @@ templates.enabled-templates-upgrading=false
 templates.backup-templates-limit=7
 ```
 
-- **enabledTemplatesUpgrading** - Enables the auto-upgrading process at UniConfig startup.
+- **enabledTemplatesUpgrading** - Enable the auto-upgrading process at UniConfig startup.
   If disabled, the other setting is ignored.
 - **backupTemplatesLimit** - Maximum number of stored backup templates.
   If exceeded, older templates are removed during the rotation procedure.
