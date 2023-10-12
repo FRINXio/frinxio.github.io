@@ -3,7 +3,7 @@
 This RPC returns all templates from the template topology. No input body
 is required.
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
