@@ -1,6 +1,7 @@
 # Applying a template
 
-Template can be applied to UniConfig nodes using the `apply-template` RPC.
+Templates can be applied to UniConfig nodes using the `apply-template` RPC.
+
 This procedure contains the following steps:
 
 1. **Read template** - Reads a template configuration from the
