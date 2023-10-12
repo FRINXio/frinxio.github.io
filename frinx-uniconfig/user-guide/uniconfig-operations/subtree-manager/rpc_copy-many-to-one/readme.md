@@ -49,12 +49,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "result": "complete"
-    }
-}
+```RPC Response, Status: 200
 ```
 
 ### Failed example
@@ -81,16 +76,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-message": "Cannot parse input path 'network-topology:network-topology/topology=uniconfig/node=dev01/configuration/invalid:invalid' - Failed to lookup for module with name 'invalid'.",
-                "error-tag": "unknown-element",
-                "error-type": "protocol"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "protocol",
+        "error-tag": "unknown-element",
+        "error-message": "Cannot parse input path 'network-topology:network-topology/topology=uniconfig/node=dev01/configuration/invalid:invalid' - Failed to lookup for module with name 'invalid'."
+      }
+    ]
+  }
 }
 ```

@@ -48,11 +48,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-    }
-}
+```RPC Response, Status: 200
 ```
 
 ### Failed example
@@ -78,11 +74,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 500
 {
-    "output": {
-        "error-message": "Failed to find schema node with identifier '(example-interfaces?revision=2019-12-01)interfaces' under: (example-interfaces?revision=2019-12-01)ext",
-        "result": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-failed",
+        "error-message": "Failed to find schema node with identifier '(example-interfaces?revision=2019-12-01)interfaces' under: (example-interfaces?revision=2019-12-01)ext"
+      }
+    ]
+  }
 }
 ```
