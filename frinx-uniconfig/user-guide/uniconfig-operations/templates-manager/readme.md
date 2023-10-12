@@ -2,34 +2,32 @@
 
 ## Overview
 
-Templates can be used for reusing of some configuration and afterwards
-easier application of this configuration into target UniConfig nodes.
+Templates can be utilised to reuse some configuration and more easily
+apply this configuration into target UniConfig nodes.
 
-Basic properties of templates as they are implemented in UniConfig:
+Basic properties of templates in UniConfig:
 
-- All templates are stored under 'templates' topology and each
-    template is represented by separate 'node' list entry.
-- Whole template configuration is placed under
-    'frinx-uniconfig-topology:configuration' container in the
-    Configuration datastore. Because of this, configuration of template
-    can be accessed and modified in the same way like modification of
-    UniConfig node.
-- Templates are validated against single schema context. Schema
-    context, against which validation is enabled, is selected at
-    creation of template using 'uniconfig-schema-repository' query
-    parameter. Value of the query parameter defines name of the schema
-    repository that is placed under UniConfig distribution in form of
+- All templates are stored under the `templates` topology and each
+    template is represented by a separate `node` list entry.
+- The entire template configuration is placed under the
+    `frinx-uniconfig-topology:configuration` container in the
+    *Configuration* datastore. Because of this, the configuration of a template
+    can be accessed and modified in the same way as a UniConfig node.
+- Templates are validated against a single schema context. The schema
+    context is selected when a template is created using
+    the `uniconfig-schema-repository` query
+    parameter. The value of the query parameter defines the name of the schema
+    repository that is placed under the UniConfig distribution in the form of
     the directory.
 
 Currently implemented template features:
 
-- **Variables** - They are used for parametrisation of templates.
-- **Tags** - Tags can be used for selection of an operation that
-    should be applied for the specific subtree at application of
-    template to UniConfig node.
+- **Variables** - Used for parametrisation of templates.
+- **Tags** - Can be used to select an operation that is applied
+    to the specific subtree when the template is applied to a UniConfig node.
 
 !!!
-Schema validation of leaves and leaf-lists is adjusted, so it can
+Schema validation of leaves and leaf-lists is adjusted so that it can
 accept both string with variables and original YANG type.
 !!!
 
@@ -41,14 +39,15 @@ accept both string with variables and original YANG type.
 
 ## Latest-schema
 
-Latest-schema defines name of the schema repository of which built schema context is used for template validation.
-Latest-schema is used only if there is not 'uniconfig-schema-repository' query parameter when creating template.
-If 'uniconfig-schema-repository' query parameter is defined, latest-schema is ignored.
+Latest-schema defines the name of the schema repository whose built schema context is used for template validation.
 
-### Configuration of the latest-schema
+Latest-schema is used only if the `uniconfig-schema-repository` query parameter is not defined when creating the template.
+If the query parameter is defined, latest-schema is ignored.
 
-Latest-schema can be set using PUT request. It will be placed in Config datastore. Name of directory has to point
-to existing schema repository that is placed under UniConfig distribution.
+### Configuring latest-schema
+
+Latest-schema can be set using a PUT request. It is placed in the *Config* datastore. The name of the directory must point
+to an existing schema repository placed under the UniConfig distribution.
 
 ```bash Set the latest schema
 curl --location --request PUT 'http://localhost:8181/rests/data/schema-settings:schema-settings/latest-schema' \
@@ -64,7 +63,7 @@ curl --location --request PUT 'http://localhost:8181/rests/data/schema-settings:
 Status: 201
 ```
 
-GET request can be used for check if latest-schema is placed in config datastore.
+GET request can be used to check if latest-schema is placed in the *config* datastore.
 
 ```bash Read the latest schema
 curl --location --request GET 'http://localhost:8181/rests/data/schema-settings:schema-settings/latest-schema' \
@@ -77,14 +76,14 @@ curl --location --request GET 'http://localhost:8181/rests/data/schema-settings:
 }
 ```
 
-### Auto-upgrading of the latest-schema
+### Auto-upgrading latest-schema
 
-Latest-schema can be automatically upgraded by UniConfig after installation of new YANG repository. YANG repository
+Latest-schema can be automatically upgraded by UniConfig after installing a new YANG repository. YANG repository
 is installed after deploying of new type of NETCONF/GRPC device or after manual invocation of RPC for loading
 of new YANG repository from directory.
 
-In order to enable auto-upgrading process, 'latestSchemaReferenceModuleName' must be specified in the
-'application.properties' file:
+In order to enable auto-upgrading process, `latestSchemaReferenceModuleName` must be specified in the
+*application.properties* file:
 
 ```properties UniConfig templates configuration (config/application.properties)
 # Template settings
@@ -94,8 +93,8 @@ templates.enabled-templates-upgrading=false
 templates.backup-templates-limit=7
 ```
 
-After new YANG repository is installed, then UniConfig will look for revision of module
-'latestSchemaReferenceModuleName' in the repository. If found revision is more recent than the last cached
+After new YANG repository is installed, UniConfig will look for revision of the 
+`latestSchemaReferenceModuleName` module in the repository. If the revision found is more recent than the last cached
 revision, UniConfig will automatically write identifier of the fresh repository into 'latest-schema' configuration.
 Afterwards, 'latest-schema' is used by UniConfig the same way as it would be written manually via RESTCONF.
 
@@ -424,7 +423,7 @@ tags:
 }
 ```
 
-## Creation of template
+## Creating a template
 
 A new template can be created by sending PUT request to new template
 node under 'templates' topology with populated 'configuration'
@@ -434,7 +433,7 @@ the 'uniconfig-schema-repository' query parameter in order to
 successfully match sent data-tree with correct schema context (it is
 usually associated with some type of NETCONF device).
 
-### Example - creation of template
+### Example
 
 The following example shows creation of new template with name
 'interface\_template' using 'schemas\_1' schema repository. The body of
