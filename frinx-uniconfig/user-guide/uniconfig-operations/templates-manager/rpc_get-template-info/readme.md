@@ -1,11 +1,11 @@
 # RPC get-template-info
 
-This RPC shows information about all variables in specified template.
-The RPC input has to contain template name.
+This RPC shows information about all variables in the specified template.
+The RPC input must contain a template name.
 
-## RPC Examples
+## RPC examples
 
-### Creation of template
+### Creating a template
 
 ```bash RPC Request
 curl --location --request PUT 'http://localhost:8181/rests/data/network-topology:network-topology/topology=templates/node=interface_template/frinx-uniconfig-topology:configuration/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=%7B%24act-var%7D,%7B%24ifc-name-var%7D?uniconfig-schema-repository=schemas_1' \
@@ -27,7 +27,7 @@ curl --location --request PUT 'http://localhost:8181/rests/data/network-topology
 ```RPC Response, Status: 201
 ```
 
-### Successful Example
+### Successful example
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:get-template-info' \
