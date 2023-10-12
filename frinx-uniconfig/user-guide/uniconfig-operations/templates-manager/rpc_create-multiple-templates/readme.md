@@ -1,38 +1,40 @@
 # RPC create-multiple-templates
 
-One or more new templates can be created by this RPC. Templates are parsed
+This RPC can be used to create one or more new templates.
+
+Templates are parsed
 and written in parallel for better performance. If specified templates already exist,
-their configuration is replaced. Execution of RPC is atomic - either all templates
+their configuration is replaced. Execution of the RPC is atomic - either all templates
 are successfully created or no changes are made in the UniConfig transaction.
 
-Description of input RPC fields:
+RPC input fields:
 
-- **template-name**:Name of the created template.
+- **template-name**: Name of the created template.
 - **yang-repository**: YANG schema repository used for parsing of template configuration.
-  Default value: 'latest'.
-- **template-configuration**: Whole template configuration.
+  Default value: `latest`.
+- **template-configuration**: The entire template configuration.
 - **tags**: List of template tags that are written on the specified paths in all created
-- templates. Specified tag type must be prefixed with 'template-tags' module name based on
-- RFC-8040 formatting of identityref.
+  templates. A specified tag type must be prefixed with the `template-tags` module name based on
+  RFC-8040 formatting of identityref.
 
-Description of output fields in RPC:
+RPC output fields:
 
-- Successful response: returns http status code 200 without fields.
+- Successful response: Returns http status code 200 without fields.
 
-- Failed response: returns http status code 400-500 and error with
-  fields shown below:
-- **error-type** : Type of the error.
-- **error-tag** : Tag of the error, also determining http status code.
-- **error-message** : Description of the error that occurred during
+- Failed response: Returns http status code 400-500 and error with
+  the following fields:
+  - **error-type** : Type of the error.
+  - **error-tag** : Tag of the error, also determining http status code.
+  - **error-message** : Description of the error that occurred during
   application of template.
-- **error-info** : Additional information related to error. For example,
+  - **error-info** : Additional information related to error. For example:
   node identification, topology identification.
 
-Only template-name and template-configuration are mandatory fields.
+Only **template-name** and **template-configuration** are mandatory fields.
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
 Successful creation of templates.
 
@@ -83,11 +85,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 ```RPC Response, Status: 200
 ```
 
-### Successful Example
+### Successful example
 
-Creation of 2 templates with separately specified template tags:
-- 'replace' tag is added to '/acl/category' and
-- '/services/group=default/types' elements, while 'create' is added to '/services' element.
+Creation of two templates with separately specified template tags:
+- **replace** tag is added to `/acl/category` and `/services/group=default/types` elements
+- **create** tag is added to `/services` element
 
 ```bash RPC request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-manager:create-multiple-templates' \
@@ -151,9 +153,9 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
 ```RPC response, Status: 200
 ```
 
-### Failed Example
+### Failed example
 
-Failed to find YANG schema repository.
+Failed to find the YANG schema repository.
 
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-manager:create-multiple-templates' \
@@ -207,7 +209,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
 }
 ```
 
-### Failed Example
+### Failed example
 
 Failed to parse template configuration.
 
