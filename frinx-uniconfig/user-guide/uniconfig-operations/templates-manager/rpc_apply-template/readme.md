@@ -67,7 +67,7 @@ Successful application of the `SERVICE_GROUP` template to two UniConfig
 nodes (R1 and R2).
 
 ```bash RPC Request
-curl --location --request PUT 'http://localhost:8181/rests/operations/template-manager:apply-template' \
+curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -134,7 +134,7 @@ curl --location --request PUT 'http://localhost:8181/rests/operations/template-m
 Failed application of the `TEMP1` template: Template does not exist.
 
 ```bash RPC Request
-curl --location --request PUT 'http://localhost:8181/rests/operations/template-manager:apply-template' \
+curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -182,7 +182,7 @@ Failed application of the template `REDUNDANCY_TEMPLATE` to two UniConfig nodes
 (R1 and R2): Missing values for some required variables.
 
 ```bash RPC Request
-curl --location --request PUT 'http://localhost:8181/rests/operations/template-manager:apply-template' \
+curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -224,13 +224,13 @@ curl --location --request PUT 'http://localhost:8181/rests/operations/template-m
 }'
 ```
 
-```json RPC Response, Status: 500
+```json RPC Response, Status: 400
 {
   "errors": {
     "error": [
       {
         "error-type": "application",
-        "error-tag": "operation-failed",
+        "error-tag": "invalid-value",
         "error-message": "String substitution failed: Node /network-topology:network-topology/topology=templates/node=redundancy_template/frinx-uniconfig-topology:configuration/ha:redundancy/intra-chassis/bfd-liveness-detection/transmit-interval/minimum-interval has defined variable/s: '[min-interval]', but there is not provided or default value for all of these variables",
         "error-info": {
           "node-id": "R2"
@@ -248,7 +248,7 @@ node (dev1): Invalid type of substituted variable value (failed
 regex constraint).
 
 ```bash RPC Request
-curl --location --request PUT 'http://localhost:8181/rests/operations/template-manager:apply-template' \
+curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -281,13 +281,13 @@ curl --location --request PUT 'http://localhost:8181/rests/operations/template-m
 }'
 ```
 
-```json RPC Response, Status: 500
+```json RPC Response, Status: 400
 {
   "errors": {
     "error": [
       {
         "error-type": "application",
-        "error-tag": "operation-failed",
+        "error-tag": "invalid-value",
         "error-message": "Value '172.30.15.1s' cannot be applied to leaf /network-topology:network-topology/topology=templates/node=redundancy_template/frinx-uniconfig-topology:configuration/ha:redundancy/inter-chassis/local-ip - it accepts only values with following YANG types: [type: string, constraints: [Length[[0..2147483647]], PatternConstraintImpl{regex=^(?:(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?)$, errorAppTag=invalid-regular-expression}], type: string, constraints: [Length[[0..2147483647]], PatternConstraintImpl{regex=^(?:((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?)$, errorAppTag=invalid-regular-expression}, PatternConstraintImpl{regex=^(?:(([^:]+:){6}(([^:]+:[^:]+)|(.*\\..*)))|((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?)(%.+)?)$, errorAppTag=invalid-regular-expression}]]",
         "error-info": {
           "node-id": "dev1"

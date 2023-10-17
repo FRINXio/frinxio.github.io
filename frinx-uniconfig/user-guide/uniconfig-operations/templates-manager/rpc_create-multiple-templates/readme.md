@@ -246,13 +246,13 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
 }'
 ```
 
-```json RPC Response, Status: 500
+```json RPC Response, Status: 400
 {
   "errors": {
     "error": [
       {
         "error-type": "application",
-        "error-tag": "operation-failed",
+        "error-tag": "invalid-value",
         "error-message": "Node with name 'service' has not been found under 'configuration'",
         "error-info": {
           "node-id": "Template-name2"
