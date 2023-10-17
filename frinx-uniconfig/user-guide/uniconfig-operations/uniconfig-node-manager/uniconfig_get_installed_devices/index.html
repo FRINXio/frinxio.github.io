@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC get-installed-nodes | Frinx Docs</title>
     <meta name="title" content="RPC get-installed-nodes | Frinx Docs">
-    <meta name="description" content="This RPC returns all installed devices from a selected topology. If no topology is specified, the output may contain devices from" />
+    <meta name="description" content="This RPC returns all installed devices from a specified topology." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_get_installed_devices/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_get_installed_devices/">
     <meta property="og:title" content="RPC get-installed-nodes | Frinx Docs">
-    <meta property="og:description" content="This RPC returns all installed devices from a selected topology. If no topology is specified, the output may contain devices from">
+    <meta property="og:description" content="This RPC returns all installed devices from a specified topology.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_get_installed_devices/">
     <meta property="twitter:title" content="RPC get-installed-nodes | Frinx Docs">
-    <meta property="twitter:description" content="This RPC returns all installed devices from a selected topology. If no topology is specified, the output may contain devices from">
+    <meta property="twitter:description" content="This RPC returns all installed devices from a specified topology.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,9 +254,12 @@
         <span>RPC get-installed-nodes</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC returns all installed devices from a selected topology.
-If no topology is specified, the output may contain devices from
-multiple topologies (CLI, NETCONF, gNMI).</p>
+<p>This RPC returns all installed devices from a specified topology.</p>
+<p>If no topology is specified, the output may contain devices from
+multiple topologies (CLI, NETCONF, gNMI). In this case, devices must be
+installed with the install request parameter &quot;uniconfig-config:install-uniconfig-node-enabled&quot;
+set to &quot;true&quot;. The RPC with no topology looks for nodes installed under the UNICONFIG topology
+by default.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
@@ -269,22 +272,32 @@ multiple topologies (CLI, NETCONF, gNMI).</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC has no input and a device called &#x27;testDevice&#x27; is installed in the NETCONF topology.</p>
+<p>The RPC contains <strong>no topology</strong> defined in input and device called &#x27;R1&#x27;
+is installed in the NETCONF topology. With parameter
+&quot;uniconfig-config:install-uniconfig-node-enabled&quot;:&quot;true&quot; in install
+request is <strong>installed</strong> under UNICONFIG topology.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:get-installed-nodes' \
 --header 'Authorization: Basic YWRtaW46YWRtaW4=' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json'</code></pre>
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {}
+}'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-  &quot;output&quot;: {
-    &quot;nodes&quot;: [
-      &quot;testDevice&quot;
-    ]
-  }
+    &quot;output&quot;: {
+        &quot;node-results&quot;: {
+            &quot;node-result&quot;: [
+                {
+                    &quot;topology-id&quot;: &quot;netconf&quot;,
+                    &quot;node-id&quot;: &quot;R1&quot;
+                }
+            ]
+        }
+    }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
@@ -293,11 +306,69 @@ multiple topologies (CLI, NETCONF, gNMI).</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC input contains the CLI topology, but no devices are installed in the topology.</p>
+<p>The RPC input contains <strong>no topology</strong> and device called &#x27;R1&#x27; is installed in the NETCONF topology.
+With parameter &quot;uniconfig-config:install-uniconfig-node-enabled&quot;:&quot;false&quot; in install
+request is <strong>not installed</strong> under UNICONFIG topology.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:get-installed-nodes' \
 --header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {}
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;node-results&quot;: {}
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>The RPC input contains the GNMI topology and device called &#x27;R1&#x27; is installed in the topology.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:get-installed-nodes' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;mount-type&quot;: &quot;gnmi&quot;
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;node-results&quot;: {
+            &quot;node-result&quot;: [
+                {
+                    &quot;topology-id&quot;: &quot;gnmi&quot;,
+                    &quot;node-id&quot;: &quot;R1&quot;
+                } 
+            ]
+        }
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example-3">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-3">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>The RPC input contains the CLI topology, but no devices are installed in the topology.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:get-installed-nodes' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -309,7 +380,9 @@ multiple topologies (CLI, NETCONF, gNMI).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-  &quot;output&quot;: {}
+    &quot;output&quot;: {
+        &quot;node-results&quot;: {}
+    }
 }</code></pre>
 </doc-codeblock></div>
 
@@ -321,7 +394,7 @@ multiple topologies (CLI, NETCONF, gNMI).</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_compare_config/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_compare-config/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>

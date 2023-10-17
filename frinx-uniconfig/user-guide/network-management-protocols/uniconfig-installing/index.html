@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -500,6 +500,27 @@ to provide <code v-pre>max-connection-attempts-install</code> higher than the de
 (default value: 1). <code v-pre>max-reconnection-attempts</code> is not that necessary to set. Uniconfig does
 not keep idle sessions open longer than it is necessary.</li>
 </ul>
+<doc-anchor-target id="storing-failed-installations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#storing-failed-installations">#</doc-anchor-trigger>
+        <span>Storing failed installations</span>
+    </h3>
+</doc-anchor-target>
+<p>The following parameter allows the user to store the installation in case the device is in some way unreachable.</p>
+<ul>
+<li><strong>uniconfig-config:store-failed-installation</strong> - If enabled, it will ensure that even if the device is unreachable,
+it will be stored in the node table in the database. If not set, the default value is false.</li>
+</ul>
+<p>When the user sets the flag to true, an additional column called <strong>installation-status</strong> will be populated with a boolean
+flag (either <strong>SUCCESSFUL</strong> for a successful installation, or <strong>FAILED</strong> for a failed one). This lets the user know that
+there has been some problem and that the device was not installed correctly. The mount-point information of that node
+will be stored (unlike with the default value). With this info already stored, the user does not need to reinstall the
+device, as all the connection information is present in the UniConfig database. Syncing the device or calling a GET
+Request will try to reconnect to the device and if it is successful, the configuration data will be saved in the
+datastore and the request will then finish. The <strong>installation-status</strong> will then change to <strong>SUCCESSFUL</strong>. The installed device
+will then behave normally as if the installation was successful in the first place. If the device is still unreachable,
+the flag will stay <strong>FAILED</strong>.</p>
+<p>This is useful when many devices are being installed in batches and the user doesn&#x27;t know if they are up or not.</p>
 <doc-anchor-target id="keepalive-strategies">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#keepalive-strategies">#</doc-anchor-trigger>
@@ -1061,6 +1082,116 @@ be found
     &quot;input&quot;: {
         &quot;node-id&quot;: &quot;xr1&quot;,
         &quot;connection-type&quot;: &quot;netconf&quot;
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="installing-snmp-agent">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-snmp-agent">#</doc-anchor-trigger>
+        <span>Installing SNMP agent</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="identification-of-remote-agent">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#identification-of-remote-agent">#</doc-anchor-trigger>
+        <span>Identification of remote agent</span>
+    </h3>
+</doc-anchor-target>
+<p>List of basic connection parameters that are used for identification of
+remote agent.</p>
+<ul>
+<li><strong>node-id</strong> - Name of node that represents device / mount-point in
+the topology.</li>
+<li><strong>snmp-topology:host</strong> - IP address or domain-name of target
+device where SNMP agent is running.</li>
+<li><strong>snmp-topology:port</strong> - SNMP port on which SNMP agent is listening
+to incoming connections.</li>
+</ul>
+<doc-anchor-target id="snmp-parameters">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#snmp-parameters">#</doc-anchor-trigger>
+        <span>SNMP parameters</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>snmp-topology:transport-type</strong> - UniConfig currently supports UDP
+for SNMP communication, with plans to add TCP support in the future.</li>
+<li><strong>snmp-topology:snmp-version</strong> - UniConfig currently supports V1 and
+V2c version of the SNMP, with plans to add V3 support in the future.</li>
+<li><strong>snmp-topology:connection-retries</strong> - Sets the number of retries to
+be performed before a request is timed out. Default value is 0.</li>
+<li><strong>snmp-topology:request-timeout</strong> - Timeout in milliseconds before
+a confirmed request is resent or timed out. Default value is 3000.</li>
+<li><strong>snmp-topology:get-bulk-size</strong> - The maximum number of values
+that can be returned in a single response to the get-bulk operation.
+Default value is 50.</li>
+</ul>
+<doc-anchor-target id="authentication-parameters-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#authentication-parameters-2">#</doc-anchor-trigger>
+        <span>Authentication parameters</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>snmp-topology:community-string</strong> - UniConfig currently supports only
+security string as authentication method that is used with V1 and
+V2c.</li>
+</ul>
+<doc-anchor-target id="others">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#others">#</doc-anchor-trigger>
+        <span>Others</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>snmp-topology:mib-repository</strong> - Name of the MIB repository that contains
+MIB files.</li>
+</ul>
+<doc-anchor-target id="example-request-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-2">#</doc-anchor-trigger>
+        <span>Example request</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Content-Type: application/json' \
+--data '{
+    &quot;input&quot;: {
+        &quot;node-id&quot;: &quot;agent1&quot;,
+        &quot;snmp&quot;: {
+            &quot;snmp-topology:host&quot;: &quot;192.168.1.225&quot;,
+            &quot;snmp-topology:port&quot;: 161,
+            &quot;snmp-topology:transport-type&quot;: &quot;udp&quot;,
+            &quot;snmp-topology:snmp-version&quot;: &quot;v2c&quot;,
+            &quot;snmp-topology:community-string&quot;: &quot;public&quot;,
+            &quot;snmp-topology:connection-retries&quot;: 1,
+            &quot;snmp-topology:request-timeout&quot;: 5000,
+            &quot;snmp-topology:get-bulk-size&quot;: &quot;900&quot;,
+            &quot;snmp-topology:mib-repository&quot;: &quot;repo1&quot;
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="uninstalling-snmp-agent">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uninstalling-snmp-agent">#</doc-anchor-trigger>
+        <span>Uninstalling SNMP agent</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="example-request-3">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-3">#</doc-anchor-trigger>
+        <span>Example request</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location 'http://localhost:8181/rests/operations/connection-manager:uninstall-node' \
+--header 'Content-Type: application/json' \
+--data '{
+    &quot;input&quot;: {
+        &quot;node-id&quot;: &quot;agent1&quot;,
+        &quot;connection-type&quot;: &quot;snmp&quot;
     }
 }'</code></pre>
 </doc-codeblock></div>

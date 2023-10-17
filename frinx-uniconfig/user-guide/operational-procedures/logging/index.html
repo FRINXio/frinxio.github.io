@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -284,12 +284,13 @@ application.</p>
 <li>&#x27;logs&#x27;: Used for writing all logs to the output file on path
 &#x27;log/logs.log&#x27;. The rolling file appender is applied.</li>
 <li>&#x27;netconf-notifications&#x27;, &#x27;netconf-messages&#x27;, &#x27;netconf-events&#x27;, and
-&#x27;cli-messages&#x27;: Sifting appenders that split logs per node ID that
+&#x27;cli-messages&#x27;, &#x27;gnmi-messages&#x27;: Sifting appenders that split logs per node ID that
 is set in the marker of the logs. Logs are written to different
 subdirectories under &#x27;log&#x27; directory and they are identified by
 their node ID. The rolling file appender is applied.</li>
 <li>&#x27;restconf&#x27;: Appender used for writing of RESTCONF messages into
 &#x27;log/restconf.log&#x27; file. The rolling file appender is applied.</li>
+<li>&#x27;gnmi&#x27;: Appender used for writing of Logs related to gNMI topology.</li>
 </ol>
 <doc-anchor-target id="loggers">
     <h3>
@@ -304,13 +305,13 @@ general messages into the console and a single output file. Logging
 level is set by default to &#x27;INFO&#x27;. For debugging purposes it is
 handy to change logging threshold to &#x27;TRACE&#x27; or &#x27;DEBUG&#x27; level.
 Covered layers: UniConfig, Unified, Controller, RESTCONF, CLI,
-NETCONF. Used appenders: &#x27;STDOUT&#x27; and &#x27;logs&#x27;.</li>
+NETCONF, gNMI. Used appenders: &#x27;STDOUT&#x27; and &#x27;logs&#x27;.</li>
 <li>Loggers used for logging brokers: These loggers should not be
 changed since the state of logging can be changed using RPC calls.
 Classpaths point to specific classes that represent implementations
 of logging brokers, the logging level is set to &#x27;TRACE&#x27;. Used
 appenders: &#x27;netconf-notifications&#x27;, &#x27;netconf-messages&#x27;,
-&#x27;netconf-events&#x27;, &#x27;cli-messages&#x27;, and &#x27;restconf&#x27;.</li>
+&#x27;netconf-events&#x27;, &#x27;cli-messages&#x27;, &#x27;gnmi-messages&#x27; and &#x27;restconf&#x27;.</li>
 </ol>
 <doc-anchor-target id="updating-configuration">
     <h3>
@@ -359,7 +360,13 @@ of UniConfig:</p>
 &lt;logger name=&quot;org.opendaylight.restconf&quot; level=&quot;DEBUG&quot;/&gt;
 &lt;logger name=&quot;org.opendaylight.aaa&quot; level=&quot;INFO&quot;/&gt;
 
-
+&lt;!-- gNMI part --&gt;
+&lt;logger name=&quot;io.uniconfig.gnmi&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;
+    &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;
+    &lt;appender-ref ref=&quot;logs&quot;/&gt;
+    &lt;appender-ref ref=&quot;gnmi&quot;/&gt;
+&lt;/logger&gt;
+    
 &lt;!-- controller part --&gt;
 &lt;logger name=&quot;org.opendaylight.daexim&quot; level=&quot;INFO&quot;/&gt;
 &lt;logger name=&quot;org.opendaylight.controller&quot; level=&quot;INFO&quot;/&gt;
@@ -670,6 +677,110 @@ under the directory &#x27;log/netconf-events&#x27; and named by the
 11:09:00.558 DEBUG org.opendaylight.netconf.logging.brokers.NetconfEventsLoggingBroker - node1: Session advertised capabilities: ...
 11:09:00.832 DEBUG org.opendaylight.netconf.logging.brokers.NetconfEventsLoggingBroker - node1: Connector for node created successfully</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="gnmi-messages">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gnmi-messages">#</doc-anchor-trigger>
+        <span>gNMI Messages</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>A broker is used for logging of all gNMI SET/GET messages incoming or
+outgoing, except the gNMI notifications.</li>
+<li>Per-device logging is supported, logs for gNMI messages are
+stored under the directory &#x27;log/gnmi-messages&#x27; and named by the
+&#x27;[node-id].log&#x27; pattern.</li>
+</ul>
+<p><strong>Example: - Sending gNMI SET request and receiving response</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">12:12:28.658 TRACE io.uniconfig.gnmi.logging.brokers.GnmiMessagesLoggingBroker - Message-id: 1693479982709, sending gNMI SET message:
+replace {
+  path {
+    elem {
+      name: &quot;openconfig-network-instance:network-instances&quot;
+    }
+    elem {
+      name: &quot;network-instance&quot;
+      key {
+        key: &quot;name&quot;
+        value: &quot;default&quot;
+      }
+    }
+    elem {
+      name: &quot;protocols&quot;
+    }
+    elem {
+      name: &quot;protocol&quot;
+      key {
+        key: &quot;identifier&quot;
+        value: &quot;BGP&quot;
+      }
+      key {
+        key: &quot;name&quot;
+        value: &quot;bgp&quot;
+      }
+    }
+    elem {
+      name: &quot;bgp&quot;
+    }
+    elem {
+      name: &quot;global&quot;
+    }
+    elem {
+      name: &quot;logging-options&quot;
+    }
+    elem {
+      name: &quot;config&quot;
+    }
+  }
+  val {
+    json_ietf_val: &quot;{\&quot;config\&quot;:{\&quot;log-neighbor-state-changes\&quot;:true}}&quot;
+  }
+}
+
+12:12:28.878 TRACE io.uniconfig.gnmi.logging.brokers.GnmiMessagesLoggingBroker - Message-id: 1693479982709, received gNMI SET message:
+response {
+  path {
+    elem {
+      name: &quot;openconfig-network-instance:network-instances&quot;
+    }
+    elem {
+      name: &quot;network-instance&quot;
+      key {
+        key: &quot;name&quot;
+        value: &quot;default&quot;
+      }
+    }
+    elem {
+      name: &quot;protocols&quot;
+    }
+    elem {
+      name: &quot;protocol&quot;
+      key {
+        key: &quot;identifier&quot;
+        value: &quot;BGP&quot;
+      }
+      key {
+        key: &quot;name&quot;
+        value: &quot;bgp&quot;
+      }
+    }
+    elem {
+      name: &quot;bgp&quot;
+    }
+    elem {
+      name: &quot;global&quot;
+    }
+    elem {
+      name: &quot;logging-options&quot;
+    }
+    elem {
+      name: &quot;config&quot;
+    }
+  }
+  op: REPLACE
+}
+timestamp: 1692266952617002464</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="supported-logging-settings">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#supported-logging-settings">#</doc-anchor-trigger>
@@ -717,6 +828,14 @@ GET query that displays the logging broker settings:</p>
                 &quot;broker-identifier&quot;: &quot;netconf_events&quot;,
                 &quot;is-logging-broker-enabled&quot;: true,
                 &quot;is-logging-enabled-on-all-devices&quot;: true
+            },
+            {
+                &quot;broker-identifier&quot;: &quot;gnmi_messages&quot;,
+                &quot;logging-enabled-on-all-devices&quot;: true,
+                &quot;logging-broker-enabled&quot;: true,
+                &quot;gnmi-logging:message-types&quot;: [
+                    &quot;SET&quot;
+                ]
             }
         ],
         &quot;global&quot;: {
@@ -764,6 +883,11 @@ must be specified using upper-case format.</li>
 (names of the headers) which content is hidden in the logs. Names of
 the HTTP headers are not case-sensitive.</li>
 </ul>
+<p>GNMI-specific settings:</p>
+<ul>
+<li><strong>gnmi-logging:message-types</strong> - gNMI message types that are enabled to be logged.
+Names of the message types must be specified using upper-case format.</li>
+</ul>
 <p>Global settings that are common in all logging brokers:</p>
 <ul>
 <li><strong>hidden-types</strong> - Value of leaf or leaf-list that uses one of these
@@ -780,7 +904,7 @@ used for masking of passwords or other confidential data from logs.</li>
 all devices, the user must explicitly specify a list of devices for
 which per-device logging is enabled. Also, RESTCONF-specific filtering
 is not configured, all HTTP requests and responses are fully logged, no
-content is dismissed.</p>
+content is dismissed. By default, only SET gNMI message type is set to be logged.</p>
 <p>Initial logging configuration can be adjusted by adding the
 &#x27;loggingController&#x27; configuration into the
 &#x27;config/lighty-uniconfig-config.json&#x27; file. The structure of this
@@ -1167,6 +1291,38 @@ to the log files.</li>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;output&quot;: {
         &quot;message&quot;: &quot;List of hidden HTTP methods have been successfully updated&quot;,
+        &quot;status&quot;: &quot;complete&quot;
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="setting-gnmi-message-types">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#setting-gnmi-message-types">#</doc-anchor-trigger>
+        <span>Setting gNMI message types</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>An RPC is used for overwriting the list of supported gNMI message types.</li>
+<li>This RPC modifies behavior of only &#x27;gnmi messages&#x27; logging behaviour.</li>
+</ul>
+<p><strong>Example: - Setting SET and GET message types</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/gnmi-logging:set-message-types' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;message-types&quot;: [
+            &quot;SET&quot;, &quot;GET&quot;
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>A positive response is shown in the output:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;message&quot;: &quot;List of message types have been successfully updated&quot;,
         &quot;status&quot;: &quot;complete&quot;
     }
 }</code></pre>

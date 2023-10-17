@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -313,20 +313,7 @@ install-node RPC. Devices are installed in parallel.</p>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R2&quot;
-            },
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R1&quot;
-            }
-        ]
-    }
-}</code></pre>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
     <h3>
@@ -334,8 +321,7 @@ install-node RPC. Devices are installed in parallel.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains devices (R1 and R2) and R2 uses two different
-protocols.</p>
+<p>RPC input contains devices (R1 and R2) and R2 uses two different protocols.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
@@ -392,20 +378,7 @@ protocols.</p>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R2&quot;
-            },
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R1&quot;
-            }
-        ]
-    }
-}</code></pre>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-2">
     <h3>
@@ -413,8 +386,7 @@ protocols.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains two devices (R1 and R2) and R2 is already installed
-using CLI protocol.</p>
+<p>RPC input contains two devices (R1 and R2) and R2 is already installed using CLI protocol.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
@@ -458,25 +430,23 @@ using CLI protocol.</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">	
-
-{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
+<div class="codeblock-title">RPC Response, Status: 409</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
             {
-                &quot;status&quot;: &quot;fail&quot;,
-                &quot;error-message&quot;: &quot;Node has already been installed using CLI protocol&quot;,
-                &quot;node-id&quot;: &quot;R2&quot;
-            },
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R1&quot;
+                &quot;error-tag&quot;: &quot;data-exists&quot;,
+                &quot;error-app-tag&quot;: &quot;UniconfigError&quot;,
+                &quot;error-info&quot;: {
+                    &quot;topology-id&quot;: &quot;netconf&quot;,
+                    &quot;node-id&quot;: &quot;R2&quot;
+                },
+                &quot;error-message&quot;: &quot;Node has already been installed using NETCONF protocol&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
             }
         ]
     }
-}
-</code></pre>
+}</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
     <h3>
@@ -484,7 +454,7 @@ using CLI protocol.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input doesn&#x27;t specify node-id.</p>
+<p>RPC input does not specify node-id.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
@@ -527,13 +497,76 @@ using CLI protocol.</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
             {
-                &quot;status&quot;: &quot;fail&quot;,
-                &quot;error-message&quot;: &quot;Field 'node-id' must be specified in the RPC input&quot;
+                &quot;error-tag&quot;: &quot;missing-element&quot;,
+                &quot;error-app-tag&quot;: &quot;UniconfigError&quot;,
+                &quot;error-message&quot;: &quot;Field 'node-id' must be specified in the RPC input&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
+        <span>Failed Example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains two devices using the same node-id.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: [
+            {
+                &quot;node-id&quot;: &quot;R1&quot;,
+                &quot;cli&quot;: {
+                    &quot;cli-topology:host&quot;: &quot;192.168.1.214&quot;,
+                    &quot;cli-topology:port&quot;: &quot;22&quot;,
+                    &quot;cli-topology:transport-type&quot;: &quot;ssh&quot;,
+                    &quot;cli-topology:device-type&quot;: &quot;ios xr&quot;,
+                    &quot;cli-topology:device-version&quot;: &quot;5.3.4&quot;,
+                    &quot;cli-topology:username&quot;: &quot;cisco&quot;,
+                    &quot;cli-topology:password&quot;: &quot;cisco&quot;,
+                    &quot;cli-topology:journal-size&quot;: 150,
+                    &quot;cli-topology:dry-run-journal-size&quot;: 150,
+                    &quot;uniconfig-config:install-uniconfig-node-enabled&quot;: true
+                },
+                &quot;cli&quot;: {
+                    &quot;cli-topology:host&quot;: &quot;192.168.1.211&quot;,
+                    &quot;cli-topology:port&quot;: &quot;22&quot;,
+                    &quot;cli-topology:transport-type&quot;: &quot;ssh&quot;,
+                    &quot;cli-topology:device-type&quot;: &quot;ios xr&quot;,
+                    &quot;cli-topology:device-version&quot;: &quot;6.1.2&quot;,
+                    &quot;cli-topology:username&quot;: &quot;cisco&quot;,
+                    &quot;cli-topology:password&quot;: &quot;cisco&quot;,
+                    &quot;cli-topology:dry-run-journal-size&quot;: 180,
+                    &quot;cli-topology:journal-size&quot;: 150,
+                    &quot;uniconfig-config:install-uniconfig-node-enabled&quot;: true
+                }
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 400</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;missing-element&quot;,
+                &quot;error-app-tag&quot;: &quot;UniconfigError&quot;,
+                &quot;error-message&quot;: &quot;Failed to install more than one node with same ID to Uniconfig layer.&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
             }
         ]
     }

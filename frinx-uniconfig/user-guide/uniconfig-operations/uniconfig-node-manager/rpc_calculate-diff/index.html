@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -259,10 +259,10 @@
 <p>This RPC creates a diff between the actual UniConfig topology nodes and
 the intended UniConfig topology nodes. The RPC input contains a list of
 UniConfig nodes to calculate the diff. Output of the RPC contains a list
-of statements representing the diff after the commit. It also matches
-all input nodes. If RPC is called with empty list of target nodes, diff
-is calculated for each modified node in the UniConfig transaction. If
-one node failed for any reason, the RPC will fail entirely.</p>
+of statements representing the diff. It also matches all input nodes.
+If RPC is called with empty list of target nodes, diff is calculated for
+each modified node in the UniConfig transaction. If some node fails for
+any reason, the RPC fails entirely</p>
 <p><figure class="content-center">
     <img src="rpc_calculate-diff-rpc_calculate_diff.svg" alt="RPC calculate-diff" />
     <figcaption class="caption">RPC calculate-diff</figcaption>
@@ -280,8 +280,8 @@ one node failed for any reason, the RPC will fail entirely.</p>
         <span>Successful Example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC calculate-diff input has two target nodes and the output
-contains a list of statements representing the diff.</p>
+<p>The RPC calculate-diff input has two target nodes and the output contains
+a list of statements representing the diff.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -290,7 +290,7 @@ contains a list of statements representing the diff.</p>
 --data-raw '{
     &quot;input&quot;: {
         &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
+            &quot;node&quot;: [&quot;R1&quot;,&quot;R2&quot;]
         }
     }
 }'</code></pre>
@@ -298,35 +298,34 @@ contains a list of statements representing the diff.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;updated-data&quot;: [
-                        {
-                            &quot;path&quot;: &quot;network-topology:network-topology/topology=uniconfig/node=IOSXRN/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
-                            &quot;data-actual&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;,
-                            &quot;data-intended&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0dfhdfghd\&quot;\n  }\n}&quot;
-                        }
-                    ],
-                    &quot;status&quot;: &quot;complete&quot;,
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;updated-data&quot;: [
-                        {
-                            &quot;path&quot;: &quot;network-topology:network-topology/topology=uniconfig/node=IOSXR/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
-                            &quot;data-actual&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;,
-                            &quot;data-intended&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0dfhdfghd\&quot;\n  }\n}&quot;
-                        }
-                    ],
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;topology&quot;: &quot;uniconfig&quot;,
+          &quot;updated-data&quot;: [
+            {
+              &quot;path&quot;: &quot;network-topology:network-topology/topology=uniconfig/node=R1/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
+              &quot;data-actual&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;,
+              &quot;data-intended&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0dfhdfghd\&quot;\n  }\n}&quot;
+            }
+          ]
+        },
+        {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;topology&quot;: &quot;unistore&quot;,
+          &quot;updated-data&quot;: [
+            {
+              &quot;path&quot;: &quot;network-topology:network-topology/topology=unistore/node=R2/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
+              &quot;data-actual&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;,
+              &quot;data-intended&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0dfhdfghd\&quot;\n  }\n}&quot;
+            }
+          ]
         }
+      ]
     }
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
@@ -335,8 +334,9 @@ contains a list of statements representing the diff.</p>
         <span>Successful Example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes, all touched nodes
-will be invoked.</p>
+<p>If the RPC calculate-diff input does not contain the target nodes,
+calculate-diff will be invoked on top of all touched nodes in the
+transaction.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -349,45 +349,92 @@ will be invoked.</p>
     }
 }'</code></pre>
 </doc-codeblock></div>
+<p>or</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+    }
+}'</code></pre>
+</doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;deleted-data&quot;: [
-                        {
-                            &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=xr5/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
-                            &quot;data&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;
-                        }
-                    ],
-                    &quot;status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;deleted-data&quot;: [
-                        {
-                            &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=xr6/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
-                            &quot;data&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;
-                        }
-                    ],
-                    &quot;status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;XR5&quot;,
-                    &quot;reordered-lists&quot;: [
-                        &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=R6/frinx-uniconfig-topology:configuration/routing-policy:routing-policy/policy-definitions/policy-definition=route_policy_1/statements/statement&quot;,
-                        &quot;actual-list-keys&quot;: &quot;[\&quot;name=1\&quot;, \&quot;name=3\&quot;, \&quot;name=2\&quot;]&quot;,
-                        &quot;intended-list-keys&quot;: &quot;[\&quot;name=1\&quot;, \&quot;name=2\&quot;, \&quot;name=3\&quot;]&quot;
-                    ],
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;topology&quot;: &quot;uniconfig&quot;,
+          &quot;deleted-data&quot;: [
+            {
+              &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=R1/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
+              &quot;data&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;
+            }
+          ]
         },
-        &quot;overall-status&quot;: &quot;complete&quot;
+        {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;topology&quot;: &quot;uniconfig&quot;,
+          &quot;deleted-data&quot;: [
+            {
+              &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=R2/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F0/config&quot;,
+              &quot;data&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/0\&quot;\n  }\n}&quot;
+            }
+          ]
+        },
+        {
+          &quot;node-id&quot;: &quot;R3&quot;,
+          &quot;topology&quot;: &quot;unistore&quot;,
+          &quot;reordered-lists&quot;: [
+            {
+              &quot;path&quot;: &quot;/network-topology:network-topology/topology=unistore/node=R3/frinx-uniconfig-topology:configuration/routing-policy:routing-policy/policy-definitions/policy-definition=route_policy_1/statements/statement&quot;,
+              &quot;actual-list-keys&quot;: &quot;[\&quot;name=1\&quot;, \&quot;name=3\&quot;, \&quot;name=2\&quot;]&quot;,
+              &quot;intended-list-keys&quot;: &quot;[\&quot;name=1\&quot;, \&quot;name=2\&quot;, \&quot;name=3\&quot;]&quot;
+            }
+          ]
+        }
+      ]
     }
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
+        <span>Successful Example</span>
+    </h3>
+</doc-anchor-target>
+<p>The RPC calculate-diff input has target node and there is no diff.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;R1&quot;]
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;topology-id&quot;: &quot;uniconfig&quot;
+        }
+      ]
+    }
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
@@ -396,9 +443,8 @@ will be invoked.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC calculate-diff input has two target nodes. One of which has not
-been mounted yet (AAA), the output describes the result of the
-checked-commit.</p>
+<p>The RPC calculate-diff input has target node. Nodes &#x27;R2&#x27; has not been
+installed yet. The output describes the result of the calculate-diff RPC.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -407,32 +453,27 @@ checked-commit.</p>
 --data-raw '{
     &quot;input&quot;: {
         &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;AAA&quot;]
+            &quot;node&quot;: [&quot;R1&quot;]
         }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 404</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;AAA&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;error-message&quot;: &quot;Node is missing in uniconfig topology CONFIG and OPERATIONAL datastore.&quot;,
-                }
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;data-missing&quot;,
+        &quot;error-message&quot;: &quot;Node 'R1' hasn't been installed in Uniconfig database&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;topology-id&quot;: &quot;uniconfig&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-1">
@@ -441,8 +482,48 @@ checked-commit.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there weren&#x27;t any
-touched nodes, the request will result in an error.</p>
+<p>The RPC calculate-diff input has two target nodes. One of the nodes,
+&#x27;R2&#x27;, has not been installed yet. The output describes the result
+of the calculate-diff RPC.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;R1&quot;,&quot;R2&quot;]
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 404</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;data-missing&quot;,
+        &quot;error-message&quot;: &quot;Node is not installed.&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;topology-id&quot;: &quot;uniconfig&quot;
+        }
+      }
+    ]
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
+        <span>Failed Example</span>
+    </h3>
+</doc-anchor-target>
+<p>If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -455,13 +536,29 @@ touched nodes, the request will result in an error.</p>
     }
 }'</code></pre>
 </doc-codeblock></div>
+<p>or</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;,
-        &quot;overall-status&quot;: &quot;fail&quot;
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
     }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 400</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;missing-element&quot;,
+        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 

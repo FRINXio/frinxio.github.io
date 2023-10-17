@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -291,20 +291,7 @@ uninstall-node RPC. Devices are uninstalled in parallel.</p>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R2&quot;
-            },
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R1&quot;
-            }
-        ]
-    }
-}</code></pre>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
     <h3>
@@ -312,8 +299,7 @@ uninstall-node RPC. Devices are uninstalled in parallel.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains devices (R1 and R2) and R2 is installed on two
-different protocols.</p>
+<p>RPC input contains devices (R1 and R2) and R2 is installed on two different protocols.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
@@ -340,24 +326,7 @@ different protocols.</p>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R2&quot;
-            },
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R2&quot;
-            },
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R1&quot;
-            }
-        ]
-    }
-}</code></pre>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-2">
     <h3>
@@ -365,8 +334,7 @@ different protocols.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains two devices (R1 and R2) and R2 is already uninstalled
-on CLI protocol.</p>
+<p>RPC input contains two devices (R1 and R2) and R2 is already uninstalled on CLI protocol.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
@@ -388,18 +356,16 @@ on CLI protocol.</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 404</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
             {
-                &quot;status&quot;: &quot;fail&quot;,
-                &quot;error-message&quot;: &quot;Node hasn't been installed on Uniconfig layer&quot;,
-                &quot;node-id&quot;: &quot;R2&quot;
-            },
-            {
-                &quot;status&quot;: &quot;complete&quot;,
-                &quot;node-id&quot;: &quot;R1&quot;
+                &quot;error-tag&quot;: &quot;data-missing&quot;,
+                &quot;error-app-tag&quot;: &quot;UniconfigError&quot;,
+                &quot;error-info&quot;: &quot;R2&quot;,
+                &quot;error-message&quot;: &quot;Node has already been removed from Uniconfig&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
             }
         ]
     }
@@ -411,7 +377,7 @@ on CLI protocol.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input doesn&#x27;t specify node-id.</p>
+<p>RPC input does not specify node-id.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
@@ -432,13 +398,15 @@ on CLI protocol.</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: [
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
             {
-                &quot;status&quot;: &quot;fail&quot;,
-                &quot;error-message&quot;: &quot;Field 'node-id' must be specified in the RPC input&quot;
+                &quot;error-tag&quot;: &quot;missing-element&quot;,
+                &quot;error-app-tag&quot;: &quot;UniconfigError&quot;,
+                &quot;error-message&quot;: &quot;Field 'node-id' must be specified in the RPC input&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
             }
         ]
     }

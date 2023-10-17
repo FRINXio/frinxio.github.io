@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC is-in-sync | Frinx Docs</title>
     <meta name="title" content="RPC is-in-sync | Frinx Docs">
-    <meta name="description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of UniConfig" />
+    <meta name="description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/">
     <meta property="og:title" content="RPC is-in-sync | Frinx Docs">
-    <meta property="og:description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of UniConfig">
+    <meta property="og:description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/rpc_is-in-sync-rpc_is_in_sync.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/">
     <meta property="twitter:title" content="RPC is-in-sync | Frinx Docs">
-    <meta property="twitter:description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of UniConfig">
+    <meta property="twitter:description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/rpc_is-in-sync-rpc_is_in_sync.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,16 +256,17 @@
         <span>RPC is-in-sync</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC can be used for verification whether the specified nodes are
-in-sync with the current state in the Operational datastore of UniConfig
-transaction. This verification is done by comparison of configuration
-fingerprints. The configuration fingerprint on the device is compared
-with the last configuration fingerprint saved in the Operational
-datastore. A fingerprint is usually represented by a configuration
-timestamp or the last transaction ID. The is-in-sync feature is
-supported only for device types that have implemented translation units
-for the &#x27;frinx-configuration-metadata&#x27; OpenConfig module (using cli
-units, netconf units, or uniconfig-native metadata units).</p>
+<p>This RPC can be used for verification whether the specified nodes
+are in-sync with the current state in the Operational datastore of
+UniConfig transaction. This verification is done by comparison of
+configuration fingerprints. The configuration fingerprint on the
+device is compared with the last configuration fingerprint saved
+in the Operational datastore. A fingerprint is usually represented
+by a configuration timestamp or the last transaction ID. The is-in-sync
+feature is supported only for device types that have implemented
+translation units for the &#x27;frinx-configuration-metadata&#x27; OpenConfig
+module (using cli units, netconf units, or uniconfig-native metadata
+units).</p>
 <p><figure class="content-center">
     <img src="rpc_is-in-sync-rpc_is_in_sync.svg" alt="RPC is-in-sync" />
     <figcaption class="caption">RPC is-in-sync</figcaption>
@@ -273,14 +274,13 @@ units, netconf units, or uniconfig-native metadata units).</p>
 </p>
 <p>The RPC input contains a list of UniConfig nodes for which the
 verification should be completed (&#x27;target-nodes&#x27; field). Response
-comprises the operation status for each of the nodes that were specified
-in the RPC input. Operation status is either &#x27;complete&#x27; with
-&#x27;is-in-sync&#x27; boolean flag or &#x27;fail&#x27;, if the operation failed it is
-because the specified node has not been successfully installed or
-connection has been lost. Calling RPC with empty list of target nodes
-will result in invocation of RPC for each node that has been modified in
-the UniConfig transaction. If the operation for one of the target nodes
-fails for any reason, &#x27;overall-status&#x27; will be set to &#x27;fail&#x27;.</p>
+comprises the operation status for each of the nodes that was
+specified in the RPC input. If the operation failed it is because
+the specified node has not been successfully installed or connection
+has been lost or uniconfig doesn&#x27;t have support for reading of
+configuration fingerprint from specific device type. Calling RPC
+with empty list of target nodes will result in invocation of RPC
+for each node that has been modified in the UniConfig transaction.</p>
 <p>Possible RPC outputs per target node:</p>
 <ol>
 <li>&#x27;status&#x27; field with value &#x27;complete&#x27; with set &#x27;is-in-sync&#x27; boolean
@@ -314,7 +314,7 @@ configuration state.</p>
     </h3>
 </doc-anchor-target>
 <p>the RPC input contains valid nodes for which the synchronization status
-must be checked (&#x27;node1&#x27; is synced while &#x27;node2&#x27; is not synced):</p>
+must be checked (&#x27;R1&#x27; is synced while &#x27;R2&#x27; is not synced):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -323,10 +323,7 @@ must be checked (&#x27;node1&#x27; is synced while &#x27;node2&#x27; is not sync
 --data-raw '{
     &quot;input&quot;: {
         &quot;target-nodes&quot;: {
-            &quot;node&quot;: [
-                &quot;node1&quot;,
-                &quot;node2&quot;
-            ]
+            &quot;node&quot;: [&quot;R1&quot;,&quot;R2&quot;]
         }
     }
 }'</code></pre>
@@ -334,23 +331,20 @@ must be checked (&#x27;node1&#x27; is synced while &#x27;node2&#x27; is not sync
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;node1&quot;,
-                    &quot;is-in-sync&quot;: true,
-                    &quot;status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;node2&quot;,
-                    &quot;is-in-sync&quot;: false,
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;is-in-sync&quot;: true
         },
-        &quot;overall-status&quot;: &quot;complete&quot;
+        {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;is-in-sync&quot;: false
+        }
+      ]
     }
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
@@ -375,28 +369,22 @@ will be invoked.</p>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">    
-
-{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;node1&quot;,
-                    &quot;is-in-sync&quot;: true,
-                    &quot;status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;node2&quot;,
-                    &quot;is-in-sync&quot;: false,
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;is-in-sync&quot;: true
         },
-        &quot;overall-status&quot;: &quot;complete&quot;
+        {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;is-in-sync&quot;: false
+        }
+      ]
     }
-}
-</code></pre>
+  }
+}</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
     <h3>
@@ -404,9 +392,8 @@ will be invoked.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains 2 invalid nodes, the &#x27;nodeX&#x27; has not been mounted yet
-and &#x27;example2&#x27; doesn&#x27;t support comparison of fingerprints (metadata
-translation unit has not been implemented for this device).</p>
+<p>RPC input contains invalid node, the &#x27;R1&#x27; doesn&#x27;t support comparison of fingerprints
+(metadata translation unit has not been implemented for this device).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -415,36 +402,26 @@ translation unit has not been implemented for this device).</p>
 --data-raw '{
     &quot;input&quot;: {
         &quot;target-nodes&quot;: {
-            &quot;node&quot;: [
-                &quot;nodeX&quot;,
-                &quot;example2&quot;
-            ]
+            &quot;node&quot;: [&quot;R1&quot;]
         }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 501</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;example2&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Unable to check configuration fingerprint - parsing of configuration fingerprint is not implemented for this device type.&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;nodeX&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Unified mountpoint not found.&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;operation-not-supported&quot;,
+        &quot;error-message&quot;: &quot;Unable to check configuration fingerprint - parsing of configuration fingerprint is not implemented for this device type.&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-1">
@@ -453,7 +430,10 @@ translation unit has not been implemented for this device).</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains 2 nodes, the first one (&#x27;node1&#x27;) is valid and synced, the second one (&#x27;nodeX&#x27;) has not been mounted yet. If there is one invalid node, Uniconfig will be evaluate nodes with fail. However, &#x27;overall-status&#x27; will be set to &#x27;fail&#x27;.</p>
+<p>RPC input contains 2 nodes, the first one &#x27;R1&#x27; is valid and synced,
+the second one (&#x27;R2&#x27;) has not been installed yet. If there is one
+invalid node, Uniconfig operation will fail with 1 error entry in the
+response.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -462,35 +442,26 @@ translation unit has not been implemented for this device).</p>
 --data-raw '{
     &quot;input&quot;: {
         &quot;target-nodes&quot;: {
-            &quot;node&quot;: [
-                &quot;node1&quot;,
-                &quot;nodeX&quot;
-            ]
+            &quot;node&quot;: [&quot;R1&quot;,&quot;R2&quot;]
         }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 502</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;node1&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;processing-error&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;nodeX&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Unified mountpoint not found.&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;southbound-no-connection&quot;,
+        &quot;error-message&quot;: &quot;Node 'R2' hasn't been installed in Uniconfig database&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R2&quot;
+        }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-2">
@@ -499,8 +470,8 @@ translation unit has not been implemented for this device).</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there weren&#x27;t any
-touched nodes, the request will result in an error.</p>
+<p>If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -514,12 +485,17 @@ touched nodes, the request will result in an error.</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;,
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;missing-element&quot;,
+        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 

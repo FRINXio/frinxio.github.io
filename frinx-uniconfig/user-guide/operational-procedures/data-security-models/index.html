@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -573,7 +573,7 @@ installation of device (&#x27;netconfReferenceModuleName&#x27; and matching of r
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>After calling this command, all Uniconfig instances will set this parameter using the notification service
+<p>After calling this command, all UniConfig instances will set this parameter using the notification service
 to the value which is sent via RPC, in this case it will be set to value true.</p>
 <p>Following request is used to disable encryption:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -586,6 +586,21 @@ to the value which is sent via RPC, in this case it will be set to value true.</
         &quot;encryption-enabled&quot;: false
     }
 }'</code></pre>
+</doc-codeblock></div>
+<p>Following request is used to check actual encryption status:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">POST request: get encryption-enabled-actual-status</div>
+<pre class="language-bash"><code v-pre class="language-bash"> curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">POST response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;encryption-enabled-actual-status&quot;: true
+  }
+}</code></pre>
 </doc-codeblock></div>
 <p>To check the functionality of this RPC, after calling install-device RPC we can request
 the password of the node, which when encryption is enabled will be returned encrypted,
@@ -600,6 +615,59 @@ and when it is disabled password will be plain text.</p>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;netconf-node-topology:password&quot;: &quot;rsa_gFXLXIxbeA9Vt8p0+JlprK1YUznBjk9DHRVlZ6Bm2nP0Fi/jUjsAUsGU814QyAZhXBiK6MY7ul75bE1EEI4uj0PlWT4xFYTXaKaMwgdHSCOnE/I6CGakuzGVGgzztKcSA/AsP8/bgXO0Rellw/S6z9U6h8blIG4Ff73GJOr53slWqoqMvAaXgSQtSbYB0EsPey1YqcukKuZnufJAazbHNHuxU1TFxcN/Cn1vTUEr8IATCAohfO7k5MOn0Ds/gYKt63RBO6000gcSP5PS9LRWhucSdLYc4b2+3soz0VXUCGEMPNSrmDXyWKUftI1S3qLfHthHoGEN1YXKGll5ccxW9g==&quot;
 }</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="change-encryption-keys-private-and-public">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#change-encryption-keys-private-and-public">#</doc-anchor-trigger>
+        <span>Change encryption keys (private and public)</span>
+    </h3>
+</doc-anchor-target>
+<p>In case it is necessary to change the encryption keys, there is RPC change-encryption-keys.
+The process of changing encryption keys requires rebooting one of the instances of UniConfig or enabling a
+new instance of UniConfig after calling change-encryption-keys RPC
+(rotation of encrypted data in the database for new encryption keys occurs when UniConfig
+is started if RPC change-encryption-keys is executed). During key rotation, if some data in the database cannot be
+decrypted with the old key, those data will remain unchanged.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC request: change-encryption-keys to new public and private keys</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;new-encryption-public-key&quot;: &quot;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAypJ4HB0kpxTvvEtOlT1jmtqTU2iY3m6VRx+xRJfP9UuGMT0qBC8/D5a/MRgTeSyJtZbmn8Jvu5ZNefDcHOgtv0yZ+BqRdew5sXd7xdzFAN0dgaBdvEAT9HXn+dKI9HGh7CMjH3JV1eNRwPLu5u3CbYiIrV3UM/2ogiZwsQsBHZcprbGlpdRa6yy+AXdB61BEGvdBQDvT0ND0q36sQkpG9qQokDxk77HyFx6b3YS8O+LXeb+Aka71sF/voTEhbMiUIF6jaWosoWYse4B0hZ2P0i+3CPtScgCA3n9XCcGXKj6g9wY/tEywsCfnS03KRTpVhpIjZb/xMKEcMOVl2BFA1wIDAQAB&quot;,
+        &quot;new-decryption-private-key&quot;:&quot;MIIEowIBAAKCAQEAypJ4HB0kpxTvvEtOlT1jmtqTU2iY3m6VRx+xRJfP9UuGMT0qBC8/D5a/MRgTeSyJtZbmn8Jvu5ZNefDcHOgtv0yZ+BqRdew5sXd7xdzFAN0dgaBdvEAT9HXn+dKI9HGh7CMjH3JV1eNRwPLu5u3CbYiIrV3UM/2ogiZwsQsBHZcprbGlpdRa6yy+AXdB61BEGvdBQDvT0ND0q36sQkpG9qQokDxk77HyFx6b3YS8O+LXeb+Aka71sF/voTEhbMiUIF6jaWosoWYse4B0hZ2P0i+3CPtScgCA3n9XCcGXKj6g9wY/tEywsCfnS03KRTpVhpIjZb/xMKEcMOVl2BFA1wIDAQABAoIBAQCSwKWPCHXjLUG4UX4uk/iy2KJejKoiik5O5mDP5oNbm0kuJrdnrKqsqnL8KAsDgAaLrTSKjJvRdEPQkXOE5ZcuvVnV6blzip0JOhxK7XMy+v1DSWBe3rUWJszVqXZaUHAT2Ci7wWL5vuMdO2Fjnt955q3Nmun+eEc5cou1VtmKCwvCIG857+FTzTdlmWcdDXTWIqbE7/OyuLcBYGmqlXnKLGx9+devRDNMwg3vTNDAeDY6b5WJWVtZjIaHLzMtXr3Rjkposu1eF8yFcGVW9AQpwecGsiMmCVOYwIKxGTe0xNOrw2LUnuAcD8unUTpI4y7MRM4tZexhG8+Pb4wSpyjhAoGBAPaMZZUdfVQ/8zQpqgxSYtbYHR3luYO2mDLEgTx7K3whuOFFIr3NrfOMUxhRmCATYZHfLSDVbym7eFn2f5+9XXlB14z8R61wiCpHWtxKyl/Ai4yWcIqxjGgWf0iCe0BDVZuPihM9cTRFDwK/P5BtsU8afH0ufggr4KuhNDxjHyRvAoGBANJWfkcxwq+k5wYn5oEwutyK95LJRx3NcBSdWX5Xb4TVxRQDeLGOEkIm/jochafJg8qkTMZJHXIycD/GNGZuXr16jJZtJix+fpmJ8yHj667QVVd9HWkOmifCfTJVTW5TJVKSKYW5EoX3xja8fgZ0sUiCWEJghCr/+/PhpN7zEW4ZAoGAHh9DHffPYya5CQt6Gi1KpCMdU5TImJ4LdFBr1b7arjzUgLlYqEXj1di0Ikl9w5V6mz7gHZ3WCgw8hQlHyHVzYSg5NKFyBG+2QywansWIejBlHFUZBOjyVZlCDdLbShuv7uSXowgjt5YkYlqJYpT0T8zVntm6TjdGKNH2NtaJbIMCgYA85jwTou2qa0VUe/L6TsCboETEJDDKCTQ9U72Ynfo07Kvt+n9UcT0KGD4dVyq/hNH6tw1fj8XNzZrAbEO5sJUPqU7RMvMNiOZg0BcsJdCUQc+j0B7WzxqFDoOvMhGEMuCogpcxF3+seCvUp0iZ1+mIg+zH8yfxR0KMvzU8NAZE6QKBgFuv6zSsGOCqm7pTdb4YWsd944ZtXWQ3YTFUWl+iRsUJ2le3FLXVZ06oLPLQZyNHzhCr0FRxsmyAXaKZ0JTULYpq5ee63RJFnp5+gxJNNdvzxlw9e29uMz+/o1sRB6tqj2ZunrOtf1W0khKJ1y7U0PAYa0ha9LwERWeoemJqggQ7&quot;
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<ul>
+<li>The default value of &#x27;new-encryption-cipher-type&#x27; parameter is value &#x27;RSA&#x27;, so there is no need to add this parameter to the request body.</li>
+</ul>
+<p>To check if UniConfig needs to be restarted or if a new UniConfig instance needs to be added,
+the following query can be run:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">POST request: get need-rotation-of-encryption-certificate</div>
+<pre class="language-bash"><code v-pre class="language-bash"> curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-keys' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">POST response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;need-rotation-of-encryption-certificate&quot;: true
+  }
+}</code></pre>
+</doc-codeblock></div>
+<p>After key rotation when UniConfig is started, the data encrypted using the old key will be overwritten
+with the new encryption keys and all other UniConfig instances in the cluster will use the new keys for encryption.</p>
+<ul>
+<li>During key rotation, UniConfig reads and updates encrypted configurations in batch groups.
+The size of these groups can be set with the parameter:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">settings</div>
+<pre class="language-none"><code v-pre class="language-none">crypto.encryption-rotation-batch-size=10</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="device-installation">
     <h3>

@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -309,8 +309,8 @@ this operation.</p>
         <span>Successful Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC validate input has 1 target node and the output describes the result
-of the validation.</p>
+<p>RPC validate input has 2 target nodes and the output describes
+the result of the successful validation.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -318,27 +318,39 @@ of the validation.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-            &quot;target-nodes&quot;: {
-                    &quot;node&quot;: [&quot;IOSXRN&quot;]
-            }
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;R1&quot;,&quot;R2]
+        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
+        <span>Successful Example</span>
+    </h3>
+</doc-anchor-target>
+<p>If the RPC input does not contain the target nodes, all touched node
+in the transaction will be validated.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;target-nodes&quot;: {
+        }
     }
-}</code></pre>
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
     <h3>
@@ -346,8 +358,8 @@ of the validation.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 1 target node and the output describes the result
-of the validation. Node has failed because failed validation.</p>
+<p>RPC commit input has 1 target node and the output describes the
+result of the validation. Node has failed because validation failed.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -355,28 +367,100 @@ of the validation. Node has failed because failed validation.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-            &quot;target-nodes&quot;: {
-                    &quot;node&quot;: [&quot;IOSXRN&quot;]
-            }
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;R1&quot;]
+        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;RemoteDevice{IOSXRN}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;fail&quot;
+  &quot;errors&quot;: {
+    &quot;node-result&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;validation-failed&quot;,
+        &quot;error-message&quot;: &quot;RemoteDevice{R1}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;
+        }
+      }
+    ]
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
+        <span>Failed Example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains 2 nodes, the first one &#x27;R1&#x27; is valid,
+the second one &#x27;R2&#x27; has not been installed yet. If there is
+one invalid node, Uniconfig will be evaluated nodes with fail.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;R1&quot;,&quot;R2&quot;]
+        }
     }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 404</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;data-missing&quot;,
+        &quot;error-message&quot;: &quot;Node 'R2' hasn't been installed in Uniconfig database&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R2&quot;
+        }
+      }
+    ]
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
+        <span>Failed Example</span>
+    </h3>
+</doc-anchor-target>
+<p>If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;target-nodes&quot;: {
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 400</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;missing-element&quot;,
+        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 

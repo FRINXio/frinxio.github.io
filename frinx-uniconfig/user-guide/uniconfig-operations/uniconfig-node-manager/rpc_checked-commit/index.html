@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC checked-commit | Frinx Docs</title>
     <meta name="title" content="RPC checked-commit | Frinx Docs">
-    <meta name="description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit but it also" />
+    <meta name="description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit, but it also" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/">
     <meta property="og:title" content="RPC checked-commit | Frinx Docs">
-    <meta property="og:description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit but it also">
+    <meta property="og:description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit, but it also">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/rpc_checked-commit-rpc_checked_commit.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/">
     <meta property="twitter:title" content="RPC checked-commit | Frinx Docs">
-    <meta property="twitter:description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit but it also">
+    <meta property="twitter:description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit, but it also">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/rpc_checked-commit-rpc_checked_commit.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -257,7 +257,7 @@
     </h1>
 </doc-anchor-target>
 <p>The trigger for execution of the checked configuration is RPC
-checked-commit. A checked commit is similar to an RPC commit but it also
+checked-commit. A checked commit is similar to an RPC commit, but it also
 checks if nodes are in sync with the network before it starts
 configuration. RPC fails if any node is out of sync. Output of the RPC
 describes the result of the commit and matches all modified nodes in the
@@ -317,8 +317,9 @@ beginning of the transaction.</p>
         <span>Successful Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC checked-commit input has 2 target nodes and the output describes the
-result of the checked-commit.</p>
+<p>Configuration of nodes &#x27;R1&#x27; and &#x27;R2&#x27; has been changed in the transaction.
+Both &#x27;R1&#x27; and &#x27;R2&#x27; are in-sync with actual state on the device.
+RPC checked-commit input invoke all touched nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -326,70 +327,12 @@ result of the checked-commit.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        }
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="successful-example-1">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful Example</span>
-    </h3>
-</doc-anchor-target>
-<p>If the RPC input does not contain the target nodes, all touched nodes
-will be invoked.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
     <h3>
@@ -397,9 +340,10 @@ will be invoked.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC checked-commit input has 2 target nodes. One of them failed on
-configuration (IOSXRN). The output describes the result of the
-checked-commit.</p>
+<p>Configuration of nodes &#x27;R1&#x27; and &#x27;R2&#x27; has been changed in the transaction.
+Both &#x27;R1&#x27; and &#x27;R2&#x27; are in-sync with actual state on the device. Node &#x27;R1&#x27;
+has failed due to improper configuration. The output describes the result
+of the checked-commit RPC.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -407,34 +351,26 @@ checked-commit.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;,
-                    &quot;error-message&quot;: &quot;Supplied value \&quot;GigabitEthernet0/0/0/1ghjfhjfhjfghj\&quot; does not match required pattern \&quot;^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\&quot;\n&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;operation-failed&quot;,
+        &quot;error-message&quot;: &quot;Supplied value \&quot;GigabitEthernet0/0/0/1ghjfhjfhjfghj\&quot; does not match required pattern \&quot;^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\&quot;\n&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;,
+          &quot;rollback-status&quot;: &quot;complete&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-1">
@@ -443,10 +379,10 @@ checked-commit.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC checked-commit input has 2 target nodes. One of them has failed
-on the changed fingerprint (IOSXRN) and the other has a bad
-configuration (IOSXR). The output describes the result of the
-checked-commit.</p>
+<p>Configuration of nodes &#x27;R1&#x27; has been changed in the transaction.
+Node &#x27;R1&#x27; is in-sync with actual state on the device. Node &#x27;R1&#x27;
+has failed on the changed fingerprint. The output describes
+the result of the checked-commit.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -454,33 +390,25 @@ checked-commit.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;error-message&quot;: &quot;Fingerprint from datastore: 2019-09-04T09:32:41 is different than fingerprint from device: 2019-09-04T09:49:01&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;validation-failed&quot;,
+        &quot;error-message&quot;: &quot;Fingerprint from datastore: 2019-09-04T09:32:41 is different than fingerprint from device: 2019-09-04T09:49:01&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-2">
@@ -489,10 +417,7 @@ checked-commit.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC checked-commit input has 3 target nodes. One of them was deleted
-so it is missing in the Config Datastore(IOSXR), the other has not been
-mounted yet (AAA). The output describes the result of the
-checked-commit.</p>
+<p>Node &#x27;R2&#x27; has lost connection.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -500,39 +425,25 @@ checked-commit.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;,&quot;AAA&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 502</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;AAA&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;,
-                    &quot;error-message&quot;: &quot;Node has not been mounted yet.&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;error-message&quot;: &quot;Node is missing in uniconfig topology CONFIG datastore.&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;southbound_no_connection&quot;,
+        &quot;error-message&quot;: &quot;Unified Mountpoint not found.&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-3">
@@ -541,8 +452,8 @@ checked-commit.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there weren&#x27;t any
-touched nodes, the request will result in an error.</p>
+<p>If the RPC input does not contain the target nodes and there
+are not any touched nodes, the request will result in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -550,18 +461,21 @@ touched nodes, the request will result in an error.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;,
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;missing-element&quot;,
+        &quot;error-message&quot;: &quot;There aren't any touched nodes.&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 

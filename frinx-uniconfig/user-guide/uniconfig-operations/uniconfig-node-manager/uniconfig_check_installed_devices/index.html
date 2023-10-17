@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC check-installed-nodes | Frinx Docs</title>
     <meta name="title" content="RPC check-installed-nodes | Frinx Docs">
-    <meta name="description" content="This RPC checks if the devices given in the input are installed or not. It checks for the database content of every device and if there is some," />
+    <meta name="description" content="This RPC checks if devices included in the input are installed by looking for the database content of each device." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_check_installed_devices/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_check_installed_devices/">
     <meta property="og:title" content="RPC check-installed-nodes | Frinx Docs">
-    <meta property="og:description" content="This RPC checks if the devices given in the input are installed or not. It checks for the database content of every device and if there is some,">
+    <meta property="og:description" content="This RPC checks if devices included in the input are installed by looking for the database content of each device.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_check_installed_devices/">
     <meta property="twitter:title" content="RPC check-installed-nodes | Frinx Docs">
-    <meta property="twitter:description" content="This RPC checks if the devices given in the input are installed or not. It checks for the database content of every device and if there is some,">
+    <meta property="twitter:description" content="This RPC checks if devices included in the input are installed by looking for the database content of each device.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,9 +254,8 @@
         <span>RPC check-installed-nodes</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC checks if the devices given in the input are installed or not.
-It checks for the database content of every device and if there is some,
-then the device is installed.</p>
+<p>This RPC checks if devices included in the input are installed by looking for the database content
+of each device. If content is found, the device is installed.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
@@ -285,9 +284,11 @@ then the device is installed.</p>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">'{
-    &quot;output&quot;: {}
-}'</code></pre>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;node-results&quot;: {}
+    }
+}</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
     <h3>
@@ -313,9 +314,53 @@ then the device is installed.</p>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;output&quot;: {
-        &quot;nodes&quot;: [
-            &quot;R1&quot;
-        ]
+        &quot;node-results&quot;: {
+            &quot;node-result&quot;: [
+                {
+                    &quot;topology-id&quot;: &quot;netconf&quot;,
+                    &quot;node-id&quot;: &quot;R1&quot;
+                }
+            ]
+        }
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains devices (R1 and R2) and both devices are installed.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;target-nodes&quot;: {
+            &quot;node&quot;: [&quot;R1&quot;, &quot;R2&quot;]
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;output&quot;: {
+        &quot;node-results&quot;: {
+            &quot;node-result&quot;: [
+                {
+                    &quot;topology-id&quot;: &quot;netconf&quot;,
+                    &quot;node-id&quot;: &quot;R1&quot;
+                },
+                {
+                    &quot;topology-id&quot;: &quot;netconf&quot;,
+                    &quot;node-id&quot;: &quot;R2&quot;
+                }
+            ]
+        }
     }
 }</code></pre>
 </doc-codeblock></div>
@@ -325,7 +370,7 @@ then the device is installed.</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input doesn&#x27;t specify any nodes.</p>
+<p>RPC input does not specify any nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
@@ -344,8 +389,41 @@ then the device is installed.</p>
     &quot;errors&quot;: {
         &quot;error&quot;: [
             {
-                &quot;error-message&quot;: &quot;Target nodes cannot be empty!&quot;,
                 &quot;error-tag&quot;: &quot;missing-element&quot;,
+                &quot;error-app-tag&quot;: &quot;UniconfigError&quot;,
+                &quot;error-message&quot;: &quot;Target nodes cannot be empty!&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
+        <span>Failed Example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input is missing the target-nodes container.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 400</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;missing-element&quot;,
+                &quot;error-app-tag&quot;: &quot;UniconfigError&quot;,
+                &quot;error-message&quot;: &quot;Target nodes are not specified!&quot;,
                 &quot;error-type&quot;: &quot;application&quot;
             }
         ]

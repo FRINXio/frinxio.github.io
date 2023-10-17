@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.746700912841">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.750856262165">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC commit | Frinx Docs</title>
     <meta name="title" content="RPC commit | Frinx Docs">
-    <meta name="description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration is" />
+    <meta name="description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/">
     <meta property="og:title" content="RPC commit | Frinx Docs">
-    <meta property="og:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration is">
+    <meta property="og:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/rpc_commit-rpc_commit.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/">
     <meta property="twitter:title" content="RPC commit | Frinx Docs">
-    <meta property="twitter:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration is">
+    <meta property="twitter:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/rpc_commit-rpc_commit.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.746700912841" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.750856262165" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.746700912841" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.746700912841" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750856262165" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750856262165" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -257,9 +257,8 @@
     </h1>
 </doc-anchor-target>
 <p>The external application stores the intended configuration under nodes
-in the UniConfig topology. The trigger for execution of configuration is
-an RPC commit. Output of the RPC describes the result of the commit and
-matches all modified nodes in the UniConfig transaction.</p>
+in the UniConfig topology. The trigger for execution of configuration
+is an RPC commit. Output of the RPC describes the result of the commit.</p>
 <p>The configuration of nodes consists of the following phases:</p>
 <ol>
 <li>Lock and validate configured nodes - Locking all modified nodes
@@ -268,20 +267,24 @@ another transaction tries to commit overlapping nodes or different
 transaction has already changed one of the nodes, then commit will
 fail at this step.</li>
 <li>Write configuration into device - Pushing calculated changes into
-device without committing of this changes.</li>
+device without committing of these changes.</li>
 <li>Validate configuration - Validation of written configuration from
 the view of constraints and consistency.
 This phase can be skipped with &quot;do-validate&quot; flag.</li>
 <li>Confirmed commit - It is used for locking of device configuration,
-so no other transaction can touch this device. This phase can be skipped with &quot;do-confirmed-commit&quot; flag.</li>
-<li>Confirming commit (submit configuration) - Persisting all changes on
-devices and in the PostgreSQL database. UniConfig transaction is
-closed.</li>
-<li>Rollback - It is used for restoring of configuration to previous state, if the configuration process fails.
-When configuring more devices in a single transaction and the process fails on one particular device,
-the rollback procedure will be applied to all touched devices. This is done by auto rollback procedure,
-which is by default turned on. It can be switched off by setting up &#x27;do-rollback&#x27; flag in input of<br />
-Commit RPC request. Then only failed devices will be rollbacked.</li>
+so no other transaction can touch this device. This phase can be
+skipped with &quot;do-confirmed-commit&quot; flag.</li>
+<li>Confirming commit (submit configuration) - Persisting all changes
+on devices and in the PostgreSQL database. UniConfig transaction
+is closed.</li>
+<li>Rollback - It is used for restoring of configuration to previous
+state, if the configuration process fails. When configuring more
+devices in a single transaction and the process fails on one
+particular device, the rollback procedure will be applied to all
+touched devices. This is done by auto rollback procedure, which
+is by default turned on. It can be switched off by setting up
+&#x27;do-rollback&#x27; flag in input of Commit RPC request. Then only
+failed devices will be rollbacked.</li>
 </ol>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
@@ -296,8 +299,10 @@ Commit RPC request. Then only failed devices will be rollbacked.</li>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>The &#x27;skip-unreachable-nodes&#x27; flag controls whether unreachable nodes are skipped when the RPC commit is sent. If set
-to &#x27;true&#x27;, nodes that are not reachable are skipped and others are configured. The default value is &#x27;false&#x27;.</p>
+<p>The &#x27;skip-unreachable-nodes&#x27; flag controls whether unreachable nodes
+are skipped when the RPC commit is sent. If set to &#x27;true&#x27;, nodes that
+are not reachable are skipped and others are configured. The default
+value is &#x27;false&#x27;.</p>
         </div>
     </div>
 </div>
@@ -305,7 +310,8 @@ to &#x27;true&#x27;, nodes that are not reachable are skipped and others are con
     <img src="rpc_commit-rpc_commit.svg" alt="RPC commit" />
     <figcaption class="caption">RPC commit</figcaption>
 </figure>
-</p>
+Commit invoke all touched nodes in transaction. There are no target
+nodes in the RPC input.</p>
 <p>The third and fourth phases take place only on the nodes that support
 these operations. If one node failed in the random phase for any reason
 the RPC will fail entirely. After commit RPC, UniConfig transaction is
@@ -324,12 +330,12 @@ closed regardless of the commit result.</p>
         </div>
         <div class="pr-5 ml-3 w-full">
 <p>If one of the nodes uses a confirmed commit (phase 4), which does not
-fail, then it is necessary to issue the submitted configuration (phase
-5) within the timeout period. Otherwise the node configuration issued
-by the confirmed commit will be reverted to its state before the
-confirmed commit (i.e. confirmed commit makes only temporary
-configuration changes). The timeout period is 600 seconds (10 minutes)
-by default, but the user can change it in the installation request.</p>
+fail, then it is necessary to issue the submitted configuration (phase 5)
+within the timeout period. Otherwise, the node configuration issued by
+the confirmed commit will be reverted to its state before the confirmed
+commit (i.e. confirmed commit makes only temporary configuration changes).
+The timeout period is 600 seconds (10 minutes) by default, but the user
+can change it in the installation request.</p>
         </div>
     </div>
 </div>
@@ -387,8 +393,8 @@ support &#x27;candidate&#x27; datastore.</p>
         <span>Successful Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit.</p>
+<p>UniConfig commits nodes &#x27;R1&#x27; and &#x27;R2&#x27; that has been changed in
+the actual transaction.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -396,31 +402,12 @@ of the commit.</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        }
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-1">
     <h3>
@@ -428,47 +415,8 @@ of the commit.</p>
         <span>Successful Example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes, all touched nodes
-will be invoked.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="successful-example-2">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
-        <span>Successful Example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the flag to disable confirmed-commit phase. The output describes the result
-of the commit.</p>
+<p>Nodes &#x27;R1&#x27; and &#x27;R2&#x27; has been changed. RPC commit input has the flag
+to disable confirmed-commit phase. UniConfig commits all touched nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -477,40 +425,20 @@ of the commit.</p>
 --data-raw '{
     &quot;input&quot;: {
         &quot;do-confirmed-commit&quot;: false,
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-    }
-}</code></pre>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="failed-example">
+<doc-anchor-target id="successful-example-2">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
+        <span>Successful Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed because failed validation (IOSXRN).</p>
+<p>If there are not any touched nodes, the request will finish successfully.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -518,34 +446,47 @@ of the commit. One node has failed because failed validation (IOSXRN).</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;, &quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;RemoteDevice{IOSXRN}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                }
-            ]
-        }
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
+        <span>Failed Example</span>
+    </h3>
+</doc-anchor-target>
+<p>Node &#x27;R1&#x27; has failed because of failed validation phase.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
     }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 500</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;node-result&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;validation-failed&quot;,
+        &quot;error-message&quot;: &quot;RemoteDevice{R2}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;,
+          &quot;rollback-status&quot;: &quot;complete&quot;
+        }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-1">
@@ -554,9 +495,8 @@ of the commit. One node has failed because failed validation (IOSXRN).</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed because the confirmed commit failed
-(IOSXRN). Validation phase was skipped due to false &quot;do-validate&quot; flag.</p>
+<p>Node &#x27;R1&#x27; has failed because the confirmed commit failed. Validation
+phase was skipped due to false &quot;do-validate&quot; flag.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -565,34 +505,26 @@ of the commit. One node has failed because the confirmed commit failed
 --data-raw '{
     &quot;input&quot;: {
         &quot;do-validate&quot; : False,
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;, &quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;RemoteDevice{IOSXRN}: Confirmed commit failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;operation-failed&quot;,
+        &quot;error-message&quot;: &quot;RemoteDevice{R1}: Confirmed commit failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;,
+          &quot;rollback-status&quot;: &quot;complete&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-2">
@@ -601,9 +533,8 @@ of the commit. One node has failed because the confirmed commit failed
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed because of the time delay between the
-confirmed commit and the submitted configuration (IOSXRN).</p>
+<p>Node &#x27;R1&#x27; has failed because of the time delay between the confirmed
+commit and the submitted configuration.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -611,34 +542,26 @@ confirmed commit and the submitted configuration (IOSXRN).</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;, &quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;RemoteDevice{IOSXRN}: time delay between confirmed and confirming commit was greater than 300 seconds, the configured changes were rolled back.\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;operation-failed&quot;,
+        &quot;error-message&quot;: &quot;RemoteDevice{R1}: time delay between confirmed and confirming commit was greater than 300 seconds, the configured changes were rolled back.&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;,
+          &quot;rollback-status&quot;: &quot;complete&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-3">
@@ -647,9 +570,7 @@ confirmed commit and the submitted configuration (IOSXRN).</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed due to improper configuration
-(IOSXRN).</p>
+<p>Node &#x27;R1&#x27; has failed due to improper configuration.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -657,34 +578,26 @@ of the commit. One node has failed due to improper configuration
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Supplied value \&quot;GigabitEthernet0/0/0/1ghjfhjfhjfghj\&quot; does not match required pattern \&quot;^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\&quot;\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;operation-failed&quot;,
+        &quot;error-message&quot;: &quot;Supplied value \&quot;GigabitEthernet0/0/0/1ghjfhjfhjfghj\&quot; does not match required pattern \&quot;^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\&quot;&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;,
+          &quot;rollback-status&quot;: &quot;complete&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-4">
@@ -693,10 +606,7 @@ of the commit. One node has failed due to improper configuration
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 3 target nodes and the output describes the result
-of the commit. One node has failed due ot improper configuration
-(IOSXR), the other has not been changed (IOSXRN), and the last has not
-been mounted yet (AAA).</p>
+<p>Node &#x27;R1&#x27; has lost connection.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -704,38 +614,25 @@ been mounted yet (AAA).</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;,&quot;AAA&quot;]
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 502</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;AAA&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;,
-                    &quot;error-message&quot;: &quot;Node has not been mounted yet.&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;southbound_no_connection&quot;,
+        &quot;error-message&quot;: &quot;Unified Mountpoint not found.&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-5">
@@ -744,9 +641,12 @@ been mounted yet (AAA).</p>
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed due to improper configuration
-(IOSXRN), the other has not been changed (IOSXR).</p>
+<p>Node &#x27;R1&#x27; has failed because of wrong configuration. In this case
+validation, confirm-commit and auto-rollback were switched off.
+Because auto-rollback is switched off, configuration of &#x27;R1&#x27; device
+was successful. However, this can be done only if validation and
+confirm-commit phase were successful or skipped, otherwise configuration
+of &#x27;R1&#x27; device would also fail.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -754,34 +654,28 @@ of the commit. One node has failed due to improper configuration
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;IOSXRN&quot;]
-        }
+        &quot;do-rollback&quot; : false,
+        &quot;do-validate&quot; : false,
+        &quot;do-confirmed-commit&quot; : false
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXRN&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Illegal value for key: (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-name, in: (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-configuration[{(http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)active=act, (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-name=GigabitEthernet0/0/0/3}], actual value: GigabitEthernet0/0/0/3/ddd, expected value from key: GigabitEthernet0/0/0/3\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;,
-                    &quot;rollback-status&quot;: &quot;complete&quot;
-                }
-            ]
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;operation-failed&quot;,
+        &quot;error-message&quot;: &quot;RemoteDevice{vnf212}: RPC during tx failed. Error messages: [/alias[name='^new']/expansion is not configured]&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;configuration-status&quot;: &quot;fail&quot;
         }
-    }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-6">
@@ -790,9 +684,11 @@ of the commit. One node has failed due to improper configuration
         <span>Failed Example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has lost connection (IOSXR), the other has not
-been mounted yet (AAA).</p>
+<p>Configuration of nodes &#x27;R1&#x27; nad &#x27;R2&#x27; has been changed in the transaction
+and both are in-sync with actual state on the device. Then connection of
+node &#x27;R2&#x27; has been lost. RPC commit input has the flag to skip unreachable
+nodes set to true. Result of the commit RPC describes success of &#x27;R1&#x27; node
+and shows list of unreachable nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -800,156 +696,18 @@ been mounted yet (AAA).</p>
 --header 'Content-Type: application/json' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;IOSXR&quot;,&quot;AAA&quot;]
-        }
+        &quot;skip-unreachable-nodes&quot;: true
     }
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;AAA&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;,
-                    &quot;error-message&quot;: &quot;Node has not been mounted yet.&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;IOSXR&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;Unified Mountpoint not found.&quot;,
-                    &quot;error-type&quot;: &quot;no-connection&quot;
-                }
-            ]
-        }
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-7">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-7">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed because of wrong configuration (R2).
-In this case validation, confirm-commit and auto-rollback was switched off.
-Because auto-rollback is switched off, configuration of R1 device was successful.
-However this can be done only, if validation and confirm-commit phase was successful or skipped,
-otherwise configuration of R1 device would also fail.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;R1&quot;, &quot;R2&quot;]
-        },
-        &quot;do-rollback&quot; : false,
-        &quot;do-validate&quot; : false,
-        &quot;do-confirmed-commit&quot; : false
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;R1&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;R2&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;,
-                    &quot;error-message&quot;: &quot;RemoteDevice{vnf212}: RPC during tx failed. Error messages: [/alias[name='^new']/expansion is not configured]\n&quot;,
-                    &quot;error-type&quot;: &quot;uniconfig-error&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-8">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-8">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there weren&#x27;t any
-touched nodes, the request will result in an error.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;error-message&quot;: &quot;There aren't any nodes specified in input RPC and there aren't any touched nodes.&quot;,
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example-9">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-9">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h3>
-</doc-anchor-target>
-<p>RPC commit input has two target nodes and the flag to skip unreachable nodes. The output describes the result
-of the commit.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;skip-unreachable-nodes&quot;: true,
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: [&quot;dev1&quot;,&quot;dev2&quot;]
-        }
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;dev1&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                },
-                {
-                    &quot;node-id&quot;: &quot;dev2&quot;,
-                    &quot;error-message&quot;: &quot;Node dev2 is unreachable (skipped)&quot;,
-                    &quot;configuration-status&quot;: &quot;fail&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
+  &quot;output&quot;: {
+    &quot;unreachable-nodes&quot;: [
+      &quot;R2&quot;
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 
@@ -971,7 +729,7 @@ of the commit.</p>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_compare_config/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_compare-config/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
                                                 <span class="block mt-1">RPC compare-​config</span>
