@@ -12,36 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Transaction tracker | Frinx Docs</title>
-    <meta name="title" content="Transaction tracker | Frinx Docs">
-    <meta name="description" content="The transaction tracker is responsible for saving a transaction-metadata to the operational snapshot after successfully executed" />
+    <title>Uniconfig 5.2.1 | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.2.1 | Frinx Docs">
+    <meta name="description" content="[UNIC-1395] Fix key delimiter in URI" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/transaction-tracker/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.1/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/transaction-tracker/">
-    <meta property="og:title" content="Transaction tracker | Frinx Docs">
-    <meta property="og:description" content="The transaction tracker is responsible for saving a transaction-metadata to the operational snapshot after successfully executed">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/transaction-tracker/transaction-tracker.png">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.1/">
+    <meta property="og:title" content="Uniconfig 5.2.1 | Frinx Docs">
+    <meta property="og:description" content="[UNIC-1395] Fix key delimiter in URI">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/transaction-tracker/">
-    <meta property="twitter:title" content="Transaction tracker | Frinx Docs">
-    <meta property="twitter:description" content="The transaction tracker is responsible for saving a transaction-metadata to the operational snapshot after successfully executed">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/transaction-tracker/transaction-tracker.png">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.1/">
+    <meta property="twitter:title" content="Uniconfig 5.2.1 | Frinx Docs">
+    <meta property="twitter:description" content="[UNIC-1395] Fix key delimiter in URI">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.750862402481" rel="stylesheet" />
+    <link href="../../../static/favicon-32x32.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.750862402481" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.750862402481" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.750862402481" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.750862402481" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.750862402481" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.750862402481" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -56,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -72,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -188,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -250,146 +247,186 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="transaction-tracker" class="break-words">
+<doc-anchor-target id="uniconfig-521" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#transaction-tracker">#</doc-anchor-trigger>
-        <span>Transaction tracker</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-521">#</doc-anchor-trigger>
+        <span>Uniconfig 5.2.1</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="introduction">
+<!-- Release notes generated using configuration in .github/release.yml at 5.2.1 -->
+<doc-anchor-target id="whats-changed">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#introduction">#</doc-anchor-trigger>
-        <span>Introduction</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
     </h2>
 </doc-anchor-target>
-<p>The transaction tracker is responsible for saving a transaction-metadata
-to the operational snapshot after successfully executed
-commit/checked-commit RPC. The transaction-metadata contains information
-about performed transactions, such as:</p>
-<ul>
-<li><strong>transaction-id</strong> - Identifier of transaction.</li>
-<li><strong>type-of-commit-time</strong> - Timestamp of either &#x27;last-commit-time&#x27;,
-when the transaction was successful or &#x27;failed-commit-time&#x27;,
-when the transaction failed. If multiple devices are configured,
-then the &#x27;last-commit-time&#x27; will contain the timestamp of
-the last update on the last device.</li>
-<li><strong>metadata</strong> - Items in this field represent nodes that have been
-configured in the one transaction. Each item contains a diff item
-with additional information.</li>
-<li><strong>diff</strong> - Items in this field are a specific changes. Each item
-contains path to changes, data before change and data after change.
-In case of a failed transaction this information in not present.</li>
-<li><strong>topology</strong> - On which topology is a node installed. Can be &#x27;uniconfig&#x27; or &#x27;unistore&#x27;.</li>
-</ul>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Data-before is visible only if data was updated or deleted.
-Data-after is visible only if data was updated or created.</p>
-        </div>
-    </div>
-</div>
-<p><img src="transaction-tracker.png" alt="transaction-tracker" />]</p>
-<doc-anchor-target id="configuration">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#configuration">#</doc-anchor-trigger>
-        <span>Configuration</span>
-    </h2>
-</doc-anchor-target>
-<p>The UniConfig stores transaction metadata only if the
-&#x27;lighty-uniconfig-config.json&#x27; file contains a &quot;maxStoredTransactions&quot;
-parameter in &quot;transactions&quot; container and its value is greater then 0.
-It is necessary to make this setting before running UniConfig, otherwise
-parameter &quot;maxStoredTransactions&quot; will be &#x27;0&#x27; (default value) and
-transaction-log will be disabled.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;transactions&quot;: {
-        &quot;maxStoredTransactions&quot;: 5,
-        &quot;maxTransactionAge&quot;: 0,
-        &quot;cleaningInterval&quot;: 0,
-        &quot;uniconfigTransactionEnabled&quot;: false
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="show-transaction-metadata">
+<doc-anchor-target id="bug-fixes">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#show-transaction-metadata">#</doc-anchor-trigger>
-        <span>Show transaction-metadata</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
     </h3>
 </doc-anchor-target>
-<p>The response to this GET request contains all stored
-transaction-metadata, their IDs and other items such as node-id, updated
-data before update and after update, etc.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/transaction-log:transactions-metadata' \
---header 'Accept: application/json'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;transactions-metadata&quot;: {
-        &quot;transaction-metadata&quot;: [
-            {
-                &quot;transaction-id&quot;: &quot;221aa4a5-e32e-46fd-921a-83314b190e89&quot;,
-                &quot;status&quot;: &quot;SUCCESS&quot;,
-                &quot;metadata&quot;: [
-                    {
-                        &quot;node-id&quot;: &quot;xr6unistore&quot;,
-                        &quot;diff&quot;: [
-                            {
-                                &quot;path&quot;: &quot;/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether1/description&quot;,
-                                &quot;data-after&quot;: &quot;{\n  \&quot;Cisco-IOS-XR-ifmgr-cfg:description\&quot;: \&quot;bundle-ether1-description-create\&quot;\n}&quot;
-                            },
-                            {
-                                &quot;path&quot;: &quot;/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether2/description&quot;,
-                                &quot;data-before&quot;: &quot;{\n  \&quot;Cisco-IOS-XR-ifmgr-cfg:description\&quot;: \&quot;bundle-ether2-description-before\&quot;\n}&quot;,
-                                &quot;data-after&quot;: &quot;{\n  \&quot;Cisco-IOS-XR-ifmgr-cfg:description\&quot;: \&quot;bundle-ether2-description-after\&quot;\n}&quot;
-                            },
-                        ],
-                        &quot;topology&quot;: &quot;unistore&quot;
-                    }
-                ],
-                &quot;last-commit-time&quot;: &quot;2021-Mar-09 10:53:59.102 +0100&quot;
-            },
-            {
-                &quot;transaction-id&quot;: &quot;869df9d6-9025-4849-b30b-9db4d8fb26ec&quot;,
-                &quot;status&quot;: &quot;SUCCESS&quot;,
-                &quot;metadata&quot;: [
-                    {
-                        &quot;node-id&quot;: &quot;xr5&quot;,
-                        &quot;diff&quot;: [
-                            {
-                                &quot;path&quot;: &quot;/frinx-openconfig-interfaces:interfaces/interface=Loopback123/config&quot;,
-                                &quot;data-before&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:softwareLoopback\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;name\&quot;: \&quot;Loopback123\&quot;\n  }\n}&quot;,
-                                &quot;data-after&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:softwareLoopback\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;description\&quot;: \&quot;test-description\&quot;,\n    \&quot;name\&quot;: \&quot;Loopback123\&quot;\n  }\n}&quot;
-                            }
-                        ],
-                        &quot;topology&quot;: &quot;uniconfig&quot;
-                    }
-                ],
-                &quot;last-commit-time&quot;: &quot;2021-Mar-09 11:06:58.000 +0100&quot;
-            },
-            {
-                &quot;transaction-id&quot;: &quot;88878588-ad67-424a-9a16-5e7360df7df0&quot;,
-                &quot;status&quot;: &quot;FAILED&quot;,
-                &quot;failed-commit-time&quot;: &quot;2022-Mar-11 14:39:32.813 +0100&quot;
-            }
-        ]
-    }
-}</code></pre>
-</doc-codeblock></div>
+<ul>
+<li>[UNIC-1395] Fix key delimiter in URI</li>
+<li>[UNIC-1390] Swagger: Fix RPCs placed after mountpoint</li>
+<li>[UNIC-1273] Use Jetty embedded server</li>
+<li>[UNIC-1399] Fix issues with shell</li>
+<li>[UNIC-1399] Switch shell terminal back to JNA</li>
+<li>[UNIC-1410] Fix tx cleanup when request fails</li>
+<li>[UNIC-1410] Fix_tx_closing</li>
+<li>[UNIC-1413] Fixed updating snapshot in immediate-commit model</li>
+<li>[UNIC-1420] Fix cli ssh session reconnect</li>
+<li>[UNIC-1425] Fix crypto bug</li>
+<li>[UNIC-1352, UNIC-1254] Fix cluster issues</li>
+<li>Cleanup test resources properly</li>
+<li>[UNIC-1340] Fixed releasing of used YANG modules from memory</li>
+<li>[UNIC-1432] Swagger: Fix generation of post list endpoints</li>
+<li>[UNIC-1429] Fix replace is sent using delete operation</li>
+<li>[UNIC-1423] Fix identityRef as listEntry key in templatesg</li>
+<li>Prevented sending no description command if there is no change for rpd description</li>
+<li>Fix show_uniconfig_status script.</li>
+<li>[UNIC-1446] Fix SpotBugs violations - Reliance on default encoding</li>
+<li>[UNIC-1404] UniConfig Shell - fix system augmentation</li>
+<li>[UNIC-1430] Fix replace yang-patch for gnmi mountpoint</li>
+<li>[UNIC-1448] Fix SpotBugs violations - Use a localized version of String.toUpperCase() and String.toLowerCase()</li>
+<li>Fix mapEntryNodes in gnmi notifications</li>
+<li>Fix calculate diff rpc</li>
+<li>SNMP Node id is incorrectly parsed</li>
+<li>[UNIC-1447] Fix SpotBugs violations - Multithreaded correctness</li>
+<li>Additional fix to calculate diff rpc</li>
+<li>[UNIC-1463] Remove duplicates from Set</li>
+<li>Fix skip of unreachable-nodes.</li>
+<li>SNMP adjust exception</li>
+<li>Fix reading of actual YANG repository from mountpoint data</li>
+<li>Fixed DateTime format in the transaction-log</li>
+<li>Fix immediate commit model and submit successfull nodes.</li>
+<li>Add git registry to dependabot.yml</li>
+<li>Registry attempt no.2</li>
+<li>Fix show UC status script</li>
+<li>Fix SNMP Notification bean creation</li>
+<li>[UNIC-1451] Fix SpotBugs violations - Correctness</li>
+<li>[UNIC-1365] Gnmi stream fixes</li>
+<li>Data-change-events publisher fix</li>
+<li>Fixed loading of YANG from path in client diff tool (#1747)</li>
+</ul>
+<doc-anchor-target id="new-features">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1394] Client side diff</li>
+<li>[UNIC-1373] Implemented dryrun-commit for GNMI topology</li>
+<li>[UNIC-1398] SNMP notifications</li>
+<li>[UNIC-1402] UC Shell - default callbacks repository</li>
+<li>[UNIC-1218] Add dynamic property module</li>
+</ul>
+<doc-anchor-target id="improvements">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1386] Map correct ObjectTypes to NotificationTypes</li>
+<li>[UNIC-1391] Add SNMP notifications to SchemaContext</li>
+<li>[UNIC-1258] Fix issues reported by SpotBugs</li>
+<li>[UNIC-980] UniconfigShell: Improving suggestions menu</li>
+<li>[UNIC-1223] ODL parent cleanup</li>
+<li>[UNIC-1273] Adjust bootstrapping of web containers</li>
+<li>[UNIC-1242] Unify generation of release notes</li>
+<li>[UNIC-1218] Rewrite database connection pool and connection properties</li>
+<li>[UNIC-981] UniconfigShell: Remove explicit show submode from root mode</li>
+<li>[UNIC-1370] Adjust notification result parsing</li>
+<li>[UNIC-1242] Remove PR links from the uploaded release notes</li>
+<li>[UNIC-1411] Add mapping to request/response log message (#1630)</li>
+<li>[UNIC-1412] change gnmi packaging</li>
+<li>[UNIC-1394] Add overloaded build methods to client side diff</li>
+<li>[UNIC-1394] Remove gnmi dependencies from java client</li>
+<li>[UNIC-1154] Integrate JOOQ into database access layer</li>
+<li>[UNIC-1401] UniConfig Shell - one line SET / DELETE command</li>
+<li>[UNIC-1403] Unified format of shell audit logs</li>
+<li>[UNIC-1245] Replacing Guava future by CompletableFuture</li>
+<li>[PANT-83] add logs for pant83</li>
+<li>[UNIC-1441] SNMP config classes</li>
+<li>[UNIC-1435] Refactor transaction-log to JOOQ style</li>
+<li>[UNIC-1463] Fix SpotBugs violations - Code vulnerabilities</li>
+<li>[UNIC-1449] Fix SpotBugs violations - Performance</li>
+</ul>
+<doc-anchor-target id="api-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#api-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F5A5;&#xFE0F;</span> API Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1289] Refactor RPCs: revert-changes, query-config, device-discovery</li>
+<li>[UNIC-1380] Add gnmi-messages logging broker</li>
+<li>[UNIC-1287] Refactor snapshot-manager RPCs</li>
+<li>[UNIC-1282] Refactoring uniconfig manager RPCs</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>build(deps): bump grpc.version from 1.57.1 to 1.57.2</li>
+<li>build(deps): bump protobuf.version from 3.23.4 to 3.24.0</li>
+<li>build(deps): bump io.zonky.test.postgres:embedded-postgres-binaries-linux-amd64 from 13.11.0 to 13.12.0</li>
+<li>[UNIC-1223] Align an embedded kafka version with the clients provided by Spring</li>
+<li>build(deps): bump protobuf.version from 3.24.0 to 3.24.1</li>
+<li>build(deps): bump org.owasp:dependency-check-maven from 8.3.1 to 8.4.0</li>
+<li>build(deps): bump com.github.gantsign.maven:ktlint-maven-plugin from 1.16.0 to 2.0.0</li>
+<li>build(deps): bump spring.boot.version from 3.1.2 to 3.1.3</li>
+<li>build(deps): bump org.apache.maven.plugins:maven-enforcer-plugin from 3.3.0 to 3.4.0</li>
+<li>build(deps): bump protobuf.version from 3.24.1 to 3.24.2</li>
+<li>build(deps): bump kotlin.version from 1.9.0 to 1.9.10</li>
+<li>build(deps): bump com.puppycrawl.tools:checkstyle from 10.12.2 to 10.12.3</li>
+<li>build(deps): bump org.apache.maven.plugins:maven-javadoc-plugin from 3.5.0 to 3.6.0</li>
+<li>build(deps): bump org.apache.commons:commons-compress from 1.23.0 to 1.24.0</li>
+<li>build(deps): bump grpc.version from 1.57.2 to 1.58.0</li>
+<li>build(deps): bump antlr4.version from 4.13.0 to 4.13.1</li>
+<li>build(deps): bump protobuf.version from 3.24.2 to 3.24.3</li>
+<li>build(deps): bump org.apache.maven.plugins:maven-enforcer-plugin from 3.4.0 to 3.4.1</li>
+<li>build(deps): bump spring.boot.version from 3.1.3 to 3.1.4</li>
+<li>build(deps): bump io.swagger.core.v3:swagger-core from 2.2.15 to 2.2.16</li>
+<li>build(deps): bump com.github.spotbugs:spotbugs-maven-plugin from 4.7.3.5 to 4.7.3.6</li>
+<li>build(deps): bump org.apache.maven.plugins:maven-shade-plugin from 3.5.0 to 3.5.1</li>
+<li>build(deps): bump org.jetbrains.dokka:dokka-maven-plugin from 1.8.20 to 1.9.0</li>
+<li>build(deps): bump com.puppycrawl.tools:checkstyle from 10.12.3 to 10.12.4</li>
+<li>build(deps): bump commons-io:commons-io from 2.13.0 to 2.14.0</li>
+<li>build(deps): bump com.github.gantsign.maven:ktlint-maven-plugin from 2.0.0 to 3.0.0</li>
+<li>Maven 3.9.5</li>
+<li>build(deps): bump commons-net:commons-net from 3.9.0 to 3.10.0</li>
+<li>build(deps): bump protobuf.version from 3.24.3 to 3.24.4</li>
+<li>build(deps): bump org.immutables:value from 2.9.3 to 2.10.0</li>
+<li>build(deps): bump org.springframework.cloud:spring-cloud-dependencies from 2022.0.3 to 2022.0.4</li>
+<li>build(deps): bump actions/checkout from 3 to 4</li>
+<li>build(deps): bump actions/upload-artifact from 3.1.2 to 3.1.3</li>
+<li>build(deps): bump docker/build-push-action from 4 to 5</li>
+<li>build(deps): bump actions/setup-python from 4.6.1 to 4.7.1</li>
+<li>build(deps): bump docker/login-action from 2.2.0 to 3.0.0</li>
+<li>build(deps): bump org.json:json from 20230618 to 20231013</li>
+</ul>
+<doc-anchor-target id="other-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>5.2.1-SNAPSHOT</li>
+<li>[FI-1693] Remove Jenkins-test from merge workflow</li>
+<li>Workflows: update cluster IP from 10.19.0.67 to 10.19.0.242 and</li>
+<li>Workflows: remove VPN to FRINX for postgresDB.</li>
+<li>Workflows: update path to new VM of postgresDB.</li>
+<li>Workflows: update path and remove FRINX VPN for embeded tests.</li>
+<li>Removed forgotten LOG</li>
+<li>Release 5.2.1</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -399,20 +436,20 @@ data before update and after update, etc.</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/transaction-log/rpc_revert-changes/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.2.0/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">RPC revert-​changes</span>
+                                                <span class="block mt-1">Uniconfig 5.​2.​0 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Uni​Config Node Manager</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -459,6 +496,6 @@ data before update and after update, etc.</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Transaction tracker", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.2.1", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
