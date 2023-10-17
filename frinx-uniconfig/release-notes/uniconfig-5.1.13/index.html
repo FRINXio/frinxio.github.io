@@ -12,24 +12,24 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Uniconfig 5.0.16 Release Notes | Frinx Docs</title>
-    <meta name="title" content="Uniconfig 5.0.16 Release Notes | Frinx Docs">
-    <meta name="description" content="Added create-multiple-templates RPC to uniconfig-client" />
+    <title>Uniconfig 5.1.13 | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.1.13 | Frinx Docs">
+    <meta name="description" content="Fix key delimiter in URI" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.16/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.13/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.16/">
-    <meta property="og:title" content="Uniconfig 5.0.16 Release Notes | Frinx Docs">
-    <meta property="og:description" content="Added create-multiple-templates RPC to uniconfig-client">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.13/">
+    <meta property="og:title" content="Uniconfig 5.1.13 | Frinx Docs">
+    <meta property="og:description" content="Fix key delimiter in URI">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.0.16/">
-    <meta property="twitter:title" content="Uniconfig 5.0.16 Release Notes | Frinx Docs">
-    <meta property="twitter:description" content="Added create-multiple-templates RPC to uniconfig-client">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.13/">
+    <meta property="twitter:title" content="Uniconfig 5.1.13 | Frinx Docs">
+    <meta property="twitter:description" content="Fix key delimiter in URI">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -247,121 +247,95 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="uniconfig-5016-release-notes" class="break-words">
+<doc-anchor-target id="uniconfig-5113" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5016-release-notes">#</doc-anchor-trigger>
-        <span>Uniconfig 5.0.16 Release Notes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5113">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.13</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="new-features">
+<!-- Release notes generated using configuration in .github/release.yml at 5.1.x-stable -->
+<doc-anchor-target id="whats-changed">
     <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="bug-fixes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Fix key delimiter in URI</li>
+<li>Swagger: Fix RPCs placed after mountpoint (#1582)</li>
+<li>[UNIC-1410] Fix tx cleanup when request fails</li>
+<li>[UNIC-1413] Fixed updating snapshot in immediate-commit model (#1629)</li>
+<li>[UNIC-1420] Fix cli ssh session reconnect</li>
+<li>[UNIC-1425] Fix crypto bug (#1664)</li>
+<li>[UNIC-1352, UNIC-1254] Fix cluster issues (#1670)</li>
+<li>[UNIC-1340] Fixed releasing of used YANG modules from memory (#1667)</li>
+<li>[UNIC-1429] Fix replace is sent using delete operation</li>
+<li>[UNIC-1432] Swagger: Fix generation of post list endpoints (#1674)</li>
+<li>[UNIC-1430] - fix replace yang-patch for gnmi mountpoint</li>
+<li>[UNIC-1404] UniConfig Shell - fix system augmentation</li>
+<li>Fixed loading of YANG from path in client diff tool</li>
+</ul>
+<doc-anchor-target id="new-features">
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
         <span><span class="docs-emoji">&#x2705;</span> New Features</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><p>Added create-multiple-templates RPC to uniconfig-client</p>
-</li>
-<li><p>Added option to specify tags in create-multiple-templates RPC</p>
-</li>
-<li><p>Swagger: Grouping of RPCs and tailf:actions</p>
-</li>
-<li><p>Encrypt/Decrypt of password for gnmi/netconf/cli topologies</p>
-</li>
-</ul>
-<doc-anchor-target id="bug-fixes">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
-    </h2>
-</doc-anchor-target>
-<ul>
-<li><p>Remove duplicate yang models</p>
-</li>
-<li><p>Data-change-events: make node-id optional</p>
-</li>
-<li><p>Fixed writing of unkeyed list entry node</p>
-</li>
-<li><p>Fixed parsing nodes with attributes</p>
-</li>
-<li><p>Fix using ignoredNamespaces from swagger-config</p>
-</li>
-<li><p>Fixed regex for trimming path in TransactionTrackerUtils (#241)</p>
-</li>
-<li><p>Swagger: Fix behavior of basePath and server generation</p>
-</li>
-<li><p>Swagger - fix list container wrapping</p>
-</li>
-<li><p>Displaying the default unistore node in shell for callbacks</p>
-</li>
-<li><p>Fix Guava dependency in POM</p>
-</li>
-<li><p>Swagger: Fix top level containers not generating</p>
-</li>
-<li><p>Fix replace-list ordering</p>
-</li>
-<li><p>Fixed submitting changes to database if there are failed nodes and do-rollback is false (#227)</p>
-</li>
-<li><p>Removed non-working option to create unistore node in request and show states</p>
-</li>
-<li><p>Wrap requests to make them RFC 8040 compliant</p>
-</li>
-<li><p>Fixed merging template tags into merge node in the same TX</p>
-</li>
-<li><p>Revert &quot;Install-node without mounting/syncing configuration from device&quot;</p>
-</li>
+<li>[UNIC-1394] Client side diff</li>
+<li>[UNIC-1402] UC Shell - default callbacks repository (#1701)</li>
 </ul>
 <doc-anchor-target id="improvements">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
         <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><p>Mapped &quot;gig&quot; to SpeedType.Gigabit</p>
-</li>
-<li><p>Netconf rpc timeout (#257)</p>
-</li>
-<li><p>Make create-multiple-templates RPC &#x27;atomic&#x27;</p>
-</li>
-<li><p>Refactored stream writers used by RESTCONF</p>
-</li>
-<li><p>Removed unused jettison dependency</p>
-</li>
-<li><p>Support upgrading of YANG repository content (#233)</p>
-</li>
-<li><p>Adjusted logging of keepalive messages (stream sessions)</p>
-</li>
-<li><p>Suppressing logs generated by received unknown requests (SSH)</p>
-</li>
-<li><p>Suppress CVE-2022-38752</p>
-</li>
-<li><p>Resolving CVE security issues between level 6 and 0</p>
-</li>
-<li><p>Removed last pieces of CheckedFuture and old unused MDSAL-API</p>
-</li>
-<li><p>Set UNICONFIGTX cookie to entire domain not just /rests/</p>
-</li>
-<li><p>Optimization of callbacks</p>
-</li>
-<li><p>Replaced CheckedFuture by FluentFuture: TX submit()</p>
-</li>
-<li><p>Made amount of max parallel installs customizable (#204)</p>
-</li>
-<li><p>Replaced CheckedFuture by FluentFuture - DOMRpcImplementation</p>
-</li>
-<li><p>Replaced CheckedFuture by FluentFuture - DOMRpcService</p>
-</li>
-<li><p>Specified create/close-transaction RPCs in YANG</p>
-</li>
-<li><p>Made error message user-friendly when user enter nonexistent node-id</p>
-</li>
-<li><p>Used FluentFuture in binding ReadTransaction</p>
-</li>
-<li><p>Replaced CheckedFuture by FluentFuture - DOM store read transaction</p>
-</li>
-<li><p>Replaced CheckedFuture by FluentFuture - DOM read transaction</p>
-</li>
+<li>[UNIC-981] UniconfigShell: Remove explicit show submode from root mod…</li>
+<li>[UNIC-1411] Add mapping to request/response log message</li>
+<li>[UNIC-1394] Add overloaded build methods to client side diff</li>
+<li>[UNIC-1394] exclude gnmi depenendecies from java client</li>
+<li>[UNIC-1401] UniConfig Shell - one line SET / DELETE command (#1621)</li>
+<li>[UNIC-1403] Unified format of shell audit logs (#1658)</li>
+<li>[PANT-83] add logs for pant83 - STABLE</li>
+</ul>
+<doc-anchor-target id="api-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#api-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F5A5;&#xFE0F;</span> API Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>add gnmi-messages logging broker</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Fix Jetty CVEs</li>
+<li>5.1.x-stable - Maven 3.9.5</li>
+</ul>
+<doc-anchor-target id="other-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>5.1.13-SNAPSHOT</li>
+<li>UniconfigShell: Improving suggestions menu</li>
+<li>[FI-1693] Remove Jenkins-test from merge workflow</li>
+<li>Release 5.1.13</li>
 </ul>
 
                                 
@@ -372,20 +346,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.15/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.12/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Uniconfig 5.​0.​15 Release Notes</span>
+                                                <span class="block mt-1">Uniconfig 5.​1.​12 Release Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.0.17/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.2.0/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Uniconfig 5.​0.​17 Release Notes</span>
+                                                <span class="block mt-1">Uniconfig 5.​2.​0 Release Notes</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -432,6 +406,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Uniconfig 5.0.16 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.13", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
