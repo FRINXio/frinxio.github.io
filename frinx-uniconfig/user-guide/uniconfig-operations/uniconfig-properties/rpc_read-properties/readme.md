@@ -1,21 +1,18 @@
 # RPC read-properties
 
-RPC reads *default properties* from database if property keys exist. If any property key
-doesn't exist in database, then this key will be returned to user in section 'ignored keys'.
-RPC works the same both with UniConfig Cloud Config enabled and disabled.
+The **read-properties** RPC reads default properties from the database. If a specified property key does not exist in the database, they key is returned in the *ignored keys* section. The RPC works the same whether UniConfig Cloud Config is enabled or disabled.
 
 ![read](read.jpg)
 
 !!!
-If *UniConfig Cloud Config* is disabled, then RPC read-properties will read the property value
-from the database, which may be different from the application instance property value.
+If UniConfig Cloud Config is disabled, the read-properties RPC reads property values from the database. These values may differ from values in the application instance.
 !!!
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-RPC input contains *default property* keys.
+RPC input contains default property keys.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:read-properties' \
@@ -54,9 +51,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-RPC input contains properties that are not default or are private (crypto keys and crypto types).
+RPC input contains properties that are not default properties or are private (crypto keys and crypto types).
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:read-properties' \
@@ -83,9 +80,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-The RPC input consists of properties that are not in the database.
+RPC input consists of properties that do not exist in the database.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:read-properties' \

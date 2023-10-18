@@ -1,30 +1,28 @@
 # RPC update-properties
 
-RPC updates property values and if *UniConfig Cloud Config* is enabled -> call *Refresh Bus Endpoint* which
-update properties in runtime for all connected UniConfig instances. RPC updates only *default properties*, but not
-*crypto* properties because those properties have different RPCs for updating 
-(*change-encryption-status* RPC and *change-encryption-keys* RPC).
+The **update-properties** RPC is used to update property values. If UniConfig Cloud Config is enabled, it also calls *Refresh Bus Endpoint* to update properties in runtime for all connected UniConfig instances.
+
+The RPC only updates **default properties**, except for *crypto* properties for which there are separate RPCs  (**change-encryption-status** and **change-encryption-keys**).
 
 RPC sequence diagram with UniConfig Cloud Config enabled:
 
 ![update-with-ucc](update-with-ucc.jpg)
 
 !!!
-If *UniConfig Cloud Config* is disabled -> RPC update-properties will update the property value
-only in the database, the application instance will still use the old property value, which may confuse the user.
-In addition, after updating properties, if a new UniConfig instance is starting, that instance will use the updated
-property value from the database, so UniConfig instances will use different values for the same property, as it shown
-in the diagram below.
+If *UniConfig Cloud Config* is disabled, the RPC only updates property values in the the database. The application instance continues to use the old property values, which can cause confusion.
 
-Recommendation: use this RPC with *UniConfig Cloud Config*. 
-The exception is *callbacks.access-token* which is always up-to-date.
+Additionally, if a new UniConfig instance is started after properties have been updated, that instance will use the updated property values from the database. UniConfig instances will therefore use different values for the same property, as described in the diagram below.
+
+We recommend that you use this RPC with UniConfig Cloud Config. The exception is *callbacks.access-token*, which is always up to date.
 !!!
+
+RPC sequence diagram with UniConfig Cloud Config disabled:
 
 ![update-without-ucc](update-without-ucc.jpg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
 RPC input contains the default properties with correct values.
 
@@ -60,9 +58,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-RPC input contains the default property crypto.
+RPC input contains the *crypto* default property.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:update-properties' \
@@ -92,9 +90,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-RPC input contains incorrect property key.
+RPC input contains an incorrect property key.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:update-properties' \
@@ -122,7 +120,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Failed example
 
-RPC input contains the default properties with incorrect values.
+RPC input contains default properties with incorrect values.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:update-properties' \
@@ -161,7 +159,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Failed example
 
-RPC input contains the default properties with incorrect values.
+RPC input contains default properties with incorrect values.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:update-properties' \

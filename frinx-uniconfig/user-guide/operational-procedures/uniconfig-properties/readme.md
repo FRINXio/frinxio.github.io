@@ -1,56 +1,39 @@
-# Uniconfig Properties
+# Uniconfig properties
 
-## Introduction
+UniConfig can be extensively configured using application properties located in the *application.properties* file.
 
-UniConfig has application properties to configure it precisely.
-All these parameters are located in the *application.properties* file.
-These parameters are divided into 3 groups:
- * runtime mutable properties - can be modified in runtime (via update-properties RPC) 
-   and the change takes effect in runtime, and these properties are persisted in database.
- * database persisted properties - includes all runtime mutable properties
-   with some additional properties. These properties are stored in database and database is always the primary source 
-   for these properties. Meaning that with *UniConfig Cloud Config* they stay the same across UniConfig instances 
-   in the same cluster and cannot be overridden via *application.properties*.
- * regular UniConfig properties - this is the rest of them, can be always changed via *application.properties* and 
-   can be different per UniConfig instance.
-Database persisted properties consist of *crypto*, *schema-settings*, *callbacks*,
-*notifications.kafka*, *netconf-default-parameters*, *gnmi-default-parameters*
-and *cli-default-parameters* property prefixes. These properties are stored
-in the table *properties* and are known as *default properties*.
-User can read *default properties* with *read-properties RPC* and update it with *update-properties RPC*.
+Application properties can be separated into three groups:
+- **Runtime mutable properties** can be modified in runtime (using the *update-properties* RPC), their changes take effect in runtime and the properties are persisted in the database.
+- **Database persisted properties** include all runtime mutable properties and some additional properties. These properties are stored in the database, which is always their primary source. With UniConfig Cloud Config, they remain constant across UniConfig instances in the same cluster and cannot be overridden via the *application properties* file.
+- **Regular UniConfig properties** comprise all the remaining properties. These properties can always be changed using *application.properties* and can differ between UniConfig instances.
+
+Database persisted properties include the following property prefixes:
+- *crypto*
+- *schema-settings*
+- *callbacks*
+- *notifications.kafka*
+- *netconf-default-parameters*
+- *gnmi-default-parameters*
+- *cli-default-parameters*
+
+These properties are stored in the *properties* table and are also known as **default properties**. They can be read and updated using the *read-properties RPC* and *update-properties RPC*.
 
 !!!
-After starting UniConfig, if the database contains these properties, 
-UniConfig will use the values of these properties from the database. But if these 
-parameters are not in the database, then the values from first UniConfig instance 
-right after its startup will be used (by application.properties file or env variables) 
-and saved to the database for the next UniConfig instances.
+After UniConfig is started, if default properties are found in the database, UniConfig will use the values in the database. For properties not found in the database, values from the first UniConfig instance after startup are used (by the *application.properties* file or env variables) and saved in the database for the next UniConfig instances.
 !!!
 
 ## UniConfig Cloud Config
 
-UniConfig Cloud Config is pretty much the same technology as Spring Cloud Config with JDBC backend:
-https://docs.spring.io/spring-cloud-config/reference/4.1/server/environment-repository/jdbc-backend.html 
-and Spring Cloud Bus: https://docs.spring.io/spring-cloud-bus/docs/current/reference/html/.
+UniConfig Cloud Config is used to retain the same property values between distributed UniConfig instances connected via a message broker. It is largely the same technology as [Spring Cloud Config with JDBC backend](https://docs.spring.io/spring-cloud-config/reference/4.1/server/environment-repository/jdbc-backend.html) and [Spring Cloud Bus](https://docs.spring.io/spring-cloud-bus/docs/current/reference/html/). The main difference is that UniConfig Cloud Config Server and Cloud Config Client are in the same project, while Spring requires a separate Cloud Config Server application.
 
-The main difference between these two, is that UniConfig Cloud Config Server and 
-Cloud Config Client are in the same project, while Spring requires the use of a separate
-Cloud Config Server application.
+By calling a special signal (the *Refresh Bus Endpoint* call) during runtime, the system sets the same value for persisted properties in all UniConfig instances. The signal is called immediately after mutable properties are modified using the *update-properties* RPC. The specific UniConfig instance calling the signal sends Kafka events containing the changed properties, while other instances read those properties from the database and use the refresh endpoint to update them in runtime.
 
-UniConfig Cloud Config is a technology for the retention of the same property values in distributed UniConfig instances 
-connected via a message broker. This system sets all UniConfig instance persisted properties to the same value during 
-the application runtime by calling a special signal (Refresh Bus Endpoint call). This signal is called immediately 
-after modifying mutable properties via update-properties RPC. UniConfig instance that called this signal sends 
-kafka events - properties that were changed and other UniConfig instances read those properties from database and use 
-refresh endpoint to update its in runtime.
+### UniConfig startup with UniConfig Cloud Config
 
-
-It works as follows:
-
+UniConfig startup with UniConfig Cloud Config:
 ![startup-with-ucc](startup-with-ucc.jpg)
 
-
-* First, before starting UniConfig, we must enable Cloud Config using the following properties
+* Before starting UniConfig, enable Cloud Config by using the following properties:
 
 ```
 # Uniconfig cloud settings - depends on kafka connection
@@ -64,23 +47,21 @@ management.endpoints.web.exposure.include=bus-refresh
 #spring.autoconfigure.exclude=org.springframework.cloud.stream.function.FunctionConfiguration
 ```
 
-* When UniConfig starts, it will first check if there are any *default properties* in the database that it could configure
-  * If *default properties* are in the database -> UniConfig instance will use it with manually refresh properties.
-  * If not -> UniConfig instance will use its properties and, once loaded, will save them to a database 
-    for a next UniConfig instances.
-* At the end of Spring initialisation the *Refresh Bus Endpoint* will be called. It refreshes *default properties* 
-  to the database values in all UniConfig instances connected via kafka refresh topic. This second refresh during 
-  UniConfig startup cycle is needed if several instances started exactly at the same moment and there were no ready 
-  property values in the database to synchronise their properties, especially encryption keys.
-* At application runtime, if user uses *update-properties RPC* with *default properties* on input -> UniConfig will
-  update the properties in database and then use the *Refresh Bus Endpoint* call, which will reload properties in all
-  connected via kafka UniConfig instances.
+On startup, UniConfig checks the database for any default properties to configure:
+- If default properties are found in the database, UniConfig manually refreshes its property values to use those in the database.
+- If no default properties are found, UniConfig uses its existing properties and, once loaded, saves them in the database for the next UniConfig instances.
 
-How to disable UniConfig Cloud Config and how the properties will be set up:
+At the end of Spring initialisation, the *Refresh Bus Endpoint* is called. This refreshes default properties with the database values for all UniConfig instances connected via the Kafka refresh topic. A second refresh during the UniConfig startup cycle is required if several instances were started simultaneously and the database contains no property values to synchronize for properties (especially encryption keys).
 
+At application runtime, if the *update-properties* RPC is used with default properties on input, UniConfig updates the properties in the database. It also calls the *Refresh Bus Endpoint*, which reloads properties for all UniConfig instances connected via Kafka.
+
+
+### UniConfig startup without UniConfig Cloud Config
+
+UniConfig startup without UniConfig Cloud Config:
 ![startup-without-ucc](startup-without-ucc.jpg)
 
-* First, before starting UniConfig, we must disable Cloud Config using the following properties
+* Before starting UniConfig, disable Cloud Config by using the following properties:
 
 ```
 # Uniconfig cloud settings - depends on kafka connection
@@ -94,11 +75,10 @@ management.endpoints.web.exposure.include=bus-refresh
 spring.autoconfigure.exclude=org.springframework.cloud.stream.function.FunctionConfiguration
 ```
 
-* When UniConfig starts, it will first check if there are any *default properties* in the database that it could configure
-  * If *default properties* are in the database -> UniConfig instance will use it with manually refresh properties.
-  * If not -> UniConfig instance will use its properties and, once loaded, will save them to a database
-  for a following UniConfig instances.
-* At the end of Spring initialisation the *Refresh Bus Endpoint* wouldn't be called.
-* At application runtime, if user uses *update-properties RPC* with *default properties* on input -> UniConfig will
-  update the properties in database, but will not update properties inside application, so it will have affect only
-  for next UniConfig instance, which will be started after properties update.
+On startup, UniConfig checks the database for any default properties to configure:
+- If default properties are found in the database, UniConfig manually refreshes its property values to those in the database.
+- If no default properties are found, UniConfig uses its existing properties and, once loaded, saves them in the database for the next UniConfig instances.
+
+At the end of Spring initialisation, the *Refresh Bus Endpoint* is not called.
+
+At application runtime, if the *update-properties* RPC is used with default properties on input, Uniconfig updates the properties in the database but not inside the application. This will therefore only affect the next UniConfig instance started after the properties are updated.

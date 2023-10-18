@@ -1,24 +1,12 @@
-# UniConfig Properties
+# UniConfig properties
 
-UniConfig properties are application properties that can be used to configure the application.
-These parameters are divided into 3 groups:
-* runtime mutable properties - can be modified in runtime (via update-properties RPC)
-  and the change takes effect in runtime, and these properties are persisted in database.
-* database persisted properties - includes all runtime mutable properties
-  with some additional properties. These properties are stored in database and database is always the primary source
-  for these properties. Meaning that with *UniConfig Cloud Config* they stay the same across UniConfig instances
-  in the same cluster and cannot be overridden via *application.properties*.
-* regular UniConfig properties - this is the rest of them, can be always changed via *application.properties* and
-  can be different per UniConfig instance.
+UniConfig properties are application properties used to configure the application. They can be separated into three groups:
 
-Database persisted properties can be changed or read in application runtime without restarting UniConfig 
-using *UniConfig Cloud Config* and these RPCs:
+- **Runtime mutable properties** can be modified in runtime (using the *update-properties* RPC), their changes take effect in runtime and the properties are persisted in the database.
+- **Database persisted properties** include all runtime mutable properties and some additional properties. These properties are stored in the database, which is always their primary source. With UniConfig Cloud Config, they remain constant across UniConfig instances in the same cluster and cannot be overridden via the *application properties* file.
+- **Regular UniConfig properties** comprise all the remaining properties. These properties can always be changed using the *application.properties* file and can differ between UniConfig instances.
 
+Database persisted properties can be changed or read in application runtime without restarting UniConfig by using UniConfig Cloud Config and the following RPCs:
 
-## Read properties
-
-[!ref text="Read properties"](../uniconfig-properties/rpc_read-properties)
-
-## Update properties
-
-[!ref text="Update properties"](../uniconfig-properties/rpc_update-properties)
+- [RPC read properties](../uniconfig-properties/rpc_read-properties)
+- [RPC update properties](../uniconfig-properties/rpc_update-properties)
