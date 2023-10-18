@@ -8,5 +8,5 @@ UniConfig properties are application properties used to configure the applicatio
 
 Database persisted properties can be changed or read in application runtime without restarting UniConfig by using UniConfig Cloud Config and the following RPCs:
 
-- [RPC read properties](../uniconfig-properties/rpc_read-properties)
-- [RPC update properties](../uniconfig-properties/rpc_update-properties)
+- [RPC read-properties](../uniconfig-properties/rpc_read-properties)
+- [RPC update-properties](../uniconfig-properties/rpc_update-properties)

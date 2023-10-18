@@ -2,7 +2,7 @@
 
 The **update-properties** RPC is used to update property values. If UniConfig Cloud Config is enabled, it also calls *Refresh Bus Endpoint* to update properties in runtime for all connected UniConfig instances.
 
-The RPC only updates **default properties**, except for *crypto* properties for which there are separate RPCs  (**change-encryption-status** and **change-encryption-keys**).
+The RPC only updates **default properties**, except for *crypto* properties for which there are separate RPCs  (*change-encryption-status* and *change-encryption-keys*).
 
 RPC sequence diagram with UniConfig Cloud Config enabled:
 
