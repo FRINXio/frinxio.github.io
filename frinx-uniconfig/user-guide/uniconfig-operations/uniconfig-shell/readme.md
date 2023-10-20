@@ -88,8 +88,12 @@ uniconfig>
 uniconfig>
 configuration-mode      (opening configuration mode)
 exit
+hide-get          (Setting item to be hidden in get)
+hide-set          (Setting item to be hidden in set)
 show                      (reading data from device)
 show-history (show history [max number of commands])
+unhide-get      (Setting item to be unhidden in get)
+unhide-set      (Setting item to be unhidden in set)
 ```
 
 * Command 'exit' is used for exiting UniConfig shell interface altogether (disconnecting SSH client).
@@ -136,6 +140,49 @@ config>show-history 5
 
 !!!
 List of invoked commands are persisted across UniConfig restarts and SSH connections.
+!!!
+
+### Unhide and Hide operations
+
+* Command 'unhide-get' is used to unhide an attribute that was hidden in application properties for read.
+* Command 'unhide-set' is used to unhide an attribute that was hidden in application properties for write.
+* Command 'hide-get' is used to hide unhidden attribute with 'unhide-get' command.
+* Command 'hide-set' is used to hide unhidden attribute with 'unhide-set' command.
+
+* When unhide is set for GET or SET operation, then request URL for this operation contains 'unhide' query parameter like bellow:  
+  http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=vnf21/configuration?unhide=all  
+  (In this example, the unhide parameter is set to 'all')
+
+!!!
+The command also confirms that attribute was added or removed from unhidden list.
+When 'unhide-get' or 'hide-get' is called without parameter, then the output contains a list of all unhidden parameters.
+It is also simillar to 'unhide-set' and 'hide-set' commands.
+!!!
+
+```shell unhide-get and unhide-set with parameters
+uc>unhide-get deprecated 
+Attribute tailf:hidden deprecated was added to unhidden get list.
+uc>unhide-set full 
+Attribute tailf:hidden full was added to unhidden set list.
+```
+```shell hide-get and hide-set with parameters
+uc>hide-get deprecated 
+Attribute tailf:hidden deprecated was removed from unhidden get list.
+uc>hide-set full 
+Attribute tailf:hidden full was removed from unhidden set list.
+```
+```shell unhide-get and unhide-set without parameters (same output is also for hide-get and hide-set)
+uc>unhide-get
+unhidden get:
+tailf:hidden deprecated
+tailf:hidden debug
+uc>unhide-set
+unhidden set:
+tailf:hidden full
+```
+
+!!!
+The 'all' parameter could also be used, which unhides all parameters for read or for write that are defined in application properties.
 !!!
 
 ## Configuration mode
