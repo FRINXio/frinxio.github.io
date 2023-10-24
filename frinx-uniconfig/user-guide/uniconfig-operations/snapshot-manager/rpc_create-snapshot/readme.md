@@ -31,70 +31,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 ```
 
 ```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "status": "complete"
-                }
-            ]
-        }
-    }
-}
 ```
 
 ### Failed Example
-
-RPC input contains the name for the topology snapshot and nodes that
-will be contained in the snapshot. You cannot call an RPC with empty
-target-nodes. If one node failed for any reason, RPC will be fail
-entirely.
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-manager:create-snapshot' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "name" : "snapshot1",
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "fail",
-        "error-message": "Cannot create snapshot. Maximum number of snapshots exceeded. Snapshot limit: 5",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "fail",
-                    "error-type": "uniconfig-error"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "status": "fail",
-                    "error-type": "uniconfig-error"
-                }
-            ]
-        }
-    }
-}
-```
-
-### Failed example
 
 The RPC input includes nodes that will be contained in the snapshot, but
 a snapshot name is missing. RPC output contains the result of the
@@ -114,25 +53,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "error-type": "uniconfig-error",
-                    "status": "fail"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "error-type": "uniconfig-error",
-                    "status": "fail"
-                }
-            ]
-        },
-        "error-message": "Cannot create snapshot: Snapshot name cannot be empty. ",
-        "overall-status": "fail"
+    "errors": {
+        "error": [
+            {
+                "error-tag": "missing-element",
+                "error-type": "application",
+                "error-message": "Snapshot name cannot be empty. "
+            }
+        ]
     }
 }
 ```
@@ -157,20 +87,19 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 404
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "AAA",
-                    "error-message": "Node is missing in uniconfig topology OPERATIONAL datastore.",
-                    "error-type": "uniconfig-error",
-                    "status": "fail"
-                }
-            ]
-        }
+    "errors": {
+        "error": [
+            {
+                "error-tag": "data-missing",
+                "error-info": {
+                    "node-id": "AAA"
+                },
+                "error-type": "application",
+                "error-message": "Node is missing in uniconfig topology OPERATIONAL datastore."
+            }
+        ]
     }
 }
 ```
@@ -192,11 +121,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "overall-status": "fail",
-        "error-message": "Nodes are not specified in input request"
+    "errors": {
+        "error": [
+            {
+                "error-tag": "missing-element",
+                "error-type": "application",
+                "error-message": "Nodes are not specified in input request"
+            }
+        ]
     }
 }
 ```
