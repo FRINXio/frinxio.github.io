@@ -6,15 +6,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.752074230158">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.752224740256">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Uniconfig 5.1.14 Release Notes | Frinx Docs</title>
-    <meta name="title" content="Uniconfig 5.1.14 Release Notes | Frinx Docs">
-    <meta name="description" content="Uniconfig shell hide / unhide command implementation - UNIC-1075" />
+    <title>Uniconfig 5.1.14 | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.1.14 | Frinx Docs">
+    <meta name="description" content="[UNIC-1429] Fix replace operation in GNMI set" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.14/" />
@@ -22,23 +22,23 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.14/">
-    <meta property="og:title" content="Uniconfig 5.1.14 Release Notes | Frinx Docs">
-    <meta property="og:description" content="Uniconfig shell hide / unhide command implementation - UNIC-1075">
+    <meta property="og:title" content="Uniconfig 5.1.14 | Frinx Docs">
+    <meta property="og:description" content="[UNIC-1429] Fix replace operation in GNMI set">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.14/">
-    <meta property="twitter:title" content="Uniconfig 5.1.14 Release Notes | Frinx Docs">
-    <meta property="twitter:description" content="Uniconfig shell hide / unhide command implementation - UNIC-1075">
+    <meta property="twitter:title" content="Uniconfig 5.1.14 | Frinx Docs">
+    <meta property="twitter:description" content="[UNIC-1429] Fix replace operation in GNMI set">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.752074230158" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.752224740256" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.752074230158" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.752224740256" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.752074230158" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.752224740256" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -247,32 +247,69 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="uniconfig-5114-release-notes" class="break-words">
+<doc-anchor-target id="uniconfig-5114" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5114-release-notes">#</doc-anchor-trigger>
-        <span>Uniconfig 5.1.14 Release Notes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5114">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.14</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="new-features">
+<!-- Release notes generated using configuration in .github/release.yml at 5.1.14 -->
+<doc-anchor-target id="whats-changed">
     <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="bug-fixes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1429] Fix replace operation in GNMI set</li>
+<li>[UNIC-1471] : Fix sync fail after failed installation was stored STABLE</li>
+<li>[UNIC-1474] Improve performance of YANG repository loading process during mounting process (#1785)</li>
+<li>UniConfig Shell - fix prompt callbacks bug</li>
+<li>[UNIC-1492] - Fix rate-limiting</li>
+<li>Fixed loading of gNMI YANG repository during MountNodeTask</li>
+<li>[UNIC-1471] Add schema-cache storing into sync impl</li>
+<li>Prevented sending no description command if there is no change for rpd description</li>
+<li>Gnmi sb netconf cache loader stable</li>
+<li>[UNIC-1494] - add migration for replace-paths</li>
+<li>Fix get fallback schema context in cli shell.</li>
+<li>Fix settings / callbacks cache</li>
+</ul>
+<doc-anchor-target id="new-features">
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
         <span><span class="docs-emoji">&#x2705;</span> New Features</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li>Uniconfig shell hide / unhide command implementation - UNIC-1075</li>
+<li>[UNIC-1075] Uniconfig shell hide / unhide command implementation</li>
 </ul>
-<doc-anchor-target id="bug-fixes">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
-    </h2>
+<doc-anchor-target id="improvements">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><p>Prevented sending no description command if there is no change for rpd description (#1818)</p>
-</li>
-<li><p>Uniconfig shell: information about expired transaction in the root mode</p>
-</li>
+<li>[UNIC-1408] UniConfig Shell - adjust cached data (#1745)</li>
+<li>[UNIC-1405] UniConfig shell: set nested JSON data (#1752)</li>
+<li>Improved logging (#1798)</li>
+</ul>
+<doc-anchor-target id="other-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Suppress CVEs</li>
+<li>[UNIC-1475] changing information about expired transaction in root mode</li>
+<li>Release 5.1.14</li>
 </ul>
 
                                 
@@ -343,6 +380,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.14 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.14", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
