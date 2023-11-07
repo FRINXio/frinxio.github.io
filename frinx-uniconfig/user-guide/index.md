@@ -10,7 +10,7 @@ within UniConfig.
 Section that explains device installation process. It covers basic
 mechanisms that take place when installing and explains parameters that
 are used in installation along with examples of install request
-examples. It then covers differences between CLI and NETCONF API.
+examples. It then covers differences between CLI, NETCONF and gNMI API.
 
 ## UniConfig Operations
 

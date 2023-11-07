@@ -9,7 +9,7 @@ order: 8000
 
 During device installation UniConfig creates a mount-point for this device and stores it in the database. This
 mount-point contains all parameters set by the user in the installation request. UniConfig supports a feature to update
-mount-point parameters. It is possible to use it for both NETCONF and CLI nodes.
+mount-point parameters. It is possible to use it for NETCONF, CLI and gNMI nodes.
 
 ### Show installation parameters
 
@@ -17,7 +17,7 @@ Parameters of the installed devices can be displayed using a GET request on the 
 topology. It should return the current node settings. See the following examples:
 
 !!!
-By default, both NETCONF and CLI topologies have the password parameter encrypted. This can be changed
+By default, NETCONF, CLI and gNMI topologies have the password parameter encrypted. This can be changed
 in the corresponding yang schema by adding/removing the extension flag "frinx-encrypt:encrypt".
 !!!
 
@@ -77,6 +77,62 @@ Output:
             }
         }
     }
+}
+```
+
+**gNMI node**
+```bash
+curl -X GET \
+  http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=gnmi-topology/node=gnmiNode
+```
+Output:
+```
+{
+    "node": [
+        {
+            "node-id": "sonic",
+            "uniconfig-config:sequence-read-active": true,
+            "uniconfig-config:uniconfig-native-enabled": true,
+            "uniconfig-config:whitelist": {
+                "path": [
+                    "openconfig-interfaces:interfaces",
+                    "openconfig-network-instance:network-instances",
+                    "openconfig-relay-agent:relay-agent",
+                    "openconfig-port-group:port-groups",
+                    "openconfig-mclag:mclag",
+                    "openconfig-lldp:lldp",
+                    "sonic-vlan:sonic-vlan",
+                    "openconfig-platform:components",
+                    "openconfig-system:system",
+                    "openconfig-neighbor:neighbor-globals",
+                    "sonic-mclag:sonic-mclag"
+                ]
+            },
+            "uniconfig-config:admin-state": "unlocked",
+            "gnmi-topology:schema-cache-directory": "gnmi-topology-v400-7",
+            "gnmi-topology:extensions-parameters": {
+                "gnmi-parameters": {
+                    "use-model-name-prefix": true
+                },
+                "gnmi-force-capabilities:force-cached-capabilities": [
+                    null
+                ]
+            },
+            "gnmi-topology:session-timers": {
+                "request-timeout": 180
+            },
+            "gnmi-topology:connection-parameters": {
+                "port": 8080,
+                "credentials": {
+                    "username": "<username>",
+                    "password": "rsa_J1H0YDNQSvmGrn5QP+MfBLF9OOzWEaWJElcr7K5ew7enUr...."
+                },
+                "device-type": "sonic",
+                "host": "10.19.0.252",
+                "connection-type": "INSECURE"
+            },
+        }
+    ]
 }
 ```
 

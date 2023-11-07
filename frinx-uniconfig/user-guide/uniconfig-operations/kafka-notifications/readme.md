@@ -2,14 +2,15 @@
 
 ## Introduction
 
-NETCONF devices produce NETCONF notifications.
+NETCONF and gNMI devices produce notifications.
 UniConfig can collect these and create its own
 UniConfig notifications about specific events. Notifications from
-both NETCONF devices and UniConfig are published using Kafka.
+both NETCONF and gNMI devices and UniConfig are published using Kafka.
 
 The following notification types are available:
 
 - NETCONF notifications
+- gNMI notifications
 - Notifications about transactions
 - Audit logs (RESTCONF notifications)
 - Data-change events
@@ -46,6 +47,41 @@ sent until either the NETCONF session or the subscription is terminated.
 NETCONF notifications are categorised as so-called streams. The subscriber
 must choose which streams to receive. The default stream is named *NETCONF*.
 
+## gNMI notifications
+
+[gNMI spec](https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md#35-subscribing-to-telemetry-updates) defines a
+mechanism where the gNMI client indicates an interest in receiving state of data instances via Subscribe RPC
+The gNMI server, if the creation of the subscription was successful, will reply with state of data instances according to specified paths. 
+The session will be opened until it will be closed either from UniConfig side (releasing of the subscription) 
+of device side (error).
+
+Mandatory fields in install-node request:
+- stream-name
+- paths
+
+```json Notification response
+{
+  "source": "10.19.0.24:8080",
+  "subscription-name": "default-1680174672",
+  "timestamp": 1680174553095998547,
+  "time": "2023-03-30T13:09:13.095998547+02:00",
+  "prefix": "openconfig-interfaces:interfaces",
+  "updates": [
+    {
+      "Path": "interface[name=Ethernet72]/state/counters/out-multicast-pkts",
+      "values": {
+        "interface/state/counters/out-multicast-pkts": 0
+      }
+    },
+    {
+      "Path": "interface[name=Ethernet72]/config/enabled",
+      "values": {
+        "interface/config/enabled": false
+      }
+    }
+  ]
+}
+```
 ## Notifications about transactions
 
 This type of notification is generated after each commit in UniConfig.
@@ -385,14 +421,14 @@ The following **three tables** in the database are related to notifications:
 
 - notification
 - settings
-- netconf-subscription
+- subscription
 
 Notifications are stored in the **notification table**. It contains the following columns:
 
-- stream name - name of the notification stream - NETCONF stream name or UniConfig-specific stream name
-- node id - node id of the NETCONF device for NETCONF notifications or identifier of UniConfig instance in case of other
+- stream name - name of the notification stream 
+- node id - node id of the NETCONF/gNMI device or identifier of UniConfig instance in case of other
   types of notifications
-- identifier - name of the YANG notification
+- identifier - name of the YANG notification for NETCONF or path to the received config top node for gNMI
 - body - full notification body in JSON format
 - event time - time when notification was generated
 
@@ -416,12 +452,12 @@ curl --location --request GET 'http://localhost:8181/rests/data/kafka-brokers:ka
 --header 'Content-Type: application/json'
 ``` 
 
-The **netconf-subscription table** is used to track NETCONF notification
+The **subscription table** is used to track NETCONF/gNMI notification
 subscriptions. It contains the following columns:
 
-- node id - id of the NETCONF node from which notifications should be collected
-- UniConfig instance id - instance id of UniConfig that is collecting notifications from the NETCONF device
-- stream name - NETCONF stream name
+- node id - id of the NETCONF/gNMI node from which notifications should be collected
+- UniConfig instance id - instance id of UniConfig that is collecting notifications from the NETCONF/gNMI device
+- stream name - NETCONF/gNMI stream name
 - creation time - time when subscription was created
 - start time - time when notifications start to be collected
 - end time - time when notifications stop to be collected
@@ -429,7 +465,7 @@ subscriptions. It contains the following columns:
 Example request for reading subscriptions using RESTCONF:
 
 ```bash Request
-curl --location --request GET 'http://localhost:8181/rests/data/netconf-subscriptions:netconf-subscriptions' \
+curl --location --request GET 'http://localhost:8181/rests/data/subscriptions:subscription' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'
 ```
@@ -500,14 +536,87 @@ The creation of a new subscription for the stream will terminate all
 existing subscriptions for the stream.
 !!!
 
-## Monitoring system - processing NETCONF subscriptions
+## gNMI subscriptions
 
-Inside UniConfig, NETCONF notification subscriptions are processed in an
+A subscription is required to receive gNMI notifications from a gNMI device. Subscriptions are
+created using an install request:
+
+```bash Request
+curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--data '{
+    "input": {
+        "node-id": "gnmiNode",
+        "gnmi": {
+            "schema-cache-directory": "gnmi-topology",
+            "uniconfig-config:whitelist": {
+                "path": [
+                    "openconfig-interfaces:interfaces",
+                    "openconfig-network-instance:network-instances",
+                    "openconfig-relay-agent:relay-agent",
+                    "openconfig-port-group:port-groups",
+                    "openconfig-mclag:mclag",
+                    "openconfig-lldp:lldp"
+                ]
+            },
+            "uniconfig-config:uniconfig-native-enabled": true,
+            "uniconfig-config:sequence-read-active": false,
+            "connection-parameters": {
+                "host": "10.19.0.252",
+                "port": "8080",
+                "device-type" : "sonic",
+                "connection-type": "INSECURE",
+                "credentials": {
+                    "username": "<username>",
+                    "password": "<password>"
+                }
+            },
+            "session-timers": {
+                "request-timeout": 10,
+                "internal-transaction-timeout": 10
+            },
+            "extensions-parameters": {
+                "gnmi-parameters": {
+                    "use-model-name-prefix": true
+                },
+                "force-cached-capabilities": [
+                    null
+                ]
+            },
+            "stream":[
+                {
+                    "stream-name":"GNMI_if",
+                    "paths" : [
+                        "openconfig-interfaces:interfaces/interface=$.*/config"
+                    ],
+                    "start-time":"2023-10-31T10:47:00+01:00",
+                    "stop-time":"2023-10-31T10:49:00+01:00"
+                }
+            ]
+        }
+    }
+}'
+``` 
+
+Subscriptions to notification streams are defined as a list with the name
+*stream*. There is one record for each stream. There are two required
+parameters *stream-name* and *paths*. The following optional parameters are supported:
+
+- *start-time* - telemetry streaming should start at the specified time.
+- *stop time* - telemetry streaming will stop if timestamp of the notification is after stop-time. 
+  If stopTime is not specified, notifications will continue until the subscription is terminated.
+  Must be used with and set to be later than *start-time*. Values in the
+  future are valid.
+
+## Monitoring system - processing NETCONF/gNMI subscriptions
+
+Inside UniConfig, NETCONF/gNMI notification subscriptions are processed in an
 infinite loop within the monitoring system. An iteration of the monitoring
 system loop consists of following steps:
 
-1. Check global setting for NETCONF notifications
-    - If turned off, release all NETCONF subscriptions and end current iteration
+1. Check global setting for NETCONF/gNMI notifications
+    - If turned off, release all NETCONF/gNMI subscriptions and end current iteration
 
 2. Release cancelled subscriptions
 

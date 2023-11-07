@@ -8,7 +8,7 @@ order: 9000
 
 ## Device installation
 
-Guide explaining installation mechanisms along with both CLI and NETCONF
+Guide explaining installation mechanisms along with CLI, NETCONF and gNMI
 examples.
 
 ## UniConfig CLI
@@ -38,10 +38,26 @@ are automatically created and provided to translation registry - user
 doesn’t write them individually. YANG models can be constructed by
 following of well-defined rules that are explained in Developer Guide.
 
+## UniConfig gNMI
+
+gNMI is gRPC Network Management Interface used for
+configuration and monitoring devices in the network. It can be used to
+“create, update, and delete configurations of network
+devices as well as susbcription to telemetry streams”. 
+gNMI operation is done via Remote Procedure Call (RPC) developed by Google. 
+All gNMI messages within gRPC service definition are defined as protocol buffers (proto3).
+
+## UniConfig gNOI
+
+gNOI is gRPC Network Operations Interface used for executing operational commands on network devices.
+The gNOI protocol supports Certificate management, bootstraping or OS installation service.
+All gNOI messages within gRPC service definition are defined as protocol buffers (proto3).
+
 Network management protocols are used in southbound API of UniConfig
 Lighty distribution for device installation and communication.
 Currently, following protocols are supported:
 
 1.  NETCONF (Network Configuration Protocol)
 2.  SSH / TELNET
+3.  gNMI/gNOI (Network Management/Operations interface)
 

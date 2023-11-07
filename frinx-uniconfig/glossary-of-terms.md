@@ -27,3 +27,7 @@ NETCONF Event Notifications <https://tools.ietf.org/html/rfc6243>
 
 With-defaults Capability for NETCONF YANG
 <https://tools.ietf.org/html/rfc6020> a modelling language for NETCONF
+
+gNMI <https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md#grpc-network-management-interface-gnmi>
+
+gNOI <https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/175/b_175_programmability_cg/m_175_prog_gnoi_protocol.pdf>

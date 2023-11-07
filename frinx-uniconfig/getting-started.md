@@ -20,10 +20,10 @@ or with an external database.
 
 -   Retrieves and stores current startup and running configuration from
     mounted network devices
--   Pushes configuration data to devices via NETCONF or CLI
+-   Pushes configuration data to devices via NETCONF, CLI or gNMI
 -   Allows for diffs to be built between actual and intended execution
     of atomic configuration changes
--   Retrieves operational data from devices via NETCONF or CLI
+-   Retrieves operational data from devices via NETCONF, CLI or gNMI
 -   Provides subtree filtering capabilities in NETCONF
 -   Transactions can be managed on one or multiple devices
 -   Offers the ability to do a dry-commit to evaluate the functionality
@@ -42,6 +42,8 @@ or with an external database.
 -   Supports PostgreSQL as an external database
 -   Support for YANG 1.1 and Tail-f actions
 -   Subscription to NETCONF notifications via web sockets
+-   Subscription to gNMI notifications 
+-   Support for gNOI
 -   Support for 3-phase commit by using NETCONF confirmed-commit
 -   High availability
 -   The ability to log specific devices as needed
