@@ -758,7 +758,9 @@ in cache directory with YANG schemas needed for installation of device.
 
 This is non-mandatory parameter that specified list of paths to subtree that 
 UniConfig will process the intended change of it as gNMI SET message - Update operation. 
-The paths are in regexp format.
+The paths are in regexp format. 
+
+More information about update paths feature <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#update-paths>.
 
 ### Replace paths
 
@@ -769,6 +771,9 @@ merge all changes according to specified `replace-paths` and make sure that gNMI
 path as the one specified in `replace-paths` in install request. 
 The paths are in common RESTful URL format, but the list entry can be compiled 
 as regexp pattern if it is specified with `$` sign after `=` sign. 
+
+More information about replace paths feature <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#replace-paths>.
+
 
 ### Remove module name paths
 
@@ -787,7 +792,9 @@ This feature is only for SONiC device type. The format of paths is the same as f
 This is non-mandatory parameter that specified list of paths that UniConfig will check and order 
 the intended changes according to it. The format of dependency paths is: 
 - `before` - path without keys that will be ordered before the path specified in `after`.
-- `after` - path withou keys that will be ordered after the path specified in `before`.
+- `after` - path without keys that will be ordered after the path specified in `before`.
+
+More information about dependency paths <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#dependency-paths>.
 
 
 ### Example request
@@ -921,7 +928,6 @@ curl --location 'http://localhost:8181/rests/operations/connection-manager:insta
 
 ```bash
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-node' \
---header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {

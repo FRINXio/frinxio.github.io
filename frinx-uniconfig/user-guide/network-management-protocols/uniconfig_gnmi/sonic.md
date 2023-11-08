@@ -2,8 +2,7 @@
 
 ## Install SONiC device
 
-SONiC device can be installed through UniConfig Native with the
-following request:
+SONiC device can be installed through gNMI with the following request:
 
 ```bash
 curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
@@ -136,7 +135,6 @@ To uninstall device run:
 ```bash
 curl --location 'http://localhost:8181/rests/operations/connection-manager:uninstall-node' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --data '{
     "input": {
         "node-id": "sonic",

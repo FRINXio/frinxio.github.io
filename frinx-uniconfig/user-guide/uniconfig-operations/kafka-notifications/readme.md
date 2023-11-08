@@ -52,8 +52,8 @@ must choose which streams to receive. The default stream is named *NETCONF*.
 [gNMI spec](https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md#35-subscribing-to-telemetry-updates) defines a
 mechanism where the gNMI client indicates an interest in receiving state of data instances via Subscribe RPC
 The gNMI server, if the creation of the subscription was successful, will reply with state of data instances according to specified paths. 
-The session will be opened until it will be closed either from UniConfig side (releasing of the subscription) 
-of device side (error).
+The session will be opened until it UniConfig closes it (releasing of the subscription) or an error occurs from the device side. 
+However, UniConfig will try to recreate the session.
 
 Mandatory fields in install-node request:
 - stream-name

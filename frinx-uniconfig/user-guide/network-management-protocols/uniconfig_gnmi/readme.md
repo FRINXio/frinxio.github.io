@@ -13,13 +13,14 @@ install, manipulate, and delete the configuration of network devices, and also t
 
 The gNMI southbound plugin follows a fully model-driven approach, similar 
 to CLI or NETCONF southbound plugins. However, the difference is that it uses protocol buffer (proto3) 
-for service structure modeling within it's RPCs instead of YANG.
+for service structure modeling within it's RPCs instead of YANG, since the gRPC protocol uses it. 
+However, UniConfig still needs the YANG schemas for config data modelling on the UniConfig side. 
 
 ## gNMI southbound plugin
 
 The gNMI southbound plugin is capable of connecting to remote gNMI devices and exposing their 
 datastores (CONFIG, STATE) as MD-SAL mount points. These mount points allow applications and remote users 
-(over RESTCONF) to interact with the mounted devices. By mounting of gNMI device a new session is gNMI session is created.
+(over RESTCONF) to interact with the mounted devices. By mounting of gNMI device a new gNMI session is created.
 The gNMI session is responsible for establishing a connection via gRPC ManagedChannel. After the connection is established, 
 gNMI southbound plugin read the device capabilities via Capabilities RPC. From the capabilities, a new schema context is built 
 (once the schema context is built, it is cached for next runs) and all necessary services are created (DOMDataBroker, 
@@ -60,7 +61,6 @@ Example of gNOI RPC invocation
 
 ```bash Invocation of SONiC specific copy-config RPC
 curl --location --request POST 'http://localhost:8181/rests/operations/network-topology:network-topology/topology=gnmi-topology/node=sonic/yang-ext:mount/gnoi-sonic:copy-config' \
---header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --header 'Content-Type: application/json' \
 --data-raw '{
         "input": {
@@ -86,7 +86,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/network-t
 
 Update paths feature tells gNMI southbound plugin to process the intended config 
 changes (calculated from UniConfig Diff) as gNMI SET message - Update operation. 
-The gNMI southbound plugin basically checks for config changes paths if they are relative to those specified in the install request.
+The gNMI southbound plugin basically checks for config changes paths if they are relative 
+to those specified in the install request. The main purpose of using update paths feature 
+is to send gNMI SET message with correct operation mode, that the device supports for specific subtree.
 Each path is whole in regexp format.
 
 ### Replace paths
@@ -108,6 +110,9 @@ it will be processed as gNMI SET message - Delete operation. It will be basicall
 This feature can be used also only in gNMI southbound plugin, 
 for example if we send config change via yang-patch operation over gNMI topology (so it goes outside of UniConfig Diff). 
 In this scenario it will just check if the config change path is relative to one of the replace-paths
+
+The main purpose of using replace paths feature is to send gNMI SET message with correct operation mode, 
+that the device supports for specific subtree.
 
 The paths are in common RESTful URL format, but the list entry can be compiled 
 as regexp pattern if it is specified with `$` sign after `=` sign. 
@@ -196,7 +201,7 @@ will be set to higher number than 0.
 ### gNMI testtool
 
 The gNMI testtool is a GO language server-side simulator capable of configuring via gNMI over OpenConfig YANG schemas 
-(currently supported only openconfig-interfaces, openconfig-system, openconfig-openflow), 
+(it currently supports only openconfig-interfaces, openconfig-system, openconfig-openflow), 
 controlling operations over gNOI, telemetry streaming. 
 It is used for scale-testing purpose to simulate interaction of thousands of devices with UniConfig.
 
