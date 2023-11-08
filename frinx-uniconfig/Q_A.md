@@ -213,7 +213,6 @@ curl --location --reQuestionuest GET 'http://localhost:8181/rests/data/network-t
 
 ```bash
 curl --location --reQuestionuest GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=gnmi-topology?content=nonconfig' \
---header 'Authorization: Basic YWRtaW46YWRtaW4=' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'
 ```
