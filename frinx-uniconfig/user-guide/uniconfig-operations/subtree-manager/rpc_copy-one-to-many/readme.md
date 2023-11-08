@@ -1,32 +1,32 @@
 # RPC copy-one-to-many
 
-RPC input contains:
+This RPC is used to perform operations with a configuration from a single source path to multiple target paths.
 
-- type of operation - 'merge' or 'replace',
-- type of source datastore - CONFIGURATION / OPERATIONAL,
-- type of target datastore - CONFIGURATION / OPERATIONAL,
-- source path in RFC-8040 URI formatting, list of target paths in RFC-8040 URI formatting (target paths denote
-    parent entities under which configuration is copied).
+RPC input contains the following:
 
-Target datastore is optional input field. By default, it is the same as
-source datastore. Other input fields are mandatory, so it is forbidden
-to call RPC with missing mandatory field. Output of RPC describes result
-of copy to target paths RPC. If one path failed for any reason, RPC will
-be failed overall and no modification will be done to datastore - all
-modifications are done in the single atomic transaction.
+* **type of operation**: `merge` or `replace`
+* **type of source datastore**: `CONFIGURATION` or `OPERATIONAL`
+* **type of target datastore**: `CONFIGURATION` or `OPERATIONAL`
+* **source path** in RFC-8040 URI format
+* **list of target paths** in RFC-8040 URI format (target paths denote
+    parent entities under the which configuration is copied)
 
-Description of RPC copy-one-to-many is on figure below.
+Target datastore is an optional input field. By default, it is the same as source datastore. All other input fields are mandatory.
+
+RPC output describes the result of the operation. If one path fails, the entire RPC fails and the datastore is not modified (i.e., all modifications are performed in a single atomic transaction).
 
 ![RPC copy-one-to-many](copy-one-to-many.svg)
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
-The following example demonstrates merging of ethernet interface
-configuration from single source into interfaces 'eth-0/2' (node
-'dev02'), 'eth-0/3' (node 'dev02'), 'eth-0/100' (node 'dev03'), and
-'eth-0/200' (node 'dev03').
+This example demonstrates merging the ethernet interface configuration from a single source to the following interfaces:
+
+* `eth-0/2` (node `dev02`)
+* `eth-0/3` (node `dev02`)
+* `eth-0/100` (node `dev03`)
+* `eth-0/200` (node `dev03`)
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-many' \
@@ -53,9 +53,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 
 ### Failed example
 
-The next example shows failed copy-one-to-many RPC - both target paths
-are invalid since 'ext' list schema nodes doesn't contain
-'interfaces:interfaces' child container.
+This example shows a failed copy-one-to-many RPC operation.
+
+Both target paths are invalid, since the `ext` list schema nodes does not contain the `interfaces:interfaces` child container.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-many' \

@@ -1,29 +1,31 @@
 # RPC calculate-subtree-diff
 
-This RPC creates a diff between the source topology subtrees and target topology subtrees.
-Supported features:
-* Comparison of subtrees under same network-topology node.
-* Comparison of subtrees between different network-topology nodes that use same YANG schemas.
-* Comparison of subtrees with different revisions of YANGs schema that are syntactically compatible
+This RPC creates a diff between source topology subtrees and target topology subtrees.
+
+Supported features include:
+* Compare subtrees under the same network-topology node.
+* Compare subtrees between different network-topology nodes that use same YANG schemas.
+* Compare subtrees with different revisions of YANG schemas that are syntactically compatible
   (for example, different software versions of devices).
 
-RPC input contains data-tree paths ('source-path' and 'target-path') and data locations
-('source-datastore' and 'target-datastore').
-Data location is the enumeration of two possible values, 'OPERATIONAL' and 'CONFIGURATION'.
-The default value of 'source-datastore' is 'OPERATIONAL' and
-default value of 'target-datastore' is 'CONFIGURATION'.
+RPC input contains data-tree paths (`source-path` and `target-path`) and data locations
+(`source-datastore` and `target-datastore`).
+
+Data location is the enumeration of two possible values, `OPERATIONAL` and `CONFIGURATION`.
+The default value for `source-datastore` is `OPERATIONAL` and the default value of
+`target-datastore` is `CONFIGURATION`.
 
 RPC output contains a list of differences between source and target subtrees.
 
 ![RPC calculate-subtree-dif](RPC_calculate_subtree_diff-RPC_calculate_subtree_diff.svg)
 
-## RPC Examples
+## RPC examples
 
 ### Successful example: Computed difference
 
-RPC calculate-subtree-diff input has a path to two different testtool
-devices with different YANG schemas. Output contains a list of statements
-representing the diff.
+RPC input contains a path to two different testtool devices with different YANG schemas.
+
+RPC output contains a list of statements representing the diff.
 
 ```json Node testtool with schema test-module
 {
@@ -514,8 +516,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 
 ### Successful example: No difference
 
-The following output demonstrates a situation with no changes
-between specified subtrees.
+The following output demonstrates a situation with no changes between specified subtrees.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:calculate-subtree-diff' \
@@ -540,9 +541,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 
 ### Failed example: Invalid value in input field
 
-RPC calculate-subtree-diff has an improperly defined datastore (AAA)
-within the input. Output describes the Allowed values [CONFIGURATION,
-OPERATIONAL].
+RPC input contains an improperly defined datastore (`AAA`).
+
+RPC output describes the allowed values (`CONFIGURATION` and `OPERATIONAL`).
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:calculate-subtree-diff' \
@@ -605,7 +606,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 
 ### Failed example: Pointing to different schema node
 
-RPC input source and target paths are not pointing to the same schema node.
+RPC input contains source and target paths that do not point to the same schema node.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:calculate-subtree-diff' \

@@ -1,32 +1,26 @@
 # RPC copy-one-to-one
 
-RPC input contains:
+This RPC is used to perform operations with a configuration from a single source path to a single target path.
 
-- type of operation - 'merge' or 'replace',
-- type of source datastore - CONFIGURATION / OPERATIONAL,
-- type of target datastore - CONFIGURATION / OPERATIONAL,
-- source path in RFC-8040 URI formatting,
-- target path in RFC-8040 URI formatting (target path denote parent
-    entities under which configuration is copied).
+RPC input contains the following:
 
-Target datastore is optional input field. By default, it is the same as
-source datastore. Other input fields are mandatory, so there is
-forbidden to call RPC with missing mandatory field. Output of RPC
-describes result of copy to target path operation. If RPC failed for
-some reason, RPC will be failed and no modification will be done to
-datastore.
+* **type of operation**: `merge` or `replace`
+* **type of source datastore**: `CONFIGURATION` or `OPERATIONAL`
+* **type of target datastore**: `CONFIGURATION` or `OPERATIONAL`
+* **source path** in RFC-8040 URI format
+* **target path** in RFC-8040 URI format (target path denotes parent entities under which the configuration is copied)
 
-Description of RPC copy-one-to-one is on figure below.
+Target datastore is an optional input field. By default, it is the same as the source datastore. All other fields are mandatory.
+
+RPC output describes the result of the operation. If the RPC fails, no changes are made to the target datastore.
 
 ![RPC copy-one-to-one](copy-one-to-one.svg)
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
-The following example demonstrates coping of whole 'org:orgs' container
-from 'dev01' to 'dev02' node under 'uniconfig' topology. Replace
-operation is used.
+This example demonstrates how to copy the entire `org:orgs` container from `dev01` to the `dev02` node under the `uniconfig` topology using the `replace` operation.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-one' \
@@ -48,11 +42,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 
 ### Failed example
 
-The following example shows failed copy-one-to-one RPC. Input contains
-specified source datastore (target datastore is the same), merge
-operation, source path, and target path. In that example target path is
-invalid, because it doesn't contain 'org:orgs' container in the schema
-tree.
+This example shows a failed copy-one-to-one operation.
+
+RPC input contains the source datastore (same as the target datastore), merge operation, source path, and target path. The target path is invalid because it does not contain the `org:orgs` container in the schema tree.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-one' \
