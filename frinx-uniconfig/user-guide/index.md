@@ -16,6 +16,18 @@ examples. It then covers differences between CLI, NETCONF and gNMI API.
 
 This section lists various APIs used interact with UniConfig.
 
+## Operational Procedures
+
+This section lists various procedures that can be used with UniConfig.
+
+## Performance and scale
+
+This section describes performance of UniConfig in various scale scenarios.
+
+## Monitoring
+
+This section describes the performance metrics of UniConfig.
+
 ## UniConfig Procedures
 
 UniConfig operations are actions that are usually inherent to UniConfig
