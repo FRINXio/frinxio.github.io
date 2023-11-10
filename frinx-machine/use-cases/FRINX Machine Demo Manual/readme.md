@@ -1,10 +1,6 @@
 # FRINX Machine Demo Manual
 
-Open the Frinx Demo at https://services.frinx.io/frinxui/. (Note that Mozilla Firefox is not supported.)
-
-Select **Login** in the upper-right corner to log into the service. Please contact *info@frinx.io* for login credentials.
-
-After logging in, you can see the **FRINX Machine dashboard**:
+After logging into FRINX Machine, you can see the **FRINX Machine dashboard**:
 
 ![FRINX Machine dashboard](fm2.0_dashboard.png)
 
