@@ -12,24 +12,24 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Uniconfig 5.1.7 Release Notes | Frinx Docs</title>
-    <meta name="title" content="Uniconfig 5.1.7 Release Notes | Frinx Docs">
-    <meta name="description" content="Lazy loading/unloading of native schema contexts (#1171)" />
+    <title>Uniconfig 5.1.15 | Frinx Docs</title>
+    <meta name="title" content="Uniconfig 5.1.15 | Frinx Docs">
+    <meta name="description" content="[UNIC-1481] Add With-Default to Java client" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.7/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.15/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.7/">
-    <meta property="og:title" content="Uniconfig 5.1.7 Release Notes | Frinx Docs">
-    <meta property="og:description" content="Lazy loading/unloading of native schema contexts (#1171)">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.15/">
+    <meta property="og:title" content="Uniconfig 5.1.15 | Frinx Docs">
+    <meta property="og:description" content="[UNIC-1481] Add With-Default to Java client">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.7/">
-    <meta property="twitter:title" content="Uniconfig 5.1.7 Release Notes | Frinx Docs">
-    <meta property="twitter:description" content="Lazy loading/unloading of native schema contexts (#1171)">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.15/">
+    <meta property="twitter:title" content="Uniconfig 5.1.15 | Frinx Docs">
+    <meta property="twitter:description" content="[UNIC-1481] Add With-Default to Java client">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -247,120 +247,66 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="uniconfig-517-release-notes" class="break-words">
+<doc-anchor-target id="uniconfig-5115" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-517-release-notes">#</doc-anchor-trigger>
-        <span>Uniconfig 5.1.7 Release Notes</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5115">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.15</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="new-features">
+<!-- Release notes generated using configuration in .github/release.yml at 5.1.15 -->
+<doc-anchor-target id="whats-changed">
     <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="bug-fixes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1481] Add With-Default to Java client</li>
+<li>[UNIC-1490] - Fix delete requests not send</li>
+</ul>
+<doc-anchor-target id="new-features">
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
         <span><span class="docs-emoji">&#x2705;</span> New Features</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><p>Lazy loading/unloading of native schema contexts (#1171)</p>
-</li>
-<li><p>Creation of MIB context to SchemaContext adapter (#1169)</p>
-</li>
-</ul>
-<doc-anchor-target id="bug-fixes">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x274C;</span> Bug Fixes</span>
-    </h2>
-</doc-anchor-target>
-<ul>
-<li><p>Fixed lazy apply-template</p>
-</li>
-<li><p>Fixed a bug that causes cli closed error if config output&#x27;s length is less than prompt&#x27;s length after config output is trimmed</p>
-</li>
-<li><p>Fix Swagger regex example generation</p>
-</li>
-<li><p>Fixed loading of schema context from swagger directory</p>
-</li>
-<li><p>Make request max size configurable for gnmi devices</p>
-</li>
-<li><p>Integrate encryption in create-multiple-templates RPC.</p>
-</li>
-<li><p>Fixed UniconfigTransactionsMediator initialization (#1181)</p>
-</li>
-<li><p>Remove TestNG (#1159)</p>
-</li>
-<li><p>Fix UC stuck when CPU is full and queue is empty (#1168)</p>
-</li>
+<li>[UNIC-1028] Connect/Disconnect node RPC</li>
 </ul>
 <doc-anchor-target id="improvements">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
         <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><p>Support for gnmi in shell</p>
-</li>
-<li><p>Implementation of idle timeout print in CLI (#1172)</p>
-</li>
-<li><p>Lazy loading/unloading of native schema contexts (#1171)</p>
-</li>
-<li><p>Improved the processing time of sync RPC for ios/iosxe devices</p>
-</li>
-<li><p>Unify movement in shell (#1005)</p>
-</li>
-<li><p>Enabled cable-upstream writer for interfaces that has number/number/number pattern as name</p>
-</li>
-<li><p>Improved apply-template RPC (#1111)</p>
-</li>
-</ul>
-<doc-anchor-target id="other">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#other">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F527;</span> Other</span>
-    </h2>
-</doc-anchor-target>
-<ul>
-<li>Add lazy loading to shell</li>
+<li>[UNIC-1487] Uniconfig Shell: prompt mode should be the same after config transaction expiration</li>
 </ul>
 <doc-anchor-target id="dependency-upgrades">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
         <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><p>build(deps): bump protobuf.version from 3.22.3 to 3.22.4</p>
-</li>
-<li><p>build(deps): bump jgrapht.version from 1.5.1 to 1.5.2</p>
-</li>
-<li><p>build(deps): bump jakarta.activation-api from 2.1.1 to 2.1.2 (#1178)</p>
-</li>
-<li><p>build(deps): bump netty.version from 4.1.91.Final to 4.1.92.Final (#1173)</p>
-</li>
-<li><p>build(deps): bump kotlin.version from 1.8.20 to 1.8.21 (#1174)</p>
-</li>
-<li><p>build(deps): bump junit.jupiter.version from 5.9.2 to 5.9.3 (#1175)</p>
-</li>
-<li><p>build(deps): bump checkstyle from 10.9.3 to 10.10.0 (#1176)</p>
-</li>
-<li><p>build(deps-dev): bump flyway-core from 9.16.3 to 9.17.0 (#1177)</p>
-</li>
-<li><p>build(deps): bump mockito.core.version from 5.2.0 to 5.3.1 (#1156)</p>
-</li>
-<li><p>build(deps): bump maven-checkstyle-plugin from 3.2.1 to 3.2.2 (#1157)</p>
-</li>
-<li><p>build(deps): bump okhttp.version from 4.10.0 to 4.11.0 (#1155)</p>
-</li>
-<li><p>build(deps): bump jackson-bom from 2.14.2 to 2.15.0 (#1158)</p>
-</li>
-<li><p>build(deps-dev): bump maven-plugin-annotations from 3.8.1 to 3.8.2 (#1152)</p>
-</li>
-<li><p>build(deps): bump maven-project-info-reports-plugin from 3.4.2 to 3.4.3 (#1145)</p>
-</li>
-<li><p>build(deps): bump maven-plugin-plugin from 3.8.1 to 3.8.2 (#1154)</p>
-</li>
-<li><p>build(deps): bump jackson-databind from 2.14.2 to 2.15.0 (#1153)</p>
-</li>
+<li>build(deps): bump kotlin.version from 1.9.0 to 1.9.20</li>
+</ul>
+<doc-anchor-target id="other-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>New snapshot release 5.1.15</li>
+<li>Do not generate release notes</li>
+<li>[UNIC-1488] Uniconfig Shell: add option to refresh the transaction</li>
 </ul>
 
                                 
@@ -371,20 +317,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.6/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.14/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Uniconfig 5.​1.​6 Release Notes</span>
+                                                <span class="block mt-1">Uniconfig 5.​1.​14</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.8/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.2.0/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Uniconfig 5.​1.​8 Release Notes</span>
+                                                <span class="block mt-1">Uniconfig 5.​2.​0 Release Notes</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -431,6 +377,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.7 Release Notes", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.15", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
