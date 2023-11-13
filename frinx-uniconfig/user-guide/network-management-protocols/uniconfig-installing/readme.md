@@ -756,16 +756,16 @@ in cache directory with YANG schemas needed for installation of device.
 
 ### Update paths
 
-This is non-mandatory parameter that specified list of paths to subtree that 
-UniConfig will process the intended change of it as gNMI SET message - Update operation. 
+This is non-mandatory parameter that specifies list of paths by which the 
+UniConfig will process the intended change as gNMI SET message - Update operation. 
 The paths are in regexp format. 
 
 More information about update paths feature <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#update-paths>.
 
 ### Replace paths
 
-This is non-mandatory parameter that specified list of paths to subtree that 
-UniConfig will process the intended change of it as gNMI SET message - Replace operation. 
+This is non-mandatory parameter that specifies list of paths by which the 
+UniConfig will process the intended change as gNMI SET message - Replace operation. 
 There is specific replace diff implementation inside of UniConfig that will check and 
 merge all changes according to specified `replace-paths` and make sure that gNMI SET message will have the same 
 path as the one specified in `replace-paths` in install request. 
@@ -777,20 +777,20 @@ More information about replace paths feature <https://docs.frinx.io/frinx-unicon
 
 ### Remove module name paths
 
-This is non-mandatory parameter that specified list of paths that 
-UniConfig will check if the intended change is relative to it and remove module-name of list entry key if specified. 
-The format of paths is the same as for `update-paths`.
+This is non-mandatory parameter that specified list of paths by which the 
+UniConfig will remove the module-name of list entry key if specified 
+(example: `protocol=openconfig-policy-types:BGP,bgp`, remove-module-name-path = `network-instances/network-instance=$.*/protocols/protocol`).
+The format of paths is the same as for `replace-paths`.
 
 ### All type paths
 
-This is non-mandatory parameter that specified list of paths that UniConfig will 
-check if the intended change is relative to it and provide GET request will ALL data type. 
-This feature is only for SONiC device type. The format of paths is the same as for `update-paths`.
+This is non-mandatory parameter that specified list of paths by which the UniConfig will provide GET request will ALL data type. 
+This feature is only for SONiC device type. The format of paths is the same as for `replace-paths`.
 
 ### Dependency paths
 
-This is non-mandatory parameter that specified list of paths that UniConfig will check and order 
-the intended changes according to it. The format of dependency paths is: 
+This is non-mandatory parameter that specified list of paths by which the UniConfig will check and order 
+the intended changes. The format of dependency paths is: 
 - `before` - path without keys that will be ordered before the path specified in `after`.
 - `after` - path without keys that will be ordered after the path specified in `before`.
 

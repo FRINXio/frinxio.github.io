@@ -86,10 +86,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/network-t
 
 Update paths feature tells gNMI southbound plugin to process the intended config 
 changes (calculated from UniConfig Diff) as gNMI SET message - Update operation. 
-The gNMI southbound plugin basically checks for config changes paths if they are relative 
-to those specified in the install request. The main purpose of using update paths feature 
-is to send gNMI SET message with correct operation mode, that the device supports for specific subtree.
-Each path is whole in regexp format.
+The gNMI southbound plugin basically checks, if config change paths are relative 
+to any of the update paths listed in the installation request 
+(example: we have config change at `a/b/c/d` which is relative to update-path `a/b/c` ). 
+The main purpose of using update paths feature is to send gNMI SET message with correct operation mode, 
+that the device supports for specific subtree. Each path is whole in regexp format.
 
 ### Replace paths
 
