@@ -1,12 +1,10 @@
 # RPC calculate-diff
 
-This RPC creates a diff between the actual UniConfig topology nodes and
-the intended UniConfig topology nodes. The RPC input contains a list of
-UniConfig nodes to calculate the diff. Output of the RPC contains a list
-of statements representing the diff. It also matches all input nodes.
-If RPC is called with empty list of target nodes, diff is calculated for
-each modified node in the UniConfig transaction. If some node fails for
-any reason, the RPC fails entirely
+This RPC creates a diff between actual and intended UniConfig topology nodes.
+
+RPC input contains a list of UniConfig nodes for calculating the diff. RPC output contains a list of statements representing the diff. It also matches all input nodes.
+
+If the RPC is called with an empty list of target nodes, a diff is calculated for each node modified in the UniConfig transaction. If a node fails for any reason, the entire RPC fails.
 
 ![RPC calculate-diff](RPC_calculate-diff-RPC_calculate_diff.svg)
 
@@ -14,8 +12,7 @@ any reason, the RPC fails entirely
 
 ### Successful Example
 
-The RPC calculate-diff input has two target nodes and the output contains
-a list of statements representing the diff.
+RPC input contains two target nodes and output contains a list of statements representing the diff.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -65,9 +62,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Successful Example
 
-If the RPC calculate-diff input does not contain the target nodes,
-calculate-diff will be invoked on top of all touched nodes in the
-transaction.
+If RPC input does not specify any target nodes, calculate-diff is invoked for all nodes touched by the transaction.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -137,7 +132,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Successful Example
 
-The RPC calculate-diff input has target node and there is no diff.
+RPC input contains a target node and there is no diff.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -169,8 +164,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Failed Example
 
-The RPC calculate-diff input has target node. Nodes 'R2' has not been
-installed yet. The output describes the result of the calculate-diff RPC.
+RPC input contains a target node that is not installed. RPC output describes the result of the calculate-diff RPC.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -205,9 +199,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Failed Example
 
-The RPC calculate-diff input has two target nodes. One of the nodes,
-'R2', has not been installed yet. The output describes the result
-of the calculate-diff RPC.
+RPC input contains two target nodes, one of which (R2) is not installed. RPC output describes the result of the calculate-diff RPC.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -242,8 +234,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Failed Example
 
-If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.
+If RPC input does not contain target nodes and no nodes have been touched, the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \

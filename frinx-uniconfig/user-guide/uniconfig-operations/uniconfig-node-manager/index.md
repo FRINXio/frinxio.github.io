@@ -1,28 +1,16 @@
 # UniConfig Node Manager
 
-The responsibility of this component is to maintain configuration on
-devices based on intended configuration. Each device and its
-configuration is represented as a node in the uniconfig topology and the
-configuration of this node is described by using OpenConfig YANG models.
-The Northbound API of Uniconfig Manager (UNM) is RPC driven and provides
-functionality for commit with automatic rollback and synchronization of
-configuration from the network.
+This component is responsible for maintaining the configuration on devices based on their intended configuration. Each device and its configuration are represented as a node in the UniConfig topology. The node's configuration is described using OpenConfig YANG models.
 
-When a commit is called, the UNM creates a diff based on intended state
-from CONFIG DS and actual state from OPER DS. This Diff is used as the
-basis for device configuration. UNM prepares a network wide transaction
-which uses Unified mountpoints for communication with different types of
-devices.
+The northbound API of the UniConfig Manager (UNM) is RPC-driven and provides commit functionality with automatic rollback and synchronization of configurations from the network.
 
-An additional git like diff RPC was created so it shows all the changes
-grouped under root elements in a git-like style.
+When a commit is called, UNM creates a diff based on the intended state in the **Config** datastore and the actual state in the **Operational** datastore. This diff is used as the basis for device configuration. UNM prepares a network-wide transaction that uses unified mountpoints for communication with different types of devices. An additional git-like diff RPC is used to display all changes grouped under root elements in a git-like style.
 
-In the case where the configuration of one device fails, the UNM
-executes automatic rollback where the previous configuration is restored
-on all modified devices.
+If configuration fails for one device, UNM executes an automatic rollback where the previous configuration is restored on all modified devices.
 
-Synchronization from the network reads configuration from devices and
-stores it as an actual state to the OPER DS.
+Synchronization from the network reads configurations from devices and stores them as actual states in the **Operational** datastore.
+
+See below for additional information on individual RPCs:
 
 - [RPC calculate-diff](../uniconfig-node-manager/rpc_calculate-diff)
 - [RPC calculate-git-like-diff](../uniconfig-node-manager/rpc_calculate-git-like-diff)
