@@ -531,10 +531,8 @@ uniconfig-native support.
 - **uniconfig-config:install-uniconfig-node-enabled** - Whether node
     should be installed to UniConfig and unified layers. By default,
     this flag is set to 'true'.
-- **uniconfig-config:sequence-read-active** - Forces reading of data
-    sequentially when mounting device. By default, this flag is set to
-    'false'. This parameter has effect only on NETCONF nodes.
-- **uniconfig-config:whitelist** - List of root YANG entities that should be read. This parameter has effect only on NETCONF nodes.
+- **uniconfig-config:sequence-read-active** - Force sequential data reading when mounting a device. If set to 'true', sync-from-network is done in parallel. The default value is 'false'.
+- **uniconfig-config:whitelist** - List of root YANG entities that should be read.
 - **uniconfig-config:blacklist** - List of root YANG entities that
     should not be read from NETCONF device due to incompatibility with
     uniconfig-native or other malfunctions in YANG schemas. This
@@ -654,6 +652,253 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
     "input": {
         "node-id": "xr1",
         "connection-type": "netconf"
+    }
+}'
+```
+
+## Installing gNMI device
+
+### Identifying remote device
+
+Basic connection parameters used to identify a remote device:
+
+- `node-id` - Name of the node that represents the device/mountpoint in the topology.
+- `gnmi-topology:host` - IP address or domain name of the target device running the gNMI server.
+- `gnmi-topology:port` - TCP port where the gNMI server is listening to incoming connections.
+- `gnmi-topology:device-type` - Specific device type. For now, only the `sonic` device type is supported. This parameter is used to create a device-type specific gNOI session. By default, this parameter is not specified.
+- `gnmi-topology:connection-type` - If specified, an insecure connection is created. The insecure connection is available only for DEBUG reasons. To establish a gRPC connection without TLS, choose the insecure connection type `PLAINTEXT`. The connection type `PLAINTEXT` indicates that the target should skip the signature verification steps if a secure connection is used.
+- `gnmi-topology:keystore-id` - If specified, a secure connection is created. Also requires `keystore-id` (identifier of the keystore), which is defined in the `gnmi-certificate-storage` model.
+
+!!!
+Only one of the parameters `keystore-id` and `connection-type` can be specified.
+!!!
+
+### Authentication parameters
+
+Parameters to configure the basic authentication method against a gNMI server. These parameters must be specified in the input request inside the `gnmi-topology:credentials` container:
+
+- `gnmi-topology:username` - Username with permission to access the device using gNMI.
+- `gnmi-topology:password` - Password for username.
+
+### Session timers
+
+The following parameters adjust timers related to maintaining gNMI session state. None of these parameters are mandatory (default values are used if not specified):
+
+- `gnmi-topology:request-timeout` - Timeout (in seconds) for each gNMI request. The request times out if not completed in time. The default value is 30.
+
+### Flags
+
+Non-mandatory flag parameters that can be added to a mount request:
+
+- `gnmi-topology:enabled-notifications` - If set to `true` and the gNMI device supports notifications, the gNMI mountpoint will expose GNMI notification and subscription services. The default value is `true`.
+
+### Other parameters
+
+Other non-mandatory parameters that can be added to a mount request:
+
+- `gnmi-topology:dry-run-journal-size` - Size of the dry-run gNMI mountpoint journal. The dry-run journal captures gNMI operations that would be executed when reading/writing a configuration. However, the operations are not actually sent to the device. The default value is 0.
+
+### Extension parameters
+
+Other extended non-mandatory parameters that can be added to a mount-request inside of the `extensions-parameters` container.
+
+#### gNMI parameters
+
+- `gnmi-topology:use-model-name-prefix` - Some devices require a module prefix in the first element name of the gNMI request path (for example, interfaces -> openconfig-interfaces:interfaces). The default value is `false`.
+
+### UniConfig-native
+
+Parameters related to installing gNMI nodes with uniconfig-native support:
+
+- `uniconfig-config:uniconfig-native-enabled` - Whether or not uniconfig-native should be used for installing of NETCONF, CLI or gNMI nodes. The default value is `false`.
+- `uniconfig-config:sequence-read-active` - Forces reading of data sequentially when mounting a device. If set to `true`, sync-from-network is done in parallel. The default value is `false`.
+- `uniconfig-config:whitelist` - List of root YANG entities that should be read.
+- `uniconfig-config:store-failed-installation` - Whether or not the installation is stored in the database if it fails (e.g., unreachable). The node is "installed" even though it fails, and the user has two options:
+  - Uninstall the device and reinstall it.
+  - Call `sync-from-network` to sync the data from the device.
+
+!!!
+An important install parameter is `gnmi-topology:schema-cache-directory: <folder-name>`. It specifies a folder name in the cache directory with the YANG schemas needed to install a device. 
+!!!
+
+### Update paths
+
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig will process intended changes as a gNMI SET message - Update operation. Paths are specified in regexp format. 
+
+More information about update paths feature: <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#update-paths>.
+
+### Replace paths
+
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig will process intended changes as a gNMI SET message - Replace operation. 
+
+A specific replace diff implementation in UniConfig checks and merges all changes according to the specified `replace-paths`, and ensures that the gNMI SET message has the same path as the one specified in `replace-paths` in the install request.
+
+Paths are specified in common RESTful URL format, but list entries can be compiled as a regexp pattern if specified with the `$` sign after the `=` sign. 
+
+More information about the replace paths feature: <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#replace-paths>.
+
+
+### Remove module name paths
+
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig removes the module name of specified list entry keys. (For example, `protocol=openconfig-policy-types:BGP,bgp`, remove-module-name-path = `network-instances/network-instance=$.*/protocols/protocol`).
+
+The path format is the same as for `replace-paths`.
+
+### All type paths
+
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig provides a GET request with the ALL data type.
+
+The path format is the same as for `replace-paths`.
+
+This feature only applies to the SONiC device type. 
+
+### Dependency paths
+
+This is a non-mandatory parameter that specifies list of paths for which UniConfig will check and order the intended changes.
+
+The format of dependency paths: 
+- `before` - path without keys that is ordered before the path specified in `after`.
+- `after` - path without keys that is ordered after the path specified in `before`.
+
+More information about dependency paths: <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#dependency-paths>.
+
+
+### Example request
+
+```bash
+curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Content-Type: application/json' \
+--data '{
+    "input": {
+        "node-id": "sonic",
+        "gnmi": {
+            "schema-cache-directory": "gnmi-topology",
+            "update-paths": [
+                "openconfig-interfaces:interfaces\/interface=.*[Ee]thernet?[0-9]+\/.*",
+                "[^\/]+",
+                "sonic-vlan:sonic-vlan.*"
+            ],
+            "replace-paths": [
+                "openconfig-interfaces:interfaces/interface=$.*[Ee]thernet?[0-9]+/openconfig-if-ethernet:ethernet/openconfig-vlan:switched-vlan/config/trunk-vlans",
+                "openconfig-interfaces:interfaces/interface=$.*[Pp]ortChannel?[0-9]+/openconfig-if-aggregate:aggregation/openconfig-vlan:switched-vlan/config/trunk-vlans",
+                "openconfig-relay-agent:relay-agent/dhcp/interfaces/interface=$[Vv]lan[0-9]+/config",
+                "openconfig-relay-agent:relay-agent/dhcpv6/interfaces/interface=$[Vv]lan[0-9]+/config",
+                "openconfig-platform:components/component=$.*/openconfig-platform:port/openconfig-platform-port:breakout-mode"
+            ],
+            "remove-module-names-paths": [
+                "network-instances/network-instance=default/protocols/protocol"
+            ],
+            "all-type-paths": [
+                "openconfig-lldp:lldp",
+                "openconfig-port-group:port-groups"
+            ],
+            "dependency-paths": [
+                {
+                    "before": "openconfig-network-instance:network-instances/network-instance",
+                    "after": "openconfig-network-instance:network-instances/network-instance/interfaces/interface"
+                },
+                {
+                    "before": "openconfig-network-instance:network-instances/network-instance/interfaces/interface",
+                    "after": "openconfig-network-instance:network-instances/network-instance/openconfig-vxlan:vxlan-vni-instances/vni-instance"
+                },
+                {
+                    "before": "openconfig-network-instance:network-instances/network-instance/interfaces/interface",
+                    "after": "openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/openconfig-interfaces-ext:sag-ipv4/config"
+                },
+                {
+                    "before": "openconfig-network-instance:network-instances/network-instance/interfaces/interface",
+                    "after": "openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/openconfig-interfaces-ext:sag-ipv6/config"
+                },
+                {
+                    "before": "openconfig-network-instance:network-instances/network-instance/openconfig-vxlan:vxlan-vni-instances/vni-instance",
+                    "after": "openconfig-relay-agent:relay-agent/dhcp/interfaces/interface"
+                },
+                {
+                    "before": "openconfig-network-instance:network-instances/network-instance/openconfig-vxlan:vxlan-vni-instances/vni-instance",
+                    "after": "openconfig-relay-agent:relay-agent/dhcpv6/interfaces/interface"
+                },
+                {
+                    "before": "openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/openconfig-interfaces-ext:sag-ipv4/config",
+                    "after": "openconfig-relay-agent:relay-agent/dhcp/interfaces/interface"
+                },
+                {
+                    "before": "openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/openconfig-interfaces-ext:sag-ipv6/config",
+                    "after": "openconfig-relay-agent:relay-agent/dhcpv6/interfaces/interface"
+                },
+                {
+                    "before": "openconfig-interfaces:interfaces/interface",
+                    "after": "openconfig-mclag:mclag/interfaces/interface"
+                },
+                {
+                    "before": "openconfig-interfaces:interfaces/interface",
+                    "after": "openconfig-interfaces:interfaces/interface/openconfig-if-ethernet:ethernet/config/aggregate-id"
+                },
+                {
+                    "before" : "openconfig-interfaces:interfaces/interface",
+                    "after": "openconfig-network-instance:network-instances/network-instance/interfaces/interface"
+                },
+                {
+                    "before" : "openconfig-network-instance:network-instances/network-instance",
+                    "after": "openconfig-interfaces:interfaces/interface/subinterfaces"
+                }
+            ],
+            "uniconfig-config:whitelist": {
+                "path": [
+                    "openconfig-interfaces:interfaces",
+                    "openconfig-network-instance:network-instances",
+                    "openconfig-relay-agent:relay-agent",
+                    "openconfig-port-group:port-groups",
+                    "openconfig-mclag:mclag",
+                    "openconfig-lldp:lldp",
+                    "sonic-vlan:sonic-vlan",
+                    "openconfig-platform:components",
+                    "openconfig-system:system",
+                    "openconfig-neighbor:neighbor-globals",
+                    "sonic-mclag:sonic-mclag"
+                ]
+            },
+            "uniconfig-config:uniconfig-native-enabled": true,
+            "uniconfig-config:sequence-read-active": true,
+            "connection-parameters": {
+                "host": "<ip>",
+                "port": "8080",
+                "device-type" : "sonic",
+                "connection-type": "INSECURE",
+                "credentials": {
+                    "username": "<username>",
+                    "password": "<password>"
+                }
+            },
+            "session-timers": {
+                "request-timeout" : 180
+            },
+            "other-parameters" : {
+                "dry-run-journal-size" : 240
+            },
+            "extensions-parameters": {
+                "gnmi-parameters": {
+                    "use-model-name-prefix": true
+                },
+                "force-cached-capabilities": [
+                    null
+                ]
+            }
+        }
+    }
+}'
+```
+
+## Uninstalling gNMI device
+
+### Example request
+
+```bash
+curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-node' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "node-id": "r1",
+        "connection-type": "gnmi"
     }
 }'
 ```

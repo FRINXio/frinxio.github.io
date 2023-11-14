@@ -1,22 +1,17 @@
 # Kafka Notifications
 
-## Introduction
-
-NETCONF devices produce NETCONF notifications.
-UniConfig can collect these and create its own
-UniConfig notifications about specific events. Notifications from
-both NETCONF devices and UniConfig are published using Kafka.
+NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events. Notifications from both NETCONF and gNMI devices and UniConfig are published using Kafka.
 
 The following notification types are available:
 
 - NETCONF notifications
+- gNMI notifications
 - Notifications about transactions
 - Audit logs (RESTCONF notifications)
-- Data-change events
+- Data change events
 - Connection notifications
 
-Each notification type is stored in its own topic in Kafka. Additionally,
-all notifications are stored in one table in the database.
+Each notification type is stored in its own topic in Kafka. Additionally, all notifications are stored in one table in the database.
 
 ![notifications-in-cluster](cluster.svg)
 
@@ -45,6 +40,40 @@ sent until either the NETCONF session or the subscription is terminated.
 
 NETCONF notifications are categorised as so-called streams. The subscriber
 must choose which streams to receive. The default stream is named *NETCONF*.
+
+## gNMI notifications
+
+The [gNMI specification](https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md) defines a [mechanism](https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md#35-subscribing-to-telemetry-updates) where the gNMI client indicates an interest in receiving updates about the state of data instances via a subscribe RPC. If the subscription is successfully created, the gNMI server replies with the state of data instances according to specified paths. 
+
+The session remains open until it UniConfig closes it (releasing the subscription) or an error occurs on the device side.  However, UniConfig will try to recreate the session.
+
+Mandatory fields in the `install-node` request:
+- `stream-name`
+- `paths`
+
+```json Notification response
+{
+  "source": "10.19.0.24:8080",
+  "subscription-name": "default-1680174672",
+  "timestamp": 1680174553095998547,
+  "time": "2023-03-30T13:09:13.095998547+02:00",
+  "prefix": "openconfig-interfaces:interfaces",
+  "updates": [
+    {
+      "Path": "interface[name=Ethernet72]/state/counters/out-multicast-pkts",
+      "values": {
+        "interface/state/counters/out-multicast-pkts": 0
+      }
+    },
+    {
+      "Path": "interface[name=Ethernet72]/config/enabled",
+      "values": {
+        "interface/config/enabled": false
+      }
+    }
+  ]
+}
+```
 
 ## Notifications about transactions
 
@@ -385,16 +414,15 @@ The following **three tables** in the database are related to notifications:
 
 - notification
 - settings
-- netconf-subscription
+- subscription
 
 Notifications are stored in the **notification table**. It contains the following columns:
 
-- stream name - name of the notification stream - NETCONF stream name or UniConfig-specific stream name
-- node id - node id of the NETCONF device for NETCONF notifications or identifier of UniConfig instance in case of other
-  types of notifications
-- identifier - name of the YANG notification
+- stream name - name of the notification stream
+- node id - identifier for the NETCONF/gNMI device or, for other types of notifications, the UniConfig instance
+- identifier - name of the YANG notification for NETCONF or path to the received config top node for gNMI
 - body - full notification body in JSON format
-- event time - time when notification was generated
+- event time - time when the notification was generated
 
 Example request for reading notifications using RESTCONF:
 
@@ -416,20 +444,19 @@ curl --location --request GET 'http://localhost:8181/rests/data/kafka-brokers:ka
 --header 'Content-Type: application/json'
 ``` 
 
-The **netconf-subscription table** is used to track NETCONF notification
-subscriptions. It contains the following columns:
+The **subscription table** is used to track NETCONF and gNMI notification subscriptions. It contains the following columns:
 
-- node id - id of the NETCONF node from which notifications should be collected
-- UniConfig instance id - instance id of UniConfig that is collecting notifications from the NETCONF device
-- stream name - NETCONF stream name
-- creation time - time when subscription was created
-- start time - time when notifications start to be collected
-- end time - time when notifications stop to be collected
+- node id - id for the NETCONF/gNMI node where notifications are collected
+- UniConfig instance id - instance id of the UniConfig instance that collects notifications from the NETCONF/gNMI device
+- stream name - NETCONF/gNMI stream name
+- creation time - time when the subscription was created
+- start time - start time for collecting notifications
+- end time - end time for collecting notifications
 
 Example request for reading subscriptions using RESTCONF:
 
 ```bash Request
-curl --location --request GET 'http://localhost:8181/rests/data/netconf-subscriptions:netconf-subscriptions' \
+curl --location --request GET 'http://localhost:8181/rests/data/subscriptions:subscription' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'
 ```
@@ -500,30 +527,95 @@ The creation of a new subscription for the stream will terminate all
 existing subscriptions for the stream.
 !!!
 
-## Monitoring system - processing NETCONF subscriptions
+## gNMI subscriptions
 
-Inside UniConfig, NETCONF notification subscriptions are processed in an
-infinite loop within the monitoring system. An iteration of the monitoring
-system loop consists of following steps:
+A subscription is required to receive gNMI notifications from a gNMI device.
 
-1. Check global setting for NETCONF notifications
-    - If turned off, release all NETCONF subscriptions and end current iteration
+Subscriptions are created with an install request:
 
-2. Release cancelled subscriptions
+```bash Request
+curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--data '{
+    "input": {
+        "node-id": "gnmiNode",
+        "gnmi": {
+            "schema-cache-directory": "gnmi-topology",
+            "uniconfig-config:whitelist": {
+                "path": [
+                    "openconfig-interfaces:interfaces",
+                    "openconfig-network-instance:network-instances",
+                    "openconfig-relay-agent:relay-agent",
+                    "openconfig-port-group:port-groups",
+                    "openconfig-mclag:mclag",
+                    "openconfig-lldp:lldp"
+                ]
+            },
+            "uniconfig-config:uniconfig-native-enabled": true,
+            "uniconfig-config:sequence-read-active": false,
+            "connection-parameters": {
+                "host": "10.19.0.252",
+                "port": "8080",
+                "device-type" : "sonic",
+                "connection-type": "INSECURE",
+                "credentials": {
+                    "username": "<username>",
+                    "password": "<password>"
+                }
+            },
+            "session-timers": {
+                "request-timeout": 10,
+                "internal-transaction-timeout": 10
+            },
+            "extensions-parameters": {
+                "gnmi-parameters": {
+                    "use-model-name-prefix": true
+                },
+                "force-cached-capabilities": [
+                    null
+                ]
+            },
+            "stream":[
+                {
+                    "stream-name":"GNMI_if",
+                    "paths" : [
+                        "openconfig-interfaces:interfaces/interface=$.*/config"
+                    ],
+                    "start-time":"2023-10-31T10:47:00+01:00",
+                    "stop-time":"2023-10-31T10:49:00+01:00"
+                }
+            ]
+        }
+    }
+}'
+``` 
 
+Subscriptions to notification streams are defined as a list with the name `stream`. There is one record for each stream.
+
+There are two required parameters, `stream-name` and `paths`. The other parameters are optional:
+
+- `start-time` - Start time for telemetry streaming.
+- `stop-time` - Telemetry streaming stops if the timestamp of the notification is later than this time. If no stop time is specified, notifications will continue until the subscription is terminated. Must be used with and set to be later than `start-time`. Values in the future are valid.
+
+## Monitoring system - processing NETCONF/gNMI subscriptions
+
+Inside UniConfig, NETCONF and gNMI notification subscriptions are processed in an infinite loop within the monitoring system.
+
+An iteration of the monitoring system loop consists of following steps:
+
+1. Check global setting for NETCONF/gNMI notifications.
+    - If turned off, release all NETCONF/gNMI subscriptions and end current iteration.
+2. Release cancelled subscriptions.
 3. Query free subscriptions from DB, and for each one:
-    1. Create a notification session (create mountpoint and register listeners)
-    2. Lock the subscription (set UniConfig instance)
+    1. Create a notification session (create mountpoint and register listeners).
+    2. Lock the subscription (set UniConfig instance).
 
 !!!
-There is a hard limit for the number of sessions that a single UniConfig node
-can handle. If the limit is reached, the UniConfig node refuses any additional
-subscriptions.
+There is a hard limit on the number of sessions that a single UniConfig node can handle. If the limit is reached, the UniConfig node refuses any additional subscriptions.
 !!!
 
-The loop interval, hard subscription limit and maximum number of
-subscriptions processed per interval can be set in the file
-*lighty-uniconfig-config.json*.
+The loop interval, hard subscription limit and maximum number of subscriptions processed per interval can be set in the **lighty-uniconfig-config.json** file.
 
 ### Dedicated NETCONF session for subscription
 
