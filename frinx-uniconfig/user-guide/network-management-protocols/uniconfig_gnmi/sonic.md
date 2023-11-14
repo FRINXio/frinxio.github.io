@@ -1,8 +1,8 @@
 # SONiC device
 
-## Install SONiC device
+## Install device
 
-SONiC device can be installed through gNMI with the following request:
+SONiC devices can be installed through gNMI with the following request:
 
 ```bash
 curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
@@ -129,8 +129,7 @@ curl --location 'http://localhost:8181/rests/operations/connection-manager:insta
 
 ## Uninstall device
 
-
-To uninstall device run:
+To uninstall a device:
 
 ```bash
 curl --location 'http://localhost:8181/rests/operations/connection-manager:uninstall-node' \

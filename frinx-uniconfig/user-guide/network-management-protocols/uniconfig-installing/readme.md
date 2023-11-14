@@ -531,9 +531,7 @@ uniconfig-native support.
 - **uniconfig-config:install-uniconfig-node-enabled** - Whether node
     should be installed to UniConfig and unified layers. By default,
     this flag is set to 'true'.
-- **uniconfig-config:sequence-read-active** - Forces reading of data
-    sequentially when mounting device. If it is set to 'true' sync-from-network 
-    will be done in parallel. By default, this flag is set to 'false'.
+- **uniconfig-config:sequence-read-active** - Force sequential data reading when mounting a device. If set to 'true', sync-from-network is done in parallel. The default value is 'false'.
 - **uniconfig-config:whitelist** - List of root YANG entities that should be read.
 - **uniconfig-config:blacklist** - List of root YANG entities that
     should not be read from NETCONF device due to incompatibility with
@@ -660,141 +658,109 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ## Installing gNMI device
 
-### Identification of remote device
+### Identifying remote device
 
-List of basic connection parameters that are used for identification of
-remote device.
+Basic connection parameters used to identify a remote device:
 
-- **node-id** - Name of node that represents device / mount-point in
-    the topology.
-- **gnmi-topology:host** - IP address or domain-name of target
-    device that runs gNMI server.
-- **gnmi-topology:port** - TCP port on which gNMI server is
-    listening to incoming connections.
-- **gnmi-topology:device-type** - Specific device type. For now, 
-    we only support 'sonic' specific device type. 
-    This parameter is used for creation of device-type specific 
-    gNOI session. By default, this parameter is not specified.
-- **gnmi-topology:connection-type** - If this parameter is specified insecure connection will be created.
-    The insecure connection is available only for DEBUG reasons.
-    For establish gRPC connection without TLS choose insecure connection type PLAINTEXT. 
-    INSECURE connection type indicates that the target should skip the signature
-    verification steps, in case a secure connection is used.
-- **gnmi-topology:keystore-id** - If this parameter is specified secure connection will be created.
-    In a secure case keystore-id is required. Identifier to keystore. 
-    Keystore is defined in gnmi-certificate-storage model.
+- `node-id` - Name of the node that represents the device/mountpoint in the topology.
+- `gnmi-topology:host` - IP address or domain name of the target device running the gNMI server.
+- `gnmi-topology:port` - TCP port where the gNMI server is listening to incoming connections.
+- `gnmi-topology:device-type` - Specific device type. For now, only the `sonic` device type is supported. This parameter is used to create a device-type specific gNOI session. By default, this parameter is not specified.
+- `gnmi-topology:connection-type` - If specified, an insecure connection is created. The insecure connection is available only for DEBUG reasons. To establish a gRPC connection without TLS, choose the insecure connection type `PLAINTEXT`. The connection type `PLAINTEXT` indicates that the target should skip the signature verification steps if a secure connection is used.
+- `gnmi-topology:keystore-id` - If specified, a secure connection is created. Also requires `keystore-id` (identifier of the keystore), which is defined in the `gnmi-certificate-storage` model.
 
 !!!
-Only one of these parameters `keystore-id`, `connection-type` can be specified.
+Only one of the parameters `keystore-id` and `connection-type` can be specified.
 !!!
 
 ### Authentication parameters
 
-Parameters used for configuration of the basic authentication method
-against gNMI server. These parameters must be specified in the input
-request inside of `gnmi-topology:credentials` container.
+Parameters to configure the basic authentication method against a gNMI server. These parameters must be specified in the input request inside the `gnmi-topology:credentials` container:
 
-- **gnmi-topology:username** - Name of the user that has permission
-    to access device using gNMI.
-- **gnmi-topology:password** - Password to the user.
+- `gnmi-topology:username` - Username with permission to access the device using gNMI.
+- `gnmi-topology:password` - Password for username.
 
 ### Session timers
 
-The following parameters adjust timers that are related with maintaining
-of gNMI session state. None of these parameters are mandatory
-(default values will be used).
+The following parameters adjust timers related to maintaining gNMI session state. None of these parameters are mandatory (default values are used if not specified):
 
-- **gnmi-topology:request-timeout** - Timeout for each gnmi request. Request times out if not completed in X seconds (default value: 30 s).
+- `gnmi-topology:request-timeout` - Timeout (in seconds) for each gNMI request. The request times out if not completed in time. The default value is 30.
 
 ### Flags
 
-Non-mandatory flag parameters that can be added to mount-request.
+Non-mandatory flag parameters that can be added to a mount request:
 
-- **gnmi-topology:enabled-notifications-** - If it is set to 'true' and gNMI device supports notifications, gNMI mountpoint will
-    expose GNMI notification and subscription services. (default value: true).
+- `gnmi-topology:enabled-notifications` - If set to `true` and the gNMI device supports notifications, the gNMI mountpoint will expose GNMI notification and subscription services. The default value is `true`.
 
 ### Other parameters
 
-Other non-mandatory parameters that can be added to mount-request.
+Other non-mandatory parameters that can be added to a mount request:
 
-- **gnmi-topology:dry-run-journal-size** - Size of the DRY RUN gNMI mountpoint journal. DRY RUN journal captures gNMI operations 
-    that would be executed when reading/writing some configuration. However the operations are not actually
-    sent to the device (default value: 0).
+- `gnmi-topology:dry-run-journal-size` - Size of the dry-run gNMI mountpoint journal. The dry-run journal captures gNMI operations that would be executed when reading/writing a configuration. However, the operations are not actually sent to the device. The default value is 0.
 
 ### Extension parameters
 
-Other extended non-mandatory parameters that can be added to mount-request inside of `extensions-parameters` container.
+Other extended non-mandatory parameters that can be added to a mount-request inside of the `extensions-parameters` container.
 
 #### gNMI parameters
 
-- **gnmi-topology:use-model-name-prefix** - Some devices require a module prefix in first element name
-    of gNMI request path (e.g interfaces -> openconfig-interfaces:interfaces) (default value: false).
+- `gnmi-topology:use-model-name-prefix` - Some devices require a module prefix in the first element name of the gNMI request path (for example, interfaces -> openconfig-interfaces:interfaces). The default value is `false`.
 
 ### UniConfig-native
 
-Parameters related to installation of gNMI node with
-uniconfig-native support.
+Parameters related to installing gNMI nodes with uniconfig-native support:
 
-- **uniconfig-config:uniconfig-native-enabled** - Whether
-    uniconfig-native should be used for installation of NETCONF, CLI or gNMI
-    node. By default, this flag is set to 'false'.
-- **uniconfig-config:sequence-read-active** - Forces reading of data
-    sequentially when mounting device. If it is set to 'true' sync-from-network 
-    will be done in parallel. By default, this flag is set to 'false'.
-- **uniconfig-config:whitelist** - List of root YANG entities that should be read.
-- **uniconfig-config:store-failed-installation** - Whether the installation
-    should be stored in the database if it fails (e.g. is unreachable).
-    The node will be 'installed' even though it failed and the user has 2 options:
-  - uninstall the device and reinstall it.
-  - call sync-from-network to sync the data from the device.
+- `uniconfig-config:uniconfig-native-enabled` - Whether or not uniconfig-native should be used for installing of NETCONF, CLI or gNMI nodes. The default value is `false`.
+- `uniconfig-config:sequence-read-active` - Forces reading of data sequentially when mounting a device. If set to `true`, sync-from-network is done in parallel. The default value is `false`.
+- `uniconfig-config:whitelist` - List of root YANG entities that should be read.
+- `uniconfig-config:store-failed-installation` - Whether or not the installation is stored in the database if it fails (e.g., unreachable). The node is "installed" even though it fails, and the user has two options:
+  - Uninstall the device and reinstall it.
+  - Call `sync-from-network` to sync the data from the device.
 
 !!!
-Important install parameter is 
-**gnmi-topology:schema-cache-directory**: **<folder-name>**. It specified folder name 
-in cache directory with YANG schemas needed for installation of device. 
+An important install parameter is `gnmi-topology:schema-cache-directory: <folder-name>`. It specifies a folder name in the cache directory with the YANG schemas needed to install a device. 
 !!!
 
 ### Update paths
 
-This is non-mandatory parameter that specified list of paths to subtree that 
-UniConfig will process the intended change of it as gNMI SET message - Update operation. 
-The paths are in regexp format. 
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig will process intended changes as a gNMI SET message - Update operation. Paths are specified in regexp format. 
 
-More information about update paths feature <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#update-paths>.
+More information about update paths feature: <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#update-paths>.
 
 ### Replace paths
 
-This is non-mandatory parameter that specified list of paths to subtree that 
-UniConfig will process the intended change of it as gNMI SET message - Replace operation. 
-There is specific replace diff implementation inside of UniConfig that will check and 
-merge all changes according to specified `replace-paths` and make sure that gNMI SET message will have the same 
-path as the one specified in `replace-paths` in install request. 
-The paths are in common RESTful URL format, but the list entry can be compiled 
-as regexp pattern if it is specified with `$` sign after `=` sign. 
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig will process intended changes as a gNMI SET message - Replace operation. 
 
-More information about replace paths feature <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#replace-paths>.
+A specific replace diff implementation in UniConfig checks and merges all changes according to the specified `replace-paths`, and ensures that the gNMI SET message has the same path as the one specified in `replace-paths` in the install request.
+
+Paths are specified in common RESTful URL format, but list entries can be compiled as a regexp pattern if specified with the `$` sign after the `=` sign. 
+
+More information about the replace paths feature: <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#replace-paths>.
 
 
 ### Remove module name paths
 
-This is non-mandatory parameter that specified list of paths that 
-UniConfig will check if the intended change is relative to it and remove module-name of list entry key if specified. 
-The format of paths is the same as for `update-paths`.
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig removes the module name of specified list entry keys. (For example, `protocol=openconfig-policy-types:BGP,bgp`, remove-module-name-path = `network-instances/network-instance=$.*/protocols/protocol`).
+
+The path format is the same as for `replace-paths`.
 
 ### All type paths
 
-This is non-mandatory parameter that specified list of paths that UniConfig will 
-check if the intended change is relative to it and provide GET request will ALL data type. 
-This feature is only for SONiC device type. The format of paths is the same as for `update-paths`.
+This is a non-mandatory parameter that specifies a list of paths for which UniConfig provides a GET request with the ALL data type.
+
+The path format is the same as for `replace-paths`.
+
+This feature only applies to the SONiC device type. 
 
 ### Dependency paths
 
-This is non-mandatory parameter that specified list of paths that UniConfig will check and order 
-the intended changes according to it. The format of dependency paths is: 
-- `before` - path without keys that will be ordered before the path specified in `after`.
-- `after` - path without keys that will be ordered after the path specified in `before`.
+This is a non-mandatory parameter that specifies list of paths for which UniConfig will check and order the intended changes.
 
-More information about dependency paths <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#dependency-paths>.
+The format of dependency paths: 
+- `before` - path without keys that is ordered before the path specified in `after`.
+- `after` - path without keys that is ordered after the path specified in `before`.
+
+More information about dependency paths: <https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#dependency-paths>.
 
 
 ### Example request

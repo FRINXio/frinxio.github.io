@@ -1,27 +1,31 @@
-# User Guide
+# User guide
 
-## Basic Concepts
+The UniConfig user guide includes the following sections:
 
-Explanation of basic concepts, principles and mechanisms that exist
-within UniConfig.
+## Basic concepts
 
-## Device Installation
+Explanations of basic concepts, principles and mechanisms within UniConfig.
 
-Section that explains device installation process. It covers basic
-mechanisms that take place when installing and explains parameters that
-are used in installation along with examples of install request
-examples. It then covers differences between CLI, NETCONF and gNMI API.
+## Device installation
 
-## UniConfig Operations
+Explains the device installation process. Covers the basic mechanisms that take place during installation, and explains parameters with examples of install requests. Also covers the differences between CLI, NETCONF and gNMI API.
 
-This section lists various APIs used interact with UniConfig.
+## UniConfig operations
 
-## UniConfig Procedures
+Lists various APIs used to interact with UniConfig.
 
-UniConfig operations are actions that are usually inherent to UniConfig
-and work on their own when set up properly.
+## Operational procedures
 
-## SDK
+Lists various procedures that can be used with UniConfig.
 
-Uniconfig provides a full blown Java based SDK. All Uniconfig operations
-available over RESTconf are also available when using the SDK.
+## Performance and scale
+
+Describes the performance of UniConfig in various scale scenarios.
+
+## Monitoring
+
+Describes UniConfig performance metrics.
+
+## UniConfig Client (SDK)
+
+UniConfig provides a full-blown Java-based SDK. All UniConfig operations available over RESTCONF are also available when using the SDK.
