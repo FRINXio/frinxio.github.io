@@ -1,22 +1,18 @@
 # RPC replace-config-with-operational
 
-RPC replaces the UniConfig topology nodes in the Config datastore with
-UniConfig topology nodes from the Operational datastore. The RPC input
-contains a list of the UniConfig nodes to replace from the Operational
-to the Config datastore of the UniConfig transaction. Output of the RPC
-describes the result of the operation and matches all input nodes. If
-RPC is invoked with empty list of target nodes, operation will be
-invoked for all nodes modified in the UniConfig transaction. If one node
-failed for any reason, RPC will fail entirely.
+This RPC replaces UniConfig topology nodes in the **Config** datastore with nodes from the **Operational** datastore.
+
+RPC input contains a list of UniConfig nodes to replace. RPC output describes the result of the operation and matches all input nodes.
+
+If the RPC is invoked with an empty list of target nodes, the operation is invoked for all nodes modified in the UniConfig transaction. If any node fails, the entire RPC also fails.
 
 ![RPC replace-config-with-operational](RPC_replace-config-with-operational-RPC_replace_config_with_operational.svg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-RPC replace-config-with-operational input has 2 target nodes and the RPC
-output contains the result of the operation.
+RPC input has two target nodes. RPC output contains the result of the operation.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \
@@ -36,8 +32,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Successful Example
 
-If the RPC input does not contain the target nodes, configuration of all
-touched nodes will be replaced by operational state.
+If the RPC input does not contain the target nodes, configuration of all touched nodes will be replaced by operational state.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \
@@ -54,10 +49,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```RPC Response, Status: 200
 ```
 
-### Failed Example
+### Failed example
 
-RPC input contains a list of the target nodes. Node 'R1' has not been
-installed yet. The RPC output contains the result of the operation.
+RPC input contains a list of target nodes. Node R1 has not been installed. RPC output contains the result of the operation.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \
@@ -89,10 +83,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.
+If RPC input does not contain any target nodes and there are no any touched nodes, the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:replace-config-with-operational' \

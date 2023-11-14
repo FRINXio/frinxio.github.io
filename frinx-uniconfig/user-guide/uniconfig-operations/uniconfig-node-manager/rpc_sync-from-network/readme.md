@@ -1,22 +1,18 @@
 # RPC sync-from-network
 
-The purpose of this RPC is to synchronize configuration from network
-devices to the UniConfig nodes in the Operational datastore of UniConfig
-transaction. The RPC input contains a list of the UniConfig nodes where
-the configuration should be refreshed within the network. Output of the
-RPC describes the result of sync-from-network and matches all input
-nodes. Calling RPC with empty list of target nodes results in syncing
-configuration of all nodes that have been modified in the UniConfig
-transaction. If one node failed for any reason, the RPC will fail
-entirely.
+The purpose of this RPC is to synchronize configurations from network devices to UniConfig nodes in the **Operational** datastore of the UniConfig transaction.
+
+RPC input contains a list of UniConfig nodes whose configuration should be refreshed within the network. RPC output describes the result and matches all input nodes.
+
+Calling the RPC with an empty list of target nodes syncs the configuration of all nodes modified in the UniConfig transaction. If any node fails, the entire RPC also fails.
 
 ![RPC sync-from-network](RPC_sync-from-network-RPC_sync_from_network.svg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-RPC input contains nodes where configuration should be refreshed.
+RPC input contains nodes whose configuration should be refreshed.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -34,9 +30,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```RPC Response, Status: 200
 ```
 
-
-If RPC input does not contain the target nodes, all touched nodes
-in the transaction will be synced.
+If RPC input contains no target nodes, all nodes touched in the transaction are synced.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -53,10 +47,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```RPC Response, Status: 200
 ```
 
-### Failed Example
+### Failed example
 
-RPC input contains a list of nodes where the configuration should be
-refreshed. Node 'R2' has not been installed yet.
+RPC input contains a list of nodes whose configuration should be refreshed. Node R2 is not installed.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -88,10 +81,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.
+If RPC input does not contain any target nodes and there are no touched nodes, the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \

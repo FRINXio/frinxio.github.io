@@ -1,47 +1,35 @@
 # RPC checked-commit
 
-The trigger for execution of the checked configuration is RPC
-checked-commit. A checked commit is similar to an RPC commit, but it also
-checks if nodes are in sync with the network before it starts
-configuration. RPC fails if any node is out of sync. Output of the RPC
-describes the result of the commit and matches all modified nodes in the
-UniConfig transaction. If one node failed for any reason, RPC will fail
-entirely.
+The checked-commit RPC is the trigger for executing the checked configuration.
 
-In comparison to commit RPC, there is one additional phase between 'lock
-and validate configured nodes' and 'write configuration into device'
-phases:
+A checked commit is similar to an RPC commit, but it also checks that nodes are in sync with the network before it starts configuration. The RPC fails if any node is out of sync.
+
+RPC output describes the result of the commit and matches all modified nodes in the UniConfig transaction. If a node fails for any reason, the entire RPC fails.
+
+Compared to the commit RPC, there is an additional step between steps 1 and 3:
 
 1. Lock and validate configured nodes
-2. Check if nodes are in-sync with state on devices
-3. Write configuration into device
+2. Check if nodes are in sync with state on devices
+3. Write configuration to device
 4. Validate configuration
 5. Confirmed commit
 6. Confirming commit (submit configuration)
 
-Following diagram captures check if configuration fingerprints in the
-transaction datastore and device are equal.
+The following diagram illustrates the check assuming that configuration fingerprints in the transaction datastore and device are equal.
 
 ![RPC checked-commit](RPC_checked-commit-RPC_checked_commit.svg)
 
 !!!
-There is a difference between fingerprint-based validation in the
-phases 1 and 2. The goal of the first phase is validation if other
-transaction has already changed the same node by comparison of
-fingerprint in the UniConfig transaction and in the database. On the
-other side, the second phase validates if fingerprint in the
-transaction equals to fingerprint on the device - if another system /
-directly user via CLI has updated device configuration since the
-beginning of the transaction.
+Fingerprint-based validation is different between steps 1 and 2. For step 1, the goal is to validate if another transaction has already changed the same node by comparing fingerprints in the UniConfig transaction and the database. Step 2 checks that the fingerprint in the transaction is equal to the fingerprint on the device (i.e., if another system or a user directly via the CLI has updated the device configuration since the beginning of the transaction).
 !!!
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-Configuration of nodes 'R1' and 'R2' has been changed in the transaction.
-Both 'R1' and 'R2' are in-sync with actual state on the device.
-RPC checked-commit input invoke all touched nodes.
+The configuration of nodes R1 and R2 has been modified in the transaction. Both nodes are in sync with the actual state on the device.
+
+RPC input invokes all touched nodes.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -56,12 +44,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```RPC Response, Status: 200
 ```
 
-### Failed Example
+### Failed example
 
-Configuration of nodes 'R1' and 'R2' has been changed in the transaction.
-Both 'R1' and 'R2' are in-sync with actual state on the device. Node 'R1'
-has failed due to improper configuration. The output describes the result
-of the checked-commit RPC.
+The configuration of nodes R1 and R2 has been modified in the transaction. Both R1 and R2 are in sync with the actual state on the device. Node R1 has failed due to incorrect configuration.
+
+RPC output describes the result of the checked-commit RPC.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -92,12 +79,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-Configuration of nodes 'R1' has been changed in the transaction.
-Node 'R1' is in-sync with actual state on the device. Node 'R1'
-has failed on the changed fingerprint. The output describes
-the result of the checked-commit.
+The configuration of node R1 has been changed in the transaction. Node R1 is in sync with the actual state on the device. Node R1 has failed on the changed fingerprint.
+
+RPC output describes the result of the checked-commit.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -127,9 +113,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-Node 'R2' has lost connection.
+Node R2 has lost connection.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -159,10 +145,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.
+If the RPC input does not contain target nodes and no nodes have been touched, the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
