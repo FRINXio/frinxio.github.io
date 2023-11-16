@@ -875,12 +875,9 @@ can use pagination in the **GET** method.
 There are 3 pagination parameters that can be used individually or in
 combination with each other :
 
-1.  **offset :** This parameter lets us choose on which list entry value
-    we want data to start rendering.
-2.  **limit :** Limit gives us the option to control how many node
-    values are going to be displayed in our **GET** request.
-3.  **fetch=count :** Used to obtain the amount of children nodes in a
-    specific node.
+1.  **offset :** The offset parameter defines the starting point in a list for data rendering, based on the index of list entry values. List indexing begins at 0, meaning `offset=2` starts rendering from the third list entry. The specified offset index entry is included in the output.
+2.  **limit :** The limit parameter allows control over the number of node values displayed in a GET request. It specifies the maximum count of entries to be included in the response, starting from the entry defined by the offset (if provided).
+3.  **fetch=count :** The fetch=count option is used to retrieve the total number of child nodes within a specific node. Instead of returning the node values, it provides a count of how many child nodes exist under the specified node.
 
 !!!
 Beware that pagination works only for list nodes.
