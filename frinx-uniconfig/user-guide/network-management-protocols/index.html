@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753187178969">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753804945451">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Device installation | Frinx Docs</title>
     <meta name="title" content="Device installation | Frinx Docs">
-    <meta name="description" content="Guide explaining installation mechanisms along with both CLI and NETCONF examples." />
+    <meta name="description" content="Guide to installation mechanisms along with CLI, NETCONF and gNMI examples." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/" />
@@ -23,22 +23,22 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/">
     <meta property="og:title" content="Device installation | Frinx Docs">
-    <meta property="og:description" content="Guide explaining installation mechanisms along with both CLI and NETCONF examples.">
+    <meta property="og:description" content="Guide to installation mechanisms along with CLI, NETCONF and gNMI examples.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/">
     <meta property="twitter:title" content="Device installation | Frinx Docs">
-    <meta property="twitter:description" content="Guide explaining installation mechanisms along with both CLI and NETCONF examples.">
+    <meta property="twitter:description" content="Guide to installation mechanisms along with CLI, NETCONF and gNMI examples.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.753187178969" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.753804945451" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -259,51 +259,54 @@
         <span>Device installation</span>
     </h2>
 </doc-anchor-target>
-<p>Guide explaining installation mechanisms along with both CLI and NETCONF
-examples.</p>
+<p>Guide to installation mechanisms along with CLI, NETCONF and gNMI examples.</p>
 <doc-anchor-target id="uniconfig-cli">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-cli">#</doc-anchor-trigger>
         <span>UniConfig CLI</span>
     </h2>
 </doc-anchor-target>
-<p>The CLI southbound plugin enables the Frinx UniConfig to communicate
-with CLI devices that do not speak NETCONF or any other programmatic
-API. The CLI service module uses YANG models and implements a
-translation logic to send and receive structured data to and from CLI
-devices.</p>
+<p>The CLI southbound plugin allows UniConfig to communicate with CLI devices that do not support NETCONF or other programmatic APIs. The CLI service module uses YANG models and implements a translation logic to send and receive structured data to and from CLI devices.</p>
 <doc-anchor-target id="uniconfig-netconf">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-netconf">#</doc-anchor-trigger>
         <span>UniConfig Netconf</span>
     </h2>
 </doc-anchor-target>
-<p>NETCONF is an Internet Engineering Task Force (IETF) protocol used for
-configuration and monitoring devices in the network. It can be used to
-“create, recover, update, and delete configurations of network
-devices”.NETCONF operations are overlaid on the Remote Procedure Call
-(RPC) layer and may be described in either XML or JSON.</p>
+<p>NETCONF is an Internet Engineering Task Force (IETF) protocol used to configure and monitor devices in the network. It can create, recover, update and delete configurations of network devices.</p>
+<p>NETCONF operations are overlaid on the Remote Procedure Call (RPC) layer and may be described in either XML or JSON.</p>
 <doc-anchor-target id="uniconfig-native-cli">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-native-cli">#</doc-anchor-trigger>
         <span>UniConfig-native CLI</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig-native CLI allows user configuration of CLI-enabled devices
-using YANG models that describe configuration commands. In
-UniConfig-native CLI deployment translation units are defined only by
-YANG models and device-specific characteristics that are used for
-parsing and serialization of commands. Afterwards, readers and writers
-are automatically created and provided to translation registry - user
-doesn’t write them individually. YANG models can be constructed by
-following of well-defined rules that are explained in Developer Guide.</p>
-<p>Network management protocols are used in southbound API of UniConfig
-Lighty distribution for device installation and communication.
-Currently, following protocols are supported:</p>
-<ol>
+<p>UniConfig-native CLI allows you to configure CLI-enabled devices using YANG models that describe configuration commands.</p>
+<p>In a UniConfig-native CLI deployment, translation units are defined only by YANG models and device-specific characteristics used for parsing and serializing commands. Readers and writers are automatically created and provided to the translation registry (i.e., the user does not need to write them individually).</p>
+<p>YANG models can be constructed by following well-defined rules explained in the Developer guide.</p>
+<doc-anchor-target id="uniconfig-gnmi">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-gnmi">#</doc-anchor-trigger>
+        <span>UniConfig gNMI</span>
+    </h2>
+</doc-anchor-target>
+<p>The gRPC Network Management Interface (gNMI) is used to configure and monitor devices in the network. It can create, update, and delete configurations of network devices as well as susbcriptions to telemetry streams.</p>
+<p>gNMI operations are performed via Remote Procedure Call (RPC) developed by Google. All gNMI messages within gRPC service definition are defined as protocol buffers (proto3).</p>
+<doc-anchor-target id="uniconfig-gnoi">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-gnoi">#</doc-anchor-trigger>
+        <span>UniConfig gNOI</span>
+    </h2>
+</doc-anchor-target>
+<p>The gRPC Network Operations Interface (gNOI) is used to execute operational commands on network devices. The gNOI protocol supports certificate management, bootstrapping and OS installation service.</p>
+<p>All gNOI messages within gRPC service definition are defined as protocol buffers (proto3).</p>
+<p>Network management protocols are used in the southbound API of the UniConfig Lighty distribution to install and communicate with devices.</p>
+<p>The following protocols are currently supported:</p>
+<ul>
 <li>NETCONF (Network Configuration Protocol)</li>
 <li>SSH / TELNET</li>
-</ol>
+<li>gNMI/gNOI (Network Management/Operations interface)</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->

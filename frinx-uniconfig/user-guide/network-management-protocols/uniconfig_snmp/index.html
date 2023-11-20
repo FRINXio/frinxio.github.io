@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753187178969">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753804945451">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>UniConfig SNMP | Frinx Docs</title>
     <meta name="title" content="UniConfig SNMP | Frinx Docs">
-    <meta name="description" content="The SNMP (Simple Network Management Protocol) southbound plugin enables Frinx UniConfig to communicate with an SNMP agent, which is a software module..." />
+    <meta name="description" content="The SNMP (Simple Network Management Protocol) southbound plugin allows UniConfig to communicate with an SNMP agent, which is a software module..." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_snmp/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_snmp/">
     <meta property="og:title" content="UniConfig SNMP | Frinx Docs">
-    <meta property="og:description" content="The SNMP (Simple Network Management Protocol) southbound plugin enables Frinx UniConfig to communicate with an SNMP agent, which is a software module...">
+    <meta property="og:description" content="The SNMP (Simple Network Management Protocol) southbound plugin allows UniConfig to communicate with an SNMP agent, which is a software module...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_snmp/">
     <meta property="twitter:title" content="UniConfig SNMP | Frinx Docs">
-    <meta property="twitter:description" content="The SNMP (Simple Network Management Protocol) southbound plugin enables Frinx UniConfig to communicate with an SNMP agent, which is a software module...">
+    <meta property="twitter:description" content="The SNMP (Simple Network Management Protocol) southbound plugin allows UniConfig to communicate with an SNMP agent, which is a software module...">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.753187178969" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.753804945451" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753187178969" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753804945451" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -260,34 +260,26 @@
         <span>Introduction</span>
     </h2>
 </doc-anchor-target>
-<p>The SNMP (Simple Network Management Protocol) southbound plugin enables Frinx
-UniConfig to communicate with an SNMP agent, which is a software module installed
-on network devices. It collects information about the status, performance,
-and configuration of these devices.</p>
-<p>The SNMP southbound plugin follows a fully model-driven approach, similar
-to CLI or NETCONF southbound plugins. However, the difference lies in the
-fact that it uses MIB (Management Information Base) for data modeling instead
-of YANG.</p>
+<p>The SNMP (Simple Network Management Protocol) southbound plugin allows UniConfig to communicate with an SNMP agent, which is a software module installed on network devices. It collects information about the status, performance, and configuration of these devices.</p>
+<p>The SNMP southbound plugin follows a fully model-driven approach, similar to CLI or NETCONF southbound plugins. However, the difference lies in the fact that, instead  of YANG, it uses MIB (Management Information Base) for data modeling.</p>
 <doc-anchor-target id="architecture">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#architecture">#</doc-anchor-trigger>
         <span>Architecture</span>
     </h2>
 </doc-anchor-target>
-<p>This section provides an architectural overview of the plugin, focusing
-on the main components.</p>
+<p>This section provides an architectural overview of the plugin.</p>
 <doc-anchor-target id="snmp-topology">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#snmp-topology">#</doc-anchor-trigger>
         <span>SNMP topology</span>
     </h3>
 </doc-anchor-target>
-<p>The SNMP topology is a dedicated topology instance where users and
-applications can:</p>
+<p>The SNMP topology is a dedicated topology instance where users and applications can:</p>
 <ul>
-<li>install an SNMP agent,</li>
-<li>uninstall an agent,</li>
-<li>read device configuration settings or performance metrics</li>
+<li>Install an SNMP agent</li>
+<li>Uninstall an agent</li>
+<li>Read device configuration settings or performance metrics</li>
 </ul>
 <doc-anchor-target id="snmp-mountpoint">
     <h3>
@@ -295,50 +287,39 @@ applications can:</p>
         <span>SNMP mountpoint</span>
     </h3>
 </doc-anchor-target>
-<p>The plugin relies on MD-SAL and its concept of mountpoints to expose information
-about a device. By exposing a mountpoint in MD-SAL, it enables the SNMP topology
-to access device information in a structured form.</p>
+<p>The plugin relies on MD-SAL and its concept of mountpoints to expose information about a device. By exposing a mountpoint in MD-SAL, it allows the SNMP topology to access device information in a structured form.</p>
 <doc-anchor-target id="local-snmp-mib-repositories">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#local-snmp-mib-repositories">#</doc-anchor-trigger>
         <span>Local SNMP MIB repositories</span>
     </h3>
 </doc-anchor-target>
-<p>It is necessary to provide /mibs directory that has to contain:</p>
+<p>It is necessary to provide the <strong>/mibs</strong> directory that contains the following:</p>
 <ul>
-<li>repository - it is directory that contains mib files. It is possible to
-use any name.</li>
-<li>mib.metadata file - through this file, we inform UniConfig that we have
-added, removed, or modified some MIB file in the repository. Just insert
-the repository name and any arbitrary string and UniConfig will update
-the relevant context for particular repository.</li>
+<li><strong>repository</strong> - a directory that contains mib files. You can use any name.</li>
+<li><strong>mib.metadata</strong> file - With this file we inform UniConfig that we have added, removed, or modified an MIB file in the repository. Simply insert the repository name and any arbitrary string, and UniConfig will update the relevant context for the particular repository.</li>
 </ul>
-<doc-anchor-target id="example-of-mibmetadata-file">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#example-of-mibmetadata-file">#</doc-anchor-trigger>
-        <span>Example of mib.metadata file</span>
-    </h2>
-</doc-anchor-target>
+<p><strong>Example - mib.metadata file</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">repository1=rev1
 repository1=rev2</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="example-of-requests">
+<doc-anchor-target id="example-request">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#example-of-requests">#</doc-anchor-trigger>
-        <span>Example of requests</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request">#</doc-anchor-trigger>
+        <span>Example request</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig currently supports read operation, with plans to add write operation in the future.</p>
+<p>UniConfig currently supports the read operation, with plans to add support for the write operation in the future.</p>
 <doc-anchor-target id="get-request">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#get-request">#</doc-anchor-trigger>
         <span>GET request</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Reading snmpV2 container</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location 'http://localhost:8181/rests/data/network-topology:network-topology/topology=topology-snmp/node=agent1/yang-ext:mount/yang-ext:mount/SNMPv2-SMI:iso/org/dod/internet/snmpV2'</code></pre>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location 'http://localhost:8181/rests/data/network-topology:network-topology/topology=topology-snmp/node=agent1/yang-ext:mount/SNMPv2-SMI:iso/org/dod/internet/snmpV2'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Sample response</div>

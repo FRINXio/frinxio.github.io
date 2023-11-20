@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753187178969">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753804945451">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Kafka Notifications | Frinx Docs</title>
     <meta name="title" content="Kafka Notifications | Frinx Docs">
-    <meta name="description" content="NETCONF devices produce NETCONF notifications. UniConfig can collect these and create its own UniConfig notifications about specific events." />
+    <meta name="description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/">
     <meta property="og:title" content="Kafka Notifications | Frinx Docs">
-    <meta property="og:description" content="NETCONF devices produce NETCONF notifications. UniConfig can collect these and create its own UniConfig notifications about specific events.">
+    <meta property="og:description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/cluster.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/">
     <meta property="twitter:title" content="Kafka Notifications | Frinx Docs">
-    <meta property="twitter:description" content="NETCONF devices produce NETCONF notifications. UniConfig can collect these and create its own UniConfig notifications about specific events.">
+    <meta property="twitter:description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/cluster.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.753187178969" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.753804945451" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753187178969" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753804945451" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,26 +256,17 @@
         <span>Kafka Notifications</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="introduction">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#introduction">#</doc-anchor-trigger>
-        <span>Introduction</span>
-    </h2>
-</doc-anchor-target>
-<p>NETCONF devices produce NETCONF notifications.
-UniConfig can collect these and create its own
-UniConfig notifications about specific events. Notifications from
-both NETCONF devices and UniConfig are published using Kafka.</p>
+<p>NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events. Notifications from both NETCONF and gNMI devices and UniConfig are published using Kafka.</p>
 <p>The following notification types are available:</p>
 <ul>
 <li>NETCONF notifications</li>
+<li>gNMI notifications</li>
 <li>Notifications about transactions</li>
 <li>Audit logs (RESTCONF notifications)</li>
-<li>Data-change events</li>
+<li>Data change events</li>
 <li>Connection notifications</li>
 </ul>
-<p>Each notification type is stored in its own topic in Kafka. Additionally,
-all notifications are stored in one table in the database.</p>
+<p>Each notification type is stored in its own topic in Kafka. Additionally, all notifications are stored in one table in the database.</p>
 <p><figure class="content-center">
     <img src="cluster.svg" alt="notifications-in-cluster" />
     <figcaption class="caption">notifications-in-cluster</figcaption>
@@ -311,6 +302,43 @@ as events occur within the system. Event notifications are
 sent until either the NETCONF session or the subscription is terminated.</p>
 <p>NETCONF notifications are categorised as so-called streams. The subscriber
 must choose which streams to receive. The default stream is named <em>NETCONF</em>.</p>
+<doc-anchor-target id="gnmi-notifications">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gnmi-notifications">#</doc-anchor-trigger>
+        <span>gNMI notifications</span>
+    </h2>
+</doc-anchor-target>
+<p>The <a href="https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md">gNMI specification</a> defines a <a href="https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md#35-subscribing-to-telemetry-updates">mechanism</a> where the gNMI client indicates an interest in receiving updates about the state of data instances via a subscribe RPC. If the subscription is successfully created, the gNMI server replies with the state of data instances according to specified paths.</p>
+<p>The session remains open until it UniConfig closes it (releasing the subscription) or an error occurs on the device side.  However, UniConfig will try to recreate the session.</p>
+<p>Mandatory fields in the <code v-pre>install-node</code> request:</p>
+<ul>
+<li><code v-pre>stream-name</code></li>
+<li><code v-pre>paths</code></li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Notification response</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;source&quot;: &quot;10.19.0.24:8080&quot;,
+  &quot;subscription-name&quot;: &quot;default-1680174672&quot;,
+  &quot;timestamp&quot;: 1680174553095998547,
+  &quot;time&quot;: &quot;2023-03-30T13:09:13.095998547+02:00&quot;,
+  &quot;prefix&quot;: &quot;openconfig-interfaces:interfaces&quot;,
+  &quot;updates&quot;: [
+    {
+      &quot;Path&quot;: &quot;interface[name=Ethernet72]/state/counters/out-multicast-pkts&quot;,
+      &quot;values&quot;: {
+        &quot;interface/state/counters/out-multicast-pkts&quot;: 0
+      }
+    },
+    {
+      &quot;Path&quot;: &quot;interface[name=Ethernet72]/config/enabled&quot;,
+      &quot;values&quot;: {
+        &quot;interface/config/enabled&quot;: false
+      }
+    }
+  ]
+}</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="notifications-about-transactions">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#notifications-about-transactions">#</doc-anchor-trigger>
@@ -664,16 +692,15 @@ connection-notification&#x27;.</p>
 <ul>
 <li>notification</li>
 <li>settings</li>
-<li>netconf-subscription</li>
+<li>subscription</li>
 </ul>
 <p>Notifications are stored in the <strong>notification table</strong>. It contains the following columns:</p>
 <ul>
-<li>stream name - name of the notification stream - NETCONF stream name or UniConfig-specific stream name</li>
-<li>node id - node id of the NETCONF device for NETCONF notifications or identifier of UniConfig instance in case of other
-types of notifications</li>
-<li>identifier - name of the YANG notification</li>
+<li>stream name - name of the notification stream</li>
+<li>node id - identifier for the NETCONF/gNMI device or, for other types of notifications, the UniConfig instance</li>
+<li>identifier - name of the YANG notification for NETCONF or path to the received config top node for gNMI</li>
 <li>body - full notification body in JSON format</li>
-<li>event time - time when notification was generated</li>
+<li>event time - time when the notification was generated</li>
 </ul>
 <p>Example request for reading notifications using RESTCONF:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -692,20 +719,19 @@ at runtime.</p>
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'</code></pre>
 </doc-codeblock></div>
-<p>The <strong>netconf-subscription table</strong> is used to track NETCONF notification
-subscriptions. It contains the following columns:</p>
+<p>The <strong>subscription table</strong> is used to track NETCONF and gNMI notification subscriptions. It contains the following columns:</p>
 <ul>
-<li>node id - id of the NETCONF node from which notifications should be collected</li>
-<li>UniConfig instance id - instance id of UniConfig that is collecting notifications from the NETCONF device</li>
-<li>stream name - NETCONF stream name</li>
-<li>creation time - time when subscription was created</li>
-<li>start time - time when notifications start to be collected</li>
-<li>end time - time when notifications stop to be collected</li>
+<li>node id - id for the NETCONF/gNMI node where notifications are collected</li>
+<li>UniConfig instance id - instance id of the UniConfig instance that collects notifications from the NETCONF/gNMI device</li>
+<li>stream name - NETCONF/gNMI stream name</li>
+<li>creation time - time when the subscription was created</li>
+<li>start time - start time for collecting notifications</li>
+<li>end time - end time for collecting notifications</li>
 </ul>
 <p>Example request for reading subscriptions using RESTCONF:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/netconf-subscriptions:netconf-subscriptions' \
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/subscriptions:subscription' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'</code></pre>
 </doc-codeblock></div>
@@ -791,27 +817,97 @@ existing subscriptions for the stream.</p>
         </div>
     </div>
 </div>
-<doc-anchor-target id="monitoring-system---processing-netconf-subscriptions">
+<doc-anchor-target id="gnmi-subscriptions">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#monitoring-system---processing-netconf-subscriptions">#</doc-anchor-trigger>
-        <span>Monitoring system - processing NETCONF subscriptions</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gnmi-subscriptions">#</doc-anchor-trigger>
+        <span>gNMI subscriptions</span>
     </h2>
 </doc-anchor-target>
-<p>Inside UniConfig, NETCONF notification subscriptions are processed in an
-infinite loop within the monitoring system. An iteration of the monitoring
-system loop consists of following steps:</p>
-<ol>
-<li><p>Check global setting for NETCONF notifications</p>
+<p>A subscription is required to receive gNMI notifications from a gNMI device.</p>
+<p>Subscriptions are created with an install request:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--data '{
+    &quot;input&quot;: {
+        &quot;node-id&quot;: &quot;gnmiNode&quot;,
+        &quot;gnmi&quot;: {
+            &quot;schema-cache-directory&quot;: &quot;gnmi-topology&quot;,
+            &quot;uniconfig-config:whitelist&quot;: {
+                &quot;path&quot;: [
+                    &quot;openconfig-interfaces:interfaces&quot;,
+                    &quot;openconfig-network-instance:network-instances&quot;,
+                    &quot;openconfig-relay-agent:relay-agent&quot;,
+                    &quot;openconfig-port-group:port-groups&quot;,
+                    &quot;openconfig-mclag:mclag&quot;,
+                    &quot;openconfig-lldp:lldp&quot;
+                ]
+            },
+            &quot;uniconfig-config:uniconfig-native-enabled&quot;: true,
+            &quot;uniconfig-config:sequence-read-active&quot;: false,
+            &quot;connection-parameters&quot;: {
+                &quot;host&quot;: &quot;10.19.0.252&quot;,
+                &quot;port&quot;: &quot;8080&quot;,
+                &quot;device-type&quot; : &quot;sonic&quot;,
+                &quot;connection-type&quot;: &quot;INSECURE&quot;,
+                &quot;credentials&quot;: {
+                    &quot;username&quot;: &quot;&lt;username&gt;&quot;,
+                    &quot;password&quot;: &quot;&lt;password&gt;&quot;
+                }
+            },
+            &quot;session-timers&quot;: {
+                &quot;request-timeout&quot;: 10,
+                &quot;internal-transaction-timeout&quot;: 10
+            },
+            &quot;extensions-parameters&quot;: {
+                &quot;gnmi-parameters&quot;: {
+                    &quot;use-model-name-prefix&quot;: true
+                },
+                &quot;force-cached-capabilities&quot;: [
+                    null
+                ]
+            },
+            &quot;stream&quot;:[
+                {
+                    &quot;stream-name&quot;:&quot;GNMI_if&quot;,
+                    &quot;paths&quot; : [
+                        &quot;openconfig-interfaces:interfaces/interface=$.*/config&quot;
+                    ],
+                    &quot;start-time&quot;:&quot;2023-10-31T10:47:00+01:00&quot;,
+                    &quot;stop-time&quot;:&quot;2023-10-31T10:49:00+01:00&quot;
+                }
+            ]
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<p>Subscriptions to notification streams are defined as a list with the name <code v-pre>stream</code>. There is one record for each stream.</p>
+<p>There are two required parameters, <code v-pre>stream-name</code> and <code v-pre>paths</code>. The other parameters are optional:</p>
 <ul>
-<li>If turned off, release all NETCONF subscriptions and end current iteration</li>
+<li><code v-pre>start-time</code> - Start time for telemetry streaming.</li>
+<li><code v-pre>stop-time</code> - Telemetry streaming stops if the timestamp of the notification is later than this time. If no stop time is specified, notifications will continue until the subscription is terminated. Must be used with and set to be later than <code v-pre>start-time</code>. Values in the future are valid.</li>
+</ul>
+<doc-anchor-target id="monitoring-system---processing-netconfgnmi-subscriptions">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#monitoring-system---processing-netconfgnmi-subscriptions">#</doc-anchor-trigger>
+        <span>Monitoring system - processing NETCONF/gNMI subscriptions</span>
+    </h2>
+</doc-anchor-target>
+<p>Inside UniConfig, NETCONF and gNMI notification subscriptions are processed in an infinite loop within the monitoring system.</p>
+<p>An iteration of the monitoring system loop consists of following steps:</p>
+<ol>
+<li>Check global setting for NETCONF/gNMI notifications.
+<ul>
+<li>If turned off, release all NETCONF/gNMI subscriptions and end current iteration.</li>
 </ul>
 </li>
-<li><p>Release cancelled subscriptions</p>
-</li>
-<li><p>Query free subscriptions from DB, and for each one:</p>
+<li>Release cancelled subscriptions.</li>
+<li>Query free subscriptions from DB, and for each one:
 <ol>
-<li>Create a notification session (create mountpoint and register listeners)</li>
-<li>Lock the subscription (set UniConfig instance)</li>
+<li>Create a notification session (create mountpoint and register listeners).</li>
+<li>Lock the subscription (set UniConfig instance).</li>
 </ol>
 </li>
 </ol>
@@ -828,15 +924,11 @@ system loop consists of following steps:</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>There is a hard limit for the number of sessions that a single UniConfig node
-can handle. If the limit is reached, the UniConfig node refuses any additional
-subscriptions.</p>
+<p>There is a hard limit on the number of sessions that a single UniConfig node can handle. If the limit is reached, the UniConfig node refuses any additional subscriptions.</p>
         </div>
     </div>
 </div>
-<p>The loop interval, hard subscription limit and maximum number of
-subscriptions processed per interval can be set in the file
-<em>lighty-uniconfig-config.json</em>.</p>
+<p>The loop interval, hard subscription limit and maximum number of subscriptions processed per interval can be set in the <strong>lighty-uniconfig-config.json</strong> file.</p>
 <doc-anchor-target id="dedicated-netconf-session-for-subscription">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#dedicated-netconf-session-for-subscription">#</doc-anchor-trigger>

@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753187178969">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753804945451">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Updating installation parameters | Frinx Docs</title>
     <meta name="title" content="Updating installation parameters | Frinx Docs">
-    <meta name="description" content="During device installation UniConfig creates a mount-point for this device and stores it in the database. This" />
+    <meta name="description" content="During device installation, UniConfig creates a mountpoint for the device and stores it in the database." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/updating-installation-parameters/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/updating-installation-parameters/">
     <meta property="og:title" content="Updating installation parameters | Frinx Docs">
-    <meta property="og:description" content="During device installation UniConfig creates a mount-point for this device and stores it in the database. This">
+    <meta property="og:description" content="During device installation, UniConfig creates a mountpoint for the device and stores it in the database.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/updating-installation-parameters/">
     <meta property="twitter:title" content="Updating installation parameters | Frinx Docs">
-    <meta property="twitter:description" content="During device installation UniConfig creates a mount-point for this device and stores it in the database. This">
+    <meta property="twitter:description" content="During device installation, UniConfig creates a mountpoint for the device and stores it in the database.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.753187178969" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.753804945451" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753187178969" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753804945451" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,23 +254,15 @@
         <span>Updating installation parameters</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="overview">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#overview">#</doc-anchor-trigger>
-        <span>Overview</span>
-    </h2>
-</doc-anchor-target>
-<p>During device installation UniConfig creates a mount-point for this device and stores it in the database. This
-mount-point contains all parameters set by the user in the installation request. UniConfig supports a feature to update
-mount-point parameters. It is possible to use it for both NETCONF and CLI nodes.</p>
+<p>During device installation, UniConfig creates a mountpoint for the device and stores it in the database. The mountpoint contains all parameters set in the installation request.</p>
+<p>UniConfig includes a feature to update mountpoint parameters, which can be used for NETCONF, CLI and gNMI nodes.</p>
 <doc-anchor-target id="show-installation-parameters">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#show-installation-parameters">#</doc-anchor-trigger>
         <span>Show installation parameters</span>
     </h3>
 </doc-anchor-target>
-<p>Parameters of the installed devices can be displayed using a GET request on the node. It is necessary to use the right
-topology. It should return the current node settings. See the following examples:</p>
+<p>Parameters for installed devices can be shown using a <code v-pre>GET</code> request on the node, which returns the current node settings. Make sure to specify the right topology. See below for examples.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -284,8 +276,8 @@ topology. It should return the current node settings. See the following examples
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>By default, both NETCONF and CLI topologies have the password parameter encrypted. This can be changed
-in the corresponding yang schema by adding/removing the extension flag &quot;frinx-encrypt:encrypt&quot;.</p>
+<p>By default, the <code v-pre>NETCONF</code>, <code v-pre>CLI</code> and <code v-pre>gNMI</code> topologies have the password parameter encrypted. This can be changed
+in the corresponding YANG schema by adding or removing the <code v-pre>frinx-encrypt:encrypt</code> extension flag.</p>
         </div>
     </div>
 </div>
@@ -347,22 +339,75 @@ in the corresponding yang schema by adding/removing the extension flag &quot;fri
     }
 }</code></pre>
 </doc-codeblock></div>
+<p><strong>gNMI node</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl -X GET \
+  http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=gnmi-topology/node=gnmiNode</code></pre>
+</doc-codeblock></div>
+<p>Output:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">{
+    &quot;node&quot;: [
+        {
+            &quot;node-id&quot;: &quot;sonic&quot;,
+            &quot;uniconfig-config:sequence-read-active&quot;: true,
+            &quot;uniconfig-config:uniconfig-native-enabled&quot;: true,
+            &quot;uniconfig-config:whitelist&quot;: {
+                &quot;path&quot;: [
+                    &quot;openconfig-interfaces:interfaces&quot;,
+                    &quot;openconfig-network-instance:network-instances&quot;,
+                    &quot;openconfig-relay-agent:relay-agent&quot;,
+                    &quot;openconfig-port-group:port-groups&quot;,
+                    &quot;openconfig-mclag:mclag&quot;,
+                    &quot;openconfig-lldp:lldp&quot;,
+                    &quot;sonic-vlan:sonic-vlan&quot;,
+                    &quot;openconfig-platform:components&quot;,
+                    &quot;openconfig-system:system&quot;,
+                    &quot;openconfig-neighbor:neighbor-globals&quot;,
+                    &quot;sonic-mclag:sonic-mclag&quot;
+                ]
+            },
+            &quot;uniconfig-config:admin-state&quot;: &quot;unlocked&quot;,
+            &quot;gnmi-topology:schema-cache-directory&quot;: &quot;gnmi-topology-v400-7&quot;,
+            &quot;gnmi-topology:extensions-parameters&quot;: {
+                &quot;gnmi-parameters&quot;: {
+                    &quot;use-model-name-prefix&quot;: true
+                },
+                &quot;gnmi-force-capabilities:force-cached-capabilities&quot;: [
+                    null
+                ]
+            },
+            &quot;gnmi-topology:session-timers&quot;: {
+                &quot;request-timeout&quot;: 180
+            },
+            &quot;gnmi-topology:connection-parameters&quot;: {
+                &quot;port&quot;: 8080,
+                &quot;credentials&quot;: {
+                    &quot;username&quot;: &quot;&lt;username&gt;&quot;,
+                    &quot;password&quot;: &quot;rsa_J1H0YDNQSvmGrn5QP+MfBLF9OOzWEaWJElcr7K5ew7enUr....&quot;
+                },
+                &quot;device-type&quot;: &quot;sonic&quot;,
+                &quot;host&quot;: &quot;10.19.0.252&quot;,
+                &quot;connection-type&quot;: &quot;INSECURE&quot;
+            },
+        }
+    ]
+}</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="update-installation-parameters">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#update-installation-parameters">#</doc-anchor-trigger>
         <span>Update installation parameters</span>
     </h3>
 </doc-anchor-target>
-<p>To update node installation parameters it is possible to use a PUT request with updated request body that is copied
-from the GET request from the previous section. It is also possible to update single parameter with direct PUT call to
-specific parameter.</p>
+<p>To update node installation parameters, use a <code v-pre>PUT</code> request with an updated request body copied from the <code v-pre>GET</code> request in the previous section. Single parameters can also be updated with a direct <code v-pre>PUT</code> call to the specific parameter.</p>
 <p>If the password parameter is set to be encrypted, changing it will encrypt the input value.</p>
 <p><strong>CLI node</strong></p>
-<p>Update multiple parameters. Specifically:</p>
+<p>Update multiple parameters:</p>
 <ul>
-<li>host</li>
-<li>dry-run-journal-size</li>
-<li>journal-size</li>
+<li><code v-pre>host</code></li>
+<li><code v-pre>dry-run-journal-size</code></li>
+<li><code v-pre>journal-size</code></li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">curl -X PUT \
@@ -386,9 +431,9 @@ specific parameter.</p>
      ]
   }'</code></pre>
 </doc-codeblock></div>
-<p>Update single parameter:</p>
+<p>Update a single parameter:</p>
 <ul>
-<li>host</li>
+<li><code v-pre>host</code></li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">curl -X PUT \
@@ -399,10 +444,10 @@ specific parameter.</p>
    }'</code></pre>
 </doc-codeblock></div>
 <p><strong>NETCONF node</strong></p>
-<p>Update multiple parameters. Specifically:</p>
+<p>Update multiple parameters:</p>
 <ul>
-<li>host</li>
-<li>keepalive-delay</li>
+<li><code v-pre>host</code></li>
+<li><code v-pre>keepalive-delay</code></li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">curl -X PUT \
@@ -434,9 +479,9 @@ specific parameter.</p>
       }
   }'</code></pre>
 </doc-codeblock></div>
-<p>Update single parameter:</p>
+<p>Update a single parameter:</p>
 <ul>
-<li>host</li>
+<li><code v-pre>host</code></li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">curl -X PUT \
@@ -446,8 +491,7 @@ specific parameter.</p>
      &quot;netconf-node-topology:host&quot;: &quot;192.168.1.214&quot;
    }'</code></pre>
 </doc-codeblock></div>
-<p>After these changes, when we use the GET requests from the &quot;Show installation parameters&quot; section, then we can see that
-the parameters have actually been changed. It is also possible to use the GET request for single parameter.</p>
+<p>After these changes have been made, use the <code v-pre>GET</code> requests in the <strong>Show installation parameters</strong> section above to see that the parameters have actually been changed. You can also use the <code v-pre>GET</code> request for a single parameter.</p>
 
                                 
                                 <!-- Required only on API pages -->

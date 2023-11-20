@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753187178969">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753804945451">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>FAQ | Frinx Docs</title>
     <meta name="title" content="FAQ | Frinx Docs">
-    <meta name="description" content="Uniconfig uses a custom in memory database which is part of MD-SAL and it is a very fast storage for YANG modeled data. UniConfig uses" />
+    <meta name="description" content="UniConfig uses a custom in-memory database that is part of MD-SAL and is a very fast storage for YANG modeled data." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/q_a/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/q_a/">
     <meta property="og:title" content="FAQ | Frinx Docs">
-    <meta property="og:description" content="Uniconfig uses a custom in memory database which is part of MD-SAL and it is a very fast storage for YANG modeled data. UniConfig uses">
+    <meta property="og:description" content="UniConfig uses a custom in-memory database that is part of MD-SAL and is a very fast storage for YANG modeled data.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/q_a/">
     <meta property="twitter:title" content="FAQ | Frinx Docs">
-    <meta property="twitter:description" content="Uniconfig uses a custom in memory database which is part of MD-SAL and it is a very fast storage for YANG modeled data. UniConfig uses">
+    <meta property="twitter:description" content="UniConfig uses a custom in-memory database that is part of MD-SAL and is a very fast storage for YANG modeled data.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.753187178969" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.753804945451" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.753187178969" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.4.0.753804945451" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -260,10 +260,8 @@
         <span>What is the datastore used in FRINX UniConfig ?</span>
     </h2>
 </doc-anchor-target>
-<p>Uniconfig uses a custom in memory database which is part of MD-SAL and
-it is a very fast storage for YANG modeled data. UniConfig uses
-datastore only for caching data in the scope of a single transaction.
-For persistence purposes, UniConfig uses PostgreSQL database.</p>
+<p>UniConfig uses a custom in-memory database that is part of MD-SAL and is a very fast storage for YANG modeled data.</p>
+<p>The datastore is used only for caching data in the scope of a single transaction. For persistence purposes, UniConfig uses a PostgreSQL database.</p>
 <hr />
 <doc-anchor-target id="are-service-instances-stored-in-the-uniconfig-layer-of-frinx-">
     <h2>
@@ -271,11 +269,8 @@ For persistence purposes, UniConfig uses PostgreSQL database.</p>
         <span>Are service instances stored in the UniConfig layer of FRINX ?</span>
     </h2>
 </doc-anchor-target>
-<p>Only the „outputs“ of a service are stored and managed by UniConfig
-(e.g. service generates bgp config for 10 devices, which is pushed into
-UniConfig). The services themselves are responsible for managing their
-configuration/operational state and rely on the same database to store
-configuration or operational data.</p>
+<p>Only the &quot;outputs&quot; of a service are stored and managed by UniConfig (for example, a service that generates BGP config for 10 devices, which is pushed into UniConfig).</p>
+<p>Services are responsible for managing their own configuration/operational state, and rely on the same database to store configuration or operational data.</p>
 <hr />
 <doc-anchor-target id="how-does-frinx-deal-with-model-changes-">
     <h2>
@@ -283,72 +278,47 @@ configuration or operational data.</p>
         <span>How does FRINX deal with model changes ?</span>
     </h2>
 </doc-anchor-target>
-<p>OpenConfig models are compiled as part of the UniConfig and because of
-this reason it is possible to change these models only before
-compilation. On the other side, NETCONF models can be dynamically loaded
-from device and also manually updated using dedicated RPC:</p>
-<p><a href="https://docs.frinx.io/frinx-uniconfig/UniConfig/user-guide/network-management-protocols/uniconfig_netconf/netconf-intro.html#registration-or-refreshing-of-netconf-cache-repository-using-rpc">https://docs.frinx.io/frinx-uniconfig/UniConfig/user-guide/network-management-protocols/uniconfig_netconf/netconf-intro.html#registration-or-refreshing-of-netconf-cache-repository-using-rpc</a></p>
+<p>OpenConfig models are compiled as part of UniConfig and can therefore be changed only before compilation.</p>
+<p>On the other hand, NETCONF models can be dynamically loaded from a device and can also be manually updated using a <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_netconf/#registration-or-refreshing-of-netconf-cache-repository-using-rpc">dedicated RPC</a>.</p>
 <hr />
-<doc-anchor-target id="does-frinx-provide-auto-rollback-on-all-affected-devices-when-a-transaction-fails-on-one-or-more-devices-">
+<doc-anchor-target id="does-frinx-provide-auto-rollback-on-all-affected-devices-if-a-transaction-fails-on-one-or-more-devices-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#does-frinx-provide-auto-rollback-on-all-affected-devices-when-a-transaction-fails-on-one-or-more-devices-">#</doc-anchor-trigger>
-        <span>Does FRINX provide auto rollback on all affected devices, when a transaction fails on one or more devices ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#does-frinx-provide-auto-rollback-on-all-affected-devices-if-a-transaction-fails-on-one-or-more-devices-">#</doc-anchor-trigger>
+        <span>Does FRINX provide auto rollback on all affected devices if a transaction fails on one or more devices ?</span>
     </h2>
 </doc-anchor-target>
-<p>Yes, all onboarded devices have full rollback implemented. But it is
-also possible to disable auto-rollback in UniConfig, so that
-successfully configured devices will keep their configuration.
-This can be done with setting up the &#x27;do-rollback&#x27; flag to False in input of Commit RPC.</p>
+<p>Yes, all onboarded devices have full rollback implemented.</p>
+<p>You can also disable auto-rollback in UniConfig, so that successfully configured devices will keep their configuration. This is done by setting the <code v-pre>do-rollback</code> flag to <code v-pre>False</code> in the input for the <strong>commit RPC</strong>.</p>
 <hr />
-<doc-anchor-target id="is-it-possible-to-show-the-differences-between-the-actual-device-configuration-and-the-operational-datastore-while-synchronizing-configuration-into-frinx-">
+<doc-anchor-target id="is-it-possible-to-display-differences-between-the-actual-device-configuration-and-the-operational-datastore-while-synchronizing-the-configuration-into-frinx-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-to-show-the-differences-between-the-actual-device-configuration-and-the-operational-datastore-while-synchronizing-configuration-into-frinx-">#</doc-anchor-trigger>
-        <span>Is it possible to show the differences between the actual device configuration and the operational datastore while synchronizing configuration into FRINX ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-to-display-differences-between-the-actual-device-configuration-and-the-operational-datastore-while-synchronizing-the-configuration-into-frinx-">#</doc-anchor-trigger>
+        <span>Is it possible to display differences between the actual device configuration and the operational datastore while synchronizing the configuration into FRINX ?</span>
     </h2>
 </doc-anchor-target>
-<dl>
-<dt>Yes, it is possible. To achieve this follow these steps:</dt>
-<dd>
-<ul>
-<li>
+<p>Yes, follow these steps:</p>
 <ol>
-<li>sync (update operational)</li>
+<li>Sync (update <code v-pre>operational</code>).</li>
+<li>Show diff.</li>
+<li>Drop the changes from the device by replacing <code v-pre>operational</code> with <code v-pre>config</code>.</li>
 </ol>
-</li>
-<li>
-<ol start="2">
-<li>show diff</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>drop the changes from device by replacing operational with
-config</li>
-</ol>
-</li>
-</ul>
-</dd>
-</dl>
 <hr />
 <doc-anchor-target id="is-any-netconf-device-fully-supported-or-must-openconfig-be-mapped-to-netconf-as-well-">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#is-any-netconf-device-fully-supported-or-must-openconfig-be-mapped-to-netconf-as-well-">#</doc-anchor-trigger>
-        <span>Is any NETCONF device fully supported, or must OpenConfig be mapped to netconf as well ?</span>
+        <span>Is any NETCONF device fully supported, or must OpenConfig be mapped to NETCONF as well ?</span>
     </h2>
 </doc-anchor-target>
-<p>You can either use the native device models (via UniConfig native) or
-use the existing translation units between OpenConfig and vendor models.</p>
+<p>You can either use the native device models (via UniConfig native) or existing translation units between OpenConfig and vendor models.</p>
 <hr />
-<doc-anchor-target id="are-the-libraries-that-are-used-to-access-the-config-data-store-model-driven-">
+<doc-anchor-target id="are-the-libraries-used-to-access-the-config-data-store-model-driven-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#are-the-libraries-that-are-used-to-access-the-config-data-store-model-driven-">#</doc-anchor-trigger>
-        <span>Are the libraries that are used to access the Config Data Store model driven ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#are-the-libraries-used-to-access-the-config-data-store-model-driven-">#</doc-anchor-trigger>
+        <span>Are the libraries used to access the Config Data Store, model driven ?</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig has a DataBroker interface and a concept of
-InstanceIdentifier. Those are the model driven APIs for data access.
-<em>More info:</em></p>
-<p><a href="https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL:Concepts">https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL:Concepts</a></p>
+<p>UniConfig has a DataBroker interface and the concept of <strong>InstanceIdentifier</strong>. These are the model driven APIs for data access.</p>
+<p>For more information, see <a href="https://docs.opendaylight.org/projects/mdsal/en/latest/#basic-concepts">MD-SAL basic concepts</a>.</p>
 <hr />
 <doc-anchor-target id="what-would-an-access-to-the-configuration-data-store-look-like-in-code-">
     <h2>
@@ -356,8 +326,7 @@ InstanceIdentifier. Those are the model driven APIs for data access.
         <span>What would an access to the configuration data store look like in code ?</span>
     </h2>
 </doc-anchor-target>
-<p><strong>A: Just to demonstrate API, in this example InterfaceConfigurations is
-read from CONF DS and put back to CONF DS.</strong></p>
+<p><strong>A.</strong> To demonstrate the API, this example reads <strong>InterfaceConfigurations</strong> from CONF DS and puts it back to CONF DS.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">ReadWriteTransaction rwTx = dataBroker.newReadWriteTransaction();
 InstanceIdentifier`&lt;InterfaceConfigurations&gt;` iid = InstanceIdentifier.create(InterfaceConfigurations.class);
@@ -365,24 +334,20 @@ InterfaceConfigurations ifcConfig = xrNodeReadTx.read(LogicalDatastoreType.CONFI
 rwTx.put(LogicalDatastoreType.CONFIGURATION, iid, ifcConfig);
 rwTx.submit();</code></pre>
 </doc-codeblock></div>
-<p><strong>B: In this example InterfaceConfigurations is read from OPER DS.</strong></p>
+<p><strong>B.</strong> This example reads <strong>InterfaceConfigurations</strong> from OPER DS.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">ReadWriteTransaction rwTx = dataBroker.newReadWriteTransaction();
 InstanceIdentifier`&lt;InterfaceConfigurations&gt;` iid = InstanceIdentifier.create(InterfaceConfigurations.class);
 InterfaceConfigurations ifcConfig = xrNodeReadTx.read(LogicalDatastoreType.OPERATIONAL, iid).checkedGet();</code></pre>
 </doc-codeblock></div>
 <hr />
-<doc-anchor-target id="is-it-possible-in-frinx-to-run-transaction-on-two-disjunct-sets-of-devices-simultaneously-">
+<doc-anchor-target id="is-it-possible-in-frinx-to-run-a-transaction-on-two-disjunct-sets-of-devices-simultaneously-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-in-frinx-to-run-transaction-on-two-disjunct-sets-of-devices-simultaneously-">#</doc-anchor-trigger>
-        <span>Is it possible in FRINX to run transaction on two disjunct sets of devices simultaneously ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-in-frinx-to-run-a-transaction-on-two-disjunct-sets-of-devices-simultaneously-">#</doc-anchor-trigger>
+        <span>Is it possible in FRINX to run a transaction on two disjunct sets of devices simultaneously ?</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig supports build-and-commit model using which it is possible to
-configure devices in the isolated transactions and commit them in
-parallel. If there are some conflicts between configured sets of
-devices, then the second transaction that is committed, will fail
-(however, it cannot happen on disjunct sets of devices).</p>
+<p>UniConfig supports the build-and-commit model, which makes it possible to configure devices in isolated transactions and commit them in parallel. If there are conflicts between configured sets of devices, the second transaction that is committed will fail (however, this cannot happen on disjunct sets of devices).</p>
 <hr />
 <doc-anchor-target id="what-access-control-measures-does-frinx-offer-">
     <h2>
@@ -390,10 +355,7 @@ devices, then the second transaction that is committed, will fail
         <span>What access control measures does FRINX offer ?</span>
     </h2>
 </doc-anchor-target>
-<p>FRINX UniConfig supports local authentification, password
-authentification, public key authentification Token authentification,
-RADIUS based authentification and subtree based authentification via AAA
-Shiro project.</p>
+<p>FRINX UniConfig supports local authentification, password authentification, public key authentification Token authentification, RADIUS-based authentification and subtree-based authentification via AAA Shiro project.</p>
 <hr />
 <doc-anchor-target id="how-does-frinx-report-problems-with-device-interaction-">
     <h2>
@@ -401,21 +363,16 @@ Shiro project.</p>
         <span>How does FRINX report problems with device interaction ?</span>
     </h2>
 </doc-anchor-target>
-<p>If a device can not be reached during a UniConfig transaction (after
-trying reestablishing the connection) a timeout will occur and the cause
-for the transaction failure will be reported. UniConfig also uses
-keepalive messages for continuous verification of connection to devices
-(both using NETCONF and CLI management protocols).</p>
+<p>If a device cannot be reached during a UniConfig transaction (after trying to re-establish the connection), a timeout occurs and the cause for the transaction failure is reported.</p>
+<p>UniConfig also uses keepalive messages to continuously verify the connection to devices, using both NETCONF and CLI management protocols.</p>
 <hr />
-<doc-anchor-target id="is-it-possible-to-backup-configuration-">
+<doc-anchor-target id="is-it-possible-to-backup-a-configuration-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-to-backup-configuration-">#</doc-anchor-trigger>
-        <span>Is it possible to backup configuration ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-to-backup-a-configuration-">#</doc-anchor-trigger>
+        <span>Is it possible to backup a configuration ?</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig stores all committed configuration of devices, templates, and
-snapshots in the PostgreSQL database. We suggest to use existing
-techniques for backup that are also provided by PostgreSQL.</p>
+<p>UniConfig stores all committed configurations for devices, templates, and snapshots in a PostgreSQL database. We suggest using existing techniques for backup that are also provided by PostgreSQL.</p>
 <hr />
 <doc-anchor-target id="is-it-possible-to-enforce-policies-over-configuration-changes-">
     <h2>
@@ -423,74 +380,51 @@ techniques for backup that are also provided by PostgreSQL.</p>
         <span>Is it possible to enforce policies over configuration changes ?</span>
     </h2>
 </doc-anchor-target>
-<p>All customer specific validations and policy enforcements can be
-implemented in layers above UniConfig</p>
+<p>All customer-specific validations and policy enforcements can be implemented in layers above UniConfig.</p>
 <hr />
-<doc-anchor-target id="in-which-languages-are-the-libraries-to-access-frinx-written-">
+<doc-anchor-target id="which-languages-are-the-libraries-to-access-frinx-in">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#in-which-languages-are-the-libraries-to-access-frinx-written-">#</doc-anchor-trigger>
-        <span>In which languages are the libraries to access FRINX written ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#which-languages-are-the-libraries-to-access-frinx-in">#</doc-anchor-trigger>
+        <span>Which languages are the libraries to access FRINX in?</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig is written in JAVA and Kotlin which can use data objects
-generated from YANG. RESTful API (RESTCONF) can be used with language
-that implements REST client (for example, Python).</p>
+<p>UniConfig is written in JAVA and Kotlin, which can use data objects generated from YANG. The RESTful API (RESTCONF) can be used with a language that implements the REST client (for example, Python).</p>
 <hr />
 <doc-anchor-target id="does-frinx-detect-if-a-cluster-node-is-down-on-its-own-or-does-it-rely-on-a-high-availability-framework-">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#does-frinx-detect-if-a-cluster-node-is-down-on-its-own-or-does-it-rely-on-a-high-availability-framework-">#</doc-anchor-trigger>
-        <span>Does FRINX detect if a cluster node is down on its own or does it rely on a high availability framework ?</span>
+        <span>Does FRINX detect if a cluster node is down on its own, or does it rely on a high-availability framework ?</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig instance is stateless - it doesn’t persist any configuration
-in its datastore (PostgreSQL is used for persistence) and it doesn’t
-keep permanent connections (connections to devices are created on-demand
-in the transaction). Because of the stateless architecture, UniConfig
-instances in the ‘cluster’ don’t have to communicate with each other and
-they don’t require any coordination. You must only keep in mind that
-requests that belong to the same transaction must be forwarded to the
-same UniConfig backend - for this purpose you can use any HA component
-that supports sticky sessions based on cookies (such as HA-proxy or
-Traefik).</p>
+<p>A UniConfig instance is stateless, i.e., it does not persist any configuration in its datastore (PostgreSQL is used for persistence) and does not keep permanent connections (connections to devices are created on-demand in the transaction).</p>
+<p>Because of its stateless architecture, UniConfig instances in the &quot;cluster&quot; do not need to communicate with each other and require no coordination. Keep in mind that requests belonging to the same transaction must be forwarded to the same UniConfig backend. For this purpose, you can use any HA component that supports sticky sessions based on cookies (for example, HA-proxy or Traefik).</p>
 <hr />
-<doc-anchor-target id="is-it-possible-for-frinx-to-report-problems-to-a-network-monitoring-system-">
+<doc-anchor-target id="can-frinx-report-problems-to-a-network-monitoring-system-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-for-frinx-to-report-problems-to-a-network-monitoring-system-">#</doc-anchor-trigger>
-        <span>Is it possible for FRINX to report problems to a network monitoring system ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#can-frinx-report-problems-to-a-network-monitoring-system-">#</doc-anchor-trigger>
+        <span>Can FRINX report problems to a network monitoring system ?</span>
     </h2>
 </doc-anchor-target>
-<p>FRINX UniConfig can propagate NETCONF notifications and internal
-UniConfig notifications or data-change-events from web sockets on
-Northbound API.</p>
+<p>FRINX UniConfig can propagate NETCONF notifications and internal UniConfig notifications or data-change-events from web sockets on the Northbound API.</p>
 <hr />
-<doc-anchor-target id="is-it-possible-to-do-additional-logging-on-the-logging-provided-by-uniconfig-">
+<doc-anchor-target id="is-additional-logging-available-in-uniconfig-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#is-it-possible-to-do-additional-logging-on-the-logging-provided-by-uniconfig-">#</doc-anchor-trigger>
-        <span>Is it possible to do additional logging on the logging provided by UniConfig ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#is-additional-logging-available-in-uniconfig-">#</doc-anchor-trigger>
+        <span>Is additional logging available in UniConfig ?</span>
     </h2>
 </doc-anchor-target>
-<p>Yes it is. Each component writes logs at different verbosity levels of
-logging (ERROR, WARN, INFO, DEBUG, TRACE). We are using the logback
-framework for logging of messages - logging can be adjusted by
-modification of config/logback.xml file in the standard way. This file
-can be updated also on runtime. The second approach for adjusting of
-logging of some specific components is using logging controller:
-<a href="https://docs.frinx.io/frinx-uniconfig/UniConfig/user-guide/operational-procedures/logging/logging.html">https://docs.frinx.io/frinx-uniconfig/UniConfig/user-guide/operational-procedures/logging/logging.html</a></p>
+<p>Yes. Each component writes logs at a different verbosity level (ERROR, WARN, INFO, DEBUG, TRACE). We use the logback framework for logging messages.</p>
+<p>Logging can be adjusted by modifying the <strong>config/logback.xml</strong> file. This file can be updated also on runtime.</p>
+<p>Another option to adjust logging for specific components is to use a logging controller. For more information, see <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/logging/">Logging</a>.</p>
 <hr />
-<doc-anchor-target id="where-do-i-find-the-status-of-the-device-and-where-do-i-find-error-messages-when-installing-does-not-work-">
+<doc-anchor-target id="where-do-i-find-the-device-status-and-error-messages-when-installing-does-not-work-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#where-do-i-find-the-status-of-the-device-and-where-do-i-find-error-messages-when-installing-does-not-work-">#</doc-anchor-trigger>
-        <span>Where do I find the status of the device and where do I find error messages, when installing does not work ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#where-do-i-find-the-device-status-and-error-messages-when-installing-does-not-work-">#</doc-anchor-trigger>
+        <span>Where do I find the device status and error messages when installing does not work ?</span>
     </h2>
 </doc-anchor-target>
-<p>installing/uninstalling process is done automatically - device is installed
-when UniConfig must read/write some data from/to device and device is
-automatically uninstalled at the end of the transaction if no other
-transaction is using the same installpoint. Users should not care about
-the installing process since it is transparent - it is useful only for
-debugging purposes. To get status of the installing process for all
-devices in the system, issue following request (it will show status as
-well as last connect attempt cause):</p>
+<p>The install/uninstall process is performed automatically. The device is installed when UniConfig must read or write data from or to the device, and uninstalled at the end of the transaction if no other transaction is using the same installpoint. The install process is transparent, and the user need not care about the process outside of debugging purposes.</p>
+<p>To get the status of the install process for all devices in the system, issue the following request. It shows the status and last connect attempt cause:</p>
 <p><strong>CLI devices:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --reQuestionuest GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=cli?content=nonconfig' \
@@ -505,75 +439,41 @@ well as last connect attempt cause):</p>
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'</code></pre>
 </doc-codeblock></div>
+<p><strong>gNMI devices:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --reQuestionuest GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=gnmi-topology?content=nonconfig' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json'</code></pre>
+</doc-codeblock></div>
 <hr />
-<doc-anchor-target id="what-does-installation-and-installing-exactly-do-">
+<doc-anchor-target id="what-exactly-happens-during-the-installation-process-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#what-does-installation-and-installing-exactly-do-">#</doc-anchor-trigger>
-        <span>What does installation and installing exactly do ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-exactly-happens-during-the-installation-process-">#</doc-anchor-trigger>
+        <span>What exactly happens during the installation process ?</span>
     </h2>
 </doc-anchor-target>
-<dl>
-<dt>installing of device:</dt>
-<dd>
-<ul>
-<li>
+<p>The entire installation process includes the following:</p>
 <ol>
-<li>Opening IO session to device (TCP session with SSH and/or
-NETCONF on top of SSH session).</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>Exposing installpoint that can be used from internal API and
-RESTCONF API for interaction with device.</li>
-</ol>
-</li>
-</ul>
-</dd>
-<dt>Installation of device contains internally also code for installing of device:</dt>
-<dd>
-<ul>
-<li>
+<li>Open internal transaction.</li>
+<li>Install device with input parameters (CLI or NETCONF).
 <ol>
-<li>Opening internal transaction</li>
+<li>Open IO session to device (TCP session with SSH and/or NETCONF on top of SSH session).</li>
+<li>Expose mountpoint (via internal API and RESTCONF API).</li>
 </ol>
 </li>
-<li>
-<ol start="2">
-<li>installing of device with input parameters (CLI / NETCONF)</li>
+<li>Sync configuration from device.</li>
+<li>Write configuration and store information in database.</li>
+<li>Uninstall device.</li>
+<li>Commit transaction.</li>
 </ol>
-</li>
-<li>
-<ol start="3">
-<li>Syncing configuration from device</li>
-</ol>
-</li>
-<li>
-<ol start="4">
-<li>Writing configuration and install information into database</li>
-</ol>
-</li>
-<li>
-<ol start="5">
-<li>Uninstalling device</li>
-</ol>
-</li>
-<li>
-<ol start="6">
-<li>Committing transaction</li>
-</ol>
-</li>
-</ul>
-</dd>
-</dl>
 <hr />
-<doc-anchor-target id="why-i-can-not-install-junos-device-on-uniconfig-">
+<doc-anchor-target id="why-cant-i-install-junos-devices-on-uniconfig-">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#why-i-can-not-install-junos-device-on-uniconfig-">#</doc-anchor-trigger>
-        <span>Why I can not install Junos device on UniConfig ?</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#why-cant-i-install-junos-devices-on-uniconfig-">#</doc-anchor-trigger>
+        <span>Why can&#x27;t I install Junos devices on UniConfig ?</span>
     </h2>
 </doc-anchor-target>
-<p>If installing Junos devices is not possible and UniConfig gives response :</p>
+<p>If installing Junos devices is not possible, UniConfig may give this response :</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">2020-03-23 03:26:07,174 ERROR [default-pool-5-2] (org.opendaylight.netconf.sal.connect.netconf.NetconfDevice) - RemoteDevice{junos}: Initialization in sal failed, disconnecting from device
 java.lang.IllegalStateException: Cannot build Netconf device schema context.
@@ -593,8 +493,7 @@ at org.opendaylight.netconf.cache.impl.utils.NetconfSchemaContextFactory.setUpSc
 at org.opendaylight.netconf.cache.impl.utils.NetconfSchemaContextFactory.buildSchemaContext(NetconfSchemaContextFactory.javanswer:61)
 ... 10 more</code></pre>
 </doc-codeblock></div>
-<p>It is necessary to set up on Junos device netconf session compliant to
-RFC and Yang schemas (rfc-compliant, yang-compliant)</p>
+<p>To install Junos devices, set up a NetConf session that is compliant with RFC and Yang schemas (<code v-pre>rfc-compliant</code> and <code v-pre>yang-compliant</code>) on the Junos device:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">&gt; configure
 # set system services netconf rfc-compliant
@@ -623,7 +522,7 @@ RFC and Yang schemas (rfc-compliant, yang-compliant)</p>
                                         <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniconfig/glossary-of-terms/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Glossary of Terms</span>
+                                                <span class="block mt-1">Glossary of terms</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>

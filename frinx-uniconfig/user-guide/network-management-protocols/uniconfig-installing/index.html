@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753187178969">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753804945451">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.753187178969" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.753804945451" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753187178969" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753187178969" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753804945451" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753804945451" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -919,10 +919,8 @@ node. By default, this flag is set to &#x27;false&#x27;.</li>
 <li><strong>uniconfig-config:install-uniconfig-node-enabled</strong> - Whether node
 should be installed to UniConfig and unified layers. By default,
 this flag is set to &#x27;true&#x27;.</li>
-<li><strong>uniconfig-config:sequence-read-active</strong> - Forces reading of data
-sequentially when mounting device. By default, this flag is set to
-&#x27;false&#x27;. This parameter has effect only on NETCONF nodes.</li>
-<li><strong>uniconfig-config:whitelist</strong> - List of root YANG entities that should be read. This parameter has effect only on NETCONF nodes.</li>
+<li><strong>uniconfig-config:sequence-read-active</strong> - Force sequential data reading when mounting a device. If set to &#x27;true&#x27;, sync-from-network is done in parallel. The default value is &#x27;false&#x27;.</li>
+<li><strong>uniconfig-config:whitelist</strong> - List of root YANG entities that should be read.</li>
 <li><strong>uniconfig-config:blacklist</strong> - List of root YANG entities that
 should not be read from NETCONF device due to incompatibility with
 uniconfig-native or other malfunctions in YANG schemas. This
@@ -1085,6 +1083,334 @@ be found
     }
 }'</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="installing-gnmi-device">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing-gnmi-device">#</doc-anchor-trigger>
+        <span>Installing gNMI device</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="identifying-remote-device">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#identifying-remote-device">#</doc-anchor-trigger>
+        <span>Identifying remote device</span>
+    </h3>
+</doc-anchor-target>
+<p>Basic connection parameters used to identify a remote device:</p>
+<ul>
+<li><code v-pre>node-id</code> - Name of the node that represents the device/mountpoint in the topology.</li>
+<li><code v-pre>gnmi-topology:host</code> - IP address or domain name of the target device running the gNMI server.</li>
+<li><code v-pre>gnmi-topology:port</code> - TCP port where the gNMI server is listening to incoming connections.</li>
+<li><code v-pre>gnmi-topology:device-type</code> - Specific device type. For now, only the <code v-pre>sonic</code> device type is supported. This parameter is used to create a device-type specific gNOI session. By default, this parameter is not specified.</li>
+<li><code v-pre>gnmi-topology:connection-type</code> - If specified, an insecure connection is created. The insecure connection is available only for DEBUG reasons. To establish a gRPC connection without TLS, choose the insecure connection type <code v-pre>PLAINTEXT</code>. The connection type <code v-pre>PLAINTEXT</code> indicates that the target should skip the signature verification steps if a secure connection is used.</li>
+<li><code v-pre>gnmi-topology:keystore-id</code> - If specified, a secure connection is created. Also requires <code v-pre>keystore-id</code> (identifier of the keystore), which is defined in the <code v-pre>gnmi-certificate-storage</code> model.</li>
+</ul>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Only one of the parameters <code v-pre>keystore-id</code> and <code v-pre>connection-type</code> can be specified.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="authentication-parameters-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#authentication-parameters-2">#</doc-anchor-trigger>
+        <span>Authentication parameters</span>
+    </h3>
+</doc-anchor-target>
+<p>Parameters to configure the basic authentication method against a gNMI server. These parameters must be specified in the input request inside the <code v-pre>gnmi-topology:credentials</code> container:</p>
+<ul>
+<li><code v-pre>gnmi-topology:username</code> - Username with permission to access the device using gNMI.</li>
+<li><code v-pre>gnmi-topology:password</code> - Password for username.</li>
+</ul>
+<doc-anchor-target id="session-timers-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#session-timers-1">#</doc-anchor-trigger>
+        <span>Session timers</span>
+    </h3>
+</doc-anchor-target>
+<p>The following parameters adjust timers related to maintaining gNMI session state. None of these parameters are mandatory (default values are used if not specified):</p>
+<ul>
+<li><code v-pre>gnmi-topology:request-timeout</code> - Timeout (in seconds) for each gNMI request. The request times out if not completed in time. The default value is 30.</li>
+</ul>
+<doc-anchor-target id="flags-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#flags-1">#</doc-anchor-trigger>
+        <span>Flags</span>
+    </h3>
+</doc-anchor-target>
+<p>Non-mandatory flag parameters that can be added to a mount request:</p>
+<ul>
+<li><code v-pre>gnmi-topology:enabled-notifications</code> - If set to <code v-pre>true</code> and the gNMI device supports notifications, the gNMI mountpoint will expose GNMI notification and subscription services. The default value is <code v-pre>true</code>.</li>
+</ul>
+<doc-anchor-target id="other-parameters-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-parameters-1">#</doc-anchor-trigger>
+        <span>Other parameters</span>
+    </h3>
+</doc-anchor-target>
+<p>Other non-mandatory parameters that can be added to a mount request:</p>
+<ul>
+<li><code v-pre>gnmi-topology:dry-run-journal-size</code> - Size of the dry-run gNMI mountpoint journal. The dry-run journal captures gNMI operations that would be executed when reading/writing a configuration. However, the operations are not actually sent to the device. The default value is 0.</li>
+</ul>
+<doc-anchor-target id="extension-parameters">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#extension-parameters">#</doc-anchor-trigger>
+        <span>Extension parameters</span>
+    </h3>
+</doc-anchor-target>
+<p>Other extended non-mandatory parameters that can be added to a mount-request inside of the <code v-pre>extensions-parameters</code> container.</p>
+<doc-anchor-target id="gnmi-parameters">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gnmi-parameters">#</doc-anchor-trigger>
+        <span>gNMI parameters</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li><code v-pre>gnmi-topology:use-model-name-prefix</code> - Some devices require a module prefix in the first element name of the gNMI request path (for example, interfaces -&gt; openconfig-interfaces:interfaces). The default value is <code v-pre>false</code>.</li>
+</ul>
+<doc-anchor-target id="uniconfig-native-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-native-1">#</doc-anchor-trigger>
+        <span>UniConfig-native</span>
+    </h3>
+</doc-anchor-target>
+<p>Parameters related to installing gNMI nodes with uniconfig-native support:</p>
+<ul>
+<li><code v-pre>uniconfig-config:uniconfig-native-enabled</code> - Whether or not uniconfig-native should be used for installing of NETCONF, CLI or gNMI nodes. The default value is <code v-pre>false</code>.</li>
+<li><code v-pre>uniconfig-config:sequence-read-active</code> - Forces reading of data sequentially when mounting a device. If set to <code v-pre>true</code>, sync-from-network is done in parallel. The default value is <code v-pre>false</code>.</li>
+<li><code v-pre>uniconfig-config:whitelist</code> - List of root YANG entities that should be read.</li>
+<li><code v-pre>uniconfig-config:store-failed-installation</code> - Whether or not the installation is stored in the database if it fails (e.g., unreachable). The node is &quot;installed&quot; even though it fails, and the user has two options:
+<ul>
+<li>Uninstall the device and reinstall it.</li>
+<li>Call <code v-pre>sync-from-network</code> to sync the data from the device.</li>
+</ul>
+</li>
+</ul>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>An important install parameter is <code v-pre>gnmi-topology:schema-cache-directory: &lt;folder-name&gt;</code>. It specifies a folder name in the cache directory with the YANG schemas needed to install a device.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="update-paths">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#update-paths">#</doc-anchor-trigger>
+        <span>Update paths</span>
+    </h3>
+</doc-anchor-target>
+<p>This is a non-mandatory parameter that specifies a list of paths for which UniConfig will process intended changes as a gNMI SET message - Update operation. Paths are specified in regexp format.</p>
+<p>More information about update paths feature: <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#update-paths">https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#update-paths</a>.</p>
+<doc-anchor-target id="replace-paths">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#replace-paths">#</doc-anchor-trigger>
+        <span>Replace paths</span>
+    </h3>
+</doc-anchor-target>
+<p>This is a non-mandatory parameter that specifies a list of paths for which UniConfig will process intended changes as a gNMI SET message - Replace operation.</p>
+<p>A specific replace diff implementation in UniConfig checks and merges all changes according to the specified <code v-pre>replace-paths</code>, and ensures that the gNMI SET message has the same path as the one specified in <code v-pre>replace-paths</code> in the install request.</p>
+<p>Paths are specified in common RESTful URL format, but list entries can be compiled as a regexp pattern if specified with the <code v-pre>$</code> sign after the <code v-pre>=</code> sign.</p>
+<p>More information about the replace paths feature: <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#replace-paths">https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#replace-paths</a>.</p>
+<doc-anchor-target id="remove-module-name-paths">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#remove-module-name-paths">#</doc-anchor-trigger>
+        <span>Remove module name paths</span>
+    </h3>
+</doc-anchor-target>
+<p>This is a non-mandatory parameter that specifies a list of paths for which UniConfig removes the module name of specified list entry keys. (For example, <code v-pre>protocol=openconfig-policy-types:BGP,bgp</code>, remove-module-name-path = <code v-pre>network-instances/network-instance=$.*/protocols/protocol</code>).</p>
+<p>The path format is the same as for <code v-pre>replace-paths</code>.</p>
+<doc-anchor-target id="all-type-paths">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#all-type-paths">#</doc-anchor-trigger>
+        <span>All type paths</span>
+    </h3>
+</doc-anchor-target>
+<p>This is a non-mandatory parameter that specifies a list of paths for which UniConfig provides a GET request with the ALL data type.</p>
+<p>The path format is the same as for <code v-pre>replace-paths</code>.</p>
+<p>This feature only applies to the SONiC device type.</p>
+<doc-anchor-target id="dependency-paths">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-paths">#</doc-anchor-trigger>
+        <span>Dependency paths</span>
+    </h3>
+</doc-anchor-target>
+<p>This is a non-mandatory parameter that specifies list of paths for which UniConfig will check and order the intended changes.</p>
+<p>The format of dependency paths:</p>
+<ul>
+<li><code v-pre>before</code> - path without keys that is ordered before the path specified in <code v-pre>after</code>.</li>
+<li><code v-pre>after</code> - path without keys that is ordered after the path specified in <code v-pre>before</code>.</li>
+</ul>
+<p>More information about dependency paths: <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#dependency-paths">https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/#dependency-paths</a>.</p>
+<doc-anchor-target id="example-request-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-2">#</doc-anchor-trigger>
+        <span>Example request</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Content-Type: application/json' \
+--data '{
+    &quot;input&quot;: {
+        &quot;node-id&quot;: &quot;sonic&quot;,
+        &quot;gnmi&quot;: {
+            &quot;schema-cache-directory&quot;: &quot;gnmi-topology&quot;,
+            &quot;update-paths&quot;: [
+                &quot;openconfig-interfaces:interfaces\/interface=.*[Ee]thernet?[0-9]+\/.*&quot;,
+                &quot;[^\/]+&quot;,
+                &quot;sonic-vlan:sonic-vlan.*&quot;
+            ],
+            &quot;replace-paths&quot;: [
+                &quot;openconfig-interfaces:interfaces/interface=$.*[Ee]thernet?[0-9]+/openconfig-if-ethernet:ethernet/openconfig-vlan:switched-vlan/config/trunk-vlans&quot;,
+                &quot;openconfig-interfaces:interfaces/interface=$.*[Pp]ortChannel?[0-9]+/openconfig-if-aggregate:aggregation/openconfig-vlan:switched-vlan/config/trunk-vlans&quot;,
+                &quot;openconfig-relay-agent:relay-agent/dhcp/interfaces/interface=$[Vv]lan[0-9]+/config&quot;,
+                &quot;openconfig-relay-agent:relay-agent/dhcpv6/interfaces/interface=$[Vv]lan[0-9]+/config&quot;,
+                &quot;openconfig-platform:components/component=$.*/openconfig-platform:port/openconfig-platform-port:breakout-mode&quot;
+            ],
+            &quot;remove-module-names-paths&quot;: [
+                &quot;network-instances/network-instance=default/protocols/protocol&quot;
+            ],
+            &quot;all-type-paths&quot;: [
+                &quot;openconfig-lldp:lldp&quot;,
+                &quot;openconfig-port-group:port-groups&quot;
+            ],
+            &quot;dependency-paths&quot;: [
+                {
+                    &quot;before&quot;: &quot;openconfig-network-instance:network-instances/network-instance&quot;,
+                    &quot;after&quot;: &quot;openconfig-network-instance:network-instances/network-instance/interfaces/interface&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-network-instance:network-instances/network-instance/interfaces/interface&quot;,
+                    &quot;after&quot;: &quot;openconfig-network-instance:network-instances/network-instance/openconfig-vxlan:vxlan-vni-instances/vni-instance&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-network-instance:network-instances/network-instance/interfaces/interface&quot;,
+                    &quot;after&quot;: &quot;openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/openconfig-interfaces-ext:sag-ipv4/config&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-network-instance:network-instances/network-instance/interfaces/interface&quot;,
+                    &quot;after&quot;: &quot;openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/openconfig-interfaces-ext:sag-ipv6/config&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-network-instance:network-instances/network-instance/openconfig-vxlan:vxlan-vni-instances/vni-instance&quot;,
+                    &quot;after&quot;: &quot;openconfig-relay-agent:relay-agent/dhcp/interfaces/interface&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-network-instance:network-instances/network-instance/openconfig-vxlan:vxlan-vni-instances/vni-instance&quot;,
+                    &quot;after&quot;: &quot;openconfig-relay-agent:relay-agent/dhcpv6/interfaces/interface&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/openconfig-interfaces-ext:sag-ipv4/config&quot;,
+                    &quot;after&quot;: &quot;openconfig-relay-agent:relay-agent/dhcp/interfaces/interface&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/openconfig-interfaces-ext:sag-ipv6/config&quot;,
+                    &quot;after&quot;: &quot;openconfig-relay-agent:relay-agent/dhcpv6/interfaces/interface&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-interfaces:interfaces/interface&quot;,
+                    &quot;after&quot;: &quot;openconfig-mclag:mclag/interfaces/interface&quot;
+                },
+                {
+                    &quot;before&quot;: &quot;openconfig-interfaces:interfaces/interface&quot;,
+                    &quot;after&quot;: &quot;openconfig-interfaces:interfaces/interface/openconfig-if-ethernet:ethernet/config/aggregate-id&quot;
+                },
+                {
+                    &quot;before&quot; : &quot;openconfig-interfaces:interfaces/interface&quot;,
+                    &quot;after&quot;: &quot;openconfig-network-instance:network-instances/network-instance/interfaces/interface&quot;
+                },
+                {
+                    &quot;before&quot; : &quot;openconfig-network-instance:network-instances/network-instance&quot;,
+                    &quot;after&quot;: &quot;openconfig-interfaces:interfaces/interface/subinterfaces&quot;
+                }
+            ],
+            &quot;uniconfig-config:whitelist&quot;: {
+                &quot;path&quot;: [
+                    &quot;openconfig-interfaces:interfaces&quot;,
+                    &quot;openconfig-network-instance:network-instances&quot;,
+                    &quot;openconfig-relay-agent:relay-agent&quot;,
+                    &quot;openconfig-port-group:port-groups&quot;,
+                    &quot;openconfig-mclag:mclag&quot;,
+                    &quot;openconfig-lldp:lldp&quot;,
+                    &quot;sonic-vlan:sonic-vlan&quot;,
+                    &quot;openconfig-platform:components&quot;,
+                    &quot;openconfig-system:system&quot;,
+                    &quot;openconfig-neighbor:neighbor-globals&quot;,
+                    &quot;sonic-mclag:sonic-mclag&quot;
+                ]
+            },
+            &quot;uniconfig-config:uniconfig-native-enabled&quot;: true,
+            &quot;uniconfig-config:sequence-read-active&quot;: true,
+            &quot;connection-parameters&quot;: {
+                &quot;host&quot;: &quot;&lt;ip&gt;&quot;,
+                &quot;port&quot;: &quot;8080&quot;,
+                &quot;device-type&quot; : &quot;sonic&quot;,
+                &quot;connection-type&quot;: &quot;INSECURE&quot;,
+                &quot;credentials&quot;: {
+                    &quot;username&quot;: &quot;&lt;username&gt;&quot;,
+                    &quot;password&quot;: &quot;&lt;password&gt;&quot;
+                }
+            },
+            &quot;session-timers&quot;: {
+                &quot;request-timeout&quot; : 180
+            },
+            &quot;other-parameters&quot; : {
+                &quot;dry-run-journal-size&quot; : 240
+            },
+            &quot;extensions-parameters&quot;: {
+                &quot;gnmi-parameters&quot;: {
+                    &quot;use-model-name-prefix&quot;: true
+                },
+                &quot;force-cached-capabilities&quot;: [
+                    null
+                ]
+            }
+        }
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="uninstalling-gnmi-device">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uninstalling-gnmi-device">#</doc-anchor-trigger>
+        <span>Uninstalling gNMI device</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="example-request-3">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-3">#</doc-anchor-trigger>
+        <span>Example request</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-node' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;node-id&quot;: &quot;r1&quot;,
+        &quot;connection-type&quot;: &quot;gnmi&quot;
+    }
+}'</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="installing-snmp-agent">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#installing-snmp-agent">#</doc-anchor-trigger>
@@ -1126,9 +1452,9 @@ a confirmed request is resent or timed out. Default value is 3000.</li>
 that can be returned in a single response to the get-bulk operation.
 Default value is 50.</li>
 </ul>
-<doc-anchor-target id="authentication-parameters-2">
+<doc-anchor-target id="authentication-parameters-3">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#authentication-parameters-2">#</doc-anchor-trigger>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#authentication-parameters-3">#</doc-anchor-trigger>
         <span>Authentication parameters</span>
     </h3>
 </doc-anchor-target>
@@ -1147,9 +1473,9 @@ V2c.</li>
 <li><strong>snmp-topology:mib-repository</strong> - Name of the MIB repository that contains
 MIB files.</li>
 </ul>
-<doc-anchor-target id="example-request-2">
+<doc-anchor-target id="example-request-4">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-2">#</doc-anchor-trigger>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-4">#</doc-anchor-trigger>
         <span>Example request</span>
     </h3>
 </doc-anchor-target>
@@ -1179,9 +1505,9 @@ MIB files.</li>
         <span>Uninstalling SNMP agent</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="example-request-3">
+<doc-anchor-target id="example-request-5">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-3">#</doc-anchor-trigger>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-request-5">#</doc-anchor-trigger>
         <span>Example request</span>
     </h3>
 </doc-anchor-target>
