@@ -1,10 +1,8 @@
 # UniConfig - Sending and receiving data (RESTCONF)
 
-## Overview
-
-RESTCONF is described in [RESTCONF RFC
-8040](https://tools.ietf.org/html/rfc8040). Put simply, RESTCONF
-represents a REST API for accessing datastores and UniConfig operations.
+The RESTCONF protocol is described in [RFC
+8040](https://tools.ietf.org/html/rfc8040). Put simply, RESTCONF represents a
+REST API for accessing datastores and UniConfig operations.
 
 ### Datastores
 
@@ -857,51 +855,54 @@ http://localhost:8181/rests/data/network-topology:network-topology/topology=unic
 http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration?fields=frinx-openconfig-interfaces:interfaces/interface/name;config/type&content=nonconfig
 ```
 
-## Filtering Data
+## Data filtering
 
-For filtering data based on specific value is good to use
-**jsonb-filter** query parameter. This parameter has to be used only
-with the **GET** method.
+To filter data based on specific values, use the `jsonb-filter` query parameter.
+This parameter can only be used with the `GET`  method.
 
-### Jsonb-filter
-
-- [JSONB filtering](../jsonb-filtering)
+For more information, see [JSONB filtering](../jsonb-filtering/).
 
 ## Pagination
 
-To further extend the ability to filter data according to our needs, we
-can use pagination in the **GET** method.
+To filter data even further, you can use pagination with the `GET` method.
 
-There are 3 pagination parameters that can be used individually or in
-combination with each other :
+There are three parameters related to pagination, which can be combined or used
+individually:
 
-1.  **offset :** The offset parameter defines the starting point in a list for data rendering, based on the index of list entry values. List indexing begins at 0, meaning `offset=2` starts rendering from the third list entry. The specified offset index entry is included in the output.
-2.  **limit :** The limit parameter allows control over the number of node values displayed in a GET request. It specifies the maximum count of entries to be included in the response, starting from the entry defined by the offset (if provided).
-3.  **fetch=count :** The fetch=count option is used to retrieve the total number of child nodes within a specific node. Instead of returning the node values, it provides a count of how many child nodes exist under the specified node.
+- `offset` - The starting point in a list for data rendering, based on the index
+   list of entry values. Indexing begins at 0, so that `offset=2` would start
+   rendering at the third entry. The specified offset index entry is included in
+   the output.
+- `limit` - The number of node values displayed in a `GET` request. Specifies
+  the maximum count for entries included in the response, starting with the
+  entry defined by the `offset` parameter (if provided).
+- `fetch=count` - Retrieves the total number of child nodes under a specific
+  node. Instead of returning node values, provides a count of how many child
+  nodes exist under the specified node.
 
 !!!
-Beware that pagination works only for list nodes.
+Note that pagination only works for list nodes.
 !!!
 
-The example of using individual pagination parameter:
+**Example** - Using one individual pagination parameter:
 
 ```
 http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?offset=1
 ```
 
-The example of using two pagination parameters simultaneously:
+**Example** - Using two pagination parameters simultaneously:
 
 ```
 http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?offset=1&limit=4
 ```
 
-The example of using fetch count parameter:
+**Example** - Using the `fetch=count` parameter:
 
 ```
 http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?fetch=count
 ```
 
-The response body of fetch count parameter with a path from the previous
+Response body for the `fetch=count` parameter with a path from the previous
 example:
 
 ```
