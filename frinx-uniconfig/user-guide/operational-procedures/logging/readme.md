@@ -1,168 +1,146 @@
-# Logging Framework
+# Logging framework
 
-## Logback Configuration
+UniConfig uses the Logback logging framework. Logback is the successor to the log4j framework with many improvements, such as more options for configuration, better performance and context-based separation of logs. The latter is used widely in UniConfig to achieve per-device logging based on the set marker in the logs.
 
-UniConfig distribution uses Logback as the implementation of the logging
-framework. Logback is the successor to to the log4j framework with many
-improvements such as; more options for configuration, better
-performance, and context-based separation of logs. Context-based
-separation of logs is used widely in UniConfig to achieve per-device
-logging based on the set marker in the logs.
+## Logback configuration
 
-Logback configuration is placed in 'config/logback.xml' file under
-UniConfig distribution. For more information about formatting of logback
-configuration, look at the
-<http://logback.qos.ch/manual/configuration.html> site. This section
-describes parts of the configuration in the context of UniConfig
-application.
+Logback configuration is placed in the **config/logback.xml** file under the UniConfig distribution. For more information, see [Logback configuration](http://logback.qos.ch/manual/configuration.html).
+
+This section describes parts of the configuration in the context of UniConfig.
 
 ### Appenders
 
 The following appenders are used:
 
-1. 'STDOUT': Prints logs into the console.
-2. 'logs': Used for writing all logs to the output file on path
-    'log/logs.log'. The rolling file appender is applied.
-3. 'netconf-notifications', 'netconf-messages', 'netconf-events', and
-    'cli-messages', 'gnmi-messages': Sifting appenders that split logs per node ID that
-    is set in the marker of the logs. Logs are written to different
-    subdirectories under 'log' directory and they are identified by
-    their node ID. The rolling file appender is applied.
-4. 'restconf': Appender used for writing of RESTCONF messages into
-    'log/restconf.log' file. The rolling file appender is applied.
-5. 'gnmi': Appender used for writing of Logs related to gNMI topology. 
+1. `STDOUT` - Print logs to the console.
+2. `logs` - Write all logs to the output file at **log/logs.log**. A rolling file appender is applied.
+3. `netconf-notifications`, `netconf-messages`, `netconf-events`, `cli-messages` and `gnmi-messages` - Sifting appenders that split logs per node ID set in the marker of the logs. Logs are written to different subdirectories under the **log** directory, and are identified by their node ID. A rolling file appender is applied.
+4. `restconf` - Appender used to write RESTCONF messages to the **log/restconf.log** file. A rolling file appender is applied.
+5. `gnmi` - Appender used to write logs related to the gNMI topology. 
+
 ### Loggers
 
-There are 2 groups of loggers:
+There are two groups of loggers:
 
-1. Package-level logging brokers: Loggers that are used for writing
-    general messages into the console and a single output file. Logging
-    level is set by default to 'INFO'. For debugging purposes it is
-    handy to change logging threshold to 'TRACE' or 'DEBUG' level.
-    Covered layers: UniConfig, Unified, Controller, RESTCONF, CLI,
-    NETCONF, gNMI. Used appenders: 'STDOUT' and 'logs'.
-2. Loggers used for logging brokers: These loggers should not be
-    changed since the state of logging can be changed using RPC calls.
-    Classpaths point to specific classes that represent implementations
-    of logging brokers, the logging level is set to 'TRACE'. Used
-    appenders: 'netconf-notifications', 'netconf-messages',
-    'netconf-events', 'cli-messages', 'gnmi-messages' and 'restconf'.
+1. Package-level logging brokers: Loggers used to write general messages to the console and a single output file.
+    - Default logging level: `INFO`. For debugging purposes, it can be useful to change the logging level to `TRACE` or `DEBUG`.
+    - Layers covered: UniConfig, Unified, Controller, RESTCONF, CLI, NETCONF, gNMI.
+    - Appenders used: `STDOUT` and `logs`.
+2. Loggers used for logging brokers: These loggers should not be changed since the state of logging can be changed using RPC calls. Classpaths point to specific classes that represent implementations of logging brokers.
+    - Logging level is set to `TRACE`.
+    - Appenders used: `netconf-notifications`, `netconf-messages`, `netconf-events`, `cli-messages`, `gnmi-messages` and `restconf`.
 
-### Updating Configuration
+### Update configuration
 
-- Logback is configured to scan for changes in its configuration file
-    and automatically reconfigure itself when the configuration file
-    changes.
-- Scanning period is set by default to 5 seconds.
+Logback is configured to scan for changes in its configuration file and automatically reconfigure itself when the configuration file changes. The default scanning frequency is 5 seconds.
 
 ### Example configuration
 
-In the logback.xml file you can edit level of logging for each component
-of UniConfig:
+In the **logback.xml** file, you can edit the level of logging for each UniConfig component:
 
+```xml Logback
+<configuration>
+    <!-- root logger -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="logs"/>
+    </root>
+
+    <!-- UniConfig layer part -->
+    <logger name="io.frinx.uniconfig" level="INFO"/>
+
+    <!-- Unified layer part -->
+    <logger name="io.frinx.unitopo" level="INFO"/>
+
+    <!-- NETCONF part -->
+    <logger name="org.opendaylight.netconf" level="INFO"/>
+
+    <!-- Uniconfig property scanning -->
+    <logger name="io.frinx.uniconfig.constants" level="INFO"/>
+
+    <!-- CLI part -->
+    <logger name="io.frinx.cli" level="INFO"/>
+
+    <!-- SSH part (used by CLI and NETCONF) -->
+    <logger name="org.apache.sshd" level="INFO"/>
+
+    <!-- translation unit framework part -->
+    <logger name="io.frinx.translate.unit.commons" level="INFO"/>
+    <logger name="io.fd.honeycomb" level="INFO"/>
+
+    <!-- gNMI part -->
+    <logger name="io.frinx.gnmi" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="logs"/>
+        <appender-ref ref="gnmi"/>
+    </logger>
+
+    <!-- RESTCONF part -->
+    <logger name="org.opendaylight.restconf" level="INFO"/>
+    <logger name="org.opendaylight.aaa" level="INFO"/>
+
+    <!-- controller part -->
+    <logger name="org.opendaylight.daexim" level="INFO"/>
+    <logger name="org.opendaylight.controller" level="INFO"/>
+    <logger name="org.opendaylight.yangtools" level="INFO"/>
+
+    <!-- DOM mountpoint service -->
+    <logger name="org.opendaylight.controller.md.sal.dom.broker.impl.mount" level="INFO"/>
+
+    <!-- Kafka -->
+    <logger name="org.apache.kafka.clients.NetworkClient" level="ERROR"/>
+
+    <!-- Metrics -->
+    <logger name="io.frinx.uniconfig.metrics" level="INFO" additivity="false">
+        <appender-ref ref="metrics"/>
+    </logger>
+
+    <!-- CLI shell -->
+    <logger name="io.frinx.uniconfig.shell" level="INFO"/>
+
+    <!-- PostgreSQL driver -->
+    <logger name="org.postgresql" level="INFO"/>
+</configuration>
 ```
-<!-- root logger -->
-<root level="INFO">
-    <appender-ref ref="STDOUT"/>
-    <appender-ref ref="logs"/>
-</root>
 
-<!-- UniConfig layer part -->
-<logger name="io.frinx.uniconfig" level="DEBUG"/>
+### Logging levels
 
-<!-- Unified layer part -->
-<logger name="io.frinx.unitopo" level="INFO"/>
-
-<!-- NETCONF part -->
-<logger name="org.opendaylight.netconf" level="INFO"/>
-
-<!-- CLI part -->
-<logger name="io.frinx.cli" level="TRACE"/>
-
-<!-- translation unit framework part -->
-<logger name="io.frinx.translate.unit.commons" level="INFO"/>
-<logger name="io.fd.honeycomb" level="INFO"/>
-
-<!-- RESTCONF part -->
-<logger name="org.opendaylight.restconf" level="DEBUG"/>
-<logger name="org.opendaylight.aaa" level="INFO"/>
-
-<!-- gNMI part -->
-<logger name="io.uniconfig.gnmi" level="INFO" additivity="false">
-    <appender-ref ref="STDOUT"/>
-    <appender-ref ref="logs"/>
-    <appender-ref ref="gnmi"/>
-</logger>
-    
-<!-- controller part -->
-<logger name="org.opendaylight.daexim" level="INFO"/>
-<logger name="org.opendaylight.controller" level="INFO"/>
-<logger name="org.opendaylight.yangtools" level="INFO"/>
-```
+The following logging levels are available:
 
 #### INFO
 
-**This is recommended level for production environments.** INFO messages
-display behavior of applications. They state what happened. For example,
-if a particular service stopped or started or you added something to the
-database. These entries are nothing to worry about during usual
-operations. The information logged using the INFO log is usually
-informative, and it does not necessarily require you to follow up on it.
+This is the recommended logging level for production environments.
+
+`INFO` messages describe the behavior of applications (for example, if a particular service starts or stops, or something is added to the database). During typical operations, these log entries are nothing to worry about and no follow-up actions are necessary.
 
 #### DEBUG
 
-With DEBUG, you are giving diagnostic information in a detailed manner.
-It is verbose and has more information than you would need when using
-the application. DEBUG logging level is used to fetch information needed
-to diagnose, troubleshoot, or test an application. This ensures a smooth
-running application.
+The `DEBUG` level gives verbose diagnostic information that includes more detail than is necessary to use
+the application. This logging level is used to diagnose, troubleshoot, or test an application to ensure that it runs smoothly.
 
 #### TRACE
 
-The TRACE log level captures all the details about the behavior of the
-application. It is mostly diagnostic and is more granular and finer than
-DEBUG log level. This log level is used in situations where you need to
-see what happened in your application.
+The `TRACE` level captures all detail about the application's behavior. It is mostly diagnostic and is more granular than `DEBUG`. This log level is used in situations where you need to see exactly what happened in your application.
 
-## Logging Brokers
+## Logging brokers
 
-The logging broker represents a configurable controller that logs one
-logical group of messages from a single classpath. Logging of multiple
-messages from the same classpath simplifies configuration of loggers in
-Logback since only one logger per broker must be specified. The logging
-broker can be controlled using RESTCONF RPCs; there are multiple
-operations where it is possible to trigger logging for the whole broker,
-or just for specified node IDs. Configuration of the logger in the
-logback file that is assigned to the logging broker should not be
-changed at all.
+The logging broker represents a configurable controller that logs one logical group of messages from a single classpath. Logging multiple messages from the same classpath simplifies the configuration of loggers in
+Logback, since only one logger per broker must be specified.
 
-### Implemented Logging Brokers
+The logging broker is controlled using RESTCONF RPCs. There are several operations that can trigger logging for the whole broker or only for specified node IDs. The logger configuration in the logback file assigned to the broker should not be changed.
 
-The following subsections describe currently implemented logging
-brokers.
+The following subsections describe available logging brokers:
 
 #### RESTCONF
 
-- It is used for logging authenticated HTTP requests and responses;
-    information about URI, source, HTTP method, query parameters, HTTP
-    headers, and body.
-- Per-device logging cannot be enabled for this broker; all logs are
-    saved to 'log/restconf.log' file.
-- It is possible to configure HTTP headers in which the content must
-    be masked in logs (using asterisk characters). This is useful
-    especially if there are some headers which contain private data
-    (such as Authorization or a Cookie header). Hidden HTTP headers are
-    marked using header identifiers.
-- It is also possible to configure HTTP methods for which the
-    communication (requests and responses) should not be logged to a
-    file.
-- Requests and responses are paired using a unique message-id. This
-    message-id is not part of the HTTP request, it is generated on the
-    RESTCONF server.
-- Requests and responses contain Uniconfig transactions for easier matching
-  with the log-transactions.
+- Used to log authenticated HTTP requests and responses; information about URI, source, HTTP method, query parameters, HTTP headers and body.
+- Per-device logging cannot be enabled for this broker. All logs are saved to the **log/restconf.log** file.
+- It is possible to specify HTTP headers whose content is masked the in logs with asterisks (`*`). This is useful if some headers contain private data (such as `Authorization` or a `Cookie` headers). Hidden HTTP headers are marked using header identifiers.
+- It is also possible to configure HTTP methods for which communication (requests and responses) is not logged to a file.
+- Requests and responses are paired using a unique `message-id` attribute, which is not part of the HTTP request but is generated on the RESTCONF server.
+- Requests and responses contain Uniconfig transactions for easier matching with log transactions.
 
-**Example: - Request and corresponding response with the same message-id**
+**Example** - Request and corresponding response (same `message-id`):
 
 ```
 08:51:21.508 TRACE org.opendaylight.restconf.nb.rfc8040.jersey.providers.logging.RestconfLoggingBroker - HTTP request:
@@ -194,29 +172,19 @@ Request body:
 08:51:21.518 TRACE org.opendaylight.restconf.nb.rfc8040.jersey.providers.logging.RestconfLoggingBroker - HTTP response:
 Request message ID: 3
 Uniconfig transaction: b6639cb4-55f2-449e-a91e-d2ad490198d2
-Status code: 200
+Status code: 204
 HTTP headers:
     Content-Type: [application/yang-data+json]
 Response body:
-{
-  "output": {
-    "message": "Successfully updated logging broker [netconf_notifications]",
-    "status": "complete"
-  }
-}
 ```
 
 #### CLI messages
 
-- Broker used for logging of all CLI requests and responses.
-- These CLI requests and responses are paired with unique message-id
-    attribute, which is generated.
-- Per-device logging is supported - logs for CLI messages are stored
-    under 'log/cli-messages' directory and named by '[node-id].log'
-    pattern.
+- Used to log all CLI requests and responses.
+- CLI requests and responses are paired with a unique `message-id` attribute.
+- Supports per-device logging. Logs for CLI messages are stored under the **log/cli-messages** directory and named according to the pattern `[node-id].log`.
 
-Example - sending POST RPC for installing CLI device, and getting
-requests with corresponding responses paired with same Message-ID:
+**Example** - Send POST RPC to install a CLI device and pair requests with corresponding responses (same `message-id`):
 
 ```
 15:11:33.119 TRACE io.frinx.cli.io.impl.cli.CliLoggingBroker - Message-ID:1 - Sending CLI command:
@@ -255,16 +223,11 @@ end
 
 #### NETCONF Messages
 
-- A broker is used for logging of all NETCONF messages incoming or
-    outgoing, except the NETCONF notifications (a distinct broker has
-    been introduced for notifications).
-- NETCONF RPC's and responses can be matched using the 'message-id'
-    attribute that is placed in the RPC header.
-- Per-device logging is supported, logs for NETCONF messages are
-    stored under the directory 'log/netconf-messages' and named by the
-    '[node-id].log' pattern.
+- Used to log all NETCONF messages, incoming and outgoing, except for NETCONF notifications (a separate broker handles notifications).
+- NETCONF RPCs and responses can be matched using the `message-id` attribute placed in the RPC header.
+- Supports per-device logging. Logs for NETCONF messages are stored in the **log/netconf-messages** directory and named according to the pattern `[node-id].log`.
 
-**Example: - Sending NETCONF GET RPC and receiving response**
+**Example** - Send NETCONF GET RPC and receive a response:
 
 ```
 11:10:15.038 TRACE org.opendaylight.netconf.logging.brokers.NetconfMessagesLoggingBroker - Session: 641 - Sending NETCONF message:
@@ -300,24 +263,15 @@ end
 ```
 
 !!!
-Number 641 represents the session ID. It is read from 
-the NETCONF hello message. If multiple sessions are 
-created between the NETCONF server and NETCONF client and are
-logically grouped by the same node ID, then logs from multiple
-sessions are stored to the same logging file (this is needed to
-distinguish between the sessions). Multiple NETCONF sessions between
-the UniConfig and NETCONF server are created for each subscription to
-the NETCONF stream.
+The number `641` represents the session ID read from the NETCONF hello message. If multiple sessions are created between the NETCONF server and client that are logically grouped under the same node ID, logs from multiple sessions are stored in the same logging file. This is necessary to distinguish between the sessions. Multiple NETCONF sessions between the UniConfig and NETCONF server are created for each subscription to the NETCONF stream.
 !!!
 
 #### NETCONF Notifications
 
-- A broker is used for logging of incoming NETCONF notifications.
-- Per-device logging is supported, logs for NETCONF notifications are
-    stored under the directory 'log/netconf-notifications' and named by
-    the '[node-id].log' pattern.
+- Used to log incoming NETCONF notifications.
+- Supports per-device logging. Logs for NETCONF notifications are stored in the **log/netconf-notifications** directory and named according to the pattern `[node-id].log`.
 
-**Example: - Received two notifications**
+**Example** - Receiving two notifications:
 
 ```
 11:37:03.907 TRACE org.opendaylight.netconf.logging.brokers.NotificationsLoggingBroker - 117123a1: Received NETCONF notification:
@@ -344,16 +298,11 @@ the NETCONF stream.
 
 #### NETCONF Events
 
-- Logs generated by this broker contain session-related information
-    about the establishment or closing of a NETCONF session from the
-    view of the NETCONF client placed in UniConfig.
-- These logs don't contain full printouts of sent or received NETCONF
-    messages.
-- Per-device logging is supported, logs for NETCONF events are stored
-    under the directory 'log/netconf-events' and named by the
-    '[node-id].log' pattern.
+- Used to log session-related information about establishing or closing a NETCONF session from the view of the NETCONF client placed in UniConfig.
+- These logs do not contain full printouts of sent or received NETCONF messages.
+- Supports per-device logging. Logs for NETCONF events are stored in the **log/netconf-events** directory and according to the pattern `[node-id].log`.
 
-**Example:**
+**Example**:
 
 ```
 11:08:59.407 INFO org.opendaylight.netconf.logging.brokers.NetconfEventsLoggingBroker - node1: Connecting remote device with config: Node{getNodeId=Uri [_value=node1], augmentations={interface org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.NetconfNode=NetconfNode{getActorResponseWaitTime=5, getBetweenAttemptsTimeoutMillis=2000, getConcurrentRpcLimit=0, getConnectionTimeoutMillis=60000, getCredentials=LoginPassword{getPassword=versa123, getUsername=admin, augmentations={}}, getCustomizationFactory=default, getDefaultRequestTimeoutMillis=60000, getDryRunJournalSize=0, getEditConfigTestOption=Set, getHost=Host [_ipAddress=IpAddress [_ipv4Address=Ipv4Address [_value=10.103.5.202]]], getKeepaliveDelay=5, getMaxConnectionAttempts=100, getPort=PortNumber [_value=2022], getSleepFactor=1.0, getYangModuleCapabilities=YangModuleCapabilities{getCapability=[http://tail-f.com/ns/docgen/experimental1?module=docgen&amp;revision=2019-11-01], isOverride=false, augmentations={}}, isEnabledNotifications=true, isReconnectOnChangedSchema=false, isSchemaless=false, isTcpOnly=false}, interface org.opendaylight.yang.gen.v1.http.frinx.io.yang.uniconfig.config.rev180703.UniconfigConfigNode=UniconfigConfigNode{getBlacklist=Blacklist{getExtension=[tailf:display-when false], augmentations={}}, isUniconfigNativeEnabled=true}}}
@@ -364,13 +313,10 @@ the NETCONF stream.
 
 #### gNMI Messages
 
-- A broker is used for logging of all gNMI SET/GET messages incoming or
-    outgoing, except the gNMI notifications.
-- Per-device logging is supported, logs for gNMI messages are
-    stored under the directory 'log/gnmi-messages' and named by the
-    '[node-id].log' pattern.
+- Used to log all gNMI SET/GET messages, incoming or outgoing, except for gNMI notifications.
+- Support per-device logging. Logs for gNMI messages are stored in the **log/gnmi-messages** directory and named according to the pattern `[node-id].log`.
 
-**Example: - Sending gNMI SET request and receiving response**
+**Example** - Send gNMI SET request and receive a response:
 
 ```
 12:12:28.658 TRACE io.uniconfig.gnmi.logging.brokers.GnmiMessagesLoggingBroker - Message-id: 1693479982709, sending gNMI SET message:
@@ -463,145 +409,115 @@ response {
 timestamp: 1692266952617002464
 ```
 
-### Supported Logging Settings
+### Supported logging settings
 
-Current logging broker settings are stored in the Operational datastore
-under the 'logging-status' root container. The following example shows a
-GET query that displays the logging broker settings:
+Current logging broker settings are stored in the `Operational` datastore under the `logging-status` root container.
 
-```bash
+The following example shows a GET query that displays the logging broker settings:
+
+```bash GET Logging Status
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/logging-status?content=nonconfig' \
 --header 'Accept: application/json'
 ```
 
 **Response:**
 
-```json
+```json Status:
 {
-    "logging-status": {
-        "broker": [
-            {
-                "broker-identifier": "netconf_messages",
-                "is-logging-broker-enabled": true,
-                "is-logging-enabled-on-all-devices": true,
-                "enabled-devices": [
-                    "xr6",
-                    "xr7"
-                ]
-            },
-            {
-                "broker-identifier": "restconf",
-                "is-logging-broker-enabled": true,
-                "restconf-logging:hidden-http-methods": [
-                    "GET"
-                ],
-                "restconf-logging:hidden-http-headers": [
-                    "Authorization",
-                    "Cookie"
-                ]
-            },
-            {
-                "broker-identifier": "netconf_notifications",
-                "is-logging-broker-enabled": true,
-                "is-logging-enabled-on-all-devices": true
-            },
-            {
-                "broker-identifier": "netconf_events",
-                "is-logging-broker-enabled": true,
-                "is-logging-enabled-on-all-devices": true
-            },
-            {
-                "broker-identifier": "gnmi_messages",
-                "logging-enabled-on-all-devices": true,
-                "logging-broker-enabled": true,
-                "gnmi-logging:message-types": [
-                    "SET"
-                ]
-            }
+  "logging-status": {
+    "broker": [
+      {
+        "broker-identifier": "netconf_messages",
+        "is-logging-broker-enabled": true,
+        "is-logging-enabled-on-all-devices": true,
+        "enabled-devices": [
+          "xr6",
+          "xr7"
+        ]
+      },
+      {
+        "broker-identifier": "restconf",
+        "is-logging-broker-enabled": true,
+        "restconf-logging:hidden-http-methods": [
+          "GET"
         ],
-        "global": {
-            "hidden-types": [
-                "password",
-                "encrypted"
-            ]
-        }
+        "restconf-logging:hidden-http-headers": [
+          "Authorization",
+          "Cookie"
+        ]
+      },
+      {
+        "broker-identifier": "netconf_notifications",
+        "is-logging-broker-enabled": true,
+        "is-logging-enabled-on-all-devices": true
+      },
+      {
+        "broker-identifier": "netconf_events",
+        "is-logging-broker-enabled": true,
+        "is-logging-enabled-on-all-devices": true
+      },
+      {
+        "broker-identifier": "gnmi_messages",
+        "logging-enabled-on-all-devices": true,
+        "logging-broker-enabled": true,
+        "gnmi-logging:message-types": [
+          "SET"
+        ]
+      },
+      {
+        "broker-identifier": "shell_logs",
+        "logging-enabled-on-all-devices": true,
+        "logging-broker-enabled": true
+      },
+      {
+        "broker-identifier": "cli_messages",
+        "logging-enabled-on-all-devices": true,
+        "logging-broker-enabled": true
+      }
+    ],
+    "global": {
+      "hidden-types": [
+        "password",
+        "encrypted"
+      ]
     }
+  }
 }
 ```
 
-Logging settings are encapsulated inside multiple list entries ('broker'
-list) where each list entry contains settings for one logging broker.
-Description of the settings that are placed under a single logging
-entry:
+Logging settings are encapsulated inside multiple list entries (`broker` list). Each entry contains settings for one logging broker.
 
-- **broker-identifier**: Unique identifier of the logging broker.
-    Currently, 5 brokers are supported: 'netconf\_messages', 'restconf',
-    'netconf\_notifications', 'netconf\_events', and cli\_messages.
-- **is-logging-broker-enabled**: Flag that specifies whether the
-    logging broker is enabled. If the logging broker is disabled, then
-    no logging messages are generated.
-- **is-logging-enabled-on-all-devices**: If this flag is set to
-    'true', then logs are separated to distinct files in the scope of
-    all devices. If it is set to 'false', then logging is enabled only
-    for devices that are listed in the 'enabled-devices' leaf-list /
-    array. This setting is unsupported in the 'restconf' logging broker
-    since RESTCONF currently doesn't differentiate the node ID in the
-    requests or responses.
-- **enabled-devices**: If 'is-logging-enabled-on-all-devices' is set
-    to 'false', then logs are generated only for devices that are
-    specified in this list, it acts as a simple filtering mechanism
-    based on the whitelist. Blacklist approach is not supported, it is
-    not possible to set 'is-logging-enabled-on-all-devices' to 'true'
-    and specify devices for which logging feature is disabled. This
-    field is not supported in the 'restconf' logging broker.
+Settings placed under a single logging entry:
+
+- `broker-identifier` - Unique identifier for the logging broker. The following brokers are supported: `netconf\_messages`, `restconf`, `netconf\_notifications`, `netconf\_events`, and `cli\_messages`.
+- `is-logging-broker-enabled` - Specifies if the logging broker is enabled or not. If the broker is disabled, no logging messages are generated.
+- `is-logging-enabled-on-all-devices` - If set to `true`, logs are separated into distinct files in the scope of all devices. If set to `false`, logging is enabled only for devices listed in the `enabled-devices` leaf-list/array. This setting is not supported for the `restconf` logging broker as RESTCONF currently does not differentiate the node ID in requests or responses.
+- `enabled-devices` - If `is-logging-enabled-on-all-devices` is set to `false`, logs are generated only for devices specified in this list. Acts as a simple filtering mechanism based on the whitelist. A blacklist approach is not supported, as it is not possible to set `is-logging-enabled-on-all-devices` to `true` and specify devices for which logging feature is disabled. This setting is not supported for the `restconf` logging broker.
 
 RESTCONF-specific settings:
 
-- **restconf-logging:hidden-http-methods** - HTTP requests (and
-    associated HTTP responses) are not logged if request's HTTP method
-    is set to one of the methods in this list. Names of the HTTP methods
-    must be specified using upper-case format.
-- **restconf-logging:hidden-http-headers** - List of HTTP headers
-    (names of the headers) which content is hidden in the logs. Names of
-    the HTTP headers are not case-sensitive.
+- `restconf-logging:hidden-http-methods` - HTTP requests and associated HTTP responses are not logged if the  request's HTTP method is included in this list. Names of HTTP methods must be specified in uppercase.
+- `restconf-logging:hidden-http-headers`` - List of HTTP headers (names of headers) whose content is hidden in the logs. Names of headers are case-insensitive.
 
 GNMI-specific settings:
 
-- **gnmi-logging:message-types** - gNMI message types that are enabled to be logged. 
-    Names of the message types must be specified using upper-case format.
+- `gnmi-logging:message-types` - gNMI message types that are logged. Names of message types must be specified in uppercase.
 
-Global settings that are common in all logging brokers:
+Global settings common for all logging brokers:
 
-- **hidden-types** - Value of leaf or leaf-list that uses one of these
-    types is hidden in the logs using asterisk characters. It can be
-    used for masking of passwords or other confidential data from logs.
+- `hidden-types` - The value of leafs or leaf-lists using one of the types specified is masked in the logs with asterisks (`*`). Useful for hiding passwords and other confidential data in logs.
 
-### Initial Configuration
+### Initial configuration
 
-By default, all logging brokers are disabled and logging is disabled on
-all devices, the user must explicitly specify a list of devices for
-which per-device logging is enabled. Also, RESTCONF-specific filtering
-is not configured, all HTTP requests and responses are fully logged, no
-content is dismissed. By default, only SET gNMI message type is set to be logged.
+By default, all logging brokers are disabled and logging is disabled on all devices. To enable per-device logging, you must explicitly specify a list of devices. Additionally, RESTCONF-specific filtering is not configured, all HTTP requests and responses are fully logged and no content is dismissed. By default, only the `SET` gNMI message type is set to be logged.
 
-Initial logging configuration can be adjusted by adding the
-'loggingController' configuration into the
-'config/lighty-uniconfig-config.json' file. The structure of this
-configuration section conforms YANG structure that is described by the
-'logging' and 'restconf-logging' modules, it is possible to copy the
-state of the Operational datastore under 'logging-status' into the
-'loggingController' root JSON node.
+The initial logging configuration can be adjusted by adding the `loggingController` configuration into the
+**config/lighty-uniconfig-config.json** file. The structure of this configuration section conforms to the YANG structure described by the `logging` and `restconf-logging` modules. It is possible to copy the state of the `Operational` datastore under `logging-status` into the `loggingController` root JSON node.
 
-The next JSON snippet shows the sample configuration
-'loggingController', logging brokers 'netconf\_messages' and
-'netconf\_notifications' are enabled; the 'netconf\_messages' broker is
-enabled for all devices while 'netconf\_notifications' is enabled only
-for 'xr6' and 'xr7' devices.
+The following JSON snippet shows the sample configuration `loggingController`. The logging brokers `netconf\_messages` and `netconf\_notifications` are enabled, (`netconf\_messages` for all devices and `netconf\_notifications` only for `xr6` and `xr7` devices).
 
 !!!
-If unknown parameters are specified in a configuration file, they will be
-ignored and a warning, that the corresponding parameter
-was ignored, will be logged.
+If unknown parameters are specified in a configuration file, they are ignored and a warning is logged.
 !!!
 
 ```json
@@ -627,22 +543,17 @@ was ignored, will be logged.
 }
 ```
 
-### Controlling of Logging Using RPC Calls
+### Control logging using RPC calls
 
-Since logging settings are stored in the Operational datastore, it is
-possible to adjust these settings on runtime only using RPC calls. The
-following subsections describe available RPCs.
+As logging settings are stored in the `Operational` datastore, it is possible to adjust these settings in runtime only using RPC calls. The following subsections describe available RPCs.
 
-#### Enable Logging Broker
+#### Enable logging broker
 
-- An RPC is used for enabling the logging broker. The enabled logging
-    broker is available to write logs.
-- The input contains only the name of the the logging broker,
-    'broker-identifier'.
+This RPC is used to enable the logging broker, which is then available to write logs. RPC input contains only the name of the logging broker (`broker-identifier`).
 
-**Example: - Enable logging broker with the identifier 'restconf'**
+**Example** - Enable logging broker with the `restconf` identifier:
 
-```bash
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/logging:enable-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -653,28 +564,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/logging:e
 }'
 ```
 
-The output shows a positive response given the broker was previously in
-a disabled state:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "Successfully updated logging broker [restconf]",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Disable Logging Broker
+#### Disable logging broker
 
-- An RPC is used for turning off the logging broker. A disabled
-    logging broker doesn't write any logs despite other settings.
-- The input contains only the name of the the logging broker,
-    'broker-identifier'.
+This RPC is used to disable a logging broker, which will no longer write any logs regardless of other settings. RPC input contains only the name of the logging broker.
 
-**Example: - Disabling the logging broker with the identifier 'restconf'**
+**Example** - Disable logging broker with the `restconf` identifier:
 
-```bash
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/logging:disable-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -685,32 +586,20 @@ curl --location --request POST 'http://localhost:8181/rests/operations/logging:d
 }'
 ```
 
-The output shows a positive response given the broker was previously in
-an enabled state:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "Successfully updated logging broker [restconf]",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Enable Default Device Logging
+#### Enable default device logging
 
-- An RPC is used for setting the default device logging to 'true',
-    logs will be written for all devices without filtering any logs
-    based on their node ID.
-- The input contains only the name of the the logging broker,
-    'broker-identifier'.
-- Invocation of this RPC causes clearing of the leaf-lest
-    'enabled-devices'.
+This RPC is used to set the default device logging to `true`. Logs are written for all devices without filtering based on node ID.
 
-**Example: - Enable default device logging in the 'netconf\_messages'
-logging broker**
+RPC input contains only the name of the logging broker (`broker-identifier`). Invoking this RPC clears the leaf-list `enabled-devices`.
 
-```bash
+**Example** - Enable default device logging in the `netconf\_messages` logging broker:
+
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/logging:enable-default-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -721,32 +610,20 @@ curl --location --request POST 'http://localhost:8181/rests/operations/logging:e
 }'
 ```
 
-The output shows a positive response given the broker was previously in
-a disabled state:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "Successfully updated logging broker [netconf_messages] default logging behaviour",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Disable Default Device Logging
+#### Disable default device logging
 
-- An RPC is used for setting default device logging to 'false', logs
-    will be written only for devices that are named in the leaf-list
-    'enabled-devices'. If the leaf-list 'enabled-devices' doesn't
-    contain a node ID, then logging in the corresponding logging broker
-    is effectively turned off.
-- The input contains only the name of the the logging broker,
-    'broker-identifier'.
+This RPC is used to set the default device logging to `false`. Logs are written only for devices named in the `enabled-devices` leaf-list. If `enabled-devices` does not contain a node ID, logging in the corresponding broker is effectively turned off.
 
-**Example: - Disable default device logging in 'netconf\_messages' logging
-broker**
+RPC input contains only the name of the logging broker (`broker-identifier`).
 
-```bash
+**Example** - Disable default device logging in the `netconf\_messages` logging broker:
+
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/logging:disable-default-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -757,29 +634,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/logging:d
 }'
 ```
 
-The output shows a positive response given the broker was previously in
-an enabled state:
+The output shows a positive response:
 
-```json
-{
-    "output": {
-        "message": "Successfully updated logging broker [netconf_messages] default logging behaviour",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Enable Device Logging
+#### Enable device logging
 
-- An RPC is used for enabling logging of specified devices that are
-    identified by node IDs.
-- The input contains the name of the the logging broker
-    'broker-identifier' and a list of node IDs called 'device-list'.
+This RPC is used to enable logging for specified devices identified by node IDs. RPC input contains the name of the logging broker (`broker-identifier`) and a list of node IDs (`device-list`).
 
-**Example: - Enable logging for devices with node IDs: 'node1', 'node2',
-and 'node3' in the 'netconf\_events' logging broker**
+**Example** - Enable logging for devices with node IDs `node1`, `node2`, and `node3` in the `netconf\_events` logging broker:
 
-```bash
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/logging:enable-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -795,28 +661,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/logging:e
 }'
 ```
 
-The output shows a positive response:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "Successfully updated logging broker [netconf_events]",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Disable Device Logging
+#### Disable device logging
 
-- An RPC is used for turning off logging of specified devices that are
-    identified by node IDs.
-- The input contains the name of the the logging broker
-    'broker-identifier' and a list of node IDs called 'device-list'.
+This RPC is used to turn off logging for specified devices identified by node IDs. RPC input contains the name of the logging broker (`broker-identifier`) and a list of node IDs (`device-list`).
 
-**Example: - Disable logging for device with node ID 'node1' in the
-'netconf\_events' logging broker**
+**Example** - Disable logging for device with node ID `node1` in the `netconf\_events` logging broker:
 
-```bash
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/logging:disable-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -830,29 +686,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/logging:d
 }'
 ```
 
-The output shows a positive response:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "Successfully updated logging broker [netconf_events]",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Setting Global Hidden Types
+#### Set global hidden types
 
-- An RPC is used for setting identifiers of hidden YANG type
-    definitions. Values of leaves and leaf-lists that are described by
-    these types are masked in the output logs.
-- This RPC overwrites all already configured hidden types. An empty
-    list of hidden types disables filtering of data values.
-- Filtering of values applies to all logs, including RESTCONF logs.
+This RPC is used to set identifiers of hidden YANG type definitions. Values of leaves and leaf-lists described by these types are masked in output logs. Overwrites all previously configured hidden types. An empty list of hidden types will disable filtering of data values. Filtering applies to all logs, including RESTCONF logs.
 
-**Example: - Setting 3 hidden types**
+**Example** - Set three (3) hidden types:
 
-```bash
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/logging:set-global-hidden-types' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -867,31 +712,20 @@ curl --location --request POST 'http://localhost:8181/rests/operations/logging:s
 }'
 ```
 
-The output shows a positive response:
+The output shows a successful response:
 
-```bash
-{
-    "output": {
-        "message": "Global logging controller configuration has been successfully updated",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Setting Hidden HTTP Headers
+#### Set Hidden HTTP Headers
 
-- An RPC is used for overwriting the list of HTTP headers which
-    content is masked in the output of the RESTCONF logs.
-- This RPC modifies behavior of only the 'restconf' logging broker.
-- HTTP headers in both requests and responses are masked.
-- The list of hidden HTTP headers denotes header identifiers.
-- The identifier of 'hidden' HTTP header still shows in the output
-    logs, however, the content of such header is replaced by asterisk
-    characters.
+This RPC is used to overwrite the list of HTTP headers whose content is hidden in the output of RESTCONF logs. Only affects the `restconf` logging broker.
 
-**Example: - Hiding content of 'Authorization' and 'Cookie' HTTP headers**
+HTTP headers in both requests and responses are masked. The list of hidden headers denotes header identifiers. The identifier of hidden headers is still included in output logs, but their content is masked with asterisks (`*`).
 
-```bash
+**Example** - Hide the content of `Authorization` and `Cookie` HTTP headers:
+
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/restconf-logging:set-hidden-http-headers' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -905,29 +739,20 @@ curl --location --request POST 'http://localhost:8181/rests/operations/restconf-
 }'
 ```
 
-A positive response is shown in the output:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "List of hidden HTTP headers have been successfully updated",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Setting Hidden HTTP Methods
+#### Set hidden HTTP methods
 
-- An RPC is used for overwriting the list of HTTP methods. RESTCONF
-    communication, that may include invocation of hidden HTTP methods,
-    is not displayed in the output logs.
-- Both requests and responses with hidden HTTP methods are not written
-    to the log files.
-- This RPC modifies behavior of only 'restconf' logging behaviour.
+This RPC is used to overwrite the list of HTTP methods. RESTCONF communication, which may include invoking hidden HTTP methods, is not displayed in output logs.
 
-**Example: - Hiding GET and PATCH communication in the RESTCONF logs**
+Both requests and responses with hidden HTTP methods are excluded from the log files. Only affects the `restconf` logging broker.
 
-```bash
+**Example** - Hide `GET` and `PATCH` communication in RESTCONF logs:
+
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/restconf-logging:set-hidden-http-methods' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -941,25 +766,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/restconf-
 }'
 ```
 
-A positive response is shown in the output:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "List of hidden HTTP methods have been successfully updated",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
 
-#### Setting gNMI message types
+#### Set gNMI message types
 
-- An RPC is used for overwriting the list of supported gNMI message types.
-- This RPC modifies behavior of only 'gnmi messages' logging behaviour.
+This RPC is used to overwrite the list of supported gNMI message types. Only affects the logging of gNMI messages.
 
-**Example: - Setting SET and GET message types**
+**Example** - Set 'SET' and 'GET' message types:
 
-```bash
+```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/gnmi-logging:set-message-types' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -972,13 +790,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/gnmi-logg
 }'
 ```
 
-A positive response is shown in the output:
+The output shows a successful response:
 
-```json
-{
-    "output": {
-        "message": "List of message types have been successfully updated",
-        "status": "complete"
-    }
-}
+```json RPC Response, Status: 204
 ```
