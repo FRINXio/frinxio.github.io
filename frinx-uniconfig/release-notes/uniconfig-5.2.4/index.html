@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753893025744">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753894040049">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,6 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Uniconfig 5.2.4 | Frinx Docs</title>
     <meta name="title" content="Uniconfig 5.2.4 | Frinx Docs">
+    <meta name="description" content="[UNIC-1517] Fix pagination" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.4/" />
@@ -22,20 +23,22 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.4/">
     <meta property="og:title" content="Uniconfig 5.2.4 | Frinx Docs">
+    <meta property="og:description" content="[UNIC-1517] Fix pagination">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.4/">
     <meta property="twitter:title" content="Uniconfig 5.2.4 | Frinx Docs">
+    <meta property="twitter:description" content="[UNIC-1517] Fix pagination">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.753893025744" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.753894040049" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.753893025744" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.753894040049" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.753893025744" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.753894040049" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -250,6 +253,92 @@
         <span>Uniconfig 5.2.4</span>
     </h1>
 </doc-anchor-target>
+<!-- Release notes generated using configuration in .github/release.yml at 5.2.4 -->
+<doc-anchor-target id="whats-changed">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="bug-fixes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1517] Fix pagination</li>
+<li>Fix getting fallback schema token.</li>
+</ul>
+<doc-anchor-target id="new-features">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1486] [UNIC-1509] Skip yang constraints</li>
+</ul>
+<doc-anchor-target id="improvements">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1514] Add support CER device version 12.*</li>
+<li>[DEP-616] UDP loadbalancer with ip transparency for SNMP notifications</li>
+<li>[UNIC-1495] Refactor mountpoint to JOOQ style</li>
+<li>Add new Release workflow</li>
+</ul>
+<doc-anchor-target id="api-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#api-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F5A5;&#xFE0F;</span> API Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1288] Refactor logging and restconf-logging RPCs</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>build(deps): bump com.github.spotbugs:spotbugs-annotations from 4.8.0 to 4.8.1</li>
+<li>build(deps): bump com.github.spotbugs:spotbugs-maven-plugin from 4.7.3.6 to 4.8.1.0</li>
+<li>build(deps): bump io.swagger.core.v3:swagger-core from 2.2.18 to 2.2.19</li>
+<li>build(deps-dev): bump org.apache.maven.plugin-tools:maven-plugin-annotations from 3.10.1 to 3.10.2</li>
+<li>build(deps): bump org.apache.maven.plugins:maven-plugin-plugin from 3.10.1 to 3.10.2</li>
+<li>build(deps): bump io.zonky.test.postgres:embedded-postgres-binaries-linux-amd64 from 13.12.0 to 13.13.0</li>
+</ul>
+<doc-anchor-target id="other-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Release new snapshot version 5.2.4-SNAPSHOT</li>
+<li>Workflows: enable immutable and mutable cluster tests.</li>
+<li>[UNIC-1407] Adjust LOGs in Uniconfig shell</li>
+<li>Workflows: add new test to embeded workflow - skip_yang_constraints.</li>
+<li>Workflows: fix typo for embeded tests.</li>
+<li>[UNIC-1438] Refactoring sal-fallback-provider / fallback-schema-service</li>
+<li>Fixed logging in TaskExecutorImpl</li>
+<li>Add name to release workflow</li>
+<li>Allow double quotes in release notes body</li>
+<li>Use PAT in release workflow</li>
+<li>Workflows: fix typo in embededDB_cross_versions workflow.</li>
+<li>Fix PAT usage</li>
+<li>Dispatch on wf completion instead</li>
+<li>Workflows: add cache for embeded test and remove all docker images</li>
+<li>Merge publish release notes into release wf as a separate job</li>
+<li>Fix release workflow</li>
+<li>Update release.yml</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
