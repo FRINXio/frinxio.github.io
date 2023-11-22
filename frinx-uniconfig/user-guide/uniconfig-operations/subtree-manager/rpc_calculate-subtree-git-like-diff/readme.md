@@ -103,7 +103,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
     "error": [
       {
         "error-type": "application",
-        "error-tag": "invalid-value",
+        "error-tag": "missing-element",
         "error-message": "Field target-path is not specified in input request"
       }
     ]

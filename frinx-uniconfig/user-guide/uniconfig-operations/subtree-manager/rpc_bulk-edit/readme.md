@@ -129,7 +129,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/subtree-m
 
 All modifications have been successfully written into the UniConfig transaction.
 
-```RPC response: Status: 200
+```RPC response: Status: 204
 ```
 
 ### Failed example
@@ -215,18 +215,17 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/subtree-m
 
 There is one error message in the result for R2. Note that no modifications are written to R1 because another node (R2) failed during execution of the operation.
 
-```json RPC response
+```json RPC response, Status: 400 
 {
   "errors": {
     "error": [
       {
-        "node-id": "dev01",
-        "error-type": "application"
-      },
-      {
-        "node-id": "dev02",
-        "error-message": "Failed to parse path: Could not parse path 'network-topology:network-topology/topology=uniconfig/node=R2/frinx-uniconfig-topology:configuration/dhcp/profile=test-profile'. Offset: '108': Reason: List entry '(test-ns?revision=2018-09-12)dhcp' requires key or value predicate to be present",
-        "error-type": "application"
+        "error-type": "application",
+        "error-tag":"unknown-element",
+        "error-message": "Failed to parse path: Could not parse path 'network-topology:network-topology/topology=uniconfig/node=R2/frinx-uniconfig-topology:configuration/alias/test'. Offset: '113': Node with name 'test' cannot be found under node: (http://tail-f.com/ns/aaa/1.1?revision=2018-09-12)alias. Candidate data children nodes: name, expansion.",
+        "error-info": {
+          "node-id": "R2"
+        }
       }
     ]
   }

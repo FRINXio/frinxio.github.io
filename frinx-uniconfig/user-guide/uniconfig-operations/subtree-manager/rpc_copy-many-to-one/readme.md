@@ -45,7 +45,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed example

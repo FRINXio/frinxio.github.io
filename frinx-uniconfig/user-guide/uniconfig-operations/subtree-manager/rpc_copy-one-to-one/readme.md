@@ -37,7 +37,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed example
@@ -60,13 +60,13 @@ curl --location --request POST 'http://localhost:8181/rests/operations/subtree-m
 }'
 ```
 
-```json RPC Response, Status: 500
+```json RPC Response, Status: 400
 {
   "errors": {
     "error": [
       {
         "error-type": "application",
-        "error-tag": "operation-failed",
+        "error-tag": "unknown-element",
         "error-message": "Failed to find schema node with identifier '(example-services?revision=2010-01-01)orgs' under: NodeList(originalListSchemaNode=list node)"
       }
     ]
