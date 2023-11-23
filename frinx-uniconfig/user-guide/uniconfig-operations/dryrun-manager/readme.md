@@ -22,9 +22,9 @@ any reason the RPC will be failed entirely.
 
 ### Successful example
 
-RPC input contains the target node and the output contains a list of
-commands which would be sent to the device if the RPC commit or
-checked-commit was called.
+RPC input does not contain the target node and the output contains
+a list of commands which would be sent to the device if the RPC commit
+or checked-commit was called.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -32,32 +32,26 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
-        }
     }
 }'
 ```
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "overall-status": "complete",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration": "<rpc message-id=\"m-23\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-24\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<get-config>\n<source>\n<candidate/>\n</source>\n<filter xmlns:ns0=\"urn:ietf:params:xml:ns:netconf:base:1.0\" ns0:type=\"subtree\">\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/filter&gt;\n&lt;/get-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-25\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<edit-config>\n<target>\n<candidate/>\n</target>\n<config>\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;mtus/&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/config&gt;\n&lt;/edit-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-26\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-27\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n<rpc message-id=\"m-28\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-29\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-30\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n",
-                    "configuration-status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration": "2019-09-13T09:03:34.072: configure terminal\n2019-09-13T09:03:34.073: interface GigabitEthernet0/0/0/1fghgfhfh\nno shutdown\nroot\n\n2019-09-13T09:03:34.073: commit\n2019-09-13T09:03:34.074: end\n",
-                    "configuration-status": "complete"
-                }
-            ]
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "IOSXRN",
+          "configuration": "<rpc message-id=\"m-23\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-24\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<get-config>\n<source>\n<candidate/>\n</source>\n<filter xmlns:ns0=\"urn:ietf:params:xml:ns:netconf:base:1.0\" ns0:type=\"subtree\">\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/filter&gt;\n&lt;/get-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-25\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<edit-config>\n<target>\n<candidate/>\n</target>\n<config>\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;mtus/&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/config&gt;\n&lt;/edit-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-26\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-27\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n<rpc message-id=\"m-28\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-29\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-30\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n"
+        },
+        {
+          "node-id": "IOSXR",
+          "configuration": "2019-09-13T09:03:34.072: configure terminal\n2019-09-13T09:03:34.073: interface GigabitEthernet0/0/0/1fghgfhfh\nno shutdown\nroot\n\n2019-09-13T09:03:34.073: commit\n2019-09-13T09:03:34.074: end\n"
         }
+      ]
     }
+  }
 }
 ```
 
@@ -70,40 +64,34 @@ modified nodes.
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
---data-raw ' {
-     "output": {
-         "node-results": {
-             "node-result": [
-                 {
-                     "node-id": "IOSXRN",
-                     "configuration": "<rpc message-id=\"m-23\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-24\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<get-config>\n<source>\n<candidate/>\n</source>\n<filter xmlns:ns0=\"urn:ietf:params:xml:ns:netconf:base:1.0\" ns0:type=\"subtree\">\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/filter&gt;\n&lt;/get-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-25\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<edit-config>\n<target>\n<candidate/>\n</target>\n<config>\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;mtus/&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/config&gt;\n&lt;/edit-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-26\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-27\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n<rpc message-id=\"m-28\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-29\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-30\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n",
-                     "configuration-status": "complete"
-                 },
-                {
-                    "node-id": "IOSXR",
-                    "configuration": "2019-09-13T09:03:34.072: configure terminal\n2019-09-13T09:03:34.073: interface GigabitEthernet0/0/0/1fghgfhfh\nno shutdown\nroot\n\n2019-09-13T09:03:34.073: commit\n2019-09-13T09:03:34.074: end\n",
-                    "configuration-status": "complete"
-                }
-            ]
+--data-raw '{
+    "input": {
+    }
+}'
+```
+
+```json RPC Response, Status: 200
+{
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "IOSXRN",
+          "configuration": "<rpc message-id=\"m-23\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-24\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<get-config>\n<source>\n<candidate/>\n</source>\n<filter xmlns:ns0=\"urn:ietf:params:xml:ns:netconf:base:1.0\" ns0:type=\"subtree\">\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/filter&gt;\n&lt;/get-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-25\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<edit-config>\n<target>\n<candidate/>\n</target>\n<config>\n<interface-configurations xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg\"&gt;\n&lt;interface-configuration&gt;\n&lt;active&gt;act&lt;/active&gt;\n&lt;interface-name&gt;GigabitEthernet0/0/0/1&lt;/interface-name&gt;\n&lt;mtus/&gt;\n&lt;/interface-configuration&gt;\n&lt;/interface-configurations&gt;\n&lt;/config&gt;\n&lt;/edit-config&gt;\n&lt;/rpc&gt;\n<rpc message-id=\"m-26\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-27\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n<rpc message-id=\"m-28\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<lock>\n<target>\n<candidate/>\n</target>\n</lock>\n</rpc>\n<rpc message-id=\"m-29\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<commit/>\n</rpc>\n<rpc message-id=\"m-30\" xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<unlock>\n<target>\n<candidate/>\n</target>\n</unlock>\n</rpc>\n"
         },
-        "overall-status": "complete"
+        {
+          "node-id": "IOSXR",
+          "configuration": "2019-09-13T09:03:34.072: configure terminal\n2019-09-13T09:03:34.073: interface GigabitEthernet0/0/0/1fghgfhfh\nno shutdown\nroot\n\n2019-09-13T09:03:34.073: commit\n2019-09-13T09:03:34.074: end\n"
+        }
+      ]
     }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete"
-    }
+  }
 }
 ```
 
-### Failed Example
+### Successful Example
 
-RPC input contains the target node and the output contains a list of
-commands which would be sent to the device if the RPC commit or
-checked-commit was called. One node does not support dry-run.
+If there are not any touched nodes, the request will finish successfully.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -111,36 +99,19 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR"]
-        }
     }
 }'
 ```
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "error-message": "Node does not support dry-run",
-                    "error-type": "no-connection",
-                    "configuration-status": "fail"
-                }
-            ]
-        }
-    }
+  "output": {}
 }
 ```
 
 ### Failed Example
 
-RPC input contains the target node and the output contains a list of
-commands which would be sent to the device if the RPC commit or
-checked-commit was called. One node has a bad configuration.
+Node 'R1' has failed due to improper configuration.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -148,45 +119,32 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 500
 {
-    "output": {
-        "overall-configuration-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "rollback-status": "complete",
-                    "error-message": "Supplied value \"GigabitEthernet0/0/0/1gfhjk\" does not match required pattern \"^(?:(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm))$\"\n",
-                    "error-type": "uniconfig-error",
-                    "configuration-status": "fail"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration": "2019-09-13T08:37:28.331: configure terminal\n2019-09-13T08:37:28.536: interface GigabitEthernet0/0/0/1\nshutdown\nroot\n\n2019-09-13T08:37:28.536: commit\n2019-09-13T08:37:28.536: end\n",
-                    "configuration-status": "complete",
-                    "rollback-status": "complete"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-failed",
+        "error-message": "Supplied value \"GigabitEthernet0/0/0/1ghjfhjfhjfghj\" does not match required pattern \"^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\"",
+        "error-info": {
+          "node-id": "R1",
+          "configuration-status": "fail",
+          "rollback-status": "complete"
         }
-    }
+      }
+    ]
+  }
 }
 ```
 
 ### Failed Example
 
-RPC input contains the target node and the output contains a list of
-commands which would be sent to a device if the RPC commit or
-checked-commit was called. One node does not support dry-run (IOSXR) and
-one is not in the unified topology (IOSXRN). There is one extra node,
-which has not been mounted yet (AAA).
+Node 'R1' has failed due to not supporting dry-run functionality.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -194,48 +152,30 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN","AAA"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 501
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "AAA",
-                            "error-message": "Node has not been mounted yet.",
-                            "error-type": "no-connection",
-                            "configuration-status": "fail"
-                },
-                {
-                    "node-id": "IOSXR",
-                            "error-message": "Node does not support dry-run.",
-                            "error-type": "no-connection",
-                            "configuration-status": "fail"
-                },
-                {
-                    "node-id": "IOSXRN",
-                            "error-message": "Unified mountpoint not found.",
-                            "error-type": "no-connection",
-                            "configuration-status": "fail"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-not-supported",
+        "error-message": "Node does not support dry-run",
+        "error-info": {
+          "node-id": "R1"
         }
-    }
+      }
+    ]
+  }
 }
 ```
 
 ### Failed Example
 
-RPC input contains a target node and the output contains a list of
-commands which would be sent to a device if the RPC commit or
-checked-commit was called. One node has not been mounted yet (AAA).
+Node 'R1' has lost connection.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -243,61 +183,24 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN","AAA"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 502
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail"
-                },
-                {
-                    "node-id": "AAA",
-                    "error-message": "Node has not been mounted yet.",
-                    "error-type": "no-connection",
-                    "configuration-status": "fail"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "southbound_no_connection",
+        "error-message": "Unified Mountpoint not found.",
+        "error-info": {
+          "node-id": "R1",
+          "configuration-status": "fail"
         }
-    }
-}
-```
-
-### Failed Example
-
-If the RPC input does not contain the target nodes and there weren't any
-touched nodes, the request will result in an error.
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "target-nodes": {
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes.",
-        "overall-status": "fail"
-    }
+      }
+    ]
+  }
 }
 ```

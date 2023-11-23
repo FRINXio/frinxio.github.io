@@ -37,12 +37,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
     }
 }'
 ```
-```json RPC Response, Status: 200
-{
-    "output": {
-        "status": "complete"
-    }
-}
+
+```RPC Response, Status: 204
 ```
 
 ## RPC Example
@@ -53,9 +49,10 @@ GET request to get the actual state of the device.
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=vnf20/uniconfig-config:admin-state' \
 --header 'Authorization: Basic YWRtaW46e3twYXNzd29yZH19'
 ```
+
 ```json RPC Response, Status: 200
 {
-    "uniconfig-config:admin-state": "unlocked"
+  "uniconfig-config:admin-state": "unlocked"
 }
 ```
 
@@ -72,16 +69,17 @@ curl --location --request PUT 'http://localhost:8181/rests/data/network-topology
     "clientAliveCountMax": 4
 }'
 ```
+
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-message": "4af87c96-e49b-4e62-9217-316fe966d3d1: The commit RPC returned FAIL status. \n The node: '{{node_id}}' is currently in admin-state LOCKED.",
-                "error-tag": "bad-element",
-                "error-type": "rpc"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-message": "4af87c96-e49b-4e62-9217-316fe966d3d1: The commit RPC returned FAIL status. \n The node: '{{node_id}}' is currently in admin-state LOCKED.",
+        "error-tag": "bad-element",
+        "error-type": "rpc"
+      }
+    ]
+  }
 }
 ```

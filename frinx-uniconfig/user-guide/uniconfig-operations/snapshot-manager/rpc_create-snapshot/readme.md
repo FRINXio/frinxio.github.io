@@ -30,7 +30,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed Example
@@ -55,15 +55,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-type": "application",
-                "error-message": "Snapshot name cannot be empty. "
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-type": "application",
+        "error-message": "Snapshot name cannot be empty. "
+      }
+    ]
+  }
 }
 ```
 
@@ -89,18 +89,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-info": {
-                    "node-id": "AAA"
-                },
-                "error-type": "application",
-                "error-message": "Node is missing in uniconfig topology OPERATIONAL datastore."
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-info": {
+          "node-id": "AAA"
+        },
+        "error-type": "application",
+        "error-message": "Node is missing in uniconfig topology OPERATIONAL datastore."
+      }
+    ]
+  }
 }
 ```
 
@@ -123,14 +123,14 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-type": "application",
-                "error-message": "Nodes are not specified in input request"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-type": "application",
+        "error-message": "Nodes are not specified in input request"
+      }
+    ]
+  }
 }
 ```

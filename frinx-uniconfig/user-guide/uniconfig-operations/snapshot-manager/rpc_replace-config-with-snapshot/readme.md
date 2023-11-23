@@ -33,7 +33,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed Example
@@ -59,18 +59,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-info": {
-                    "node-id": "IOSXR"
-                },
-                "error-type": "application",
-                "error-message": "Snapshot with name 'snapshot2' does not exist."
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-info": {
+          "node-id": "IOSXR"
+        },
+        "error-type": "application",
+        "error-message": "Snapshot with name 'snapshot2' does not exist."
+      }
+    ]
+  }
 }
 ```
 
@@ -96,15 +96,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-type": "application",
-                "error-message": "Snapshot name cannot be empty. "
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-type": "application",
+        "error-message": "Snapshot name cannot be empty. "
+      }
+    ]
+  }
 }
 ```
 
@@ -131,18 +131,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-info": {
-                    "node-id": "IOSXRN"
-                },
-                "error-type": "application",
-                "error-message": "UniConfig node does not exist in snapshot 'snapshot1'."
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-info": {
+          "node-id": "IOSXRN"
+        },
+        "error-type": "application",
+        "error-message": "UniConfig node does not exist in snapshot 'snapshot1'."
+      }
+    ]
+  }
 }
 ```
 
@@ -164,14 +164,14 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-type": "application",
-                "error-message": "Nodes are not specified in input request"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-type": "application",
+        "error-message": "Nodes are not specified in input request"
+      }
+    ]
+  }
 }
 ```

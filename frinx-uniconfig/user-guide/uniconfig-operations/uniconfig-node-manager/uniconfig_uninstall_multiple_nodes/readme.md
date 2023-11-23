@@ -29,7 +29,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
@@ -60,7 +60,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
@@ -89,17 +89,17 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-app-tag": "UniconfigError",
-                "error-info": "R2",
-                "error-message": "Node has already been removed from Uniconfig",
-                "error-type": "application"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-app-tag": "UniconfigError",
+        "error-info": "R2",
+        "error-message": "Node has already been removed from Uniconfig",
+        "error-type": "application"
+      }
+    ]
+  }
 }
 ```
 
@@ -128,15 +128,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-app-tag": "UniconfigError",
-                "error-message": "Field 'node-id' must be specified in the RPC input",
-                "error-type": "application"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-app-tag": "UniconfigError",
+        "error-message": "Field 'node-id' must be specified in the RPC input",
+        "error-type": "application"
+      }
+    ]
+  }
 }
 ```

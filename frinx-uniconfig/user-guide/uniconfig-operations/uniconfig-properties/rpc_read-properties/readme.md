@@ -31,23 +31,23 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "read-properties-status": "There are 3 from 3 properties read successfully. Ignored keys: []",
-        "properties-map": [
-            {
-                "key": "notifications.kafka.audit-logs-enabled",
-                "value": "true"
-            },
-            {
-                "key": "notifications.kafka.netconf-notifications-enabled",
-                "value": "true"
-            },
-            {
-                "key": "notifications.kafka.gnmi-notifications-enabled",
-                "value": "true"
-            }
-        ]
-    }
+  "output": {
+    "read-properties-status": "There are 3 from 3 properties read successfully. Ignored keys: []",
+    "properties-map": [
+      {
+        "key": "notifications.kafka.audit-logs-enabled",
+        "value": "true"
+      },
+      {
+        "key": "notifications.kafka.netconf-notifications-enabled",
+        "value": "true"
+      },
+      {
+        "key": "notifications.kafka.gnmi-notifications-enabled",
+        "value": "true"
+      }
+    ]
+  }
 }
 ```
 

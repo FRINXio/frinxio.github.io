@@ -29,16 +29,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "topology-id": "netconf",
-                    "node-id": "R1"
-                }
-            ]
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "topology-id": "netconf",
+          "node-id": "R1"
         }
+      ]
     }
+  }
 }
 ```
 
@@ -60,9 +60,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "node-results": {}
-    }
+  "output": {
+    "node-results": {}
+  }
 }
 ```
 
@@ -83,16 +83,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "topology-id": "gnmi",
-                    "node-id": "R1"
-                } 
-            ]
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "topology-id": "gnmi",
+          "node-id": "R1"
         }
+      ]
     }
+  }
 }
 ```
 
@@ -113,8 +113,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "node-results": {}
-    }
+  "output": {
+    "node-results": {}
+  }
 }
 ```

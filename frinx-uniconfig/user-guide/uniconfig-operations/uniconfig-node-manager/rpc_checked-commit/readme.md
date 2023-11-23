@@ -41,7 +41,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed example

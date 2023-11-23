@@ -135,7 +135,7 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 Reverting changes of multiple transactions.
@@ -156,7 +156,7 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 Reverting changes of multiple transactions, where the transaction with
@@ -181,7 +181,7 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 204
 ```
 
 ### Failed example
@@ -206,18 +206,18 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-info": {
-                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
-                },
-                "error-type": "application",
-                "error-message": "Failed to find transaction in log with ID: 82b4e916-e1ed-4a54-97bc-067699842af6"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-info": {
+          "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
+        },
+        "error-type": "application",
+        "error-message": "Failed to find transaction in log with ID: 82b4e916-e1ed-4a54-97bc-067699842af6"
+      }
+    ]
+  }
 }
 ```
 
@@ -245,17 +245,17 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-info": {
-                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
-                },
-                "error-message": "Transaction metadata 2c4c1eb5-185a-4204-8021-2ea05ba2c2c1 contains non-existent uniconfig nodes: [R1]",
-                "error-type": "application"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-info": {
+          "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
+        },
+        "error-message": "Transaction metadata 2c4c1eb5-185a-4204-8021-2ea05ba2c2c1 contains non-existent uniconfig nodes: [R1]",
+        "error-type": "application"
+      }
+    ]
+  }
 }
 ```

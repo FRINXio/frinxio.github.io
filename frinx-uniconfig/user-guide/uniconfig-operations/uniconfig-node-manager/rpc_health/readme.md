@@ -17,10 +17,10 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "healthy": true,
-        "message": "DB persistence is disabled"
-    }
+  "output": {
+    "healthy": true,
+    "message": "DB persistence is disabled"
+  }
 }
 ```
 
@@ -28,21 +28,20 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "healthy": true,
-        "message": "DB connection is alive"
-    }
+  "output": {
+    "healthy": true,
+    "message": "DB connection is alive"
+  }
 }
 ```
 
 **Response when database persistence is enabled and database connection is not valid:**
 
-
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "healthy": false,
-        "message": "Error connecting to DB"
-    }
+  "output": {
+    "healthy": false,
+    "message": "Error connecting to DB"
+  }
 }
 ```

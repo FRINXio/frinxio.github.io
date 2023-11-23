@@ -59,8 +59,7 @@ curl --location --request PUT 'http://localhost:8181/rests/data/schema-settings:
 }'
 ```
 
-```text PUT response
-Status: 201
+```PUT response, Status: 201
 ```
 
 GET request can be used to check if latest-schema is placed in the *config* datastore.
@@ -70,9 +69,9 @@ curl --location --request GET 'http://localhost:8181/rests/data/schema-settings:
 --header 'Accept: application/json'
 ```
 
-```json GET response
+```json GET response, Status: 200
 {
-    "latest-schema" : "schemas-1"
+  "latest-schema" : "schemas-1"
 }
 ```
 
@@ -96,7 +95,7 @@ templates.backup-templates-limit=7
 After new YANG repository is installed, UniConfig will look for revision of the 
 `latestSchemaReferenceModuleName` module in the repository. If the revision found is more recent than the last cached
 revision, UniConfig will automatically write identifier of the fresh repository into 'latest-schema' configuration.
-Afterwards, 'latest-schema' is used by UniConfig the same way as it would be written manually via RESTCONF.
+Afterward, 'latest-schema' is used by UniConfig the same way as it would be written manually via RESTCONF.
 
 ## Variables
 
@@ -262,8 +261,8 @@ leaf-list elements is preserved during substitution process.
 **F. Leaves and leaf-lists with escaped special characters**
 
 - The following example demonstrates escaping of special characters
-    outside of the variable identifier (leaf-list 'leaf-list-a') and
-    inside of the variable identifier (leaf 'leaf-a').
+    outside the variable identifier (leaf-list 'leaf-list-a') and
+    inside the variable identifier (leaf 'leaf-a').
 - Unescaped identifier of the leaf 'leaf-a': 'var-{2}'.
 
 ```
@@ -369,7 +368,7 @@ on the defined tags:
     (implicit root operation).
 - Container 'system:system' will be updated - its content is merged
     only, if it has already been created.
-- The whole list 'users' will replaced in the target UniConfig node.
+- The whole list 'users' will be replaced in the target UniConfig node.
 - Leaf named 'password' will be created at the target UniConfig node -
     it cannot exist under 'users' list entry, otherwise the error will
     be raised.
@@ -477,9 +476,7 @@ curl --location --request PUT 'http://localhost:8181/rests/data/network-topology
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-}
+```RPC Response, Status: 204
 ```
 
 ## Read/update/delete template
@@ -503,26 +500,26 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 
 ```json RPC Response, Status: 200
 {
-    "unit": [
-        {
+  "unit": [
+    {
+      "@": {
+        "template-tags:operation": "replace"
+      },
+      "vlan-id": "{$unit-id}",
+      "enable": false,
+      "name": "{$unit-id}",
+      "family-inet": {
+        "address": [
+          {
             "@": {
-                "template-tags:operation": "replace"
+              "template-tags:operation": "update"
             },
-            "vlan-id": "{$unit-id}",
-            "enable": false,
-            "name": "{$unit-id}",
-            "family-inet": {
-                "address": [
-                    {
-                        "@": {
-                            "template-tags:operation": "update"
-                        },
-                        "address": "{$ip-address}"
-                    }
-                ]
-            }
-        }
-    ]
+            "address": "{$ip-address}"
+          }
+        ]
+      }
+    }
+  ]
 }
 ```
 
@@ -545,7 +542,5 @@ curl --location --request PUT 'http://localhost:8181/rests/data/network-topology
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-}
+```json RPC Response, Status: 204
 ```

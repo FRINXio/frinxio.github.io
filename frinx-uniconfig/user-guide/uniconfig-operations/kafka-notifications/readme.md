@@ -464,7 +464,7 @@ curl --location --request GET 'http://localhost:8181/rests/data/subscriptions:su
 ## NETCONF subscriptions
 
 A subscription is required to receive NETCONF notifications from a NETCONF device. Subscriptions are
-created using an install request:
+created using an installation request:
 
 ```bash Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-node' \
@@ -531,7 +531,7 @@ existing subscriptions for the stream.
 
 A subscription is required to receive gNMI notifications from a gNMI device.
 
-Subscriptions are created with an install request:
+Subscriptions are created with an installation request:
 
 ```bash Request
 curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
@@ -680,7 +680,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-chan
 }'
 ```
 
-```json RPC response
+```json RPC response, Status: 200
 {
   "output": {
     "subscription-id": "8e82453d-4ea8-4c26-a74e-50d855a721fa"
@@ -733,7 +733,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-chan
 }'
 ```
 
-```RPC response, Status: 200
+```RPC response, Status: 204
 ```
 
 #### Failed Example

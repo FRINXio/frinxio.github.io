@@ -480,7 +480,7 @@ config>request calculate-diff target-nodes/node iosxr
     "node-result": [
       {
         "node-id": "iosxr",
-        "status": "complete",
+        "topology-id": "uniconfig",
         "created-data": [
           {
             "path": "/network-topology:network-topology/topology=uniconfig/node=iosxr/frinx-uniconfig-topology:configuration/frinx-openconfig-system:system",
@@ -497,8 +497,7 @@ config>request calculate-diff target-nodes/node iosxr
         ]
       }
     ]
-  },
-  "overall-status": "complete"
+  }
 }
 [24.04.2023, 09:25:31]
 ```
@@ -514,17 +513,7 @@ target-nodes/node
 
 ```shell Execute 'sync-from-network' RPC with two arguments (target node and 'check-timestamp' flag)
 config>request sync-from-network check-timestamp true target-nodes/node iosxr
-{
-  "node-results": {
-    "node-result": [
-      {
-        "node-id": "iosxr",
-        "status": "complete"
-      }
-    ]
-  },
-  "overall-status": "complete"
-}
+{}
 [24.04.2023, 09:26:48]
 ```
 
@@ -754,11 +743,10 @@ config>diff xr5
     "node-result": [
       {
         "node-id": "xr5",
-        "status": "complete"
+        "topology-id": "uniconfig"
       }
     ]
-  },
-  "overall-status": "complete"
+  }
 }
 [24.04.2023, 09:31:32]
 config>

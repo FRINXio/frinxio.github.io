@@ -39,12 +39,12 @@ transaction-log will be disabled.
 
 ```json
 {
-    "transactions": {
-        "maxStoredTransactions": 5,
-        "maxTransactionAge": 0,
-        "cleaningInterval": 0,
-        "uniconfigTransactionEnabled": false
-    }
+  "transactions": {
+    "maxStoredTransactions": 5,
+    "maxTransactionAge": 0,
+    "cleaningInterval": 0,
+    "uniconfigTransactionEnabled": false
+  }
 }
 ```
 
@@ -61,54 +61,54 @@ curl --location --request GET 'http://localhost:8181/rests/data/transaction-log:
 
 ```json RPC Response, Status: 200
 {
-    "transactions-metadata": {
-        "transaction-metadata": [
-            {
-                "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
-                "status": "SUCCESS",
-                "metadata": [
-                    {
-                        "node-id": "xr6unistore",
-                        "diff": [
-                            {
-                                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether1/description",
-                                "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether1-description-create\"\n}"
-                            },
-                            {
-                                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether2/description",
-                                "data-before": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-before\"\n}",
-                                "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-after\"\n}"
-                            },
-                        ],
-                        "topology": "unistore"
-                    }
-                ],
-                "last-commit-time": "2021-Mar-09 10:53:59.102 +0100"
-            },
-            {
-                "transaction-id": "869df9d6-9025-4849-b30b-9db4d8fb26ec",
-                "status": "SUCCESS",
-                "metadata": [
-                    {
-                        "node-id": "xr5",
-                        "diff": [
-                            {
-                                "path": "/frinx-openconfig-interfaces:interfaces/interface=Loopback123/config",
-                                "data-before": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"name\": \"Loopback123\"\n  }\n}",
-                                "data-after": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"description\": \"test-description\",\n    \"name\": \"Loopback123\"\n  }\n}"
-                            }
-                        ],
-                        "topology": "uniconfig"
-                    }
-                ],
-                "last-commit-time": "2021-Mar-09 11:06:58.000 +0100"
-            },
-            {
-                "transaction-id": "88878588-ad67-424a-9a16-5e7360df7df0",
-                "status": "FAILED",
-                "failed-commit-time": "2022-Mar-11 14:39:32.813 +0100"
-            }
-        ]
-    }
+  "transactions-metadata": {
+    "transaction-metadata": [
+      {
+        "transaction-id": "221aa4a5-e32e-46fd-921a-83314b190e89",
+        "status": "SUCCESS",
+        "metadata": [
+          {
+            "node-id": "xr6unistore",
+            "diff": [
+              {
+                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether1/description",
+                "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether1-description-create\"\n}"
+              },
+              {
+                "path": "/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether2/description",
+                "data-before": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-before\"\n}",
+                "data-after": "{\n  \"Cisco-IOS-XR-ifmgr-cfg:description\": \"bundle-ether2-description-after\"\n}"
+              }
+            ],
+            "topology": "unistore"
+          }
+        ],
+        "last-commit-time": "2021-Mar-09 10:53:59.102 +0100"
+      },
+      {
+        "transaction-id": "869df9d6-9025-4849-b30b-9db4d8fb26ec",
+        "status": "SUCCESS",
+        "metadata": [
+          {
+            "node-id": "xr5",
+            "diff": [
+              {
+                "path": "/frinx-openconfig-interfaces:interfaces/interface=Loopback123/config",
+                "data-before": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"name\": \"Loopback123\"\n  }\n}",
+                "data-after": "{\n  \"frinx-openconfig-interfaces:config\": {\n    \"type\": \"iana-if-type:softwareLoopback\",\n    \"enabled\": true,\n    \"description\": \"test-description\",\n    \"name\": \"Loopback123\"\n  }\n}"
+              }
+            ],
+            "topology": "uniconfig"
+          }
+        ],
+        "last-commit-time": "2021-Mar-09 11:06:58.000 +0100"
+      },
+      {
+        "transaction-id": "88878588-ad67-424a-9a16-5e7360df7df0",
+        "status": "FAILED",
+        "failed-commit-time": "2022-Mar-11 14:39:32.813 +0100"
+      }
+    ]
+  }
 }
 ```

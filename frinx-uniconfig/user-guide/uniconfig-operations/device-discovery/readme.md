@@ -43,7 +43,7 @@ The snippet contains two additional parameters.
 -   **"max-pool-size"** specifies the size of the
     executor that is used. If the amount of addresses in the
     request is high, consider raising the value.
--   **kepalive-time** specifies the time (in seconds) before the execution
+-   **keepalive-time** specifies the time (in seconds) before the execution
     of a specified task is timed out.
 -   **"addressCheckLimit"** specifies how many
     addresses are checked. If more addresses are specified in
@@ -450,18 +450,18 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-type": "protocol",
-                "error-tag": "malformed-message",
-                "error-message": "Error parsing input: Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case.",
-                "error-info": "Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case."
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "protocol",
+        "error-tag": "malformed-message",
+        "error-message": "Error parsing input: Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case.",
+        "error-info": "Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case."
+      }
+    ]
+  }
 }
 ```
 
@@ -504,17 +504,17 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-type": "protocol",
-                "error-tag": "bad-element",
-                "error-message": "Invalid IP address range! End address should be bigger than start address! The range is from 127.0.0.63 to 127.0.0.60"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "protocol",
+        "error-tag": "bad-element",
+        "error-message": "Invalid IP address range! End address should be bigger than start address! The range is from 127.0.0.63 to 127.0.0.60"
+      }
+    ]
+  }
 }
 ```
 
@@ -556,16 +556,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 501
 {
-    "errors": {
-        "error": [
-            {
-                "error-type": "application",
-                "error-tag": "operation-not-supported",
-                "error-message": "IPv6 is not supported yet!"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-not-supported",
+        "error-message": "IPv6 is not supported yet!"
+      }
+    ]
+  }
 }
 ```

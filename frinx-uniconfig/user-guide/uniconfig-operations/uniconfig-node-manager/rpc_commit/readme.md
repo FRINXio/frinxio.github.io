@@ -67,7 +67,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
@@ -85,7 +85,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
@@ -102,7 +102,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed example
@@ -121,8 +121,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ```json RPC Response, Status: 500
 {
-  "output": {
-    "node-result": [
+  "errors": {
+    "error": [
       {
         "error-type": "application",
         "error-tag": "validation-failed",
@@ -296,7 +296,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
       {
         "error-type": "application",
         "error-tag": "operation-failed",
-        "error-message": "RemoteDevice{vnf212}: RPC during tx failed. Error messages: [/alias[name='^new']/expansion is not configured]",
+        "error-message": "RemoteDevice{R1}: RPC during tx failed. Error messages: [/alias[name='^new']/expansion is not configured]",
         "error-info": {
           "node-id": "R1",
           "configuration-status": "fail"

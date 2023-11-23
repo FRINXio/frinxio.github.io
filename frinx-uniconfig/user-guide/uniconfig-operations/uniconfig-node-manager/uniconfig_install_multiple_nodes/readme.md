@@ -51,7 +51,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
@@ -112,7 +112,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
@@ -163,20 +163,20 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 409
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-exists",
-                "error-app-tag": "UniconfigError",
-                "error-info": {
-                    "topology-id": "netconf",
-                    "node-id": "R2"
-                },
-                "error-message": "Node has already been installed using NETCONF protocol",
-                "error-type": "application"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-exists",
+        "error-app-tag": "UniconfigError",
+        "error-info": {
+          "topology-id": "netconf",
+          "node-id": "R2"
+        },
+        "error-message": "Node has already been installed using NETCONF protocol",
+        "error-type": "application"
+      }
+    ]
+  }
 }
 ```
 
@@ -227,16 +227,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-app-tag": "UniconfigError",
-                "error-message": "Field 'node-id' must be specified in the RPC input",
-                "error-type": "application"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-app-tag": "UniconfigError",
+        "error-message": "Field 'node-id' must be specified in the RPC input",
+        "error-type": "application"
+      }
+    ]
+  }
 }
 ```
 
@@ -285,15 +285,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "missing-element",
-                "error-app-tag": "UniconfigError",
-                "error-message": "Failed to install more than one node with same ID to Uniconfig layer.",
-                "error-type": "application"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "missing-element",
+        "error-app-tag": "UniconfigError",
+        "error-message": "Failed to install more than one node with same ID to Uniconfig layer.",
+        "error-type": "application"
+      }
+    ]
+  }
 }
 ```

@@ -82,7 +82,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
@@ -150,7 +150,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
 }
 ```
 
-```RPC response, Status: 200
+```RPC response, Status: 204
 ```
 
 ### Failed example

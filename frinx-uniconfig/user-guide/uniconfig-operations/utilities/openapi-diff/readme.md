@@ -4,7 +4,7 @@
 
 The Uniconfig distribution includes a program for checking the difference between OpenAPI specifications. 
 After building and unpacking the distribution, you can find the program in the 'utils' directory as a shell
-script called called 'show_swagger_diff.sh'.
+script called 'show_swagger_diff.sh'.
 
 The program uses [OpenAPI-diff](https://github.com/OpenAPITools/openapi-diff) to generate OpenAPI differences.
 

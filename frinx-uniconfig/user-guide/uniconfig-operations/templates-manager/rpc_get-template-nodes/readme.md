@@ -18,7 +18,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 
 ```json RPC Response, Status: 200
 {
-    "output": {}
+  "output": {}
 }
 ```
 
@@ -35,10 +35,10 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "nodes": [
-            "test-template"
-        ]
-    }
+  "output": {
+    "nodes": [
+      "test-template"
+    ]
+  }
 }
 ```

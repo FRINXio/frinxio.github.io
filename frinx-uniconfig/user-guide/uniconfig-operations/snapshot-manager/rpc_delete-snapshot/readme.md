@@ -24,7 +24,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed example
@@ -46,14 +46,14 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-type": "application",
-                "error-message": "Snapshot with name snapshot1 does not exist. Cannot delete snapshot."
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-type": "application",
+        "error-message": "Snapshot with name snapshot1 does not exist. Cannot delete snapshot."
+      }
+    ]
+  }
 }
 ```

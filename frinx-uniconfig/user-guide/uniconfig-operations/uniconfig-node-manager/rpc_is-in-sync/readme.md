@@ -55,6 +55,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
   }
 }
 ```
+
 ### Successful example
 
 If RPC input contains no target nodes, all touched nodes are invoked.

@@ -220,23 +220,22 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "global",
-                    "status": "complete",
-                    "created-data": [
-                        {
-                            "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings",
-                            "data": "{\n  \"config:settings\": {\n    \"update-interval\": 5000,\n    \"cluster\": {\n      \"ping-interval\": 20000,\n      \"idle-timeout\": 100\n    },\n    \"routing-protocols\": [\n      {\n        \"process-id\": \"rip\",\n        \"interfaces\": [\n          \"eth0.0\",\n          \"eth0.1\"\n        ]\n      },\n      {\n        \"process-id\": \"ospf\",\n        \"interfaces\": [\n          \"eth0.1\"\n        ]\n      }\n    ]\n  }\n}"
-                        }
-                    ]
-                }
-            ]
-        },
-        "overall-status": "complete"
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "global",
+          "topology-id": "unistore",
+          "created-data": [
+            {
+              "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings",
+              "data": "{\n  \"config:settings\": {\n    \"update-interval\": 5000,\n    \"cluster\": {\n      \"ping-interval\": 20000,\n      \"idle-timeout\": 100\n    },\n    \"routing-protocols\": [\n      {\n        \"process-id\": \"rip\",\n        \"interfaces\": [\n          \"eth0.0\",\n          \"eth0.1\"\n        ]\n      },\n      {\n        \"process-id\": \"ospf\",\n        \"interfaces\": [\n          \"eth0.1\"\n        ]\n      }\n    ]\n  }\n}"
+            }
+          ]
+        }
+      ]
     }
+  }
 }
 ```
 
@@ -260,20 +259,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "global",
-                    "configuration-status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
+```RPC Response, Status: 204
 ```
 
 !!!
@@ -295,30 +281,30 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 
 ```json RPC Response, Status: 200
 {
-    "frinx-uniconfig-topology:configuration": {
-        "config:settings": {
-            "update-interval": 5000,
-            "cluster": {
-                "ping-interval": 20000,
-                "idle-timeout": 100
-            },
-            "routing-protocols": [
-                {
-                    "process-id": "rip",
-                    "interfaces": [
-                        "eth0.0",
-                        "eth0.1"
-                    ]
-                },
-                {
-                    "process-id": "ospf",
-                    "interfaces": [
-                        "eth0.1"
-                    ]
-                }
-            ]
+  "frinx-uniconfig-topology:configuration": {
+    "config:settings": {
+      "update-interval": 5000,
+      "cluster": {
+        "ping-interval": 20000,
+        "idle-timeout": 100
+      },
+      "routing-protocols": [
+        {
+          "process-id": "rip",
+          "interfaces": [
+            "eth0.0",
+            "eth0.1"
+          ]
+        },
+        {
+          "process-id": "ospf",
+          "interfaces": [
+            "eth0.1"
+          ]
         }
+      ]
     }
+  }
 }
 ```
 
@@ -339,7 +325,7 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 
 ```json RPC Response, Status: 200
 {
-    "frinx-configuration-metadata:last-configuration-fingerprint": "428d1a55-5681-4a47-8a51-634a215127d7"
+  "frinx-configuration-metadata:last-configuration-fingerprint": "428d1a55-5681-4a47-8a51-634a215127d7"
 }
 ```
 
@@ -377,8 +363,7 @@ curl --location --request PATCH 'http://localhost:8181/rests/data/network-topolo
 }'
 ```
 
-```json RPC Response, Status: 200
-
+```RPC Response, Status: 200
 ```
 
 ### Calculate-diff RPC (updated node)
@@ -402,35 +387,34 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "global",
-                    "status": "complete",
-                    "created-data": [
-                        {
-                            "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings/routing-protocols=eigrp",
-                            "data": "{\n  \"routing-protocols\": [\n    {\n      \"process-id\": \"eigrp\",\n      \"interfaces\": [\n        \"g1\"\n      ]\n    }\n  ]\n}"
-                        }
-                    ],
-                    "updated-data": [
-                        {
-                            "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings/routing-protocols=ospf",
-                            "data-actual": "{\n  \"config:interfaces\": [\n    \"eth0.1\"\n  ]\n}",
-                            "data-intended": "{\n  \"config:interfaces\": [\n    \"eth0.1\",\n    \"eth0.2\"\n  ]\n}"
-                        },
-                        {
-                            "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings/cluster/ping-interval",
-                            "data-actual": "{\n  \"config:ping-interval\": 20000\n}",
-                            "data-intended": "{\n  \"config:ping-interval\": 10000\n}"
-                        }
-                    ]
-                }
-            ]
-        },
-        "overall-status": "complete"
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "global",
+          "topology-id": "unistore",
+          "created-data": [
+            {
+              "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings/routing-protocols=eigrp",
+              "data": "{\n  \"routing-protocols\": [\n    {\n      \"process-id\": \"eigrp\",\n      \"interfaces\": [\n        \"g1\"\n      ]\n    }\n  ]\n}"
+            }
+          ],
+          "updated-data": [
+            {
+              "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings/routing-protocols=ospf",
+              "data-actual": "{\n  \"config:interfaces\": [\n    \"eth0.1\"\n  ]\n}",
+              "data-intended": "{\n  \"config:interfaces\": [\n    \"eth0.1\",\n    \"eth0.2\"\n  ]\n}"
+            },
+            {
+              "path": "/network-topology:network-topology/topology=unistore/node=global/frinx-uniconfig-topology:configuration/config:settings/cluster/ping-interval",
+              "data-actual": "{\n  \"config:ping-interval\": 20000\n}",
+              "data-intended": "{\n  \"config:ping-interval\": 10000\n}"
+            }
+          ]
+        }
+      ]
     }
+  }
 }
 ```
 
@@ -451,29 +435,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "global",
-                    "configuration-status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
+```RPC Response, Status: 204
 ```
 
 ### Displaying content of transaction-log
 
-Committed transactions including all metadata (e.g serialized diff
+Committed transactions including all metadata (e.g. serialized diff
 output or transaction ID) can be displayed by reading of
 'transactions-metadata' container in the Operational data-store. It also
 displays information about successfully committed UniStore nodes.
-Afterwards, user can leverage this information and revert some changes
+Afterward, user can leverage this information and revert some changes
 using transaction-id that is shown in the transaction-log.
 
 ```bash Reading entries of transaction-log
@@ -483,52 +454,52 @@ curl --location --request GET 'http://localhost:8181/rests/data/transactions-met
 
 ```json RPC Response, Status: 200
 {
-    "transaction-metadata": [
+  "transaction-metadata": [
+    {
+      "transaction-id": "428d1a55-5681-4a47-8a51-634a215127d7",
+      "username": "admin",
+      "metadata": [
         {
-            "transaction-id": "428d1a55-5681-4a47-8a51-634a215127d7",
-            "username": "admin",
-            "metadata": [
-                {
-                    "node-id": "global",
-                    "diff": [
-                        {
-                            "path": "/config:settings",
-                            "data-after": "{\"config:settings\": {\"cluster\": {\"idle-timeout\": 100, \"ping-interval\": 20000}, \"update-interval\": 5000, \"routing-protocols\": [{\"interfaces\": [\"eth0.0\", \"eth0.1\"], \"process-id\": \"rip\"}, {\"interfaces\": [\"eth0.1\"], \"process-id\": \"ospf\"}]}}"
-                        }
-                    ],
-                    "topology": "unistore"
-                }
-            ],
-            "commit-time": "2021-Oct-10 18:52:40.942 +0200"
-        },
-        {
-            "transaction-id": "107e38d9-fa85-4bd7-89f3-76beac55345a",
-            "username": "admin",
-            "metadata": [
-                {
-                    "node-id": "global",
-                    "diff": [
-                        {
-                            "path": "/config:settings/routing-protocols=eigrp",
-                            "data-after": "{\"routing-protocols\": [{\"interfaces\": [\"g1\"], \"process-id\": \"eigrp\"}]}"
-                        },
-                        {
-                            "path": "/config:settings/cluster/ping-interval",
-                            "data-before": "{\"config:ping-interval\": 20000}",
-                            "data-after": "{\"config:ping-interval\": 10000}"
-                        },
-                        {
-                            "path": "/config:settings/routing-protocols=ospf",
-                            "data-before": "{\"config:interfaces\": [\"eth0.1\"]}",
-                            "data-after": "{\"config:interfaces\": [\"eth0.1\", \"eth0.2\"]}"
-                        }
-                    ],
-                    "topology": "unistore"
-                }
-            ],
-            "commit-time": "2021-Oct-10 19:12:34.241 +0200"
+          "node-id": "global",
+          "diff": [
+            {
+              "path": "/config:settings",
+              "data-after": "{\"config:settings\": {\"cluster\": {\"idle-timeout\": 100, \"ping-interval\": 20000}, \"update-interval\": 5000, \"routing-protocols\": [{\"interfaces\": [\"eth0.0\", \"eth0.1\"], \"process-id\": \"rip\"}, {\"interfaces\": [\"eth0.1\"], \"process-id\": \"ospf\"}]}}"
+            }
+          ],
+          "topology": "unistore"
         }
-    ]
+      ],
+      "commit-time": "2021-Oct-10 18:52:40.942 +0200"
+    },
+    {
+      "transaction-id": "107e38d9-fa85-4bd7-89f3-76beac55345a",
+      "username": "admin",
+      "metadata": [
+        {
+          "node-id": "global",
+          "diff": [
+            {
+              "path": "/config:settings/routing-protocols=eigrp",
+              "data-after": "{\"routing-protocols\": [{\"interfaces\": [\"g1\"], \"process-id\": \"eigrp\"}]}"
+            },
+            {
+              "path": "/config:settings/cluster/ping-interval",
+              "data-before": "{\"config:ping-interval\": 20000}",
+              "data-after": "{\"config:ping-interval\": 10000}"
+            },
+            {
+              "path": "/config:settings/routing-protocols=ospf",
+              "data-before": "{\"config:interfaces\": [\"eth0.1\"]}",
+              "data-after": "{\"config:interfaces\": [\"eth0.1\", \"eth0.2\"]}"
+            }
+          ],
+          "topology": "unistore"
+        }
+      ],
+      "commit-time": "2021-Oct-10 19:12:34.241 +0200"
+    }
+  ]
 }
 ```
 
@@ -544,8 +515,7 @@ curl --location --request DELETE 'http://localhost:8181/rests/data/network-topol
 --header 'Accept: application/json'
 ```
 
-```json RPC Response, Status: 204
-
+```RPC Response, Status: 204
 ```
 
 ```bash Commit RPC
@@ -560,18 +530,5 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "global",
-                    "configuration-status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
-    }
-}
+```RPC Response, Status: 204
 ```
