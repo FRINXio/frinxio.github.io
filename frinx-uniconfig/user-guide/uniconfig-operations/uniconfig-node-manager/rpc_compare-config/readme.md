@@ -1,19 +1,14 @@
 # RPC compare-config
 
-This RPC is a combination of the sync-from-network and calculate-diff RPCs. 
-If one of those RPCs fails, this one also fails with no changes made.
+This RPC is a combination of the **sync-from-network** and **calculate-diff** RPCs.  If one of those RPCs fails, this one also fails with no changes made.
 
-The purpose of this RPC is to synchronize configurations from network devices
-to UniConfig nodes in the Configuration datastore of the UniConfig transaction.
+The purpose of this RPC is to synchronise configurations from network devices to UniConfig nodes in the **Configuration** datastore of the UniConfig transaction.
 
-The RPC input contains a list of UniConfig nodes which configuration should be
-compared to actual configuration in the transaction The output of the RPC
-describes the result of compare-config and matches all input nodes with
-a list of statements representing the diff.
+RPC input contains a list of UniConfig nodes whose configuration is compared to the actual configuration in the transaction. RPC output describes the result of the RPC and matches all input nodes with a list of statements representing the diff.
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:compare-config' \
@@ -70,10 +65,9 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-If the RPC input does not contain the target nodes, configuration of all
-touched nodes in the transaction is compared to synced device configuration.
+If RPC input does not specify target nodes, the configuration of all nodes touched in the transaction is compared to the synced device configuration.
 
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:compare-config' \
@@ -129,9 +123,9 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-The RPC compare-config input has target node and there is no diff.
+RPC input includes a target node and there is no diff.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:compare-config' \
@@ -161,11 +155,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-The RPC compare-config input has two target nodes. One of the nodes,
-'R2', has not been installed yet. The output describes the result
-of the sync-from-network.
+RPC input has two target nodes, one of which (R2) is not installed. The output describes the result of **sync-from-network**.
 
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:compare-config' \
@@ -197,10 +189,9 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 }
 ```
 
-If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.
+### Failed example
 
-### Failed Example
+If RPC input does not contain target nodes and there are no touched nodes, the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:compare-config' \

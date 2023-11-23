@@ -1,20 +1,18 @@
 # RPC calculate-git-like-diff
 
-This RPC creates a diff between the actual UniConfig topology nodes and
-the intended UniConfig topology nodes. The RPC input contains a list of
-UniConfig nodes to calculate the diff. Output of the RPC contains a list
-of statements representing the diff in a git-like style.
-It checks for every touched node in the transaction if target nodes are
-not specified in the input. If some node fails, the RPC will fail entirely.
+This RPC creates a diff between actual and intended UniConfig topology nodes.
+
+RPC input contains a list of UniConfig nodes to calculate the diff. RPC output contains a list of statements that represent the diff in a git-like style.
+
+If RPC input contains no target nodes, all nodes touched in the transaction are checked. If any node fails, the entire RPC fails. 
 
 ![RPC calculate-git-like-diff](RPC_calculate-git-like-diff-RPC_calculate_git_like_diff.svg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-The RPC calculate-git-like-diff input has two target nodes and the
-output contains a list of statements representing the diff.
+RPC input contains two target nodes. RPC output contains a list of statements representing the diff.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
@@ -62,12 +60,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-The RPC calculate-git-like-diff input has no target nodes specified,
-so it will look for all touched nodes in the transaction, and the output
-will contain a list of all changes on different paths. Multiple changes
-that occur under the same path are merged together.
+RPC input contains no target nodes, therefore all nodes touched in the transaction are checked. RPC output contains a list of all changes on different paths. Multiple changes that occur under the same path are merged together.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
@@ -123,9 +118,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Successful Example
+### Successful example
 
-The RPC calculate-git-like-diff input has target node and there is no diff.
+RPC input contains a target node and there is no diff.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
@@ -155,11 +150,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-The RPC calculate-git-like-diff input has target node. Nodes 'R2' has not
-been installed yet. The output describes the result of the calculate-diff
-RPC.
+RPC input contains a target node that is not installed. RPC output describes the result of the calculate-diff RPC.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
@@ -192,11 +185,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-The RPC calculate-git-like-diff input has two target nodes.
-One of the nodes,'R1', has not been installed yet. The output
-describes the result of the calculate-git-like-diff RPC.
+RPC input contains two target nodes, one of which (R1) is not installed. RPC output describes the result of the calculate-git-like-diff RPC.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \
@@ -229,10 +220,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.
+If RPC input does not contain target nodes and no nodes have been touched, the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-git-like-diff' \

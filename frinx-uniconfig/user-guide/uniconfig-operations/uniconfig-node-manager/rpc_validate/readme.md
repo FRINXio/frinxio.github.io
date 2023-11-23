@@ -1,39 +1,33 @@
 # RPC validate
 
-The external application stores the intended configuration under nodes
-in the UniConfig topology. The configuration can be validated if it is
-valid or not. The trigger for execution of configuration validation is
-an RPC validate. RPC input contains a list of UniConfig nodes which
-configuration should be validated. Output of the RPC describes the
-result of the validation and matches all input nodes. It is valid to
-call this RPC with empty list of target nodes - in this case, all nodes
-that have been modified in the UniConfig transaction will be validated.
+The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be checked for validity. This RPC is the trigger for configuration validation.
 
-The configuration of nodes consists of the following phases:
+RPC input contains a list of UniConfig nodes whose configuration should be validated. RPC output describes the result of the validation and matches all input nodes.
+
+If the RPC is called with an empty list of target nodes, all nodes modified in the UniConfig transaction are validated.
+
+The configuration of nodes follows these steps:
 
 1. Open transaction to device
 2. Write configuration
 3. Validate configuration
 4. Close transaction
 
-If one node failed in second (validation) phase for any reason, the RPC
-will fail entirely.
+If any node fails in step 3 (validation), the entire RPC also fails.
 
 !!!
-The validation (second phase) take place only on nodes that support
-this operation.
+Validation (step 3) only applies to nodes that support this operation.
 !!!
 
-Validate RPC is shown in the figure bellow.
+The diagram below illustrates the RPC:
 
 ![RPC validate](RPC_validation-RPC_validate.svg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-RPC validate input has 2 target nodes and the output describes
-the result of the successful validation.
+RPC input has two target nodes. RPC output describes the result of successful validation.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -51,10 +45,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```RPC Response, Status: 200
 ```
 
-### Successful Example
+### Successful example
 
-If the RPC input does not contain the target nodes, all touched node
-in the transaction will be validated.
+If RPC input does not specify any target nodes, all nodes touched in the transaction are validated.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -71,10 +64,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```RPC Response, Status: 200
 ```
 
-### Failed Example
+### Failed example
 
-RPC commit input has 1 target node and the output describes the
-result of the validation. Node has failed because validation failed.
+RPC input has one target node. RPC output describes the result of the validation. In this case, the node has failed because validation has failed.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -106,11 +98,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC input contains 2 nodes, the first one 'R1' is valid,
-the second one 'R2' has not been installed yet. If there is
-one invalid node, Uniconfig will be evaluated nodes with fail.
+RPC input contains two nodes. Node R1 is valid and R2 is not installed. If at least one node is invalid, the entire operation fails.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -142,10 +132,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Failed Example
+### Failed example
 
-If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.
+If RPC input does not contain any target nodes and there are no touched nodes, the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
