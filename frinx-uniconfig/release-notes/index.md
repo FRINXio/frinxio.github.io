@@ -1,5 +1,6 @@
 # Release notes
 
+- [Release notes for UniConfig 5.2.4](../release-notes/uniconfig-5.2.4.md)
 - [Release notes for UniConfig 5.2.3](../release-notes/uniconfig-5.2.3.md)
 - [Release notes for UniConfig 5.1.15](../release-notes/uniconfig-5.1.15.md)
 - [Release notes for UniConfig 5.1.14](../release-notes/uniconfig-5.1.14.md)
