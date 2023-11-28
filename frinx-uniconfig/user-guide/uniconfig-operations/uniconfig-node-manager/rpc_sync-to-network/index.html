@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC sync-to-network | Frinx Docs</title>
     <meta name="title" content="RPC sync-to-network | Frinx Docs">
-    <meta name="description" content="This RPC is a combination of sync-from-network and commit RPCs. If one of these RPCs fails the RPC will fail without any changes made." />
+    <meta name="description" content="This RPC is a combination of the sync-from-network and commit RPCs. If one of those RPCs fails, this RPC also fails without making any changes." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_sync-to-network/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_sync-to-network/">
     <meta property="og:title" content="RPC sync-to-network | Frinx Docs">
-    <meta property="og:description" content="This RPC is a combination of sync-from-network and commit RPCs. If one of these RPCs fails the RPC will fail without any changes made.">
+    <meta property="og:description" content="This RPC is a combination of the sync-from-network and commit RPCs. If one of those RPCs fails, this RPC also fails without making any changes.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_sync-to-network/">
     <meta property="twitter:title" content="RPC sync-to-network | Frinx Docs">
-    <meta property="twitter:description" content="This RPC is a combination of sync-from-network and commit RPCs. If one of these RPCs fails the RPC will fail without any changes made.">
+    <meta property="twitter:description" content="This RPC is a combination of the sync-from-network and commit RPCs. If one of those RPCs fails, this RPC also fails without making any changes.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,31 +254,24 @@
         <span>RPC sync-to-network</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC is a combination of sync-from-network and commit RPCs.
-If one of these RPCs fails the RPC will fail without any changes made.</p>
-<p>The purpose of this RPC is to synchronize configuration from the
-UniConfig nodes in the Configuration datastore of UniConfig transaction
-to network devices. The RPC input contains a list of the UniConfig nodes
-which are to be updated on a network device. Output of the RPC describes
-the result of sync-to-network and matches all input nodes. Calling RPC
-with empty list of target nodes results in syncing configuration of all
-nodes that have been modified in the UniConfig transaction. If some node
-fails, the RPC fails entirely.</p>
-<p>It is necessary for admin-state of UniConfig nodes, specified in the input,
-to be set to &quot;unlocked&quot;.</p>
+<p>This RPC is a combination of the <strong>sync-from-network</strong> and <strong>commit</strong> RPCs. If one of those RPCs fails, this RPC also fails without making any changes.</p>
+<p>The purpose of this RPC is to synchronize configurations from UniConfig nodes in the <strong>Configuration</strong> datastore of the UniConfig transaction to network devices.</p>
+<p>RPC input contains a list of UniConfig nodes to be updated on a network device. RPC output describes the results and matches all input nodes.</p>
+<p>Calling this RPC with an empty list of target nodes syncs the configuration of all nodes modified in the UniConfig transaction. If any node fails, the entire RPC also fails.</p>
+<p>The <code v-pre>admin-state</code> of UniConfig nodes specified in the input must be set to <code v-pre>unlocked</code>.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains nodes which are to be updated on the corresponding network device.</p>
+<p>RPC input contains a list of nodes to be updated on the corresponding network device.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
@@ -299,11 +292,10 @@ to be set to &quot;unlocked&quot;.</p>
 <doc-anchor-target id="successful-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes, operation will be
-invoked on top of all touched nodes in the transaction.</p>
+<p>If RPC input contains no target nodes, the operation is invoked for all nodes touched in the transaction.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
@@ -323,12 +315,10 @@ invoked on top of all touched nodes in the transaction.</p>
 <doc-anchor-target id="failed-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>If one or more input nodes are not set to admin-state &#x27;unlocked&#x27;
-the request will result in an error pointing out nodes with
-the wrong admin-state.</p>
+<p>If the <code v-pre>admin-state</code> for some input nodes is not set to <code v-pre>unlocked</code>, the request results in an error that includes a list of nodes with the wrong state.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
@@ -370,10 +360,10 @@ the wrong admin-state.</p>
 <doc-anchor-target id="failed-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains only one node with bad admin-state.</p>
+<p>RPC input contains one node with an incorrect <code v-pre>admin-state</code>.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
@@ -407,12 +397,10 @@ the wrong admin-state.</p>
 <doc-anchor-target id="failed-example-2">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains 2 nodes, the first one &#x27;R1&#x27; is valid,
-the second one &#x27;R2&#x27; has not been installed yet. If there is
-at least one invalid node, operation will fail.</p>
+<p>RPC input contains two nodes. Node R1 is valid and R2 has not been installed. If at least one node is invalid, the entire operation fails.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \
@@ -446,11 +434,10 @@ at least one invalid node, operation will fail.</p>
 <doc-anchor-target id="failed-example-3">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-3">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.</p>
+<p>If RPC input contains no target nodes and there are no touched nodes, the request results in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-to-network' \

@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC copy-many-to-one | Frinx Docs</title>
     <meta name="title" content="RPC copy-many-to-one | Frinx Docs">
-    <meta name="description" content="RPC input contains:" />
+    <meta name="description" content="This RPC is used to perform operations with a configuration from multiple source paths to a single target path." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-many-to-one/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-many-to-one/">
     <meta property="og:title" content="RPC copy-many-to-one | Frinx Docs">
-    <meta property="og:description" content="RPC input contains:">
+    <meta property="og:description" content="This RPC is used to perform operations with a configuration from multiple source paths to a single target path.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-many-to-one/copy-many-to-one.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-many-to-one/">
     <meta property="twitter:title" content="RPC copy-many-to-one | Frinx Docs">
-    <meta property="twitter:description" content="RPC input contains:">
+    <meta property="twitter:description" content="This RPC is used to perform operations with a configuration from multiple source paths to a single target path.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-many-to-one/copy-many-to-one.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,22 +256,18 @@
         <span>RPC copy-many-to-one</span>
     </h1>
 </doc-anchor-target>
-<p>RPC input contains:</p>
+<p>This RPC is used to perform operations with a configuration from multiple source paths to a single target path.</p>
+<p>RPC input contains the following:</p>
 <ul>
-<li>type of operation - &#x27;merge&#x27; or &#x27;replace&#x27;,</li>
-<li>type of source datastore - CONFIGURATION / OPERATIONAL,</li>
-<li>type of target datastore - CONFIGURATION / OPERATIONAL,</li>
-<li>list of source paths in RFC-8040 URI formatting,</li>
-<li>target path in RFC-8040 URI formatting (target path denotes parent
-entities under which configuration is copied).</li>
+<li><strong>type of operation</strong>: <code v-pre>merge</code> or <code v-pre>replace</code></li>
+<li><strong>type of source datastore</strong>: <code v-pre>CONFIGURATION</code> or <code v-pre>OPERATIONAL</code></li>
+<li><strong>type of target datastore</strong>: <code v-pre>CONFIGURATION</code> or <code v-pre>OPERATIONAL</code></li>
+<li><strong>list of source paths</strong> in RFC-8040 URI format</li>
+<li><strong>target path</strong> in RFC-8040 URI format (target path denotes parent
+entities under which the configuration is copied)</li>
 </ul>
-<p>Target datastore is optional input field. By default, it is the same as
-source datastore. Other input fields are mandatory, so it is forbidden
-to call RPC with missing mandatory field. Output of RPC describes result
-of copy to target path RPC. If one path failed for any reason, RPC will
-be failed overall and no modification will be done to datastore - all
-modifications are done in the single atomic transaction.</p>
-<p>Description of RPC copy-many-to-one is on figure below.</p>
+<p>Target datastore is an optional input field. By default, it is the same as source datastore. All other input fields are mandatory.</p>
+<p>RPC output describes the result of the operation. If one path fails, the entire operation fails and the datastore is not modified (i.e., all modifications are performed in a single atomic transaction).</p>
 <p><figure class="content-center">
     <img src="copy-many-to-one.svg" alt="RPC copy-many-to-one" />
     <figcaption class="caption">RPC copy-many-to-one</figcaption>
@@ -280,7 +276,7 @@ modifications are done in the single atomic transaction.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
@@ -289,10 +285,8 @@ modifications are done in the single atomic transaction.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>The following example demonstrates execution of copy-many-to-one RPC
-with 3 source paths. Data that is described by these source paths
-(&#x27;snmp&#x27;, &#x27;access&#x27;, and &#x27;ntp&#x27; containers under three different nodes)
-will be copied under root &#x27;system:system&#x27; container (&#x27;dev04&#x27; node).</p>
+<p>This example demonstrates the execution of the copy-many-to-one RPC with three (3) source paths.</p>
+<p>Data described by these source paths (<code v-pre>snmp</code>, <code v-pre>access</code>, and <code v-pre>ntp</code> containers under three different nodes) are copied under the root <code v-pre>system:system</code> container (<code v-pre>dev04</code> node).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-many-to-one' \
@@ -314,12 +308,8 @@ will be copied under root &#x27;system:system&#x27; container (&#x27;dev04&#x27;
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;result&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
     <h3>
@@ -327,8 +317,7 @@ will be copied under root &#x27;system:system&#x27; container (&#x27;dev04&#x27;
         <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>The following example shows failed copy-many-to-one RPC. One of the
-source paths points to non-existing schema node (&#x27;invalid:invalid&#x27;).</p>
+<p>This example shows a failed copy-many-to-one RPC operation. One of the source paths points to a non-existing schema node (<code v-pre>invalid:invalid</code>).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-many-to-one' \
@@ -349,17 +338,17 @@ source paths points to non-existing schema node (&#x27;invalid:invalid&#x27;).</
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Cannot parse input path 'network-topology:network-topology/topology=uniconfig/node=dev01/configuration/invalid:invalid' - Failed to lookup for module with name 'invalid'.&quot;,
-                &quot;error-tag&quot;: &quot;unknown-element&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;protocol&quot;,
+        &quot;error-tag&quot;: &quot;unknown-element&quot;,
+        &quot;error-message&quot;: &quot;Cannot parse input path 'network-topology:network-topology/topology=uniconfig/node=dev01/configuration/invalid:invalid' - Failed to lookup for module with name 'invalid'.&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 

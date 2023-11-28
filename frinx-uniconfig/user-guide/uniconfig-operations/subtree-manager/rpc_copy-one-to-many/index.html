@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC copy-one-to-many | Frinx Docs</title>
     <meta name="title" content="RPC copy-one-to-many | Frinx Docs">
-    <meta name="description" content="RPC input contains:" />
+    <meta name="description" content="This RPC is used to perform operations with a configuration from a single source path to multiple target paths." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-many/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-many/">
     <meta property="og:title" content="RPC copy-one-to-many | Frinx Docs">
-    <meta property="og:description" content="RPC input contains:">
+    <meta property="og:description" content="This RPC is used to perform operations with a configuration from a single source path to multiple target paths.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-many/copy-one-to-many.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-many/">
     <meta property="twitter:title" content="RPC copy-one-to-many | Frinx Docs">
-    <meta property="twitter:description" content="RPC input contains:">
+    <meta property="twitter:description" content="This RPC is used to perform operations with a configuration from a single source path to multiple target paths.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-many/copy-one-to-many.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,21 +256,18 @@
         <span>RPC copy-one-to-many</span>
     </h1>
 </doc-anchor-target>
-<p>RPC input contains:</p>
+<p>This RPC is used to perform operations with a configuration from a single source path to multiple target paths.</p>
+<p>RPC input contains the following:</p>
 <ul>
-<li>type of operation - &#x27;merge&#x27; or &#x27;replace&#x27;,</li>
-<li>type of source datastore - CONFIGURATION / OPERATIONAL,</li>
-<li>type of target datastore - CONFIGURATION / OPERATIONAL,</li>
-<li>source path in RFC-8040 URI formatting, list of target paths in RFC-8040 URI formatting (target paths denote
-parent entities under which configuration is copied).</li>
+<li><strong>type of operation</strong>: <code v-pre>merge</code> or <code v-pre>replace</code></li>
+<li><strong>type of source datastore</strong>: <code v-pre>CONFIGURATION</code> or <code v-pre>OPERATIONAL</code></li>
+<li><strong>type of target datastore</strong>: <code v-pre>CONFIGURATION</code> or <code v-pre>OPERATIONAL</code></li>
+<li><strong>source path</strong> in RFC-8040 URI format</li>
+<li><strong>list of target paths</strong> in RFC-8040 URI format (target paths denote
+parent entities under the which configuration is copied)</li>
 </ul>
-<p>Target datastore is optional input field. By default, it is the same as
-source datastore. Other input fields are mandatory, so it is forbidden
-to call RPC with missing mandatory field. Output of RPC describes result
-of copy to target paths RPC. If one path failed for any reason, RPC will
-be failed overall and no modification will be done to datastore - all
-modifications are done in the single atomic transaction.</p>
-<p>Description of RPC copy-one-to-many is on figure below.</p>
+<p>Target datastore is an optional input field. By default, it is the same as source datastore. All other input fields are mandatory.</p>
+<p>RPC output describes the result of the operation. If one path fails, the entire RPC fails and the datastore is not modified (i.e., all modifications are performed in a single atomic transaction).</p>
 <p><figure class="content-center">
     <img src="copy-one-to-many.svg" alt="RPC copy-one-to-many" />
     <figcaption class="caption">RPC copy-one-to-many</figcaption>
@@ -279,7 +276,7 @@ modifications are done in the single atomic transaction.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
@@ -288,10 +285,13 @@ modifications are done in the single atomic transaction.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>The following example demonstrates merging of ethernet interface
-configuration from single source into interfaces &#x27;eth-0/2&#x27; (node
-&#x27;dev02&#x27;), &#x27;eth-0/3&#x27; (node &#x27;dev02&#x27;), &#x27;eth-0/100&#x27; (node &#x27;dev03&#x27;), and
-&#x27;eth-0/200&#x27; (node &#x27;dev03&#x27;).</p>
+<p>This example demonstrates merging the ethernet interface configuration from a single source to the following interfaces:</p>
+<ul>
+<li><code v-pre>eth-0/2</code> (node <code v-pre>dev02</code>)</li>
+<li><code v-pre>eth-0/3</code> (node <code v-pre>dev02</code>)</li>
+<li><code v-pre>eth-0/100</code> (node <code v-pre>dev03</code>)</li>
+<li><code v-pre>eth-0/200</code> (node <code v-pre>dev03</code>)</li>
+</ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-many' \
@@ -313,11 +313,8 @@ configuration from single source into interfaces &#x27;eth-0/2&#x27; (node
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
     <h3>
@@ -325,9 +322,8 @@ configuration from single source into interfaces &#x27;eth-0/2&#x27; (node
         <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>The next example shows failed copy-one-to-many RPC - both target paths
-are invalid since &#x27;ext&#x27; list schema nodes doesn&#x27;t contain
-&#x27;interfaces:interfaces&#x27; child container.</p>
+<p>This example shows a failed copy-one-to-many RPC operation.</p>
+<p>Both target paths are invalid, since the <code v-pre>ext</code> list schema nodes does not contain the <code v-pre>interfaces:interfaces</code> child container.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-many' \
@@ -346,12 +342,17 @@ are invalid since &#x27;ext&#x27; list schema nodes doesn&#x27;t contain
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;error-message&quot;: &quot;Failed to find schema node with identifier '(example-interfaces?revision=2019-12-01)interfaces' under: (example-interfaces?revision=2019-12-01)ext&quot;,
-        &quot;result&quot;: &quot;fail&quot;
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;operation-failed&quot;,
+        &quot;error-message&quot;: &quot;Failed to find schema node with identifier '(example-interfaces?revision=2019-12-01)interfaces' under: (example-interfaces?revision=2019-12-01)ext&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 

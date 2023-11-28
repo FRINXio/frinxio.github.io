@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>UniConfig Node Manager | Frinx Docs</title>
     <meta name="title" content="UniConfig Node Manager | Frinx Docs">
-    <meta name="description" content="The responsibility of this component is to maintain configuration on devices based on intended configuration. Each device and its" />
+    <meta name="description" content="This component is responsible for maintaining the configuration on devices based on their intended configuration." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/" />
@@ -23,22 +23,22 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/">
     <meta property="og:title" content="UniConfig Node Manager | Frinx Docs">
-    <meta property="og:description" content="The responsibility of this component is to maintain configuration on devices based on intended configuration. Each device and its">
+    <meta property="og:description" content="This component is responsible for maintaining the configuration on devices based on their intended configuration.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/">
     <meta property="twitter:title" content="UniConfig Node Manager | Frinx Docs">
-    <meta property="twitter:description" content="The responsibility of this component is to maintain configuration on devices based on intended configuration. Each device and its">
+    <meta property="twitter:description" content="This component is responsible for maintaining the configuration on devices based on their intended configuration.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -253,25 +253,12 @@
         <span>UniConfig Node Manager</span>
     </h1>
 </doc-anchor-target>
-<p>The responsibility of this component is to maintain configuration on
-devices based on intended configuration. Each device and its
-configuration is represented as a node in the uniconfig topology and the
-configuration of this node is described by using OpenConfig YANG models.
-The Northbound API of Uniconfig Manager (UNM) is RPC driven and provides
-functionality for commit with automatic rollback and synchronization of
-configuration from the network.</p>
-<p>When a commit is called, the UNM creates a diff based on intended state
-from CONFIG DS and actual state from OPER DS. This Diff is used as the
-basis for device configuration. UNM prepares a network wide transaction
-which uses Unified mountpoints for communication with different types of
-devices.</p>
-<p>An additional git like diff RPC was created so it shows all the changes
-grouped under root elements in a git-like style.</p>
-<p>In the case where the configuration of one device fails, the UNM
-executes automatic rollback where the previous configuration is restored
-on all modified devices.</p>
-<p>Synchronization from the network reads configuration from devices and
-stores it as an actual state to the OPER DS.</p>
+<p>This component is responsible for maintaining the configuration on devices based on their intended configuration. Each device and its configuration are represented as a node in the UniConfig topology. The node&#x27;s configuration is described using OpenConfig YANG models.</p>
+<p>The northbound API of the UniConfig Manager (UNM) is RPC-driven and provides commit functionality with automatic rollback and synchronization of configurations from the network.</p>
+<p>When a commit is called, UNM creates a diff based on the intended state in the <strong>Config</strong> datastore and the actual state in the <strong>Operational</strong> datastore. This diff is used as the basis for device configuration. UNM prepares a network-wide transaction that uses unified mountpoints for communication with different types of devices. An additional git-like diff RPC is used to display all changes grouped under root elements in a git-like style.</p>
+<p>If configuration fails for one device, UNM executes an automatic rollback where the previous configuration is restored on all modified devices.</p>
+<p>Synchronization from the network reads configurations from devices and stores them as actual states in the <strong>Operational</strong> datastore.</p>
+<p>See below for additional information on individual RPCs:</p>
 <ul>
 <li><a href="rpc_calculate-diff/">RPC calculate-diff</a></li>
 <li><a href="rpc_calculate-git-like-diff/">RPC calculate-git-like-diff</a></li>

@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC bulk-edit | Frinx Docs</title>
     <meta name="title" content="RPC bulk-edit | Frinx Docs">
-    <meta name="description" content="The bulk-edit operation can be used to modify multiple configuration subtrees under multiple target nodes" />
+    <meta name="description" content="The bulk-edit operation modifies multiple configuration subtrees under multiple target nodes in the uniconfig" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/">
     <meta property="og:title" content="RPC bulk-edit | Frinx Docs">
-    <meta property="og:description" content="The bulk-edit operation can be used to modify multiple configuration subtrees under multiple target nodes">
+    <meta property="og:description" content="The bulk-edit operation modifies multiple configuration subtrees under multiple target nodes in the uniconfig">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/execution_of_bulk_edit_rpc.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/">
     <meta property="twitter:title" content="RPC bulk-edit | Frinx Docs">
-    <meta property="twitter:description" content="The bulk-edit operation can be used to modify multiple configuration subtrees under multiple target nodes">
+    <meta property="twitter:description" content="The bulk-edit operation modifies multiple configuration subtrees under multiple target nodes in the uniconfig">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_bulk-edit/execution_of_bulk_edit_rpc.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,11 +256,8 @@
         <span>RPC bulk-edit</span>
     </h1>
 </doc-anchor-target>
-<p>The bulk-edit operation can be used to modify multiple configuration subtrees under multiple target nodes
-from the &#x27;uniconfig&#x27;, &#x27;templates&#x27; or &#x27;unistore&#x27; topology (the same list of modifications are applied to all listed
-target nodes). The bulk-edit operation is executed atomically - either all modifications are applied on all target nodes
-successfully, or the operation fails and the configuration is not touched in the UniConfig transaction. This RPC also benefits
-from parallel processing of changes per target node.</p>
+<p>The bulk-edit operation modifies multiple configuration subtrees under multiple target nodes in the <code v-pre>uniconfig</code>, <code v-pre>templates</code> or <code v-pre>unistore</code> topology. The same modifications are applied to all target nodes.</p>
+<p>The operation is executed atomically so that either all modifications are applied on all target nodes successfully, or the operation fails and the configuration is not touched in the UniConfig transaction. This RPC also benefits from parallel processing of changes per target node.</p>
 <p><figure class="content-center">
     <img src="execution_of_bulk_edit_rpc.svg" alt="RPC bulk-edit" />
     <figcaption class="caption">RPC bulk-edit</figcaption>
@@ -272,31 +269,23 @@ from parallel processing of changes per target node.</p>
         <span>RPC input</span>
     </h2>
 </doc-anchor-target>
-<p>RPC input specifies a list of target nodes and a list of modifications that must be applied under target nodes:</p>
-<p>Description of input fields:</p>
+<p>RPC input specifies a list of target nodes and a list of modifications to be applied to target nodes.</p>
+<p>RPC input fields:</p>
 <ul>
-<li><strong>topology-id</strong> (mandatory): Identifier for the topology which contains all target nodes.
-Currently supported topologies: uniconfig, templates, unistore.</li>
-<li><strong>node-id</strong> (optional): List of target nodes identifiers residing in the specified topology. If this field is not
-specified or is empty, RPC is executed on all available nodes in the specified topology.</li>
-<li><strong>edit</strong> (mandatory with at least 1 entry): List of modifications. Each modification is uniquely identified
-by the &#x27;path&#x27; key. Modifications are applied in the preserved user-defined order.</li>
+<li><strong>topology-id</strong> (mandatory): Identifier for the topology that contains all target nodes. Currently supported topologies are <code v-pre>uniconfig</code>, <code v-pre>templates</code> and <code v-pre>unistore</code>.</li>
+<li><strong>node-id</strong> (optional): List of target nodes identifiers residing in the specified topology. If this field is not specified or is left empty, the RPC is executed on all available nodes in the specified topology.</li>
+<li><strong>edit</strong> (mandatory with at least one entry): List of modifications. Each modification is uniquely identified by the <code v-pre>path</code> key. Modifications are applied in the user-defined order.</li>
 </ul>
-<p>Description of fields in the edit entry:</p>
+<p>Parameters for the <strong>edit</strong> field:</p>
 <ul>
-<li><strong>path</strong> (mandatory): Path encoded using the RFC-8040 format. Specified as relative path to root
-&#x27;configuration&#x27; container. If this leaf contains a single character &#x27;/&#x27;, the path points to the whole configuration.
-If this path contains a list node without key, the operation is applied to all list node elements.</li>
-<li><strong>operation</strong> (mandatory): Operation that must be executed on the specified path. Supported operations
-are &#x27;merge&#x27;, &#x27;replace&#x27;, and &#x27;remove&#x27;. Operations &#x27;merge&#x27; and &#x27;replace&#x27; requires to also specify input &#x27;data&#x27;.</li>
-<li><strong>data</strong> (optional): Content of the replaced or merged data without wrapping parent element
-(the last element of the path is not declared in the &#x27;data&#x27;, see examples on how to correctly specify content
-of this leaf in different use-cases).</li>
+<li><strong>path</strong> (mandatory): Path encoded using the RFC-8040 format. Specified as a relative path to the root <code v-pre>configuration</code> container. If this leaf contains a single character <code v-pre>/</code>, the path points to the whole configuration. If this path contains a list node without key, the operation is applied to all list node elements.</li>
+<li><strong>operation</strong> (mandatory): Operation to be executed on the specified path. Supported operations are <code v-pre>merge</code>, <code v-pre>replace</code>, and <code v-pre>remove</code>. Merge and replace operations also require the <strong>data</strong> input.</li>
+<li><strong>data</strong> (optional): Content of the replaced or merged data without wrapping parent element. The last element of the path is not declared in. See other cases for examples of how to specify the content of this leaf.</li>
 </ul>
 <p>Supported operations:</p>
 <ul>
-<li><strong>merge</strong>: Supplied value is merged with the target data node.</li>
-<li><strong>replace</strong>: Supplied value is used to replace the target data node.</li>
+<li><strong>merge</strong>: The supplied value is merged with the target data node.</li>
+<li><strong>replace</strong>: The supplied value is used to replace the target data node.</li>
 <li><strong>remove</strong>: Delete target node if it exists.</li>
 </ul>
 <doc-anchor-target id="rpc-output">
@@ -306,22 +295,12 @@ of this leaf in different use-cases).</li>
     </h2>
 </doc-anchor-target>
 <p>RPC output contains the global status of the executed operation and per-node status.</p>
-<p>Description of output fields:</p>
+<p>Fields in the <strong>node-result</strong> entry:</p>
 <ul>
-<li><strong>overall-status</strong>: Status of operation. If RPC execution fails on at least one of the target nodes,
-the overall status is set to &#x27;fail&#x27;. Otherwise, status is set to &#x27;complete&#x27;.</li>
-<li><strong>error-message</strong>: &quot;Reason for the failure. Used if there is a structural error
-in the RPC input that does not relate to one specific target node.&quot;</li>
-<li><strong>node-result</strong>: Results of RPC execution divided per target node (&#x27;node-id&#x27; is the key of the list).</li>
-</ul>
-<p>Description of fields in the node-result entry:</p>
-<ul>
-<li><strong>node-id</strong>: Identifier for the target node.</li>
-<li><strong>status</strong>: Status of bulk-edit operation on this node. This value is set to &#x27;complete&#x27; only if all modifications have
-been successfully written into UniConfig transaction (including other nodes). Otherwise, the value is set to &#x27;fail&#x27;.</li>
-<li><strong>error-message</strong>: Reason for the failure. This field appears in the output only if RPC execution failed
-on this target node.</li>
-<li><strong>error-type</strong>: Categorized error type.</li>
+<li><strong>error-type</strong>: Error type.</li>
+<li><strong>error-tag</strong> : Error tag.</li>
+<li><strong>error-message</strong>: Reason for the failure. Included in output only if RPC execution failed on target node.</li>
+<li><strong>error-info</strong>: Additional information about the error, such as node identification.</li>
 </ul>
 <doc-anchor-target id="rpc-examples">
     <h2>
@@ -337,12 +316,12 @@ on this target node.</li>
 </doc-anchor-target>
 <p>The following request demonstrates the application of six (6) modifications to four (4) templates:</p>
 <ol>
-<li>Replace the value of the &#x27;description&#x27; leaf.</li>
-<li>Remove the &#x27;snmp&#x27; container.</li>
-<li>Replace the whole &#x27;ssh&#x27; container.</li>
-<li>Merge the configuration of the &#x27;routing-protocol&#x27; list entry.</li>
-<li>Merge the whole &#x27;tree&#x27; list with the specified multiple list entries.</li>
-<li>Replace the leaf-list &#x27;services&#x27; with the provided array of strings.</li>
+<li>Replace the value of the <code v-pre>description</code> leaf.</li>
+<li>Remove the <code v-pre>snmp</code> container.</li>
+<li>Replace the whole <code v-pre>ssh</code> container.</li>
+<li>Merge the configuration of the <code v-pre>routing-protocol</code> list entry.</li>
+<li>Merge the whole <code v-pre>tree</code> list with the specified multiple list entries.</li>
+<li>Replace the leaf-list <code v-pre>services</code> with the provided array of strings.</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC request</div>
@@ -419,33 +398,10 @@ on this target node.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The response contains the overall status &#x27;complete&#x27; and per-node status &#x27;complete&#x27; - all modifications have been successfully
-written into the UniConfig transaction.</p>
+<p>All modifications have been successfully written into the UniConfig transaction.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC response</div>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;complete&quot;,
-        &quot;node-result&quot;: [
-            {
-                &quot;node-id&quot;: &quot;tpl_1&quot;,
-                &quot;status&quot;: &quot;complete&quot;
-            },
-            {
-                &quot;node-id&quot;: &quot;tpl_2&quot;,
-                &quot;status&quot;: &quot;complete&quot;
-            },
-            {
-                &quot;node-id&quot;: &quot;tpl_3&quot;,
-                &quot;status&quot;: &quot;complete&quot;
-            },
-            {
-                &quot;node-id&quot;: &quot;tpl_4&quot;,
-                &quot;status&quot;: &quot;complete&quot;
-            }
-        ]
-    }
-}</code></pre>
+<div class="codeblock-title">RPC response: Status: 204</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
     <h3>
@@ -453,8 +409,7 @@ written into the UniConfig transaction.</p>
         <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>The following example demonstrates the execution of a bulk-edit operation that fails on parsing one of the paths
-using YANG schemas of the device &#x27;dev02&#x27;.</p>
+<p>RPC input does not contain the mandatory <code v-pre>topology-id</code> field.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/subtree-manager:bulk-edit' \
@@ -464,8 +419,58 @@ using YANG schemas of the device &#x27;dev02&#x27;.</p>
 --data-raw '{
     &quot;input&quot;: {
         &quot;node-id&quot;: [
-            &quot;dev01&quot;,
-            &quot;dev02&quot;
+            &quot;R1&quot;,
+            &quot;R2&quot;
+        ],
+        &quot;edit&quot;: [
+            {
+                &quot;path&quot;: &quot;/dhcp/profile=test-profile&quot;,
+                &quot;operation&quot;: &quot;replace&quot;,
+                &quot;data&quot;: {
+                    &quot;name&quot;: &quot;test-profile&quot;,
+                    &quot;description&quot;: &quot;test&quot;
+                }
+            },
+            {
+                &quot;path&quot;: &quot;/settings&quot;,
+                &quot;operation&quot;: &quot;remove&quot;
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response: Status: 400</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;missing-element&quot;,
+        &quot;error-message&quot;: &quot;Topology-id is not specified&quot;
+      }
+    ]
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
+        <span>Failed example</span>
+    </h3>
+</doc-anchor-target>
+<p>This example demonstrates the execution of a bulk-edit operation that fails on parsing one of the paths using YANG schemas of the R2 device.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/subtree-manager:bulk-edit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: UNICONFIGTXID=7bb3fbdf-23b0-488e-8d59-8d0b2757da73' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;node-id&quot;: [
+            &quot;R1&quot;,
+            &quot;R2&quot;
         ],
         &quot;topology-id&quot;: &quot;uniconfig&quot;,
         &quot;edit&quot;: [
@@ -485,28 +490,22 @@ using YANG schemas of the device &#x27;dev02&#x27;.</p>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The RPC response contains the overall status &#x27;fail&#x27;. There is one error message in the result of &#x27;dev02&#x27;. Note that the &#x27;dev01&#x27;
-result also contains the &#x27;fail&#x27; status, as modifications have not been written to this node since another node (&#x27;dev02&#x27;) failed
-during execution of the operation.</p>
+<p>There is one error message in the result for R2. Note that no modifications are written to R1 because another node (R2) failed during execution of the operation.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC response</div>
+<div class="codeblock-title">RPC response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;overall-status&quot;: &quot;fail&quot;,
-        &quot;node-result&quot;: [
-            {
-                &quot;node-id&quot;: &quot;dev01&quot;,
-                &quot;status&quot;: &quot;fail&quot;,
-                &quot;error-type&quot;: &quot;uniconfig-error&quot;
-            },
-            {
-                &quot;node-id&quot;: &quot;dev02&quot;,
-                &quot;status&quot;: &quot;fail&quot;,
-                &quot;error-message&quot;: &quot;Failed to parse path: Could not parse path 'network-topology:network-topology/topology=uniconfig/node=dev02/frinx-uniconfig-topology:configuration/dhcp/profile=test-profile'. Offset: '108': Reason: List entry '(test-ns?revision=2018-09-12)dhcp' requires key or value predicate to be present&quot;,
-                &quot;error-type&quot;: &quot;uniconfig-error&quot;
-            }
-        ]
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;:&quot;unknown-element&quot;,
+        &quot;error-message&quot;: &quot;Failed to parse path: Could not parse path 'network-topology:network-topology/topology=uniconfig/node=R2/frinx-uniconfig-topology:configuration/alias/test'. Offset: '113': Node with name 'test' cannot be found under node: (http://tail-f.com/ns/aaa/1.1?revision=2018-09-12)alias. Candidate data children nodes: name, expansion.&quot;,
+        &quot;error-info&quot;: {
+          &quot;node-id&quot;: &quot;R2&quot;
+        }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 

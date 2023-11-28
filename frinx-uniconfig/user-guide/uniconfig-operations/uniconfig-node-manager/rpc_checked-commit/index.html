@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC checked-commit | Frinx Docs</title>
     <meta name="title" content="RPC checked-commit | Frinx Docs">
-    <meta name="description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit, but it also" />
+    <meta name="description" content="The checked-commit RPC is the trigger for executing the checked configuration." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/">
     <meta property="og:title" content="RPC checked-commit | Frinx Docs">
-    <meta property="og:description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit, but it also">
+    <meta property="og:description" content="The checked-commit RPC is the trigger for executing the checked configuration.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/rpc_checked-commit-rpc_checked_commit.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/">
     <meta property="twitter:title" content="RPC checked-commit | Frinx Docs">
-    <meta property="twitter:description" content="The trigger for execution of the checked configuration is RPC checked-commit. A checked commit is similar to an RPC commit, but it also">
+    <meta property="twitter:description" content="The checked-commit RPC is the trigger for executing the checked configuration.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_checked-commit/rpc_checked-commit-rpc_checked_commit.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,26 +256,19 @@
         <span>RPC checked-commit</span>
     </h1>
 </doc-anchor-target>
-<p>The trigger for execution of the checked configuration is RPC
-checked-commit. A checked commit is similar to an RPC commit, but it also
-checks if nodes are in sync with the network before it starts
-configuration. RPC fails if any node is out of sync. Output of the RPC
-describes the result of the commit and matches all modified nodes in the
-UniConfig transaction. If one node failed for any reason, RPC will fail
-entirely.</p>
-<p>In comparison to commit RPC, there is one additional phase between &#x27;lock
-and validate configured nodes&#x27; and &#x27;write configuration into device&#x27;
-phases:</p>
+<p>The checked-commit RPC is the trigger for executing the checked configuration.</p>
+<p>A checked commit is similar to an RPC commit, but it also checks that nodes are in sync with the network before it starts configuration. The RPC fails if any node is out of sync.</p>
+<p>RPC output describes the result of the commit and matches all modified nodes in the UniConfig transaction. If a node fails for any reason, the entire RPC fails.</p>
+<p>Compared to the commit RPC, there is an additional step between steps 1 and 3:</p>
 <ol>
 <li>Lock and validate configured nodes</li>
-<li>Check if nodes are in-sync with state on devices</li>
-<li>Write configuration into device</li>
+<li>Check if nodes are in sync with state on devices</li>
+<li>Write configuration to device</li>
 <li>Validate configuration</li>
 <li>Confirmed commit</li>
 <li>Confirming commit (submit configuration)</li>
 </ol>
-<p>Following diagram captures check if configuration fingerprints in the
-transaction datastore and device are equal.</p>
+<p>The following diagram illustrates the check assuming that configuration fingerprints in the transaction datastore and device are equal.</p>
 <p><figure class="content-center">
     <img src="rpc_checked-commit-rpc_checked_commit.svg" alt="RPC checked-commit" />
     <figcaption class="caption">RPC checked-commit</figcaption>
@@ -294,32 +287,24 @@ transaction datastore and device are equal.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>There is a difference between fingerprint-based validation in the
-phases 1 and 2. The goal of the first phase is validation if other
-transaction has already changed the same node by comparison of
-fingerprint in the UniConfig transaction and in the database. On the
-other side, the second phase validates if fingerprint in the
-transaction equals to fingerprint on the device - if another system /
-directly user via CLI has updated device configuration since the
-beginning of the transaction.</p>
+<p>Fingerprint-based validation is different between steps 1 and 2. For step 1, the goal is to validate if another transaction has already changed the same node by comparing fingerprints in the UniConfig transaction and the database. Step 2 checks that the fingerprint in the transaction is equal to the fingerprint on the device (i.e., if another system or a user directly via the CLI has updated the device configuration since the beginning of the transaction).</p>
         </div>
     </div>
 </div>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>Configuration of nodes &#x27;R1&#x27; and &#x27;R2&#x27; has been changed in the transaction.
-Both &#x27;R1&#x27; and &#x27;R2&#x27; are in-sync with actual state on the device.
-RPC checked-commit input invoke all touched nodes.</p>
+<p>The configuration of nodes R1 and R2 has been modified in the transaction. Both nodes are in sync with the actual state on the device.</p>
+<p>RPC input invokes all touched nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -337,13 +322,11 @@ RPC checked-commit input invoke all touched nodes.</p>
 <doc-anchor-target id="failed-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Configuration of nodes &#x27;R1&#x27; and &#x27;R2&#x27; has been changed in the transaction.
-Both &#x27;R1&#x27; and &#x27;R2&#x27; are in-sync with actual state on the device. Node &#x27;R1&#x27;
-has failed due to improper configuration. The output describes the result
-of the checked-commit RPC.</p>
+<p>The configuration of nodes R1 and R2 has been modified in the transaction. Both R1 and R2 are in sync with the actual state on the device. Node R1 has failed due to incorrect configuration.</p>
+<p>RPC output describes the result of the checked-commit RPC.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -376,13 +359,11 @@ of the checked-commit RPC.</p>
 <doc-anchor-target id="failed-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Configuration of nodes &#x27;R1&#x27; has been changed in the transaction.
-Node &#x27;R1&#x27; is in-sync with actual state on the device. Node &#x27;R1&#x27;
-has failed on the changed fingerprint. The output describes
-the result of the checked-commit.</p>
+<p>The configuration of node R1 has been changed in the transaction. Node R1 is in sync with the actual state on the device. Node R1 has failed on the changed fingerprint.</p>
+<p>RPC output describes the result of the checked-commit.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -414,10 +395,10 @@ the result of the checked-commit.</p>
 <doc-anchor-target id="failed-example-2">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Node &#x27;R2&#x27; has lost connection.</p>
+<p>Node R2 has lost connection.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \
@@ -449,11 +430,10 @@ the result of the checked-commit.</p>
 <doc-anchor-target id="failed-example-3">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-3">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.</p>
+<p>If the RPC input does not contain target nodes and no nodes have been touched, the request results in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:checked-commit' \

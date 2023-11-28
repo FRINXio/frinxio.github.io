@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC commit | Frinx Docs</title>
     <meta name="title" content="RPC commit | Frinx Docs">
-    <meta name="description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration" />
+    <meta name="description" content="The external application stores the intended configuration under nodes in the UniConfig topology." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/">
     <meta property="og:title" content="RPC commit | Frinx Docs">
-    <meta property="og:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration">
+    <meta property="og:description" content="The external application stores the intended configuration under nodes in the UniConfig topology.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/rpc_commit-rpc_commit.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/">
     <meta property="twitter:title" content="RPC commit | Frinx Docs">
-    <meta property="twitter:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for execution of configuration">
+    <meta property="twitter:description" content="The external application stores the intended configuration under nodes in the UniConfig topology.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_commit/rpc_commit-rpc_commit.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,35 +256,15 @@
         <span>RPC commit</span>
     </h1>
 </doc-anchor-target>
-<p>The external application stores the intended configuration under nodes
-in the UniConfig topology. The trigger for execution of configuration
-is an RPC commit. Output of the RPC describes the result of the commit.</p>
+<p>The external application stores the intended configuration under nodes in the UniConfig topology. The trigger for executing the configuration is an RPC commit. RPC output describes the result of the commit.</p>
 <p>The configuration of nodes consists of the following phases:</p>
 <ol>
-<li>Lock and validate configured nodes - Locking all modified nodes
-using PostgreSQL advisory locks and validation of fingerprints - if
-another transaction tries to commit overlapping nodes or different
-transaction has already changed one of the nodes, then commit will
-fail at this step.</li>
-<li>Write configuration into device - Pushing calculated changes into
-device without committing of these changes.</li>
-<li>Validate configuration - Validation of written configuration from
-the view of constraints and consistency.
-This phase can be skipped with &quot;do-validate&quot; flag.</li>
-<li>Confirmed commit - It is used for locking of device configuration,
-so no other transaction can touch this device. This phase can be
-skipped with &quot;do-confirmed-commit&quot; flag.</li>
-<li>Confirming commit (submit configuration) - Persisting all changes
-on devices and in the PostgreSQL database. UniConfig transaction
-is closed.</li>
-<li>Rollback - It is used for restoring of configuration to previous
-state, if the configuration process fails. When configuring more
-devices in a single transaction and the process fails on one
-particular device, the rollback procedure will be applied to all
-touched devices. This is done by auto rollback procedure, which
-is by default turned on. It can be switched off by setting up
-&#x27;do-rollback&#x27; flag in input of Commit RPC request. Then only
-failed devices will be rollbacked.</li>
+<li>Lock and validate configured nodes: Locking all modified nodes using PostgreSQL advisory locks and validating fingerprints. If another transaction attempts to commit overlapping nodes or another transaction has already changed one of the nodes, commit will fail at this step.</li>
+<li>Write configuration into device: Pushing calculated changes onto the device without committing these changes.</li>
+<li>Validate configuration: Validating the written configuration from the view of constraints and consistency. This phase can be skipped with the <code v-pre>do-validate</code> flag.</li>
+<li>Confirmed commit: Locking the device configuration so that no other transaction can touch the device. This phase can be skipped with the <code v-pre>do-confirmed-commit</code> flag.</li>
+<li>Confirming commit (submit configuration): Persisting all changes on devices and in the PostgreSQL database. The UniConfig transaction is closed.</li>
+<li>Rollback: Restoring the configuration to the previous state if the configuration process fails. When configuring multiple devices in a single transaction and the process fails on one particular device, the rollback procedure is applied to all touched devices. This is done with the auto rollback procedure, which is by enabled by default. The procedure can be disabled with the <code v-pre>do-rollback</code> flag in the RPC input, after which only failed devices will be rolled back.</li>
 </ol>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
@@ -299,10 +279,8 @@ failed devices will be rollbacked.</li>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>The &#x27;skip-unreachable-nodes&#x27; flag controls whether unreachable nodes
-are skipped when the RPC commit is sent. If set to &#x27;true&#x27;, nodes that
-are not reachable are skipped and others are configured. The default
-value is &#x27;false&#x27;.</p>
+<p>The <code v-pre>skip-unreachable-nodes</code> flag controls whether unreachable nodes are skipped when the RPC commit is sent. When set to <em>true</em>, nodes that are not reachable are skipped and others are configured. The default
+value is <em>false</em>.</p>
         </div>
     </div>
 </div>
@@ -310,12 +288,8 @@ value is &#x27;false&#x27;.</p>
     <img src="rpc_commit-rpc_commit.svg" alt="RPC commit" />
     <figcaption class="caption">RPC commit</figcaption>
 </figure>
-Commit invoke all touched nodes in transaction. There are no target
-nodes in the RPC input.</p>
-<p>The third and fourth phases take place only on the nodes that support
-these operations. If one node failed in the random phase for any reason
-the RPC will fail entirely. After commit RPC, UniConfig transaction is
-closed regardless of the commit result.</p>
+Commit invokes all nodes touched in the transaction. There are no target nodes in the RPC input.</p>
+<p>Steps 3 and 4 only apply to nodes that support these operations. If a node fails for any reason, the entire RPC fails. After commit RPC, the UniConfig transaction is closed regardless of the result.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -329,27 +303,18 @@ closed regardless of the commit result.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>If one of the nodes uses a confirmed commit (phase 4), which does not
-fail, then it is necessary to issue the submitted configuration (phase 5)
-within the timeout period. Otherwise, the node configuration issued by
-the confirmed commit will be reverted to its state before the confirmed
-commit (i.e. confirmed commit makes only temporary configuration changes).
-The timeout period is 600 seconds (10 minutes) by default, but the user
-can change it in the installation request.</p>
+<p>If one of the nodes uses a confirmed commit (step 4) that does not fail, it is necessary to issue the submitted configuration (step 5) within the timeout period. Otherwise the node configuration issued by the confirmed commit is reverted to its state before the confirmed commit (i.e., confirmed commit makes only temporary configuration changes). The default timeout period is 600 seconds (10 minutes), which can be changed in the installation request.</p>
         </div>
     </div>
 </div>
-<p>Next diagram describe the first phase of commit RPC - locking of changes
-nodes in the PostgreSQL database and verification if other transaction
-has already committed overlapping nodes.</p>
-<p>Next diagrams describe all 5 commit phases in detail:</p>
+<p>The following diagrams describe all five commit steps in more detail.</p>
 <p><strong>1. Lock and validate configured nodes</strong></p>
 <p><figure class="content-center">
     <img src="rpc_commit-locking-phase-locking_phase.svg" alt="Locking nodes" />
     <figcaption class="caption">Locking nodes</figcaption>
 </figure>
 </p>
-<p><strong>2. Write configuration into device</strong></p>
+<p><strong>2. Write configuration to device</strong></p>
 <p><figure class="content-center">
     <img src="rpc_commit-configuration-phase-configuration_phase.svg" alt="Configuration phase" />
     <figcaption class="caption">Configuration phase</figcaption>
@@ -373,9 +338,7 @@ has already committed overlapping nodes.</p>
     <figcaption class="caption">Confirming commit</figcaption>
 </figure>
 </p>
-<p>The last diagram shows rollback procedure that must be executed after
-failed commit on nodes that have already been configured and don&#x27;t
-support &#x27;candidate&#x27; datastore.</p>
+<p>The next diagram shows the rollback procedure that must be executed after a failed commit on nodes that have already been configured and do not support the <strong>candidate</strong> datastore.</p>
 <p><figure class="content-center">
     <img src="rpc_commit_rollback-rollback_changes.svg" alt="Rollback operation" />
     <figcaption class="caption">Rollback operation</figcaption>
@@ -384,17 +347,16 @@ support &#x27;candidate&#x27; datastore.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>UniConfig commits nodes &#x27;R1&#x27; and &#x27;R2&#x27; that has been changed in
-the actual transaction.</p>
+<p>UniConfig commits nodes R1 and R2 that have been changed in the actual transaction.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -412,11 +374,10 @@ the actual transaction.</p>
 <doc-anchor-target id="successful-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>Nodes &#x27;R1&#x27; and &#x27;R2&#x27; has been changed. RPC commit input has the flag
-to disable confirmed-commit phase. UniConfig commits all touched nodes.</p>
+<p>Nodes R1 and R2 have been changed. RPC input includes the flag to disable the confirmed-commit phase. UniConfig commits all touched nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -435,10 +396,10 @@ to disable confirmed-commit phase. UniConfig commits all touched nodes.</p>
 <doc-anchor-target id="successful-example-2">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>If there are not any touched nodes, the request will finish successfully.</p>
+<p>If there are no touched nodes, the request finishes successfully.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -456,10 +417,10 @@ to disable confirmed-commit phase. UniConfig commits all touched nodes.</p>
 <doc-anchor-target id="failed-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Node &#x27;R1&#x27; has failed because of failed validation phase.</p>
+<p>Node R1 has failed because it failed the validation step.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -492,11 +453,10 @@ to disable confirmed-commit phase. UniConfig commits all touched nodes.</p>
 <doc-anchor-target id="failed-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Node &#x27;R1&#x27; has failed because the confirmed commit failed. Validation
-phase was skipped due to false &quot;do-validate&quot; flag.</p>
+<p>Node R1 has failed because the confirmed commit failed. The validation step is skipped because of the <code v-pre>do-validate</code> flag.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -530,11 +490,10 @@ phase was skipped due to false &quot;do-validate&quot; flag.</p>
 <doc-anchor-target id="failed-example-2">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Node &#x27;R1&#x27; has failed because of the time delay between the confirmed
-commit and the submitted configuration.</p>
+<p>Node R1 has failed because of the time delay between confirmed commit and submitted configuration.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -567,10 +526,10 @@ commit and the submitted configuration.</p>
 <doc-anchor-target id="failed-example-3">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-3">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Node &#x27;R1&#x27; has failed due to improper configuration.</p>
+<p>Node R1 has failed due to incorrect configuration.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -603,10 +562,10 @@ commit and the submitted configuration.</p>
 <doc-anchor-target id="failed-example-4">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-4">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Node &#x27;R1&#x27; has lost connection.</p>
+<p>Node R1 has lost connection.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -638,15 +597,11 @@ commit and the submitted configuration.</p>
 <doc-anchor-target id="failed-example-5">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-5">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Node &#x27;R1&#x27; has failed because of wrong configuration. In this case
-validation, confirm-commit and auto-rollback were switched off.
-Because auto-rollback is switched off, configuration of &#x27;R1&#x27; device
-was successful. However, this can be done only if validation and
-confirm-commit phase were successful or skipped, otherwise configuration
-of &#x27;R1&#x27; device would also fail.</p>
+<p>Node R1 has failed because of incorrect configuration. In this case, validation, confirm-commit and auto-rollback were disabled.</p>
+<p>Since auto-rollback is disabled, configuration of the R1 device was successful. However, this can only be done if the validation and confirm-commit phases were successful or skipped; otherwise configuration of the R1 device would also fail.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -681,14 +636,11 @@ of &#x27;R1&#x27; device would also fail.</p>
 <doc-anchor-target id="failed-example-6">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-6">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Configuration of nodes &#x27;R1&#x27; nad &#x27;R2&#x27; has been changed in the transaction
-and both are in-sync with actual state on the device. Then connection of
-node &#x27;R2&#x27; has been lost. RPC commit input has the flag to skip unreachable
-nodes set to true. Result of the commit RPC describes success of &#x27;R1&#x27; node
-and shows list of unreachable nodes.</p>
+<p>Configuration of nodes R1 and R2 have been modified in the transaction, and both are in sync with the actual state on the device. Connection to node R2 has been lost. RPC input has the flag to skip unreachable nodes set to <code v-pre>true</code>.</p>
+<p>The result of the commit RPC describes success for node R1 and includes a list of unreachable nodes.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \

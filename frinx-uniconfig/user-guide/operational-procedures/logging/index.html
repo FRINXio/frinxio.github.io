@@ -6,15 +6,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Logging Framework | Frinx Docs</title>
-    <meta name="title" content="Logging Framework | Frinx Docs">
-    <meta name="description" content="UniConfig distribution uses Logback as the implementation of the logging framework. Logback is the successor to to the log4j framework with many" />
+    <title>Logging framework | Frinx Docs</title>
+    <meta name="title" content="Logging framework | Frinx Docs">
+    <meta name="description" content="UniConfig uses the Logback logging framework. Logback is the successor to the log4j framework with many improvements, such as more options for..." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/logging/" />
@@ -22,24 +22,24 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/logging/">
-    <meta property="og:title" content="Logging Framework | Frinx Docs">
-    <meta property="og:description" content="UniConfig distribution uses Logback as the implementation of the logging framework. Logback is the successor to to the log4j framework with many">
+    <meta property="og:title" content="Logging framework | Frinx Docs">
+    <meta property="og:description" content="UniConfig uses the Logback logging framework. Logback is the successor to the log4j framework with many improvements, such as more options for...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/logging/">
-    <meta property="twitter:title" content="Logging Framework | Frinx Docs">
-    <meta property="twitter:description" content="UniConfig distribution uses Logback as the implementation of the logging framework. Logback is the successor to to the log4j framework with many">
+    <meta property="twitter:title" content="Logging framework | Frinx Docs">
+    <meta property="twitter:description" content="UniConfig uses the Logback logging framework. Logback is the successor to the log4j framework with many improvements, such as more options for...">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -251,27 +251,18 @@
 <doc-anchor-target id="logging-framework" class="break-words">
     <h1>
         <doc-anchor-trigger class="header-anchor-trigger" to="#logging-framework">#</doc-anchor-trigger>
-        <span>Logging Framework</span>
+        <span>Logging framework</span>
     </h1>
 </doc-anchor-target>
+<p>UniConfig uses the Logback logging framework. Logback is the successor to the log4j framework with many improvements, such as more options for configuration, better performance and context-based separation of logs. The latter is used widely in UniConfig to achieve per-device logging based on the set marker in the logs.</p>
 <doc-anchor-target id="logback-configuration">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#logback-configuration">#</doc-anchor-trigger>
-        <span>Logback Configuration</span>
+        <span>Logback configuration</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig distribution uses Logback as the implementation of the logging
-framework. Logback is the successor to to the log4j framework with many
-improvements such as; more options for configuration, better
-performance, and context-based separation of logs. Context-based
-separation of logs is used widely in UniConfig to achieve per-device
-logging based on the set marker in the logs.</p>
-<p>Logback configuration is placed in &#x27;config/logback.xml&#x27; file under
-UniConfig distribution. For more information about formatting of logback
-configuration, look at the
-<a href="http://logback.qos.ch/manual/configuration.html">http://logback.qos.ch/manual/configuration.html</a> site. This section
-describes parts of the configuration in the context of UniConfig
-application.</p>
+<p>Logback configuration is placed in the <strong>config/logback.xml</strong> file under the UniConfig distribution. For more information, see <a href="http://logback.qos.ch/manual/configuration.html">Logback configuration</a>.</p>
+<p>This section describes parts of the configuration in the context of UniConfig.</p>
 <doc-anchor-target id="appenders">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#appenders">#</doc-anchor-trigger>
@@ -280,17 +271,11 @@ application.</p>
 </doc-anchor-target>
 <p>The following appenders are used:</p>
 <ol>
-<li>&#x27;STDOUT&#x27;: Prints logs into the console.</li>
-<li>&#x27;logs&#x27;: Used for writing all logs to the output file on path
-&#x27;log/logs.log&#x27;. The rolling file appender is applied.</li>
-<li>&#x27;netconf-notifications&#x27;, &#x27;netconf-messages&#x27;, &#x27;netconf-events&#x27;, and
-&#x27;cli-messages&#x27;, &#x27;gnmi-messages&#x27;: Sifting appenders that split logs per node ID that
-is set in the marker of the logs. Logs are written to different
-subdirectories under &#x27;log&#x27; directory and they are identified by
-their node ID. The rolling file appender is applied.</li>
-<li>&#x27;restconf&#x27;: Appender used for writing of RESTCONF messages into
-&#x27;log/restconf.log&#x27; file. The rolling file appender is applied.</li>
-<li>&#x27;gnmi&#x27;: Appender used for writing of Logs related to gNMI topology.</li>
+<li><code v-pre>STDOUT</code> - Print logs to the console.</li>
+<li><code v-pre>logs</code> - Write all logs to the output file at <strong>log/logs.log</strong>. A rolling file appender is applied.</li>
+<li><code v-pre>netconf-notifications</code>, <code v-pre>netconf-messages</code>, <code v-pre>netconf-events</code>, <code v-pre>cli-messages</code> and <code v-pre>gnmi-messages</code> - Sifting appenders that split logs per node ID set in the marker of the logs. Logs are written to different subdirectories under the <strong>log</strong> directory, and are identified by their node ID. A rolling file appender is applied.</li>
+<li><code v-pre>restconf</code> - Appender used to write RESTCONF messages to the <strong>log/restconf.log</strong> file. A rolling file appender is applied.</li>
+<li><code v-pre>gnmi</code> - Appender used to write logs related to the gNMI topology.</li>
 </ol>
 <doc-anchor-target id="loggers">
     <h3>
@@ -298,136 +283,141 @@ their node ID. The rolling file appender is applied.</li>
         <span>Loggers</span>
     </h3>
 </doc-anchor-target>
-<p>There are 2 groups of loggers:</p>
+<p>There are two groups of loggers:</p>
 <ol>
-<li>Package-level logging brokers: Loggers that are used for writing
-general messages into the console and a single output file. Logging
-level is set by default to &#x27;INFO&#x27;. For debugging purposes it is
-handy to change logging threshold to &#x27;TRACE&#x27; or &#x27;DEBUG&#x27; level.
-Covered layers: UniConfig, Unified, Controller, RESTCONF, CLI,
-NETCONF, gNMI. Used appenders: &#x27;STDOUT&#x27; and &#x27;logs&#x27;.</li>
-<li>Loggers used for logging brokers: These loggers should not be
-changed since the state of logging can be changed using RPC calls.
-Classpaths point to specific classes that represent implementations
-of logging brokers, the logging level is set to &#x27;TRACE&#x27;. Used
-appenders: &#x27;netconf-notifications&#x27;, &#x27;netconf-messages&#x27;,
-&#x27;netconf-events&#x27;, &#x27;cli-messages&#x27;, &#x27;gnmi-messages&#x27; and &#x27;restconf&#x27;.</li>
+<li>Package-level logging brokers: Loggers used to write general messages to the console and a single output file.
+<ul>
+<li>Default logging level: <code v-pre>INFO</code>. For debugging purposes, it can be useful to change the logging level to <code v-pre>TRACE</code> or <code v-pre>DEBUG</code>.</li>
+<li>Layers covered: UniConfig, Unified, Controller, RESTCONF, CLI, NETCONF, gNMI.</li>
+<li>Appenders used: <code v-pre>STDOUT</code> and <code v-pre>logs</code>.</li>
+</ul>
+</li>
+<li>Loggers used for logging brokers: These loggers should not be changed since the state of logging can be changed using RPC calls. Classpaths point to specific classes that represent implementations of logging brokers.
+<ul>
+<li>Logging level is set to <code v-pre>TRACE</code>.</li>
+<li>Appenders used: <code v-pre>netconf-notifications</code>, <code v-pre>netconf-messages</code>, <code v-pre>netconf-events</code>, <code v-pre>cli-messages</code>, <code v-pre>gnmi-messages</code> and <code v-pre>restconf</code>.</li>
+</ul>
+</li>
 </ol>
-<doc-anchor-target id="updating-configuration">
+<doc-anchor-target id="update-configuration">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#updating-configuration">#</doc-anchor-trigger>
-        <span>Updating Configuration</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#update-configuration">#</doc-anchor-trigger>
+        <span>Update configuration</span>
     </h3>
 </doc-anchor-target>
-<ul>
-<li>Logback is configured to scan for changes in its configuration file
-and automatically reconfigure itself when the configuration file
-changes.</li>
-<li>Scanning period is set by default to 5 seconds.</li>
-</ul>
+<p>Logback is configured to scan for changes in its configuration file and automatically reconfigure itself when the configuration file changes. The default scanning frequency is 5 seconds.</p>
 <doc-anchor-target id="example-configuration">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#example-configuration">#</doc-anchor-trigger>
         <span>Example configuration</span>
     </h3>
 </doc-anchor-target>
-<p>In the logback.xml file you can edit level of logging for each component
-of UniConfig:</p>
+<p>In the <strong>logback.xml</strong> file, you can edit the level of logging for each UniConfig component:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">&lt;!-- root logger --&gt;
-&lt;root level=&quot;INFO&quot;&gt;
-    &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;
-    &lt;appender-ref ref=&quot;logs&quot;/&gt;
-&lt;/root&gt;
+<div class="codeblock-title">Logback</div>
+<pre class="language-markup"><code v-pre class="language-markup">&lt;configuration&gt;
+    &lt;!-- root logger --&gt;
+    &lt;root level=&quot;INFO&quot;&gt;
+        &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;
+        &lt;appender-ref ref=&quot;logs&quot;/&gt;
+    &lt;/root&gt;
 
-&lt;!-- UniConfig layer part --&gt;
-&lt;logger name=&quot;io.frinx.uniconfig&quot; level=&quot;DEBUG&quot;/&gt;
+    &lt;!-- UniConfig layer part --&gt;
+    &lt;logger name=&quot;io.frinx.uniconfig&quot; level=&quot;INFO&quot;/&gt;
 
-&lt;!-- Unified layer part --&gt;
-&lt;logger name=&quot;io.frinx.unitopo&quot; level=&quot;INFO&quot;/&gt;
+    &lt;!-- Unified layer part --&gt;
+    &lt;logger name=&quot;io.frinx.unitopo&quot; level=&quot;INFO&quot;/&gt;
 
-&lt;!-- NETCONF part --&gt;
-&lt;logger name=&quot;org.opendaylight.netconf&quot; level=&quot;INFO&quot;/&gt;
+    &lt;!-- NETCONF part --&gt;
+    &lt;logger name=&quot;org.opendaylight.netconf&quot; level=&quot;INFO&quot;/&gt;
 
-&lt;!-- CLI part --&gt;
-&lt;logger name=&quot;io.frinx.cli&quot; level=&quot;TRACE&quot;/&gt;
+    &lt;!-- Uniconfig property scanning --&gt;
+    &lt;logger name=&quot;io.frinx.uniconfig.constants&quot; level=&quot;INFO&quot;/&gt;
 
-&lt;!-- translation unit framework part --&gt;
-&lt;logger name=&quot;io.frinx.translate.unit.commons&quot; level=&quot;INFO&quot;/&gt;
-&lt;logger name=&quot;io.fd.honeycomb&quot; level=&quot;INFO&quot;/&gt;
+    &lt;!-- CLI part --&gt;
+    &lt;logger name=&quot;io.frinx.cli&quot; level=&quot;INFO&quot;/&gt;
 
-&lt;!-- RESTCONF part --&gt;
-&lt;logger name=&quot;org.opendaylight.restconf&quot; level=&quot;DEBUG&quot;/&gt;
-&lt;logger name=&quot;org.opendaylight.aaa&quot; level=&quot;INFO&quot;/&gt;
+    &lt;!-- SSH part (used by CLI and NETCONF) --&gt;
+    &lt;logger name=&quot;org.apache.sshd&quot; level=&quot;INFO&quot;/&gt;
 
-&lt;!-- gNMI part --&gt;
-&lt;logger name=&quot;io.uniconfig.gnmi&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;
-    &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;
-    &lt;appender-ref ref=&quot;logs&quot;/&gt;
-    &lt;appender-ref ref=&quot;gnmi&quot;/&gt;
-&lt;/logger&gt;
-    
-&lt;!-- controller part --&gt;
-&lt;logger name=&quot;org.opendaylight.daexim&quot; level=&quot;INFO&quot;/&gt;
-&lt;logger name=&quot;org.opendaylight.controller&quot; level=&quot;INFO&quot;/&gt;
-&lt;logger name=&quot;org.opendaylight.yangtools&quot; level=&quot;INFO&quot;/&gt;</code></pre>
+    &lt;!-- translation unit framework part --&gt;
+    &lt;logger name=&quot;io.frinx.translate.unit.commons&quot; level=&quot;INFO&quot;/&gt;
+    &lt;logger name=&quot;io.fd.honeycomb&quot; level=&quot;INFO&quot;/&gt;
+
+    &lt;!-- gNMI part --&gt;
+    &lt;logger name=&quot;io.frinx.gnmi&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;
+        &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;
+        &lt;appender-ref ref=&quot;logs&quot;/&gt;
+        &lt;appender-ref ref=&quot;gnmi&quot;/&gt;
+    &lt;/logger&gt;
+
+    &lt;!-- RESTCONF part --&gt;
+    &lt;logger name=&quot;org.opendaylight.restconf&quot; level=&quot;INFO&quot;/&gt;
+    &lt;logger name=&quot;org.opendaylight.aaa&quot; level=&quot;INFO&quot;/&gt;
+
+    &lt;!-- controller part --&gt;
+    &lt;logger name=&quot;org.opendaylight.daexim&quot; level=&quot;INFO&quot;/&gt;
+    &lt;logger name=&quot;org.opendaylight.controller&quot; level=&quot;INFO&quot;/&gt;
+    &lt;logger name=&quot;org.opendaylight.yangtools&quot; level=&quot;INFO&quot;/&gt;
+
+    &lt;!-- DOM mountpoint service --&gt;
+    &lt;logger name=&quot;org.opendaylight.controller.md.sal.dom.broker.impl.mount&quot; level=&quot;INFO&quot;/&gt;
+
+    &lt;!-- Kafka --&gt;
+    &lt;logger name=&quot;org.apache.kafka.clients.NetworkClient&quot; level=&quot;ERROR&quot;/&gt;
+
+    &lt;!-- Metrics --&gt;
+    &lt;logger name=&quot;io.frinx.uniconfig.metrics&quot; level=&quot;INFO&quot; additivity=&quot;false&quot;&gt;
+        &lt;appender-ref ref=&quot;metrics&quot;/&gt;
+    &lt;/logger&gt;
+
+    &lt;!-- CLI shell --&gt;
+    &lt;logger name=&quot;io.frinx.uniconfig.shell&quot; level=&quot;INFO&quot;/&gt;
+
+    &lt;!-- PostgreSQL driver --&gt;
+    &lt;logger name=&quot;org.postgresql&quot; level=&quot;INFO&quot;/&gt;
+&lt;/configuration&gt;</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="logging-levels">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#logging-levels">#</doc-anchor-trigger>
+        <span>Logging levels</span>
+    </h3>
+</doc-anchor-target>
+<p>The following logging levels are available:</p>
 <doc-anchor-target id="info">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#info">#</doc-anchor-trigger>
         <span>INFO</span>
     </h4>
 </doc-anchor-target>
-<p><strong>This is recommended level for production environments.</strong> INFO messages
-display behavior of applications. They state what happened. For example,
-if a particular service stopped or started or you added something to the
-database. These entries are nothing to worry about during usual
-operations. The information logged using the INFO log is usually
-informative, and it does not necessarily require you to follow up on it.</p>
+<p>This is the recommended logging level for production environments.</p>
+<p><code v-pre>INFO</code> messages describe the behavior of applications (for example, if a particular service starts or stops, or something is added to the database). During typical operations, these log entries are nothing to worry about and no follow-up actions are necessary.</p>
 <doc-anchor-target id="debug">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#debug">#</doc-anchor-trigger>
         <span>DEBUG</span>
     </h4>
 </doc-anchor-target>
-<p>With DEBUG, you are giving diagnostic information in a detailed manner.
-It is verbose and has more information than you would need when using
-the application. DEBUG logging level is used to fetch information needed
-to diagnose, troubleshoot, or test an application. This ensures a smooth
-running application.</p>
+<p>The <code v-pre>DEBUG</code> level gives verbose diagnostic information that includes more detail than is necessary to use
+the application. This logging level is used to diagnose, troubleshoot, or test an application to ensure that it runs smoothly.</p>
 <doc-anchor-target id="trace">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#trace">#</doc-anchor-trigger>
         <span>TRACE</span>
     </h4>
 </doc-anchor-target>
-<p>The TRACE log level captures all the details about the behavior of the
-application. It is mostly diagnostic and is more granular and finer than
-DEBUG log level. This log level is used in situations where you need to
-see what happened in your application.</p>
+<p>The <code v-pre>TRACE</code> level captures all detail about the application&#x27;s behavior. It is mostly diagnostic and is more granular than <code v-pre>DEBUG</code>. This log level is used in situations where you need to see exactly what happened in your application.</p>
 <doc-anchor-target id="logging-brokers">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#logging-brokers">#</doc-anchor-trigger>
-        <span>Logging Brokers</span>
+        <span>Logging brokers</span>
     </h2>
 </doc-anchor-target>
-<p>The logging broker represents a configurable controller that logs one
-logical group of messages from a single classpath. Logging of multiple
-messages from the same classpath simplifies configuration of loggers in
-Logback since only one logger per broker must be specified. The logging
-broker can be controlled using RESTCONF RPCs; there are multiple
-operations where it is possible to trigger logging for the whole broker,
-or just for specified node IDs. Configuration of the logger in the
-logback file that is assigned to the logging broker should not be
-changed at all.</p>
-<doc-anchor-target id="implemented-logging-brokers">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#implemented-logging-brokers">#</doc-anchor-trigger>
-        <span>Implemented Logging Brokers</span>
-    </h3>
-</doc-anchor-target>
-<p>The following subsections describe currently implemented logging
-brokers.</p>
+<p>The logging broker represents a configurable controller that logs one logical group of messages from a single classpath. Logging multiple messages from the same classpath simplifies the configuration of loggers in
+Logback, since only one logger per broker must be specified.</p>
+<p>The logging broker is controlled using RESTCONF RPCs. There are several operations that can trigger logging for the whole broker or only for specified node IDs. The logger configuration in the logback file assigned to the broker should not be changed.</p>
+<p>The following subsections describe available logging brokers:</p>
 <doc-anchor-target id="restconf">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#restconf">#</doc-anchor-trigger>
@@ -435,26 +425,14 @@ brokers.</p>
     </h4>
 </doc-anchor-target>
 <ul>
-<li>It is used for logging authenticated HTTP requests and responses;
-information about URI, source, HTTP method, query parameters, HTTP
-headers, and body.</li>
-<li>Per-device logging cannot be enabled for this broker; all logs are
-saved to &#x27;log/restconf.log&#x27; file.</li>
-<li>It is possible to configure HTTP headers in which the content must
-be masked in logs (using asterisk characters). This is useful
-especially if there are some headers which contain private data
-(such as Authorization or a Cookie header). Hidden HTTP headers are
-marked using header identifiers.</li>
-<li>It is also possible to configure HTTP methods for which the
-communication (requests and responses) should not be logged to a
-file.</li>
-<li>Requests and responses are paired using a unique message-id. This
-message-id is not part of the HTTP request, it is generated on the
-RESTCONF server.</li>
-<li>Requests and responses contain Uniconfig transactions for easier matching
-with the log-transactions.</li>
+<li>Used to log authenticated HTTP requests and responses; information about URI, source, HTTP method, query parameters, HTTP headers and body.</li>
+<li>Per-device logging cannot be enabled for this broker. All logs are saved to the <strong>log/restconf.log</strong> file.</li>
+<li>It is possible to specify HTTP headers whose content is masked the in logs with asterisks (<code v-pre>*</code>). This is useful if some headers contain private data (such as <code v-pre>Authorization</code> or a <code v-pre>Cookie</code> headers). Hidden HTTP headers are marked using header identifiers.</li>
+<li>It is also possible to configure HTTP methods for which communication (requests and responses) is not logged to a file.</li>
+<li>Requests and responses are paired using a unique <code v-pre>message-id</code> attribute, which is not part of the HTTP request but is generated on the RESTCONF server.</li>
+<li>Requests and responses contain Uniconfig transactions for easier matching with log transactions.</li>
 </ul>
-<p><strong>Example: - Request and corresponding response with the same message-id</strong></p>
+<p><strong>Example</strong> - Request and corresponding response (same <code v-pre>message-id</code>):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">08:51:21.508 TRACE org.opendaylight.restconf.nb.rfc8040.jersey.providers.logging.RestconfLoggingBroker - HTTP request:
 Message ID: 3
@@ -485,16 +463,10 @@ Request body:
 08:51:21.518 TRACE org.opendaylight.restconf.nb.rfc8040.jersey.providers.logging.RestconfLoggingBroker - HTTP response:
 Request message ID: 3
 Uniconfig transaction: b6639cb4-55f2-449e-a91e-d2ad490198d2
-Status code: 200
+Status code: 204
 HTTP headers:
     Content-Type: [application/yang-data+json]
-Response body:
-{
-  &quot;output&quot;: {
-    &quot;message&quot;: &quot;Successfully updated logging broker [netconf_notifications]&quot;,
-    &quot;status&quot;: &quot;complete&quot;
-  }
-}</code></pre>
+Response body:</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="cli-messages">
     <h4>
@@ -503,15 +475,11 @@ Response body:
     </h4>
 </doc-anchor-target>
 <ul>
-<li>Broker used for logging of all CLI requests and responses.</li>
-<li>These CLI requests and responses are paired with unique message-id
-attribute, which is generated.</li>
-<li>Per-device logging is supported - logs for CLI messages are stored
-under &#x27;log/cli-messages&#x27; directory and named by &#x27;[node-id].log&#x27;
-pattern.</li>
+<li>Used to log all CLI requests and responses.</li>
+<li>CLI requests and responses are paired with a unique <code v-pre>message-id</code> attribute.</li>
+<li>Supports per-device logging. Logs for CLI messages are stored under the <strong>log/cli-messages</strong> directory and named according to the pattern <code v-pre>[node-id].log</code>.</li>
 </ul>
-<p>Example - sending POST RPC for installing CLI device, and getting
-requests with corresponding responses paired with same Message-ID:</p>
+<p><strong>Example</strong> - Send POST RPC to install a CLI device and pair requests with corresponding responses (same <code v-pre>message-id</code>):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">15:11:33.119 TRACE io.frinx.cli.io.impl.cli.CliLoggingBroker - Message-ID:1 - Sending CLI command:
 show configuration commit list | utility egrep &quot;^1 &quot;
@@ -553,16 +521,11 @@ end</code></pre>
     </h4>
 </doc-anchor-target>
 <ul>
-<li>A broker is used for logging of all NETCONF messages incoming or
-outgoing, except the NETCONF notifications (a distinct broker has
-been introduced for notifications).</li>
-<li>NETCONF RPC&#x27;s and responses can be matched using the &#x27;message-id&#x27;
-attribute that is placed in the RPC header.</li>
-<li>Per-device logging is supported, logs for NETCONF messages are
-stored under the directory &#x27;log/netconf-messages&#x27; and named by the
-&#x27;[node-id].log&#x27; pattern.</li>
+<li>Used to log all NETCONF messages, incoming and outgoing, except for NETCONF notifications (a separate broker handles notifications).</li>
+<li>NETCONF RPCs and responses can be matched using the <code v-pre>message-id</code> attribute placed in the RPC header.</li>
+<li>Supports per-device logging. Logs for NETCONF messages are stored in the <strong>log/netconf-messages</strong> directory and named according to the pattern <code v-pre>[node-id].log</code>.</li>
 </ul>
-<p><strong>Example: - Sending NETCONF GET RPC and receiving response</strong></p>
+<p><strong>Example</strong> - Send NETCONF GET RPC and receive a response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">11:10:15.038 TRACE org.opendaylight.netconf.logging.brokers.NetconfMessagesLoggingBroker - Session: 641 - Sending NETCONF message:
 &lt;rpc xmlns=&quot;urn:ietf:params:xml:ns:netconf:base:1.0&quot; message-id=&quot;m-179&quot;&gt;
@@ -608,14 +571,7 @@ stored under the directory &#x27;log/netconf-messages&#x27; and named by the
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Number 641 represents the session ID. It is read from
-the NETCONF hello message. If multiple sessions are
-created between the NETCONF server and NETCONF client and are
-logically grouped by the same node ID, then logs from multiple
-sessions are stored to the same logging file (this is needed to
-distinguish between the sessions). Multiple NETCONF sessions between
-the UniConfig and NETCONF server are created for each subscription to
-the NETCONF stream.</p>
+<p>The number <code v-pre>641</code> represents the session ID read from the NETCONF hello message. If multiple sessions are created between the NETCONF server and client that are logically grouped under the same node ID, logs from multiple sessions are stored in the same logging file. This is necessary to distinguish between the sessions. Multiple NETCONF sessions between the UniConfig and NETCONF server are created for each subscription to the NETCONF stream.</p>
         </div>
     </div>
 </div>
@@ -626,12 +582,10 @@ the NETCONF stream.</p>
     </h4>
 </doc-anchor-target>
 <ul>
-<li>A broker is used for logging of incoming NETCONF notifications.</li>
-<li>Per-device logging is supported, logs for NETCONF notifications are
-stored under the directory &#x27;log/netconf-notifications&#x27; and named by
-the &#x27;[node-id].log&#x27; pattern.</li>
+<li>Used to log incoming NETCONF notifications.</li>
+<li>Supports per-device logging. Logs for NETCONF notifications are stored in the <strong>log/netconf-notifications</strong> directory and named according to the pattern <code v-pre>[node-id].log</code>.</li>
 </ul>
-<p><strong>Example: - Received two notifications</strong></p>
+<p><strong>Example</strong> - Receiving two notifications:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">11:37:03.907 TRACE org.opendaylight.netconf.logging.brokers.NotificationsLoggingBroker - 117123a1: Received NETCONF notification:
 &lt;notification xmlns=&quot;urn:ietf:params:xml:ns:netconf:notification:1.0&quot;&gt;
@@ -661,16 +615,11 @@ the &#x27;[node-id].log&#x27; pattern.</li>
     </h4>
 </doc-anchor-target>
 <ul>
-<li>Logs generated by this broker contain session-related information
-about the establishment or closing of a NETCONF session from the
-view of the NETCONF client placed in UniConfig.</li>
-<li>These logs don&#x27;t contain full printouts of sent or received NETCONF
-messages.</li>
-<li>Per-device logging is supported, logs for NETCONF events are stored
-under the directory &#x27;log/netconf-events&#x27; and named by the
-&#x27;[node-id].log&#x27; pattern.</li>
+<li>Used to log session-related information about establishing or closing a NETCONF session from the view of the NETCONF client placed in UniConfig.</li>
+<li>These logs do not contain full printouts of sent or received NETCONF messages.</li>
+<li>Supports per-device logging. Logs for NETCONF events are stored in the <strong>log/netconf-events</strong> directory and according to the pattern <code v-pre>[node-id].log</code>.</li>
 </ul>
-<p><strong>Example:</strong></p>
+<p><strong>Example</strong>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">11:08:59.407 INFO org.opendaylight.netconf.logging.brokers.NetconfEventsLoggingBroker - node1: Connecting remote device with config: Node{getNodeId=Uri [_value=node1], augmentations={interface org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.NetconfNode=NetconfNode{getActorResponseWaitTime=5, getBetweenAttemptsTimeoutMillis=2000, getConcurrentRpcLimit=0, getConnectionTimeoutMillis=60000, getCredentials=LoginPassword{getPassword=versa123, getUsername=admin, augmentations={}}, getCustomizationFactory=default, getDefaultRequestTimeoutMillis=60000, getDryRunJournalSize=0, getEditConfigTestOption=Set, getHost=Host [_ipAddress=IpAddress [_ipv4Address=Ipv4Address [_value=10.103.5.202]]], getKeepaliveDelay=5, getMaxConnectionAttempts=100, getPort=PortNumber [_value=2022], getSleepFactor=1.0, getYangModuleCapabilities=YangModuleCapabilities{getCapability=[http://tail-f.com/ns/docgen/experimental1?module=docgen&amp;amp;revision=2019-11-01], isOverride=false, augmentations={}}, isEnabledNotifications=true, isReconnectOnChangedSchema=false, isSchemaless=false, isTcpOnly=false}, interface org.opendaylight.yang.gen.v1.http.frinx.io.yang.uniconfig.config.rev180703.UniconfigConfigNode=UniconfigConfigNode{getBlacklist=Blacklist{getExtension=[tailf:display-when false], augmentations={}}, isUniconfigNativeEnabled=true}}}
 11:09:00.554 DEBUG org.opendaylight.netconf.logging.brokers.NetconfEventsLoggingBroker - node1: Session established
@@ -684,13 +633,10 @@ under the directory &#x27;log/netconf-events&#x27; and named by the
     </h4>
 </doc-anchor-target>
 <ul>
-<li>A broker is used for logging of all gNMI SET/GET messages incoming or
-outgoing, except the gNMI notifications.</li>
-<li>Per-device logging is supported, logs for gNMI messages are
-stored under the directory &#x27;log/gnmi-messages&#x27; and named by the
-&#x27;[node-id].log&#x27; pattern.</li>
+<li>Used to log all gNMI SET/GET messages, incoming or outgoing, except for gNMI notifications.</li>
+<li>Support per-device logging. Logs for gNMI messages are stored in the <strong>log/gnmi-messages</strong> directory and named according to the pattern <code v-pre>[node-id].log</code>.</li>
 </ul>
-<p><strong>Example: - Sending gNMI SET request and receiving response</strong></p>
+<p><strong>Example</strong> - Send gNMI SET request and receive a response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">12:12:28.658 TRACE io.uniconfig.gnmi.logging.brokers.GnmiMessagesLoggingBroker - Message-id: 1693479982709, sending gNMI SET message:
 replace {
@@ -784,139 +730,111 @@ timestamp: 1692266952617002464</code></pre>
 <doc-anchor-target id="supported-logging-settings">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#supported-logging-settings">#</doc-anchor-trigger>
-        <span>Supported Logging Settings</span>
+        <span>Supported logging settings</span>
     </h3>
 </doc-anchor-target>
-<p>Current logging broker settings are stored in the Operational datastore
-under the &#x27;logging-status&#x27; root container. The following example shows a
-GET query that displays the logging broker settings:</p>
+<p>Current logging broker settings are stored in the <code v-pre>Operational</code> datastore under the <code v-pre>logging-status</code> root container.</p>
+<p>The following example shows a GET query that displays the logging broker settings:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">GET Logging Status</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://127.0.0.1:8181/rests/data/logging-status?content=nonconfig' \
 --header 'Accept: application/json'</code></pre>
 </doc-codeblock></div>
 <p><strong>Response:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Status:</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;logging-status&quot;: {
-        &quot;broker&quot;: [
-            {
-                &quot;broker-identifier&quot;: &quot;netconf_messages&quot;,
-                &quot;is-logging-broker-enabled&quot;: true,
-                &quot;is-logging-enabled-on-all-devices&quot;: true,
-                &quot;enabled-devices&quot;: [
-                    &quot;xr6&quot;,
-                    &quot;xr7&quot;
-                ]
-            },
-            {
-                &quot;broker-identifier&quot;: &quot;restconf&quot;,
-                &quot;is-logging-broker-enabled&quot;: true,
-                &quot;restconf-logging:hidden-http-methods&quot;: [
-                    &quot;GET&quot;
-                ],
-                &quot;restconf-logging:hidden-http-headers&quot;: [
-                    &quot;Authorization&quot;,
-                    &quot;Cookie&quot;
-                ]
-            },
-            {
-                &quot;broker-identifier&quot;: &quot;netconf_notifications&quot;,
-                &quot;is-logging-broker-enabled&quot;: true,
-                &quot;is-logging-enabled-on-all-devices&quot;: true
-            },
-            {
-                &quot;broker-identifier&quot;: &quot;netconf_events&quot;,
-                &quot;is-logging-broker-enabled&quot;: true,
-                &quot;is-logging-enabled-on-all-devices&quot;: true
-            },
-            {
-                &quot;broker-identifier&quot;: &quot;gnmi_messages&quot;,
-                &quot;logging-enabled-on-all-devices&quot;: true,
-                &quot;logging-broker-enabled&quot;: true,
-                &quot;gnmi-logging:message-types&quot;: [
-                    &quot;SET&quot;
-                ]
-            }
+  &quot;logging-status&quot;: {
+    &quot;broker&quot;: [
+      {
+        &quot;broker-identifier&quot;: &quot;netconf_messages&quot;,
+        &quot;is-logging-broker-enabled&quot;: true,
+        &quot;is-logging-enabled-on-all-devices&quot;: true,
+        &quot;enabled-devices&quot;: [
+          &quot;xr6&quot;,
+          &quot;xr7&quot;
+        ]
+      },
+      {
+        &quot;broker-identifier&quot;: &quot;restconf&quot;,
+        &quot;is-logging-broker-enabled&quot;: true,
+        &quot;restconf-logging:hidden-http-methods&quot;: [
+          &quot;GET&quot;
         ],
-        &quot;global&quot;: {
-            &quot;hidden-types&quot;: [
-                &quot;password&quot;,
-                &quot;encrypted&quot;
-            ]
-        }
+        &quot;restconf-logging:hidden-http-headers&quot;: [
+          &quot;Authorization&quot;,
+          &quot;Cookie&quot;
+        ]
+      },
+      {
+        &quot;broker-identifier&quot;: &quot;netconf_notifications&quot;,
+        &quot;is-logging-broker-enabled&quot;: true,
+        &quot;is-logging-enabled-on-all-devices&quot;: true
+      },
+      {
+        &quot;broker-identifier&quot;: &quot;netconf_events&quot;,
+        &quot;is-logging-broker-enabled&quot;: true,
+        &quot;is-logging-enabled-on-all-devices&quot;: true
+      },
+      {
+        &quot;broker-identifier&quot;: &quot;gnmi_messages&quot;,
+        &quot;logging-enabled-on-all-devices&quot;: true,
+        &quot;logging-broker-enabled&quot;: true,
+        &quot;gnmi-logging:message-types&quot;: [
+          &quot;SET&quot;
+        ]
+      },
+      {
+        &quot;broker-identifier&quot;: &quot;shell_logs&quot;,
+        &quot;logging-enabled-on-all-devices&quot;: true,
+        &quot;logging-broker-enabled&quot;: true
+      },
+      {
+        &quot;broker-identifier&quot;: &quot;cli_messages&quot;,
+        &quot;logging-enabled-on-all-devices&quot;: true,
+        &quot;logging-broker-enabled&quot;: true
+      }
+    ],
+    &quot;global&quot;: {
+      &quot;hidden-types&quot;: [
+        &quot;password&quot;,
+        &quot;encrypted&quot;
+      ]
     }
+  }
 }</code></pre>
 </doc-codeblock></div>
-<p>Logging settings are encapsulated inside multiple list entries (&#x27;broker&#x27;
-list) where each list entry contains settings for one logging broker.
-Description of the settings that are placed under a single logging
-entry:</p>
+<p>Logging settings are encapsulated inside multiple list entries (<code v-pre>broker</code> list). Each entry contains settings for one logging broker.</p>
+<p>Settings placed under a single logging entry:</p>
 <ul>
-<li><strong>broker-identifier</strong>: Unique identifier of the logging broker.
-Currently, 5 brokers are supported: &#x27;netconf_messages&#x27;, &#x27;restconf&#x27;,
-&#x27;netconf_notifications&#x27;, &#x27;netconf_events&#x27;, and cli_messages.</li>
-<li><strong>is-logging-broker-enabled</strong>: Flag that specifies whether the
-logging broker is enabled. If the logging broker is disabled, then
-no logging messages are generated.</li>
-<li><strong>is-logging-enabled-on-all-devices</strong>: If this flag is set to
-&#x27;true&#x27;, then logs are separated to distinct files in the scope of
-all devices. If it is set to &#x27;false&#x27;, then logging is enabled only
-for devices that are listed in the &#x27;enabled-devices&#x27; leaf-list /
-array. This setting is unsupported in the &#x27;restconf&#x27; logging broker
-since RESTCONF currently doesn&#x27;t differentiate the node ID in the
-requests or responses.</li>
-<li><strong>enabled-devices</strong>: If &#x27;is-logging-enabled-on-all-devices&#x27; is set
-to &#x27;false&#x27;, then logs are generated only for devices that are
-specified in this list, it acts as a simple filtering mechanism
-based on the whitelist. Blacklist approach is not supported, it is
-not possible to set &#x27;is-logging-enabled-on-all-devices&#x27; to &#x27;true&#x27;
-and specify devices for which logging feature is disabled. This
-field is not supported in the &#x27;restconf&#x27; logging broker.</li>
+<li><code v-pre>broker-identifier</code> - Unique identifier for the logging broker. The following brokers are supported: <code v-pre>netconf\_messages</code>, <code v-pre>restconf</code>, <code v-pre>netconf\_notifications</code>, <code v-pre>netconf\_events</code>, and <code v-pre>cli\_messages</code>.</li>
+<li><code v-pre>is-logging-broker-enabled</code> - Specifies if the logging broker is enabled or not. If the broker is disabled, no logging messages are generated.</li>
+<li><code v-pre>is-logging-enabled-on-all-devices</code> - If set to <code v-pre>true</code>, logs are separated into distinct files in the scope of all devices. If set to <code v-pre>false</code>, logging is enabled only for devices listed in the <code v-pre>enabled-devices</code> leaf-list/array. This setting is not supported for the <code v-pre>restconf</code> logging broker as RESTCONF currently does not differentiate the node ID in requests or responses.</li>
+<li><code v-pre>enabled-devices</code> - If <code v-pre>is-logging-enabled-on-all-devices</code> is set to <code v-pre>false</code>, logs are generated only for devices specified in this list. Acts as a simple filtering mechanism based on the whitelist. A blacklist approach is not supported, as it is not possible to set <code v-pre>is-logging-enabled-on-all-devices</code> to <code v-pre>true</code> and specify devices for which logging feature is disabled. This setting is not supported for the <code v-pre>restconf</code> logging broker.</li>
 </ul>
 <p>RESTCONF-specific settings:</p>
 <ul>
-<li><strong>restconf-logging:hidden-http-methods</strong> - HTTP requests (and
-associated HTTP responses) are not logged if request&#x27;s HTTP method
-is set to one of the methods in this list. Names of the HTTP methods
-must be specified using upper-case format.</li>
-<li><strong>restconf-logging:hidden-http-headers</strong> - List of HTTP headers
-(names of the headers) which content is hidden in the logs. Names of
-the HTTP headers are not case-sensitive.</li>
+<li><code v-pre>restconf-logging:hidden-http-methods</code> - HTTP requests and associated HTTP responses are not logged if the  request&#x27;s HTTP method is included in this list. Names of HTTP methods must be specified in uppercase.</li>
+<li>&#x60;restconf-logging:hidden-http-headers&#x60;&#x60; - List of HTTP headers (names of headers) whose content is hidden in the logs. Names of headers are case-insensitive.</li>
 </ul>
 <p>GNMI-specific settings:</p>
 <ul>
-<li><strong>gnmi-logging:message-types</strong> - gNMI message types that are enabled to be logged.
-Names of the message types must be specified using upper-case format.</li>
+<li><code v-pre>gnmi-logging:message-types</code> - gNMI message types that are logged. Names of message types must be specified in uppercase.</li>
 </ul>
-<p>Global settings that are common in all logging brokers:</p>
+<p>Global settings common for all logging brokers:</p>
 <ul>
-<li><strong>hidden-types</strong> - Value of leaf or leaf-list that uses one of these
-types is hidden in the logs using asterisk characters. It can be
-used for masking of passwords or other confidential data from logs.</li>
+<li><code v-pre>hidden-types</code> - The value of leafs or leaf-lists using one of the types specified is masked in the logs with asterisks (<code v-pre>*</code>). Useful for hiding passwords and other confidential data in logs.</li>
 </ul>
 <doc-anchor-target id="initial-configuration">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#initial-configuration">#</doc-anchor-trigger>
-        <span>Initial Configuration</span>
+        <span>Initial configuration</span>
     </h3>
 </doc-anchor-target>
-<p>By default, all logging brokers are disabled and logging is disabled on
-all devices, the user must explicitly specify a list of devices for
-which per-device logging is enabled. Also, RESTCONF-specific filtering
-is not configured, all HTTP requests and responses are fully logged, no
-content is dismissed. By default, only SET gNMI message type is set to be logged.</p>
-<p>Initial logging configuration can be adjusted by adding the
-&#x27;loggingController&#x27; configuration into the
-&#x27;config/lighty-uniconfig-config.json&#x27; file. The structure of this
-configuration section conforms YANG structure that is described by the
-&#x27;logging&#x27; and &#x27;restconf-logging&#x27; modules, it is possible to copy the
-state of the Operational datastore under &#x27;logging-status&#x27; into the
-&#x27;loggingController&#x27; root JSON node.</p>
-<p>The next JSON snippet shows the sample configuration
-&#x27;loggingController&#x27;, logging brokers &#x27;netconf_messages&#x27; and
-&#x27;netconf_notifications&#x27; are enabled; the &#x27;netconf_messages&#x27; broker is
-enabled for all devices while &#x27;netconf_notifications&#x27; is enabled only
-for &#x27;xr6&#x27; and &#x27;xr7&#x27; devices.</p>
+<p>By default, all logging brokers are disabled and logging is disabled on all devices. To enable per-device logging, you must explicitly specify a list of devices. Additionally, RESTCONF-specific filtering is not configured, all HTTP requests and responses are fully logged and no content is dismissed. By default, only the <code v-pre>SET</code> gNMI message type is set to be logged.</p>
+<p>The initial logging configuration can be adjusted by adding the <code v-pre>loggingController</code> configuration into the
+<strong>config/lighty-uniconfig-config.json</strong> file. The structure of this configuration section conforms to the YANG structure described by the <code v-pre>logging</code> and <code v-pre>restconf-logging</code> modules. It is possible to copy the state of the <code v-pre>Operational</code> datastore under <code v-pre>logging-status</code> into the <code v-pre>loggingController</code> root JSON node.</p>
+<p>The following JSON snippet shows the sample configuration <code v-pre>loggingController</code>. The logging brokers <code v-pre>netconf\_messages</code> and <code v-pre>netconf\_notifications</code> are enabled, (<code v-pre>netconf\_messages</code> for all devices and <code v-pre>netconf\_notifications</code> only for <code v-pre>xr6</code> and <code v-pre>xr7</code> devices).</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -930,9 +848,7 @@ for &#x27;xr6&#x27; and &#x27;xr7&#x27; devices.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>If unknown parameters are specified in a configuration file, they will be
-ignored and a warning, that the corresponding parameter
-was ignored, will be logged.</p>
+<p>If unknown parameters are specified in a configuration file, they are ignored and a warning is logged.</p>
         </div>
     </div>
 </div>
@@ -958,29 +874,23 @@ was ignored, will be logged.</p>
   }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="controlling-of-logging-using-rpc-calls">
+<doc-anchor-target id="control-logging-using-rpc-calls">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#controlling-of-logging-using-rpc-calls">#</doc-anchor-trigger>
-        <span>Controlling of Logging Using RPC Calls</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#control-logging-using-rpc-calls">#</doc-anchor-trigger>
+        <span>Control logging using RPC calls</span>
     </h3>
 </doc-anchor-target>
-<p>Since logging settings are stored in the Operational datastore, it is
-possible to adjust these settings on runtime only using RPC calls. The
-following subsections describe available RPCs.</p>
+<p>As logging settings are stored in the <code v-pre>Operational</code> datastore, it is possible to adjust these settings in runtime only using RPC calls. The following subsections describe available RPCs.</p>
 <doc-anchor-target id="enable-logging-broker">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#enable-logging-broker">#</doc-anchor-trigger>
-        <span>Enable Logging Broker</span>
+        <span>Enable logging broker</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for enabling the logging broker. The enabled logging
-broker is available to write logs.</li>
-<li>The input contains only the name of the the logging broker,
-&#x27;broker-identifier&#x27;.</li>
-</ul>
-<p><strong>Example: - Enable logging broker with the identifier &#x27;restconf&#x27;</strong></p>
+<p>This RPC is used to enable the logging broker, which is then available to write logs. RPC input contains only the name of the logging broker (<code v-pre>broker-identifier</code>).</p>
+<p><strong>Example</strong> - Enable logging broker with the <code v-pre>restconf</code> identifier:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/logging:enable-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -990,30 +900,21 @@ broker is available to write logs.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The output shows a positive response given the broker was previously in
-a disabled state:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;Successfully updated logging broker [restconf]&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="disable-logging-broker">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#disable-logging-broker">#</doc-anchor-trigger>
-        <span>Disable Logging Broker</span>
+        <span>Disable logging broker</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for turning off the logging broker. A disabled
-logging broker doesn&#x27;t write any logs despite other settings.</li>
-<li>The input contains only the name of the the logging broker,
-&#x27;broker-identifier&#x27;.</li>
-</ul>
-<p><strong>Example: - Disabling the logging broker with the identifier &#x27;restconf&#x27;</strong></p>
+<p>This RPC is used to disable a logging broker, which will no longer write any logs regardless of other settings. RPC input contains only the name of the logging broker.</p>
+<p><strong>Example</strong> - Disable logging broker with the <code v-pre>restconf</code> identifier:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/logging:disable-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1023,34 +924,22 @@ logging broker doesn&#x27;t write any logs despite other settings.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The output shows a positive response given the broker was previously in
-an enabled state:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;Successfully updated logging broker [restconf]&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="enable-default-device-logging">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#enable-default-device-logging">#</doc-anchor-trigger>
-        <span>Enable Default Device Logging</span>
+        <span>Enable default device logging</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for setting the default device logging to &#x27;true&#x27;,
-logs will be written for all devices without filtering any logs
-based on their node ID.</li>
-<li>The input contains only the name of the the logging broker,
-&#x27;broker-identifier&#x27;.</li>
-<li>Invocation of this RPC causes clearing of the leaf-lest
-&#x27;enabled-devices&#x27;.</li>
-</ul>
-<p><strong>Example: - Enable default device logging in the &#x27;netconf_messages&#x27;
-logging broker</strong></p>
+<p>This RPC is used to set the default device logging to <code v-pre>true</code>. Logs are written for all devices without filtering based on node ID.</p>
+<p>RPC input contains only the name of the logging broker (<code v-pre>broker-identifier</code>). Invoking this RPC clears the leaf-list <code v-pre>enabled-devices</code>.</p>
+<p><strong>Example</strong> - Enable default device logging in the <code v-pre>netconf\_messages</code> logging broker:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/logging:enable-default-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1060,34 +949,22 @@ logging broker</strong></p>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The output shows a positive response given the broker was previously in
-a disabled state:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;Successfully updated logging broker [netconf_messages] default logging behaviour&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="disable-default-device-logging">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#disable-default-device-logging">#</doc-anchor-trigger>
-        <span>Disable Default Device Logging</span>
+        <span>Disable default device logging</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for setting default device logging to &#x27;false&#x27;, logs
-will be written only for devices that are named in the leaf-list
-&#x27;enabled-devices&#x27;. If the leaf-list &#x27;enabled-devices&#x27; doesn&#x27;t
-contain a node ID, then logging in the corresponding logging broker
-is effectively turned off.</li>
-<li>The input contains only the name of the the logging broker,
-&#x27;broker-identifier&#x27;.</li>
-</ul>
-<p><strong>Example: - Disable default device logging in &#x27;netconf_messages&#x27; logging
-broker</strong></p>
+<p>This RPC is used to set the default device logging to <code v-pre>false</code>. Logs are written only for devices named in the <code v-pre>enabled-devices</code> leaf-list. If <code v-pre>enabled-devices</code> does not contain a node ID, logging in the corresponding broker is effectively turned off.</p>
+<p>RPC input contains only the name of the logging broker (<code v-pre>broker-identifier</code>).</p>
+<p><strong>Example</strong> - Disable default device logging in the <code v-pre>netconf\_messages</code> logging broker:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/logging:disable-default-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1097,31 +974,21 @@ broker</strong></p>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The output shows a positive response given the broker was previously in
-an enabled state:</p>
+<p>The output shows a positive response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;Successfully updated logging broker [netconf_messages] default logging behaviour&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="enable-device-logging">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#enable-device-logging">#</doc-anchor-trigger>
-        <span>Enable Device Logging</span>
+        <span>Enable device logging</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for enabling logging of specified devices that are
-identified by node IDs.</li>
-<li>The input contains the name of the the logging broker
-&#x27;broker-identifier&#x27; and a list of node IDs called &#x27;device-list&#x27;.</li>
-</ul>
-<p><strong>Example: - Enable logging for devices with node IDs: &#x27;node1&#x27;, &#x27;node2&#x27;,
-and &#x27;node3&#x27; in the &#x27;netconf_events&#x27; logging broker</strong></p>
+<p>This RPC is used to enable logging for specified devices identified by node IDs. RPC input contains the name of the logging broker (<code v-pre>broker-identifier</code>) and a list of node IDs (<code v-pre>device-list</code>).</p>
+<p><strong>Example</strong> - Enable logging for devices with node IDs <code v-pre>node1</code>, <code v-pre>node2</code>, and <code v-pre>node3</code> in the <code v-pre>netconf\_events</code> logging broker:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/logging:enable-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1136,30 +1003,21 @@ and &#x27;node3&#x27; in the &#x27;netconf_events&#x27; logging broker</strong><
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The output shows a positive response:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;Successfully updated logging broker [netconf_events]&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="disable-device-logging">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#disable-device-logging">#</doc-anchor-trigger>
-        <span>Disable Device Logging</span>
+        <span>Disable device logging</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for turning off logging of specified devices that are
-identified by node IDs.</li>
-<li>The input contains the name of the the logging broker
-&#x27;broker-identifier&#x27; and a list of node IDs called &#x27;device-list&#x27;.</li>
-</ul>
-<p><strong>Example: - Disable logging for device with node ID &#x27;node1&#x27; in the
-&#x27;netconf_events&#x27; logging broker</strong></p>
+<p>This RPC is used to turn off logging for specified devices identified by node IDs. RPC input contains the name of the logging broker (<code v-pre>broker-identifier</code>) and a list of node IDs (<code v-pre>device-list</code>).</p>
+<p><strong>Example</strong> - Disable logging for device with node ID <code v-pre>node1</code> in the <code v-pre>netconf\_events</code> logging broker:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/logging:disable-device-logging' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1172,31 +1030,21 @@ identified by node IDs.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The output shows a positive response:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;Successfully updated logging broker [netconf_events]&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="setting-global-hidden-types">
+<doc-anchor-target id="set-global-hidden-types">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#setting-global-hidden-types">#</doc-anchor-trigger>
-        <span>Setting Global Hidden Types</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#set-global-hidden-types">#</doc-anchor-trigger>
+        <span>Set global hidden types</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for setting identifiers of hidden YANG type
-definitions. Values of leaves and leaf-lists that are described by
-these types are masked in the output logs.</li>
-<li>This RPC overwrites all already configured hidden types. An empty
-list of hidden types disables filtering of data values.</li>
-<li>Filtering of values applies to all logs, including RESTCONF logs.</li>
-</ul>
-<p><strong>Example: - Setting 3 hidden types</strong></p>
+<p>This RPC is used to set identifiers of hidden YANG type definitions. Values of leaves and leaf-lists described by these types are masked in output logs. Overwrites all previously configured hidden types. An empty list of hidden types will disable filtering of data values. Filtering applies to all logs, including RESTCONF logs.</p>
+<p><strong>Example</strong> - Set three (3) hidden types:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/logging:set-global-hidden-types' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1210,33 +1058,22 @@ list of hidden types disables filtering of data values.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>The output shows a positive response:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;Global logging controller configuration has been successfully updated&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="setting-hidden-http-headers">
+<doc-anchor-target id="set-hidden-http-headers">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#setting-hidden-http-headers">#</doc-anchor-trigger>
-        <span>Setting Hidden HTTP Headers</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#set-hidden-http-headers">#</doc-anchor-trigger>
+        <span>Set Hidden HTTP Headers</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for overwriting the list of HTTP headers which
-content is masked in the output of the RESTCONF logs.</li>
-<li>This RPC modifies behavior of only the &#x27;restconf&#x27; logging broker.</li>
-<li>HTTP headers in both requests and responses are masked.</li>
-<li>The list of hidden HTTP headers denotes header identifiers.</li>
-<li>The identifier of &#x27;hidden&#x27; HTTP header still shows in the output
-logs, however, the content of such header is replaced by asterisk
-characters.</li>
-</ul>
-<p><strong>Example: - Hiding content of &#x27;Authorization&#x27; and &#x27;Cookie&#x27; HTTP headers</strong></p>
+<p>This RPC is used to overwrite the list of HTTP headers whose content is hidden in the output of RESTCONF logs. Only affects the <code v-pre>restconf</code> logging broker.</p>
+<p>HTTP headers in both requests and responses are masked. The list of hidden headers denotes header identifiers. The identifier of hidden headers is still included in output logs, but their content is masked with asterisks (<code v-pre>*</code>).</p>
+<p><strong>Example</strong> - Hide the content of <code v-pre>Authorization</code> and <code v-pre>Cookie</code> HTTP headers:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/restconf-logging:set-hidden-http-headers' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1249,31 +1086,22 @@ characters.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>A positive response is shown in the output:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;List of hidden HTTP headers have been successfully updated&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="setting-hidden-http-methods">
+<doc-anchor-target id="set-hidden-http-methods">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#setting-hidden-http-methods">#</doc-anchor-trigger>
-        <span>Setting Hidden HTTP Methods</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#set-hidden-http-methods">#</doc-anchor-trigger>
+        <span>Set hidden HTTP methods</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for overwriting the list of HTTP methods. RESTCONF
-communication, that may include invocation of hidden HTTP methods,
-is not displayed in the output logs.</li>
-<li>Both requests and responses with hidden HTTP methods are not written
-to the log files.</li>
-<li>This RPC modifies behavior of only &#x27;restconf&#x27; logging behaviour.</li>
-</ul>
-<p><strong>Example: - Hiding GET and PATCH communication in the RESTCONF logs</strong></p>
+<p>This RPC is used to overwrite the list of HTTP methods. RESTCONF communication, which may include invoking hidden HTTP methods, is not displayed in output logs.</p>
+<p>Both requests and responses with hidden HTTP methods are excluded from the log files. Only affects the <code v-pre>restconf</code> logging broker.</p>
+<p><strong>Example</strong> - Hide <code v-pre>GET</code> and <code v-pre>PATCH</code> communication in RESTCONF logs:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/restconf-logging:set-hidden-http-methods' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1286,27 +1114,21 @@ to the log files.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>A positive response is shown in the output:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;List of hidden HTTP methods have been successfully updated&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="setting-gnmi-message-types">
+<doc-anchor-target id="set-gnmi-message-types">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#setting-gnmi-message-types">#</doc-anchor-trigger>
-        <span>Setting gNMI message types</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#set-gnmi-message-types">#</doc-anchor-trigger>
+        <span>Set gNMI message types</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>An RPC is used for overwriting the list of supported gNMI message types.</li>
-<li>This RPC modifies behavior of only &#x27;gnmi messages&#x27; logging behaviour.</li>
-</ul>
-<p><strong>Example: - Setting SET and GET message types</strong></p>
+<p>This RPC is used to overwrite the list of supported gNMI message types. Only affects the logging of gNMI messages.</p>
+<p><strong>Example</strong> - Set &#x27;SET&#x27; and &#x27;GET&#x27; message types:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/gnmi-logging:set-message-types' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -1318,14 +1140,10 @@ to the log files.</li>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>A positive response is shown in the output:</p>
+<p>The output shows a successful response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;message&quot;: &quot;List of message types have been successfully updated&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-json"><code v-pre class="language-json"></code></pre>
 </doc-codeblock></div>
 
                                 
@@ -1396,6 +1214,6 @@ to the log files.</li>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Logging Framework", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Logging framework", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

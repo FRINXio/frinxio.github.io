@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC calculate-subtree-diff | Frinx Docs</title>
     <meta name="title" content="RPC calculate-subtree-diff | Frinx Docs">
-    <meta name="description" content="This RPC creates a diff between the source topology subtrees and target topology subtrees. Supported features:" />
+    <meta name="description" content="This RPC creates a diff between source topology subtrees and target topology subtrees." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-diff/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-diff/">
     <meta property="og:title" content="RPC calculate-subtree-diff | Frinx Docs">
-    <meta property="og:description" content="This RPC creates a diff between the source topology subtrees and target topology subtrees. Supported features:">
+    <meta property="og:description" content="This RPC creates a diff between source topology subtrees and target topology subtrees.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-diff/rpc_calculate_subtree_diff-rpc_calculate_subtree_diff.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-diff/">
     <meta property="twitter:title" content="RPC calculate-subtree-diff | Frinx Docs">
-    <meta property="twitter:description" content="This RPC creates a diff between the source topology subtrees and target topology subtrees. Supported features:">
+    <meta property="twitter:description" content="This RPC creates a diff between source topology subtrees and target topology subtrees.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_calculate-subtree-diff/rpc_calculate_subtree_diff-rpc_calculate_subtree_diff.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,19 +256,19 @@
         <span>RPC calculate-subtree-diff</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC creates a diff between the source topology subtrees and target topology subtrees.
-Supported features:</p>
+<p>This RPC creates a diff between source topology subtrees and target topology subtrees.</p>
+<p>Supported features include:</p>
 <ul>
-<li>Comparison of subtrees under same network-topology node.</li>
-<li>Comparison of subtrees between different network-topology nodes that use same YANG schemas.</li>
-<li>Comparison of subtrees with different revisions of YANGs schema that are syntactically compatible
+<li>Compare subtrees under the same network-topology node.</li>
+<li>Compare subtrees between different network-topology nodes that use same YANG schemas.</li>
+<li>Compare subtrees with different revisions of YANG schemas that are syntactically compatible
 (for example, different software versions of devices).</li>
 </ul>
-<p>RPC input contains data-tree paths (&#x27;source-path&#x27; and &#x27;target-path&#x27;) and data locations
-(&#x27;source-datastore&#x27; and &#x27;target-datastore&#x27;).
-Data location is the enumeration of two possible values, &#x27;OPERATIONAL&#x27; and &#x27;CONFIGURATION&#x27;.
-The default value of &#x27;source-datastore&#x27; is &#x27;OPERATIONAL&#x27; and
-default value of &#x27;target-datastore&#x27; is &#x27;CONFIGURATION&#x27;.</p>
+<p>RPC input contains data-tree paths (<code v-pre>source-path</code> and <code v-pre>target-path</code>) and data locations
+(<code v-pre>source-datastore</code> and <code v-pre>target-datastore</code>).</p>
+<p>Data location is the enumeration of two possible values, <code v-pre>OPERATIONAL</code> and <code v-pre>CONFIGURATION</code>.
+The default value for <code v-pre>source-datastore</code> is <code v-pre>OPERATIONAL</code> and the default value of
+<code v-pre>target-datastore</code> is <code v-pre>CONFIGURATION</code>.</p>
 <p>RPC output contains a list of differences between source and target subtrees.</p>
 <p><figure class="content-center">
     <img src="rpc_calculate_subtree_diff-rpc_calculate_subtree_diff.svg" alt="RPC calculate-subtree-dif" />
@@ -278,7 +278,7 @@ default value of &#x27;target-datastore&#x27; is &#x27;CONFIGURATION&#x27;.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example-computed-difference">
@@ -287,321 +287,320 @@ default value of &#x27;target-datastore&#x27; is &#x27;CONFIGURATION&#x27;.</p>
         <span>Successful example: Computed difference</span>
     </h3>
 </doc-anchor-target>
-<p>RPC calculate-subtree-diff input has a path to two different testtool
-devices with different YANG schemas. Output contains a list of statements
-representing the diff.</p>
+<p>RPC input contains a path to two different testtool devices with different YANG schemas.</p>
+<p>RPC output contains a list of statements representing the diff.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Node testtool with schema test-module</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;root&quot;: {
-        &quot;simple-root&quot;: {
-            &quot;leaf-a&quot;: &quot;leafA&quot;,
-            &quot;leaf-b&quot;: &quot;EDITED&quot;,
-            &quot;ll&quot;: [
-                &quot;str1&quot;,
-                &quot;str2&quot;,
-                &quot;str3&quot;
+  &quot;root&quot;: {
+    &quot;simple-root&quot;: {
+      &quot;leaf-a&quot;: &quot;leafA&quot;,
+      &quot;leaf-b&quot;: &quot;EDITED&quot;,
+      &quot;ll&quot;: [
+        &quot;str1&quot;,
+        &quot;str2&quot;,
+        &quot;str3&quot;
+      ],
+      &quot;nested&quot;: {
+        &quot;sample-y&quot;: false
+      }
+    },
+    &quot;list-root&quot;: {
+      &quot;branch-ab&quot;: 9999,
+      &quot;top-list&quot;: [
+        {
+          &quot;key-1&quot;: &quot;ka&quot;,
+          &quot;key-2&quot;: &quot;kb&quot;,
+          &quot;next-data&quot;: {
+            &quot;switch-1&quot;: [
+              null
             ],
-            &quot;nested&quot;: {
-                &quot;sample-y&quot;: false
-            }
-        },
-        &quot;list-root&quot;: {
-            &quot;branch-ab&quot;: 9999,
-            &quot;top-list&quot;: [
-                {
-                    &quot;key-1&quot;: &quot;ka&quot;,
-                    &quot;key-2&quot;: &quot;kb&quot;,
-                    &quot;next-data&quot;: {
-                        &quot;switch-1&quot;: [
-                            null
-                        ],
-                        &quot;switch-2&quot;: [
-                            null
-                        ]
-                    },
-                    &quot;nested-list&quot;: [
-                        {
-                            &quot;identifier&quot;: &quot;f1&quot;,
-                            &quot;foo&quot;: 1
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;f2&quot;,
-                            &quot;foo&quot;: 10
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;f3&quot;,
-                            &quot;foo&quot;: 20
-                        }
-                    ]
-                },
-                {
-                    &quot;key-1&quot;: &quot;kb&quot;,
-                    &quot;key-2&quot;: &quot;ka&quot;,
-                    &quot;next-data&quot;: {
-                        &quot;switch-1&quot;: [
-                            null
-                        ]
-                    },
-                    &quot;nested-list&quot;: [
-                        {
-                            &quot;identifier&quot;: &quot;e1&quot;,
-                            &quot;foo&quot;: 1
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;e2&quot;,
-                            &quot;foo&quot;: 2
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;e3&quot;,
-                            &quot;foo&quot;: 3
-                        }
-                    ]
-                },
-                {
-                    &quot;key-1&quot;: &quot;kc&quot;,
-                    &quot;key-2&quot;: &quot;ke&quot;,
-                    &quot;next-data&quot;: {
-                        &quot;switch-2&quot;: [
-                            null
-                        ]
-                    },
-                    &quot;nested-list&quot;: [
-                        {
-                            &quot;identifier&quot;: &quot;q1&quot;,
-                            &quot;foo&quot;: 13
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;q2&quot;,
-                            &quot;foo&quot;: 14
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;q3&quot;,
-                            &quot;foo&quot;: 15
-                        }
-                    ]
-                }
+            &quot;switch-2&quot;: [
+              null
             ]
-        },
-        &quot;choice-root&quot;: {
-            &quot;cb&quot;: [
-                {
-                    &quot;key-cb&quot;: &quot;f1&quot;,
-                    &quot;next-bit&quot;: &quot;asdfgh&quot;
-                },
-                {
-                    &quot;key-cb&quot;: &quot;f2&quot;,
-                    &quot;next-bit&quot;: &quot;qwertz&quot;
-                },
-                {
-                    &quot;key-cb&quot;: &quot;f3&quot;,
-                    &quot;next-bit&quot;: &quot;yxcvb&quot;
-                },
-                {
-                    &quot;key-cb&quot;: &quot;f4&quot;,
-                    &quot;next-bit&quot;: &quot;poiuzz&quot;
-                }
-            ]
-        },
-        &quot;augmented-root&quot;: {
-            &quot;aug-c&quot;: {
-                &quot;original-leaf&quot;: [
-                    null
-                ],
-                &quot;test-augment:list-1&quot;: [
-                    {
-                        &quot;leaf-x&quot;: &quot;x1&quot;,
-                        &quot;leaf-y&quot;: &quot;x1&quot;
-                    },
-                    {
-                        &quot;leaf-x&quot;: &quot;x2&quot;,
-                        &quot;leaf-y&quot;: &quot;x1&quot;
-                    },
-                    {
-                        &quot;leaf-x&quot;: &quot;x3&quot;,
-                        &quot;leaf-y&quot;: &quot;x1&quot;
-                    }
-                ]
+          },
+          &quot;nested-list&quot;: [
+            {
+              &quot;identifier&quot;: &quot;f1&quot;,
+              &quot;foo&quot;: 1
             },
-            &quot;aug-l&quot;: [
-                {
-                    &quot;my-key&quot;: &quot;k1&quot;,
-                    &quot;test-augment:abc&quot;: {
-                        &quot;abc&quot;: false
-                    }
-                },
-                {
-                    &quot;my-key&quot;: &quot;k2&quot;,
-                    &quot;test-augment:abc&quot;: {
-                        &quot;abc&quot;: true
-                    }
-                },
-                {
-                    &quot;my-key&quot;: &quot;k3&quot;,
-                    &quot;test-augment:abc&quot;: {
-                        &quot;abc&quot;: false
-                    }
-                }
+            {
+              &quot;identifier&quot;: &quot;f2&quot;,
+              &quot;foo&quot;: 10
+            },
+            {
+              &quot;identifier&quot;: &quot;f3&quot;,
+              &quot;foo&quot;: 20
+            }
+          ]
+        },
+        {
+          &quot;key-1&quot;: &quot;kb&quot;,
+          &quot;key-2&quot;: &quot;ka&quot;,
+          &quot;next-data&quot;: {
+            &quot;switch-1&quot;: [
+              null
             ]
+          },
+          &quot;nested-list&quot;: [
+            {
+              &quot;identifier&quot;: &quot;e1&quot;,
+              &quot;foo&quot;: 1
+            },
+            {
+              &quot;identifier&quot;: &quot;e2&quot;,
+              &quot;foo&quot;: 2
+            },
+            {
+              &quot;identifier&quot;: &quot;e3&quot;,
+              &quot;foo&quot;: 3
+            }
+          ]
+        },
+        {
+          &quot;key-1&quot;: &quot;kc&quot;,
+          &quot;key-2&quot;: &quot;ke&quot;,
+          &quot;next-data&quot;: {
+            &quot;switch-2&quot;: [
+              null
+            ]
+          },
+          &quot;nested-list&quot;: [
+            {
+              &quot;identifier&quot;: &quot;q1&quot;,
+              &quot;foo&quot;: 13
+            },
+            {
+              &quot;identifier&quot;: &quot;q2&quot;,
+              &quot;foo&quot;: 14
+            },
+            {
+              &quot;identifier&quot;: &quot;q3&quot;,
+              &quot;foo&quot;: 15
+            }
+          ]
         }
+      ]
+    },
+    &quot;choice-root&quot;: {
+      &quot;cb&quot;: [
+        {
+          &quot;key-cb&quot;: &quot;f1&quot;,
+          &quot;next-bit&quot;: &quot;asdfgh&quot;
+        },
+        {
+          &quot;key-cb&quot;: &quot;f2&quot;,
+          &quot;next-bit&quot;: &quot;qwertz&quot;
+        },
+        {
+          &quot;key-cb&quot;: &quot;f3&quot;,
+          &quot;next-bit&quot;: &quot;yxcvb&quot;
+        },
+        {
+          &quot;key-cb&quot;: &quot;f4&quot;,
+          &quot;next-bit&quot;: &quot;poiuzz&quot;
+        }
+      ]
+    },
+    &quot;augmented-root&quot;: {
+      &quot;aug-c&quot;: {
+        &quot;original-leaf&quot;: [
+          null
+        ],
+        &quot;test-augment:list-1&quot;: [
+          {
+            &quot;leaf-x&quot;: &quot;x1&quot;,
+            &quot;leaf-y&quot;: &quot;x1&quot;
+          },
+          {
+            &quot;leaf-x&quot;: &quot;x2&quot;,
+            &quot;leaf-y&quot;: &quot;x1&quot;
+          },
+          {
+            &quot;leaf-x&quot;: &quot;x3&quot;,
+            &quot;leaf-y&quot;: &quot;x1&quot;
+          }
+        ]
+      },
+      &quot;aug-l&quot;: [
+        {
+          &quot;my-key&quot;: &quot;k1&quot;,
+          &quot;test-augment:abc&quot;: {
+            &quot;abc&quot;: false
+          }
+        },
+        {
+          &quot;my-key&quot;: &quot;k2&quot;,
+          &quot;test-augment:abc&quot;: {
+            &quot;abc&quot;: true
+          }
+        },
+        {
+          &quot;my-key&quot;: &quot;k3&quot;,
+          &quot;test-augment:abc&quot;: {
+            &quot;abc&quot;: false
+          }
+        }
+      ]
     }
+  }
 }</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Node testtool2 with schema test-module-mod</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;root&quot;: {
-        &quot;simple-root&quot;: {
-            &quot;leaf-a&quot;: &quot;leafA&quot;,
-            &quot;leaf-b&quot;: &quot;leafB&quot;,
-            &quot;ll&quot;: [
-                &quot;str1&quot;,
-                &quot;str2&quot;,
-                &quot;EDITED&quot;
+  &quot;root&quot;: {
+    &quot;simple-root&quot;: {
+      &quot;leaf-a&quot;: &quot;leafA&quot;,
+      &quot;leaf-b&quot;: &quot;leafB&quot;,
+      &quot;ll&quot;: [
+        &quot;str1&quot;,
+        &quot;str2&quot;,
+        &quot;EDITED&quot;
+      ],
+      &quot;nested&quot;: {
+        &quot;sample-y&quot;: false
+      }
+    },
+    &quot;list-root&quot;: {
+      &quot;branch-ab&quot;: 5,
+      &quot;top-list&quot;: [
+        {
+          &quot;key-1&quot;: &quot;ka&quot;,
+          &quot;key-2&quot;: &quot;kb&quot;,
+          &quot;next-data&quot;: {
+            &quot;switch-1&quot;: [
+              null
             ],
-            &quot;nested&quot;: {
-                &quot;sample-y&quot;: false
-            }
-        },
-        &quot;list-root&quot;: {
-            &quot;branch-ab&quot;: 5,
-            &quot;top-list&quot;: [
-                {
-                    &quot;key-1&quot;: &quot;ka&quot;,
-                    &quot;key-2&quot;: &quot;kb&quot;,
-                    &quot;next-data&quot;: {
-                        &quot;switch-1&quot;: [
-                            null
-                        ],
-                        &quot;switch-2&quot;: [
-                            null
-                        ]
-                    },
-                    &quot;nested-list&quot;: [
-                        {
-                            &quot;identifier&quot;: &quot;f1&quot;,
-                            &quot;foo&quot;: 1
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;f2&quot;,
-                            &quot;foo&quot;: 10
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;f3&quot;,
-                            &quot;foo&quot;: 20
-                        }
-                    ]
-                },
-                {
-                    &quot;key-1&quot;: &quot;kb&quot;,
-                    &quot;key-2&quot;: &quot;ka&quot;,
-                    &quot;next-data&quot;: {
-                        &quot;switch-1&quot;: [
-                            null
-                        ]
-                    },
-                    &quot;nested-list&quot;: [
-                        {
-                            &quot;identifier&quot;: &quot;e1&quot;,
-                            &quot;foo&quot;: 1
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;e2&quot;,
-                            &quot;foo&quot;: 2
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;e3&quot;,
-                            &quot;foo&quot;: 3
-                        }
-                    ]
-                },
-                {
-                    &quot;key-1&quot;: &quot;kc&quot;,
-                    &quot;key-2&quot;: &quot;EDITED&quot;,
-                    &quot;next-data&quot;: {
-                        &quot;switch-2&quot;: [
-                            null
-                        ]
-                    },
-                    &quot;nested-list&quot;: [
-                        {
-                            &quot;identifier&quot;: &quot;q1&quot;,
-                            &quot;foo&quot;: 13
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;q2&quot;,
-                            &quot;foo&quot;: 14
-                        },
-                        {
-                            &quot;identifier&quot;: &quot;q3&quot;,
-                            &quot;foo&quot;: 15
-                        }
-                    ]
-                }
+            &quot;switch-2&quot;: [
+              null
             ]
-        },
-        &quot;choice-root&quot;: {
-            &quot;cb&quot;: [
-                {
-                    &quot;key-cb&quot;: &quot;f1&quot;,
-                    &quot;next-bit&quot;: &quot;asdfgh&quot;
-                },
-                {
-                    &quot;key-cb&quot;: &quot;f2&quot;,
-                    &quot;next-bit&quot;: &quot;qwertz&quot;
-                },
-                {
-                    &quot;key-cb&quot;: &quot;f3&quot;,
-                    &quot;next-bit&quot;: &quot;yxcvb&quot;
-                },
-                {
-                    &quot;key-cb&quot;: &quot;f4&quot;,
-                    &quot;next-bit&quot;: &quot;poiuzz&quot;
-                }
-            ]
-        },
-        &quot;augmented-root&quot;: {
-            &quot;aug-c&quot;: {
-                &quot;original-leaf&quot;: [
-                    null
-                ],
-                &quot;test-augment:list-1&quot;: [
-                    {
-                        &quot;leaf-x&quot;: &quot;x1&quot;,
-                        &quot;leaf-y&quot;: &quot;x1&quot;
-                    },
-                    {
-                        &quot;leaf-x&quot;: &quot;EDITED&quot;,
-                        &quot;leaf-y&quot;: &quot;x1&quot;
-                    },
-                    {
-                        &quot;leaf-x&quot;: &quot;x3&quot;,
-                        &quot;leaf-y&quot;: &quot;x1&quot;
-                    }
-                ]
+          },
+          &quot;nested-list&quot;: [
+            {
+              &quot;identifier&quot;: &quot;f1&quot;,
+              &quot;foo&quot;: 1
             },
-            &quot;aug-l&quot;: [
-                {
-                    &quot;my-key&quot;: &quot;k1&quot;,
-                    &quot;test-augment:abc&quot;: {
-                        &quot;abc&quot;: false
-                    }
-                },
-                {
-                    &quot;my-key&quot;: &quot;EDITED&quot;,
-                    &quot;test-augment:abc&quot;: {
-                        &quot;abc&quot;: true
-                    }
-                },
-                {
-                    &quot;my-key&quot;: &quot;k3&quot;,
-                    &quot;test-augment:abc&quot;: {
-                        &quot;abc&quot;: false
-                    }
-                }
+            {
+              &quot;identifier&quot;: &quot;f2&quot;,
+              &quot;foo&quot;: 10
+            },
+            {
+              &quot;identifier&quot;: &quot;f3&quot;,
+              &quot;foo&quot;: 20
+            }
+          ]
+        },
+        {
+          &quot;key-1&quot;: &quot;kb&quot;,
+          &quot;key-2&quot;: &quot;ka&quot;,
+          &quot;next-data&quot;: {
+            &quot;switch-1&quot;: [
+              null
             ]
+          },
+          &quot;nested-list&quot;: [
+            {
+              &quot;identifier&quot;: &quot;e1&quot;,
+              &quot;foo&quot;: 1
+            },
+            {
+              &quot;identifier&quot;: &quot;e2&quot;,
+              &quot;foo&quot;: 2
+            },
+            {
+              &quot;identifier&quot;: &quot;e3&quot;,
+              &quot;foo&quot;: 3
+            }
+          ]
+        },
+        {
+          &quot;key-1&quot;: &quot;kc&quot;,
+          &quot;key-2&quot;: &quot;EDITED&quot;,
+          &quot;next-data&quot;: {
+            &quot;switch-2&quot;: [
+              null
+            ]
+          },
+          &quot;nested-list&quot;: [
+            {
+              &quot;identifier&quot;: &quot;q1&quot;,
+              &quot;foo&quot;: 13
+            },
+            {
+              &quot;identifier&quot;: &quot;q2&quot;,
+              &quot;foo&quot;: 14
+            },
+            {
+              &quot;identifier&quot;: &quot;q3&quot;,
+              &quot;foo&quot;: 15
+            }
+          ]
         }
+      ]
+    },
+    &quot;choice-root&quot;: {
+      &quot;cb&quot;: [
+        {
+          &quot;key-cb&quot;: &quot;f1&quot;,
+          &quot;next-bit&quot;: &quot;asdfgh&quot;
+        },
+        {
+          &quot;key-cb&quot;: &quot;f2&quot;,
+          &quot;next-bit&quot;: &quot;qwertz&quot;
+        },
+        {
+          &quot;key-cb&quot;: &quot;f3&quot;,
+          &quot;next-bit&quot;: &quot;yxcvb&quot;
+        },
+        {
+          &quot;key-cb&quot;: &quot;f4&quot;,
+          &quot;next-bit&quot;: &quot;poiuzz&quot;
+        }
+      ]
+    },
+    &quot;augmented-root&quot;: {
+      &quot;aug-c&quot;: {
+        &quot;original-leaf&quot;: [
+          null
+        ],
+        &quot;test-augment:list-1&quot;: [
+          {
+            &quot;leaf-x&quot;: &quot;x1&quot;,
+            &quot;leaf-y&quot;: &quot;x1&quot;
+          },
+          {
+            &quot;leaf-x&quot;: &quot;EDITED&quot;,
+            &quot;leaf-y&quot;: &quot;x1&quot;
+          },
+          {
+            &quot;leaf-x&quot;: &quot;x3&quot;,
+            &quot;leaf-y&quot;: &quot;x1&quot;
+          }
+        ]
+      },
+      &quot;aug-l&quot;: [
+        {
+          &quot;my-key&quot;: &quot;k1&quot;,
+          &quot;test-augment:abc&quot;: {
+            &quot;abc&quot;: false
+          }
+        },
+        {
+          &quot;my-key&quot;: &quot;EDITED&quot;,
+          &quot;test-augment:abc&quot;: {
+            &quot;abc&quot;: true
+          }
+        },
+        {
+          &quot;my-key&quot;: &quot;k3&quot;,
+          &quot;test-augment:abc&quot;: {
+            &quot;abc&quot;: false
+          }
+        }
+      ]
     }
+  }
 }</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -621,160 +620,160 @@ representing the diff.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;updated-data&quot;: [
+  &quot;output&quot;: {
+    &quot;updated-data&quot;: [
+      {
+        &quot;path-intended&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/list-root/branch-ab&quot;,
+        &quot;path-actual&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/list-root/branch-ab&quot;,
+        &quot;data-actual&quot;: {
+          &quot;test-module-mod:branch-ab&quot;: 5
+        },
+        &quot;data-intended&quot;: {
+          &quot;test-module:branch-ab&quot;: 9999
+        }
+      },
+      {
+        &quot;path-intended&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/simple-root&quot;,
+        &quot;path-actual&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/simple-root&quot;,
+        &quot;data-actual&quot;: {
+          &quot;test-module-mod:ll&quot;: [
+            &quot;EDITED&quot;,
+            &quot;str1&quot;,
+            &quot;str2&quot;
+          ]
+        },
+        &quot;data-intended&quot;: {
+          &quot;test-module:ll&quot;: [
+            &quot;str3&quot;,
+            &quot;str2&quot;,
+            &quot;str1&quot;
+          ]
+        }
+      },
+      {
+        &quot;path-intended&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/simple-root/leaf-b&quot;,
+        &quot;path-actual&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/simple-root/leaf-b&quot;,
+        &quot;data-actual&quot;: {
+          &quot;test-module-mod:leaf-b&quot;: &quot;leafB&quot;
+        },
+        &quot;data-intended&quot;: {
+          &quot;test-module:leaf-b&quot;: &quot;EDITED&quot;
+        }
+      }
+    ],
+    &quot;created-data&quot;: [
+      {
+        &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/augmented-root/aug-l=EDITED&quot;,
+        &quot;data&quot;: {
+          &quot;aug-l&quot;: [
             {
-                &quot;path-intended&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/list-root/branch-ab&quot;,
-                &quot;path-actual&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/list-root/branch-ab&quot;,
-                &quot;data-actual&quot;: {
-                  &quot;test-module-mod:branch-ab&quot;: 5
-                },
-                &quot;data-intended&quot;: {
-                  &quot;test-module:branch-ab&quot;: 9999
-                }
-            },
-            {
-                &quot;path-intended&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/simple-root&quot;,
-                &quot;path-actual&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/simple-root&quot;,
-                &quot;data-actual&quot;: {
-                  &quot;test-module-mod:ll&quot;: [
-                    &quot;EDITED&quot;,
-                    &quot;str1&quot;,
-                    &quot;str2&quot;
-                  ]
-                },
-                &quot;data-intended&quot;: {
-                  &quot;test-module:ll&quot;: [
-                    &quot;str3&quot;,
-                    &quot;str2&quot;,
-                    &quot;str1&quot;
-                  ]
-                }
-            },
-            {
-                &quot;path-intended&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/simple-root/leaf-b&quot;,
-                &quot;path-actual&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/simple-root/leaf-b&quot;,
-                &quot;data-actual&quot;: {
-                  &quot;test-module-mod:leaf-b&quot;: &quot;leafB&quot;
-                },
-                &quot;data-intended&quot;: {
-                  &quot;test-module:leaf-b&quot;: &quot;EDITED&quot;
-                }
+              &quot;my-key&quot;: &quot;EDITED&quot;,
+              &quot;test-augment-mod:abc&quot;: {
+                &quot;abc&quot;: true
+              }
             }
-        ],
-        &quot;created-data&quot;: [
+          ]
+        }
+      },
+      {
+        &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/augmented-root/aug-c/test-augment-mod:list-1=EDITED&quot;,
+        &quot;data&quot;: {
+          &quot;list-1&quot;: [
             {
-                &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/augmented-root/aug-l=EDITED&quot;,
-                &quot;data&quot;: {
-                  &quot;aug-l&quot;: [
-                    {
-                      &quot;my-key&quot;: &quot;EDITED&quot;,
-                      &quot;test-augment-mod:abc&quot;: {
-                        &quot;abc&quot;: true
-                      }
-                    }
-                  ]
-                }
-            },
-            {
-                &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/augmented-root/aug-c/test-augment-mod:list-1=EDITED&quot;,
-                &quot;data&quot;: {
-                  &quot;list-1&quot;: [
-                    {
-                      &quot;leaf-x&quot;: &quot;EDITED&quot;,
-                      &quot;leaf-y&quot;: &quot;x1&quot;
-                    }
-                  ]
-                }
-            },
-            {
-                &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/list-root/top-list=kc,EDITED&quot;,
-                &quot;data&quot;: {
-                  &quot;top-list&quot;: [
-                    {
-                      &quot;key-1&quot;: &quot;kc&quot;,
-                      &quot;key-2&quot;: &quot;EDITED&quot;,
-                      &quot;nested-list&quot;: [
-                        {
-                          &quot;identifier&quot;: &quot;q2&quot;,
-                          &quot;foo&quot;: 14
-                        },
-                        {
-                          &quot;identifier&quot;: &quot;q1&quot;,
-                          &quot;foo&quot;: 13
-                        },
-                        {
-                          &quot;identifier&quot;: &quot;q3&quot;,
-                          &quot;foo&quot;: 15
-                        }
-                      ],
-                      &quot;next-data&quot;: {
-                        &quot;switch-2&quot;: [
-                          null
-                        ]
-                      }
-                    }
-                  ]
-                }
+              &quot;leaf-x&quot;: &quot;EDITED&quot;,
+              &quot;leaf-y&quot;: &quot;x1&quot;
             }
-        ],
-        &quot;deleted-data&quot;: [
+          ]
+        }
+      },
+      {
+        &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool2/frinx-uniconfig-topology:configuration/test-module-mod:root/list-root/top-list=kc,EDITED&quot;,
+        &quot;data&quot;: {
+          &quot;top-list&quot;: [
             {
-                &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/list-root/top-list=kc,ke&quot;,
-                &quot;data&quot;: {
-                  &quot;top-list&quot;: [
-                    {
-                      &quot;key-1&quot;: &quot;kc&quot;,
-                      &quot;key-2&quot;: &quot;ke&quot;,
-                      &quot;nested-list&quot;: [
-                        {
-                          &quot;identifier&quot;: &quot;q2&quot;,
-                          &quot;foo&quot;: 14
-                        },
-                        {
-                          &quot;identifier&quot;: &quot;q1&quot;,
-                          &quot;foo&quot;: 13
-                        },
-                        {
-                          &quot;identifier&quot;: &quot;q3&quot;,
-                          &quot;foo&quot;: 15
-                        }
-                      ],
-                      &quot;next-data&quot;: {
-                        &quot;switch-2&quot;: [
-                          null
-                        ]
-                      }
-                    }
-                  ]
+              &quot;key-1&quot;: &quot;kc&quot;,
+              &quot;key-2&quot;: &quot;EDITED&quot;,
+              &quot;nested-list&quot;: [
+                {
+                  &quot;identifier&quot;: &quot;q2&quot;,
+                  &quot;foo&quot;: 14
+                },
+                {
+                  &quot;identifier&quot;: &quot;q1&quot;,
+                  &quot;foo&quot;: 13
+                },
+                {
+                  &quot;identifier&quot;: &quot;q3&quot;,
+                  &quot;foo&quot;: 15
                 }
-            },
-            {
-                &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/augmented-root/aug-c/test-augment:list-1=x2&quot;,
-                &quot;data&quot;: {
-                  &quot;list-1&quot;: [
-                    {
-                      &quot;leaf-x&quot;: &quot;x2&quot;,
-                      &quot;leaf-y&quot;: &quot;x1&quot;
-                    }
-                  ]
-                }
-            },
-            {
-                &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/augmented-root/aug-l=k2&quot;,
-                &quot;data&quot;: {
-                  &quot;aug-l&quot;: [
-                    {
-                      &quot;my-key&quot;: &quot;k2&quot;,
-                      &quot;test-augment:abc&quot;: {
-                        &quot;abc&quot;: true
-                      }
-                    }
-                  ]
-                }
+              ],
+              &quot;next-data&quot;: {
+                &quot;switch-2&quot;: [
+                  null
+                ]
+              }
             }
-        ]
-    }
+          ]
+        }
+      }
+    ],
+    &quot;deleted-data&quot;: [
+      {
+        &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/list-root/top-list=kc,ke&quot;,
+        &quot;data&quot;: {
+          &quot;top-list&quot;: [
+            {
+              &quot;key-1&quot;: &quot;kc&quot;,
+              &quot;key-2&quot;: &quot;ke&quot;,
+              &quot;nested-list&quot;: [
+                {
+                  &quot;identifier&quot;: &quot;q2&quot;,
+                  &quot;foo&quot;: 14
+                },
+                {
+                  &quot;identifier&quot;: &quot;q1&quot;,
+                  &quot;foo&quot;: 13
+                },
+                {
+                  &quot;identifier&quot;: &quot;q3&quot;,
+                  &quot;foo&quot;: 15
+                }
+              ],
+              &quot;next-data&quot;: {
+                &quot;switch-2&quot;: [
+                  null
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/augmented-root/aug-c/test-augment:list-1=x2&quot;,
+        &quot;data&quot;: {
+          &quot;list-1&quot;: [
+            {
+              &quot;leaf-x&quot;: &quot;x2&quot;,
+              &quot;leaf-y&quot;: &quot;x1&quot;
+            }
+          ]
+        }
+      },
+      {
+        &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=testtool/frinx-uniconfig-topology:configuration/test-module:root/augmented-root/aug-l=k2&quot;,
+        &quot;data&quot;: {
+          &quot;aug-l&quot;: [
+            {
+              &quot;my-key&quot;: &quot;k2&quot;,
+              &quot;test-augment:abc&quot;: {
+                &quot;abc&quot;: true
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="successful-example-no-difference">
@@ -783,11 +782,10 @@ representing the diff.</p>
         <span>Successful example: No difference</span>
     </h3>
 </doc-anchor-target>
-<p>The following output demonstrates a situation with no changes
-between specified subtrees.</p>
+<p>The following output demonstrates a situation with no changes between specified subtrees.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-subtree-diff' \
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:calculate-subtree-diff' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -802,8 +800,8 @@ between specified subtrees.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-    }
+  &quot;output&quot;: {
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-invalid-value-in-input-field">
@@ -812,9 +810,8 @@ between specified subtrees.</p>
         <span>Failed example: Invalid value in input field</span>
     </h3>
 </doc-anchor-target>
-<p>RPC calculate-subtree-diff has an improperly defined datastore (AAA)
-within the input. Output describes the Allowed values [CONFIGURATION,
-OPERATIONAL].</p>
+<p>RPC input contains an improperly defined datastore (<code v-pre>AAA</code>).</p>
+<p>RPC output describes the allowed values (<code v-pre>CONFIGURATION</code> and <code v-pre>OPERATIONAL</code>).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:calculate-subtree-diff' \
@@ -832,16 +829,16 @@ OPERATIONAL].</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 400</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-type&quot;: &quot;protocol&quot;,
-                &quot;error-message&quot;: &quot;Error parsing input: Invalid value 'AAA' for enum type. Allowed values are: [CONFIGURATION, OPERATIONAL]&quot;,
-                &quot;error-tag&quot;: &quot;malformed-message&quot;,
-                &quot;error-info&quot;: &quot;Invalid value 'AAA' for enum type. Allowed values are: [CONFIGURATION, OPERATIONAL]&quot;
-            }
-        ]
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;protocol&quot;,
+        &quot;error-tag&quot;: &quot;malformed-message&quot;,
+        &quot;error-message&quot;: &quot;Error parsing input: Invalid value 'AAA' for enum type. Allowed values are: [CONFIGURATION, OPERATIONAL]&quot;,
+        &quot;error-info&quot;: &quot;Invalid value 'AAA' for enum type. Allowed values are: [CONFIGURATION, OPERATIONAL]&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-missing-mandatory-field">
@@ -869,9 +866,44 @@ OPERATIONAL].</p>
   &quot;errors&quot;: {
     &quot;error&quot;: [
       {
-        &quot;error-message&quot;: &quot;Field target-path is not specified in input request&quot;,
+        &quot;error-type&quot;: &quot;application&quot;,
         &quot;error-tag&quot;: &quot;invalid-value&quot;,
-        &quot;error-type&quot;: &quot;application&quot;
+        &quot;error-message&quot;: &quot;Field target-path is not specified in input request&quot;
+      }
+    ]
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-pointing-to-different-schema-node">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-pointing-to-different-schema-node">#</doc-anchor-trigger>
+        <span>Failed example: Pointing to different schema node</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains source and target paths that do not point to the same schema node.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:calculate-subtree-diff' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot; : {
+        &quot;source-path&quot;: [&quot;/network-topology:network-topology/network-topology:topology=uniconfig/network-topology:node=XR5/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/frinx-openconfig-interfaces:interface=GigabitEthernet0%2F0%2F0%2F0&quot;],
+        &quot;target-path&quot;: [&quot;/network-topology:network-topology/network-topology:topology=uniconfig/network-topology:node=XR6/frinx-uniconfig-topology:configuration/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act=GigabitEthernet0%2F0%2F0%2F0&quot;],
+        &quot;source-datastore&quot;: &quot;CONFIGURATION&quot;,
+        &quot;target-datastore&quot;: &quot;CONFIGURATION&quot;
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 400</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-tag&quot;: &quot;invalid-value&quot;,
+        &quot;error-message&quot;: &quot;Source and target paths are not pointing to the same schema node&quot;
       }
     ]
   }

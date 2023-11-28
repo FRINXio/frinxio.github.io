@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,24 +254,19 @@
         <span>RPC compare-config</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC is a combination of the sync-from-network and calculate-diff RPCs.
-If one of those RPCs fails, this one also fails with no changes made.</p>
-<p>The purpose of this RPC is to synchronize configurations from network devices
-to UniConfig nodes in the Configuration datastore of the UniConfig transaction.</p>
-<p>The RPC input contains a list of UniConfig nodes which configuration should be
-compared to actual configuration in the transaction The output of the RPC
-describes the result of compare-config and matches all input nodes with
-a list of statements representing the diff.</p>
+<p>This RPC is a combination of the <strong>sync-from-network</strong> and <strong>calculate-diff</strong> RPCs.  If one of those RPCs fails, this one also fails with no changes made.</p>
+<p>The purpose of this RPC is to synchronise configurations from network devices to UniConfig nodes in the <strong>Configuration</strong> datastore of the UniConfig transaction.</p>
+<p>RPC input contains a list of UniConfig nodes whose configuration is compared to the actual configuration in the transaction. RPC output describes the result of the RPC and matches all input nodes with a list of statements representing the diff.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -332,11 +327,10 @@ a list of statements representing the diff.</p>
 <doc-anchor-target id="successful-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes, configuration of all
-touched nodes in the transaction is compared to synced device configuration.</p>
+<p>If RPC input does not specify target nodes, the configuration of all nodes touched in the transaction is compared to the synced device configuration.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:compare-config' \
@@ -394,10 +388,10 @@ touched nodes in the transaction is compared to synced device configuration.</p>
 <doc-anchor-target id="successful-example-2">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC compare-config input has target node and there is no diff.</p>
+<p>RPC input includes a target node and there is no diff.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:compare-config' \
@@ -429,12 +423,10 @@ touched nodes in the transaction is compared to synced device configuration.</p>
 <doc-anchor-target id="failed-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC compare-config input has two target nodes. One of the nodes,
-&#x27;R2&#x27;, has not been installed yet. The output describes the result
-of the sync-from-network.</p>
+<p>RPC input has two target nodes, one of which (R2) is not installed. The output describes the result of <strong>sync-from-network</strong>.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:compare-config' \
@@ -465,14 +457,13 @@ of the sync-from-network.</p>
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.</p>
 <doc-anchor-target id="failed-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
+<p>If RPC input does not contain target nodes and there are no touched nodes, the request results in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:compare-config' \

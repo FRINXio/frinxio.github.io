@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC validate | Frinx Docs</title>
     <meta name="title" content="RPC validate | Frinx Docs">
-    <meta name="description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be validated if it is" />
+    <meta name="description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be checked for validity." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_validate/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_validate/">
     <meta property="og:title" content="RPC validate | Frinx Docs">
-    <meta property="og:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be validated if it is">
+    <meta property="og:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be checked for validity.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_validate/rpc_validation-rpc_validate.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_validate/">
     <meta property="twitter:title" content="RPC validate | Frinx Docs">
-    <meta property="twitter:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be validated if it is">
+    <meta property="twitter:description" content="The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be checked for validity.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_validate/rpc_validation-rpc_validate.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,23 +256,17 @@
         <span>RPC validate</span>
     </h1>
 </doc-anchor-target>
-<p>The external application stores the intended configuration under nodes
-in the UniConfig topology. The configuration can be validated if it is
-valid or not. The trigger for execution of configuration validation is
-an RPC validate. RPC input contains a list of UniConfig nodes which
-configuration should be validated. Output of the RPC describes the
-result of the validation and matches all input nodes. It is valid to
-call this RPC with empty list of target nodes - in this case, all nodes
-that have been modified in the UniConfig transaction will be validated.</p>
-<p>The configuration of nodes consists of the following phases:</p>
+<p>The external application stores the intended configuration under nodes in the UniConfig topology. The configuration can be checked for validity. This RPC is the trigger for configuration validation.</p>
+<p>RPC input contains a list of UniConfig nodes whose configuration should be validated. RPC output describes the result of the validation and matches all input nodes.</p>
+<p>If the RPC is called with an empty list of target nodes, all nodes modified in the UniConfig transaction are validated.</p>
+<p>The configuration of nodes follows these steps:</p>
 <ol>
 <li>Open transaction to device</li>
 <li>Write configuration</li>
 <li>Validate configuration</li>
 <li>Close transaction</li>
 </ol>
-<p>If one node failed in second (validation) phase for any reason, the RPC
-will fail entirely.</p>
+<p>If any node fails in step 3 (validation), the entire RPC also fails.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -286,12 +280,11 @@ will fail entirely.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>The validation (second phase) take place only on nodes that support
-this operation.</p>
+<p>Validation (step 3) only applies to nodes that support this operation.</p>
         </div>
     </div>
 </div>
-<p>Validate RPC is shown in the figure bellow.</p>
+<p>The diagram below illustrates the RPC:</p>
 <p><figure class="content-center">
     <img src="rpc_validation-rpc_validate.svg" alt="RPC validate" />
     <figcaption class="caption">RPC validate</figcaption>
@@ -300,17 +293,16 @@ this operation.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC validate input has 2 target nodes and the output describes
-the result of the successful validation.</p>
+<p>RPC input has two target nodes. RPC output describes the result of successful validation.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -331,11 +323,10 @@ the result of the successful validation.</p>
 <doc-anchor-target id="successful-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes, all touched node
-in the transaction will be validated.</p>
+<p>If RPC input does not specify any target nodes, all nodes touched in the transaction are validated.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -355,11 +346,10 @@ in the transaction will be validated.</p>
 <doc-anchor-target id="failed-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC commit input has 1 target node and the output describes the
-result of the validation. Node has failed because validation failed.</p>
+<p>RPC input has one target node. RPC output describes the result of the validation. In this case, the node has failed because validation has failed.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \
@@ -393,12 +383,10 @@ result of the validation. Node has failed because validation failed.</p>
 <doc-anchor-target id="failed-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains 2 nodes, the first one &#x27;R1&#x27; is valid,
-the second one &#x27;R2&#x27; has not been installed yet. If there is
-one invalid node, Uniconfig will be evaluated nodes with fail.</p>
+<p>RPC input contains two nodes. Node R1 is valid and R2 is not installed. If at least one node is invalid, the entire operation fails.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -432,11 +420,10 @@ one invalid node, Uniconfig will be evaluated nodes with fail.</p>
 <doc-anchor-target id="failed-example-2">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.</p>
+<p>If RPC input does not contain any target nodes and there are no touched nodes, the request results in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:validate' \

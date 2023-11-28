@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.753895847557">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488400068">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC is-in-sync | Frinx Docs</title>
     <meta name="title" content="RPC is-in-sync | Frinx Docs">
-    <meta name="description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of" />
+    <meta name="description" content="This RPC is used to verify that specified nodes are in sync with the current state in the Operational" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/">
     <meta property="og:title" content="RPC is-in-sync | Frinx Docs">
-    <meta property="og:description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of">
+    <meta property="og:description" content="This RPC is used to verify that specified nodes are in sync with the current state in the Operational">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/rpc_is-in-sync-rpc_is_in_sync.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/">
     <meta property="twitter:title" content="RPC is-in-sync | Frinx Docs">
-    <meta property="twitter:description" content="This RPC can be used for verification whether the specified nodes are in-sync with the current state in the Operational datastore of">
+    <meta property="twitter:description" content="This RPC is used to verify that specified nodes are in sync with the current state in the Operational">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_is-in-sync/rpc_is-in-sync-rpc_is_in_sync.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.753895847557" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488400068" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.753895847557" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.753895847557" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488400068" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488400068" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,65 +256,35 @@
         <span>RPC is-in-sync</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC can be used for verification whether the specified nodes
-are in-sync with the current state in the Operational datastore of
-UniConfig transaction. This verification is done by comparison of
-configuration fingerprints. The configuration fingerprint on the
-device is compared with the last configuration fingerprint saved
-in the Operational datastore. A fingerprint is usually represented
-by a configuration timestamp or the last transaction ID. The is-in-sync
-feature is supported only for device types that have implemented
-translation units for the &#x27;frinx-configuration-metadata&#x27; OpenConfig
-module (using cli units, netconf units, or uniconfig-native metadata
-units).</p>
+<p>This RPC is used to verify that specified nodes are in sync with the current state in the <strong>Operational</strong> datastore of the UniConfig transaction.</p>
+<p>Verification is performed by comparing configuration fingerprints. The configuration fingerprint on the device is compared with the last configuration fingerprint saved in the <strong>Operational</strong> datastore. A fingerprint is usually represented by a configuration timestamp or the last transaction ID.</p>
+<p>The <strong>is-in-sync</strong> feature is supported only for device types that have implemented translation units for the <code v-pre>frinx-configuration-metadata</code> OpenConfig module (using CLI units, NETCONF units, or UniConfig-native metadata units).</p>
 <p><figure class="content-center">
     <img src="rpc_is-in-sync-rpc_is_in_sync.svg" alt="RPC is-in-sync" />
     <figcaption class="caption">RPC is-in-sync</figcaption>
 </figure>
 </p>
-<p>The RPC input contains a list of UniConfig nodes for which the
-verification should be completed (&#x27;target-nodes&#x27; field). Response
-comprises the operation status for each of the nodes that was
-specified in the RPC input. If the operation failed it is because
-the specified node has not been successfully installed or connection
-has been lost or uniconfig doesn&#x27;t have support for reading of
-configuration fingerprint from specific device type. Calling RPC
-with empty list of target nodes will result in invocation of RPC
-for each node that has been modified in the UniConfig transaction.</p>
+<p>RPC input contains a list of UniConfig nodes for which verification should be performed (the <code v-pre>target-nodes</code> field). The response contains the operation status for each node specified in the input. If the operation fails, it is because the specified node has not been successfully installed, the connection is lost or UniConfig does not support reading the configuration fingerprint from that specific device type. Calling the RPC with an empty list of target nodes invokes the RPC for each node modified in the UniConfig transaction.</p>
 <p>Possible RPC outputs per target node:</p>
 <ol>
-<li>&#x27;status&#x27; field with value &#x27;complete&#x27; with set &#x27;is-in-sync&#x27; boolean
-flag; is-in-sync feature is supported and the configuration
-fingerprints have been successfully compared.</li>
-<li>&#x27;status&#x27; field with value &#x27;fail&#x27; with set &#x27;error-type&#x27; to
-&#x27;no-connection&#x27; and corresponding &#x27;error-message&#x27;; Unified
-mountpoint doesn&#x27;t exist because the connection has been lost or the
-node has not been mounted yet.</li>
-<li>&#x27;status&#x27; field with value &#x27;fail&#x27; with set &#x27;error-type&#x27; to
-&#x27;uniconfig-error&#x27; and corresponding &#x27;error-message&#x27;; reading of the
-fingerprint from the Operational datastore or Unified mountpoint has
-failed, or the configuration metadata parsing is not supported for
-the device type.</li>
+<li><code v-pre>status</code> field with value <code v-pre>complete</code> and <code v-pre>is-in-sync</code> boolean flag set: The <strong>is-in-sync</strong> feature is supported and configuration fingerprints have been successfully compared.</li>
+<li><code v-pre>status</code> field with value <code v-pre>fail</code>, <code v-pre>error-type</code> field with value <code v-pre>no-connection</code> and corresponding <code v-pre>error-message</code>: The unified mountpoint does not exist because the connection was lost or the node is not mounted.</li>
+<li><code v-pre>status</code> field with value <code v-pre>fail</code>, <code v-pre>error-type</code> field with value <code v-pre>uniconfig-error</code> and corresponding <code v-pre>error-message</code>: Reading the fingerprint from the <strong>Operational</strong> datastore or unified mountpoint has failed, or parsing configuration metadata is not supported for the device type.</li>
 </ol>
-<p>Execution of the &#x27;is-in-sync&#x27; RPC doesn&#x27;t modify the Operational
-datastore. The configuration fingerprint that is stored in the
-Operational datastore is not updated. &#x27;Sync-from-network&#x27; RPC must be
-used for updating the last configuration fingerprint and the actual
-configuration state.</p>
+<p>Executing the *<strong>is-in-sync</strong> RPC does not modify the <strong>Operational</strong> datastore. The configuration fingerprint stored in the <strong>Operational</strong> datastore is not updated. Use the <strong>sync-from-network RPC</strong> to update the last configuration fingerprint and the actual configuration state.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC Examples</span>
+        <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="successful-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>the RPC input contains valid nodes for which the synchronization status
-must be checked (&#x27;R1&#x27; is synced while &#x27;R2&#x27; is not synced):</p>
+<p>RPC input contains valid nodes for which synchronization status should be checked (R1 is synced, R2 is not synced).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -350,11 +320,10 @@ must be checked (&#x27;R1&#x27; is synced while &#x27;R2&#x27; is not synced):</
 <doc-anchor-target id="successful-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful Example</span>
+        <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes, all touched nodes
-will be invoked.</p>
+<p>If RPC input contains no target nodes, all touched nodes are invoked.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -389,11 +358,10 @@ will be invoked.</p>
 <doc-anchor-target id="failed-example">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains invalid node, the &#x27;R1&#x27; doesn&#x27;t support comparison of fingerprints
-(metadata translation unit has not been implemented for this device).</p>
+<p>RPC input contains an invalid node (R1), which does not support fingerprint comparisons (metadata translation unit has not been implemented for this device).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -427,13 +395,10 @@ will be invoked.</p>
 <doc-anchor-target id="failed-example-1">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>RPC input contains 2 nodes, the first one &#x27;R1&#x27; is valid and synced,
-the second one (&#x27;R2&#x27;) has not been installed yet. If there is one
-invalid node, Uniconfig operation will fail with 1 error entry in the
-response.</p>
+<p>RPC input contains two nodes. Node R1 is valid and synced, R2 is not installed. If one node is invalid, the UniConfig operation will fail with an error entry in the response.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
@@ -467,11 +432,10 @@ response.</p>
 <doc-anchor-target id="failed-example-2">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
-        <span>Failed Example</span>
+        <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>If the RPC input does not contain the target nodes and there
-are not any touched nodes, the request will result in an error.</p>
+<p>If RPC input does not contain any target nodes and there are no touched nodes, the request results in an error.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
