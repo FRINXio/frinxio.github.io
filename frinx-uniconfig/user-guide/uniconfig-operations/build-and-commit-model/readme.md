@@ -1,32 +1,30 @@
 # Build-and-Commit Model
 
-## Introduction
-
-Build-and-commit model is based on explicit creation of the transaction,
-invoking operations in the scope of this transaction and finally
-committing or closing transaction. The transaction represents a session
-between the client and the UniConfig instance.
+The Build-and-Commit model is based on explicit creation of a transaction,
+invoking operations in the scope of this transaction and, finally,
+committing or closing the transaction. The transaction represents a session
+between client and UniConfig instance.
 
 Using explicitly created transactions has multiple advantages in
-comparison to Immediate Commit Model:
+comparison to the Immediate Commit Model:
 
-- Multiple operations and modifications can be invoked in the single
+- Multiple operations and modifications can be invoked in a single
     transaction while keeping transactions isolated.
-- Most of the UniConfig operations, such as calculate-diff and commit,
-    doesn't have any usage in the Immediate Commit Model - they are
-    valuable only if the Build-and-Commit Model is used.
-- The transaction allows a client to identify if it still communicates
-    with the same UniConfig instance (this property is usable in the
-    clustered deployment). If the UniConfig instance does not know about
-    the transaction then the request will fail because transaction
-    expired, is closed, or has never been created.
+- Most UniConfig operations, such as calculate-diff and commit, have no use in
+    the Immediate Commit Model. They are valuable only if the Build-and-Commit
+    Model is used.
+- The transaction allows a client to identify if it still communicates with the
+    same UniConfig instance (this property is usable in the clustered
+    deployment). If the UniConfig instance does not know about the transaction,
+    the request will fail because the transaction expired, is closed or was
+    never created in the first place.
 
 ## Configuration
 
-Configuration related to UniConfig transactions is placed in the
-'config/lighty-uniconfig-config.json' file under 'transactions'
-container. Note that build-and-commit model is enabled if
-'uniconfigTransactionEnabled' is set to 'true' value (default value).
+Configurations related to UniConfig transactions are placed in the
+**config/lighty-uniconfig-config.json** file under the `transactions` container.
+Note that the Build-and-Commit model is enabled if `uniconfigTransactionEnabled`
+is set to `true` (this is the default value).
 
 ```
 // Grouped settings that are related to Uniconfig transactions.
@@ -58,41 +56,37 @@ container. Note that build-and-commit model is enabled if
 
 ## Optimistic locking mechanism
 
-Race condition between transactions that are committed in parallel and
-contain changes of same nodes (uniconfig, unistore, snapshot, or
-template nodes) is solved using optimistic locking mechanism.
-Configuration of same node can be modified in parallel from 2
-transactions, however only the first committed transaction will succeed.
-Commit of the second transaction will fail.
+Race conditions between transactions that are committed in parallel and contain
+changes to the same nodes (uniconfig, unistore, snapshot or template nodes) are
+solved using the optimistic locking mechanism. The configuration of a node can
+be modified in parallel from two transactions, but only the first committed
+transaction will succeed. The commit for the second transaction will fail.
 
-UniConfig uses 2 different techniques for detection of conflicts during
-commit or checked-commit operation:
+UniConfig uses two different techniques to detect conflicts during commit or
+checked-commit operations:
 
-1. Comparison of configuration fingerprints - Fingerprint value is
-updated for altered node at the end of the commit operation - at the
-beginning of commit operation, UniConfig compares the value of
-actual fingerprint in database with value of fingerprint read before
-the first CRUD operation done in the transaction and the last synced
-fingerprint (updated after execution of sync-from-network RPC). If
-actual fingerprint from database equals to fingerprint read before
-the first CRUD operation or the last synced fingerprint, then commit
-operation can continue. Otherwise, error is returned without
-touching any devices on network.
+1. **Comparing configuration fingerprints** - The fingerprint value for an
+altered node is updated at the end of the commit operation. At the beginning of
+a commit operation, UniConfig compares the value of the actual fingerprint in
+the database with the value of the fingerprint read before the first CRUD
+operation done in the transaction and the last synced fingerprint (updated after
+execution of the **sync-from-network RPC**). If the actual fingerprint in the
+database is equal to the fingerprint read before the first CRUD operation or the
+last synced fingerprint, the commit operation can continue. Otherwise, an error
+is returned without touching any devices in the network.
 
-2. Per-node advisory locks - Comparison of configuration fingerprints 
-are reliable if transactions are committed one after another.
-However, such serialization cannot be achieved in the clustered
-environment because UniConfig instances are not coordinated. If 2
-transactions are committed at the same time and both assume that
-configuration fingerprints haven't been updated by other
-transaction, both transactions may start to push changes to network
-devices at the same time. To prevent occurrences of this
-scenario, UniConfig locks node in the PostgresSQL database using
-transaction-level advisory locks at the beginning of commit
-operation. If other transaction tries to lock the same node, this
-attempt will fail, and second transaction will not enter critical
-section - rather it will fail. Locks are automatically released at
-the end of the transaction (commit RPC closes transaction).
+2. **Per-node advisory locks** - Comparison of configuration fingerprints is
+reliable if transactions are committed one after another. However, such
+serialization cannot be achieved in the clustered environment as UniConfig
+instances are not coordinated. If two transactions are committed at the same
+time and both assume that configuration fingerprints haven't been updated by
+another transaction, both transactions may start to push changes to network
+devices simultaneously. To prevent this scenario, UniConfig locks the node in
+the PostgresSQL database using transaction-level advisory locks at the beginning
+of the commit operation. If another transaction tries to lock the same node, its
+attempt will fail, and the second transaction cannot enter the critical section
+but will fail. Locks are automatically released at the end of the transaction
+(**commit RPC** closes the transaction).
 
 All possible scenarios are captured in the following diagrams.
 
@@ -208,15 +202,18 @@ http://localhost:8181/rests/operations/uniconfig-manager:create-transaction?time
 
 ### Dedicated session to device
 
-By default, UniConfig shares southbound session to network device, if multiple UniConfig transactions
-use the same device via same management protocol. This behaviour can be disabled using 'dedicatedDeviceSession'
-query parameter which accepts boolean value. Afterward, UniConfig transaction will create dedicated session
-to device which is used only by one transaction and closed immediately after committing or closing the transaction.
+By default, UniConfig shares a southbound session to a network device if
+multiple UniConfig transactions use the same device via the same management
+protocol. This behaviour can be disabled using the `dedicatedDeviceSession`
+query parameter, which accepts a boolean value. Afterwards the UniConfig
+transaction will create a dedicated session to the device, which is used only by
+one transaction and is closed immediately after committing or closing the
+transaction.
 
-Dedicated sessions to device are useful when:
-* Device is not able to process requests in parallel via same session.
-* Device is able to process requests in parallel via same session, but it doesn't process them in parallel
-  - decreasing processing performance.
+Dedicated sessions to a device are useful when:
+* The evice is not able to process requests in parallel via the same session.
+* The device is able to process requests in parallel via same session, but does
+  not process them in parallel, decreasing processing performance.
 
 ```URL Setting dedicated device sessions
 http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction?dedicatedDeviceSession=true

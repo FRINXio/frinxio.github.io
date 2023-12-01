@@ -2,29 +2,33 @@
 
 ## RPC dryrun-commit
 
-The RPC will resolve the diff between actual and intended configuration
-of nodes by using UniConfig Node Manager. Changes for CLI nodes are
-applied by using cli-dryrun mountpoint which only stores translated CLI
-commands to the cli-dry-run journal. After all changes are applied, the
-cli-dryrun journal is read and an RPC output is created and returned. It
-works similarly with NETCONF devices, but it outputs NETCONF messages
-instead of CLI commands. RPC input contains a list of UniConfig nodes
-for which to execute the dry run. Output of the RPC describes the
-results of the operation and matches all input nodes. It also contains a
-list of commands, and NETCONF messages for the given nodes. If RPC is
-called with empty list of target nodes, dryrun operation is executed on
-all modified nodes in the UniConfig transaction. If one node failed for
-any reason the RPC will be failed entirely.
+This RPC resolves the diff between the actual and intended configurationz of
+nodes by using the UniConfig Node Manager.
+
+Changes to CLI nodes are applied using the cli-dryrun mountpoint, which only
+stores translated CLI commands to the cli-dry-run journal. After all changes are
+applied, the cli-dryrun journal is read and an RPC output is created and
+returned. This works similarly with NETCONF devices, but produces NETCONF
+messages as output instead of CLI commands.
+
+RPC input contains a list of UniConfig nodes for which to execute the dry run.
+
+RPC output describes the results of the operation and matches all input nodes.
+It also contains a list of commands and NETCONF messages for the given nodes.
+
+If the RPC is called with an empty list of target nodes, the dryrun operation is
+executed on all modified nodes in the UniConfig transaction. If a node fails for
+any reason, the entire RPC fails.
 
 ![RPC dryrun commit](RPC_dry-run-RPC_dryrun_commit.svg)
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
-RPC input does not contain the target node and the output contains
-a list of commands which would be sent to the device if the RPC commit
-or checked-commit was called.
+RPC input does not contain the target node. RPC output contains a list of
+commands that would be sent to the device if the RPC commit or checked-commit
+was called.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -57,7 +61,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 
 ### Successful example
 
-RPC input does not contain target nodes, dryrun is executed with all
+RPC input does not contain any target nodes. Dryrun is executed with all
 modified nodes.
 
 ```bash RPC Request
@@ -89,9 +93,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 }
 ```
 
-### Successful Example
+### Successful example
 
-If there are not any touched nodes, the request will finish successfully.
+If there are no touched nodes, the request finishes successfully.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -109,9 +113,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 }
 ```
 
-### Failed Example
+### Failed example
 
-Node 'R1' has failed due to improper configuration.
+Node R1 has failed due to incorrect configuration.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -142,9 +146,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 }
 ```
 
-### Failed Example
+### Failed example
 
-Node 'R1' has failed due to not supporting dry-run functionality.
+Node R1 has failed because it does not support dry-run functionality.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \
@@ -173,9 +177,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-ma
 }
 ```
 
-### Failed Example
+### Failed example
 
-Node 'R1' has lost connection.
+Node R1 has lost connection.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/dryrun-manager:dryrun-commit' \

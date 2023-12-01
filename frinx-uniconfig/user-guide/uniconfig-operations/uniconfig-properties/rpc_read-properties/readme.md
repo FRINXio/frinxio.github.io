@@ -1,11 +1,14 @@
 # RPC read-properties
 
-The **read-properties** RPC reads default properties from the database. If a specified property key does not exist in the database, they key is returned in the *ignored keys* section. The RPC works the same whether UniConfig Cloud Config is enabled or disabled.
+This RPC reads default properties from the database. If a specified property key
+does not exist in the database, the key is returned under `Ignored keys`. The
+RPC works the same whether UniConfig Cloud Config is enabled or disabled.
 
 ![read](read.jpg)
 
 !!!
-If UniConfig Cloud Config is disabled, the read-properties RPC reads property values from the database. These values may differ from values in the application instance.
+If UniConfig Cloud Config is disabled, this RPC reads property values from the
+database. These values may differ from values in the application instance.
 !!!
 
 ## RPC examples
@@ -53,7 +56,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Successful example
 
-RPC input contains properties that are not default properties or are private (crypto keys and crypto types).
+RPC input contains properties that are not default properties or are private
+(crypto keys and crypto types).
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:read-properties' \

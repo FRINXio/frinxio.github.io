@@ -2,20 +2,20 @@
 
 This RPC returns all installed devices from a specified topology.
 
-If no topology is specified, the output may contain devices from
-multiple topologies (CLI, NETCONF, gNMI). In this case, devices must be
-installed with the install request parameter "uniconfig-config:install-uniconfig-node-enabled"
-set to "true". The RPC with no topology looks for nodes installed under the UNICONFIG topology
-by default.
+If no topology is specified, the output may contain devices from multiple
+topologies (CLI, NETCONF, gNMI). In this case, devices must be installed with
+the install request parameter `uniconfig-config:install-uniconfig-node-enabled`
+set to `true`. If no topology is specified, the RPC looks for nodes installed in
+the UNICONFIG topology by default.
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
-The RPC contains **no topology** defined in input and device called 'R1'
-is installed in the NETCONF topology. With parameter
-"uniconfig-config:install-uniconfig-node-enabled":"true" in install
-request is **installed** under UNICONFIG topology.
+RPC input does not specify a topology, and device R1 is installed in the NETCONF
+topology. If the install request includes the parameter
+`“uniconfig-config:install-uniconfig-node-enabled”:“true”`, the device is
+installed in the UNICONFIG topology instead.
 
 
 ```bash RPC Request
@@ -44,9 +44,10 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-The RPC input contains **no topology** and device called 'R1' is installed in the NETCONF topology.
-With parameter "uniconfig-config:install-uniconfig-node-enabled":"false" in install
-request is **not installed** under UNICONFIG topology.
+RPC input does not specify a topology, and device R1 is installed in the NETCONF
+topology. If the install request includes the parameter
+`“uniconfig-config:install-uniconfig-node-enabled”:“false”`, the device is not
+installed in the UNICONFIG topology.
 
 
 ```bash RPC Request
@@ -68,7 +69,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-The RPC input contains the GNMI topology and device called 'R1' is installed in the topology.
+RPC input specifies the GNMI topology, and device R1 is installed in that
+topology.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:get-installed-nodes' \
@@ -98,7 +100,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-The RPC input contains the CLI topology, but no devices are installed in the topology.
+RPC input specifies the CLI topology, but no devices are installed in that
+topology.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:get-installed-nodes' \

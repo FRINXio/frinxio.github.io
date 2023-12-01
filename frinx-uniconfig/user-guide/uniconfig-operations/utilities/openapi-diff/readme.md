@@ -1,25 +1,28 @@
 # Difference between OpenAPI specifications
 
-## Introduction
+The Uniconfig distribution includes a program for checking the difference
+between OpenAPI specifications. After building and unpacking the distribution,
+you can find the program in the **utils** directory as a shell script called
+**show_swagger_diff.sh**.
 
-The Uniconfig distribution includes a program for checking the difference between OpenAPI specifications. 
-After building and unpacking the distribution, you can find the program in the 'utils' directory as a shell
-script called 'show_swagger_diff.sh'.
-
-The program uses [OpenAPI-diff](https://github.com/OpenAPITools/openapi-diff) to generate OpenAPI differences.
+The program uses [OpenAPI-diff](https://github.com/OpenAPITools/openapi-diff) to
+generate OpenAPI differences.
 
 ## Usage
 
-The ```./show_swagger_diff.sh``` script contains four arguments. Each one has its own identifier, so you can give arguments
-in any order. All arguments are optional as default values are included for each argument.
+The **./show_swagger_diff.sh** script contains four arguments. Each one has
+its own identifier, so you can give arguments in any order. All arguments are
+optional as default values are included for each one.
 
-* ```--former, -f /path/to/former/yaml/files``` - optional argument. Path to previous OpenAPI specifications (.yaml files). The default path is 'openapi_diff/old'.
-* ```--new, -n /path/to/new/yaml/files``` - optional argument. Path to new OpenAPI specifications (.yaml files). The default path is 'openapi_diff/new'.
-* ```--output, -o /path/to/output``` - optional argument. Path for the html output file with differences. The default path is 'openapi_diff'.
-* ```-s``` - optional argument. Silent printing, includes less information.
+* ```--former, -f /path/to/former/yaml/files``` - Path to previous OpenAPI specifications (.yaml files). The default path is `openapi_diff/old`.
+* ```--new, -n /path/to/new/yaml/files``` - Path to new OpenAPI specifications (.yaml files). The default path is `openapi_diff/new`.
+* ```--output, -o /path/to/output``` - Path to HTML output file with
+  differences. The default path is `openapi_diff`.
+* ```-s``` - Silent printing, includes less information.
 
 !!!
-Bash script ```./show_swagger_diff.sh``` also includes a simple help facility. There are two options for showing the help text:
+The script also includes a simple help facility. There are two ways to view
+the help text:
 1. ```./show_swagger_diff.sh -h```
 2. ```./show_swagger_diff.sh --help```
 !!!
@@ -32,14 +35,15 @@ The script only accepts YAML files.
 
 ### Default usage
 
-This example shows basic usage of the script with and without optional arguments. Open a terminal
-and the  '../utils' directory, and run the following command:
+This example shows basic usage of the script with and without optional
+arguments. Open a terminal and the  **../utils** directory, and run
+the following command:
 
 ```console
 ./show_swagger_diff.sh
 ```
 
-OR
+Alternatively:
 
 ```console
 ./show_swagger_diff.sh -f openapi_diff/old -n openapi_diff/new -o openapi_diff
@@ -61,8 +65,9 @@ Open openapi_diff/openapi_diff.html in web browser to view all the differences b
 
 ### Usage with non-existent input path
 
-This example shows basic usage of the script where some specified input directories do not exist. Open a terminal
-and the '../utils' directory, and run the following command:
+This example shows basic usage of the script where some specified input
+directories do not exist. Open a terminal and the **../utils** directory, and
+run the following command:
 
 ```console
 ./show_swagger_diff.sh -n non/existent/path

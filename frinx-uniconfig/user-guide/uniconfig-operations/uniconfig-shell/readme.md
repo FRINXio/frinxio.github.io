@@ -1,21 +1,24 @@
-# UniConfig Shell
+# UniConfig shell
 
-UniConfig shell is a command-line interface for Uniconfig.
-
-Accessible over SSH, it allows users to interact with Uniconfig features including the following:
+UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH,
+it allows users to interact with Uniconfig features including the following:
 
 * Read operational data of devices
-* Manipulate device configuration
+* Manipulate device configurations
 * Manipulate configuration templates
 * Manipulate data stored in Unistore
 * Invoke device or UniConfig operations
 * Manipulate global UniConfig settings
 
-As Uniconfig shell is model-driven, its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available RPC/action operations).
+Uniconfig shell is model-driven, therefore its interface is mostly
+auto-generated from YANG schemas (e.g., tree structure of data-nodes or
+available RPC/action operations).
  
 ## Configuration
 
-By default, UniConfig shell is disabled. To enable it, set the configuration parameter `cliShell/sshServer/enabled` to `true` in the **config/lighty-uniconfig-config.json** file.
+UniConfig shell is disabled by default. To enable it, set the configuration
+parameter `cliShell/sshServer/enabled` to `true` in the
+**config/lighty-uniconfig-config.json** file.
 
 All available settings and descriptions are listed below:
 
@@ -32,20 +35,33 @@ cli-shell.ssh-server.username-password-auth.username=admin
 cli-shell.ssh-server.username-password-auth.password=secret
 ```
 
-After starting UniConfig, the SSH server will listen for connections on port 2022 and the loopback interface.
+After starting UniConfig, the SSH server listens for connections on port 2022
+and the loopback interface.
 
 ## Navigating in the shell
 
-* Every command line starts with a command prompt that ends with the `>` character. The identifier of the command prompt changes based on the current shell mode and the state of execution in this mode.
-* The commands `exit` and `quit` are available in all shell modes:
+* Every command line starts with a command prompt that ends with the `>`
+  character. The identifier of the command prompt changes based on the current
+  shell mode and the state of execution in this mode.
+* The `exit` and `quit` commands are available in all shell modes:
     * `exit` returns the state to the parent state
-    * `quit` returns the state to the nearest parent mode (e.g., configuration mode, root mode, operational show mode). If the current state of the shell represents some mode, 'quit' and 'exit' have the same effect of returning to the parent mode.
-* Typed commands are sent to UniConfig using the `ENTER` key. UniConfig processes the command and may send a response to the console depending on the command behaviour. All commands are processed synchronously, meaning that multiple commands cannot be executed in parallel in the same SSH session.
-* `CTRL-A` and `CTRL-E` move the cursor to the beginning or end of the current line.
+    * `quit` returns the state to the nearest parent mode (e.g., configuration
+      mode, root mode, operational show mode). If the current state of the shell
+      represents some mode, `quit` and `exit` have the same effect of returning
+      to the parent mode.
+* Typed commands are sent to UniConfig using the `ENTER` key. UniConfig
+  processes the command and may send a response to the console depending on the
+  command. All commands are processed synchronously, meaning that multiple
+  commands cannot be executed in parallel in the same SSH session.
+* `CTRL-A` and `CTRL-E` move the cursor to the beginning or end of the current
+  line.
 * `CTRL-L` clears the shell screen.
-* Arrow keys `UP/DOWN` are used to load previous commands in the command history.
+* Arrow keys `UP/DOWN` load previous commands in the command history.
 * `CTRL-C` cancels the current line and moves to a new blank line.
-* `TAB` loads suggestions in the current context. Hit `TAB` again to navigate through suggested commands using the arrow keys and select using `ENTER`. Leave the submode with suggestions using the shortcut `CTRL-E`. The text in brackets contains a description of the next command.
+* `TAB` loads suggestions in the current context. Hit `TAB` again to navigate
+  through suggested commands using the arrow keys and select using `ENTER`.
+  Leave the submode with suggestions using the shortcut `CTRL-E`. The text in
+  brackets contains a description of the next command.
 
 ```shell Loading available suggestions in 'uniconfig-topology-vnf21>' under 'show' command
 uniconfig-topology-vnf21>show 
@@ -60,7 +76,10 @@ confdConfig                                (ConfD configuration.)   |           
 event                                             (Event scripts)
 ```
 
-If the output is longer than the length of the command-line window, the output is displayed with scrolling capability. Use `ENTER` to display the next line and `SPACE` to display the next page. Use the `q` key to leave scrolling mode. You can only scroll only in one direction, towards the end of the output.
+If the output is longer than the length of the command line window, it is
+displayed with scrolling capability. Use `ENTER` to display the next line and
+`SPACE` to display the next page. Use the `q` key to leave scrolling mode. You
+can only scroll only in one direction, towards the end of the output.
 
 ![Scrolling through long output](scrolling_example.png)
 
@@ -90,7 +109,8 @@ unhide-get      (Setting item to be unhidden in get)
 unhide-set      (Setting item to be unhidden in set)
 ```
 
-The `exit` command is used to exit the UniConfig shell interface altogether (disconnecting SSH client).
+The `exit` command is used to exit the UniConfig shell interface altogether
+(disconnecting SSH client).
 
 * Example - Exit UniConfig shell:
 
@@ -102,7 +122,8 @@ Connection to 127.0.0.1 closed.
 ```
 
 !!!
-Currently, only username/password single-user authentication is supported as configured in the **application.properties** file.
+Currently, only username/password single-user authentication is supported as
+configured in the **application.properties** file.
 !!!
 
 ### Accessing sub-modes
@@ -118,7 +139,8 @@ config>
 
 ### Show command history
 
-The `show-history` command is used to display a list of N last invoked commands. This command is also available in configuration mode.
+The `show-history` command is used to display a list of N last invoked commands.
+This command is also available in configuration mode.
 
 * Example - Show the last five executed commands:
 
@@ -133,26 +155,35 @@ config>show-history 5
 ```
 
 !!!
-Note that the list of invoked commands persists across UniConfig restarts and SSH connections.
+Note that the list of invoked commands persists across UniConfig restarts and
+SSH connections.
 !!!
 
 ### Unhide and hide operations
 
-The following commands are used to unhide and hide attributes in application properties:
+The following commands are used to unhide and hide attributes in application
+properties:
 
-* `unhide-get` is used to unhide an attribute hidden in application properties for read purposes.
-* `unhide-set` is used to unhide an attribute hidden in application properties for write purposes.
+* `unhide-get` is used to unhide an attribute hidden in application properties
+  for read purposes.
+* `unhide-set` is used to unhide an attribute hidden in application properties
+  for write purposes.
 * `hide-get` is used to hide attributes that were unhidden with `unhide-get`.
 * `hide-set` is used to hide attributes that were unhidden with `unhide-set`.
 
-When unhide is set for a GET or SET operation, the request URL for the operation contains the `unhide` query parameter. In the following example, the `unhide` parameter is set to `all`:
+When unhide is set for a GET or SET operation, the request URL for the operation
+contains the `unhide` query parameter. In the following example, the `unhide`
+parameter is set to `all`:
 
   http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=vnf21/configuration?unhide=all
 
-The command also gives confirmation that the attribute was added to or removed from the unhidden list.
+The command also gives confirmation that the attribute was added to or removed
+from the unhidden list.
 
 !!!
-When `unhide-get` or `hide-get` are called without parameters, the output contains a list of all unhidden parameters. The same applies to `unhide-set` and `hide-set`.
+When `unhide-get` or `hide-get` are called without parameters, the output
+contains a list of all unhidden parameters. The same applies to `unhide-set` and
+`hide-set`.
 !!!
 
 ```shell 'unhide-get' and 'unhide-set' with parameters
@@ -180,7 +211,8 @@ tailf:hidden full
 ```
 
 !!!
-When used with the parameter `all`, the unhide operation applies to all parameters defined in application properties for read or write purposes.
+When used with the parameter `all`, the unhide operation applies to all
+parameters defined in application properties for read or write purposes.
 !!!
 
 ## Configuration mode
@@ -191,9 +223,14 @@ Configuration mode provides access to the following:
 2. CRUD operations on top of persisted UniConfig settings
 3. UniConfig RPC operations such as `commit` or `calculate-diff`
 
-After opening configuration mode, a new UniConfig transaction is created. All operations invoked in configuration mode are executed in the scope of the created transaction. The transaction is automatically closed after leaving configuration mode (`exit` or `quit` command).
+After opening configuration mode, a new UniConfig transaction is created. All
+operations invoked in configuration mode are executed in the scope of the
+created transaction. The transaction is automatically closed after leaving
+configuration mode (`exit` or `quit` command).
 
-If `commit` or `checked-commit` are invoked, the transaction is automatically refreshed. The user stays in configuration mode with a newly created transaction.
+If `commit` or `checked-commit` are invoked, the transaction is automatically
+refreshed. The user stays in configuration mode with a newly created
+transaction.
 
 ```shell Configuration mode overview
 config>
@@ -211,7 +248,8 @@ aliases
 diff (alias for 'request calculate-diff target-nodes/node *')
 ```
 
-Commands like SET / SHOW / DELETE are now available only on a specific device and are not accessible in root configuration mode.
+Commands like `SET`, `SHOW` and `DELETE` are now available only on a specific device
+and are not accessible in root configuration mode.
 
 ```shell Set / show / delete commands overview
 config>uniconfig-topology test-node-1
@@ -231,12 +269,14 @@ interfaces                             (Interfaces configuration)
 
 ### Show configuration
 
-The `show` operation can be used to display selected subtrees.
+The `show` operation is used to display selected subtrees.
 
-The subtree path can be constructed interactively with the help of shell suggestions / auto-completion mechanism. Construction of the path works the same way for SET / SHOW/ DELETE operations.
+The subtree path can be constructed interactively with the help of shell
+suggestions/auto-completion mechanism. Construction of the path works the same
+way for `SET`, `SHOW` and `DELETE` operations.
 
-  * Example - Display the configuration of a selected container:
-
+**Example** - Display the configuration of a selected container:
+  
 1. First move into a specific topology on a specific device:
 
 ```shell Move to a specific topology
@@ -288,7 +328,7 @@ uniconfig-topology-test-node-1>show interfaces vni vni-0/10
 
 The `delete` operation removes a selected subtree.
 
-* Example - Remove a container:
+**Example** - Remove a container:
 
 1. First move to a specific topology on a specific device:
 
@@ -322,7 +362,8 @@ uniconfig-topology-test-node-1>delete interfaces vni vni-0/10 ether-options
 uniconfig-topology-test-node-1>
 ```
 
-3. Quit to configuration mode, commit using request mode and return to the device on the topology:
+3. Quit to configuration mode, commit using request mode and return to the
+   device on the topology:
 
 ```shell Verify state of 'network-instance'
 uniconfig-topology-test-node-1>show interfaces vni vni-0/10 
@@ -337,12 +378,12 @@ uniconfig-topology-test-node-1>show interfaces vni vni-0/10
 
 The `set` operation can be used for the following:
 
-1. Set the value of a single leaf.
-2. Set the values of multiple leaves in a single shell operation.
-3. Set a list of values for a leaf-list.
-4. Replace the entire subtree using a JSON snippet.
+* Set the value of a single leaf.
+* Set the values of multiple leaves in a single shell operation.
+* Set a list of values for a leaf-list.
+* Replace the entire subtree using a JSON snippet.
 
-* Example - Set the value of a single leaf:
+**Example** - Set the value of a single leaf:
 
 ```shell move to specified device
 config>uniconfig-topology iosxr
@@ -365,7 +406,7 @@ uniconfig-topology-iosxr>show lacp config
 }
 ```
 
-* Example - Set values for multiple leaves under the 'hold-time' container:
+**Example** - Set values for multiple leaves under the `hold-time` container:
 
 ```shell move to specified device
 config>uniconfig-topology iosxr
@@ -396,9 +437,13 @@ uniconfig-topology-iosxr>show uniconfig iosxr interfaces interface GigabitEthern
 }
 ```
 
-A JSON snippet can be written to a selected data-tree node by entering the `json` sub-mode. In this sub-mode, you can type multiple lines that must represent a well-formed JSON document. At the end, confirm the set operation using the pattern 'w!' + newline, or cancel the set operation with the pattern 'q!' + newline.
+A JSON snippet can be written to a selected data-tree node by entering the
+json sub-mode. In this sub-mode, you can type multiple lines that represent a
+well-formed JSON document. At the end, confirm the set operation using the
+pattern `w!` + newline, or cancel the set operation with the pattern `q!` +
+newline.
 
-* Example - Replace configuration of an interface using a JSON snippet:
+**Example** - Replace configuration of an interface using a JSON snippet:
 
 ```shell move to specified device
 config>uniconfig-topology iosxr
@@ -428,7 +473,7 @@ uniconfig-topology-iosxr>show interfaces interface GigabitEthernet0/0/0/1
 }
 ```
 
-* Example - Leave `json` sub-mode without executing set operation:
+**Example** - Leave json sub-mode without executing set operation:
 
 ```shell Cancel set operation and leave 'json' sub-mode
 uniconfig-topology-iosxr>set interfaces interface GigabitEthernet0/0/0/1 config json
@@ -456,12 +501,15 @@ uniconfig-topology-iosxr>show interfaces interface GigabitEthernet0/0/0/1
 
 ### Execute UniConfig operation
 
-The `request` command is used to execute UniConfig operations such as `commit` or `calculate-diff` in the UniConfig transaction:
+The `request` command is used to execute UniConfig operations such as `commit`
+or `calculate-diff` in the UniConfig transaction:
 
-* The command is available in configuration mode.
-* You can fill in input parameters and values interactively or via provided JSON snippet.
+* The command is available in configuration mode
+* You can fill in input parameters and values interactively or via provided JSON
+  snippet
 
-* Example - Execute UniConfig RPCs in the scope of the open UniConfig transaction:
+**Example** - Execute UniConfig RPCs in the scope of the open UniConfig
+transaction:
 
 ```shell Display available 'commit' RPC parameters
 config>request commit
@@ -519,16 +567,19 @@ config>request sync-from-network check-timestamp true target-nodes/node iosxr
 
 ## Request operational mode
 
-This command has been merged with request configuration mode and is now only available in configuration mode.
+This command has been merged with request configuration mode and is now
+available only in configuration mode.
 
 Request mode allows users to:
 
 * Invoke selected UniConfig requests that read or alter UniConfig settings.
-* Invoke RPCs or actions that are provided by network devices or other southbound mount-points.
+* Invoke RPCs or actions provided by network devices or other southbound
+  mountpoints.
 
-Input parameters and values can be filled in interactively or via a provided JSON snippet. The transaction is passed from configuration mode.
+Input parameters and values can be filled in interactively or via a provided
+JSON snippet. The transaction is passed from configuration mode.
 
-* Example - Invoke RPC `execute-and-read` with typed input parameters:
+**Example** - Invoke **RPC execute-and-read** with typed input parameters:
 
 ```shell Display available RPCs provided by device 'iosxr'
 request>cli iosxr
@@ -560,7 +611,7 @@ request>cli iosxr execute-and-read wait-for-output-timer 2 command "show users"
 [24.04.2023, 09:34:21]
 ```
 
-* Example - Execute the same RPC 'execute-and-read' using input JSON:
+**Example** - Execute the same **RPC execute-and-read** using input JSON:
 
 ```shell Execute the 'execute-and-read' RPC with input JSON snippet:
 request>cli iosxr execute-and-read json
@@ -580,15 +631,18 @@ w!
 ```
 
 !!!
-UniConfig shell does not support interactive typing of input arguments for an RPC/action that contains the `list` YANG element. Such operations must be executed using input JSON.
+UniConfig shell does not support interactive typing of input arguments for an
+RPC/action that contains the `list` YANG element. Such operations must be
+executed using input JSON.
 !!!
 
 ## Show operational mode
 
 Show mode allows users to:
 
-1. Display operational data about UniConfig itself (e.g., logging status, list of open transactions or list of acquired subscriptions).
-2. Display operational data of network devices.
+* Display operational data about UniConfig itself (e.g., logging status, list of
+   open transactions or list of acquired subscriptions)
+* Display operational data of network devices
 
 ```shell Overview of show operational mode
 show>
@@ -608,14 +662,15 @@ aliases
 lbr      (alias for 'logging-status broker restconf')
 ```
 
-After opening show mode, a new UniConfig transaction is opened. The transaction is closed when you leave this mode.
+After opening show mode, a new UniConfig transaction is opened. The transaction
+is closed when you leave this mode.
 
 ```shell Open show operational mode
 uniconfig>show
 show>
 ```
 
-* Example - Display configuration of selected subtree:
+**Example** - Display configuration of selected subtree:
 
 ```shell Display configuration of GigabitEthernet0/0/0/0 interface
 show>cli iosxr interfaces(frinx-openconfig-interfaces) interface GigabitEthernet0/0/0/0
@@ -629,7 +684,7 @@ show>cli iosxr interfaces(frinx-openconfig-interfaces) interface GigabitEthernet
 }
 ```
 
-Example - Display selected system configuration:
+**Example** - Display selected system configuration:
 
 ```shell Display list of open UniConfig transactions
 show>transactions transaction-data
@@ -653,9 +708,11 @@ show>transactions transaction-data
 
 ## Pipe operations
 
-UniConfig shell supports pipe operations similar to Unix shell/bash pipes. When a command is followed by the pipe sign `|`, the output of the command is passed to the selected pipe operation.
+UniConfig shell supports pipe operations similar to Unix shell/bash pipes. When
+a command is followed by the pipe sign (`|`), the output of the command is
+passed to the selected pipe operation.
 
-* Example:
+**Example:**
 
 ```shell Move to specified device
 config>uniconfig-topology R1
@@ -669,18 +726,20 @@ uniconfig-topology-R1>show interface-configurations interface-configuration | gr
 
 Supported pipe operations are:
 
-1. grep - Show only lines that match supplied regex
-2. match - Same as grep, but can be used with optional parameters to also show lines before and after matched lines
-3. context-match - Same as grep, but also shows parent structure
-4. brief - Display root elements in short table format
-5. hide-empty-data-nodes - Hide data nodes without child nodes 
-6. hide-attributes - Hide attributes of data nodes
+* `grep` - Show only lines that match supplied regex
+* `match` - Same as `grep`, but can be used with optional parameters to also
+   show lines before and after matched lines
+* `context-match` - Same as `grep`, but also shows parent structure
+* `brief` - Display root elements in short table format
+* `hide-empty-data-nodes` - Hide data nodes without child nodes 
+* `hide-attributes` -  Hide attributes of data nodes
 
 ## Redirecting output
 
-The output of an executed command can be redirected to a file using the `>` sign followed by a filename.
+The output of an executed command can be redirected to a file using the `>` sign
+followed by a filename.
 
-* Example:
+**Example:**
 
 ```shell Move to specified device
 config>uniconfig-topology R1
@@ -689,7 +748,8 @@ config>uniconfig-topology R1
 ```shell Redirect output to file
 uniconfig-topology-R1>show interface-configurations interface-configuration act\ GigabitEthernet0/0/0/1 > '/home/output.txt' 
 ```
-In this case, output in the console is empty but the content of the **output.txt** file is a follows:
+In this case, output in the console is empty but the content of the
+**output.txt** file is a follows:
 
 ```text Redirection output
 {
@@ -703,8 +763,11 @@ In this case, output in the console is empty but the content of the **output.txt
 
 ## Aliases
 
-You can define aliases in UniConfig shell. For this purpose, there is a json file named **shell-aliases** in the 
-UniConfig distribution. After unpacking the UniConfig distribution, the file can be found under **Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config**. The file contains some sample aliases.
+You can define aliases in UniConfig shell. A json file named **shell-aliases**
+is included in the UniConfig distribution for this purpose. After unpacking the
+UniConfig distribution, the file can be found under
+**Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config**. The file
+contains some sample aliases.
 
 ``` shell-aliases.json with default samples
 /*
@@ -727,13 +790,15 @@ Asterisk symbol is a placeholder. We can dynamically add an alias value
 
 ### Alias creation
 
-Aliases cannot be created dynamically, only before Uniconfig is started. The following rules apply:
+Aliases cannot be created dynamically, only before Uniconfig is started. The
+following rules apply:
 
 1. The alias name must be unique and cannot contain whitespaces.
-2. The command can contain a wildcard (*). In this case, the user is prompted to add a value.
+2. The command can contain a wildcard (`*`). In this case, the user is prompted to
+   add a value.
 3. The alias is only visible in the mode where it was defined.
 
-* Example - Execute the alias 'diff xr5':
+**Example** - Execute the alias `diff xr5`:
 
 ```
 uniconfig>configuration-mode 
@@ -752,7 +817,7 @@ config>diff xr5
 config>
 ```
 
-* Example: Execute the alias 'lbr':
+**Example** - Execute the alias `lbr`:
 
 ```
 uniconfig>show
@@ -764,7 +829,7 @@ show>lbr
 show>
 ```
 
-- Example - Execute the alias 'shh':
+**Example** - Execute the alias `shh`:
 
 ```
 uniconfig>request
@@ -783,17 +848,27 @@ request>
 
 ## Callbacks
 
-Callbacks include sending POST and GET requests to the remote server and invoking user scripts from the UniConfig shell.
+Callbacks include sending `POST` and `GET` requests to the remote server and
+invoking user scripts from the UniConfig shell.
 
 The following is required to use callbacks:
 
 1. Necessary YANG modules - YANG modules that are required by the callbacks.
-2. Configuration - Enable callbacks in **config/application.properties** and set the remote server and access token.
-3. Update repository - Add the necessary YANG modules from step 1 into at least one YANG repository in the cache directory, and either define remote endpoints and scripts in a YANG file or create a new one for callbacks. For a definition of remote endpoints, use the **frinx-callpoint@2022-06-22.yang** extension.
-4. UniStore node - Create a UniStore node using the YANG repository containing the necessary YANG modules from step 1 and a YANG file with defined endpoints and scripts.
+2. Configuration - Enable callbacks in **config/application.properties** and set
+   the remote server and access token.
+3. Update repository - Add the necessary YANG modules from step 1 into at least
+   one YANG repository in the cache directory, and either define remote
+   endpoints and scripts in a YANG file or create a new one for callbacks. For a
+   definition of remote endpoints, use the **frinx-callpoint@2022-06-22.yang**
+   extension.
+4. UniStore node - Create a UniStore node using the YANG repository containing
+   the necessary YANG modules from step 1 and a YANG file with defined endpoints
+   and scripts.
 
 !!!
-In UniConfig shell, step 4 is optional as UniConfig creates dummy UniStore nodes for all repositories that meet the conditions in step 3. In this case, the dummy UniStore node name is identical to the YANG repository name.
+In UniConfig shell, step 4 is optional as UniConfig creates dummy UniStore nodes
+for all repositories that meet the conditions in step 3. In this case, the dummy
+UniStore node name is identical to the YANG repository name.
 
 In RestConf, step 4 is mandatory.
 !!!
@@ -809,13 +884,17 @@ The following YANG modules are required:
 
 ### Configuration
 
-By default, callbacks are disabled and the host and port for the remote server are empty in **config/lighty-uniconfig-config.json**. 
+By default, callbacks are disabled and the host and port for the remote server
+are empty in **config/lighty-uniconfig-config.json**. 
 
-To enable callbacks, set the configuration parameter `callbacks/enabled` to `true`. It is also necessary to set the host and port for the remote server and store an access token in the UniConfig database. 
+To enable callbacks, set the configuration parameter `callbacks/enabled` to
+`true`. It is also necessary to set the host and port for the remote server and
+store an access token in the UniConfig database. 
 
 The host and port for the remote server can be set in three ways:
 
-1. Before starting Uniconfig, in the **config/application.properties** file. The port number is optional:
+1. Before starting Uniconfig, in the **config/application.properties** file. The
+   port number is optional:
 
 ```properties UniConfig callback configuration (config/application.properties)
 # Callbacks config
@@ -824,7 +903,7 @@ callbacks.remote-server.host=127.0.0.1
 callbacks.remote-server.port=8443
 ```
 
-2. After starting UniConfig, with a PUT request:
+2. After starting UniConfig, with a `PUT` request:
 
 ```update remote server by PUT request
   curl --location --request PUT 'http://127.0.0.1:8181/rests/data/callbacks:callbacks-settings' \
@@ -851,7 +930,7 @@ callbacks.remote-server.port=8443
 
 The access token can be stored in the UniConfig database in one of two ways:
 
-1. After starting UniConfig, with a PUT request:
+1. After starting UniConfig, with a `PUT` request:
 
 ```update access token by PUT request
   curl --location --request PUT 'http://127.0.0.1:8181/rests/data/callbacks:callbacks-settings/access-token' \
@@ -882,8 +961,9 @@ callbacks.remote-server.port=8443
 
 ### Update repository
 
-First, create or update the YANG repository by using the **frinx-callpoint@2022-06-22.yang** extension 
-displayed in the following snippet. There is only one extension, `url`, with the argument `point`.
+First, create or update the YANG repository by using the
+**frinx-callpoint@2022-06-22.yang** extension displayed in the following
+snippet. There is only one extension, `url`, with the argument `point`.
 
 ``` frinx-callpoint@2022-06-22.yang
 module frinx-callpoint {
@@ -903,8 +983,8 @@ module frinx-callpoint {
 
 #### Add call-point (GET request)
 
-The following snippet shows how to create a call-point in the **frinx-test** YANG file by using the 
-**frinx-callpoint@2022-06-22.yang** extension.
+The following snippet shows how to create a call-point in the **frinx-test**
+YANG file by using the **frinx-callpoint@2022-06-22.yang** extension.
 
 ``` example of using of the frinx-callpoint@2022-06-22.yang in YANG file
 module frinx-test {
@@ -920,14 +1000,16 @@ module frinx-test {
     }
 ```
 
-The argument of the 'url' extension is '/data/from/remote', which is appended to the end of the remote server URI 
-configured in 'config/lighty-uniconfig-config.json'. Thus the final address for the remote call-point is 
-'https://remote.server.io/data/from/remote'.
+The argument of the `url` extension is `/data/from/remote`, which is appended to
+the end of the remote server URI configured in
+**config/lighty-uniconfig-config.json**. Thus the final address for the remote
+call-point is `https://remote.server.io/data/from/remote`.
 
 #### Add action (POST request)
 
-The following snippet shows how to create an action in the **frinx-test** YANG file by using the
-**frinx-callpoint@2022-06-22.yang** extension. You must also import **tailf-common.yang**.
+The following snippet shows how to create an action in the **frinx-test** YANG
+file by using the **frinx-callpoint@2022-06-22.yang** extension. You must also
+import **tailf-common.yang**.
 
 The action consists of:
 
@@ -959,8 +1041,9 @@ module frinx-test {
 
 #### Add script
 
-The following snippet shows how to create a script in the **frinx-test** YANG file by using
-**tailf-common.yang**. It is not necessary to import the **frinx-callpoint@2022-06-22.yang** extension.
+The following snippet shows how to create a script in the **frinx-test** YANG
+file by using **tailf-common.yang**. It is not necessary to import the
+**frinx-callpoint@2022-06-22.yang** extension.
 
 The script consists of:
 
@@ -968,12 +1051,13 @@ The script consists of:
 2. The path to the script, defined by `tailf:exec`.
 3. Arguments for the script, defined by `tailf:exec`.
 
-Arguments can be dynamic (i.e., the user can pass values to them) or static (flags). Follow these conventions 
-when creating arguments:
+Arguments can be dynamic (i.e., the user can pass values to them) or static
+(flags). Follow these conventions when creating arguments:
 
-1. Each argument must contain a name (for example, -n, -j).
+1. Each argument must contain a name (for example, `-n`, `-j`).
 2. Dynamic arguments must be enclosed in `$(...)` (for example, `$(name)`).
-3. Flags are simple words without whitespace (for example, VIP, UPPER, upper).
+3. Flags are simple words without whitespace (for example, `VIP`, `UPPER`,
+   `upper`).
 
 ``` Example of using frinx-callpoint@2022-06-22.yang in YANG file
 module frinx-test {
@@ -994,11 +1078,16 @@ module frinx-test {
 ### UniStore node
 
 
-A UniStore node can be created by RestConf or UniConfig shell. If a repository is explicitly defined by the query parameter `?uniconfig-schema-repository=repository-name`, this repository must contain all necessary YANG modules. If a repository name is not defined when the UniStore node is created, all necessary YANG modules must be in the `latest` schema repository.
+A UniStore node can be created by RestConf or UniConfig shell. If a repository
+is explicitly defined by the query parameter
+`?uniconfig-schema-repository=repository-name`, this repository must contain all
+necessary YANG modules. If a repository name is not defined when the UniStore
+node is created, all necessary YANG modules must be in the `latest` schema
+repository.
 
 ### Examples
 
-* Example - Invoke callpoint in shell:
+**Example** - Invoke callpoint in shell:
 
 ``` callpoint invocation
 config>callbacks repository-name
@@ -1011,7 +1100,7 @@ callbacks-repository-name>show test get-request
 callbacks-repository-name>
 ```
 
-* Example - Invoke action in shell:
+**Example** - Invoke action in shell:
 
 ``` action invocation
 config>request 
@@ -1024,7 +1113,7 @@ request>callbacks repository-name post-request test-action body data "some-data"
 request>
 ```
 
-* Example - Execute user script in shell:
+**Example** - Execute user script in shell:
 
 ``` user script execution
 config>request 

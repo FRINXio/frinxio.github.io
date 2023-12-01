@@ -1,41 +1,37 @@
 # Transaction tracker
 
-## Introduction
+The transaction tracker is responsible for saving transaction metadata to the
+operational snapshot after a successfully executed commit/checked-commit RPC.
+Transaction metadata contains information about performed transactions, such as
+the following:
 
-The transaction tracker is responsible for saving a transaction-metadata
-to the operational snapshot after successfully executed
-commit/checked-commit RPC. The transaction-metadata contains information
-about performed transactions, such as:
-
-- **transaction-id** - Identifier of transaction.
-- **type-of-commit-time** - Timestamp of either 'last-commit-time',
-    when the transaction was successful or 'failed-commit-time',
-    when the transaction failed. If multiple devices are configured,
-    then the 'last-commit-time' will contain the timestamp of
-    the last update on the last device.
-- **metadata** - Items in this field represent nodes that have been
-    configured in the one transaction. Each item contains a diff item
-    with additional information.
-- **diff** - Items in this field are a specific changes. Each item 
-    contains path to changes, data before change and data after change.
-    In case of a failed transaction this information in not present.
-- **topology** - On which topology is a node installed. Can be 'uniconfig' or 'unistore'.
+- `transaction-id` - Identifier for transaction.
+- `type-of-commit-time` - Timestamp for either `last-commit-time` (if the
+    transaction was successful) or `failed-commit-time` (if the transaction
+    failed). If multiple devices are configured, `last-commit-time` contains a
+    timestamp for the last update on the last device.
+- `metadata` - Items in this field represent nodes configured in the
+    transaction. Each item contains a `diff` item with additional information.
+- `diff` - Items in this field are specific changes. Each item contains a path
+    to changes, data before the change and data after the change. For failed
+    transactions, this information is not included.
+- `topology` - Which topology the node is installed on. Either `uniconfig` or
+  `unistore`.
 
 !!!
-Data-before is visible only if data was updated or deleted.
-Data-after is visible only if data was updated or created.
+`Data-before` is visible only if data was updated or deleted. `Data-after` is
+visible only if data was updated or created.
 !!!
 
 ![transaction-tracker](transaction-tracker.png)]
 
 ## Configuration
 
-The UniConfig stores transaction metadata only if the
-'lighty-uniconfig-config.json' file contains a "maxStoredTransactions"
-parameter in "transactions" container and its value is greater then 0.
-It is necessary to make this setting before running UniConfig, otherwise
-parameter "maxStoredTransactions" will be '0' (default value) and
-transaction-log will be disabled.
+UniConfig stores transaction metadata only if the
+**lighty-uniconfig-config.json** file contains the `maxStoredTransactions`
+parameter in the `transactions` container with a value greater then `0`. If not
+set before UniConfig is run, the default value of `0` is used and the
+transaction log is disabled.
 
 ```json
 {
@@ -50,9 +46,9 @@ transaction-log will be disabled.
 
 ### Show transaction-metadata
 
-The response to this GET request contains all stored
-transaction-metadata, their IDs and other items such as node-id, updated
-data before update and after update, etc.
+The response to this `GET` request contains all stored transaction metadata,
+transaction ids and other items such as node id, updated data before and after
+update, etc.
 
 ```bash RPC Request
 curl --location --request GET 'http://localhost:8181/rests/data/transaction-log:transactions-metadata' \

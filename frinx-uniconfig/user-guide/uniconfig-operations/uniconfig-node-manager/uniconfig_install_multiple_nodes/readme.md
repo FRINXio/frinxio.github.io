@@ -1,9 +1,9 @@
 # RPC install-multiple-nodes
 
-This RPC installs multiple devices at once. It uses the default
-install-node RPC. Devices are installed in parallel.
+This RPC installs multiple devices at once using the default
+**install-node RPC**. Devices are installed in parallel.
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
@@ -56,7 +56,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-RPC input contains devices (R1 and R2) and R2 uses two different protocols.
+RPC input contains two devices (R1 and R2). Device R2 uses two different
+protocols.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
@@ -117,7 +118,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-RPC input contains two devices (R1 and R2) and R2 is already installed using CLI protocol.
+RPC input contains two devices (R1 and R2). Device R2 is already installed using
+the CLI protocol.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
@@ -182,7 +184,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Failed Example
 
-RPC input does not specify node-id.
+RPC input does not specify a `node-id`.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \
@@ -242,7 +244,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Failed Example
 
-RPC input contains two devices using the same node-id.
+RPC input contains two devices with the same `node-id`.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-multiple-nodes' \

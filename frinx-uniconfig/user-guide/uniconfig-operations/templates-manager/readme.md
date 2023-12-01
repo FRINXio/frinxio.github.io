@@ -11,7 +11,7 @@ Basic properties of templates in UniConfig:
     template is represented by a separate `node` list entry.
 - The entire template configuration is placed under the
     `frinx-uniconfig-topology:configuration` container in the
-    *Configuration* datastore. Because of this, the configuration of a template
+    `Configuration` datastore. Because of this, the configuration of a template
     can be accessed and modified in the same way as a UniConfig node.
 - Templates are validated against a single schema context. The schema
     context is selected when a template is created using
@@ -22,13 +22,13 @@ Basic properties of templates in UniConfig:
 
 Currently implemented template features:
 
-- **Variables** - Used for parametrisation of templates.
-- **Tags** - Can be used to select an operation that is applied
-    to the specific subtree when the template is applied to a UniConfig node.
+- `Variables` - Used for template parametrisation.
+- `Tags` - Used to select an operation that is applied to the specific subtree
+    when the template is applied to a UniConfig node.
 
 !!!
-Schema validation of leaves and leaf-lists is adjusted so that it can
-accept both string with variables and original YANG type.
+Schema validation of leaves and leaf-lists is adjusted so that it can accept
+both string with variables and original YANG type.
 !!!
 
 - [RPC apply-template](../templates-manager/rpc_apply-template)

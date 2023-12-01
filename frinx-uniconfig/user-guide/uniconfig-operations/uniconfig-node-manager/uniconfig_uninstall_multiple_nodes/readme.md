@@ -1,9 +1,9 @@
 # RPC uninstall-multiple-nodes
 
-This RPC uninstalls multiple devices at once. It uses the default
-uninstall-node RPC. Devices are uninstalled in parallel.
+This RPC uninstalls multiple devices at once using the default
+**uninstall-node RPC**. Devices are uninstalled in parallel.
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
@@ -34,7 +34,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-RPC input contains devices (R1 and R2) and R2 is installed on two different protocols.
+RPC input contains two devices (R1 and R2). Device R2 is installed on two
+different protocols.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
@@ -65,7 +66,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-RPC input contains two devices (R1 and R2) and R2 is already uninstalled on CLI protocol.
+RPC input contains two devices (R1 and R2). Device R2 is already uninstalled on
+the CLI protocol.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \
@@ -103,9 +105,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC input does not specify node-id.
+RPC input does not specify a `node-id`.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:uninstall-multiple-nodes' \

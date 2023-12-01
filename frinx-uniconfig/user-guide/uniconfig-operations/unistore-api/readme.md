@@ -1,77 +1,72 @@
 # UniStore API
 
-## Introduction
+UniStore nodes are used to store and manage various settings and configurations
+inside UniConfig. The difference between UniStore and UniConfig nodes is that
+UniConfig nodes are backed by a real/network device, whereas UniStore nodes do
+not correspond to real devices. In the case of UniStore nodes, UniConfig is
+used only to manage the configuration and its persistence into the PostgreSQL
+DBMS.
 
-UniStores nodes are used for storing and management of various
-settings/configuration inside UniConfig. The difference between UniStore
-and UniConfig nodes is that UniConfig nodes are backed by a
-(real/network) device whereas UniStore nodes are not reflected by any
-real device. In case of UniStore nodes, UniConfig is used only for
-management of the configuration and persistence of this configuration
-into PostgreSQL DBMS.
+UniStore nodes have the following characteristics:
 
-Summarized characteristics of UniStore nodes:
-
-- UniStore nodes are not backed by 'real' devices / southbound
-    mount-points - they are used only for storing some configuration -
-    configuration is only committed to PostgreSQL DBMS.
-- Configuration of UniStore node can be read, created, removed, and
-    updated the same way as it is done with UniConfig topology nodes -
-    user can use the same set of CRUD RESTCONF operations and supported
-    UniConfig RPCs for operation purposes.
-- UniStore nodes are placed in a dedicated 'unistore' topology under
-    network-topology nodes. The whole configuration is placed under
-    'configuration' container.
-- UniStore configuration is modelled by user-provided YANG schemas
-    that can be loaded into UniConfig - at creation of UniStore node,
-    user must provide name of the YANG repository, so UniConfig known
-    how to parse configuration (query parameter
-    'uniconfig-schema-repository').
+- UniStore nodes are not backed by "real" devices or southbound mountpoints.
+    They are used only to store configurations which are committed to the
+    PostgreSQL DBMS.
+- The configuration of a UniStore node can be read, created, removed and updated
+    in the same way as UniConfig topology nodes. You can use the the same set of
+    CRUD RESTCONF operations and supported UniConfig RPCs for operation
+    purposes.
+- UniStore nodes are placed in a dedicated `unistore` topology under
+    network-topology nodes. The whole configuration is placed under the
+    `configuration` container.
+- The UniStore configuration is modelled by user-provided YANG schemas that can
+    be loaded into UniConfig. When creating a new UniStore node, you must
+    provide the name of a YANG repository so that UniConfig knows how to parse
+    the configuration (`uniconfig-schema-repository` query parameter).
 
 UniConfig operations that are supported for UniStore nodes:
 
-- all RESTCONF CRUD operations
+- All RESTCONF CRUD operations
 - commit / checked-commit RPC
-- calculate-diff RPC (including git-like-diff flavour)
+- calculate-diff RPC (including git-like-diff flavor)
 - subtree-manager RPCs
 - replace-config-with-oper RPC
 - revert-changes RPC (transaction-log feature)
 
 !!!
-Node ID of UniStore node must be unique among all UniConfig and UniStore nodes.
+The node ID of a UniStore node must be unique among all UniConfig and UniStore
+nodes.
 !!!
 
 ## Commit operation
 
-Actions performed with UniStore nodes during commit operations:
+Actions performed with UniStore nodes during a commit operation:
 
-1. Configuration fingerprint verification - if another UniConfig
-    transaction has already changed one of the UniStore nodes touched in
-    the current transaction, then commit operation must fail.
-2. Calculation of diff operation across all changed UniStore nodes.
-3. Writing intended configuration into UniConfig transaction.
-4. Rebasing actual configuration by intended in the UniConfig
+1. Verify configuration fingerprint. If another UniConfig transaction has
+    already changed one of the UniStore nodes touched in the current
+    transaction, the commit operation fails.
+2. Calculate diff operation across all changed UniStore nodes.
+3. Write intended configuration into the UniConfig transaction.
+4. Replace the actual configuration with the intended configuration in the
+   UniConfig transaction.
+5. Update last configuration fingerprint to the UUID of the committed
     transaction.
-5. Updating last configuration fingerprint to the UUID of committed
-    transaction.
-6. Writing transaction-log into transaction.
-7. Committing UniConfig transaction - cached changes are sent to
-    PostgreSQL DBMS.
+6. Write transaction log into transaction.
+7. Commit UniConfig transaction. Cached changes are sent to the PostgreSQL DBMS.
 
-## Example use-case
+## Example use case
 
-### Preparation of YANG repository
+### Prepare YANG repository
 
-User must feed UniConfig with YANG repository, that will be used for
-modeling of UniStore node configuration. The same UniStore node can me
-modeled only by 1 YANG repository, however, different nodes can track
-next different YANG repositories. YANG repository can be provided to
-UniConfig by copying directory with YANG files under 'cache' parent
-directory. Afterwards it is loaded either at startup or in runtime using
-'register-repository' RPC.
+A YANG repository is required for UniConfig to model the UniStore node
+configuration. A UniStore node can only be modeled by one YANG repository.
 
-For demonstration purposes, let's assume that cache contains YANG
-repository 'system' with simple YANG module:
+To provide a YANG repository to UniConfig, copy the directory containing the
+YANG files under the **cache** parent directory. From there, it is loaded either
+at startup or in runtime with the **register-repository RPC**.
+
+As an example, assume that **cache** contains the **system** YANG repository with a
+simple YANG module:
 
 ```yang config@2021-09-30.yang:
 module config {
@@ -113,13 +108,12 @@ module config {
 }
 ```
 
-### Creation of UniStore node
+### Create UniStore node
 
-The next request shows creation of new UniStore node 'global' using
-provided JSON payload and name of the YANG repository that is used for
-parsing of the provided payload (query parameter
-'uniconfig-schema-repository'). Note that this yang repository must be
-specified only at the initialization of UniStore node.
+The following request shows how a new Unistore node (`global`) is created using
+the provided JSON payload and the name of the YANG repository used to parse the
+payload (query parameter `uniconfig-schema-repository`). Note that the YANG
+repository must be specified only when the UniStore node is initialized.
 
 ```bash Creation of UniStore node with ID ‘global’
 curl --location --request PUT 'http://localhost:8181/rests/data/network-topology:network-topology/topology=unistore/node=global/configuration/settings?uniconfig-schema-repository=system' \
@@ -155,13 +149,13 @@ curl --location --request PUT 'http://localhost:8181/rests/data/network-topology
 
 ```
 
-### Reading content of UniStore node
+### Read content of UniStore node
 
-The following sample shows reading of UniStore node content using
-regular GET request. Query parameter 'content' is set to 'config' to
-point out the fact that UniStore node is cached only in the
-Configuration data-store of transaction (Operational data-store is at
-this time empty).
+The following sample shows how to read the content of a UniStore node using a
+regular `GET` request. The query parameter `content` is set to `config`,
+indicating that the UniStore node is cached only in the `Configuration`
+datastore of the transaction (the `Operational` datastore is empty at this
+time).
 
 ```bash Reading UniStore node with ID ‘global’
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=unistore/node=global/configuration?content=config' \
@@ -199,11 +193,10 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 
 ### Calculate-diff RPC (created node)
 
-Calculate-diff operation is also supported for UniStore nodes. the
-following request shows difference of all touched nodes in the current
-transaction including UniStore nodes. Since UniStore node has only been
-created, diff output only contains 'created-data' with whole root
-'settings' container.
+The calculate-diff operation is also supported for UniStore nodes. The following
+request shows the diff for all touched nodes in the current transaction,
+including UniStore nodes. As the UniStore node was just created, the diff output
+only contains `created-data` with the entire root `settings` container.
 
 ```bash Calculate-diff RPC
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:calculate-diff' \
@@ -239,13 +232,12 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Persistence of UniStore node
+### Persistence of UniStore nodes
 
-In case of UniStore nodes, commit RPC is used for confirming done
-changes and storing them into PostgreSQL DBMS. As it was explained in
-the previous section, commit operation causes storing of UniStore node
-configuration and transaction-log in the DBMS, operation doesn't touch
-any network device.
+For UniStore nodes, the **commit RPC** is used to confirm the changes that have
+been made and to store them in the PostgreSQL DBMS. As described in the previous
+section, the commit operation stores the UniStore node configuration and
+transaction log in the DBMS and does not touch network devices.
 
 ```bash Commit RPC
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -263,16 +255,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```
 
 !!!
-It is possible to combine changes of UniStore and UniConfig nodes in
-the same transaction and commit them at once.
+Changes to UniStore and UniConfig nodes can be combined in the same transaction
+and can be committed simultaneously.
 !!!
 
-### Reading committed configuration
+### Read committed configuration
 
-The configuration is also visible in the Operation data-store of newly
-created transaction since it was committed in the previous step. The
-actual state can be shown by appending 'content=nonconfig' query
-parameter to GET request as it is shown in the next example.
+Since the configuration was committed in the previous step, it is also visible
+in the `Operational` datastore of the newly created transaction. The actual
+state can be read by appending the `content=nonconfig` query parameter to a
+`GET` request, as shown in the following example:
 
 ```bash Reading UniStore node with ID **'global'**
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=unistore/node=global/configuration?content=nonconfig' \
@@ -308,15 +300,14 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 }
 ```
 
-### Verification of configuration fingerprint
+### Verify configuration fingerprint
 
-Configuration fingerprint is used as part of the optimistic locking
-mechanism - by comparison of the configuration fingerprint from the
-beginning of the transaction and at commit operation it is possible to
-find out if other UniConfig transaction has already changed affected
-UniStore node. In case of UniStore nodes, fingerprint is always updated
-to the value of transaction-id (UUID) of the last committed transaction
-that contained the UniStore node.
+The configuration fingerprint is part of the optimistic locking mechanism. By
+comparing fingerprints from the beginning of the transaction and from the commit
+operation, it is possible to see if another UniConfig transaction has already
+modified the affected UniStore node. For Unistore nodes, the fingerprint is
+always updated to match the transaction id (UUID) of the last committed
+transaction containing the UniStore node.
 
 ```bash Reading UniStore node with ID **'global'**
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=unistore/node=global/configuration-metadata/last-configuration-fingerprint?content=nonconfig' \
@@ -329,11 +320,11 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 }
 ```
 
-### Modification of configuration
+### Modify configuration
 
-The same RESTCONF CRUD operations that can be applied to UniConfig nodes
-are also relevant within UniStore nodes. The following request
-demonstrates merging of multiple fields using PATCH operation.
+The same RESTCONF CRUD operations that can be applied to UniConfig nodes are
+also relevant to UniStore nodes. The following request demonstrates how to merge
+multiple fields using the `PATCH` operation.
 
 ```bash Merging configuration
 curl --location --request PATCH 'http://localhost:8181/rests/data/network-topology:network-topology/topology=unistore/node=global/configuration/settings' \
@@ -368,8 +359,8 @@ curl --location --request PATCH 'http://localhost:8181/rests/data/network-topolo
 
 ### Calculate-diff RPC (updated node)
 
-The second calculate-diff RPC shows more granular changes done into
-existing UniStore node - it contains 'create-data' and 'updated-data'
+The second calculate-diff RPC shows more granular changes made to an
+existing UniStore node, which includes the `create-data` and `updated-data`
 entries.
 
 ```bash Calculate-diff RPC
@@ -418,34 +409,13 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }
 ```
 
-### Commit made changes
+### Display content of transaction log
 
-Persistence of made changes under UniStore node can be done using commit
-RPC.
-
-```bash Commit RPC
-curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "target-nodes": {
-        }
-    }
-}'
-```
-
-```RPC Response, Status: 204
-```
-
-### Displaying content of transaction-log
-
-Committed transactions including all metadata (e.g. serialized diff
-output or transaction ID) can be displayed by reading of
-'transactions-metadata' container in the Operational data-store. It also
-displays information about successfully committed UniStore nodes.
-Afterward, user can leverage this information and revert some changes
-using transaction-id that is shown in the transaction-log.
+Committed transactions, including all metadata such as serialized diff output or
+transaction ID, can be displayed by reading the `transactions-metadata`
+container in the `Operational` datastore. Information about successfully
+committed UniStore nodes is also displayed. This can be used to revert changes
+using the transaction ID displayed in the transaction log.
 
 ```bash Reading entries of transaction-log
 curl --location --request GET 'http://localhost:8181/rests/data/transactions-metadata/transaction-metadata?content=nonconfig' \
@@ -503,12 +473,12 @@ curl --location --request GET 'http://localhost:8181/rests/data/transactions-met
 }
 ```
 
-### Removal of UniStore node
+### Remove UniStore node
 
-UniStore node can be removed by sending DELETE request to whole 'node'
-list entry, 'configuration' container, or by removing of all children
-'configuration' entities. In all cases, UniStore node will be removed
-after confirming of changes using commit RPC.
+A UniStore node can be removed either by sending a `DELETE` request to the
+entire `node` list entry or `configuration` container, or by removing all
+`configuration` child entities. In each case, the UniStore node is removed after
+changes are confirmed using the **commit RPC**.
 
 ```bash Removal of UniStore node
 curl --location --request DELETE 'http://localhost:8181/rests/data/network-topology:network-topology/topology=unistore/node=global' \

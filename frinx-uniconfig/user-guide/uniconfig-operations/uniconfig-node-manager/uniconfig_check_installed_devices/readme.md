@@ -1,13 +1,14 @@
 # RPC check-installed-nodes
 
-This RPC checks if devices included in the input are installed by looking for the database content
-of each device. If content is found, the device is installed.
+This RPC checks if devices specified in the input are installed by looking for
+the database content of each device. If content is found, the device is
+installed.
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
-RPC input contains a device while no devices are installed.
+RPC input contains a device, while no devices are installed.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
@@ -32,7 +33,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-RPC input contains devices (R1 and R2) and device R1 is installed.
+RPC input contains two devices (R1 and R2), one of which (R1) is installed.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
@@ -64,7 +65,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 
 ### Successful example
 
-RPC input contains devices (R1 and R2) and both devices are installed.
+RPC input contains two devices (R1 and R2), both of which are installed.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \
@@ -98,7 +99,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }
 ```
 
-### Failed Example
+### Failed example
 
 RPC input does not specify any nodes.
 
@@ -129,9 +130,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC input is missing the target-nodes container.
+RPC input is missing the `target-nodes` container.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:check-installed-nodes' \

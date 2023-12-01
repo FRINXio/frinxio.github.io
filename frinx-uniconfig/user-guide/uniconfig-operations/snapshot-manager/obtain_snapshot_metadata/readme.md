@@ -1,7 +1,7 @@
 # Obtaining snapshots-metadata
 
-Snapshots metadata contains list of created snapshots with the date of
-creation and list of nodes.
+Snapshots metadata contains a list of created snapshots with the date of
+creation and a list of nodes.
 
 ```bash RPC Request
 curl --location --request GET 'http://localhost:8181/rests/data/snapshot-manager:snapshots-metadata?content=config' \
