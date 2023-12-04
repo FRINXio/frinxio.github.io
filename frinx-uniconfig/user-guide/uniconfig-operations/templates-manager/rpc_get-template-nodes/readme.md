@@ -1,7 +1,7 @@
 # RPC get-template-nodes
 
-This RPC returns all templates from the template topology. No input body
-is required.
+This RPC returns all templates from a template topology. No input body is
+required.
 
 ## RPC examples
 
@@ -18,13 +18,13 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 
 ```json RPC Response, Status: 200
 {
-    "output": {}
+  "output": {}
 }
 ```
 
 ### Successful example
 
-There is a template called 'test-template' in the template topology.
+There is a template called `test-template` in the template topology.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:get-template-nodes' \
@@ -35,10 +35,10 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "nodes": [
-            "test-template"
-        ]
-    }
+  "output": {
+    "nodes": [
+      "test-template"
+    ]
+  }
 }
 ```

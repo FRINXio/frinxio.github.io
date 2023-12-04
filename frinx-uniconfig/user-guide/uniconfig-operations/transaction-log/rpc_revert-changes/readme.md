@@ -1,41 +1,41 @@
 # RPC revert-changes
 
-This RPC revert changes that were configured within one transaction. If
-a user wants to revert single transaction or multiple transactions, he
-must find out transaction-ids and paste them into the body of RPC. The
-transaction-id is part of the transaction-metadata, that is created by a
-transaction tracker after commit/checked-commit RPC.
+This RPC is used to revert previously configured changes. To revert one or more
+transactions, their transaction ids must be included in the body of the RPC. The
+transaction id is part of transaction metadata created by the transaction
+tracker after the commit/checked-commit RPC.
 
 !!!
-RPC revert-changes updates data only in the CONFIGURATION Snapshot. If
-we want to write reverted data to the device, we must use RPC commit
-after RPC revert-changes.
+This RPC only updates data in the `CONFIGURATION` snapshot. To write reverted
+data to the device, use **RPC commit** after **RPC revert-changes**.
 !!!
+
 
 ![RPC revert-changes](RPC_revert-changes.png)
 
-## Ignore non-existent nodes
+## Ignore non-existing nodes
 
-If a user wants to revert multiple transactions, some transactions
-metadata may contain nodes that do not currently exist in UniConfig. In
-this case, the RPC fails. The user has a choice of two options:
+When reverting multiple transactions, some transaction metadata may contain
+nodes that do not currently exist in UniConfig. In this case, the RPC fails.
 
-1.  remove transaction that contain non-existent nodes from the request
-    body
-2.  add 'ignore-non-existing-nodes' parameter to the RPC request body
-    with a value of 'true' (default: 'false')
+There are two options for handling non-existing nodes:
+
+1.  Remove transactions that contain non-existing nodes from the request
+    body.
+2.  Add the `ignore-non-existing-nodes` parameter to the RPC request body
+    with a value of `true` (the default value is `false`).
 
 !!!
-If the user does not use the 'ignore-non-existing-nodes' parameter,
-the default value 'false' is automatically used.
+If the `ignore-non-existing-nodes` parameter is not specified, the default value
+is used.
 !!!
 
-## RPC Examples
+## RPC examples
 
 ### Successful examples
 
-Before reverting a transaction we need to know its ID. We will use the
-GET request to display all stored transaction-metadata.
+To revert a transaction, we need to find its ID. Let's use a `GET` request to
+display all stored transaction metadata.
 
 ```bash RPC Request
 curl --location --request GET 'http://192.168.56.11:8181/rests/data/transaction-log:transactions-metadata' \
@@ -118,7 +118,7 @@ curl --location --request GET 'http://192.168.56.11:8181/rests/data/transaction-
 }
 ```
 
-Reverting changes of a single transaction.
+Revert changes for a single transaction.
 
 ```bash RPC Request
 curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
@@ -135,10 +135,10 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
-Reverting changes of multiple transactions.
+Revert changes for multiple transactions.
 
 ```bash RPC Request
 curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
@@ -156,13 +156,13 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
-Reverting changes of multiple transactions, where the transaction with
-id '2c4c1eb5-185a-4204-8021-2ea05ba2c2c1' contains non-existent node
-'R1'. In this case 'ignore-non-existing-nodes' with a value of 'true' is
-used, and therefore the RPC will be successful.
+Revert changes for multiple transactions. The transaction with id
+`2c4c1eb5-185a-4204-8021-2ea05ba2c2c1` contains the non-existing node `R1`.
+Since the `ignore-non-existing-nodes` parameter is set to `true`, the RPC is
+successful.
 
 ```bash RPC Request
 curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
@@ -181,13 +181,12 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 204
 ```
 
 ### Failed example
 
-This is a case when revert-changes request contains a non-existent
-transaction in the request body.
+The request contains a non-existing transaction in the request body.
 
 ```bash RPC Request
 curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
@@ -206,25 +205,24 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-info": {
-                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
-                },
-                "error-type": "application",
-                "error-message": "Failed to find transaction in log with ID: 82b4e916-e1ed-4a54-97bc-067699842af6"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-info": {
+          "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
+        },
+        "error-type": "application",
+        "error-message": "Failed to find transaction in log with ID: 82b4e916-e1ed-4a54-97bc-067699842af6"
+      }
+    ]
+  }
 }
 ```
 
-Reverting changes of multiple transactions, where the transaction
-metadata with id '2c4c1eb5-185a-4204-8021-2ea05ba2c2c1' contains
-non-existent node. In this case 'ignore-non-existing-nodes' with a value
-of 'false' is used, and therefore the RPC fails.
+Reverting changes for multiple transactions. The transaction metadata with id
+`2c4c1eb5-185a-4204-8021-2ea05ba2c2c1` contains a non-existing node. Since the
+`ignore-non-existing-nodes` parameter is set to `false`, the RPC fails.
 
 ```bash RPC Request
 curl --location --request POST 'http://192.168.56.11:8181/rests/operations/transaction-log:revert-changes' \
@@ -245,17 +243,17 @@ curl --location --request POST 'http://192.168.56.11:8181/rests/operations/trans
 
 ```json RPC Response, Status: 404
 {
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-info": {
-                    "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
-                },
-                "error-message": "Transaction metadata 2c4c1eb5-185a-4204-8021-2ea05ba2c2c1 contains non-existent uniconfig nodes: [R1]",
-                "error-type": "application"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-info": {
+          "transaction-id": "2c4c1eb5-185a-4204-8021-2ea05ba2c2c1"
+        },
+        "error-message": "Transaction metadata 2c4c1eb5-185a-4204-8021-2ea05ba2c2c1 contains non-existent uniconfig nodes: [R1]",
+        "error-type": "application"
+      }
+    ]
+  }
 }
 ```

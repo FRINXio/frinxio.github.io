@@ -1,33 +1,32 @@
-# Device Discovery
+# Device discovery
 
-RPC device-discovery is used to verify reachable devices in a
-network. You can either check a single IP address in IPv4 format, a
-network or a range of addresses. Additionally, you can also specify
-a port or range of ports (TCP or UDP) that are checked if they are open.
-The ICMP protocol is used to check the availability devices. 
+The **device-discovery RPC** is used to verify reachable devices in a network.
+You can either check a single IP address in IPv4 format, a network or a range of
+addresses. Additionally, you can specify a port or range of ports (TCP or UDP)
+that are checked if they are open. The ICMP protocol is used to check the
+availability of devices. 
 
-The input consists of a list of all IP addresses that should be checked
-(IPv4 or IPv6, a single IP address or a network with a prefix, or a
-range of IP addresses). Additionally, it contains the TCP/UDP ports that
-should be checked whether they are open or not on the given addresses.
+RPC input consists of a list of all IP addresses to check (IPv4 or IPv6, a
+single IP address or a network with a prefix, or a range of IP addresses).
+Additionally, it contains the TCP/UDP ports that should be checked if they are
+open or not on the given addresses.
 
-The output of the RPC shows if the IP addresses are reachable via the
-ICMP protocol. For every IP address, a list of open TCP/UPD ports is
-also included.
+RPC output shows if the IP addresses are reachable via the ICMP protocol. For
+every IP address, a list of open TCP/UPD ports is also included.
 
 For testing, you need to add your IP address to the configuration JSON file.
-The configuration file is located under
+The configuration file is located at:
 
 **\~/FRINX-machine/config/uniconfig/frinx/uniconfig/config/application.properties**
 
-When running UniConfig stand-alone, the config file is in the config folder:
+When running UniConfig stand-alone, the config file is in the **config** folder:
 
 **/opt/uniconfig-frinx/config/application.properties**
 
-Execute the **ifconfig** command  in the terminal and look for an
-interface. If you are using a VPN, the interface is often called **tun0**.
-If not, look for a different interface. Copy **inet** from the interface and
-paste it into the file.
+Execute the `ifconfig` command in the terminal and look for an interface. If you
+are using a VPN, the interface is often called `tun0`. If not, look for a
+different interface. From the interface, copy the `inet` address and paste it
+into the file.
 
 ```properties Snippet
 device-discovery.local-address=
@@ -37,39 +36,37 @@ device-discover-keepalive-time=60
 device-discovery.address-check-limit=254
 ```
 
-The snippet contains two additional parameters.
+The previous snippet contains the following additional parameters:
 
--   **initial-pool-size** of the thread pool that is used by the executor.
--   **"max-pool-size"** specifies the size of the
-    executor that is used. If the amount of addresses in the
-    request is high, consider raising the value.
--   **kepalive-time** specifies the time (in seconds) before the execution
-    of a specified task is timed out.
--   **"addressCheckLimit"** specifies how many
-    addresses are checked. If more addresses are specified in
-    the request, the request will not be successful.
+-   `initial-pool-size` - Thread pool used by the executor.
+-   `max-pool-size` - Size of the executor. If the request contains a large
+    number of addresses, consider raising the value.
+-   `keepalive-time` - Time before the execution of a specified task is timed
+    out (in seconds).
+-   `addressCheckLimit` - Maximum number of addresses checked. If a request
+    contains more addresses, it will not be successful.
 
-If you want to discover hosts and ports in listening state in a
-network, do not add the network and broadcast address of that
-network. For example, if you want to check the network "192.168.1.0/24",
-you can use one of the following:
+To discover hosts and ports in listening state in a network, do not add the
+network and broadcast address of that network. For example, to check the network
+`192.168.1.0/24`, use one of the following:
 
--   "network": "192.168.1.0/24"
--   "start-ipv4-address": "192.168.1.1", "end-ipv4-address":
-    "192.168.1.254"
+-   `"network": "192.168.1.0/24"`
+-   `"start-ipv4-address": "192.168.1.1", "end-ipv4-address":
+    "192.168.1.254"`
 
-If you specify the range using a network statement, the network address
-and broadcast address will not be included in the discovery process. If
-you specify the range via range statements, make sure that only hosts
-addresses are included in the specified range.
+If you specify the range using a network statement, the network address and
+broadcast address are not included in the discovery process. If you specify the
+range via range statements, make sure that only hosts addresses are included in
+the specified range.
 
-## RPC Examples
+## RPC examples
 
 ### Successful example
 
-RPC input contains a network with the prefix /29. Addresses in the
-network and desired ports are checked for availability. The output
-contains reachable addresses in the network and all open TCP/UDP
+RPC input contains a network with the `/29` prefix. Addresses in the network and
+desired ports are checked for availability.
+
+RPC output contains reachable addresses in the network and all open TCP/UDP
 ports.
 
 ```bash RPC Request
@@ -200,9 +197,10 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 
 ### Successful example
 
-RPC input contains a range of addresses. The addresses and desired
-ports are checked for availability. The output contains reachable addresses
-and all open TCP/UDP ports.
+RPC input contains a range of addresses. Addresses and desired ports are checked
+for availability.
+
+RPC output contains reachable addresses and all open TCP/UDP ports.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/device-discovery:discover' \
@@ -341,9 +339,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 
 ### Successful example
 
-RPC input contains the host name and ports that are checked for
-availability. The output shows if the host is reachable as well
-as all open TCP/UDP ports.
+RPC input contains the host name and ports to be checked for availability.
+
+RPC output shows if the host is reachable and all open TCP/UDP ports.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/device-discovery:discover' \
@@ -412,7 +410,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 }
 ```
 
-### Failed Example
+### Failed example
 
 RPC input contains two addresses that are incorrectly wrapped.
 
@@ -450,24 +448,24 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-type": "protocol",
-                "error-tag": "malformed-message",
-                "error-message": "Error parsing input: Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case.",
-                "error-info": "Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case."
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "protocol",
+        "error-tag": "malformed-message",
+        "error-message": "Error parsing input: Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case.",
+        "error-info": "Data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)ip-address-case are specified but other data from case (urn:ietf:params:xml:ns:yang:rpc?revision=2021-07-08)hostname-case were specified earlier. Data aren't from the same case."
+      }
+    ]
+  }
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC input contains an IP range where the start point is greater than the end
+RPC input contains an IP range where the starting point is greater than the end
 point.
 
 ```bash RPC Request
@@ -504,24 +502,23 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "errors": {
-        "error": [
-            {
-                "error-type": "protocol",
-                "error-tag": "bad-element",
-                "error-message": "Invalid IP address range! End address should be bigger than start address! The range is from 127.0.0.63 to 127.0.0.60"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "protocol",
+        "error-tag": "bad-element",
+        "error-message": "Invalid IP address range! End address should be bigger than start address! The range is from 127.0.0.63 to 127.0.0.60"
+      }
+    ]
+  }
 }
 ```
 
-### Not supported operation Example
+### Unsupported operation - example
 
-RPC input contains a network in IPv6 format that is currently not
-supported.
+RPC input contains a network in IPv6 format that is currently not supported.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/device-discovery:discover' \
@@ -556,16 +553,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/device-di
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 501
 {
-    "errors": {
-        "error": [
-            {
-                "error-type": "application",
-                "error-tag": "operation-not-supported",
-                "error-message": "IPv6 is not supported yet!"
-            }
-        ]
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-not-supported",
+        "error-message": "IPv6 is not supported yet!"
+      }
+    ]
+  }
 }
 ```

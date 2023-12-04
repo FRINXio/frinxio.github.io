@@ -2,41 +2,41 @@
 
 This RPC can be used to create one or more new templates.
 
-Templates are parsed
-and written in parallel for better performance. If specified templates already exist,
-their configuration is replaced. Execution of the RPC is atomic - either all templates
-are successfully created or no changes are made in the UniConfig transaction.
+Templates are parsed and written in parallel for better performance. If
+specified templates already exist, their configuration is replaced. Execution of
+the RPC is atomic, meaning that either all templates are successfully created or no
+changes are made to the UniConfig transaction.
 
 RPC input fields:
 
-- **template-name**: Name of the created template.
-- **yang-repository**: YANG schema repository used for parsing of template configuration.
-  Default value: `latest`.
-- **template-configuration**: The entire template configuration.
-- **tags**: List of template tags that are written on the specified paths in all created
-  templates. A specified tag type must be prefixed with the `template-tags` module name based on
-  RFC-8040 formatting of identityref.
+- `template-name` -  Name of the created template.
+- `yang-repository` - YANG schema repository used to parse template
+  configuration. The default value is `latest`.
+- `template-configuration` - The entire template configuration.
+- `tags` - List of template tags written on the specified paths in all created
+  templates. A specified tag type must be prefixed with the `template-tags`
+  module name based on RFC-8040 formatting of identityref.
 
 RPC output fields:
 
-- Successful response: Returns http status code 200 without fields.
+- Successful response: Returns HTTP status code 200 with no fields.
 
-- Failed response: Returns http status code 400-500 and error with
+- Failed response: Returns HTTP status code 400&ndash;500 and an error with
   the following fields:
-  - **error-type** : Type of the error.
-  - **error-tag** : Tag of the error, also determining http status code.
-  - **error-message** : Description of the error that occurred during
-  application of template.
-  - **error-info** : Additional information related to error. For example:
-  node identification, topology identification.
+  - `error-type` - Error type.
+  - `error-tag` - Error tag, also determines HTTP status code.
+  - `error-message` - Description of the error that occurred when the template
+     was applied.
+  - `error-info` - Additional information related to the error. For example,
+     node identification, topology identification.
 
-Only **template-name** and **template-configuration** are mandatory fields.
+Mandatory fields are `template-name` and `template-configuration`.
 
 ## RPC examples
 
 ### Successful example
 
-Successful creation of templates.
+Successfully creating templates.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:create-multiple-templates' \
@@ -82,14 +82,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Successful example
 
-Creation of two templates with separately specified template tags:
-- **replace** tag is added to `/acl/category` and `/services/group=default/types` elements
-- **create** tag is added to `/services` element
+Creating two templates with separately specified template tags:
+- `replace` tag is added to `/acl/category` and `/services/group=default/types`
+  elements
+- `create` tag is added to `/services` element
 
 ```bash RPC request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-manager:create-multiple-templates' \
@@ -150,12 +151,12 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-
 }
 ```
 
-```RPC response, Status: 200
+```RPC response, Status: 204
 ```
 
 ### Failed example
 
-Failed to find the YANG schema repository.
+Cannot find the specified YANG schema repository.
 
 ```bash RPC Request
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/template-manager:create-multiple-templates' \

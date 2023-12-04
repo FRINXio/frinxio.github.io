@@ -1,16 +1,15 @@
-# Applying a template
+# Apply template
 
-Templates can be applied to UniConfig nodes using the `apply-template` RPC.
+The **apply-templates RPC** is used to apply templates to UniConfig nodes.
 
-This procedure contains the following steps:
+The procedure contains the following steps:
 
 1. **Read template** - Reads a template configuration from the
-   *templates* topology in the *Configuration* datastore.
-2. **String-substitution** - Substitutes variables with provided
-   or default values. If no values are provided for
-   some variables and leaf/leaf-list defines a default values. If some
-   variables cannot be substituted (for example, if not input value is specified
-   for a variable), returns an error.
+   `templates` topology in the `Configuration` datastore.
+2. **String-substitution** - Substitutes variables with provided or default
+   values. If no values are provided for some variables and leafs/leaf-lists,
+   uses default values. If some variables cannot be substituted (for example, if
+   no input value is specified for a variable), returns an error.
 3. **Version-drop** - Converts a template into a target schema context
    used by the target UniConfig node. Also drops
    unsupported data from the input template. Because of this, the template
@@ -20,42 +19,41 @@ This procedure contains the following steps:
    RESTCONF filtering mechanism.
 4. **Apply tags** - Streams the data-tree of the template and recursively
    applies data to the target UniConfig node based on tags set on data elements.
-   The UniConfig node configuration is updated only in the *Configuration* datastore.
+   The UniConfig node configuration is updated only in the `Configuration`
+   datastore.
 
 RPC input fields:
 
-- **template-node-id**: Name of the existing input template.
-- **uniconfig-node**: List of target UniConfig nodes to which the template
+- `template-node-id` - Name of the existing input template.
+- `uniconfig-node` - List of target UniConfig nodes to which the template
   is applied (`uniconfig-node-id` is the key).
-- **uniconfig-node-id**: Target UniConfig node identifier.
-- **variable**: List of variables and substituted values that must be
-  used when the template is applied to a UniConfig node. Variables
-  must be set per target UniConfig node, as it is common that
-  values of variables are different between devices. Leaf
-  'variable-id' represents the key of this list.
-- **variable-id**: Unescaped variable identifier.
-- **leaf-value**: Scalar value of the variable. Special characters
-  ('\$', '{', '}') must be escaped.
-- **leaf-list-values**: List of values - it can be used only with
-  leaf-lists. Special characters ('\$', '{', '}') must be escaped.
+- `uniconfig-node-id` -  Target UniConfig node identifier.
+- `variable` -  List of variables and substituted values that must be used when
+  the template is applied to a UniConfig node. Variables must be set per target
+  UniConfig node, as it is common that values of variables are different between
+  devices. The `variable-id` leaf represents the key of this list.
+- `variable-id` - Unescaped variable identifier.
+- `leaf-value` - Scalar value of the variable. Special characters (`\$`, `{`,
+  `}`) must be escaped.
+- `leaf-list-values` - List of values that can only be used with leaf-lists.
+  Special characters (`\$`, `{`, `}`) must be escaped.
 
 RPC output fields:
 
-- Successful response: Returns http status code 200 without fields.
+- Successful response: Returns HTTP status code 200 with no fields.
 
-- Failed response: Returns http status code 400-500 and error with
+- Failed response: Returns HTTP status code 400&ndash;500 and an error with
   the following fields:
-   - **error-type** : Type of the error.
-   - **error-tag** : Tag of the error, also determining http status code.
-   - **error-message** : Description of the error that occurred during
-     application of template.
-   - **error-info** : Additional information related to error. For example,
-     node identification, topology identification.
+   - `error-type` - Error type.
+   - `error-tag` - Error tag, also determines HTTP status code.
+   - `error-message` - Description of the error that occurred when the template
+     was applied.
+   - `error-info` - Additional information related to the error. For example,
+     node identification and topology identification.
 
-The following sequence diagram and nested activity diagram show process
-of the `apply-template` RPC in detail.
+The following diagrams illustrate the process in more detail:
 
-![RPC apply-template](rpc_apply-template/apply_template.svg)
+![RPC apply-template](apply_template.svg)
 
 ![Processing template configuration](processing_template.svg)
 
@@ -63,8 +61,8 @@ of the `apply-template` RPC in detail.
 
 ### Successful example
 
-Successful application of the `SERVICE_GROUP` template to two UniConfig
-nodes (R1 and R2).
+Successful applying the `SERVICE_GROUP` template to two UniConfig nodes (R1 and
+R2).
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
@@ -126,12 +124,12 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 }'
 ```
 
-```RPC Response, Status: 200
+```RPC Response, Status: 204
 ```
 
 ### Failed example
 
-Failed application of the `TEMP1` template: Template does not exist.
+Failed to apply the `TEMP1` template: Template does not exist.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
@@ -178,8 +176,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 
 ### Failed example
 
-Failed application of the template `REDUNDANCY_TEMPLATE` to two UniConfig nodes
-(R1 and R2): Missing values for some required variables.
+Failed to apply the template `REDUNDANCY_TEMPLATE` to two UniConfig nodes (R1
+and R2): Missing values for required variables.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
@@ -243,9 +241,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/template-
 
 ### Failed example
 
-Failed application of the template `redundancy_template` to a UniConfig
-node (dev1): Invalid type of substituted variable value (failed
-regex constraint).
+Failed to apply the template `redundancy_template` to a UniConfig node (dev1):
+Invalid type of substituted variable value (failed regex constraint).
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
