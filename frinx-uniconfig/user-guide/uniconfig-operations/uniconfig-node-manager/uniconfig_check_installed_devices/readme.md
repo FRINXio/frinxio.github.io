@@ -4,6 +4,12 @@ This RPC checks if devices specified in the input are installed by looking for
 the database content of each device. If content is found, the device is
 installed.
 
+Output of the RPC contains only a list of devices that are present in the UniConfig database.
+List of devices contains:
+- topology-id - identifier of the topology in which the device is installed
+- node-id - device identifier
+- uniconfig-layer - boolean value indicating whether the device is installed in the UniConfig layer
+
 ## RPC examples
 
 ### Successful example
@@ -55,7 +61,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
       "node-result": [
         {
           "topology-id": "netconf",
-          "node-id": "R1"
+          "node-id": "R1",
+          "uniconfig-layer": true
         }
       ]
     }
@@ -87,11 +94,13 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
       "node-result": [
         {
           "topology-id": "netconf",
-          "node-id": "R1"
+          "node-id": "R1",
+          "uniconfig-layer": true
         },
         {
           "topology-id": "netconf",
-          "node-id": "R2"
+          "node-id": "R2",
+          "uniconfig-layer": false
         }
       ]
     }
