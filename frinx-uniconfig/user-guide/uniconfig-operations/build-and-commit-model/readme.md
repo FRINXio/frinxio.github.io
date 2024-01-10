@@ -218,6 +218,33 @@ Dedicated sessions to a device are useful when:
 ```URL Setting dedicated device sessions
 http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction?dedicatedDeviceSession=true
 ```
+### Audit parameters
+
+Uniconfig can pass audit parameters to network devices when a Uniconfig transaction is committed.
+
+Following implementations are currently supported on southbound:
+
+* **Tailf confD extension (NETCONF)**
+```
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="m-3">
+    <commit>
+        <confirmed/>
+        <rollback-comment xmlns="http://tail-f.com/ns/netconf/rollback">Uniconfig transaction: c7be0e5d-2bc3-473f-8590-0fe3f732beef</rollback-comment>
+        <rollback-label xmlns="http://tail-f.com/ns/netconf/rollback">test</rollback-label>
+    </commit>
+</rpc>
+```
+
+On the northbound, the parameters are exposed as HTTP headers:
+
+* AUDIT_USER
+* AUDIT_COMMENT
+
+```
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction' \
+--header 'AUDIT_USER: audit user' \
+--header 'AUDIT_COMMENT: audit comment'
+```
 
 ## Invocation of CRUD operation in transaction
 
