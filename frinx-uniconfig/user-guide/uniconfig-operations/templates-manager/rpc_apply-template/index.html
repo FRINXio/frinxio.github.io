@@ -6,15 +6,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488426450">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.758206519409">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Applying a template | Frinx Docs</title>
-    <meta name="title" content="Applying a template | Frinx Docs">
-    <meta name="description" content="Templates can be applied to UniConfig nodes using the apply-template RPC." />
+    <title>Apply template | Frinx docs</title>
+    <meta name="title" content="Apply template | Frinx docs">
+    <meta name="description" content="The apply-templates RPC is used to apply templates to UniConfig nodes." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/rpc_apply-template/" />
@@ -22,26 +22,26 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/rpc_apply-template/">
-    <meta property="og:title" content="Applying a template | Frinx Docs">
-    <meta property="og:description" content="Templates can be applied to UniConfig nodes using the apply-template RPC.">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/rpc_apply-template/processing_template.svg">
+    <meta property="og:title" content="Apply template | Frinx docs">
+    <meta property="og:description" content="The apply-templates RPC is used to apply templates to UniConfig nodes.">
+    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/rpc_apply-template/apply_template.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/rpc_apply-template/">
-    <meta property="twitter:title" content="Applying a template | Frinx Docs">
-    <meta property="twitter:description" content="Templates can be applied to UniConfig nodes using the apply-template RPC.">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/rpc_apply-template/processing_template.svg">
+    <meta property="twitter:title" content="Apply template | Frinx docs">
+    <meta property="twitter:description" content="The apply-templates RPC is used to apply templates to UniConfig nodes.">
+    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/rpc_apply-template/apply_template.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.754488426450" rel="stylesheet" />
+    <link href="../../../../../static/favicon-192x192.png" rel="icon" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.758206519409" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.754488426450" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.758206519409" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -88,7 +88,7 @@
                                             <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                         </g>
                                     </svg>
-                                    <span>Webpage</span>
+                                    <span>Frinx</span>
                                 </a>
                             </li>
                             <li class="mr-6">
@@ -105,7 +105,7 @@
                                 <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
-                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                            <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                         </g>
                                     </svg>
                                     <span>LinkedIn</span>
@@ -204,7 +204,7 @@
                                                     <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                                 </g>
                                             </svg>
-                                            <span>Webpage</span>
+                                            <span>Frinx</span>
                                         </a>
                                     </li>
                                     <li class="mr-6">
@@ -221,7 +221,7 @@
                                         <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
-                                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                                    <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                                 </g>
                                             </svg>
                                             <span>LinkedIn</span>
@@ -250,22 +250,21 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="applying-a-template" class="break-words">
+<doc-anchor-target id="apply-template" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#applying-a-template">#</doc-anchor-trigger>
-        <span>Applying a template</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#apply-template">#</doc-anchor-trigger>
+        <span>Apply template</span>
     </h1>
 </doc-anchor-target>
-<p>Templates can be applied to UniConfig nodes using the <code v-pre>apply-template</code> RPC.</p>
-<p>This procedure contains the following steps:</p>
+<p>The <strong>apply-templates RPC</strong> is used to apply templates to UniConfig nodes.</p>
+<p>The procedure contains the following steps:</p>
 <ol>
 <li><strong>Read template</strong> - Reads a template configuration from the
-<em>templates</em> topology in the <em>Configuration</em> datastore.</li>
-<li><strong>String-substitution</strong> - Substitutes variables with provided
-or default values. If no values are provided for
-some variables and leaf/leaf-list defines a default values. If some
-variables cannot be substituted (for example, if not input value is specified
-for a variable), returns an error.</li>
+<code v-pre>templates</code> topology in the <code v-pre>Configuration</code> datastore.</li>
+<li><strong>String-substitution</strong> - Substitutes variables with provided or default
+values. If no values are provided for some variables and leafs/leaf-lists,
+uses default values. If some variables cannot be substituted (for example, if
+no input value is specified for a variable), returns an error.</li>
 <li><strong>Version-drop</strong> - Converts a template into a target schema context
 used by the target UniConfig node. Also drops
 unsupported data from the input template. Because of this, the template
@@ -275,45 +274,44 @@ Version-drop is also aware of the <code v-pre>ignoredDataOnWriteByExtensions</co
 RESTCONF filtering mechanism.</li>
 <li><strong>Apply tags</strong> - Streams the data-tree of the template and recursively
 applies data to the target UniConfig node based on tags set on data elements.
-The UniConfig node configuration is updated only in the <em>Configuration</em> datastore.</li>
+The UniConfig node configuration is updated only in the <code v-pre>Configuration</code>
+datastore.</li>
 </ol>
 <p>RPC input fields:</p>
 <ul>
-<li><strong>template-node-id</strong>: Name of the existing input template.</li>
-<li><strong>uniconfig-node</strong>: List of target UniConfig nodes to which the template
+<li><code v-pre>template-node-id</code> - Name of the existing input template.</li>
+<li><code v-pre>uniconfig-node</code> - List of target UniConfig nodes to which the template
 is applied (<code v-pre>uniconfig-node-id</code> is the key).</li>
-<li><strong>uniconfig-node-id</strong>: Target UniConfig node identifier.</li>
-<li><strong>variable</strong>: List of variables and substituted values that must be
-used when the template is applied to a UniConfig node. Variables
-must be set per target UniConfig node, as it is common that
-values of variables are different between devices. Leaf
-&#x27;variable-id&#x27; represents the key of this list.</li>
-<li><strong>variable-id</strong>: Unescaped variable identifier.</li>
-<li><strong>leaf-value</strong>: Scalar value of the variable. Special characters
-(&#x27;$&#x27;, &#x27;{&#x27;, &#x27;}&#x27;) must be escaped.</li>
-<li><strong>leaf-list-values</strong>: List of values - it can be used only with
-leaf-lists. Special characters (&#x27;$&#x27;, &#x27;{&#x27;, &#x27;}&#x27;) must be escaped.</li>
+<li><code v-pre>uniconfig-node-id</code> -  Target UniConfig node identifier.</li>
+<li><code v-pre>variable</code> -  List of variables and substituted values that must be used when
+the template is applied to a UniConfig node. Variables must be set per target
+UniConfig node, as it is common that values of variables are different between
+devices. The <code v-pre>variable-id</code> leaf represents the key of this list.</li>
+<li><code v-pre>variable-id</code> - Unescaped variable identifier.</li>
+<li><code v-pre>leaf-value</code> - Scalar value of the variable. Special characters (<code v-pre>\$</code>, <code v-pre>{</code>,
+<code v-pre>}</code>) must be escaped.</li>
+<li><code v-pre>leaf-list-values</code> - List of values that can only be used with leaf-lists.
+Special characters (<code v-pre>\$</code>, <code v-pre>{</code>, <code v-pre>}</code>) must be escaped.</li>
 </ul>
 <p>RPC output fields:</p>
 <ul>
-<li><p>Successful response: Returns http status code 200 without fields.</p>
+<li><p>Successful response: Returns HTTP status code 200 with no fields.</p>
 </li>
-<li><p>Failed response: Returns http status code 400-500 and error with
+<li><p>Failed response: Returns HTTP status code 400–500 and an error with
 the following fields:</p>
 <ul>
-<li><strong>error-type</strong> : Type of the error.</li>
-<li><strong>error-tag</strong> : Tag of the error, also determining http status code.</li>
-<li><strong>error-message</strong> : Description of the error that occurred during
-application of template.</li>
-<li><strong>error-info</strong> : Additional information related to error. For example,
-node identification, topology identification.</li>
+<li><code v-pre>error-type</code> - Error type.</li>
+<li><code v-pre>error-tag</code> - Error tag, also determines HTTP status code.</li>
+<li><code v-pre>error-message</code> - Description of the error that occurred when the template
+was applied.</li>
+<li><code v-pre>error-info</code> - Additional information related to the error. For example,
+node identification and topology identification.</li>
 </ul>
 </li>
 </ul>
-<p>The following sequence diagram and nested activity diagram show process
-of the <code v-pre>apply-template</code> RPC in detail.</p>
+<p>The following diagrams illustrate the process in more detail:</p>
 <p><figure class="content-center">
-    <img src="rpc_apply-template/apply_template.svg" alt="RPC apply-template" />
+    <img src="apply_template.svg" alt="RPC apply-template" />
     <figcaption class="caption">RPC apply-template</figcaption>
 </figure>
 </p>
@@ -334,8 +332,8 @@ of the <code v-pre>apply-template</code> RPC in detail.</p>
         <span>Successful example</span>
     </h3>
 </doc-anchor-target>
-<p>Successful application of the <code v-pre>SERVICE_GROUP</code> template to two UniConfig
-nodes (R1 and R2).</p>
+<p>Successful applying the <code v-pre>SERVICE_GROUP</code> template to two UniConfig nodes (R1 and
+R2).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
@@ -397,7 +395,7 @@ nodes (R1 and R2).</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
+<div class="codeblock-title">RPC Response, Status: 204</div>
 <pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example">
@@ -406,7 +404,7 @@ nodes (R1 and R2).</p>
         <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Failed application of the <code v-pre>TEMP1</code> template: Template does not exist.</p>
+<p>Failed to apply the <code v-pre>TEMP1</code> template: Template does not exist.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
@@ -456,8 +454,8 @@ nodes (R1 and R2).</p>
         <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Failed application of the template <code v-pre>REDUNDANCY_TEMPLATE</code> to two UniConfig nodes
-(R1 and R2): Missing values for some required variables.</p>
+<p>Failed to apply the template <code v-pre>REDUNDANCY_TEMPLATE</code> to two UniConfig nodes (R1
+and R2): Missing values for required variables.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
@@ -524,9 +522,8 @@ nodes (R1 and R2).</p>
         <span>Failed example</span>
     </h3>
 </doc-anchor-target>
-<p>Failed application of the template <code v-pre>redundancy_template</code> to a UniConfig
-node (dev1): Invalid type of substituted variable value (failed
-regex constraint).</p>
+<p>Failed to apply the template <code v-pre>redundancy_template</code> to a UniConfig node (dev1):
+Invalid type of substituted variable value (failed regex constraint).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/template-manager:apply-template' \
@@ -613,12 +610,9 @@ regex constraint).</p>
                             <footer class="flex flex-wrap items-center justify-between">
                                 <div>
                                     <ul class="flex flex-wrap items-center text-sm">
-                                        <li>
-                                            <a class="block mr-4 py-2 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="about.md">About</a>
-                                        </li>
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. <a href="https://frinx.io/">Frinx.io</a> All rights reserved.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. <a href="https://elisapolystar.com/">Elisa Polystar</a> All rights reserved.</p></div>
                             </footer>
                         </div>
                     </div>
@@ -647,6 +641,6 @@ regex constraint).</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Applying a template", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Apply template", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

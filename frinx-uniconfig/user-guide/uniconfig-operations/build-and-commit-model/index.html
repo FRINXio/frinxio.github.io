@@ -6,15 +6,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488426450">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.758206519409">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Build-and-Commit Model | Frinx Docs</title>
-    <meta name="title" content="Build-and-Commit Model | Frinx Docs">
-    <meta name="description" content="Build-and-commit model is based on explicit creation of the transaction, invoking operations in the scope of this transaction and finally" />
+    <title>Build-and-Commit Model | Frinx docs</title>
+    <meta name="title" content="Build-and-Commit Model | Frinx docs">
+    <meta name="description" content="The Build-and-Commit model is based on explicit creation of a transaction, invoking operations in the scope of this transaction and, finally," />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/" />
@@ -22,26 +22,26 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/">
-    <meta property="og:title" content="Build-and-Commit Model | Frinx Docs">
-    <meta property="og:description" content="Build-and-commit model is based on explicit creation of the transaction, invoking operations in the scope of this transaction and finally">
+    <meta property="og:title" content="Build-and-Commit Model | Frinx docs">
+    <meta property="og:description" content="The Build-and-Commit model is based on explicit creation of a transaction, invoking operations in the scope of this transaction and, finally,">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/optimistic-locking.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/">
-    <meta property="twitter:title" content="Build-and-Commit Model | Frinx Docs">
-    <meta property="twitter:description" content="Build-and-commit model is based on explicit creation of the transaction, invoking operations in the scope of this transaction and finally">
+    <meta property="twitter:title" content="Build-and-Commit Model | Frinx docs">
+    <meta property="twitter:description" content="The Build-and-Commit model is based on explicit creation of a transaction, invoking operations in the scope of this transaction and, finally,">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/optimistic-locking.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.754488426450" rel="stylesheet" />
+    <link href="../../../../static/favicon-192x192.png" rel="icon" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.758206519409" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.754488426450" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.758206519409" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -88,7 +88,7 @@
                                             <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                         </g>
                                     </svg>
-                                    <span>Webpage</span>
+                                    <span>Frinx</span>
                                 </a>
                             </li>
                             <li class="mr-6">
@@ -105,7 +105,7 @@
                                 <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
-                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                            <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                         </g>
                                     </svg>
                                     <span>LinkedIn</span>
@@ -204,7 +204,7 @@
                                                     <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                                 </g>
                                             </svg>
-                                            <span>Webpage</span>
+                                            <span>Frinx</span>
                                         </a>
                                     </li>
                                     <li class="mr-6">
@@ -221,7 +221,7 @@
                                         <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
-                                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                                    <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                                 </g>
                                             </svg>
                                             <span>LinkedIn</span>
@@ -256,29 +256,23 @@
         <span>Build-and-Commit Model</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="introduction">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#introduction">#</doc-anchor-trigger>
-        <span>Introduction</span>
-    </h2>
-</doc-anchor-target>
-<p>Build-and-commit model is based on explicit creation of the transaction,
-invoking operations in the scope of this transaction and finally
-committing or closing transaction. The transaction represents a session
-between the client and the UniConfig instance.</p>
+<p>The Build-and-Commit model is based on explicit creation of a transaction,
+invoking operations in the scope of this transaction and, finally,
+committing or closing the transaction. The transaction represents a session
+between client and UniConfig instance.</p>
 <p>Using explicitly created transactions has multiple advantages in
-comparison to Immediate Commit Model:</p>
+comparison to the Immediate Commit Model:</p>
 <ul>
-<li>Multiple operations and modifications can be invoked in the single
+<li>Multiple operations and modifications can be invoked in a single
 transaction while keeping transactions isolated.</li>
-<li>Most of the UniConfig operations, such as calculate-diff and commit,
-doesn&#x27;t have any usage in the Immediate Commit Model - they are
-valuable only if the Build-and-Commit Model is used.</li>
-<li>The transaction allows a client to identify if it still communicates
-with the same UniConfig instance (this property is usable in the
-clustered deployment). If the UniConfig instance does not know about
-the transaction then the request will fail because transaction
-expired, is closed, or has never been created.</li>
+<li>Most UniConfig operations, such as calculate-diff and commit, have no use in
+the Immediate Commit Model. They are valuable only if the Build-and-Commit
+Model is used.</li>
+<li>The transaction allows a client to identify if it still communicates with the
+same UniConfig instance (this property is usable in the clustered
+deployment). If the UniConfig instance does not know about the transaction,
+the request will fail because the transaction expired, is closed or was
+never created in the first place.</li>
 </ul>
 <doc-anchor-target id="configuration">
     <h2>
@@ -286,10 +280,10 @@ expired, is closed, or has never been created.</li>
         <span>Configuration</span>
     </h2>
 </doc-anchor-target>
-<p>Configuration related to UniConfig transactions is placed in the
-&#x27;config/lighty-uniconfig-config.json&#x27; file under &#x27;transactions&#x27;
-container. Note that build-and-commit model is enabled if
-&#x27;uniconfigTransactionEnabled&#x27; is set to &#x27;true&#x27; value (default value).</p>
+<p>Configurations related to UniConfig transactions are placed in the
+<strong>config/lighty-uniconfig-config.json</strong> file under the <code v-pre>transactions</code> container.
+Note that the Build-and-Commit model is enabled if <code v-pre>uniconfigTransactionEnabled</code>
+is set to <code v-pre>true</code> (this is the default value).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">// Grouped settings that are related to Uniconfig transactions.
 &quot;transactions&quot;: {
@@ -323,40 +317,36 @@ container. Note that build-and-commit model is enabled if
         <span>Optimistic locking mechanism</span>
     </h2>
 </doc-anchor-target>
-<p>Race condition between transactions that are committed in parallel and
-contain changes of same nodes (uniconfig, unistore, snapshot, or
-template nodes) is solved using optimistic locking mechanism.
-Configuration of same node can be modified in parallel from 2
-transactions, however only the first committed transaction will succeed.
-Commit of the second transaction will fail.</p>
-<p>UniConfig uses 2 different techniques for detection of conflicts during
-commit or checked-commit operation:</p>
+<p>Race conditions between transactions that are committed in parallel and contain
+changes to the same nodes (uniconfig, unistore, snapshot or template nodes) are
+solved using the optimistic locking mechanism. The configuration of a node can
+be modified in parallel from two transactions, but only the first committed
+transaction will succeed. The commit for the second transaction will fail.</p>
+<p>UniConfig uses two different techniques to detect conflicts during commit or
+checked-commit operations:</p>
 <ol>
-<li><p>Comparison of configuration fingerprints - Fingerprint value is
-updated for altered node at the end of the commit operation - at the
-beginning of commit operation, UniConfig compares the value of
-actual fingerprint in database with value of fingerprint read before
-the first CRUD operation done in the transaction and the last synced
-fingerprint (updated after execution of sync-from-network RPC). If
-actual fingerprint from database equals to fingerprint read before
-the first CRUD operation or the last synced fingerprint, then commit
-operation can continue. Otherwise, error is returned without
-touching any devices on network.</p>
+<li><p><strong>Comparing configuration fingerprints</strong> - The fingerprint value for an
+altered node is updated at the end of the commit operation. At the beginning of
+a commit operation, UniConfig compares the value of the actual fingerprint in
+the database with the value of the fingerprint read before the first CRUD
+operation done in the transaction and the last synced fingerprint (updated after
+execution of the <strong>sync-from-network RPC</strong>). If the actual fingerprint in the
+database is equal to the fingerprint read before the first CRUD operation or the
+last synced fingerprint, the commit operation can continue. Otherwise, an error
+is returned without touching any devices in the network.</p>
 </li>
-<li><p>Per-node advisory locks - Comparison of configuration fingerprints
-are reliable if transactions are committed one after another.
-However, such serialization cannot be achieved in the clustered
-environment because UniConfig instances are not coordinated. If 2
-transactions are committed at the same time and both assume that
-configuration fingerprints haven&#x27;t been updated by other
-transaction, both transactions may start to push changes to network
-devices at the same time. To prevent prevent occurrences of this
-scenario, UniConfig locks node in the PostgresSQL database using
-transaction-level advisory locks at the beginning of commit
-operation. If other transaction tries to lock the same node, this
-attempt will fail, and second transaction will not enter critical
-section - rather it will fail. Locks are automatically released at
-the end of the transaction (commit RPC closes transaction).</p>
+<li><p><strong>Per-node advisory locks</strong> - Comparison of configuration fingerprints is
+reliable if transactions are committed one after another. However, such
+serialization cannot be achieved in the clustered environment as UniConfig
+instances are not coordinated. If two transactions are committed at the same
+time and both assume that configuration fingerprints haven&#x27;t been updated by
+another transaction, both transactions may start to push changes to network
+devices simultaneously. To prevent this scenario, UniConfig locks the node in
+the PostgresSQL database using transaction-level advisory locks at the beginning
+of the commit operation. If another transaction tries to lock the same node, its
+attempt will fail, and the second transaction cannot enter the critical section
+but will fail. Locks are automatically released at the end of the transaction
+(<strong>commit RPC</strong> closes the transaction).</p>
 </li>
 </ol>
 <p>All possible scenarios are captured in the following diagrams.</p>
@@ -465,16 +455,16 @@ UniConfig returns response with 500 status code.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 500</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-type&quot;: &quot;protocol&quot;,
-                &quot;error-message&quot;: &quot;Failed to create Uniconfig transaction&quot;,
-                &quot;error-tag&quot;: &quot;operation-failed&quot;,
-                &quot;error-info&quot;: &quot;Maximum open transactions created by User was reached&quot;
-            }
-        ]
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;protocol&quot;,
+        &quot;error-message&quot;: &quot;Failed to create Uniconfig transaction&quot;,
+        &quot;error-tag&quot;: &quot;operation-failed&quot;,
+        &quot;error-info&quot;: &quot;Maximum open transactions created by User was reached&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="transaction-idle-timeout">
@@ -498,18 +488,18 @@ time in seconds.</p>
         <span>Dedicated session to device</span>
     </h3>
 </doc-anchor-target>
-<p>By default, UniConfig shares southbound session to network device, if multiple UniConfig transactions
-use the same device via same management protocol. This behaviour can be disabled using &#x27;dedicatedDeviceSession&#x27;
-query parameter which accepts boolean value. Afterwards, UniConfig transaction will create dedicated session
-to device which is used only by one transaction and closed immediately after committing or closing the transaction.</p>
-<p>Dedicated sessions to device are useful when:</p>
+<p>By default, UniConfig shares a southbound session to a network device if
+multiple UniConfig transactions use the same device via the same management
+protocol. This behaviour can be disabled using the <code v-pre>dedicatedDeviceSession</code>
+query parameter, which accepts a boolean value. Afterwards the UniConfig
+transaction will create a dedicated session to the device, which is used only by
+one transaction and is closed immediately after committing or closing the
+transaction.</p>
+<p>Dedicated sessions to a device are useful when:</p>
 <ul>
-<li>Device is not able to process requests in parallel via same session.</li>
-<li>Device is able to process requests in parallel via same session, but it doesn&#x27;t process them in parallel
-<ul>
-<li>decreasing processing performance.</li>
-</ul>
-</li>
+<li>The evice is not able to process requests in parallel via the same session.</li>
+<li>The device is able to process requests in parallel via same session, but does
+not process them in parallel, decreasing processing performance.</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Setting dedicated device sessions</div>
@@ -609,15 +599,15 @@ code (Unprocessable Entity).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">GET Response, Status: 422</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Unknown uniconfig transaction: d7ff736e-8efa-4cc5-9d27-b7f560a76ff4&quot;,
-                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Unknown uniconfig transaction: d7ff736e-8efa-4cc5-9d27-b7f560a76ff4&quot;,
+        &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
+        &quot;error-type&quot;: &quot;protocol&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="invocation-of-rpc-operation-in-transaction">
@@ -678,24 +668,23 @@ modifications done on the &#x27;junos&#x27; node.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;junos&quot;,
-                    &quot;status&quot;: &quot;complete&quot;,
-                    &quot;updated-data&quot;: [
-                        {
-                            &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=fxp0/config&quot;,
-                            &quot;data-actual&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;name\&quot;: \&quot;fxp0\&quot;\n  }\n}&quot;,
-                            &quot;data-intended&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;fxp0\&quot;\n  }\n}&quot;
-                        }
-                    ]
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;junos&quot;,
+          &quot;topology-id&quot;: &quot;uniconfig&quot;,
+          &quot;updated-data&quot;: [
+            {
+              &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=fxp0/config&quot;,
+              &quot;data-actual&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: true,\n    \&quot;name\&quot;: \&quot;fxp0\&quot;\n  }\n}&quot;,
+              &quot;data-intended&quot;: &quot;{\n  \&quot;frinx-openconfig-interfaces:config\&quot;: {\n    \&quot;type\&quot;: \&quot;iana-if-type:ethernetCsmacd\&quot;,\n    \&quot;enabled\&quot;: false,\n    \&quot;name\&quot;: \&quot;fxp0\&quot;\n  }\n}&quot;
+            }
+          ]
+        }
+      ]
     }
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-2">
@@ -723,16 +712,16 @@ format.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 403</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-type&quot;: &quot;protocol&quot;,
-                &quot;error-message&quot;: &quot;Invalid transaction-id format; it should conform UUID based on RFC 4122: 2a335e04-ae11-4677-885b-cea1ea71157x&quot;,
-                &quot;error-tag&quot;: &quot;access-denied&quot;,
-                &quot;error-info&quot;: &quot;Error at index 11 in: \&quot;cea1ea71157x\&quot;&quot;
-            }
-        ]
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-type&quot;: &quot;protocol&quot;,
+        &quot;error-message&quot;: &quot;Invalid transaction-id format; it should conform UUID based on RFC 4122: 2a335e04-ae11-4677-885b-cea1ea71157x&quot;,
+        &quot;error-tag&quot;: &quot;access-denied&quot;,
+        &quot;error-info&quot;: &quot;Error at index 11 in: \&quot;cea1ea71157x\&quot;&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="closing-transaction">
@@ -812,8 +801,8 @@ doesn&#x27;t body, only status code 200.</p>
 --header 'Cookie: UNICONFIGTXID=2ab7cfc3-dedc-4444-8431-6e9cf94fad3b'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json"></code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="failed-example-3">
     <h3>
@@ -832,15 +821,15 @@ JSON body containing error message.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 422</div>
 <pre class="language-json"><code v-pre class="language-json">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Uniconfig transaction 3819fbaa-6bd4-4c79-bc4e-68f70cf97903 has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Uniconfig transaction 3819fbaa-6bd4-4c79-bc4e-68f70cf97903 has already been closed&quot;,
+        &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
+        &quot;error-type&quot;: &quot;protocol&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="transaction-cleaner">
@@ -954,16 +943,14 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 <p>The first response contains transaction-id of TX1 that can be used in
 the subsequent requests that belong to TX1:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">Status: 201 Created
-Set cookie: UNICONFIGTXID=73f85310-a20a-46b9-beaf-d2ac98cc74cc;Version=1;Comment=&quot;uniconfig transaction created&quot;;Path=/rests/</code></pre>
+<div class="codeblock-title">RPC Response, Status: 201</div>
+<pre class="language-none"><code v-pre class="language-none">Set cookie: UNICONFIGTXID=73f85310-a20a-46b9-beaf-d2ac98cc74cc;Version=1;Comment=&quot;uniconfig transaction created&quot;;Path=/rests/</code></pre>
 </doc-codeblock></div>
 <p>The first second contains transaction-id of TX2 that can be used in the
 subsequent requests that belong to TX2:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">Status: 201 Created
-Set cookie: UNICONFIGTXID=5e8ab9d0-803a-40d6-9f0a-92e47524bab8;Version=1;Comment=&quot;uniconfig transaction created&quot;;Path=/rests/</code></pre>
+<div class="codeblock-title">RPC Response, Status: 201</div>
+<pre class="language-none"><code v-pre class="language-none">Set cookie: UNICONFIGTXID=5e8ab9d0-803a-40d6-9f0a-92e47524bab8;Version=1;Comment=&quot;uniconfig transaction created&quot;;Path=/rests/</code></pre>
 </doc-codeblock></div>
 <p><strong>3. Modification of ‘xr6_1’ uniconfig configuration inside TX1</strong></p>
 <p>Creation of new Loopback97 interface in the TX1 - cookie header contains
@@ -990,8 +977,8 @@ UNICONFIGTXID of TX1:</p>
 </doc-codeblock></div>
 <p>Response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">Status: 201 Created</code></pre>
+<div class="codeblock-title">RPC Response, Status: 201</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <p>Verification if TX1 contains created interface (Cookie header contains
 UNICONFIGTXID of TX1):</p>
@@ -1005,18 +992,18 @@ UNICONFIGTXID of TX1):</p>
 </doc-codeblock></div>
 <p>Response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;interface-configuration&quot;: [
-        {
-            &quot;active&quot;: &quot;act&quot;,
-            &quot;interface-name&quot;: &quot;Loopback97&quot;,
-            &quot;description&quot;: &quot;stanov loopback&quot;,
-            &quot;interface-virtual&quot;: [
-                null
-            ]
-        }
-    ]
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;interface-configuration&quot;: [
+    {
+      &quot;active&quot;: &quot;act&quot;,
+      &quot;interface-name&quot;: &quot;Loopback97&quot;,
+      &quot;description&quot;: &quot;stanov loopback&quot;,
+      &quot;interface-virtual&quot;: [
+        null
+      ]
+    }
+  ]
 }</code></pre>
 </doc-codeblock></div>
 <p><strong>4. Modification of ‘xr6_2’ uniconfig configuration inside TX2</strong></p>
@@ -1044,8 +1031,8 @@ UNICONFIGTXID of TX2:</p>
 </doc-codeblock></div>
 <p>Response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">Status: 201 Created</code></pre>
+<div class="codeblock-title">RPC Response Status: 201</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <p>Verification if TX2 contains created interface (Cookie header contains
 UNICONFIGTXID of TX2):</p>
@@ -1059,18 +1046,18 @@ UNICONFIGTXID of TX2):</p>
 </doc-codeblock></div>
 <p>Response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;interface-configuration&quot;: [
-        {
-            &quot;active&quot;: &quot;act&quot;,
-            &quot;interface-name&quot;: &quot;Loopback79&quot;,
-            &quot;description&quot;: &quot;stanov loopback&quot;,
-            &quot;interface-virtual&quot;: [
-                null
-            ]
-        }
-    ]
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;interface-configuration&quot;: [
+    {
+      &quot;active&quot;: &quot;act&quot;,
+      &quot;interface-name&quot;: &quot;Loopback79&quot;,
+      &quot;description&quot;: &quot;stanov loopback&quot;,
+      &quot;interface-virtual&quot;: [
+        null
+      ]
+    }
+  ]
 }</code></pre>
 </doc-codeblock></div>
 <p><strong>5. Verification if TX1 and TX2 are isolated</strong></p>
@@ -1091,17 +1078,17 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 </doc-codeblock></div>
 <p>Both responses should return Status 404 Not Found:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Request could not be completed because the relevant data model content does not exist&quot;,
-                &quot;error-tag&quot;: &quot;data-missing&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+<div class="codeblock-title">RPC Response, Status: 404</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Request could not be completed because the relevant data model content does not exist&quot;,
+        &quot;error-tag&quot;: &quot;data-missing&quot;,
+        &quot;error-type&quot;: &quot;protocol&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <p><strong>6. Committing TX1 and TX2 using uniconfig-manager:commit RPC</strong></p>
@@ -1115,45 +1102,18 @@ UniConfig transaction tracks modified nodes:</p>
 --header 'Cookie: UNICONFIGTXID=73f85310-a20a-46b9-beaf-d2ac98cc74cc; JSESSIONID=node01ojoxzbr05hlopwixblbfbk7i5.node0' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: []
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <p>Since there aren&#x27;t any conflicts between modifications in the committed
 transactions, both RPCs should succeed. Expected responses:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;xr6_1&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;xr6_2&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <p><strong>7. Verification of committed data</strong></p>
 <p>Verification if configuration was correctly committed to devices (direct
@@ -1193,17 +1153,17 @@ verification can be done on &#x27;xr6_2&#x27;.</p>
 </doc-codeblock></div>
 <p>Response - Status 422 Unprocessable Entity:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Uniconfig transaction 5e8ab9d0-803a-40d6-9f0a-92e47524bab8 has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+<div class="codeblock-title">RPC Response, Status: 422</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Uniconfig transaction 5e8ab9d0-803a-40d6-9f0a-92e47524bab8 has already been closed&quot;,
+        &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
+        &quot;error-type&quot;: &quot;protocol&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <p>Trying to read some data in the TX2:</p>
@@ -1217,17 +1177,17 @@ verification can be done on &#x27;xr6_2&#x27;.</p>
 </doc-codeblock></div>
 <p>Response - Status 422 Unprocessable Entity:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Uniconfig transaction 73f85310-a20a-46b9-beaf-d2ac98cc74cc has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+<div class="codeblock-title">RPC Response, Status: 422</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Uniconfig transaction 73f85310-a20a-46b9-beaf-d2ac98cc74cc has already been closed&quot;,
+        &quot;error-tag&quot;: &quot;invalid-transaction&quot;,
+        &quot;error-type&quot;: &quot;protocol&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="modification-of-sub-tree-on-same-device-in-separate-transactions">
@@ -1304,9 +1264,6 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Cookie: UNICONFIGTXID=4b44231a-b2e5-457d-9d88-8f970d33201e; JSESSIONID=node0wbvwgmd3tbx8uu6sw13rcfq210.node0' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: []
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
@@ -1385,28 +1342,13 @@ configuration of the same interface:</p>
 --header 'Cookie: UNICONFIGTXID=5160a334-aeb0-4864-931a-bc652990feb0; JSESSIONID=node0nqbpx1l07fbilbrxdj1h0vx15.node0' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: []
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
 <p>Response:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;output&quot;: {
-        &quot;node-results&quot;: {
-            &quot;node-result&quot;: [
-                {
-                    &quot;node-id&quot;: &quot;xr6_1&quot;,
-                    &quot;configuration-status&quot;: &quot;complete&quot;
-                }
-            ]
-        },
-        &quot;overall-status&quot;: &quot;complete&quot;
-    }
-}</code></pre>
+<div class="codeblock-title">RPC Response, Status: 204</div>
+<pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
 <p><strong>7. Commit TX2</strong></p>
 <p>Commit TX1 without target nodes - it should fail because the same node
@@ -1420,20 +1362,22 @@ committed:</p>
 --header 'Cookie: UNICONFIGTXID=14804ad7-c0f6-4b22-8336-7484efc23e31; JSESSIONID=node0nqbpx1l07fbilbrxdj1h0vx15.node0' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;target-nodes&quot;: {
-            &quot;node&quot;: []
-        }
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>Response - Status 200 OK with error message:</p>
+<p>Response - Status 500 with error message:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;output&quot;: {
-        &quot;error-message&quot;: &quot;14804ad7-c0f6-4b22-8336-7484efc23e31: Node 'xr6_1' in topology 'uniconfig' has been modified by other transaction.&quot;
-        &quot;overall-status&quot;: &quot;fail&quot;
-    }
+<div class="codeblock-title">RPC Response, Status: 500</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-tag&quot;: &quot;validation-failed&quot;,
+        &quot;error-type&quot;: &quot;application&quot;,
+        &quot;error-message&quot;: &quot;TransactionCommitFailedException{message=\&quot;14804ad7-c0f6-4b22-8336-7484efc23e31: Node 'xr6_1' in topology 'uniconfig' has been modified by other transactions.&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <p><strong>8. Verification of committed data in TX1 / non-committed data in TX2</strong></p>
@@ -1462,18 +1406,18 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 Response for all three requests (description of interface is 'test loopback' - TX2 hasn't been committed):</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;interface-configuration&quot;: [
-        {
-            &quot;active&quot;: &quot;act&quot;,
-            &quot;interface-name&quot;: &quot;Loopback97&quot;,
-            &quot;description&quot;: &quot;test loopback&quot;,
-            &quot;interface-virtual&quot;: [
-                null
-            ]
-        }
-    ]
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;interface-configuration&quot;: [
+    {
+      &quot;active&quot;: &quot;act&quot;,
+      &quot;interface-name&quot;: &quot;Loopback97&quot;,
+      &quot;description&quot;: &quot;test loopback&quot;,
+      &quot;interface-virtual&quot;: [
+        null
+      ]
+    }
+  ]
 }</code></pre>
 </doc-codeblock></div>
 <p><strong>9. Verification if TX1 and TX2 are closed</strong></p>
@@ -1494,31 +1438,31 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 </doc-codeblock></div>
 <p>Respective responses:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Uniconfig transaction 5160a334-aeb0-4864-931a-bc652990feb0 has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;access-denied&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+<div class="codeblock-title">RPC Response, Status: 403</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Uniconfig transaction 5160a334-aeb0-4864-931a-bc652990feb0 has already been closed&quot;,
+        &quot;error-tag&quot;: &quot;access-denied&quot;,
+        &quot;error-type&quot;: &quot;protocol&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response</div>
-<pre class="language-none"><code v-pre class="language-none">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-message&quot;: &quot;Uniconfig transaction 14804ad7-c0f6-4b22-8336-7484efc23e31 has already been closed&quot;,
-                &quot;error-tag&quot;: &quot;access-denied&quot;,
-                &quot;error-type&quot;: &quot;protocol&quot;
-            }
-        ]
-    }
+<div class="codeblock-title">RPC Response, Status: 403</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;errors&quot;: {
+    &quot;error&quot;: [
+      {
+        &quot;error-message&quot;: &quot;Uniconfig transaction 14804ad7-c0f6-4b22-8336-7484efc23e31 has already been closed&quot;,
+        &quot;error-tag&quot;: &quot;access-denied&quot;,
+        &quot;error-type&quot;: &quot;protocol&quot;
+      }
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 
@@ -1543,7 +1487,7 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
                                         <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/uniconfig-operations/device-discovery/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Device Discovery</span>
+                                                <span class="block mt-1">Device discovery</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -1556,12 +1500,9 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
                             <footer class="flex flex-wrap items-center justify-between">
                                 <div>
                                     <ul class="flex flex-wrap items-center text-sm">
-                                        <li>
-                                            <a class="block mr-4 py-2 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="about.md">About</a>
-                                        </li>
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. <a href="https://frinx.io/">Frinx.io</a> All rights reserved.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. <a href="https://elisapolystar.com/">Elisa Polystar</a> All rights reserved.</p></div>
                             </footer>
                         </div>
                     </div>

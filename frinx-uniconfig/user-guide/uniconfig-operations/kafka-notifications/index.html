@@ -6,15 +6,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488426450">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.758206519409">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Kafka Notifications | Frinx Docs</title>
-    <meta name="title" content="Kafka Notifications | Frinx Docs">
-    <meta name="description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events." />
+    <title>Kafka Notifications | Frinx docs</title>
+    <meta name="title" content="Kafka Notifications | Frinx docs">
+    <meta name="description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect to create its own UniConfig notifications about specific events." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/" />
@@ -22,26 +22,26 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/">
-    <meta property="og:title" content="Kafka Notifications | Frinx Docs">
-    <meta property="og:description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events.">
+    <meta property="og:title" content="Kafka Notifications | Frinx docs">
+    <meta property="og:description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect to create its own UniConfig notifications about specific events.">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/cluster.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/">
-    <meta property="twitter:title" content="Kafka Notifications | Frinx Docs">
-    <meta property="twitter:description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events.">
+    <meta property="twitter:title" content="Kafka Notifications | Frinx docs">
+    <meta property="twitter:description" content="NETCONF and gNMI devices produce notifications, which UniConfig can collect to create its own UniConfig notifications about specific events.">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/kafka-notifications/cluster.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.754488426450" rel="stylesheet" />
+    <link href="../../../../static/favicon-192x192.png" rel="icon" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.758206519409" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.754488426450" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.758206519409" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -88,7 +88,7 @@
                                             <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                         </g>
                                     </svg>
-                                    <span>Webpage</span>
+                                    <span>Frinx</span>
                                 </a>
                             </li>
                             <li class="mr-6">
@@ -105,7 +105,7 @@
                                 <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
-                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                            <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                         </g>
                                     </svg>
                                     <span>LinkedIn</span>
@@ -204,7 +204,7 @@
                                                     <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                                 </g>
                                             </svg>
-                                            <span>Webpage</span>
+                                            <span>Frinx</span>
                                         </a>
                                     </li>
                                     <li class="mr-6">
@@ -221,7 +221,7 @@
                                         <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
-                                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                                    <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                                 </g>
                                             </svg>
                                             <span>LinkedIn</span>
@@ -256,7 +256,9 @@
         <span>Kafka Notifications</span>
     </h1>
 </doc-anchor-target>
-<p>NETCONF and gNMI devices produce notifications, which UniConfig can collect and create its own UniConfig notifications about specific events. Notifications from both NETCONF and gNMI devices and UniConfig are published using Kafka.</p>
+<p>NETCONF and gNMI devices produce notifications, which UniConfig can collect to
+create its own UniConfig notifications about specific events. Notifications from
+both NETCONF and gNMI devices and UniConfig are published using Kafka.</p>
 <p>The following notification types are available:</p>
 <ul>
 <li>NETCONF notifications</li>
@@ -266,7 +268,8 @@
 <li>Data change events</li>
 <li>Connection notifications</li>
 </ul>
-<p>Each notification type is stored in its own topic in Kafka. Additionally, all notifications are stored in one table in the database.</p>
+<p>Each notification type is stored in its own topic in Kafka. Additionally, all
+notifications are stored in one table in the database.</p>
 <p><figure class="content-center">
     <img src="cluster.svg" alt="notifications-in-cluster" />
     <figcaption class="caption">notifications-in-cluster</figcaption>
@@ -278,39 +281,45 @@
         <span>Kafka</span>
     </h2>
 </doc-anchor-target>
-<p>Apache Kafka is a publish–subscribe-based, durable messaging system
-that sends messages between processes, applications and servers.
-Within Kafka, you can define topics (categories) and applications
-can add, process and reprocess records.</p>
-<p>In our specific case, UniConfig publishes notifications. Each type
-of notification is stored in a separate topic and can therefore be
-subscribed to independently. The names of topics and connection data are
-configurable in the file <em>lighty-uniconfig-config.json</em>.</p>
+<p>Apache Kafka is a publish–subscribe-based, durable messaging system that sends
+messages between processes, applications and servers. Within Kafka, you can
+define topics (categories) and applications can add, process and reprocess
+records.</p>
+<p>In our particular case, UniConfig publishes notifications. Each type of
+notification is stored in a separate topic and can therefore be subscribed to
+independently. The names of topics and connection data are configurable in the
+<strong>lighty-uniconfig-config.json</strong> file.</p>
 <doc-anchor-target id="netconf-notifications">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#netconf-notifications">#</doc-anchor-trigger>
         <span>NETCONF notifications</span>
     </h2>
 </doc-anchor-target>
-<p><a href="https://tools.ietf.org/html/rfc5277">RFC 5277</a> defines a
-mechanism where the NETCONF client indicates an interest in receiving event
-notifications from a NETCONF server by subscribing to
-event notifications. The NETCONF server replies
-whether the subscription request was successful and, if so,
-starts sending event notifications to the NETCONF client
-as events occur within the system. Event notifications are
-sent until either the NETCONF session or the subscription is terminated.</p>
-<p>NETCONF notifications are categorised as so-called streams. The subscriber
-must choose which streams to receive. The default stream is named <em>NETCONF</em>.</p>
+<p><a href="https://tools.ietf.org/html/rfc5277">RFC 5277</a> defines a mechanism where a
+NETCONF client indicates an interest in receiving event notifications from a
+NETCONF server by subscribing to event notifications. The NETCONF server sends a
+reply about whether the subscription request was successful and, if so, starts
+sending event notifications to the NETCONF client as events occur within the
+system. Event notifications are sent until either the NETCONF session or the
+subscription is terminated.</p>
+<p>NETCONF notifications are categorized as so-called streams. The subscriber can
+choose which streams to receive. The default stream is <code v-pre>NETCONF</code>.</p>
 <doc-anchor-target id="gnmi-notifications">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#gnmi-notifications">#</doc-anchor-trigger>
         <span>gNMI notifications</span>
     </h2>
 </doc-anchor-target>
-<p>The <a href="https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md">gNMI specification</a> defines a <a href="https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md#35-subscribing-to-telemetry-updates">mechanism</a> where the gNMI client indicates an interest in receiving updates about the state of data instances via a subscribe RPC. If the subscription is successfully created, the gNMI server replies with the state of data instances according to specified paths.</p>
-<p>The session remains open until it UniConfig closes it (releasing the subscription) or an error occurs on the device side.  However, UniConfig will try to recreate the session.</p>
-<p>Mandatory fields in the <code v-pre>install-node</code> request:</p>
+<p>The gNMI specification defines a
+<a href="https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-specification.md#35-subscribing-to-telemetry-updates">mechanism</a>
+where the gNMI client indicates an interest in receiving updates about the state
+of data instances via a subscribe RPC. If the subscription is successfully
+created, the gNMI server replies with the state of data instances according to
+specified paths.</p>
+<p>The session remains open until it UniConfig closes it (releasing the
+subscription) or an error occurs on the device side.  However, UniConfig will
+try to recreate the session.</p>
+<p>The following fields are mandatory for the <code v-pre>install-node</code> request:</p>
 <ul>
 <li><code v-pre>stream-name</code></li>
 <li><code v-pre>paths</code></li>
@@ -365,30 +374,30 @@ must choose which streams to receive. The default stream is named <em>NETCONF</e
 <li>request data
 <ul>
 <li>uri</li>
-<li>http-method</li>
-<li>source-address</li>
-<li>source-port</li>
-<li>query-parameters</li>
-<li>user-id</li>
+<li>http method</li>
+<li>source address</li>
+<li>source port</li>
+<li>query parameters</li>
+<li>user id</li>
 <li>body</li>
 </ul>
 </li>
 <li>response data
 <ul>
-<li>status-code</li>
-<li>query-parameters</li>
+<li>status code</li>
+<li>query parameters</li>
 <li>body</li>
 </ul>
 </li>
 </ul>
-<p>The response body does not need to be included in notifications. It can be
-configured using the <em>includeResponseBody</em> parameter in
-the <em>application.properties</em> file. Also, the calculation difference result can be part
-of the notification if the parameter <em>includeCalculateDiffResult</em> parameter is set to <em>true</em>
-in the file <em>application.properties</em>.</p>
-<p>Below are <strong>three examples</strong> of notifications with the response body and the calculation
-difference result.</p>
-<p>The <strong>first example</strong> is for created data:</p>
+<p>The response body can be included or excluded from notifications with the
+<code v-pre>includeResponseBody</code> parameter in the <strong>application.properties</strong> file.
+Similarly, the calculation difference result is included if the parameter
+<code v-pre>includeCalculateDiffResult</code> parameter is set to <code v-pre>true</code> in
+<strong>application.properties</strong>.</p>
+<p>Below are <strong>three examples</strong> of notifications with the response body and the
+calculation difference result.</p>
+<p><strong>Example 1</strong> - Created data</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;eventTime&quot;: &quot;2023-02-09T10:00:59.39924-00:00&quot;,
@@ -429,7 +438,7 @@ difference result.</p>
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>The <strong>second example</strong> is for deleted data:</p>
+<p><strong>Example 2</strong> - Deleted data</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;eventTime&quot;: &quot;2023-02-09T10:00:48.62214-00:00&quot;,
@@ -470,7 +479,7 @@ difference result.</p>
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>The <strong>third example</strong> is for updated data:</p>
+<p><strong>Example 3</strong> - Updated data</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;eventTime&quot;: &quot;2023-02-09T10:00:37.40739-00:00&quot;,
@@ -517,14 +526,14 @@ difference result.</p>
         <span>Shell notifications</span>
     </h2>
 </doc-anchor-target>
-<p>This type of notification is generated after each shell operation.</p>
-<p>It contains the following:</p>
+<p>This type of notification is generated after each shell operation. It contains
+the following:</p>
 <ul>
 <li>transaction id</li>
 <li>request data
 <ul>
-<li>source-address</li>
-<li>source-port</li>
+<li>source address</li>
+<li>source port</li>
 <li>prompt</li>
 <li>executed command</li>
 </ul>
@@ -560,14 +569,16 @@ difference result.</p>
 <doc-anchor-target id="data-change-events">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#data-change-events">#</doc-anchor-trigger>
-        <span>Data-change events</span>
+        <span>Data change events</span>
     </h2>
 </doc-anchor-target>
-<p>A subscription step is required before data-change events are generated and published into Kafka. With
-the subscription, a user can specify observed subtrees against data changes. Afterwards, data-change events
-are generated by UniConfig instances when a transaction is committed and committed changes contain
-subscribed subtrees.</p>
-<p>A sample data-change event captured by Kafka console consumer:</p>
+<p>A subscription step is required before data change events are generated and
+published into Kafka.</p>
+<p>With the subscription, a user can specify which subtrees are observed for data
+changes. Afterwards, data change events are generated by UniConfig instances
+when a transaction is committed and the committed changes contain subscribed
+subtrees.</p>
+<p>A sample data change event captured by Kafka console consumer:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;eventTime&quot;: &quot;2022-02-14T07:36:39.55857-00:00&quot;,
@@ -612,27 +623,32 @@ subscribed subtrees.</p>
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>For data-change events, the streamName is always &#x27;DCE&#x27; and the identifier for the YANG notification is &#x27;data-change-event&#x27;.
-The body contains the following:</p>
+<p>For data change events, <code v-pre>streamName</code> is always <code v-pre>DCE</code> and the identifier for the
+YANG notification is <code v-pre>data-change-event</code>.</p>
+<p>The body contains the following:</p>
 <ul>
-<li>subscription-id: Identifier of the subscription that triggers generation of data-change-event.
-Subscription identifier makes association of subscriptions and received data-changes-events easier than using
-combination of multiple fields such as node identifier, topology identifier and subtree path.</li>
-<li>transaction-id: Identifier of committed transaction that triggered data-change-event after commit or checked-commit
-UniConfig operations.</li>
-<li>edit - List of captured modifications done in the committed transaction.</li>
+<li><code v-pre>subscription-id</code> - Identifier for the subscription that triggers the
+generation of a data change event. The subscription identifier makes it easier
+to associate subscriptions and received data change events compared to using a
+combination of multiple fields such as node identifier, topology identifier
+and subtree path.</li>
+<li><code v-pre>transaction-id</code> - Identifier for the committed transaction that triggered the
+data change event after commit or checked-commit UniConfig operations.</li>
+<li><code v-pre>edit</code> - List of captured modifications done in the committed transaction.</li>
 </ul>
-<p>Edit entry fields:</p>
+<p>Fields under <code v-pre>edit</code>:</p>
 <ul>
-<li>subtree-path: Relative path to data-tree element at which data-change happened. Path is relative to subtree-path
-specified during subscription.</li>
-<li>data-before: JSON representation of subtree data before done changes. If this field is not present, then &#x27;data-after&#x27;
-represents created data.</li>
-<li>data-after: JSON representation of subtree data including done changes. If this fields is not present, then
-&#x27;data-before&#x27; represents removed data.</li>
-<li>operation: Operation type of the data change event.</li>
-<li>node-id: Node identifier of the data change event.</li>
-<li>topology-id: Topology where the node exists. Can be either &#x27;uniconfig&#x27; or &#x27;unistore&#x27;.</li>
+<li><code v-pre>subtree-path</code> - Relative path to the data-tree element where the data change
+occurred. The path is relative to the subtree path specified during
+subscription.</li>
+<li><code v-pre>data-before</code> - JSON representation of subtree data before changes were made.
+If this field is not specified, <code v-pre>data-after</code> represents created data.</li>
+<li><code v-pre>data-after</code> - JSON representation of subtree data including the changes. If
+this field is not specified, <code v-pre>data-before</code> represents removed data.</li>
+<li><code v-pre>operation</code> - Operation type for the data change event.</li>
+<li><code v-pre>node-id</code> - Node identifier for the data change event.</li>
+<li><code v-pre>topology-id</code> - Topology identifier for the node. Either <code v-pre>uniconfig</code> or
+<code v-pre>unistore</code>.</li>
 </ul>
 <doc-anchor-target id="connection-notifications">
     <h2>
@@ -640,17 +656,17 @@ represents created data.</li>
         <span>Connection notifications</span>
     </h2>
 </doc-anchor-target>
-<p>Connection notification are generated whenever the status of a node changes.
-For connection notifications, the streamName is always &#x27;CONNECTION&#x27; and the identifier for the YANG notification is &#x27;
-connection-notification&#x27;.</p>
-<p>It contains the following:</p>
+<p>Connection notification are generated whenever the status of a node changes. For
+connection notifications, <code v-pre>streamName</code> is always <code v-pre>CONNECTION</code> and the identifier
+for the YANG notification is <code v-pre>connection-notification</code>.</p>
+<p>Contains the following:</p>
 <ul>
 <li>topology id</li>
 <li>node id</li>
 <li>connection status</li>
 <li>connection message</li>
 </ul>
-<p>Supported topologies are cli, netconf and gnmi.</p>
+<p>Supported topologies are <code v-pre>cli</code>, <code v-pre>netconf</code> and <code v-pre>gnmi</code>.</p>
 <p>Sample connection notifications captured by Kafka console consumer:</p>
 <p><strong>CLI disconnect notification:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -690,45 +706,51 @@ connection-notification&#x27;.</p>
 </doc-anchor-target>
 <p>The following <strong>three tables</strong> in the database are related to notifications:</p>
 <ul>
-<li>notification</li>
-<li>settings</li>
-<li>subscription</li>
+<li>notification table</li>
+<li>settings table</li>
+<li>subscription table</li>
 </ul>
-<p>Notifications are stored in the <strong>notification table</strong>. It contains the following columns:</p>
+<p>The <strong>notification table</strong> is where notifications are stored. It contains the
+following columns:</p>
 <ul>
-<li>stream name - name of the notification stream</li>
-<li>node id - identifier for the NETCONF/gNMI device or, for other types of notifications, the UniConfig instance</li>
-<li>identifier - name of the YANG notification for NETCONF or path to the received config top node for gNMI</li>
-<li>body - full notification body in JSON format</li>
-<li>event time - time when the notification was generated</li>
+<li>stream name - Name of the notification stream</li>
+<li>node id - Identifier for the NETCONF/gNMI device or, for other types of
+notifications, the UniConfig instance</li>
+<li>identifier - Name of the YANG notification for NETCONF or path to the received
+config top node for gNMI</li>
+<li>body - Full notification body in JSON format</li>
+<li>event time - Time when the notification was generated</li>
 </ul>
-<p>Example request for reading notifications using RESTCONF:</p>
+<p><strong>Example</strong> - Request for reading notifications using RESTCONF:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/notifications:notification' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'</code></pre>
 </doc-codeblock></div>
-<p>The <strong>settings table</strong> contains two columns: identifier and config. Records with
-the identifier <em>kafka</em> contain configurations for Kafka that can be modified
-at runtime.</p>
-<p>Example request for reading Kafka settings using RESTCONF:</p>
+<p>The <strong>settings table</strong> contains two columns: <code v-pre>identifier</code> and <code v-pre>config</code>. Records
+with the <code v-pre>kafka</code> identifier contain configurations for Kafka that can be
+modified at runtime.</p>
+<p><strong>Example</strong> - Request for reading Kafka settings using RESTCONF:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/kafka-brokers:kafka-settings' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'</code></pre>
 </doc-codeblock></div>
-<p>The <strong>subscription table</strong> is used to track NETCONF and gNMI notification subscriptions. It contains the following columns:</p>
+<p>The <strong>subscription table</strong> is used to track NETCONF and gNMI notification
+subscriptions. It contains the following columns:</p>
 <ul>
-<li>node id - id for the NETCONF/gNMI node where notifications are collected</li>
-<li>UniConfig instance id - instance id of the UniConfig instance that collects notifications from the NETCONF/gNMI device</li>
+<li>node id - Identifier for the NETCONF/gNMI node where notifications are
+collected</li>
+<li>UniConfig instance id - Identifier for the UniConfig instance that collects
+notifications from the NETCONF/gNMI device</li>
 <li>stream name - NETCONF/gNMI stream name</li>
-<li>creation time - time when the subscription was created</li>
-<li>start time - start time for collecting notifications</li>
-<li>end time - end time for collecting notifications</li>
+<li>creation time - Time when the subscription was created</li>
+<li>start time - Start time for collecting notifications</li>
+<li>end time - End time for collecting notifications</li>
 </ul>
-<p>Example request for reading subscriptions using RESTCONF:</p>
+<p><strong>Example</strong> - Request for reading subscriptions using RESTCONF:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/subscriptions:subscription' \
@@ -741,8 +763,9 @@ at runtime.</p>
         <span>NETCONF subscriptions</span>
     </h2>
 </doc-anchor-target>
-<p>A subscription is required to receive NETCONF notifications from a NETCONF device. Subscriptions are
-created using an install request:</p>
+<p>A subscription is required to receive NETCONF notifications from a NETCONF
+device.</p>
+<p>Subscriptions are created with an installation request:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-node' \
@@ -788,16 +811,15 @@ created using an install request:</p>
 }'</code></pre>
 </doc-codeblock></div>
 <p>Subscriptions to notification streams are defined as a list with the name
-<em>stream</em>. There is one record for each stream. The only required
-parameter is <em>stream-name</em>. The following optional parameters are supported:</p>
+<code v-pre>stream</code>. There is one record for each stream.</p>
+<p>The only mandatory parameter is <code v-pre>stream-name</code>. Other parameters are optional:</p>
 <ul>
-<li><em>start-time</em> - must be specified to enable replay and
-should start at the specified time.</li>
-<li><em>stop time</em> - used with the optional replay feature to indicate the
-newest notifications of interest. If stopTime is not specified,
-notifications will continue until the subscription is terminated.
-Must be used with and set to be later than <em>start-time</em>. Values in the
-future are valid.</li>
+<li><code v-pre>start-time</code> - Must be specified to enable replay and should start at the
+specified time.</li>
+<li><code v-pre>stop-time</code> - Used with the optional replay feature to indicate the newest
+notifications of interest. If no stop time is specified, notifications will
+continue until the subscription is terminated. Must be used with and set to be
+later than <code v-pre>start-time</code>. Values in the future are valid.</li>
 </ul>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
@@ -812,8 +834,8 @@ future are valid.</li>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>The creation of a new subscription for the stream will terminate all
-existing subscriptions for the stream.</p>
+<p>If a new subscription to a stream is created, all existing subscriptions to the
+stream are terminated.</p>
         </div>
     </div>
 </div>
@@ -824,7 +846,7 @@ existing subscriptions for the stream.</p>
     </h2>
 </doc-anchor-target>
 <p>A subscription is required to receive gNMI notifications from a gNMI device.</p>
-<p>Subscriptions are created with an install request:</p>
+<p>Subscriptions are created with an installation request:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
@@ -883,11 +905,16 @@ existing subscriptions for the stream.</p>
     }
 }'</code></pre>
 </doc-codeblock></div>
-<p>Subscriptions to notification streams are defined as a list with the name <code v-pre>stream</code>. There is one record for each stream.</p>
-<p>There are two required parameters, <code v-pre>stream-name</code> and <code v-pre>paths</code>. The other parameters are optional:</p>
+<p>Subscriptions to notification streams are defined as a list with the name
+<code v-pre>stream</code>. There is one record for each stream.</p>
+<p>There are two required parameters, <code v-pre>stream-name</code> and <code v-pre>paths</code>. Other parameters
+are optional:</p>
 <ul>
 <li><code v-pre>start-time</code> - Start time for telemetry streaming.</li>
-<li><code v-pre>stop-time</code> - Telemetry streaming stops if the timestamp of the notification is later than this time. If no stop time is specified, notifications will continue until the subscription is terminated. Must be used with and set to be later than <code v-pre>start-time</code>. Values in the future are valid.</li>
+<li><code v-pre>stop-time</code> - Telemetry streaming stops if the timestamp of the notification
+is later than this time. If no stop time is specified, notifications will
+continue until the subscription is terminated. Must be used with and set to be
+later than <code v-pre>start-time</code>. Values in the future are valid.</li>
 </ul>
 <doc-anchor-target id="monitoring-system---processing-netconfgnmi-subscriptions">
     <h2>
@@ -895,12 +922,14 @@ existing subscriptions for the stream.</p>
         <span>Monitoring system - processing NETCONF/gNMI subscriptions</span>
     </h2>
 </doc-anchor-target>
-<p>Inside UniConfig, NETCONF and gNMI notification subscriptions are processed in an infinite loop within the monitoring system.</p>
+<p>In UniConfig, subscriptions to NETCONF and gNMI notifications are processed
+in an infinite loop within the monitoring system.</p>
 <p>An iteration of the monitoring system loop consists of following steps:</p>
 <ol>
 <li>Check global setting for NETCONF/gNMI notifications.
 <ul>
-<li>If turned off, release all NETCONF/gNMI subscriptions and end current iteration.</li>
+<li>If turned off, release all NETCONF/gNMI subscriptions and end current
+iteration.</li>
 </ul>
 </li>
 <li>Release cancelled subscriptions.</li>
@@ -924,76 +953,83 @@ existing subscriptions for the stream.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>There is a hard limit on the number of sessions that a single UniConfig node can handle. If the limit is reached, the UniConfig node refuses any additional subscriptions.</p>
+<p>There is a hard limit on the number of sessions that a single UniConfig node can
+handle. If the limit is reached, the UniConfig node refuses any additional
+subscriptions.</p>
         </div>
     </div>
 </div>
-<p>The loop interval, hard subscription limit and maximum number of subscriptions processed per interval can be set in the <strong>lighty-uniconfig-config.json</strong> file.</p>
+<p>The loop interval, hard subscription limit and maximum number of subscriptions
+processed per interval can be set in the <strong>lighty-uniconfig-config.json</strong> file.</p>
 <doc-anchor-target id="dedicated-netconf-session-for-subscription">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#dedicated-netconf-session-for-subscription">#</doc-anchor-trigger>
         <span>Dedicated NETCONF session for subscription</span>
     </h3>
 </doc-anchor-target>
-<p>A NETCONF device may have the interleave capability that indicates
-support for interleaving other NETCONF operations within a notification
-subscription. This means that the NETCONF server can receive, process and
-respond to NETCONF requests on a session with an active notification
-subscription. As not all devices include support for this capability, the
-common approach for devices &#x27;with&#x27; and &#x27;without&#x27; interleave
-capability is to track notifications with a separate NETCONF session. To
-support this functionality, UniConfig creates a separate
-NETCONF session with a separate mount-point for every subscription.
-These mount points and sessions are automatically destroyed when the
+<p>A NETCONF device may have the interleave capability that indicates support for
+interleaving other NETCONF operations within a notification subscription. This
+means that the NETCONF server can receive, process and respond to NETCONF
+requests on a session with an active notification subscription.</p>
+<p>As not all devices include support for this capability, the common approach for
+devices with and without interleave capability is to track notifications with a
+separate NETCONF session. To support this functionality, UniConfig creates a
+separate NETCONF session with a separate mountpoint for every subscription.
+These mountpoints and sessions are automatically terminated when the
 corresponding subscription is closed.</p>
 <p><figure class="content-center">
     <img src="monitoring.svg" alt="monitoring-system" />
     <figcaption class="caption">monitoring-system</figcaption>
 </figure>
 </p>
-<doc-anchor-target id="subscription-to-data-change-events">
+<doc-anchor-target id="subscriptions-to-data-change-events">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#subscription-to-data-change-events">#</doc-anchor-trigger>
-        <span>Subscription to data-change events</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#subscriptions-to-data-change-events">#</doc-anchor-trigger>
+        <span>Subscriptions to data change events</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="creating-a-new-subscription">
+<doc-anchor-target id="create-a-new-subscription">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-a-new-subscription">#</doc-anchor-trigger>
-        <span>Creating a new subscription</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#create-a-new-subscription">#</doc-anchor-trigger>
+        <span>Create a new subscription</span>
     </h3>
 </doc-anchor-target>
-<p>Subscriptions to data-change events are created using the &#x27;create-data-change-subscription&#x27; RPC. After the subscription
-is done, UniConfig listens to data-change events on selected nodes and subtrees and distributes the corresponding
-messages to a dedicated Kafka topic.</p>
+<p>Subscriptions to data change events are created using the
+<strong>create-data-change-subscription RPC</strong>. After a subscription is created,
+UniConfig listens to data change events on selected nodes and subtrees and
+distributes the corresponding messages to a dedicated Kafka topic.</p>
 <p>RPC input contains the following:</p>
 <ul>
-<li>node-id: Identifier for the node from which data-change-events are generated. This field is optional. If not given,
-a global subscription is created and data-change-events are generated for all nodes under the topology.</li>
-<li>topology-id: Identifier for the topology where the specified node is placed.</li>
-<li>subtree-path: Path to the subtree from which the user would like to receive data-change-events. Default path is &#x27;/&#x27;</li>
-<li>captured data-change-events from whole node configuration.</li>
-<li>data-change-scope: Data-tree scope that specifies how granular data-change-events should be captured and propagated
-to Kafka. There are three options:
+<li><code v-pre>node-id</code> - Identifier for the node from which data change events are
+generated. If not specified, a global subscription is created and data change
+events are generated for all nodes under the topology. This field is optional.</li>
+<li><code v-pre>topology-id</code> - Identifier for the topology where the specified node is
+placed.</li>
+<li><code v-pre>subtree-path</code> - Path to the subtree from which the user would like to receive
+data change events. The default value is <code v-pre>/</code>, which captures data change
+events from the entire node configuration.</li>
+<li><code v-pre>data-change-scope</code> - Data-tree scope that specifies how granular data change
+events should be captured and propagated to Kafka. There are three options:
 <ul>
-<li>&#x27;SUBTREE&#x27;: Represents a change of the node or any of its child nodes, direct and nested.
-This scope is a superset of ONE and BASE. This is the default value.</li>
-<li>&#x27;ONE&#x27;: Represent a change (addition, replacement, or deletion) of the node on the subtree-path or one of its
-direct child elements.</li>
-<li>&#x27;BASE&#x27;: Represents only a direct change of the node on subtree-path, such as replacement of a node,
-addition or deletion.</li>
+<li><code v-pre>SUBTREE</code>: Represents a change of the node or any of its child nodes,
+direct and nested. This scope is a superset of <code v-pre>ONE</code> and <code v-pre>BASE</code>. This is
+the default value.</li>
+<li><code v-pre>ONE</code>: Represent a change (an addition, replacement or deletion) of the
+node on the subtree-path or one of its direct child elements.</li>
+<li><code v-pre>BASE</code>: Represents only a direct change of the node on the subtree-path,
+such as replacement of a node, addition or deletion.</li>
 </ul>
 </li>
 </ul>
-<p>RPC output contains only the generated &#x27;subscription-id&#x27; in the format of UUID. This subscription identifier represents a token
-that can be used for the following:</p>
+<p>RPC output contains only the generated subscription identifier in UUID format.
+This identifier represents a token that can be used for the following:</p>
 <ul>
-<li>displaying information about created subscription using RPC</li>
-<li>deleting existing subscription</li>
-<li>sorting received Kafka messages</li>
+<li>Display information about a created subscription using the RPC</li>
+<li>Delete an existing subscription</li>
+<li>Sort received Kafka messages</li>
 </ul>
-<p>Example: Creating a subscription to the node <em>device1</em> in the <em>uniconfig</em> topology, and to the whole configuration
-subtree &#x27;/interfaces&#x27;.</p>
+<p><strong>Example</strong> - Create a subscription to the <code v-pre>device1</code> node  in the <code v-pre>uniconfig</code>
+topology, and to the whole <code v-pre>/interfaces</code> configuration subtree:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:create-data-change-subscription' \
@@ -1008,15 +1044,15 @@ subtree &#x27;/interfaces&#x27;.</p>
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC response</div>
+<div class="codeblock-title">RPC response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;output&quot;: {
     &quot;subscription-id&quot;: &quot;8e82453d-4ea8-4c26-a74e-50d855a721fa&quot;
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>Example: Creating a subscription to the <em>uniconfig</em> topology and to the whole <em>/interfaces</em> configuration
-subtree.</p>
+<p><strong>Example</strong> - Create a subscription to the <code v-pre>uniconfig</code> topology and to the whole
+<code v-pre>/interfaces</code> configuration subtree:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:create-data-change-subscription' \
@@ -1037,23 +1073,24 @@ subtree.</p>
   }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="removing-a-subscription">
+<doc-anchor-target id="remove-a-subscription">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#removing-a-subscription">#</doc-anchor-trigger>
-        <span>Removing a subscription</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#remove-a-subscription">#</doc-anchor-trigger>
+        <span>Remove a subscription</span>
     </h3>
 </doc-anchor-target>
-<p>Existing subscriptions can be removed using the <em>delete-data-change-subscription</em> RPC and the provided subscription-id.
-After a subscription is removed, UniConfig stops generating new data-change events related to the subscribed path.</p>
-<p>RPC input contains only <em>subscription-id</em>, a unique identifier for the subscription to data-change events. RPC output
-does not contain a body. The RPC returns 404 if no subscription exists for the provided identifier.</p>
-<p>Example: Removing a subscription with the ID <em>8e82453d-4ea8-4c26-a74e-50d855a721fa</em>.</p>
-<doc-anchor-target id="successful-example">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful Example</span>
-    </h4>
-</doc-anchor-target>
+<p>Existing subscriptions can be removed using the
+<strong>delete-data-change-subscription RPC</strong> and the provided <code v-pre>subscription-id</code>. After
+a subscription is removed, UniConfig stops generating new data change events
+related to the subscribed path.</p>
+<p>RPC input contains only the <code v-pre>subscription-id</code>, which is a unique identifier for
+the subscription to data change events.</p>
+<p>RPC output does not contain a body. The RPC returns a 404 error if no
+subscription exists for the provided identifier.</p>
+<p><strong>Example</strong> - Remove a subscription:</p>
+<ul>
+<li>Successful example:</li>
+</ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:delete-data-change-subscription' \
@@ -1065,15 +1102,12 @@ does not contain a body. The RPC returns 404 if no subscription exists for the p
 }'</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC response, Status: 200</div>
+<div class="codeblock-title">RPC response, Status: 204</div>
 <pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="failed-example">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h4>
-</doc-anchor-target>
+<ul>
+<li>Failed example:</li>
+</ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:delete-data-change-subscription' \
@@ -1098,24 +1132,27 @@ does not contain a body. The RPC returns 404 if no subscription exists for the p
   }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="showing-information-about-subscription">
+<doc-anchor-target id="show-information-about-a-subscription">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#showing-information-about-subscription">#</doc-anchor-trigger>
-        <span>Showing information about subscription</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#show-information-about-a-subscription">#</doc-anchor-trigger>
+        <span>Show information about a subscription</span>
     </h3>
 </doc-anchor-target>
-<p>The RPC <em>show-subscription-data</em> is used to display information about a created subscription.</p>
-<p>RPC input contains the identifier of the target subscription.</p>
-<p>RPC output for existing subscriptions contains &#x27;topology-id&#x27;, &#x27;node-id&#x27;, &#x27;subtree-path&#x27; and &#x27;data-change-scope&#x27; - the
-same fields that can also be specified in the &#x27;create-data-change-subscription&#x27; RPC input.</p>
-<p>If no subscription exists with the specified ID, the RPC returns a 404 status code with a standard RESTCONF error container.</p>
-<p>Example: Displaying information</p>
-<doc-anchor-target id="successful-example-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
-        <span>Successful Example</span>
-    </h4>
-</doc-anchor-target>
+<p>The <strong>show-subscription-data RPC</strong> is used to display information about a
+created subscription.</p>
+<p>RPC input contains an identifier for the target subscription.</p>
+<p>RPC output for existing subscriptions contains the following:</p>
+<ul>
+<li><code v-pre>topology-id</code></li>
+<li><code v-pre>node-id</code></li>
+<li><code v-pre>subtree-path</code></li>
+<li><code v-pre>data-change-scope</code></li>
+</ul>
+<p>These are the same fields that can be specified as input for the
+<strong>create-data-change-subscription RPC</strong>.</p>
+<p>If no subscription exists with the specified ID, the RPC returns a 404 status
+code with a standard RESTCONF error container.</p>
+<p><strong>Successful example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:show-subscription-data' \
@@ -1137,12 +1174,7 @@ same fields that can also be specified in the &#x27;create-data-change-subscript
   }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="failed-example-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
-        <span>Failed Example</span>
-    </h4>
-</doc-anchor-target>
+<p><strong>Failed example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:show-subscription-data' \
@@ -1167,9 +1199,10 @@ same fields that can also be specified in the &#x27;create-data-change-subscript
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>It is also possible to fetch all created subscriptions under a specific node or topology by sending a GET request
-to the <em>data-change-subscriptions</em> list under the <em>node</em> list item (operational data).</p>
-<p>Example (there are two subscriptions under the <em>device1</em> node):</p>
+<p>It is also possible to fetch all created subscriptions under a specific node or
+topology by sending a GET request to the <code v-pre>data-change-subscriptions</code> list under
+the <code v-pre>node</code> list item (operational data).</p>
+<p><strong>Example</strong> - Two subscriptions under the <code v-pre>device1</code> node</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">GET request</div>
 <pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device1/data-change-subscriptions?content=nonconfig' \
@@ -1220,8 +1253,9 @@ to the <em>data-change-subscriptions</em> list under the <em>node</em> list item
         <span>Configuration</span>
     </h2>
 </doc-anchor-target>
-<p>Configurations for notifications are in the <em>lighty-uniconfig-config.json</em> file,
-under the <em>notifications</em> property. The entire configuration looks like this:</p>
+<p>Configurations for notifications are in the <strong>lighty-uniconfig-config.json</strong>
+file, under the <code v-pre>notifications</code> property.</p>
+<p>The entire configuration looks like this:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;notifications&quot;: {
@@ -1273,119 +1307,117 @@ under the <em>notifications</em> property. The entire configuration looks like t
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>All notifications and the monitoring system can be enabled or disabled
-using the <em>enabled</em> flag.</p>
-<p><strong>Three (3) properties related to the monitoring system:</strong></p>
+<p>All notifications, as well as the monitoring system, can be enabled or disabled
+using the <code v-pre>enabled</code> flag.</p>
+<p><strong>Properties related to the monitoring system:</strong></p>
 <ul>
-<li>subscriptionsMonitoringInterval - How often the monitoring system
-loop is run and attempts to acquire free subscriptions. The value is
-given in seconds, the default value is 5.</li>
-<li>maxSubscriptionsPerInterval - The maximum number of free subscriptions
-that can be acquired in a single iteration of the monitoring system
-loop. If the number of free subscriptions is smaller than this value,
-all free subscriptions are processed. If the number of free subscriptions
-is larger than this value, only the specified number of subscriptions are
-acquired. The rest can be acquired during the next iterations of the
-monitoring system loop or by other UniConfing instances in the cluster.
-The default value is 10.</li>
-<li>maxNetconfSubscriptionsHardLimit - Maximum number of subscriptions that
-a single UniConfig node can handle.</li>
+<li><code v-pre>subscriptionsMonitoringInterval</code> - How often the monitoring system loop is
+run and how often it attempts to acquire free subscriptions (in seconds). The
+default value is 5.</li>
+<li><code v-pre>maxSubscriptionsPerInterval</code> - The maximum number of free subscriptions that
+can be acquired in a single iteration of the monitoring system loop. If the
+number of free subscriptions is smaller than this value, all free
+subscriptions are processed. If the number of free subscriptions is larger
+than this value, only the specified number of subscriptions are acquired. The
+rest can be acquired during the next iterations of the monitoring system loop
+or by other UniConfing instances in the cluster. The default value is 10.</li>
+<li><code v-pre>maxNetconfSubscriptionsHardLimit</code> - Maximum number of subscriptions that  a
+single UniConfig node can handle.</li>
 </ul>
-<p><strong>Three (3) properties related to the monitoring system in clustered
-environments:</strong></p>
+<p><strong>Properties related to the monitoring system in clustered environments:</strong></p>
 <ul>
-<li>rebalanceOnUCNodeGoingDownGracePeriod - Grace period for a
-UniConfig node going down. Other nodes will not restart
-subscriptions until the grace period has passed after a dead
-Uniconfig node was last seen. The default value is 120 seconds.</li>
-<li>optimalNetconfSubscriptionsApproachingMargin - The lower margin to
-calculate optimal range start. The default value is 0.05.</li>
-<li>optimalNetconfSubscriptionsReachedMargin - The higher margin to
-calculate optimal range end. The default value is 0.10.</li>
+<li><code v-pre>rebalanceOnUCNodeGoingDownGracePeriod</code> - Grace period for a UniConfig node
+going down (in seconds). Other nodes will not restart subscriptions until the
+grace period has passed after a dead Uniconfig node was last seen. The default
+value is 120.</li>
+<li><code v-pre>optimalNetconfSubscriptionsApproachingMargin</code> - Lower margin to calculate
+optimal range start. The default value is 0.05.</li>
+<li><code v-pre>optimalNetconfSubscriptionsReachedMargin</code> - Upper margin to calculate optimal
+range end. The default value is 0.10.</li>
 </ul>
-<p><strong>Three (3) properties related to the timeout of messages to Kafka</strong></p>
+<p><strong>Properties related to message timeout to Kafka:</strong></p>
 <ul>
-<li>blockingTimeout - How long the <strong>send()</strong> method and the creation of
-a connection for reading metadata methods will block (in ms).</li>
-<li>requestTimeout - How long the producer waits for acknowledgement of a
-request (in ms). If no acknowledgement is received before the timeout
-period is over, the producer will resend the request or, if retries are
-exhausted, fail it.</li>
-<li>deliveryTimeout - The upper bound on the time to report success or failure
-after a call to <strong>send()</strong> returns (in ms). Sets a limit on the total time
+<li><code v-pre>blockingTimeout</code> - How long the <code v-pre>send()</code> method and the creation of a
+connection for reading metadata methods will block (in milliseconds).</li>
+<li><code v-pre>requestTimeout</code> - How long the producer waits for acknowledgement of a
+request (in milliseconds). If no acknowledgement is received before the
+timeout period has passed, the producer resends the request or, if retries are
+exhausted, fails the request.</li>
+<li><code v-pre>deliveryTimeout</code> - Upper bound on the time to report success or failure after
+a call to <code v-pre>send()</code> returns (in milliseconds). Sets a limit on the total time
 that a record will be delayed prior to sending, the time to wait for
 acknowledgement from the broker (if expected) and the time allowed for
 retriable send failures.</li>
 </ul>
-<p><strong>Two (2) properties related to the thread pool executor required to
-send messages to Kafka</strong></p>
+<p><strong>Properties related to the thread pool executor required to send messages to Kafka:</strong></p>
 <ul>
-<li>maxThreadPoolSize - The maximum thread pool size in the executor.</li>
-<li>queueCapacity - The maximum capacity for the work queue in the executor.</li>
+<li><code v-pre>maxThreadPoolSize</code> - Maximum thread pool size in the executor.</li>
+<li><code v-pre>queueCapacity</code> - Maximum capacity for the work queue in the executor.</li>
 </ul>
-<p><strong>Two (2) properties used to limit the number of records in the notifications table in the database:</strong></p>
+<p><strong>Properties used to limit the number of records in the notifications table in the database:</strong></p>
 <ul>
-<li>maxCount - Maximum number of records in the notifications table. If the
+<li><p><code v-pre>maxCount</code> - Maximum number of records in the notifications table. If the
 number of records exceeds this value, the oldest record in the table is
-deleted. The default value is 10,000.</li>
-<li>maxAge - Maximum age of a record in the notifications table (in hours).
-Records older than this value are deleted. The default value is 100.</li>
+deleted. The default value is 10,000.</p>
+</li>
+<li><p><code v-pre>maxAge</code> - Maximum age of a record in the notifications table (in hours).
+Records older than this value are deleted. The default value is 100.</p>
+<p>These properties are under <code v-pre>notificationDbTreshold</code>. Both are implemented
+using database triggers. Triggers are running on inserts to the notifications
+table.</p>
+</li>
 </ul>
-<p>These properties are under <em>notificationDbTreshold</em>. Both of these are
-implemented using database triggers. Triggers are running on inserts to
-notifications table.</p>
-<p>Audit logs settings are under auditLogs property. Currently there is
-only one flag <em>includeResponseBody</em>, which is used to enable or disable
-logging of the body of RESTCONF responses.</p>
-<p>All settings related to Kafka are grouped under <em>kafka</em> property. For
-authentication, there are the <em>username</em> and <em>password</em> properties. For the Kafka
-connection, there is the <em>kafkaServers</em> property. This contains a list of Kafka
-servers as a combination of <em>brokerHost</em> and <em>brokerListeningPort</em>. Broker
-host can be either an IP address or hostname.</p>
-<p>You can enable or disable each type of notification
-independently of others. The following flags are used for this:</p>
+<p>Audit log settings are under the <code v-pre>auditLogs</code> property. Currently there is only
+one flag, <code v-pre>includeResponseBody</code>, which is used to enable or disable logging the
+body of RESTCONF responses.</p>
+<p>All settings related to Kafka are grouped under <code v-pre>kafka</code> property. For
+authentication, there are the <code v-pre>username</code> and <code v-pre>password</code> properties. For the
+Kafka connection, there is the <code v-pre>kafkaServers</code> property which contains a list of
+Kafka servers as a combination of <code v-pre>brokerHost</code> and <code v-pre>brokerListeningPort</code>. The
+broker host can be either an IP address or hostname.</p>
+<p>Enable or disable each type of notification independently of others by using the
+following flags:</p>
 <ul>
-<li>netconfNotificationsEnabled</li>
-<li>auditLogsEnabled</li>
-<li>transactionNotificationsEnabled</li>
-<li>dataChangeEventsEnabled</li>
+<li><code v-pre>netconfNotificationsEnabled</code></li>
+<li><code v-pre>auditLogsEnabled</code></li>
+<li><code v-pre>transactionNotificationsEnabled</code></li>
+<li><code v-pre>dataChangeEventsEnabled</code></li>
 </ul>
-<p>You can configure the names of all topics for every notification type.
-The following flags are used for this:</p>
+<p>Configure the names of all topics for every notification type by using the
+following flags:</p>
 <ul>
-<li>transactionsTopicName - topic name for transactions about notifications</li>
-<li>netconfNotificationsTopicName - topic name for NETCONF notifications</li>
-<li>auditLogsTopicName - topic name for audit logs</li>
-<li>dataChangeEventsTopicName - topic name for data-change-events</li>
+<li><code v-pre>transactionsTopicName</code> - Topic name for transactions about notifications</li>
+<li><code v-pre>netconfNotificationsTopicName</code> - Topic name for NETCONF notifications</li>
+<li><code v-pre>auditLogsTopicName</code> - Topic name for audit logs</li>
+<li><code v-pre>dataChangeEventsTopicName</code> - Topic name for data change events</li>
 </ul>
-<p>You can also to set up embedded Kafka. These setting are grouped
-under the <em>embeddedKafka</em> property:</p>
+<p>You can also to set up embedded Kafka using these setting grouped under the
+<code v-pre>embeddedKafka</code> property:</p>
 <ul>
-<li>enabled - flag that enables or disables embedded kafka</li>
-<li>installDir - where should be kafka files placed</li>
-<li>archiveUrl - where to download kafka from</li>
-<li>dataDir - kafka data directory</li>
-<li>cleanDataBeforeStart - if kafka config should be cleared before start</li>
+<li><code v-pre>enabled</code> - Enable or disable embedded Kafka</li>
+<li><code v-pre>installDir</code> - Where Kafka files should be placed</li>
+<li><code v-pre>archiveUrl</code> - Where to download Kafka from</li>
+<li><code v-pre>dataDir</code> - Kafka data directory</li>
+<li><code v-pre>cleanDataBeforeStart</code> - Whether or not to clear Kafka config before start</li>
 </ul>
-<p>Kafka settings are also stored in the db. This way they can be changed at
-runtime using RESTCONF or UniConfig shell.
-Kafka setting are stored in the <em>settings</em> table.</p>
+<p>Kafka settings are also stored in the database. This way they can be changed at
+runtime using RESTCONF or UniConfig shell. Kafka setting are stored in the
+<strong>settings table</strong>.</p>
 <doc-anchor-target id="kafka-client---example">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#kafka-client---example">#</doc-anchor-trigger>
-        <span>Kafka client - example</span>
+        <span>Kafka client - Example</span>
     </h2>
 </doc-anchor-target>
-<p>To read notifications from kafka, you can use the command line
-consumer. Run the following command in the Kafka installation
-directory:</p>
+<p>To read notifications from Kafka, you can use the command line consumer.</p>
+<p>Run the following command in the Kafka installation directory:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">bin/kafka-console-consumer.sh \
  --bootstrap-server localhost:9092 \
  --topic netconf-notifications</code></pre>
 </doc-codeblock></div>
-<p>It is important to properly set up the hostname, port and topic name.
-Output after creation of NETCONF notification looks something like this:</p>
+<p>It is important to properly set up the hostname, port and topic name.</p>
+<p>Output after a NETCONF notification is created:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;eventTime&quot;: &quot;2021-12-03T08:16:45.75600-00:00&quot;,
@@ -1434,12 +1466,9 @@ Output after creation of NETCONF notification looks something like this:</p>
                             <footer class="flex flex-wrap items-center justify-between">
                                 <div>
                                     <ul class="flex flex-wrap items-center text-sm">
-                                        <li>
-                                            <a class="block mr-4 py-2 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="about.md">About</a>
-                                        </li>
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. <a href="https://frinx.io/">Frinx.io</a> All rights reserved.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. <a href="https://elisapolystar.com/">Elisa Polystar</a> All rights reserved.</p></div>
                             </footer>
                         </div>
                     </div>

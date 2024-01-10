@@ -6,15 +6,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.754488426450">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.758206519409">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>UniConfig Shell | Frinx Docs</title>
-    <meta name="title" content="UniConfig Shell | Frinx Docs">
-    <meta name="description" content="UniConfig shell is a command-line interface for Uniconfig." />
+    <title>UniConfig shell | Frinx docs</title>
+    <meta name="title" content="UniConfig shell | Frinx docs">
+    <meta name="description" content="UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including the..." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/" />
@@ -22,26 +22,26 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">
-    <meta property="og:title" content="UniConfig Shell | Frinx Docs">
-    <meta property="og:description" content="UniConfig shell is a command-line interface for Uniconfig.">
+    <meta property="og:title" content="UniConfig shell | Frinx docs">
+    <meta property="og:description" content="UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including the...">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/scrolling_example.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">
-    <meta property="twitter:title" content="UniConfig Shell | Frinx Docs">
-    <meta property="twitter:description" content="UniConfig shell is a command-line interface for Uniconfig.">
+    <meta property="twitter:title" content="UniConfig shell | Frinx docs">
+    <meta property="twitter:description" content="UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH, it allows users to interact with Uniconfig features including the...">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/scrolling_example.png">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../static/favicon-32x32.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.754488426450" rel="stylesheet" />
+    <link href="../../../../static/favicon-192x192.png" rel="icon" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.758206519409" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.754488426450" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.754488426450" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.758206519409" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.758206519409" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -88,7 +88,7 @@
                                             <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                         </g>
                                     </svg>
-                                    <span>Webpage</span>
+                                    <span>Frinx</span>
                                 </a>
                             </li>
                             <li class="mr-6">
@@ -105,7 +105,7 @@
                                 <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
-                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                            <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                         </g>
                                     </svg>
                                     <span>LinkedIn</span>
@@ -204,7 +204,7 @@
                                                     <path fill-rule="evenodd" d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0122.25 22H1.75A1.75 1.75 0 010 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25V5.5h4v-2H1.75zM7 3.5v2h4v-2H7zm5.5 0v2h10V3.75a.25.25 0 00-.25-.25H12.5zm10 3.5h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7z"/>
                                                 </g>
                                             </svg>
-                                            <span>Webpage</span>
+                                            <span>Frinx</span>
                                         </a>
                                     </li>
                                     <li class="mr-6">
@@ -221,7 +221,7 @@
                                         <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.linkedin.com/company/frinx" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
-                                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.515.098 1.021.069 1.482-.056-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411-1.461-.977-1.875-2.907-1.016-4.383 1.619 1.986 4.038 3.293 6.766 3.43-.479-2.053 1.08-4.03 3.199-4.03.943 0 1.797.398 2.395 1.037.748-.147 1.451-.42 2.086-.796-.246.767-.766 1.41-1.443 1.816.664-.08 1.297-.256 1.885-.517-.439.656-.996 1.234-1.639 1.697z"/>
+                                                    <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z"/>
                                                 </g>
                                             </svg>
                                             <span>LinkedIn</span>
@@ -253,27 +253,31 @@
 <doc-anchor-target id="uniconfig-shell" class="break-words">
     <h1>
         <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-shell">#</doc-anchor-trigger>
-        <span>UniConfig Shell</span>
+        <span>UniConfig shell</span>
     </h1>
 </doc-anchor-target>
-<p>UniConfig shell is a command-line interface for Uniconfig.</p>
-<p>Accessible over SSH, it allows users to interact with Uniconfig features including the following:</p>
+<p>UniConfig shell is a command-line interface for Uniconfig. Accessible over SSH,
+it allows users to interact with Uniconfig features including the following:</p>
 <ul>
 <li>Read operational data of devices</li>
-<li>Manipulate device configuration</li>
+<li>Manipulate device configurations</li>
 <li>Manipulate configuration templates</li>
 <li>Manipulate data stored in Unistore</li>
 <li>Invoke device or UniConfig operations</li>
 <li>Manipulate global UniConfig settings</li>
 </ul>
-<p>As Uniconfig shell is model-driven, its interface is mostly auto-generated from YANG schemas (e.g., tree structure of data-nodes or available RPC/action operations).</p>
+<p>Uniconfig shell is model-driven, therefore its interface is mostly
+auto-generated from YANG schemas (e.g., tree structure of data-nodes or
+available RPC/action operations).</p>
 <doc-anchor-target id="configuration">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#configuration">#</doc-anchor-trigger>
         <span>Configuration</span>
     </h2>
 </doc-anchor-target>
-<p>By default, UniConfig shell is disabled. To enable it, set the configuration parameter <code v-pre>cliShell/sshServer/enabled</code> to <code v-pre>true</code> in the <strong>config/lighty-uniconfig-config.json</strong> file.</p>
+<p>UniConfig shell is disabled by default. To enable it, set the configuration
+parameter <code v-pre>cliShell/sshServer/enabled</code> to <code v-pre>true</code> in the
+<strong>config/lighty-uniconfig-config.json</strong> file.</p>
 <p>All available settings and descriptions are listed below:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">UniConfig shell configuration (config/application.properties)</div>
@@ -288,7 +292,8 @@ cli-shell.ssh-server.inet-address=127.0.0.1
 cli-shell.ssh-server.username-password-auth.username=admin
 cli-shell.ssh-server.username-password-auth.password=secret</code></pre>
 </doc-codeblock></div>
-<p>After starting UniConfig, the SSH server will listen for connections on port 2022 and the loopback interface.</p>
+<p>After starting UniConfig, the SSH server listens for connections on port 2022
+and the loopback interface.</p>
 <doc-anchor-target id="navigating-in-the-shell">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#navigating-in-the-shell">#</doc-anchor-trigger>
@@ -296,19 +301,31 @@ cli-shell.ssh-server.username-password-auth.password=secret</code></pre>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>Every command line starts with a command prompt that ends with the <code v-pre>&gt;</code> character. The identifier of the command prompt changes based on the current shell mode and the state of execution in this mode.</li>
-<li>The commands <code v-pre>exit</code> and <code v-pre>quit</code> are available in all shell modes:
+<li>Every command line starts with a command prompt that ends with the <code v-pre>&gt;</code>
+character. The identifier of the command prompt changes based on the current
+shell mode and the state of execution in this mode.</li>
+<li>The <code v-pre>exit</code> and <code v-pre>quit</code> commands are available in all shell modes:
 <ul>
 <li><code v-pre>exit</code> returns the state to the parent state</li>
-<li><code v-pre>quit</code> returns the state to the nearest parent mode (e.g., configuration mode, root mode, operational show mode). If the current state of the shell represents some mode, &#x27;quit&#x27; and &#x27;exit&#x27; have the same effect of returning to the parent mode.</li>
+<li><code v-pre>quit</code> returns the state to the nearest parent mode (e.g., configuration
+mode, root mode, operational show mode). If the current state of the shell
+represents some mode, <code v-pre>quit</code> and <code v-pre>exit</code> have the same effect of returning
+to the parent mode.</li>
 </ul>
 </li>
-<li>Typed commands are sent to UniConfig using the <code v-pre>ENTER</code> key. UniConfig processes the command and may send a response to the console depending on the command behaviour. All commands are processed synchronously, meaning that multiple commands cannot be executed in parallel in the same SSH session.</li>
-<li><code v-pre>CTRL-A</code> and <code v-pre>CTRL-E</code> move the cursor to the beginning or end of the current line.</li>
+<li>Typed commands are sent to UniConfig using the <code v-pre>ENTER</code> key. UniConfig
+processes the command and may send a response to the console depending on the
+command. All commands are processed synchronously, meaning that multiple
+commands cannot be executed in parallel in the same SSH session.</li>
+<li><code v-pre>CTRL-A</code> and <code v-pre>CTRL-E</code> move the cursor to the beginning or end of the current
+line.</li>
 <li><code v-pre>CTRL-L</code> clears the shell screen.</li>
-<li>Arrow keys <code v-pre>UP/DOWN</code> are used to load previous commands in the command history.</li>
+<li>Arrow keys <code v-pre>UP/DOWN</code> load previous commands in the command history.</li>
 <li><code v-pre>CTRL-C</code> cancels the current line and moves to a new blank line.</li>
-<li><code v-pre>TAB</code> loads suggestions in the current context. Hit <code v-pre>TAB</code> again to navigate through suggested commands using the arrow keys and select using <code v-pre>ENTER</code>. Leave the submode with suggestions using the shortcut <code v-pre>CTRL-E</code>. The text in brackets contains a description of the next command.</li>
+<li><code v-pre>TAB</code> loads suggestions in the current context. Hit <code v-pre>TAB</code> again to navigate
+through suggested commands using the arrow keys and select using <code v-pre>ENTER</code>.
+Leave the submode with suggestions using the shortcut <code v-pre>CTRL-E</code>. The text in
+brackets contains a description of the next command.</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Loading available suggestions in &#x27;uniconfig-topology-vnf21&gt;&#x27; under &#x27;show&#x27; command</div>
@@ -323,7 +340,10 @@ alias                                     (Create command alias.)   system      
 confdConfig                                (ConfD configuration.)   |                                                          (pipe)
 event                                             (Event scripts)</code></pre>
 </doc-codeblock></div>
-<p>If the output is longer than the length of the command-line window, the output is displayed with scrolling capability. Use <code v-pre>ENTER</code> to display the next line and <code v-pre>SPACE</code> to display the next page. Use the <code v-pre>q</code> key to leave scrolling mode. You can only scroll only in one direction, towards the end of the output.</p>
+<p>If the output is longer than the length of the command line window, it is
+displayed with scrolling capability. Use <code v-pre>ENTER</code> to display the next line and
+<code v-pre>SPACE</code> to display the next page. Use the <code v-pre>q</code> key to leave scrolling mode. You
+can only scroll only in one direction, towards the end of the output.</p>
 <p><figure class="content-center">
     <img src="scrolling_example.png" alt="Scrolling through long output" />
     <figcaption class="caption">Scrolling through long output</figcaption>
@@ -357,7 +377,8 @@ show-history (show history [max number of commands])
 unhide-get      (Setting item to be unhidden in get)
 unhide-set      (Setting item to be unhidden in set)</code></pre>
 </doc-codeblock></div>
-<p>The <code v-pre>exit</code> command is used to exit the UniConfig shell interface altogether (disconnecting SSH client).</p>
+<p>The <code v-pre>exit</code> command is used to exit the UniConfig shell interface altogether
+(disconnecting SSH client).</p>
 <ul>
 <li>Example - Exit UniConfig shell:</li>
 </ul>
@@ -381,7 +402,8 @@ Connection to 127.0.0.1 closed.</code></pre>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Currently, only username/password single-user authentication is supported as configured in the <strong>application.properties</strong> file.</p>
+<p>Currently, only username/password single-user authentication is supported as
+configured in the <strong>application.properties</strong> file.</p>
         </div>
     </div>
 </div>
@@ -406,7 +428,8 @@ config&gt;</code></pre>
         <span>Show command history</span>
     </h3>
 </doc-anchor-target>
-<p>The <code v-pre>show-history</code> command is used to display a list of N last invoked commands. This command is also available in configuration mode.</p>
+<p>The <code v-pre>show-history</code> command is used to display a list of N last invoked commands.
+This command is also available in configuration mode.</p>
 <ul>
 <li>Example - Show the last five executed commands:</li>
 </ul>
@@ -433,7 +456,8 @@ config&gt;</code></pre>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Note that the list of invoked commands persists across UniConfig restarts and SSH connections.</p>
+<p>Note that the list of invoked commands persists across UniConfig restarts and
+SSH connections.</p>
         </div>
     </div>
 </div>
@@ -443,16 +467,22 @@ config&gt;</code></pre>
         <span>Unhide and hide operations</span>
     </h3>
 </doc-anchor-target>
-<p>The following commands are used to unhide and hide attributes in application properties:</p>
+<p>The following commands are used to unhide and hide attributes in application
+properties:</p>
 <ul>
-<li><code v-pre>unhide-get</code> is used to unhide an attribute hidden in application properties for read purposes.</li>
-<li><code v-pre>unhide-set</code> is used to unhide an attribute hidden in application properties for write purposes.</li>
+<li><code v-pre>unhide-get</code> is used to unhide an attribute hidden in application properties
+for read purposes.</li>
+<li><code v-pre>unhide-set</code> is used to unhide an attribute hidden in application properties
+for write purposes.</li>
 <li><code v-pre>hide-get</code> is used to hide attributes that were unhidden with <code v-pre>unhide-get</code>.</li>
 <li><code v-pre>hide-set</code> is used to hide attributes that were unhidden with <code v-pre>unhide-set</code>.</li>
 </ul>
-<p>When unhide is set for a GET or SET operation, the request URL for the operation contains the <code v-pre>unhide</code> query parameter. In the following example, the <code v-pre>unhide</code> parameter is set to <code v-pre>all</code>:</p>
+<p>When unhide is set for a GET or SET operation, the request URL for the operation
+contains the <code v-pre>unhide</code> query parameter. In the following example, the <code v-pre>unhide</code>
+parameter is set to <code v-pre>all</code>:</p>
 <p>http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=vnf21/configuration?unhide=all</p>
-<p>The command also gives confirmation that the attribute was added to or removed from the unhidden list.</p>
+<p>The command also gives confirmation that the attribute was added to or removed
+from the unhidden list.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -466,7 +496,9 @@ config&gt;</code></pre>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>When <code v-pre>unhide-get</code> or <code v-pre>hide-get</code> are called without parameters, the output contains a list of all unhidden parameters. The same applies to <code v-pre>unhide-set</code> and <code v-pre>hide-set</code>.</p>
+<p>When <code v-pre>unhide-get</code> or <code v-pre>hide-get</code> are called without parameters, the output
+contains a list of all unhidden parameters. The same applies to <code v-pre>unhide-set</code> and
+<code v-pre>hide-set</code>.</p>
         </div>
     </div>
 </div>
@@ -507,7 +539,8 @@ tailf:hidden full</code></pre>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>When used with the parameter <code v-pre>all</code>, the unhide operation applies to all parameters defined in application properties for read or write purposes.</p>
+<p>When used with the parameter <code v-pre>all</code>, the unhide operation applies to all
+parameters defined in application properties for read or write purposes.</p>
         </div>
     </div>
 </div>
@@ -523,8 +556,13 @@ tailf:hidden full</code></pre>
 <li>CRUD operations on top of persisted UniConfig settings</li>
 <li>UniConfig RPC operations such as <code v-pre>commit</code> or <code v-pre>calculate-diff</code></li>
 </ol>
-<p>After opening configuration mode, a new UniConfig transaction is created. All operations invoked in configuration mode are executed in the scope of the created transaction. The transaction is automatically closed after leaving configuration mode (<code v-pre>exit</code> or <code v-pre>quit</code> command).</p>
-<p>If <code v-pre>commit</code> or <code v-pre>checked-commit</code> are invoked, the transaction is automatically refreshed. The user stays in configuration mode with a newly created transaction.</p>
+<p>After opening configuration mode, a new UniConfig transaction is created. All
+operations invoked in configuration mode are executed in the scope of the
+created transaction. The transaction is automatically closed after leaving
+configuration mode (<code v-pre>exit</code> or <code v-pre>quit</code> command).</p>
+<p>If <code v-pre>commit</code> or <code v-pre>checked-commit</code> are invoked, the transaction is automatically
+refreshed. The user stays in configuration mode with a newly created
+transaction.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Configuration mode overview</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;
@@ -541,7 +579,8 @@ unistore-topology       (operations on the unistore topology)
 aliases
 diff (alias for 'request calculate-diff target-nodes/node *')</code></pre>
 </doc-codeblock></div>
-<p>Commands like SET / SHOW / DELETE are now available only on a specific device and are not accessible in root configuration mode.</p>
+<p>Commands like <code v-pre>SET</code>, <code v-pre>SHOW</code> and <code v-pre>DELETE</code> are now available only on a specific device
+and are not accessible in root configuration mode.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Set / show / delete commands overview</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology test-node-1
@@ -564,11 +603,11 @@ interfaces                             (Interfaces configuration)</code></pre>
         <span>Show configuration</span>
     </h3>
 </doc-anchor-target>
-<p>The <code v-pre>show</code> operation can be used to display selected subtrees.</p>
-<p>The subtree path can be constructed interactively with the help of shell suggestions / auto-completion mechanism. Construction of the path works the same way for SET / SHOW/ DELETE operations.</p>
-<ul>
-<li>Example - Display the configuration of a selected container:</li>
-</ul>
+<p>The <code v-pre>show</code> operation is used to display selected subtrees.</p>
+<p>The subtree path can be constructed interactively with the help of shell
+suggestions/auto-completion mechanism. Construction of the path works the same
+way for <code v-pre>SET</code>, <code v-pre>SHOW</code> and <code v-pre>DELETE</code> operations.</p>
+<p><strong>Example</strong> - Display the configuration of a selected container:</p>
 <ol>
 <li>First move into a specific topology on a specific device:</li>
 </ol>
@@ -625,9 +664,7 @@ vni-0/10             vni-0/5              vni-0/7              vni-0/9</code></p
     </h3>
 </doc-anchor-target>
 <p>The <code v-pre>delete</code> operation removes a selected subtree.</p>
-<ul>
-<li>Example - Remove a container:</li>
-</ul>
+<p><strong>Example</strong> - Remove a container:</p>
 <ol>
 <li>First move to a specific topology on a specific device:</li>
 </ol>
@@ -663,7 +700,8 @@ event                                             (Event scripts)</code></pre>
 uniconfig-topology-test-node-1&gt;</code></pre>
 </doc-codeblock></div>
 <ol start="3">
-<li>Quit to configuration mode, commit using request mode and return to the device on the topology:</li>
+<li>Quit to configuration mode, commit using request mode and return to the
+device on the topology:</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Verify state of &#x27;network-instance&#x27;</div>
@@ -681,15 +719,13 @@ uniconfig-topology-test-node-1&gt;</code></pre>
     </h3>
 </doc-anchor-target>
 <p>The <code v-pre>set</code> operation can be used for the following:</p>
-<ol>
+<ul>
 <li>Set the value of a single leaf.</li>
 <li>Set the values of multiple leaves in a single shell operation.</li>
 <li>Set a list of values for a leaf-list.</li>
 <li>Replace the entire subtree using a JSON snippet.</li>
-</ol>
-<ul>
-<li>Example - Set the value of a single leaf:</li>
 </ul>
+<p><strong>Example</strong> - Set the value of a single leaf:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">move to specified device</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology iosxr</code></pre>
@@ -711,9 +747,7 @@ uniconfig-topology-iosxr&gt;</code></pre>
   &quot;system-priority&quot;: 100
 }</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example - Set values for multiple leaves under the &#x27;hold-time&#x27; container:</li>
-</ul>
+<p><strong>Example</strong> - Set values for multiple leaves under the <code v-pre>hold-time</code> container:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">move to specified device</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology iosxr</code></pre>
@@ -743,10 +777,12 @@ uniconfig-topology-iosxr&gt;</code></pre>
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>A JSON snippet can be written to a selected data-tree node by entering the <code v-pre>json</code> sub-mode. In this sub-mode, you can type multiple lines that must represent a well-formed JSON document. At the end, confirm the set operation using the pattern &#x27;w!&#x27; + newline, or cancel the set operation with the pattern &#x27;q!&#x27; + newline.</p>
-<ul>
-<li>Example - Replace configuration of an interface using a JSON snippet:</li>
-</ul>
+<p>A JSON snippet can be written to a selected data-tree node by entering the
+json sub-mode. In this sub-mode, you can type multiple lines that represent a
+well-formed JSON document. At the end, confirm the set operation using the
+pattern <code v-pre>w!</code> + newline, or cancel the set operation with the pattern <code v-pre>q!</code> +
+newline.</p>
+<p><strong>Example</strong> - Replace configuration of an interface using a JSON snippet:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">move to specified device</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology iosxr</code></pre>
@@ -775,9 +811,7 @@ w!</code></pre>
   }
 }</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example - Leave <code v-pre>json</code> sub-mode without executing set operation:</li>
-</ul>
+<p><strong>Example</strong> - Leave json sub-mode without executing set operation:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Cancel set operation and leave &#x27;json&#x27; sub-mode</div>
 <pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-iosxr&gt;set interfaces interface GigabitEthernet0/0/0/1 config json
@@ -808,15 +842,15 @@ q!</code></pre>
         <span>Execute UniConfig operation</span>
     </h3>
 </doc-anchor-target>
-<p>The <code v-pre>request</code> command is used to execute UniConfig operations such as <code v-pre>commit</code> or <code v-pre>calculate-diff</code> in the UniConfig transaction:</p>
+<p>The <code v-pre>request</code> command is used to execute UniConfig operations such as <code v-pre>commit</code>
+or <code v-pre>calculate-diff</code> in the UniConfig transaction:</p>
 <ul>
-<li><p>The command is available in configuration mode.</p>
-</li>
-<li><p>You can fill in input parameters and values interactively or via provided JSON snippet.</p>
-</li>
-<li><p>Example - Execute UniConfig RPCs in the scope of the open UniConfig transaction:</p>
-</li>
+<li>The command is available in configuration mode</li>
+<li>You can fill in input parameters and values interactively or via provided JSON
+snippet</li>
 </ul>
+<p><strong>Example</strong> - Execute UniConfig RPCs in the scope of the open UniConfig
+transaction:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Display available &#x27;commit&#x27; RPC parameters</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;request commit
@@ -835,7 +869,7 @@ target-nodes/node
     &quot;node-result&quot;: [
       {
         &quot;node-id&quot;: &quot;iosxr&quot;,
-        &quot;status&quot;: &quot;complete&quot;,
+        &quot;topology-id&quot;: &quot;uniconfig&quot;,
         &quot;created-data&quot;: [
           {
             &quot;path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=iosxr/frinx-uniconfig-topology:configuration/frinx-openconfig-system:system&quot;,
@@ -852,8 +886,7 @@ target-nodes/node
         ]
       }
     ]
-  },
-  &quot;overall-status&quot;: &quot;complete&quot;
+  }
 }
 [24.04.2023, 09:25:31]</code></pre>
 </doc-codeblock></div>
@@ -869,17 +902,7 @@ target-nodes/node
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Execute &#x27;sync-from-network&#x27; RPC with two arguments (target node and &#x27;check-timestamp&#x27; flag)</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;request sync-from-network check-timestamp true target-nodes/node iosxr
-{
-  &quot;node-results&quot;: {
-    &quot;node-result&quot;: [
-      {
-        &quot;node-id&quot;: &quot;iosxr&quot;,
-        &quot;status&quot;: &quot;complete&quot;
-      }
-    ]
-  },
-  &quot;overall-status&quot;: &quot;complete&quot;
-}
+{}
 [24.04.2023, 09:26:48]</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="request-operational-mode">
@@ -888,16 +911,17 @@ target-nodes/node
         <span>Request operational mode</span>
     </h2>
 </doc-anchor-target>
-<p>This command has been merged with request configuration mode and is now only available in configuration mode.</p>
+<p>This command has been merged with request configuration mode and is now
+available only in configuration mode.</p>
 <p>Request mode allows users to:</p>
 <ul>
 <li>Invoke selected UniConfig requests that read or alter UniConfig settings.</li>
-<li>Invoke RPCs or actions that are provided by network devices or other southbound mount-points.</li>
+<li>Invoke RPCs or actions provided by network devices or other southbound
+mountpoints.</li>
 </ul>
-<p>Input parameters and values can be filled in interactively or via a provided JSON snippet. The transaction is passed from configuration mode.</p>
-<ul>
-<li>Example - Invoke RPC <code v-pre>execute-and-read</code> with typed input parameters:</li>
-</ul>
+<p>Input parameters and values can be filled in interactively or via a provided
+JSON snippet. The transaction is passed from configuration mode.</p>
+<p><strong>Example</strong> - Invoke <strong>RPC execute-and-read</strong> with typed input parameters:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Display available RPCs provided by device &#x27;iosxr&#x27;</div>
 <pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr
@@ -928,9 +952,7 @@ wait-for-output-timer (If no output is received during this time, then execute n
 }
 [24.04.2023, 09:34:21]</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example - Execute the same RPC &#x27;execute-and-read&#x27; using input JSON:</li>
-</ul>
+<p><strong>Example</strong> - Execute the same <strong>RPC execute-and-read</strong> using input JSON:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Execute the &#x27;execute-and-read&#x27; RPC with input JSON snippet:</div>
 <pre class="language-bash"><code v-pre class="language-bash">request&gt;cli iosxr execute-and-read json
@@ -961,7 +983,9 @@ w!
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>UniConfig shell does not support interactive typing of input arguments for an RPC/action that contains the <code v-pre>list</code> YANG element. Such operations must be executed using input JSON.</p>
+<p>UniConfig shell does not support interactive typing of input arguments for an
+RPC/action that contains the <code v-pre>list</code> YANG element. Such operations must be
+executed using input JSON.</p>
         </div>
     </div>
 </div>
@@ -972,10 +996,11 @@ w!
     </h2>
 </doc-anchor-target>
 <p>Show mode allows users to:</p>
-<ol>
-<li>Display operational data about UniConfig itself (e.g., logging status, list of open transactions or list of acquired subscriptions).</li>
-<li>Display operational data of network devices.</li>
-</ol>
+<ul>
+<li>Display operational data about UniConfig itself (e.g., logging status, list of
+open transactions or list of acquired subscriptions)</li>
+<li>Display operational data of network devices</li>
+</ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Overview of show operational mode</div>
 <pre class="language-bash"><code v-pre class="language-bash">show&gt;
@@ -994,15 +1019,14 @@ transactions               (reading transaction data)
 aliases
 lbr      (alias for 'logging-status broker restconf')</code></pre>
 </doc-codeblock></div>
-<p>After opening show mode, a new UniConfig transaction is opened. The transaction is closed when you leave this mode.</p>
+<p>After opening show mode, a new UniConfig transaction is opened. The transaction
+is closed when you leave this mode.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Open show operational mode</div>
 <pre class="language-bash"><code v-pre class="language-bash">uniconfig&gt;show
 show&gt;</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example - Display configuration of selected subtree:</li>
-</ul>
+<p><strong>Example</strong> - Display configuration of selected subtree:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Display configuration of GigabitEthernet0/0/0/0 interface</div>
 <pre class="language-bash"><code v-pre class="language-bash">show&gt;cli iosxr interfaces(frinx-openconfig-interfaces) interface GigabitEthernet0/0/0/0
@@ -1015,7 +1039,7 @@ show&gt;</code></pre>
   }
 }</code></pre>
 </doc-codeblock></div>
-<p>Example - Display selected system configuration:</p>
+<p><strong>Example</strong> - Display selected system configuration:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Display list of open UniConfig transactions</div>
 <pre class="language-bash"><code v-pre class="language-bash">show&gt;transactions transaction-data
@@ -1042,10 +1066,10 @@ show&gt;</code></pre>
         <span>Pipe operations</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig shell supports pipe operations similar to Unix shell/bash pipes. When a command is followed by the pipe sign <code v-pre>|</code>, the output of the command is passed to the selected pipe operation.</p>
-<ul>
-<li>Example:</li>
-</ul>
+<p>UniConfig shell supports pipe operations similar to Unix shell/bash pipes. When
+a command is followed by the pipe sign (<code v-pre>|</code>), the output of the command is
+passed to the selected pipe operation.</p>
+<p><strong>Example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Move to specified device</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology R1</code></pre>
@@ -1057,24 +1081,24 @@ show&gt;</code></pre>
     &quot;netmask&quot;: &quot;255.255.255.0&quot;</code></pre>
 </doc-codeblock></div>
 <p>Supported pipe operations are:</p>
-<ol>
-<li>grep - Show only lines that match supplied regex</li>
-<li>match - Same as grep, but can be used with optional parameters to also show lines before and after matched lines</li>
-<li>context-match - Same as grep, but also shows parent structure</li>
-<li>brief - Display root elements in short table format</li>
-<li>hide-empty-data-nodes - Hide data nodes without child nodes</li>
-<li>hide-attributes - Hide attributes of data nodes</li>
-</ol>
+<ul>
+<li><code v-pre>grep</code> - Show only lines that match supplied regex</li>
+<li><code v-pre>match</code> - Same as <code v-pre>grep</code>, but can be used with optional parameters to also
+show lines before and after matched lines</li>
+<li><code v-pre>context-match</code> - Same as <code v-pre>grep</code>, but also shows parent structure</li>
+<li><code v-pre>brief</code> - Display root elements in short table format</li>
+<li><code v-pre>hide-empty-data-nodes</code> - Hide data nodes without child nodes</li>
+<li><code v-pre>hide-attributes</code> -  Hide attributes of data nodes</li>
+</ul>
 <doc-anchor-target id="redirecting-output">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#redirecting-output">#</doc-anchor-trigger>
         <span>Redirecting output</span>
     </h2>
 </doc-anchor-target>
-<p>The output of an executed command can be redirected to a file using the <code v-pre>&gt;</code> sign followed by a filename.</p>
-<ul>
-<li>Example:</li>
-</ul>
+<p>The output of an executed command can be redirected to a file using the <code v-pre>&gt;</code> sign
+followed by a filename.</p>
+<p><strong>Example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Move to specified device</div>
 <pre class="language-bash"><code v-pre class="language-bash">config&gt;uniconfig-topology R1</code></pre>
@@ -1083,7 +1107,8 @@ show&gt;</code></pre>
 <div class="codeblock-title">Redirect output to file</div>
 <pre class="language-bash"><code v-pre class="language-bash">uniconfig-topology-R1&gt;show interface-configurations interface-configuration act\ GigabitEthernet0/0/0/1 &gt; '/home/output.txt' </code></pre>
 </doc-codeblock></div>
-<p>In this case, output in the console is empty but the content of the <strong>output.txt</strong> file is a follows:</p>
+<p>In this case, output in the console is empty but the content of the
+<strong>output.txt</strong> file is a follows:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Redirection output</div>
 <pre class="language-none"><code v-pre class="language-none">{
@@ -1100,8 +1125,11 @@ show&gt;</code></pre>
         <span>Aliases</span>
     </h2>
 </doc-anchor-target>
-<p>You can define aliases in UniConfig shell. For this purpose, there is a json file named <strong>shell-aliases</strong> in the
-UniConfig distribution. After unpacking the UniConfig distribution, the file can be found under <strong>Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config</strong>. The file contains some sample aliases.</p>
+<p>You can define aliases in UniConfig shell. A json file named <strong>shell-aliases</strong>
+is included in the UniConfig distribution for this purpose. After unpacking the
+UniConfig distribution, the file can be found under
+<strong>Uniconfig/distribution/packaging/zip/target/uniconfig-x.x.x/config</strong>. The file
+contains some sample aliases.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">shell-aliases.json with default samples</div>
 <pre class="language-none"><code v-pre class="language-none">/*
@@ -1127,15 +1155,15 @@ Asterisk symbol is a placeholder. We can dynamically add an alias value
         <span>Alias creation</span>
     </h3>
 </doc-anchor-target>
-<p>Aliases cannot be created dynamically, only before Uniconfig is started. The following rules apply:</p>
+<p>Aliases cannot be created dynamically, only before Uniconfig is started. The
+following rules apply:</p>
 <ol>
 <li>The alias name must be unique and cannot contain whitespaces.</li>
-<li>The command can contain a wildcard (*). In this case, the user is prompted to add a value.</li>
+<li>The command can contain a wildcard (<code v-pre>*</code>). In this case, the user is prompted to
+add a value.</li>
 <li>The alias is only visible in the mode where it was defined.</li>
 </ol>
-<ul>
-<li>Example - Execute the alias &#x27;diff xr5&#x27;:</li>
-</ul>
+<p><strong>Example</strong> - Execute the alias <code v-pre>diff xr5</code>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">uniconfig&gt;configuration-mode 
 config&gt;diff xr5
@@ -1144,18 +1172,15 @@ config&gt;diff xr5
     &quot;node-result&quot;: [
       {
         &quot;node-id&quot;: &quot;xr5&quot;,
-        &quot;status&quot;: &quot;complete&quot;
+        &quot;topology-id&quot;: &quot;uniconfig&quot;
       }
     ]
-  },
-  &quot;overall-status&quot;: &quot;complete&quot;
+  }
 }
 [24.04.2023, 09:31:32]
 config&gt;</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example: Execute the alias &#x27;lbr&#x27;:</li>
-</ul>
+<p><strong>Example</strong> - Execute the alias <code v-pre>lbr</code>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">uniconfig&gt;show
 show&gt;lbr 
@@ -1165,9 +1190,7 @@ show&gt;lbr
 }
 show&gt;</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example - Execute the alias &#x27;shh&#x27;:</li>
-</ul>
+<p><strong>Example</strong> - Execute the alias <code v-pre>shh</code>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">uniconfig&gt;request
 request&gt;show-history 
@@ -1188,13 +1211,21 @@ request&gt;
         <span>Callbacks</span>
     </h2>
 </doc-anchor-target>
-<p>Callbacks include sending POST and GET requests to the remote server and invoking user scripts from the UniConfig shell.</p>
+<p>Callbacks include sending <code v-pre>POST</code> and <code v-pre>GET</code> requests to the remote server and
+invoking user scripts from the UniConfig shell.</p>
 <p>The following is required to use callbacks:</p>
 <ol>
 <li>Necessary YANG modules - YANG modules that are required by the callbacks.</li>
-<li>Configuration - Enable callbacks in <strong>config/application.properties</strong> and set the remote server and access token.</li>
-<li>Update repository - Add the necessary YANG modules from step 1 into at least one YANG repository in the cache directory, and either define remote endpoints and scripts in a YANG file or create a new one for callbacks. For a definition of remote endpoints, use the <strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension.</li>
-<li>UniStore node - Create a UniStore node using the YANG repository containing the necessary YANG modules from step 1 and a YANG file with defined endpoints and scripts.</li>
+<li>Configuration - Enable callbacks in <strong>config/application.properties</strong> and set
+the remote server and access token.</li>
+<li>Update repository - Add the necessary YANG modules from step 1 into at least
+one YANG repository in the cache directory, and either define remote
+endpoints and scripts in a YANG file or create a new one for callbacks. For a
+definition of remote endpoints, use the <strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong>
+extension.</li>
+<li>UniStore node - Create a UniStore node using the YANG repository containing
+the necessary YANG modules from step 1 and a YANG file with defined endpoints
+and scripts.</li>
 </ol>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
@@ -1209,7 +1240,9 @@ request&gt;
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>In UniConfig shell, step 4 is optional as UniConfig creates dummy UniStore nodes for all repositories that meet the conditions in step 3. In this case, the dummy UniStore node name is identical to the YANG repository name.</p>
+<p>In UniConfig shell, step 4 is optional as UniConfig creates dummy UniStore nodes
+for all repositories that meet the conditions in step 3. In this case, the dummy
+UniStore node name is identical to the YANG repository name.</p>
 <p>In RestConf, step 4 is mandatory.</p>
         </div>
     </div>
@@ -1233,11 +1266,15 @@ request&gt;
         <span>Configuration</span>
     </h3>
 </doc-anchor-target>
-<p>By default, callbacks are disabled and the host and port for the remote server are empty in <strong>config/lighty-uniconfig-config.json</strong>.</p>
-<p>To enable callbacks, set the configuration parameter <code v-pre>callbacks/enabled</code> to <code v-pre>true</code>. It is also necessary to set the host and port for the remote server and store an access token in the UniConfig database.</p>
+<p>By default, callbacks are disabled and the host and port for the remote server
+are empty in <strong>config/lighty-uniconfig-config.json</strong>.</p>
+<p>To enable callbacks, set the configuration parameter <code v-pre>callbacks/enabled</code> to
+<code v-pre>true</code>. It is also necessary to set the host and port for the remote server and
+store an access token in the UniConfig database.</p>
 <p>The host and port for the remote server can be set in three ways:</p>
 <ol>
-<li>Before starting Uniconfig, in the <strong>config/application.properties</strong> file. The port number is optional:</li>
+<li>Before starting Uniconfig, in the <strong>config/application.properties</strong> file. The
+port number is optional:</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">UniConfig callback configuration (config/application.properties)</div>
@@ -1247,7 +1284,7 @@ callbacks.remote-server.host=127.0.0.1
 callbacks.remote-server.port=8443</code></pre>
 </doc-codeblock></div>
 <ol start="2">
-<li>After starting UniConfig, with a PUT request:</li>
+<li>After starting UniConfig, with a <code v-pre>PUT</code> request:</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">update remote server by PUT request</div>
@@ -1275,7 +1312,7 @@ callbacks.remote-server.port=8443</code></pre>
 </doc-codeblock></div>
 <p>The access token can be stored in the UniConfig database in one of two ways:</p>
 <ol>
-<li>After starting UniConfig, with a PUT request:</li>
+<li>After starting UniConfig, with a <code v-pre>PUT</code> request:</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">update access token by PUT request</div>
@@ -1310,8 +1347,9 @@ callbacks.remote-server.port=8443</code></pre>
         <span>Update repository</span>
     </h3>
 </doc-anchor-target>
-<p>First, create or update the YANG repository by using the <strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension
-displayed in the following snippet. There is only one extension, <code v-pre>url</code>, with the argument <code v-pre>point</code>.</p>
+<p>First, create or update the YANG repository by using the
+<strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension displayed in the following
+snippet. There is only one extension, <code v-pre>url</code>, with the argument <code v-pre>point</code>.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title"><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></div>
 <pre class="language-none"><code v-pre class="language-none">module frinx-callpoint {
@@ -1334,8 +1372,8 @@ displayed in the following snippet. There is only one extension, <code v-pre>url
         <span>Add call-point (GET request)</span>
     </h4>
 </doc-anchor-target>
-<p>The following snippet shows how to create a call-point in the <strong>frinx-test</strong> YANG file by using the
-<strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension.</p>
+<p>The following snippet shows how to create a call-point in the <strong>frinx-test</strong>
+YANG file by using the <strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">example of using of the <a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a> in YANG file</div>
 <pre class="language-none"><code v-pre class="language-none">module frinx-test {
@@ -1350,17 +1388,19 @@ displayed in the following snippet. There is only one extension, <code v-pre>url
         }
     }</code></pre>
 </doc-codeblock></div>
-<p>The argument of the &#x27;url&#x27; extension is &#x27;/data/from/remote&#x27;, which is appended to the end of the remote server URI
-configured in &#x27;config/lighty-uniconfig-config.json&#x27;. Thus the final address for the remote call-point is
-&#x27;https://remote.server.io/data/from/remote&#x27;.</p>
+<p>The argument of the <code v-pre>url</code> extension is <code v-pre>/data/from/remote</code>, which is appended to
+the end of the remote server URI configured in
+<strong>config/lighty-uniconfig-config.json</strong>. Thus the final address for the remote
+call-point is <code v-pre>https://remote.server.io/data/from/remote</code>.</p>
 <doc-anchor-target id="add-action-post-request">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#add-action-post-request">#</doc-anchor-trigger>
         <span>Add action (POST request)</span>
     </h4>
 </doc-anchor-target>
-<p>The following snippet shows how to create an action in the <strong>frinx-test</strong> YANG file by using the
-<strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension. You must also import <strong>tailf-common.yang</strong>.</p>
+<p>The following snippet shows how to create an action in the <strong>frinx-test</strong> YANG
+file by using the <strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension. You must also
+import <strong>tailf-common.yang</strong>.</p>
 <p>The action consists of:</p>
 <ol>
 <li>The action name, defined by <code v-pre>tailf:action</code>.</li>
@@ -1395,20 +1435,22 @@ configured in &#x27;config/lighty-uniconfig-config.json&#x27;. Thus the final ad
         <span>Add script</span>
     </h4>
 </doc-anchor-target>
-<p>The following snippet shows how to create a script in the <strong>frinx-test</strong> YANG file by using
-<strong>tailf-common.yang</strong>. It is not necessary to import the <strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension.</p>
+<p>The following snippet shows how to create a script in the <strong>frinx-test</strong> YANG
+file by using <strong>tailf-common.yang</strong>. It is not necessary to import the
+<strong><a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a></strong> extension.</p>
 <p>The script consists of:</p>
 <ol>
 <li>The script name, defined by <code v-pre>tailf:action</code>.</li>
 <li>The path to the script, defined by <code v-pre>tailf:exec</code>.</li>
 <li>Arguments for the script, defined by <code v-pre>tailf:exec</code>.</li>
 </ol>
-<p>Arguments can be dynamic (i.e., the user can pass values to them) or static (flags). Follow these conventions
-when creating arguments:</p>
+<p>Arguments can be dynamic (i.e., the user can pass values to them) or static
+(flags). Follow these conventions when creating arguments:</p>
 <ol>
-<li>Each argument must contain a name (for example, -n, -j).</li>
+<li>Each argument must contain a name (for example, <code v-pre>-n</code>, <code v-pre>-j</code>).</li>
 <li>Dynamic arguments must be enclosed in <code v-pre>$(...)</code> (for example, <code v-pre>$(name)</code>).</li>
-<li>Flags are simple words without whitespace (for example, VIP, UPPER, upper).</li>
+<li>Flags are simple words without whitespace (for example, <code v-pre>VIP</code>, <code v-pre>UPPER</code>,
+<code v-pre>upper</code>).</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Example of using <a href="mailto:frinx-callpoint@2022-06-22.yang">frinx-callpoint@2022-06-22.yang</a> in YANG file</div>
@@ -1432,16 +1474,19 @@ when creating arguments:</p>
         <span>UniStore node</span>
     </h3>
 </doc-anchor-target>
-<p>A UniStore node can be created by RestConf or UniConfig shell. If a repository is explicitly defined by the query parameter <code v-pre>?uniconfig-schema-repository=repository-name</code>, this repository must contain all necessary YANG modules. If a repository name is not defined when the UniStore node is created, all necessary YANG modules must be in the <code v-pre>latest</code> schema repository.</p>
+<p>A UniStore node can be created by RestConf or UniConfig shell. If a repository
+is explicitly defined by the query parameter
+<code v-pre>?uniconfig-schema-repository=repository-name</code>, this repository must contain all
+necessary YANG modules. If a repository name is not defined when the UniStore
+node is created, all necessary YANG modules must be in the <code v-pre>latest</code> schema
+repository.</p>
 <doc-anchor-target id="examples">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#examples">#</doc-anchor-trigger>
         <span>Examples</span>
     </h3>
 </doc-anchor-target>
-<ul>
-<li>Example - Invoke callpoint in shell:</li>
-</ul>
+<p><strong>Example</strong> - Invoke callpoint in shell:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">callpoint invocation</div>
 <pre class="language-none"><code v-pre class="language-none">config&gt;callbacks repository-name
@@ -1453,9 +1498,7 @@ callbacks-repository-name&gt;show test get-request
 }
 callbacks-repository-name&gt;</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example - Invoke action in shell:</li>
-</ul>
+<p><strong>Example</strong> - Invoke action in shell:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">action invocation</div>
 <pre class="language-none"><code v-pre class="language-none">config&gt;request 
@@ -1467,9 +1510,7 @@ request&gt;callbacks repository-name post-request test-action body data &quot;so
 }
 request&gt;</code></pre>
 </doc-codeblock></div>
-<ul>
-<li>Example - Execute user script in shell:</li>
-</ul>
+<p><strong>Example</strong> - Execute user script in shell:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">user script execution</div>
 <pre class="language-none"><code v-pre class="language-none">config&gt;request 
@@ -1520,12 +1561,9 @@ request&gt;</code></pre>
                             <footer class="flex flex-wrap items-center justify-between">
                                 <div>
                                     <ul class="flex flex-wrap items-center text-sm">
-                                        <li>
-                                            <a class="block mr-4 py-2 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="about.md">About</a>
-                                        </li>
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. <a href="https://frinx.io/">Frinx.io</a> All rights reserved.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. <a href="https://elisapolystar.com/">Elisa Polystar</a> All rights reserved.</p></div>
                             </footer>
                         </div>
                     </div>
@@ -1554,6 +1592,6 @@ request&gt;</code></pre>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "UniConfig Shell", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "UniConfig shell", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
