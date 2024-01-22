@@ -359,7 +359,7 @@ RPC were sent serially - *connection-manager:install-multiple-nodes* RPC was use
 
 
 Evaluation 2:
-Devices were PATCHED - after PATH they contain 10 more interfaces - which is 1234 json lines. 
+Devices were PATCHED - after PATCH they contain 10 more interfaces - which is 1234 json lines.  
 Then 6000 devices were updated in 4.3 minutes on single node Uniconfig using 12 cores.  
 Update process consisted of RPCs: sync-from-network
 After sync-from-network each configuration was increased from 1144 to 1234 json lines
