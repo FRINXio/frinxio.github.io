@@ -361,8 +361,8 @@ RPC were sent serially - *connection-manager:install-multiple-nodes* RPC was use
 Evaluation 2:
 Devices were PATCHED - after PATCH they contain 10 more interfaces - which is 1234 json lines.  
 Then 6000 devices were updated in 4.3 minutes on single node Uniconfig using 12 cores.  
-Update process consisted of RPCs: sync-from-network
-After sync-from-network each configuration was increased from 1144 to 1234 json lines
+Update process consisted of RPCs: sync-from-network  
+After sync-from-network each configuration was increased from 1144 to 1234 json lines  
 Average one device update duration = 4.3 minutes / 6000 devices = 0,00072 minutes  
 Average number of json lines per device = 1234 lines  
 lines of json / per core / per minute = 1234 lines / 12 cores / 0,00072 minutes = 142824
