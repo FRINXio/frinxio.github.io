@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.758206638744">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.759479827369">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.758206638744" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.759479827369" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.758206638744" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.759479827369" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.758206638744" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.758206638744" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.759479827369" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.759479827369" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -257,6 +257,13 @@
 <p>This RPC checks if devices specified in the input are installed by looking for
 the database content of each device. If content is found, the device is
 installed.</p>
+<p>Output of the RPC contains only a list of devices that are present in the UniConfig database.
+List of devices contains:</p>
+<ul>
+<li>topology-id - identifier of the topology in which the device is installed</li>
+<li>node-id - device identifier</li>
+<li>uniconfig-layer - boolean value indicating whether the device is installed in the UniConfig layer</li>
+</ul>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
@@ -319,7 +326,8 @@ installed.</p>
       &quot;node-result&quot;: [
         {
           &quot;topology-id&quot;: &quot;netconf&quot;,
-          &quot;node-id&quot;: &quot;R1&quot;
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;uniconfig-layer&quot;: true
         }
       ]
     }
@@ -354,11 +362,13 @@ installed.</p>
       &quot;node-result&quot;: [
         {
           &quot;topology-id&quot;: &quot;netconf&quot;,
-          &quot;node-id&quot;: &quot;R1&quot;
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;uniconfig-layer&quot;: true
         },
         {
           &quot;topology-id&quot;: &quot;netconf&quot;,
-          &quot;node-id&quot;: &quot;R2&quot;
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;uniconfig-layer&quot;: false
         }
       ]
     }

@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.758206638744">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.759479827369">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.758206638744" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.759479827369" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.758206638744" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.759479827369" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.758206638744" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.758206638744" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.759479827369" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.759479827369" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -504,6 +504,36 @@ not process them in parallel, decreasing processing performance.</li>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">Setting dedicated device sessions</div>
 <pre class="language-uri"><code v-pre class="language-uri">http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction?dedicatedDeviceSession=true</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="audit-parameters">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#audit-parameters">#</doc-anchor-trigger>
+        <span>Audit parameters</span>
+    </h3>
+</doc-anchor-target>
+<p>Uniconfig can pass audit parameters to network devices when a Uniconfig transaction is committed.</p>
+<p>Following implementations are currently supported on southbound:</p>
+<ul>
+<li><strong>Tailf confD extension (NETCONF)</strong></li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">&lt;rpc xmlns=&quot;urn:ietf:params:xml:ns:netconf:base:1.0&quot; message-id=&quot;m-3&quot;&gt;
+    &lt;commit&gt;
+        &lt;confirmed/&gt;
+        &lt;rollback-comment xmlns=&quot;http://tail-f.com/ns/netconf/rollback&quot;&gt;Uniconfig transaction: c7be0e5d-2bc3-473f-8590-0fe3f732beef&lt;/rollback-comment&gt;
+        &lt;rollback-label xmlns=&quot;http://tail-f.com/ns/netconf/rollback&quot;&gt;test&lt;/rollback-label&gt;
+    &lt;/commit&gt;
+&lt;/rpc&gt;</code></pre>
+</doc-codeblock></div>
+<p>On the northbound, the parameters are exposed as HTTP headers:</p>
+<ul>
+<li>AUDIT_USER</li>
+<li>AUDIT_COMMENT</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction' \
+--header 'AUDIT_USER: audit user' \
+--header 'AUDIT_COMMENT: audit comment'</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="invocation-of-crud-operation-in-transaction">
     <h2>
