@@ -11,8 +11,10 @@ Calling the RPC with an empty list of target nodes syncs the configuration of
 all nodes modified in the UniConfig transaction. If any node fails, the entire
 RPC also fails.
 
-If the network device was installed as southbound only (with parameter **uniconfig-config:install-uniconfig-node-enabled** set to false), 
-then once this rpc is called it will sync the device to UniConfig topology and rewrite mentioned parameter to True.
+If the network device was installed as southbound-only (with the
+`uniconfig-config:install-uniconfig-node-enabled` parameter set to `false`), the
+RPC syncs the device to the UniConfig topology and rewrites the above-mentioned
+parameter to `true`.
 
 ![RPC sync-from-network](RPC_sync-from-network-RPC_sync_from_network.svg)
 
