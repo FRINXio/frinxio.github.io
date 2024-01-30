@@ -1,37 +1,44 @@
 # RPC connect-node
 
-This RPC functions similar to mount-node RPC in a sense that it creates a connection to an already installed device,
-but it does so outside a transaction, meaning that the connection will stay up even when there are no active
-transactions.
+This RPC is similar to the **mount-node RPC** in that it creates a connection to
+a device that is already installed. The connection is created outside of a
+transaction, so that the connection stays up even without active transactions.
 
 !!!
-Note that the transaction used in this RPC is created internally so a user created transaction won't be used.
+Note that the transaction used in this RPC is created internally, so that no
+user-created transactions are used.
 !!!
 
-Connect-node RPC also supports connecting to stream nodes. This is only possible if a stream node was already
-defined in the install-node RPC. It's most relevant use case is when a subscription stream was disconnected and a
-reconnection is necessary.
+The **connect-node RPC** also supports connections to stream nodes. These are
+possible only if a stream node is already defined in the **install-node RPC**.
+The most common use case is when a subscription stream is disconnected and a
+reconnection is required.
 
 !!!
-Connect-node RPC only works on local Uniconfig node in a cluster.
+The **connect-node RPC** only works on local Uniconfig nodes in a cluster.
 !!!
 
 ## RPC parameters
 
-- **node-id (mandatory)** - Id of a stream node which consists of device node and stream name (\<device node>_\<stream name>) e.g.
-"R1_NETCONF".
-- **max-connection-attempts** - Maximum number of connection attempts. Default value is 1.
-- **between-attempts-timeout** - Timeout between connection attempts in seconds. Default value is 60 seconds.
+- `node-id` (mandatory) - ID of stream node. Consists of a device node and
+  stream name (`<device node>_<stream name>`, for example `R1_NETCONF`).
+- `max-connection-attempts` - Maximum number of connection attempts. The default
+  value is 1.
+- `between-attempts-timeout` - Timeout between connection attempts in seconds.
+  The default value is 60 seconds.
 
 ## CLI Shell
 
-This RPC is also included in the CLI Shell implementation. As this RPC takes a node-id as an input parameter, CLI Shell
-suggests to the user only nodes that are relevant to this RPC e.g. nodes that are installed in the UC but are not yet
-connected.
+The **connect-node RPC** is also included in
+[UniConfig shell](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/).
+As it takes `node-id` as input, the shell only suggests nodes that are relevant
+to this RPC (for example, nodes that are installed in UniConfig but are not yet
+connected).
 
-## Successful RPC examples
+## RPC examples
 
-With all examples consider that the install RPC request included the following parameters:
+For all examples, assume that the **install RPC** request included the following
+parameters:
 
 ```json
 {
@@ -53,7 +60,7 @@ With all examples consider that the install RPC request included the following p
 }
 ```
 
-### Successful request for a device node.
+### Successful example - Request for a device node
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:connect-node' \
@@ -73,7 +80,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 ```RPC Response, Status: 200
 ```
 
-### Successful request for a stream node.
+### Successful example - Request for a stream node
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:connect-node' \
@@ -94,14 +101,14 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 ```
 
 !!!
-Note that we currently do not support waiting for a stream node to be connected. This means that even if the response
-code is 200, the connection isn't necessary successful too. To test if the connection is successful or in the process
-of connecting, use the RPC again (example below) or look at UC logs.
+Note that waiting for a stream node to be connected is currently not supported. This means that even if the response code is 200, the connection is not
+necessarily successful as well. To test if the connection is successful or in
+the process of connecting, call the RPC again (see example below) or examine the
+UniConfig logs.
 !!!
 
-## Failed RPC responses
+### Failed example - Node is already connected
 
-### Node is already connected
 ```json RPC Response, Status: 409
 {
     "errors": {
@@ -116,7 +123,8 @@ of connecting, use the RPC again (example below) or look at UC logs.
 }
 ```
 
-### Node is in connection process
+### Failed example - Node is in the process of connecting
+
 ```json RPC Response, Status: 409
 {
     "errors": {
@@ -131,7 +139,8 @@ of connecting, use the RPC again (example below) or look at UC logs.
 }
 ```
 
-### Node doesn't exist
+### Failed example - Node does not exist
+
 ```json
 {
     "errors": {

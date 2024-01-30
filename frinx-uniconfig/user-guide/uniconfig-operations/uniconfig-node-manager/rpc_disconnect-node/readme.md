@@ -1,30 +1,34 @@
 # RPC disconnect-node
 
-This RPC functions similar to unmount-node RPC in a sense that it closes a connection to a device.
+This RPC is similar to the **unmount-node RPC** in that it closes a connection
+to a device.
 
 !!!
-Note that the transaction used in this RPC is created internally so a user created transaction won't be used.
+Note that the transaction used in this RPC is created internally, so that no
+user-created transactions are used.
 !!!
 
-Disconnect-node RPC also supports disconnecting stream nodes.
+The **disconnect-node RPC** also supports disconnecting stream nodes.
 
-!!!
-Disconnect-node RPC only works on local Uniconfig node in a cluster.
-!!!
+!!! Note that the **disconnect-node RPC** only works on local Uniconfig nodes in
+a cluster. !!!
 
 ## RPC parameters
 
-- **node-id (mandatory)** - Id of a stream node which consists of device node and stream name (\<device node>_\<stream name>) e.g.
-"R1_NETCONF".
+- `node-id` (mandatory) - ID of stream node. Consists of a device node and
+stream name (`<device node>_<stream name>`, for example `R1_NETCONF`).
 
-## CLI Shell
+## UniConfig shell
 
-This RPC is also included in the CLI Shell implementation. As this RPC takes a node-id as an input parameter, CLI Shell
-suggests to the user only nodes that are relevant to this RPC e.g. connected nodes.
+The **disconnect-node RPC** is also included in 
+[UniConfig shell](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/). 
+As it takes `node-id` as input, the shell only suggests nodes user that are
+relevant to this RPC (for example, connected nodes).
 
-## Successful RPC examples
+## RPC examples
 
-With all examples consider that the install RPC request included the following parameters:
+For all examples, assume that the **install RPC** request included the following
+parameters:
 
 ```json
 {
@@ -46,7 +50,7 @@ With all examples consider that the install RPC request included the following p
 }
 ```
 
-### Successful request for a device node.
+### Successful example - Request for a device node
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:disconnect-node' \
@@ -64,7 +68,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 ```RPC Response, Status: 200
 ```
 
-### Successful request for a stream node.
+### Successful example - Request for a stream node
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:disconnect-node' \
@@ -82,11 +86,9 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 ```RPC Response, Status: 200
 ```
 
-## Failed RPC responses
+### Failed example - Node not connected
 
-### Node isn't connected
-
-Specified node isn't connected or does not exist in database.
+The specified node is not connected or does not exist in the database.
 
 ```json RPC Response, Status: 502
 {
@@ -102,7 +104,7 @@ Specified node isn't connected or does not exist in database.
 }
 ```
 
-### Node doesn't exist
+### Failed example - Node does not exist
 ```json
 {
     "errors": {
