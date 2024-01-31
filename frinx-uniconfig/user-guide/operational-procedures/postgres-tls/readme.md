@@ -29,48 +29,53 @@ The configuration file that must be modified can
 be found on the following path relative to the UniConfig root directory:
 
 ```
-vim config/lighty-uniconfig-config.json
+vim config/application.properties
 ```
 
 Then edit the **configuration** section in **dbPersistence** section.
 
 Example:
 
-```json
-  "connection": {
-    "dbName": "uniconfig",
-    "username": "uniremote",
-    "password": "unipass",
-    "initialDbPoolSize": 5,
-    "maxDbPoolSize": 20,
-    "maxIdleConnections": 5,
-    "socketReadTimeout": 20,
-    "maxWaitTime": 30000,
-    "enabledTls": true,
-    "tlsClientCert": "./client.pks",
-    "tlsClientKey": "./client.key",
-    "tlsCaCert": "./ca.pks",
-    "sslPassword": "",
-    "databaseLocations": [
-      {
-        "host": "127.0.0.1",
-        "port": 26257
-      }
-    ],
-    "repairSchemaHistory": false
-  }
+```properties
+# DB persistence settings
+db-persistence.embedded-database.enabled=true
+db-persistence.embedded-database.data-dir=./data/pg_dir
+db-persistence.embedded-database.clean-data-dir=true
+
+db-persistence.connection.db-name=uniconfig
+db-persistence.connection.username=uniremote
+db-persistence.connection.password=unipass
+db-persistence.connection.uri=jdbc:postgresql://
+db-persistence.connection.driver-class-name=org.postgresql.Driver
+db-persistence.connection.connection-timeout=30000
+db-persistence.connection.max-lifetime=1800000
+db-persistence.connection.min-idle-connections=10
+db-persistence.connection.max-db-pool-size=20
+db-persistence.connection.socket-read-timeout=20
+db-persistence.connection.enabled-tls=false
+db-persistence.connection.tls-client-cert=./client.pks
+db-persistence.connection.tls-client-key=./client.key
+db-persistence.connection.tls-ca-cert=./ca.pks
+db-persistence.connection.ssl-password=
+db-persistence.connection.database-locations[0].host=127.0.0.1
+db-persistence.connection.database-locations[0].port=26257
+db-persistence.connection.repair-schema-history=false
+#db-persistence.uniconfig-instance.instance-name=
+db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
 The TLS related fields are the following:
 
-`enabledTls` - setting to `true` enables TLS encryption, default is `false`
+`db-persistence.connection.enabled-tls` - setting to `true` enables TLS encryption, default is `false`
 
-`tlsClientCert` - specify the **relative** path to the Client certificate from the root UniConfig directory
+`db-persistence.connection.tls-client-cert` - specify the **relative** path to the Client certificate from the root UniConfig directory
 
-`tlsClientKey` - specify the **relative** path to the Client key from the root UniConfig directory, this can be PKCS-12 or PKCS-8 format
+`db-persistence.connection.tls-client-key` - specify the **relative** path to the Client key from the root UniConfig 
+directory, this can be PKCS-12 or PKCS-8 format
 
-`tlsCaCert` - specify the **relative** path to the root CA certificate from the root UniConfig directory
+`db-persistence.connection.tls-ca-cert` - specify the **relative** path to the root CA certificate from the root UniConfig directory
 
-`sslPassword` - if the `tlsClientKey` file is encrypted with password, specify it here. It is needed for PKCS-12 keys and for encrypted PKCS-8 keys, this will be ignored for the unencrypted keys.
+`db-persistence.connection.ssl-password` - if the `db-persistence.connection.tls-client-key` file is encrypted 
+with password, specify it here. It is needed for PKCS-12 keys and for encrypted PKCS-8 keys, this will be ignored for the unencrypted keys.
 
 Do not forget to adjust other database connection parameters accordingly.

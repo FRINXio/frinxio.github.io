@@ -22,36 +22,25 @@ comparison to the Immediate Commit Model:
 ## Configuration
 
 Configurations related to UniConfig transactions are placed in the
-**config/lighty-uniconfig-config.json** file under the `transactions` container.
-Note that the Build-and-Commit model is enabled if `uniconfigTransactionEnabled`
-is set to `true` (this is the default value).
+**config/application.properties** file under the `transactions` container.
 
-```
-// Grouped settings that are related to Uniconfig transactions.
-"transactions": {
-    /*
-    Time after transaction can be closed [seconds] by transaction cleaner.
-    */
-    "transactionIdleTimeOut": 300,
-    /*
-    Maximum transaction age before it can be evicted from transaction registry [seconds].
-    Configuring '0' disables cleaning of Uniconfig transactions.
-    */
-    "maxTransactionAge": 1800,
-    /*
-    Interval at which expired transactions are closed and cleaned [seconds].
-    Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
-    Only dedicated Uniconfig transactions (initialized using 'create-transaction' RPC)
-    are cleaned - shared transaction is never removed or invalidated.
-     Configuring '0' disables cleaning of Uniconfig transactions.
-    */
-    "cleaningInterval": 60,
-    /*
-    Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
-    If disabled, only manually created transactions can exist.
-    */
-    "isImmediateCommitEnabled": true
-}
+```properties
+# Grouped settings that are related to UniConfig transactions
+
+# Time after transaction can be closed [seconds] by transaction cleaner.
+transactions.transaction-idle-time-out=300
+# Maximum transaction age before it can be evicted from transaction registry [seconds].
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.max-transaction-age=1800
+# Interval at which expired transactions are closed and cleaned [seconds].
+# Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
+# Only dedicated UniConfig transactions (initialized using 'create-transaction' RPC)
+# are cleaned - shared transaction is never removed or invalidated.
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.cleaning-interval=60
+# Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
+# If disabled, only manually created transactions can exist.
+transactions.immediate-commit-enabled=true
 ```
 
 ## Optimistic locking mechanism

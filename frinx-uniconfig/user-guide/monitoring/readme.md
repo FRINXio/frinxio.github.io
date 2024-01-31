@@ -22,17 +22,15 @@ CSV files are located in the **metrics** directory in the **root** of the distri
 
 ## Configuration
 
-Configuration is done via a section in "uniconfig-lighty-config.json" file:
+Configuration is done via a section in "application.properties" file:
 
-```json
-"metrics": {
-            // flag that determines if metrics will be reported or not
-            "enabled": true,
-            // reporter type (log, csv)
-            "reporter": "log",
-            // reporting rate in seconds
-            "rate": 30
-    }
+```properties
+# flag that determines if metrics will be reported or not
+metrics.enabled=true
+# reporter type (log, csv)
+metrics.reporter-type=LOG
+# reporting rate in seconds
+metrics.rate=30
 ```
 
 ## Example output

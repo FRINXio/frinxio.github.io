@@ -27,24 +27,16 @@ using the Immediate Commit Model.
 
 ## Configuration
 Configuration related to UniConfig transactions is placed in the
-'config/lighty-uniconfig-config.json' file under 'transactions'
-container.
+'config/application.properties' file.
 A user can turn off the Immediate Commit Model and use only the
 [Build and Commit Model](../build-and-commit-model/readme.md)
 instead.
 
 
-```json JSON Snippet
-"transactions": {
-        .
-        .
-        .
-        /*
-        Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
-        If disabled, only manually created transactions can exist.
-        */
-        "isImmediateCommitEnabled": true
-    }
+```properties Transaction property snippet
+# Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
+# If disabled, only manually created transactions can exist.
+transactions.immediate-commit-enabled=true
 ```
 
 RPC Examples

@@ -117,56 +117,79 @@ on load-balancer operation.
 ### UniConfig configuration
 
 All UniConfig nodes in the cluster should be configured with the same parameters. There are several important sections
-of config/lighty-uniconfig-config.json file related to clustered environment.
+of config/application.properties file related to clustered environment.
 
 #### Database connection settings
 
 This section contains information how to connect to PostgreSQL database and connection pool settings. It is placed
-under 'dbPersistence.connection' JSON object.
+under 'dbPersistence.connection' properties object.
 
 Example with essential settings:
 
-```json database connection settings
-// Grouped settings related to database connection.
-"connection": {
-    // name of the database
-    "dbName": "uniconfig",
-    // name of the user that has the remote access to database specified by 'dbName'
-    "username": "uniremote",
-    // user password (it is used only for the password-base authentication)
-    "password": "unipass",
-    // initial size of the connection pool (pre-initialized connections)
-    "initialDbPoolSize": 5,
-    // maximum size of connections for internal usage
-    "maxInternalDbConnections" : 2,
-    // maximum size of the connection pool, before creation of next connections are blocked
-    // It includes 'maxInternalDbConnections'. Subtraction of 'maxInternalDbConnections' from 'maxDbPoolSize'
-    // is maximum of open user transactions
-    "maxDbPoolSize": 20,
-    // maximum number of idle connections before next idle connections are cleaned
-    "maxIdleConnections": 5,
-    /*
-    Timeout value used for socket read operations. If reading from the server takes longer than this value,
-    the connection is closed. This can be used as both a brute force global query timeout and a method of
-    detecting network problems. The timeout is specified in seconds and a value of 0 means that it is disabled.
-    */
-    "socketReadTimeout": 20,
-    // maximum wait time for obtaining of a new connection before fetch request is dropped [milliseconds]
-    "maxWaitTime": 30000,
-    /*
-    List of network locations at which target database resides. The first entry is always tried in the first
-    attempt during creation of database connection. If there are multiple entries specified, then other
-    locations are used as fallback method in the order in which they are specified.
-    */
-    "databaseLocations": [
-        {
-            // database hostname / IP address
-            "host": "uniconfig-db",
-            // TCP port on which target database listens to incoming connections
-            "port": 26257
-        }
-    ]
-}
+```properties database connection settings
+# DB persistence settings
+db-persistence.embedded-database.enabled=true
+db-persistence.embedded-database.data-dir=./data/pg_dir
+db-persistence.embedded-database.clean-data-dir=true
+
+db-persistence.connection.db-name=uniconfig
+db-persistence.connection.username=uniremote
+db-persistence.connection.password=unipass
+db-persistence.connection.uri=jdbc:postgresql://
+db-persistence.connection.driver-class-name=org.postgresql.Driver
+# This property controls the maximum number of milliseconds that a client will wait for a connection from the pool.
+# If this time is exceeded without a connection becoming available, a {@link SQLException} will be thrown.
+# Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
+db-persistence.connection.connection-timeout=30000
+# This property controls the maximum lifetime of a connection in the pool.
+# On a connection-by-connection basis, minor negative attenuation is applied to avoid mass-extinction in the pool.
+# We strongly recommend setting this value, and it should be several seconds shorter than any database or
+# infrastructure imposed connection time limit. A value of 0 indicates no maximum lifetime (infinite lifetime),
+# subject of course to the idleTimeout setting.
+# The minimum allowed value is 30000ms (30 seconds). Default: 1800000 (30 minutes).
+db-persistence.connection.max-lifetime=1800000
+# This property controls the minimum number of idle connections that HikariCP tries to maintain in the pool.
+# If the idle connections dip below this value and total connections in the pool are less than maximumPoolSize,
+# HikariCP will make the best effort to add additional connections quickly and efficiently.
+# However, for maximum performance and responsiveness to spike demands, we recommend not setting this value
+# and instead allowing HikariCP to act as a fixed size connection pool. Default: same as maximumPoolSize
+db-persistence.connection.min-idle-connections=10
+# This property controls the maximum size that the pool is allowed to reach,
+# including both idle and in-use connections. Basically this value will determine the maximum number
+# of actual connections to the database backend. A reasonable value for this is best determined by your
+# execution environment. When the pool reaches this size, and no idle connections are available,
+# calls to getConnection() will block for up to connectionTimeout milliseconds before timing out.
+db-persistence.connection.max-db-pool-size=20
+# Timeout value used for socket read operations. If reading from the server takes longer than this value,
+# the connection is closed. This can be used as both a brute force global query timeout and a method of
+# detecting network problems. The timeout is specified in seconds and a value of 0 means that it is disabled.
+db-persistence.connection.socket-read-timeout=20
+# Enabled TLS authentication (if it is enabled, 'tlsClientCert', 'tlsClientKey', and 'tlsCaCert'
+# are used and 'password' field is not used).
+db-persistence.connection.enabled-tls=false
+db-persistence.connection.tls-client-cert=./client.pks
+db-persistence.connection.tls-client-key=./client.key
+db-persistence.connection.tls-ca-cert=./ca.pks
+# Password to an encrypted SSL certificate key file.
+db-persistence.connection.ssl-password=
+
+# List of network locations at which target database resides. The first entry is always tried in the first
+# attempt during creation of database connection. If there are multiple entries specified, then other
+# locations are used as fallback method in the order in which they are specified.
+
+# database hostname / IP address
+db-persistence.connection.database-locations[0].host=127.0.0.1
+# TCP port on which target database listens to incoming connections
+db-persistence.connection.database-locations[0].port=26257
+
+# Repairs the Flyway schema history table before Flyway migration. This will perform the following actions:
+# 1. Remove any failed migrations on databases.
+# 2. Realign the checksums, descriptions and types of the applied migrations with available migrations.
+db-persistence.connection.repair-schema-history=false
+# Name / unique identifier of local Uniconfig instance.
+#db-persistence.uniconfig-instance.instance-name=
+# Hostname or IP address of a local host that runs Uniconfig.
+db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
 !!!
@@ -175,91 +198,153 @@ of open transactions and open connections on PostgreSQL side. Be aware that 'max
 number of open UniConfig transactions (1 UniConfig transaction == 1 database transaction == 1 connection to database).
 !!!
 
-#### UniConfig node identification and heartbeat
+#### UniConfig node identification
 
 By default, UniConfig node name is generated randomly. This behaviour can be changed by setting
-'dbPersistence.uniconfigInstance.instanceName'. Instance name is leveraged, for example, in the clustering
+'db-persistence.uniconfig-instance.instance-name'. Instance name is leveraged, for example, in the clustering
 of stream subscriptions.
-
-UniConfig nodes reports themselves in the cluster by updating heartbeat timestamp in database. Currently, this
-feature is not used by any other component in the UniConfig cluster. Reporting interval can be adjusted
-by 'dbPersistence.heartBeat.heartbeatInterval' field.
 
 Example:
 
-```json node identification and heartbeat settings
-// UniConfig instance naming settings.
-"uniconfigInstance": {
-    // Identifier of the local UniConfig instance (name must be unique in the cluster). If it is set to 'null'
-    // then this identifier is tried to be loaded from 'data/instance_name'. If this file doesn't exist, then
-    // name of the UniConfig instance is randomly generated and this file is created with new name of instance.
-    "instanceName": null
-},
-// Heart beat service settings.
-"heartBeat": {
-    // interval between updating of local UniConfig instance heartbeat timestamp [milliseconds]
-    "heartbeatInterval": 1000
-}
+```properties node identification properties
+# Name / unique identifier of local Uniconfig instance.
+# db-persistence.uniconfig-instance.instance-name=
+# Hostname or IP address of a local host that runs Uniconfig.
+db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
-#### Kafka and notification settings
+#### Kafka and notification properties
 
-This section contains settings related to connections to Kafka brokers, Kafka publisher timeouts, authentication, 
+This section contains properties related to connections to Kafka brokers, Kafka publisher timeouts, authentication, 
 subscription allocation, and rebalancing settings.
 
-Example with essential settings:
+Example with essential properties:
 
-```json notification settings
-// Grouped settings that are related to notifications.
-"notifications": {
-    // Flag that determines whether notifications are collected
-    "enabled": true,
-    "kafka": {
-        // Username used for authentication into Kafka brokers (SASL). If it is not set, then authentication
-        // is disabled (PLAINTEXT scheme).
-        // "username": "kafka",
-        // Password used for authentication into Kafka brokers.
-        //"password": "kafka",
-        "kafkaServers": [
-            {
-                // Address / hostname of the interface on which Kafka broker is listening to incoming connections.
-                "brokerHost": "kafka-broker",
-                // TCP port on which Kafka broker is listening to incoming connections.
-                "brokerListeningPort": 9092
-            }
-        ],
-        // Kafka producer settings
-        "kafkaProducer": {
-            // Specifies the number of messages that the Kafka handler processes as a batch
-            "batchSize": 16384
-        },
-        // Configuration of how long the send() method and the creation of connection for
-        // reading of metadata methods will block. (in ms)
-        "blockingTimeout": 60000,
-        // Configuration of how long will the producer wait for the acknowledgement of a request. (in ms)
-        // If the acknowledgement is not received before the timeout elapses, the producer will resend the
-        // request or fail the request if retries are exhausted
-        "requestTimeout": 30000,
-        // Configuration of the upper bound on the time to report success or failure after a
-        // call to send() returns.(in ms)
-        // This limits the total time that a record will be delayed prior to sending, the time to
-        // await acknowledgement from the broker (if expected), and the time allowed for retriable send failures.
-        "deliveryTimeout": 120000
-    }
-    // How often should uniconfig check for unassigned netconf notifications subscriptions (in seconds)
-    "netconfSubscriptionsMonitoringInterval": 5,
-    // How many unassigned netconf subscriptions can be processed within one subscription monitoring interval
-    "maxNetconfSubscriptionsPerInterval": 10,
-    // hard limit for how many subscriptions can a single UniConfig node handle
-    "maxNetconfSubscriptionsHardLimit": 5000,
-    // grace period for a UniConfig node going down. Other nodes will not restart the subscriptions until the grace
-    // period passes from when a dead Uniconfig node has been seen last
-    "rebalanceOnUCNodeGoingDownGracePeriod": 120,
-    // the lower margin to calculate optimal range start
-    "optimalNetconfSubscriptionsApproachingMargin": 0.05,
-    // the higher margin to calculate optimal range end
-    "optimalNetconfSubscriptionsReachedMargin" : 0.10
-}
+```properties notification properties
+# Grouped settings that are related to notifications.
+
+# Flag that determines whether notifications are collected.
+notifications.enabled=false
+# How many unassigned subscriptions can be processed.
+notifications.max-subscriptions-hard-limit=5000
+# How many unassigned subscriptions can be processed within one subscription monitoring interval.
+notifications.max-subscriptions-per-interval=10
+# How often should UniConfig check for unassigned notifications subscriptions (in seconds).
+notifications.subscriptions-monitoring-interval=5
+# If response body should be included in notification.
+notifications.audit-logs.include-response-body=false
+# If calculating the diff result should be included in notification.
+notifications.audit-logs.include-calculate-diff-result=false
+# Maximum count of records, after reaching this count the oldest records will be deleted.
+notifications.notification-db-threshold.max-count=10000
+# Maximum age of records, all older records will be deleted (in hours).
+notifications.notification-db-threshold.max-age=100
+
+# Grouped settings that are related to kafka.
+
+# Flag that determines whether audit logs are enabled.
+notifications.kafka.audit-logs-enabled=true
+# Flag that determines whether netconf notifications are enabled.
+notifications.kafka.netconf-notifications-enabled=true
+# Flag that determines whether gnmi notifications are enabled.
+notifications.kafka.gnmi-notifications-enabled=true
+# Flag that determines whether snmp notifications are enabled.
+notifications.kafka.snmp-notifications-enabled=true
+# Flag that sets the port to listen to notifications.
+notifications.kafka.snmp-notifications-udp-port=50000
+# The time in which the cache entry will expire (in seconds) if not accessed. This cache is used to map addresses
+# from notifications to repository names that is used to parse the specific notification.
+notifications.kafka.snmp-notifications-address-cache-duration=600
+# The time in which the cache entry will expire (in seconds) if not accessed. This cache is used to map object
+# identifiers to translated yang instance identifiers that are used to map them in the UniConfig schema context.
+notifications.kafka.snmp-notifications-oid-cache-duration=600
+# Flag that determines whether transaction notifications are enabled.
+notifications.kafka.transaction-notifications-enabled=true
+# Enabled collection and propagation of data-change-events into Kafka.
+notifications.kafka.data-change-events-enabled=true
+# Enabled collection and propagation of connection notifications into Kafka.
+notifications.kafka.connection-notifications-enabled=true
+# Unique identifier of topic that is used for storing netconf notifications.
+notifications.kafka.netconf-notifications-topic-name=netconf-notifications
+# Unique identifier of topic that is used for storing GNMI notifications.
+notifications.kafka.gnmi-notifications-topic-name=gnmi-notifications
+# Unique identifier of topic that is used for storing SNMP notifications.
+notifications.kafka.snmp-notifications-topic-name=snmp-notifications
+# Unique identifier of topic that is used for storing audit logs.
+notifications.kafka.audit-logs-topic-name=audit-logs
+# Unique identifier of topic that is used for storing transaction notifications.
+notifications.kafka.transactions-topic-name=transactions
+# Unique identifier of the Kafka topic used for distribution of data-change-events.
+notifications.kafka.data-change-events-topic-name=data-change-events
+# Unique identifier of the Kafka topic used for distribution of connection notifications.
+notifications.kafka.connection-notifications-topic-name=connection-notifications
+# If only connection notifications for NETCONF stream are enabled.
+notifications.kafka.connection-notifications-netconf-stream-only=true
+# The maximum thread pool size in the executor.
+# A thread pool executor is needed to send messages to Kafka.
+notifications.kafka.max-thread-pool-size=8
+# The maximum capacity of the work queue in the executor.
+notifications.kafka.queue-capacity=2048
+# Unique identifier of the Kafka topic used for distribution of shell notifications.
+notifications.kafka.shell-notifications-topic-name=shell-notifications
+# Enabled shell notifications into Kafka.
+notifications.kafka.shell-notifications-enabled=true
+# List of Address / hostname of the interface on which Kafka broker is listening to incoming connections and
+# TCP port on which Kafka broker is listening to incoming connections.
+notifications.kafka.kafka-servers[0].broker-host=127.0.0.1
+notifications.kafka.kafka-servers[0].broker-listening-port=9092
+# Specifies the number of messages that the Kafka handler processes as a batch.
+# In kafka is set with the parameter 'batch.size'.
+notifications.kafka.kafka-producer.batch-size=16384
+# Configuration of how long will the producer wait for the acknowledgement of a request. (in ms)
+# If the acknowledgement is not received before the timeout elapses, the producer will resend the
+# request or fail the request if retries are exhausted.
+# In kafka is set with the parameter 'request.timeout.ms'.
+notifications.kafka.kafka-producer.request-timeout=30000
+# Configuration of the upper bound on the time to report success or failure after a
+# call to send() returns.(in ms)
+# This limits the total time that a record will be delayed prior to sending, the time to
+# await acknowledgement from the broker (if expected), and the time allowed for retriable send failures.
+# In kafka is set with the parameter 'delivery.timeout.ms'.
+notifications.kafka.kafka-producer.delivery-timeout=120000
+# Configuration of how long the send() method and the creation of connection for
+# reading of metadata methods will block. (in ms).
+# In kafka is set with the parameter 'max.block.ms'.
+notifications.kafka.kafka-producer.blocking-timeout=60000
+# The producer groups together any records that arrive in between request transmissions into a single batched
+# request. Normally this occurs only under load when records arrive faster than they can be sent out.
+# However, in some circumstances the client may want to reduce the number of requests even under moderate load.
+# This setting accomplishes this by adding a small amount of artificial delay—that is, rather than immediately
+# sending out a record, the producer will wait for up to the given delay to allow other records to be sent so
+# that the sends can be batched together. This can be thought of as analogous to Nagle’s algorithm in TCP.
+# This setting gives the upper bound on the delay for batching: once we get 'batch.size' worth of records for a
+# partition it will be sent immediately regardless of this setting, however if we have fewer than this many
+# bytes accumulated for this partition we will ‘linger’ for the specified time waiting for more records to show
+# up. This setting defaults to 0 (i.e. no delay). Setting linger=5, for example, would have the effect of
+# reducing the number of requests sent but would add up to 5ms of latency to records sent in the absence of
+# load. In kafka is set with the parameter 'linger.ms'.
+notifications.kafka.kafka-producer.linger=0
+# Select compression algorithm for kafka producer.
+# Can be one of: none gzip snappy lz4 zstd
+# Snappy offers good balance and is good for JSON-based documents and logs.
+notifications.kafka.kafka-producer.compression-type=SNAPPY
+# The maximum time to block during receiving of next NETCONF notifications in milliseconds.
+notifications.kafka.kafka-subscriber.netconf-notifications-poll-timeout=100
+# The maximum time to block during receiving of next data-change-events in milliseconds.
+notifications.kafka.kafka-subscriber.data-change-events-poll-timeout=100
+# If this flag is set to 'true', then embedded Kafka is started during boot process.
+# Otherwise, all other settings are effectively ignored.
+notifications.kafka.embedded-kafka.enabled=false
+# Directory to which embedded Kafka is downloaded and extracted.
+notifications.kafka.embedded-kafka.install-dir=/tmp/embedded-kafka
+# URL that is used for download of Kafka, if it hasn't been downloaded yet.
+notifications.kafka.embedded-kafka.archive-url=https://dlcdn.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz
+# Directory to which embedded Kafka is downloaded and extracted.
+notifications.kafka.embedded-kafka.data-dir=./data/embedded-kafka
+# Clean data from previous run before starting of Kafka (= disabled persistence).
+notifications.kafka.embedded-kafka.clean-data-before-start=true
+# Number of partitions used for created topic.
+notifications.kafka.embedded-kafka.partitions=1
 ```
 
 ### Load-balancer configuration
@@ -353,6 +438,6 @@ many subscriptions each node handles:
 ![notifications-in-cluster-rebalancing](netconf_subs_rebalancing.svg)
 
 !!!
-The hard limit still applies in clustered environment and it will never
+The hard limit still applies in clustered environment, and it will never
 be crossed, regardless of the optimal range.
 !!!

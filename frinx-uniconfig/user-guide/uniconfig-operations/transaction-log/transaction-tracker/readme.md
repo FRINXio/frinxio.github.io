@@ -27,21 +27,26 @@ visible only if data was updated or created.
 
 ## Configuration
 
-UniConfig stores transaction metadata only if the
-**lighty-uniconfig-config.json** file contains the `maxStoredTransactions`
-parameter in the `transactions` container with a value greater then `0`. If not
-set before UniConfig is run, the default value of `0` is used and the
-transaction log is disabled.
+By default, UniConfig stores transaction metadata. 
+Their removal depends only on the `transactions.max-transaction-age` parameter.
 
-```json
-{
-  "transactions": {
-    "maxStoredTransactions": 5,
-    "maxTransactionAge": 0,
-    "cleaningInterval": 0,
-    "uniconfigTransactionEnabled": false
-  }
-}
+```properties
+# Grouped settings that are related to UniConfig transactions
+
+# Time after transaction can be closed [seconds] by transaction cleaner.
+transactions.transaction-idle-time-out=300
+# Maximum transaction age before it can be evicted from transaction registry [seconds].
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.max-transaction-age=0
+# Interval at which expired transactions are closed and cleaned [seconds].
+# Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
+# Only dedicated UniConfig transactions (initialized using 'create-transaction' RPC)
+# are cleaned - shared transaction is never removed or invalidated.
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.cleaning-interval=0
+# Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
+# If disabled, only manually created transactions can exist.
+transactions.immediate-commit-enabled=true
 ```
 
 ### Show transaction-metadata

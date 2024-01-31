@@ -35,7 +35,7 @@ UniConfig startup with UniConfig Cloud Config:
 
 * Before starting UniConfig, enable Cloud Config by using the following properties:
 
-```
+```properties
 # Uniconfig cloud settings - depends on kafka connection
 uniconfig.cloud.config.enabled=true
 uniconfig.cloud.config.fail-fast=false
@@ -63,7 +63,7 @@ UniConfig startup without UniConfig Cloud Config:
 
 * Before starting UniConfig, disable Cloud Config by using the following properties:
 
-```
+```properties
 # Uniconfig cloud settings - depends on kafka connection
 uniconfig.cloud.config.enabled=false
 uniconfig.cloud.config.fail-fast=false

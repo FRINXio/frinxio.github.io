@@ -28,7 +28,7 @@ records.
 In our particular case, UniConfig publishes notifications. Each type of
 notification is stored in a separate topic and can therefore be subscribed to
 independently. The names of topics and connection data are configurable in the
-**lighty-uniconfig-config.json** file.
+**application.properties** file.
 
 ## NETCONF notifications
 
@@ -650,7 +650,7 @@ subscriptions.
 !!!
 
 The loop interval, hard subscription limit and maximum number of subscriptions
-processed per interval can be set in the **lighty-uniconfig-config.json** file.
+processed per interval can be set in the **application.properties** file.
 
 ### Dedicated NETCONF session for subscription
 
@@ -927,61 +927,139 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 
 ## Configuration
 
-Configurations for notifications are in the **lighty-uniconfig-config.json**
+Configurations for notifications are in the **application.properties**
 file, under the `notifications` property.
 
 The entire configuration looks like this:
 
-```json
-{
-  "notifications": {
-    "enabled": true,
-    "kafka": {
-      "username": "kafka",
-      "password": "kafka",
-      "kafkaServers": [
-        {
-          "brokerHost": "127.0.0.1",
-          "brokerListeningPort": 9092
-        }
-      ],
-      "netconfNotificationsEnabled": true,
-      "auditLogsEnabled": true,
-      "transactionNotificationsEnabled": true,
-      "dataChangeEventsEnabled": true,
-      "netconfNotificationsTopicName": "netconf-notifications",
-      "auditLogsTopicName": "auditLogs",
-      "transactionsTopicName": "transactions",
-      "dataChangeEventsTopicName": "data-change-events",
-      "blockingTimeout": 60000,
-      "requestTimeout": 30000,
-      "deliveryTimeout": 120000,
-      "maxThreadPoolSize": 8,
-      "queueCapacity": 2048,
-      "embeddedKafka": {
-        "enabled": true,
-        "installDir": "/tmp/embedded-kafka",
-        "archiveUrl": "https://dlcdn.apache.org/kafka/3.0.0/kafka_2.12-3.0.0.tgz",
-        "dataDir": "./data/embedded-kafka",
-        "cleanDataBeforeStart": true,
-        "partitions": 1
-      }
-    },
-    "auditLogs": {
-      "includeResponseBody": true
-    },
-    "notificationDbTreshold": {
-      "maxCount": 10000,
-      "maxAge": 100
-    },
-    "netconfSubscriptionsMonitoringInterval": 5,
-    "maxNetconfSubscriptionsPerInterval": 10,
-    "maxNetconfSubscriptionsHardLimit": 5000,
-    "rebalanceOnUCNodeGoingDownGracePeriod": 120,
-    "optimalNetconfSubscriptionsApproachingMargin": 0.05,
-    "optimalNetconfSubscriptionsReachedMargin": 0.10
-  }
-}
+```properties notification properties
+# Grouped settings that are related to notifications.
+
+# Flag that determines whether notifications are collected.
+notifications.enabled=false
+# How many unassigned subscriptions can be processed.
+notifications.max-subscriptions-hard-limit=5000
+# How many unassigned subscriptions can be processed within one subscription monitoring interval.
+notifications.max-subscriptions-per-interval=10
+# How often should UniConfig check for unassigned notifications subscriptions (in seconds).
+notifications.subscriptions-monitoring-interval=5
+notifications.optimal-subscriptions-reached-margin=0.10
+notifications.optimal-subscriptions-approaching-margin=0.05
+notifications.rebalance-on-uc-node-going-down-grace-period=120
+# If response body should be included in notification.
+notifications.audit-logs.include-response-body=false
+# If calculating the diff result should be included in notification.
+notifications.audit-logs.include-calculate-diff-result=false
+# Maximum count of records, after reaching this count the oldest records will be deleted.
+notifications.notification-db-threshold.max-count=10000
+# Maximum age of records, all older records will be deleted (in hours).
+notifications.notification-db-threshold.max-age=100
+
+# Grouped settings that are related to kafka.
+
+# Flag that determines whether audit logs are enabled.
+notifications.kafka.audit-logs-enabled=true
+# Flag that determines whether netconf notifications are enabled.
+notifications.kafka.netconf-notifications-enabled=true
+# Flag that determines whether gnmi notifications are enabled.
+notifications.kafka.gnmi-notifications-enabled=true
+# Flag that determines whether snmp notifications are enabled.
+notifications.kafka.snmp-notifications-enabled=true
+# Flag that sets the port to listen to notifications.
+notifications.kafka.snmp-notifications-udp-port=50000
+# The time in which the cache entry will expire (in seconds) if not accessed. This cache is used to map addresses
+# from notifications to repository names that is used to parse the specific notification.
+notifications.kafka.snmp-notifications-address-cache-duration=600
+# The time in which the cache entry will expire (in seconds) if not accessed. This cache is used to map object
+# identifiers to translated yang instance identifiers that are used to map them in the UniConfig schema context.
+notifications.kafka.snmp-notifications-oid-cache-duration=600
+# Flag that determines whether transaction notifications are enabled.
+notifications.kafka.transaction-notifications-enabled=true
+# Enabled collection and propagation of data-change-events into Kafka.
+notifications.kafka.data-change-events-enabled=true
+# Enabled collection and propagation of connection notifications into Kafka.
+notifications.kafka.connection-notifications-enabled=true
+# Unique identifier of topic that is used for storing netconf notifications.
+notifications.kafka.netconf-notifications-topic-name=netconf-notifications
+# Unique identifier of topic that is used for storing GNMI notifications.
+notifications.kafka.gnmi-notifications-topic-name=gnmi-notifications
+# Unique identifier of topic that is used for storing SNMP notifications.
+notifications.kafka.snmp-notifications-topic-name=snmp-notifications
+# Unique identifier of topic that is used for storing audit logs.
+notifications.kafka.audit-logs-topic-name=audit-logs
+# Unique identifier of topic that is used for storing transaction notifications.
+notifications.kafka.transactions-topic-name=transactions
+# Unique identifier of the Kafka topic used for distribution of data-change-events.
+notifications.kafka.data-change-events-topic-name=data-change-events
+# Unique identifier of the Kafka topic used for distribution of connection notifications.
+notifications.kafka.connection-notifications-topic-name=connection-notifications
+# If only connection notifications for NETCONF stream are enabled.
+notifications.kafka.connection-notifications-netconf-stream-only=true
+# The maximum thread pool size in the executor.
+# A thread pool executor is needed to send messages to Kafka.
+notifications.kafka.max-thread-pool-size=8
+# The maximum capacity of the work queue in the executor.
+notifications.kafka.queue-capacity=2048
+# Unique identifier of the Kafka topic used for distribution of shell notifications.
+notifications.kafka.shell-notifications-topic-name=shell-notifications
+# Enabled shell notifications into Kafka.
+notifications.kafka.shell-notifications-enabled=true
+# List of Address / hostname of the interface on which Kafka broker is listening to incoming connections and
+# TCP port on which Kafka broker is listening to incoming connections.
+notifications.kafka.kafka-servers[0].broker-host=127.0.0.1
+notifications.kafka.kafka-servers[0].broker-listening-port=9092
+# Specifies the number of messages that the Kafka handler processes as a batch.
+# In kafka is set with the parameter 'batch.size'.
+notifications.kafka.kafka-producer.batch-size=16384
+# Configuration of how long will the producer wait for the acknowledgement of a request. (in ms)
+# If the acknowledgement is not received before the timeout elapses, the producer will resend the
+# request or fail the request if retries are exhausted.
+# In kafka is set with the parameter 'request.timeout.ms'.
+notifications.kafka.kafka-producer.request-timeout=30000
+# Configuration of the upper bound on the time to report success or failure after a
+# call to send() returns.(in ms)
+# This limits the total time that a record will be delayed prior to sending, the time to
+# await acknowledgement from the broker (if expected), and the time allowed for retriable send failures.
+# In kafka is set with the parameter 'delivery.timeout.ms'.
+notifications.kafka.kafka-producer.delivery-timeout=120000
+# Configuration of how long the send() method and the creation of connection for
+# reading of metadata methods will block. (in ms).
+# In kafka is set with the parameter 'max.block.ms'.
+notifications.kafka.kafka-producer.blocking-timeout=60000
+# The producer groups together any records that arrive in between request transmissions into a single batched
+# request. Normally this occurs only under load when records arrive faster than they can be sent out.
+# However, in some circumstances the client may want to reduce the number of requests even under moderate load.
+# This setting accomplishes this by adding a small amount of artificial delay—that is, rather than immediately
+# sending out a record, the producer will wait for up to the given delay to allow other records to be sent so
+# that the sends can be batched together. This can be thought of as analogous to Nagle’s algorithm in TCP.
+# This setting gives the upper bound on the delay for batching: once we get 'batch.size' worth of records for a
+# partition it will be sent immediately regardless of this setting, however if we have fewer than this many
+# bytes accumulated for this partition we will ‘linger’ for the specified time waiting for more records to show
+# up. This setting defaults to 0 (i.e. no delay). Setting linger=5, for example, would have the effect of
+# reducing the number of requests sent but would add up to 5ms of latency to records sent in the absence of
+# load. In kafka is set with the parameter 'linger.ms'.
+notifications.kafka.kafka-producer.linger=0
+# Select compression algorithm for kafka producer.
+# Can be one of: none gzip snappy lz4 zstd
+# Snappy offers good balance and is good for JSON-based documents and logs.
+notifications.kafka.kafka-producer.compression-type=SNAPPY
+# The maximum time to block during receiving of next NETCONF notifications in milliseconds.
+notifications.kafka.kafka-subscriber.netconf-notifications-poll-timeout=100
+# The maximum time to block during receiving of next data-change-events in milliseconds.
+notifications.kafka.kafka-subscriber.data-change-events-poll-timeout=100
+# If this flag is set to 'true', then embedded Kafka is started during boot process.
+# Otherwise, all other settings are effectively ignored.
+notifications.kafka.embedded-kafka.enabled=false
+# Directory to which embedded Kafka is downloaded and extracted.
+notifications.kafka.embedded-kafka.install-dir=/tmp/embedded-kafka
+# URL that is used for download of Kafka, if it hasn't been downloaded yet.
+notifications.kafka.embedded-kafka.archive-url=https://dlcdn.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz
+# Directory to which embedded Kafka is downloaded and extracted.
+notifications.kafka.embedded-kafka.data-dir=./data/embedded-kafka
+# Clean data from previous run before starting of Kafka (= disabled persistence).
+notifications.kafka.embedded-kafka.clean-data-before-start=true
+# Number of partitions used for created topic.
+notifications.kafka.embedded-kafka.partitions=1
 ```
 
 All notifications, as well as the monitoring system, can be enabled or disabled
@@ -989,39 +1067,39 @@ using the `enabled` flag.
 
 **Properties related to the monitoring system:**
 
-- `subscriptionsMonitoringInterval` - How often the monitoring system loop is
+- `subscriptions-monitoring-interval` - How often the monitoring system loop is
   run and how often it attempts to acquire free subscriptions (in seconds). The
   default value is 5.
-- `maxSubscriptionsPerInterval` - The maximum number of free subscriptions that
+- `max-subscriptions-per-interval` - The maximum number of free subscriptions that
   can be acquired in a single iteration of the monitoring system loop. If the
   number of free subscriptions is smaller than this value, all free
   subscriptions are processed. If the number of free subscriptions is larger
   than this value, only the specified number of subscriptions are acquired. The
   rest can be acquired during the next iterations of the monitoring system loop
   or by other UniConfing instances in the cluster. The default value is 10.
-- `maxNetconfSubscriptionsHardLimit` - Maximum number of subscriptions that  a
+- `max-netconf-subscriptions-hard-limit` - Maximum number of subscriptions that  a
   single UniConfig node can handle.
 
 **Properties related to the monitoring system in clustered environments:**
 
-- `rebalanceOnUCNodeGoingDownGracePeriod` - Grace period for a UniConfig node
+- `rebalance-on-UC-node-going-down-grace-period` - Grace period for a UniConfig node
   going down (in seconds). Other nodes will not restart subscriptions until the
   grace period has passed after a dead Uniconfig node was last seen. The default
   value is 120.
-- `optimalNetconfSubscriptionsApproachingMargin` - Lower margin to calculate
+- `optimal-subscriptions-approaching-margin` - Lower margin to calculate
   optimal range start. The default value is 0.05.
-- `optimalNetconfSubscriptionsReachedMargin` - Upper margin to calculate optimal
+- `optimal-subscriptions-reached-margin` - Upper margin to calculate optimal
   range end. The default value is 0.10.
 
 **Properties related to message timeout to Kafka:**
 
-- `blockingTimeout` - How long the `send()` method and the creation of a
+- `blocking-timeout` - How long the `send()` method and the creation of a
   connection for reading metadata methods will block (in milliseconds).
-- `requestTimeout` - How long the producer waits for acknowledgement of a
+- `request-timeout` - How long the producer waits for acknowledgement of a
   request (in milliseconds). If no acknowledgement is received before the
   timeout period has passed, the producer resends the request or, if retries are
   exhausted, fails the request.
-- `deliveryTimeout` - Upper bound on the time to report success or failure after
+- `delivery-timeout` - Upper bound on the time to report success or failure after
   a call to `send()` returns (in milliseconds). Sets a limit on the total time
   that a record will be delayed prior to sending, the time to wait for
   acknowledgement from the broker (if expected) and the time allowed for
@@ -1029,55 +1107,55 @@ using the `enabled` flag.
 
 **Properties related to the thread pool executor required to send messages to Kafka:**
 
-- `maxThreadPoolSize` - Maximum thread pool size in the executor.
-- `queueCapacity` - Maximum capacity for the work queue in the executor.
+- `max-thread-pool-size` - Maximum thread pool size in the executor.
+- `queue-capacity` - Maximum capacity for the work queue in the executor.
 
 **Properties used to limit the number of records in the notifications table in the database:**
 
-- `maxCount` - Maximum number of records in the notifications table. If the
+- `max-count` - Maximum number of records in the notifications table. If the
   number of records exceeds this value, the oldest record in the table is
   deleted. The default value is 10,000.
-- `maxAge` - Maximum age of a record in the notifications table (in hours).
+- `max-age` - Maximum age of a record in the notifications table (in hours).
   Records older than this value are deleted. The default value is 100.
 
-  These properties are under `notificationDbTreshold`. Both are implemented
+  These properties are under `notification-db-treshold`. Both are implemented
   using database triggers. Triggers are running on inserts to the notifications
   table.
 
-Audit log settings are under the `auditLogs` property. Currently there is only
-one flag, `includeResponseBody`, which is used to enable or disable logging the
+Audit log settings are under the `audit-logs` property. Currently there is only
+one flag, `include-response-body`, which is used to enable or disable logging the
 body of RESTCONF responses.
 
 All settings related to Kafka are grouped under `kafka` property. For
 authentication, there are the `username` and `password` properties. For the
-Kafka connection, there is the `kafkaServers` property which contains a list of
-Kafka servers as a combination of `brokerHost` and `brokerListeningPort`. The
+Kafka connection, there is the `kafka-servers` property which contains a list of
+Kafka servers as a combination of `broker-host` and `broker-listening-port`. The
 broker host can be either an IP address or hostname.
 
 Enable or disable each type of notification independently of others by using the
 following flags:
 
-- `netconfNotificationsEnabled`
-- `auditLogsEnabled`
-- `transactionNotificationsEnabled`
-- `dataChangeEventsEnabled`
+- `netconf-notifications-enabled`
+- `audit-logs-enabled`
+- `transaction-notifications-enabled`
+- `data-change-events-enabled`
 
 Configure the names of all topics for every notification type by using the
 following flags:
 
-- `transactionsTopicName` - Topic name for transactions about notifications
-- `netconfNotificationsTopicName` - Topic name for NETCONF notifications
-- `auditLogsTopicName` - Topic name for audit logs
-- `dataChangeEventsTopicName` - Topic name for data change events
+- `transactions-topic-name` - Topic name for transactions about notifications
+- `netconf-notifications-topic-name` - Topic name for NETCONF notifications
+- `audit-logs-topic-name` - Topic name for audit logs
+- `data-change-events-topic-name` - Topic name for data change events
 
 You can also to set up embedded Kafka using these setting grouped under the
 `embeddedKafka` property:
 
 - `enabled` - Enable or disable embedded Kafka
-- `installDir` - Where Kafka files should be placed
-- `archiveUrl` - Where to download Kafka from
-- `dataDir` - Kafka data directory
-- `cleanDataBeforeStart` - Whether or not to clear Kafka config before start
+- `install-dir` - Where Kafka files should be placed
+- `archive-url` - Where to download Kafka from
+- `data-dir` - Kafka data directory
+- `clean-data-before-start` - Whether or not to clear Kafka config before start
 
 Kafka settings are also stored in the database. This way they can be changed at
 runtime using RESTCONF or UniConfig shell. Kafka setting are stored in the

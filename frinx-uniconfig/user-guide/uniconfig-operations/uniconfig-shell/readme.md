@@ -17,26 +17,38 @@ available RPC/action operations).
 ## Configuration
 
 UniConfig shell is disabled by default. To enable it, set the configuration
-parameter `cliShell/sshServer/enabled` to `true` in the
-**config/lighty-uniconfig-config.json** file.
+parameter `cli-shell.ssh-server.enabled` to `true` in the
+**application.properties** file.
 
 All available settings and descriptions are listed below:
 
 ```properties UniConfig shell configuration (config/application.properties)
 # CLI shell config
+cli-shell.ssh-server.enabled=false
 cli-shell.default-unistore-node-id=system
+cli-shell.default-callbacks-repository=callbacks
 cli-shell.enable-scrolling=false
 cli-shell.history-size=500
 cli-shell.history-file-size=1000
-cli-shell.ssh-server.enabled=false
 cli-shell.ssh-server.port=2022
 cli-shell.ssh-server.inet-address=127.0.0.1
+cli-shell.ssh-server.idle-timeout=600
+cli-shell.ssh-server.auth-timeout=120
 cli-shell.ssh-server.username-password-auth.username=admin
 cli-shell.ssh-server.username-password-auth.password=secret
+cli-shell.shell-colors.description-color=default
+cli-shell.shell-colors.error-color=default
+cli-shell.shell-colors.info-color=default
+cli-shell.shell-colors.warning-color=default
 ```
 
 After starting UniConfig, the SSH server listens for connections on port 2022
 and the loopback interface.
+UniConfig Shell has 2 connection timeouts: authorization timeout (key used to retrieve 
+the value of the timeout after which it will close the connection if the other side has 
+not been authenticated - in seconds. The default is 120 seconds.) and idle timeout (key used 
+to retrieve the value of idle timeout after which it will close the connection - in seconds. 
+The default is 600 seconds.)
 
 ## Navigating in the shell
 
@@ -885,7 +897,7 @@ The following YANG modules are required:
 ### Configuration
 
 By default, callbacks are disabled and the host and port for the remote server
-are empty in **config/lighty-uniconfig-config.json**. 
+are empty in **config/application.properties**. 
 
 To enable callbacks, set the configuration parameter `callbacks/enabled` to
 `true`. It is also necessary to set the host and port for the remote server and
@@ -1002,7 +1014,7 @@ module frinx-test {
 
 The argument of the `url` extension is `/data/from/remote`, which is appended to
 the end of the remote server URI configured in
-**config/lighty-uniconfig-config.json**. Thus the final address for the remote
+**config/application.properties**. Thus the final address for the remote
 call-point is `https://remote.server.io/data/from/remote`.
 
 #### Add action (POST request)

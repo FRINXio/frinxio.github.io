@@ -1516,18 +1516,21 @@ The following example demonstrates how to enable schema filters for
 selected extensions and make RESTCONF ignore unknown definitions and
 definitions with a 'deprecated status' attribute.
 
-```json
-"schemaFilters": {
-  "ignoredDataOnWriteByExtensions": [
-    "tailf:hidden full"
-  ],
-  "hiddenDataOnReadByExtensions": [
-    "tailf:hidden deprecated",
-    "tailf:hidden debug"
-  ],
-    "ignoreUnsupportedDefinitionsOnWrite": true,
-    "hideDeprecatedDefinitionsOnRead": true
-}
+```properties RESTCONF Shema Filters Properties
+# Indicates if the data for non-existing schema nodes will be ignored during PUT/POST/PATCH operation
+# or during GET operation in the 'fields' query parameter value.
+restconf.schema-filters.ignore-unsupported-definitions-on-write=true
+# Indicates if the definition with "DEPRECATED" status should be hidden during GET operation.
+restconf.schema-filters.hide-deprecated-definitions-on-read=true
+# Indicates if constraint will throw an exception for an invalid input value.
+# This is used on DB layer (serializing/deserializing), RestConf layer (reading/writing),
+# gNMI layer (serializing/deserializing). Currently, string patterns + enums are ignored.
+restconf.schema-filters.skip-constraint-checking=false
+# List of extension definitions that can be used to filter out data during PUT/POST/PATCH operation.
+restconf.schema-filters.ignored-data-on-write-by-extensions[0]=tailf:hidden full
+# List of extension definitions that can be used to filter out data during GET operation.
+restconf.schema-filters.hidden-data-on-read-by-extensions[0]=tailf:hidden deprecated
+restconf.schema-filters.hidden-data-on-read-by-extensions[1]=tailf:hidden debug
 ```
 
 ### Unhide Parameter for READ/WRITE Operations
@@ -1578,8 +1581,7 @@ curl --location --request DELETE 'http://localhost:8181/rests/data/network-topol
     "errors": {
         "error": [
             {
-                "error-message": "Leafref validation failed. Violated leafref constraint on leaf /network-topology/topology/node/configuration/interfaces/interface/name -
-                                    node is referenced by leaf on path: /network-topology/topology/node/configuration/referencing/path,
+                "error-message": "Leafref validation failed. Violated leafref constraint on leaf /network-topology/topology/node/configuration/interfaces/interface/name - node is referenced by leaf on path: /network-topology/topology/node/configuration/referencing/path",
                 "error-tag": "invalid-value",
                 "error-type": "protocol"
             }
@@ -1671,15 +1673,26 @@ https://www.urlencoder.org/
 UniConfig allows to specify delimiter used for demarcation of list key value. Afterwards, all special characters
 inside key are automatically escaped.
 
-By default, key delimiter is disabled. It must be specified in the 'config/lighty-uniconfig-config.json' file:
+By default, key delimiter is disabled. It must be specified in the 'config/application.properties' file:
 
-```json Configuration of keyDelimiter
-    // RESTCONF and web server settings
-    "restconf": {
-        // delimiter used for escaping of list keys in URI (for example, '%22')
-        // if it is set to 'null' (default), keys cannot be escaped and must be directly encoded according to RFC-8040
-        "keyDelimiter": "%22"
-    }
+```properties RESTCONF Properties
+# RESTCONF settings
+
+# This flag removes namespaces from GET response (only if there are no duplicate localnames)
+# (E.g. if there is: namespace1:test and namespace2:test the namespace won't be removed because
+# there would be two identical localnames).
+restconf.show-namespace-in-json-response=true
+# Trying to parse input body and URI using the latest schema if parsing using another context failed.
+# If parsing using the latest schema is successful, then error returned to user is adjusted.
+restconf.format-error-with-latest-schema=false
+# Flag that if enabled, changes yang-patch responses containing errors into RFC-8040 format.
+restconf.yang-patch-rfc8040-error-response=false
+# Default value 0 makes the behavior as defined in RFC8040 (returns status code 404 [Not Found]),
+# if changed to anything else, that status code will be returned.
+restconf.status-code-for-empty-get-response=0
+# Delimiter used for escaping of list keys in URI (for example, '%22')
+# if it is set to 'null' (default), keys cannot be escaped and must be directly encoded according to RFC-8040.
+restconf.keyDelimiter=%22
 ```
 
 The following request demonstrates demarcation of interface name 'ge0/0/1' using '%22' delimiter.

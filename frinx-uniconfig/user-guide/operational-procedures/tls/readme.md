@@ -95,11 +95,13 @@ UniConfig to the key-store file that we have created in the previous
 section.
 
 ```json
-"tls": {
+{
+  "tls": {
     "enabledTls": true,
     "enabledClientAuthentication": false,
     "keystorePath": "tls/.keystore",
     "keystorePassword": "key-pass"
+  }
 }
 ```
 
@@ -108,13 +110,15 @@ as well, you should also specify the trust-store fields by setting the
 'enabledClientAuthentication' field to 'true'.
 
 ```json
-"tls": {
+{
+  "tls": {
     "enabledTls": true,
     "enabledClientAuthentication": true,
     "keystorePath": "tls/.keystore",
     "keystorePassword": "key-pass",
     "truststorePath": "tls/.truststore",
     "truststorePassword": "trust-pass"
+  }
 }
 ```
 
@@ -124,31 +128,32 @@ Jetty server and clients. The following default configuration is based
 on actual recommendations (you should adjust it as needed):
 
 ```json
-"tls": {
-  ...,
-  "includedProtocols": [
+{
+  "tls": {
+    "includedProtocols": [
       "TLSv1.2",
       "TLSv1.3"
-  ],
-  "excludedProtocols": [
+    ],
+    "excludedProtocols": [
       "TLSv1",
       "TLSv1.1",
       "SSL",
       "SSLv2",
       "SSLv2Hello",
       "SSLv3"
-  ],
-  "includedCipherSuites": [
+    ],
+    "includedCipherSuites": [
       "TLS_ECDHE.*",
       "TLS_DHE_RSA.*"
-  ],
-  "excludedCipherSuites": [
+    ],
+    "excludedCipherSuites": [
       ".*MD5.*",
       ".*RC4.*",
       ".*DSS.*",
       ".*NULL.*",
       ".*DES.*"
-  ]
+    ]
+  }
 }
 ```
 

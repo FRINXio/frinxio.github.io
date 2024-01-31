@@ -194,11 +194,11 @@ private key must be 'encrypt_key' and name of the public key must be 'encrypt_ke
 these files, UniConfig will automatically generate its own key-pair with length of 2048 bits.
 All UniConfig instances in the cluster must use the same key-pair.
 
-Encryption settings are stored in the 'config/lighty-uniconfig-config.json' file under 'crypto' root object.
+Encryption settings are stored in the 'config/application.properties'.
 
 Example:
 
-```settings
+```properties
 crypto.encrypt-enabled=true
 crypto.encrypt-extension-id=frinx-encrypt:encrypt
 crypto.netconf-reference-module-name=system
