@@ -511,10 +511,13 @@ Global settings common for all logging brokers:
 
 By default, all logging brokers are disabled and logging is disabled on all devices. To enable per-device logging, you must explicitly specify a list of devices. Additionally, RESTCONF-specific filtering is not configured, all HTTP requests and responses are fully logged and no content is dismissed. By default, only the `SET` gNMI message type is set to be logged.
 
-The initial logging configuration can be adjusted by adding the `logging-controller` configuration into the
+The initial logging configuration can be adjusted by adding the `logging-controller` configuration to the
 **config/application.properties** file. The structure of this configuration section conforms to the YANG structure described by the `logging` and `restconf-logging` modules. It is possible to copy the state of the `Operational` datastore under `logging-status` into the `logging-controller` node.
 
-The following properties snippet shows the sample configuration `logging-controller`. The logging brokers `netconf\_messages` and `netconf\_notifications` are enabled, (`netconf\_messages` for all devices and `netconf\_notifications` only for `xr6` and `xr7` devices).
+The following properties snippet shows the sample configuration
+`logging-controller`. The logging brokers `netconf\_messages` and
+`netconf\_notifications` are enabled, (`netconf\_messages` for all devices and
+`netconf\_notifications` only for `xr6` and `xr7` devices).
 
 !!!
 If unknown parameters are specified in a configuration file, they are ignored and a warning is logged.

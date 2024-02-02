@@ -44,11 +44,11 @@ cli-shell.shell-colors.warning-color=default
 
 After starting UniConfig, the SSH server listens for connections on port 2022
 and the loopback interface.
-UniConfig Shell has 2 connection timeouts: authorization timeout (key used to retrieve 
-the value of the timeout after which it will close the connection if the other side has 
-not been authenticated - in seconds. The default is 120 seconds.) and idle timeout (key used 
-to retrieve the value of idle timeout after which it will close the connection - in seconds. 
-The default is 600 seconds.)
+UniConfig Shell has two connection timeouts:
+- Authorization timeout, after which the connection is closed if the other party
+  has not been authenticated (in seconds). The default value is 120 seconds.
+- Idle timeout, after which the connection is closed if idle (in seconds). The
+  default value is 600 seconds.
 
 ## Navigating in the shell
 

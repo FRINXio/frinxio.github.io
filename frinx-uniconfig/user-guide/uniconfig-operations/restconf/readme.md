@@ -1668,12 +1668,13 @@ Mappings between special characters and UTF-8 codes can be found on following si
 https://www.urlencoder.org/
 !!!
 
-### Demarcation of key using delimiter
+### Demarcate key using delimiter
 
-UniConfig allows to specify delimiter used for demarcation of list key value. Afterwards, all special characters
-inside key are automatically escaped.
+UniConfig lets you specify a key delimiter used to demarcate list key values.
+Once defined, all special characters inside the key are automatically escaped.
 
-By default, key delimiter is disabled. It must be specified in the 'config/application.properties' file:
+The delimiter is disabled by default. It can be defined in the
+`config/application.properties` file:
 
 ```properties RESTCONF Properties
 # RESTCONF settings
@@ -1695,7 +1696,8 @@ restconf.status-code-for-empty-get-response=0
 restconf.keyDelimiter=%22
 ```
 
-The following request demonstrates demarcation of interface name 'ge0/0/1' using '%22' delimiter.
+The following request demonstrates the demarcation of an interface named
+`ge0/0/1`using the `%22` delimiter.
 
 ```shell Read interface (escaped interface name)
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device/configuration/frinx-openconfig-interfaces:interfaces/interface=%22ge0/0/1%22 \

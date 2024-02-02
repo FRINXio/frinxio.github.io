@@ -1,9 +1,9 @@
 # Build-and-Commit Model
 
-The Build-and-Commit model is based on explicit creation of a transaction,
-invoking operations in the scope of this transaction and, finally,
-committing or closing the transaction. The transaction represents a session
-between client and UniConfig instance.
+The Build-and-Commit model is based on explicitly creating a transaction,
+invoking operations in the scope of this transaction and, finally, committing or
+closing the transaction. The transaction represents a session between client and
+UniConfig instance.
 
 Using explicitly created transactions has multiple advantages in
 comparison to the Immediate Commit Model:
@@ -16,8 +16,8 @@ comparison to the Immediate Commit Model:
 - The transaction allows a client to identify if it still communicates with the
     same UniConfig instance (this property is usable in the clustered
     deployment). If the UniConfig instance does not know about the transaction,
-    the request will fail because the transaction expired, is closed or was
-    never created in the first place.
+    the request fails because the transaction expired, is closed or was never
+    created in the first place.
 
 ## Configuration
 

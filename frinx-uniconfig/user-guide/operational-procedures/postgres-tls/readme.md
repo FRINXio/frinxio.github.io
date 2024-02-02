@@ -1,38 +1,48 @@
 # TLS encryption for Postgres database
 
-By default all the communication to the database is not encrypted.
-In deployments where UniConfig is running separately from database, the traffic might be visible to unwanted eyes. Here are the steps to enabling TLS encryption for communication with the database.
+By default, communications with the database are unencrypted. In deployments
+where UniConfig is running separately from the database, network traffic may be
+visible to outside parties.
 
-## Generating self-signed certificate using OpenSSL
+The sections below describe how to enable TLS encryption for communications with
+the database.
 
-If you already have SSL keys generated, you need to convert them to proper format,
-see [Converting SSL keys to proper format](#Converting-SSL-keys-to-proper-format), otherwise you need to generate them.
+## Generate self-signed certificate using OpenSSL
 
+If you have already generated your SSL keys, you must convert them to the
+correct format. See [Convert SSL keys to correct format](#Convert-SSL-keys-to-correct-format)
 
-## Converting SSL keys to proper format
+If not, you must first generate your keys.
 
-The proper format for the SSL keys is the following:
+## Convert SSL keys to correct format
+
+The correct format for SSL keys is as follows:
 
     Client certificate: PEM encoded X509v3 certificate
     Root certificate: PEM encoded X509v3 certificate
     Key file: PKCS-8 encoded in DER format or PKCS-12 key
 
-The command which needs to be used to convert the keys properly may differ based on the format of the keys in which they are available. They can be converted using OpenSSL version 1.1.1, from command line ```openssl``` command. OpenSSL documentation provides examples for the most common cases. 
+The command for converting the keys may differ based on the format of your
+existing keys. They can be converted using OpenSSL version 1.1.1 with the
+```openssl``` command.
 
-To convert to PKCS-8 DER binary format, consult the documentation here: [PKCS-8](https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs8.html)
+The OpenSSL documentation provides examples for most
+common cases:
+- To convert to PKCS-8 DER binary format, see 
+[PKCS-8](https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs8.html).
+- To convert to PKCS-12 format, see 
+[PKCS-12](https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs12.html).
 
-To convert to PKCS-12 format, consult the documentation here: [PKCS-12](https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs12.html)
+## Enable TLS for database connections
 
-## Enabling TLS for the database connection
-
-The configuration file that must be modified can
-be found on the following path relative to the UniConfig root directory:
+Edit the configuration file at the following path relative to the UniConfig
+root directory: 
 
 ```
 vim config/application.properties
 ```
 
-Then edit the **configuration** section in **dbPersistence** section.
+Modify the `connection` section within the `dbPersistence` section:
 
 Example:
 
@@ -64,18 +74,25 @@ db-persistence.connection.repair-schema-history=false
 db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
-The TLS related fields are the following:
+TLS-related fields include the following:
 
-`db-persistence.connection.enabled-tls` - setting to `true` enables TLS encryption, default is `false`
+`db-persistence.connection.enabled-tls` - Set to `true` to enable TLS
+encryption. The default value is `false`.
 
-`db-persistence.connection.tls-client-cert` - specify the **relative** path to the Client certificate from the root UniConfig directory
+`db-persistence.connection.tls-client-cert` - Specify the *relative* path from
+the root UniConfig directory to the Client certificate.
 
-`db-persistence.connection.tls-client-key` - specify the **relative** path to the Client key from the root UniConfig 
-directory, this can be PKCS-12 or PKCS-8 format
+`db-persistence.connection.tls-client-key` - Specify the *relative* path from
+the root UniConfig directory to the Client key. Can be PKCS-12 or PKCS-8 format.
 
-`db-persistence.connection.tls-ca-cert` - specify the **relative** path to the root CA certificate from the root UniConfig directory
+`db-persistence.connection.tls-ca-cert` - Specify the *relative* path  from the
+root UniConfig directory to the root CA certificate.
 
-`db-persistence.connection.ssl-password` - if the `db-persistence.connection.tls-client-key` file is encrypted 
-with password, specify it here. It is needed for PKCS-12 keys and for encrypted PKCS-8 keys, this will be ignored for the unencrypted keys.
+`db-persistence.connection.ssl-password` - If the file specified in
+`db-persistence.connection.tls-client-key` is encrypted with a password, specify
+the password here. Required for PKCS-12 keys and for encrypted PKCS-8 keys.
+Ignored for unencrypted keys.
 
+!!!
 Do not forget to adjust other database connection parameters accordingly.
+!!!

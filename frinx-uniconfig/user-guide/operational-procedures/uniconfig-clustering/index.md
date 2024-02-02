@@ -2,127 +2,168 @@
 
 ## Introduction
 
-UniConfig can be easily deployed in the cluster thanks to its stateless architecture and transaction isolation:
+UniConfig can be easily deployed in a cluster owing to its stateless
+architecture and transaction isolation:
 
-* stateless architecture - UniConfig nodes in the cluster don't keep any state that would have to be communicated directly
-  to other Uniconfig nodes in a cluster. All network-topology configuration and state information are stored inside
-  a PostgreSQL database that must be reachable from all UniConfig nodes in the same zone. All Uniconfig nodes share the
-  same database, making the database single source of truth for Uniconfig cluster.
-* transaction isolation - Load-balancing is based on mapping UniConfig transactions to Uniconfig nodes
-  in a cluster (transactions are sticky). One UniConfig transaction cannot span multiple UniConfig nodes in a cluster.
-  Southbound sessions used for device management are ephemeral - they are created when UniConfig needs to access device
-  on the network (like pushing cnfiguration updates) and they are closed as soon as a UniConfig transactions is committed or closed.
+* Stateless architecture - UniConfig nodes in the cluster do not keep any state
+  that needs to be communicated directly to other UniConfig nodes in the
+  cluster. All network-topology configuration and state information is stored
+  inside a PostgreSQL database that must be reachable from all UniConfig nodes
+  in the same zone. All UniConfig nodes share the same database, making the
+  database the single source of truth for the cluster.
+* Transaction isolation - Load-balancing is based on mapping UniConfig
+  transactions to UniConfig nodes in a cluster (transactions are sticky). One
+  UniConfig transaction cannot span multiple UniConfig nodes in a cluster.
+  Southbound sessions used for device management are ephemeral, i.e., they are
+  created when UniConfig needs to access a device on the network (like pushing
+  configuration updates) and are closed as soon as a UniConfig transaction is
+  committed or closed.
 
-There are several advantages of clustered deployment of UniConfig nodes:
+There are several advantages to clustered deployment of UniConfig nodes:
 
-* horizontal scalability - Increasing number of units that can process UniConfig transactions in parallel.
-  Single UniConfig node tends to have limited processing and networking resources - by increasing number of nodes in the
-  cluster, this constraint can be mitigated. The more Uniconfig nodes in a cluster, the more transactions can be executed in parallel.
-  Number of connected UniConfig nodes in the cluster can also be adjusted at the runtime.
-* high-availability - Single UniConfig node doesn't represent single point of failure. If UniConfig node crashes,
-  only UniConfig transactions that are processed by corresponding node, are cancelled. Application can retry failed
-  transaction, and it will be processed by next node in the cluster.
+* Horizontal scalability - Increasing the number of units that can process
+  UniConfig transactions in parallel. A single UniConfig node tends to have
+  limited processing and networking resources - this constraint can be mitigated
+  by increasing the number of nodes in the cluster. The more UniConfig nodes in
+  the cluster, the more transactions can be executed in parallel. The number of
+  connected UniConfig nodes in the cluster can also be adjusted at runtime.
+* High availability - A single UniConfig node does not represent a single point
+  of failure. If a UniConfig node crashes, only transactions processed by the
+  corresponding node are cancelled. The application can retry a failed
+  transaction, which will be processed by the next node in the cluster.
 
 There also are a couple limitations to be considered:
 
-* Parallel execution of transactions is subject to a locking mechanism, where 2 transactions cannot manipulate the same device at the same time.
-* Single transaction is always executed by a single Uniconfig node. This means that a scope of a single transaction is limited by the number devices and   their configuration a single Uniconfig node can handle.
+* Parallel execution of transactions is subject to a locking mechanism, whereby
+  two transactions cannot manipulate the same device at the same time.
+* A single transaction is always executed by a single UniConfig node. This means
+  that the scope of a single transaction is limited by the number of devices and
+  their configurations that a single Uniconfig node can handle.
 
 ## Deployments
 
 ### Single-zone deployment
 
-In the single-zone deployment, all managed network devices are reachable by all UniConfig nodes in the cluster - zone.
-Components of the single-zone deployment and connections between them are depicted by the next diagram.
+In a single-zone deployment, all managed network devices are reachable by all
+UniConfig nodes in the cluster zone. Components of a single-zone deployment and
+connections between them are illustrated in the diagram below.
 
 ![Deployment with single zone](single-zone-architecture.svg)
 
-Description of components:
-* UniConfig controllers - Network controllers that use common PostgreSQL system for persistence of data, communicate
-  with network devices using NETCONF/GNMi/CLI management protocols and propagate notifications into Kafka topics
-  (UniConfig nodes act only as Kafka producers). UniConfig nodes do not communicate with each other directly,
-  their operation can only be coordinated using data stored in the database.
-* Database storage - PostgreSQL is used for persistence of network-topology configuration, mountpoints settings,
-  and selected operational data. PostgreSQL database can also be deployed in the cluster (outside of scope).
-* Message and notification channels - Kafka cluster is used for propagation of notifications that are generated
-  by UniConfig itself (e.g., audit and transaction notifications) or from network devices and only propagated
-  by UniConfig controller.
-* Load-balancers - Load-balancer is used for distributing transactions (HTTP traffic) and SSH sessions
-  from applications to UniConfig nodes. From the view of load-balancer, all UniConfig nodes in a cluster are equall.
-  Currently, only round-robin load-balancing strategy is supported.
-* Managed network devices - Devices that are managed using NETCONF/GNMi/CLI protocols by UniConfig nodes or generate
-  notifications to UniConfig nodes. Sessions between UniConfig nodes and devices are either on-demand/emphemeral
-  (configuration of devices) or long-term (distribution of notifications over streams).
-* HTTP / SSH clients & Kafka consumers - Application layer such as workflow management systems or end-user systems.
-  RESTCONF API is exposed using HTTP protocol, SSH server is exposing UniConfig shell
-  and Kafka brokers allow Kafka consumers to listen to the events on subscribed topics.
+Included components:
+* UniConfig controllers - Network controllers that use a common PostgreSQL
+  system for persistence of data, communicate with network devices using
+  NETCONF/GNMi/CLI management protocols and propagate notifications into Kafka
+  topics (UniConfig nodes act only as Kafka producers). UniConfig nodes do not
+  communicate with each other directly, their operations can only be coordinated
+  using data stored in the database.
+* Database storage - PostgreSQL is used for persistence of network-topology
+  configuration, mountpoints settings and selected operational data. The
+  PostgreSQL database can also be deployed in the cluster (outside of scope).
+* Message and notification channels - The Kafka cluster is used to propagate
+  notifications generated by UniConfig itself (e.g., audit and transaction
+  notifications) or from network devices and only propagated by UniConfig
+  controllers.
+* Load-balancers - Load-balancers are used to distribute transactions (HTTP
+  traffic) and SSH sessions from applications to UniConfig nodes. From the point
+  of view of the load-balancer, all UniConfig nodes in the cluster are equal.
+  Currently only a round-robin load-balancing strategy is supported.
+* Managed network devices - Devices that are managed using NETCONF/GNMi/CLI
+  protocols by UniConfig nodes or generate notifications to UniConfig nodes.
+  Sessions between UniConfig nodes and devices are either on-demand/emphemeral
+  (configuration of devices) or long-term (distribution of notifications over
+  streams).
+* HTTP/SSH clients and Kafka consumers - Application layer, such as workflow
+  management systems or end-user systems. The RESTCONF API is exposed using the
+  HTTP protocol, the SSH server exposes UniConfig shell and Kafka brokers allow
+  Kafka consumers to listen to events on subscribed topics.
 
 ### Multi-zone deployment
 
-In this type of deployment there are multiple zones that manage separate sets of devices because:
+This type of deployment has multiple zones that manage separate sets of devices
+for the following reasons:
 
-* network reachability issues - groups of devices are only reachable and thus manageable from some part
-  of the network (zone) but not from others
-* logical separation - there are different scaling strategies or requirements for different zones
-* legal issues - some devices must be managed separately with split storage, for example, because of the regional
-   restrictions
+* Network reachability issues - Groups of devices are reachable, and thus
+  manageable, only from some part of the network (zone) but not from others
+* Logical separation - Different scaling strategies or requirements for
+  different zones.
+* Legal issues - Some devices must be managed separately with split storage
+   because of, for example, regional restrictions.
 
-The following diagrams represents a sample deployment with 2 zones. The first zone contains 3 UniConfig nodes
-while the second zone contains only 2 UniConfig nodes.
-Multiple zones might share a single Kafka cluster but database instances need to be split (could be running in a single postgres server).
+The following diagrams represents a sample deployment with two zones:
+- Zone 1 contains three UniConfig nodes.
+- Zone 2 contains only two UniConfig nodes.
+
+Multiple zones can share a single Kafka cluster, but database instances must be
+be split (can be running in a single Postgres server).
 
 ![Deployment with multiple zones](multi-zone-architecture.svg)
 
 Description of multi-zone areas:
 
-* Applications - The application layer is responsible for managing mapping between network segments and Uniconfig zones.
-  Typically this is achieved by deploying/using an additional inventory database that contains device <-> zone
-  mappings - based on this information the application decides which zone to use. 
-* Isolated zones - A zone contains one or more UniConfig nodes, load-balancers and managed network devices.
-  The clusters in isolated zones share 0 information.
-* PostgreSQL databases - It is necessary to use dedicated database per zone.
-* Kafka cluster - Kafka cluster can be shared by multiple clusters in different zones or there could be single Kafka cluster per zone.
-  Notifications from different zones can be safely pushed to the common topics since there can be no possible
-  conflicts between Kafka publishers. However it is also possible to achieve isolation of published messages
-  in a shared Kafka deployment by setting different topic names in different zones.
+* Applications - The application layer is responsible for managing mapping
+  between network segments and UniConfig zones. Typically this is achieved by
+  deploying/using an additional inventory database that contains device <-> zone
+  mappings, and based on this information the application decides which zone to
+  use. 
+* Isolated zones - A zone contains one or more UniConfig nodes, load-balancers
+  and managed network devices. Clusters in isolated zones do not share
+  information.
+* PostgreSQL databases - It is necessary to use a dedicated database per zone.
+* Kafka cluster - A Kafka cluster can be shared by multiple clusters in
+  different zones, or alternatively there can be a single Kafka cluster per
+  zone. Notifications from different zones can be safely pushed to common
+  topics, as there can be no conflicts between Kafka publishers. However, it is
+  also possible to achieve isolation of published messages in a shared Kafka
+  deployment by setting different topic names in different zones.
 
 ### Load-balancer operation
 
-The responsibility of a load-balancer is to allocate UniConfig transaction on one of the UniConfig nodes in the cluster.
-It is done by forwarding requests without UniConfig transaction header to one of the UniConfig nodes
-(using round-robin strategy) and afterwards appending a backed identifier to the create-transaction RPC response in form
-of an additional Cookie header ('sticky session' concept). Afterwards, it is the responsibility of an application
-to assure that all requests that belong to the same transaction contain the same backend identifier.
+Load-balancers are responsible for allocating UniConfig transactions to one of
+the UniConfig nodes in the cluster. This is done by forwarding requests without
+a UniConfig transaction header to one of the UniConfig nodes (using round-robin
+strategy) and afterwards appending a backed identifier to the
+**create-transaction RPC** response in the form of an additional Cookie header
+('sticky session' concept). Afterwards, the application is responsible for
+assuring that all requests belonging to the same transaction contain the same
+backend identifier.
 
 !!!
-The application is responsible for preserving transaction and backend identifier cookies throught a transaction lifetime.
+The application is responsible for preserving transaction and backend identifier
+cookies throughout the transaction's lifetime.
 !!!
 
-The next sequence diagram captures a process of creating and using 2 UniConfig transactions with focus
-on load-balancer operation.
+The following sequence diagram captures the process of creating and using two
+UniConfig transactions with a focus on load-balancer operation.
 
 ![Load-balancing UniConfig transactions](load-balancing-transactions.svg)
 
-* The first create-transaction RPC is forwarded to the first UniConfig node (applying round-robin strategy), because
-  it does not contain uniconfig_server_id key in the Cookie header.
-  The response contains both UniConfig transaction ID (UNICONFIGTXID) and uniconfig_server_id that represents
-  'sticky cookie'. Cookie header uniconfig_server_id is appended to the response by load-balancer.
-* The next request that belongs to the created transaction, contains same UNICONFIGTXID and uniconfig_server_id.
-  Load balancer uses the uniconfig_server_id to forward this request to the correct UniConfig node.
-* The last application request represents again create-transaction RPC. This time, request is forwarded to
-  the next registered UniConfig node in the cluster according to the round-robin strategy.
+* The first **create-transaction RPC** is forwarded to the first UniConfig node
+  (applying round-robin strategy), because it does not contain the
+  `uniconfig_server_id` key in the Cookie header. The response contains both the
+  UniConfig transaction ID (`UNICONFIGTXID`) and `uniconfig_server_id` that
+  represents a 'sticky cookie'. The `uniconfig_server_id` cookie header is
+  appended to the response by the load-balancer.
+* The next request that belongs to the created transaction contains the same
+  `UNICONFIGTXID` and `uniconfig_server_id`. The load balancer uses
+  `uniconfig_server_id` to forward this request to the correct UniConfig node.
+* The last application request again represents the **create-transaction RPC**.
+  This time the request is forwarded to the next registered UniConfig node in
+  the cluster according to the round-robin strategy.
 
 ## Configuration
 
 ### UniConfig configuration
 
-All UniConfig nodes in the cluster should be configured with the same parameters. There are several important sections
-of config/application.properties file related to clustered environment.
+All UniConfig nodes in the cluster should be configured using the same
+parameters. There are several important sections in the
+**config/application.properties** file that relate to the clustered environment.
 
 #### Database connection settings
 
-This section contains information how to connect to PostgreSQL database and connection pool settings. It is placed
-under 'dbPersistence.connection' properties object.
+This section contains information on how to connect to a PostgreSQL database as
+well as connection pool settings. It is located under the
+`dbPersistence.connection` properties object.
 
 Example with essential settings:
 
@@ -137,20 +178,20 @@ db-persistence.connection.username=uniremote
 db-persistence.connection.password=unipass
 db-persistence.connection.uri=jdbc:postgresql://
 db-persistence.connection.driver-class-name=org.postgresql.Driver
-# This property controls the maximum number of milliseconds that a client will wait for a connection from the pool.
-# If this time is exceeded without a connection becoming available, a {@link SQLException} will be thrown.
-# Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
+# This property controls the time (in milliseconds) that a client will wait for a connection from the pool.
+# If this value is exceeded without a connection becoming available, a {@link SQLException} is thrown.
+# The lowest acceptable connection timeout is 250 ms. The default value is 30000 (i.e., 30 seconds)
 db-persistence.connection.connection-timeout=30000
 # This property controls the maximum lifetime of a connection in the pool.
-# On a connection-by-connection basis, minor negative attenuation is applied to avoid mass-extinction in the pool.
+# On a connection-by-connection basis, minor negative attenuation is applied to avoid mass extinction in the pool.
 # We strongly recommend setting this value, and it should be several seconds shorter than any database or
 # infrastructure imposed connection time limit. A value of 0 indicates no maximum lifetime (infinite lifetime),
-# subject of course to the idleTimeout setting.
+# subject to the idleTimeout setting.
 # The minimum allowed value is 30000ms (30 seconds). Default: 1800000 (30 minutes).
 db-persistence.connection.max-lifetime=1800000
 # This property controls the minimum number of idle connections that HikariCP tries to maintain in the pool.
-# If the idle connections dip below this value and total connections in the pool are less than maximumPoolSize,
-# HikariCP will make the best effort to add additional connections quickly and efficiently.
+# If the number of idle connections dips below this value and total connections in the pool are less than maximumPoolSize,
+# HikariCP will attempt to add additional connections quickly and efficiently.
 # However, for maximum performance and responsiveness to spike demands, we recommend not setting this value
 # and instead allowing HikariCP to act as a fixed size connection pool. Default: same as maximumPoolSize
 db-persistence.connection.min-idle-connections=10
@@ -193,30 +234,34 @@ db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
 !!!
-Be sure that [number of UniConfig nodes in cluster] * [maxDbPoolSize] does not exceed maximum allowed number
-of open transactions and open connections on PostgreSQL side. Be aware that 'maxDbPoolSize' also caps maximum
-number of open UniConfig transactions (1 UniConfig transaction == 1 database transaction == 1 connection to database).
+Make sure that [number of UniConfig nodes in cluster] * [maxDbPoolSize] does not
+exceed the maximum allowed number of open transactions and open connections on
+the PostgreSQL side. Note that `maxDbPoolSize` also caps the maximum number of
+open UniConfig transactions (1 UniConfig transaction == 1 database transaction
+== 1 connection to database).
 !!!
 
 #### UniConfig node identification
 
-By default, UniConfig node name is generated randomly. This behaviour can be changed by setting
-'db-persistence.uniconfig-instance.instance-name'. Instance name is leveraged, for example, in the clustering
-of stream subscriptions.
+By default, UniConfig node names are generated randomly. This behavior can be
+modified by setting `db-persistence.uniconfig-instance.instance-name`. The
+instance name is leveraged, for example, in the clustering of stream
+subscriptions.
 
 Example:
 
 ```properties node identification properties
 # Name / unique identifier of local Uniconfig instance.
-# db-persistence.uniconfig-instance.instance-name=
+db-persistence.uniconfig-instance.instance-name=
 # Hostname or IP address of a local host that runs Uniconfig.
 db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
 #### Kafka and notification properties
 
-This section contains properties related to connections to Kafka brokers, Kafka publisher timeouts, authentication, 
-subscription allocation, and rebalancing settings.
+This section contains properties related to connections to Kafka brokers, Kafka
+publisher timeouts, authentication, subscription allocation and rebalancing
+settings.
 
 Example with essential properties:
 
@@ -349,8 +394,10 @@ notifications.kafka.embedded-kafka.partitions=1
 
 ### Load-balancer configuration
 
-The following YAML code represents sample Traefik configuration that can be used in the clustered UniConfig deployment
-(deployment with 1 Traefik node). There is one registered entry-point with identifier 'uniconfig' and port '8181'.
+The following YAML code represents a sample Traefik configuration that can be
+used in the clustered UniConfig deployment (deployment with a single Traefik
+node). There is one registered entry-point with the `uniconfig` identifier on
+port 8181.
 
 ```yaml traefik configuration
 api:
@@ -364,10 +411,11 @@ providers:
   docker: {}
 ```
 
-Next, it is needed to configure UniConfig docker containers with traefik labels - UniConfig nodes are automatically
-detected by Traefik container as 'uniconfig' service providers. There is also URI prefix '/rests', name of the
-'sticky cookie' 'uniconfig_server_id' and server port number '8181' (UniConfig web server is listening to incoming
-HTTP requests on this port).
+Next, you need to configure UniConfig docker containers with Traefik labels.
+UniConfig nodes are automatically detected by a Traefik container as `uniconfig`
+service providers. There is also a URI prefix (`/rests`), the name of the
+"sticky cookie" (`uniconfig_server_id`) and the server port number (`8181`)
+where the UniConfig web server listens to incoming HTTP requests.
 
 ```yaml configuration of UniConfig docker container
 services:
@@ -381,32 +429,35 @@ services:
       - traefik.http.services.uniconfig.loadbalancer.server.port=8181
 ```
 
-Values of all traefik labels should be same on all nodes in the cluster - scaling of UniConfig service in the cluster
-(for example, using Docker Swarm tools) is simple since container settings do not change.
+Values for all Traefik labels should be the same on all nodes in the cluster.
+Scaling of the UniConfig service in the cluster (for example, using Docker Swarm
+tools) is simple when container settings do not change.
 
 !!!
-The similar configuration, like the presented one with Traefik, can be achieved using other load-balancer tools,
-such as HAProxy.
+A similar configuration to the one presented using Traefik can also be achieved
+using other load-balancer tools, such as HAProxy.
 !!!
 
 ## Clustering of NETCONF subscriptions and notifications
 
-When device is installed with stream property set, subscriptions for all
+When a device is installed with the stream property set, subscriptions for all
 provided streams are created in database. These subscriptions are always
-created with UniConfig instance id set to null, so they can be acquired
-by any UniConfig from cluster. Each UniConfig instance in cluster uses
-its own monitoring system to acquire free subscriptions. Monitoring
-system uses specialized transaction to lock subscriptions which prevents
-more UniConfig instances to lock same subscriptions. While locking
-subscription, UniConfig instance writes its id to subscription table to
-currently locked subscription and which means that this subscription is
-already acquired by this UniConfig instance. Other instances of
-UniConfig will not find this subscription as free anymore.
+created with the UniConfig instance id set to null, so they can be acquired
+by any UniConfig from the cluster.
+
+Each UniConfig instance in a cluster uses its own monitoring system to acquire
+free subscriptions. The monitoring system uses a specialized transaction to lock
+subscriptions, which prevents other UniConfig instances from locking the same
+subscriptions. While locking a subscription, the UniConfig instance writes its
+id into the subscription table for the currently locked subscription, which
+indicates that this subscription is already acquired by this UniConfig instance.
+Other instances of UniConfig will then see that this subscription is not
+available.
 
 ### Optimal subscription count and rebalancing
 
-With multiple UniConfig instances working in a cluster, each instance
-calculates an optimal range of subscriptions to manage.
+With multiple UniConfig instances working in a cluster, each instance calculates
+an optimal range of subscriptions to manage.
 
 ```
 OPTIMAL_RANGE_LOW = (NUMBER_OF_ALL_SUBSCRIPTIONS / NUMBER_OF_LIVE_UC_NODES_IN_CLUSTER) * OPTIMAL_NETCONF_SUBSCRIPTIONS_APPROACHING_MARGIN
@@ -414,30 +465,32 @@ OPTIMAL_RANGE_HIGH = (NUMBER_OF_ALL_SUBSCRIPTIONS / NUMBER_OF_LIVE_UC_NODES_IN_C
 # Example: optimal range for 5000 subscriptions with 3 nodes in the cluster and margins set to 0.05 and 0.10 = (1750, 1834)
 ```
 
-Based on optimal range and a number of currently opened subscriptions,
-each UniConfig node (while performing a monitoring system iteration)
-decides whether it should:
+Based on the optimal range and number of currently opened subscriptions, each
+UniConfig node (while performing a monitoring system iteration) decides whether
+it should:
 
-- Acquire additional subscriptions before optimal range is reached
-- Stay put and not acquire additional subscriptions in case optimal range is reached
-- Release some of its subscriptions to trigger rebalancing until optimal range is reached
+- Acquire additional subscriptions until the optimal range is reached.
+- Once the optimal range is reached, stay put and not acquire any additional
+  subscriptions.
+- Release some of its subscriptions to trigger rebalancing until the optimal
+  range is reached.
 
-When an instance goes down, all of its subscriptions will be immediately
-released and the optimal range for the other living nodes will changemanaged network devices
-and thus the subscriptions will be reopened by the rest of the cluster.
+If an instance goes down, all of its subscriptions are immediately released and
+the optimal ranges of other living nodes are adjusted. Managed network devices,
+and thus subscriptions, are reopened by the rest of the cluster.
 
 !!!
-There is a grace period before the other nodes take over the
-subscriptions. So in case a node goes down and up quickly, it will
-restart the subscriptions on its own.
+Note that there is a grace period before other nodes take over the
+subscriptions. Therefore, if a node goes down and then back up in quick
+succession, it will restart the subscriptions on its own.
 !!!
 
-Following example illustrates a timeline of a 3 node cluster and how
-many subscriptions each node handles:
+The following example illustrates a timeline for a three-node cluster and how
+many subscriptions are handled by each node:
 
 ![notifications-in-cluster-rebalancing](netconf_subs_rebalancing.svg)
 
 !!!
-The hard limit still applies in clustered environment, and it will never
-be crossed, regardless of the optimal range.
+The hard limit still applies in clustered environments. It is never exceeded
+regardless of the optimal range.
 !!!

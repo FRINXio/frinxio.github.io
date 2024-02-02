@@ -1,51 +1,48 @@
 # Immediate Commit Model
 
 The immediate commit creates new transactions for every call of an RPC.
-The transaction is then closed so no lingering data will occur.
+The transaction is then closed so that no lingering data remains.
 
-For reading data (GET request), a sequential diagram was created for
-better understanding of how the whole process works.
+The sequential diagram below illustrates how the process works for reading data
+(GET request).
 
 ![Get Request](get-request.png)
 
-Similarly, a sequential diagram for putting data (PUT request) was
-created as well.
+Similarly, the following diagram illustrates the process for putting data (PUT
+request).
 
 ![Put Request](put-request.png)
 
-The key difference in those diagrams is that editing data (PUT, PATCH,
-DELETE, POST) + RPC calls in the database need to be committed, so there
-is an additional call of the commit RPC. This commit ensures that the
-transaction is closed. For reading data, it is necessary to close the
-transaction differently, because no data were changed, so calling a
-commit would be unnecessary.
+The key difference in the two diagrams is that editing data (PUT, PATCH, DELETE,
+POST) and RPC calls in the database must be committed, hence there is an
+additional call of the **commit RPC**. This commit ensures that the transaction
+is closed. For reading data, it is necessary to close the transaction in a
+different manner, because no data was changed and calling a commit is not
+necessary.
 
-When calling the 'sync-from-network' RPC, it internally calls
-'replace-config-with-operational'. Note that this only works when
+When calling the **sync-from-network RPC**, it internally calls the
+**replace-config-with-operational RPC**. Note that this only works when
 using the Immediate Commit Model.
 
-
 ## Configuration
-Configuration related to UniConfig transactions is placed in the
-'config/application.properties' file.
-A user can turn off the Immediate Commit Model and use only the
-[Build and Commit Model](../build-and-commit-model/readme.md)
-instead.
+
+Configurations related to UniConfig transactions are placed in the
+**config/application.properties** file. You can also turn off the Immediate
+Commit Model and use the 
+[Build and Commit Model](../build-and-commit-model/readme.md) instead.
 
 
 ```properties Transaction property snippet
-# Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
+# Boolean value to enable or disable the Immediate Commit Model. The default value is 'true'.
 # If disabled, only manually created transactions can exist.
 transactions.immediate-commit-enabled=true
 ```
 
-RPC Examples
-------------
+## RPC examples
 
 ### Successful example
 
-RPC input contains a new interface that will be added to the existing
-ones.
+RPC input contains a new interface that is added to the existing ones.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=R1/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=Loopback123' \
@@ -72,8 +69,8 @@ curl --location --request POST 'http://localhost:8181/rests/data/network-topolog
 }
 ```
 
-After putting the data into the database, they will be automatically
-committed and can be viewed.
+After putting the data into the database, they are automatically committed and
+can be viewed.
 
 ```bash RPC Request
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=R1/frinx-uniconfig-topology:configuration/frinx-openconfig-interfaces:interfaces/interface=Loopback123?content=nonconfig' \
@@ -96,7 +93,7 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 }
 ```
 
-### Failed Example
+### Failed example
 
 RPC input contains a value that is not supported.
 

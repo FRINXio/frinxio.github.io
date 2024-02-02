@@ -59,11 +59,11 @@ Priority of initial writing default parameters into database:
 2. User defines default parameters into config file
 3. Default values from yang schema file will be saved
 
-Default parameters can be managed (read/update) by user using RESTCONF/Uniconfig-shell with
-[UniConfig Cloud Config](../../uniconfig-operations/uniconfig-properties) .
+Default parameters can be managed (read/update) using RESTCONF/Uniconfig shell
+with [UniConfig Cloud Config](../../uniconfig-operations/uniconfig-properties).
 
-Definition of default parameters can be also done using config file **application.properties.json**. 
-It is placed in config subdirectory.
+Default parameters can also be defined in the **application.properties.json**
+file located in the `config` directory.
 
 ```properties
 # Netconf default parameters properties.

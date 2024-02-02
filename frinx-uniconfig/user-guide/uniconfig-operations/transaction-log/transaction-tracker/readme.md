@@ -1,9 +1,9 @@
 # Transaction tracker
 
 The transaction tracker is responsible for saving transaction metadata to the
-operational snapshot after a successfully executed commit/checked-commit RPC.
-Transaction metadata contains information about performed transactions, such as
-the following:
+**Operational** snapshot after a successfully executed **commit** or
+**checked-commit RPC**. Transaction metadata contains information about
+performed transactions, such as the following:
 
 - `transaction-id` - Identifier for transaction.
 - `type-of-commit-time` - Timestamp for either `last-commit-time` (if the
@@ -51,7 +51,7 @@ transactions.immediate-commit-enabled=true
 
 ### Show transaction-metadata
 
-The response to this `GET` request contains all stored transaction metadata,
+The response to this GET request contains all stored transaction metadata,
 transaction ids and other items such as node id, updated data before and after
 update, etc.
 
