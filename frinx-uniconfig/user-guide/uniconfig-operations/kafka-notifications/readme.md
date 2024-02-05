@@ -728,6 +728,36 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-chan
 }
 ```
 
+**Example** - Create a duplicate subscription to the `device1` node  in the `uniconfig`
+topology, and to the whole `/interfaces` configuration subtree:
+
+```bash RPC Request
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/data-change-events:create-data-change-subscription' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "node-id": "device1",
+        "topology-id": "uniconfig",
+        "subtree-path": "/interfaces",
+        "data-change-scope": "SUBTREE"
+    }
+}'
+```
+
+```json RPC response, Status: 409
+{
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-exists",
+        "error-type": "application",
+        "error-message": "Data-change-subscription with these values already exists"
+      }
+    ]
+  }
+}
+```
+
 **Example** - Create a subscription to the `uniconfig` topology and to the whole
 `/interfaces` configuration subtree:
 
