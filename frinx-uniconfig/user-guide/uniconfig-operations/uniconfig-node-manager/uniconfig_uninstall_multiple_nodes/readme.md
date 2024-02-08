@@ -2,8 +2,10 @@
 
 This RPC uninstalls multiple devices at once using the default
 **uninstall-node RPC**. Devices are uninstalled independently in parallel. 
-If two nodes are being uninstalled and one node has failed, the second node is uninstalled. 
-The response (if at least one node failed) describes result of failed nodes only.
+
+If two nodes are being uninstalled and one node fails, the second node is still
+uninstalled. If at least one node fails, the response describes the result for
+failed nodes only.
 
 ## RPC examples
 
