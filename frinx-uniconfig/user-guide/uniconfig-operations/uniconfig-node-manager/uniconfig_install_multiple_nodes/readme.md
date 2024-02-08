@@ -1,7 +1,9 @@
 # RPC install-multiple-nodes
 
 This RPC installs multiple devices at once using the default
-**install-node RPC**. Devices are installed in parallel.
+**install-node RPC**. Devices are installed independently in parallel. 
+If two nodes are being installed and one node has failed, the second node is installed. 
+The response (if at least one node failed) describes result of failed nodes only.
 
 ## RPC examples
 
