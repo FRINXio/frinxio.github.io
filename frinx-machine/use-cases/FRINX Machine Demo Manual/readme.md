@@ -1,15 +1,6 @@
 # FRINX Machine Demo Manual
 
-The Frinx Demo is available at https://services.frinx.io/frinxui/. (Note that
-Mozilla Firefox is not supported.)
-
-!!!
-Please contact *info@frinx.io* for login credentials.
-!!!
-
-To log into the service, select **Login** in the upper-right corner. Once logged
-in, you can see the **FRINX Machine dashboard**:
-
+After logging into FRINX Machine, you can see the **FRINX Machine dashboard**:
 
 ![FRINX Machine dashboard](fm2.0_dashboard.png)
 
@@ -273,11 +264,13 @@ are named in this demo topology).
 
 ![FRINX Machine dashboard](lambda_2_body.PNG)
 
-10) **Read_journal_cli_device**: In the **Input parameters** tab under **device_id**, enter `${lambda_ZW66.output.result}`.
+10) **Read_journal_cli_device**: In the **Input parameters** tab under
+    **device_id**, enter `${lambda_ZW66.output.result}`.
 
 ![FRINX Machine dashboard](read_journal_body.PNG)
 
-11) The output from **Read_journal_cli_device** is concatenated with *END*, as is the output from **terminated**. Thus we have closed our custom workflow.
+11) The output from **Read_journal_cli_device** is concatenated with **END**, as
+    is the output from **terminated**. Thus we have closed our custom workflow.
 
 ![FRINX Machine dashboard](custom_task_final.PNG)
 ![FRINX Machine dashboard](custom_task_final_all.PNG)
@@ -289,11 +282,13 @@ are named in this demo topology).
 
 Next steps:
 
-Finding your new workflow and running it with multiple different inputs such as 10 000, 10 002, 10 012, etc.
+Find your new workflow and run it with multiple different inputs such as
+`10 000`, `10 002`, `10 012`, etc.
 
 ![FRINX Machine dashboard](find_demo_workflow.png)
 
-For different ports, you can see different devices with other run commands in memory.
+For different ports, you can see different devices with other run commands in
+memory.
 
 ![FRINX Machine dashboard](output_journal_commands.png)
 ![FRINX Machine dashboard](output_journal_commands_3.png)
@@ -427,16 +422,25 @@ markers that serve as a differentiator.
 On the results page, you will see five individual tasks:
 
 ### INVENTORY_get_all_devices_as_dynamic_fork_tasks
-This workflow displays a list of all devices in the inventory or devices filtered by label. It parses the output in the correct format for the dynamic fork, which creates a number of tasks depending on the number of devices in the inventory. 
+This workflow displays a list of all devices in the inventory or devices
+filtered by label. It parses the output in the correct format for the dynamic
+fork, which creates a number of tasks depending on the number of devices in the
+inventory. 
 
 ### SUB_WORKFLOW
-This is the dynamic fork sub-workflow. In this case, it creates **UNICONFIG_write_structured_device_data** for every individual device in the inventory. You can then get detailed information on the progress and succession of every device.
+This is the dynamic fork sub-workflow. In this case, it creates
+**UNICONFIG_write_structured_device_data** for every individual device in the
+inventory. You can then get detailed information on progress and succession for
+every device.
 
 ### UNICONFIG_calculate_diff
-This remote procedure call creates a difference between the actual UniConfig topology devices and the intended UniConfig topology nodes. 
+This remote procedure call creates a difference between the actual UniConfig
+topology devices and the intended UniConfig topology nodes. 
 
 ### UNICONFIG_dryrun_commit
-This remote procedure call resolves the difference between actual and intended device configurations. After all changes are applied, the cli-dryrun journal is read and a remote procedure call output is created and returned. 
+This remote procedure call resolves the difference between actual and intended
+device configurations. After all changes are applied, the cli-dryrun journal is
+read and a remote procedure call output is created and returned. 
 
 ### UNICONFIG_commit
 This is the final task that actually commits the intended configuration to the devices.
@@ -453,7 +457,8 @@ On the FRINX Dashboard, open the menu in the top-left corner and select
 
 Select **Services**.
 
-Select **+ Add service**. Fill in the information as shown below. Select the chain icon to automatically generate the **VPN ID**.
+Select **+ Add service**. Fill in the information as shown below. Select the
+chain icon to automatically generate the **VPN ID**.
 
 ![FRINX Machine dashboard](create_vpn_service.png)
 
@@ -463,8 +468,8 @@ Select **Save changes**. You are redirected to the previous page.
 
 Select **Commit changes**. Select **Commit changes** again.
 
-After committing, you can see all executed tasks and sub-workflows. Select **Go
-to detail** to review individual processes.
+After committing, you can see all executed tasks and sub-workflows. Select
+**Go to detail** to review individual processes.
 
 ![FRINX Machine dashboard](l3vpn_status.png)
 
@@ -486,7 +491,7 @@ Select **Add network access**.
 
 Enter the following settings:
 
-**General and Service**:
+**General** and **Service**:
 - **VPN Attachment:** GNS00001005
 - **BTM Circuit Reference:** CES00000000-05
 - **Devices:** Select one of the CPE devices.
@@ -496,7 +501,6 @@ Enter the following settings:
 ![FRINX Machine dashboard](create_site_network_access.png)
 
 **Routing Protocol:**
-
 - Select **+ Create Static Protocol** and **Configure BGP**.
 - **Static Routing LAN:** 10.0.0.0/8
 - **Static Routing Next Hop:** 10.0.0.1
@@ -508,7 +512,8 @@ Enter the following settings:
 
 **IP Connection**
 
-To automatically generate a provider and customer address, select the chain icon:
+To automatically generate a provider and customer address, select the chain
+icon:
 
 ![FRINX Machine dashboard](ico_chain.png)
 

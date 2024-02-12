@@ -1,17 +1,19 @@
 # RPC delete-snapshot
 
-RPC removes the snapshot from CONFIG datastore of UniConfig transaction.
-RPC input contains the name of the snapshot topology which should be
-removed. RPC output contains result of the operation.
+This RPC removes a snapshot from the `Configuration` datastore of the UniConfig
+transaction.
+
+RPC input contains the name of the snapshot topology to be removed. RPC output
+contains the result of the operation.
 
 ![RPC delete-snapshot](RPC_delete-snapshot-RPC_delete_snapshot.svg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-RPC input contains the name of the snapshot topology which should be
-removed. RPC output contains the results of the operation.
+RPC input contains the name of the snapshot topology to be removed. RPC output
+contains the result of the operation.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-manager:delete-snapshot' \
@@ -24,19 +26,13 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete"
-    }
-}
+```RPC Response, Status: 204
 ```
 
 ### Failed example
 
-RPC input contains the name of the snapshot topology which should be
-removed. The input snapshot name does not exist. RPC output contains the
-results of the operation.
+RPC input contains the name of the snapshot topology to be removed. The snapshot
+name specified does not exist. RPC output contains the result of the operation.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-manager:delete-snapshot' \
@@ -49,11 +45,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/snapshot-
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 404
 {
-    "output": {
-        "error-message": "Snapshot with name snapshot1 does not exist. Cannot delete snapshot.",
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-tag": "data-missing",
+        "error-type": "application",
+        "error-message": "Snapshot with name snapshot1 does not exist. Cannot delete snapshot."
+      }
+    ]
+  }
 }
 ```

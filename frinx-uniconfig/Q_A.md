@@ -7,74 +7,63 @@ label: FAQ
 
 ## What is the datastore used in FRINX UniConfig ?
 
-Uniconfig uses a custom in memory database which is part of MD-SAL and
-it is a very fast storage for YANG modeled data. UniConfig uses
-datastore only for caching data in the scope of a single transaction.
-For persistence purposes, UniConfig uses PostgreSQL database.
+UniConfig uses a custom in-memory database that is part of MD-SAL and is a very fast storage for YANG modeled data.
+
+The datastore is used only for caching data in the scope of a single transaction. For persistence purposes, UniConfig uses a PostgreSQL database.
 
 ---
 
 ## Are service instances stored in the UniConfig layer of FRINX ?
 
-Only the „outputs“ of a service are stored and managed by UniConfig
-(e.g. service generates bgp config for 10 devices, which is pushed into
-UniConfig). The services themselves are responsible for managing their
-configuration/operational state and rely on the same database to store
-configuration or operational data.
+Only the "outputs" of a service are stored and managed by UniConfig (for example, a service that generates BGP config for 10 devices, which is pushed into UniConfig).
+
+Services are responsible for managing their own configuration/operational state, and rely on the same database to store configuration or operational data.
 
 ---
 
 ## How does FRINX deal with model changes ?
 
-OpenConfig models are compiled as part of the UniConfig and because of
-this reason it is possible to change these models only before
-compilation. On the other side, NETCONF models can be dynamically loaded
-from device and also manually updated using dedicated RPC:
+OpenConfig models are compiled as part of UniConfig and can therefore be changed only before compilation.
 
-<https://docs.frinx.io/frinx-uniconfig/UniConfig/user-guide/network-management-protocols/uniconfig_netconf/netconf-intro.html#registration-or-refreshing-of-netconf-cache-repository-using-rpc>
+On the other hand, NETCONF models can be dynamically loaded from a device and can also be manually updated using a [dedicated RPC](https://docs.frinx.io/frinx-uniconfig/user-guide/network-management-protocols/uniconfig_netconf/#registration-or-refreshing-of-netconf-cache-repository-using-rpc).
 
 ---
 
-## Does FRINX provide auto rollback on all affected devices, when a transaction fails on one or more devices ?
+## Does FRINX provide auto rollback on all affected devices if a transaction fails on one or more devices ?
 
-Yes, all onboarded devices have full rollback implemented. But it is
-also possible to disable auto-rollback in UniConfig, so that
-successfully configured devices will keep their configuration. 
-This can be done with setting up the 'do-rollback' flag to False in input of Commit RPC.
+Yes, all onboarded devices have full rollback implemented.
 
----
-
-## Is it possible to show the differences between the actual device configuration and the operational datastore while synchronizing configuration into FRINX ?
-
-Yes, it is possible. To achieve this follow these steps:
-:   -   1. sync (update operational)
-    -   2. show diff
-    -   3.  drop the changes from device by replacing operational with
-            config
+You can also disable auto-rollback in UniConfig, so that successfully configured devices will keep their configuration. This is done by setting the `do-rollback` flag to `False` in the input for the **commit RPC**.
 
 ---
 
-## Is any NETCONF device fully supported, or must OpenConfig be mapped to netconf as well ?
+## Is it possible to display differences between the actual device configuration and the operational datastore while synchronizing the configuration into FRINX ?
 
-You can either use the native device models (via UniConfig native) or
-use the existing translation units between OpenConfig and vendor models.
+Yes, follow these steps:
+
+1. Sync (update `operational`).
+2. Show diff.
+3. Drop the changes from the device by replacing `operational` with `config`.
 
 ---
 
-## Are the libraries that are used to access the Config Data Store model driven ?
+## Is any NETCONF device fully supported, or must OpenConfig be mapped to NETCONF as well ?
 
-UniConfig has a DataBroker interface and a concept of
-InstanceIdentifier. Those are the model driven APIs for data access.
-*More info:*
+You can either use the native device models (via UniConfig native) or existing translation units between OpenConfig and vendor models.
 
-<https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL:Concepts>
+---
+
+## Are the libraries used to access the Config Data Store, model driven ?
+
+UniConfig has a DataBroker interface and the concept of **InstanceIdentifier**. These are the model driven APIs for data access.
+
+For more information, see [MD-SAL basic concepts](https://docs.opendaylight.org/projects/mdsal/en/latest/#basic-concepts).
 
 ---
 
 ## What would an access to the configuration data store look like in code ?
 
-**A: Just to demonstrate API, in this example InterfaceConfigurations is
-read from CONF DS and put back to CONF DS.**
+**A.** To demonstrate the API, this example reads **InterfaceConfigurations** from CONF DS and puts it back to CONF DS.
 
 ```
 ReadWriteTransaction rwTx = dataBroker.newReadWriteTransaction();
@@ -83,7 +72,7 @@ InterfaceConfigurations ifcConfig = xrNodeReadTx.read(LogicalDatastoreType.CONFI
 rwTx.put(LogicalDatastoreType.CONFIGURATION, iid, ifcConfig);
 rwTx.submit();
 ```
-**B: In this example InterfaceConfigurations is read from OPER DS.**
+**B.** This example reads **InterfaceConfigurations** from OPER DS.
 
 ```
 ReadWriteTransaction rwTx = dataBroker.newReadWriteTransaction();
@@ -93,103 +82,73 @@ InterfaceConfigurations ifcConfig = xrNodeReadTx.read(LogicalDatastoreType.OPERA
 
 ---
 
-## Is it possible in FRINX to run transaction on two disjunct sets of devices simultaneously ?
+## Is it possible in FRINX to run a transaction on two disjunct sets of devices simultaneously ?
 
-UniConfig supports build-and-commit model using which it is possible to
-configure devices in the isolated transactions and commit them in
-parallel. If there are some conflicts between configured sets of
-devices, then the second transaction that is committed, will fail
-(however, it cannot happen on disjunct sets of devices).
+UniConfig supports the build-and-commit model, which makes it possible to configure devices in isolated transactions and commit them in parallel. If there are conflicts between configured sets of devices, the second transaction that is committed will fail (however, this cannot happen on disjunct sets of devices).
 
 ---
 
 ## What access control measures does FRINX offer ?
 
-FRINX UniConfig supports local authentification, password
-authentification, public key authentification Token authentification,
-RADIUS based authentification and subtree based authentification via AAA
-Shiro project.
+FRINX UniConfig supports local authentification, password authentification, public key authentification Token authentification, RADIUS-based authentification and subtree-based authentification via AAA Shiro project.
 
 ---
 
 ## How does FRINX report problems with device interaction ?
 
-If a device can not be reached during a UniConfig transaction (after
-trying reestablishing the connection) a timeout will occur and the cause
-for the transaction failure will be reported. UniConfig also uses
-keepalive messages for continuous verification of connection to devices
-(both using NETCONF and CLI management protocols).
+If a device cannot be reached during a UniConfig transaction (after trying to re-establish the connection), a timeout occurs and the cause for the transaction failure is reported.
+
+UniConfig also uses keepalive messages to continuously verify the connection to devices, using both NETCONF and CLI management protocols.
 
 ---
 
-## Is it possible to backup configuration ?
+## Is it possible to backup a configuration ?
 
-UniConfig stores all committed configuration of devices, templates, and
-snapshots in the PostgreSQL database. We suggest to use existing
-techniques for backup that are also provided by PostgreSQL.
+UniConfig stores all committed configurations for devices, templates, and snapshots in a PostgreSQL database. We suggest using existing techniques for backup that are also provided by PostgreSQL.
 
 ---
 
 ## Is it possible to enforce policies over configuration changes ?
 
-All customer specific validations and policy enforcements can be
-implemented in layers above UniConfig
+All customer-specific validations and policy enforcements can be implemented in layers above UniConfig.
 
 ---
 
-## In which languages are the libraries to access FRINX written ?
+## Which languages are the libraries to access FRINX in?
 
-UniConfig is written in JAVA and Kotlin which can use data objects
-generated from YANG. RESTful API (RESTCONF) can be used with language
-that implements REST client (for example, Python).
+UniConfig is written in JAVA and Kotlin, which can use data objects generated from YANG. The RESTful API (RESTCONF) can be used with a language that implements the REST client (for example, Python).
 
 ---
 
-## Does FRINX detect if a cluster node is down on its own or does it rely on a high availability framework ?
+## Does FRINX detect if a cluster node is down on its own, or does it rely on a high-availability framework ?
 
-UniConfig instance is stateless - it doesn’t persist any configuration
-in its datastore (PostgreSQL is used for persistence) and it doesn’t
-keep permanent connections (connections to devices are created on-demand
-in the transaction). Because of the stateless architecture, UniConfig
-instances in the ‘cluster’ don’t have to communicate with each other and
-they don’t require any coordination. You must only keep in mind that
-requests that belong to the same transaction must be forwarded to the
-same UniConfig backend - for this purpose you can use any HA component
-that supports sticky sessions based on cookies (such as HA-proxy or
-Traefik).
+A UniConfig instance is stateless, i.e., it does not persist any configuration in its datastore (PostgreSQL is used for persistence) and does not keep permanent connections (connections to devices are created on-demand in the transaction).
+
+Because of its stateless architecture, UniConfig instances in the "cluster" do not need to communicate with each other and require no coordination. Keep in mind that requests belonging to the same transaction must be forwarded to the same UniConfig backend. For this purpose, you can use any HA component that supports sticky sessions based on cookies (for example, HA-proxy or Traefik).
 
 ---
 
-## Is it possible for FRINX to report problems to a network monitoring system ?
+## Can FRINX report problems to a network monitoring system ?
 
-FRINX UniConfig can propagate NETCONF notifications and internal
-UniConfig notifications or data-change-events from web sockets on
-Northbound API.
+FRINX UniConfig can propagate NETCONF notifications and internal UniConfig notifications or data-change-events from web sockets on the Northbound API.
 
 ---
 
-## Is it possible to do additional logging on the logging provided by UniConfig ?
+## Is additional logging available in UniConfig ?
 
-Yes it is. Each component writes logs at different verbosity levels of
-logging (ERROR, WARN, INFO, DEBUG, TRACE). We are using the logback
-framework for logging of messages - logging can be adjusted by
-modification of config/logback.xml file in the standard way. This file
-can be updated also on runtime. The second approach for adjusting of
-logging of some specific components is using logging controller:
-<https://docs.frinx.io/frinx-uniconfig/UniConfig/user-guide/operational-procedures/logging/logging.html>
+Yes. Each component writes logs at a different verbosity level (ERROR, WARN, INFO, DEBUG, TRACE). We use the logback framework for logging messages.
+
+Logging can be adjusted by modifying the **config/logback.xml** file. This file can be updated also on runtime. 
+
+Another option to adjust logging for specific components is to use a logging controller. For more information, see [Logging](https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/logging/).
 
 ---
 
-## Where do I find the status of the device and where do I find error messages, when installing does not work ?
+## Where do I find the device status and error messages when installing does not work ?
 
-installing/uninstalling process is done automatically - device is installed
-when UniConfig must read/write some data from/to device and device is
-automatically uninstalled at the end of the transaction if no other
-transaction is using the same installpoint. Users should not care about
-the installing process since it is transparent - it is useful only for
-debugging purposes. To get status of the installing process for all
-devices in the system, issue following request (it will show status as
-well as last connect attempt cause):
+The install/uninstall process is performed automatically. The device is installed when UniConfig must read or write data from or to the device, and uninstalled at the end of the transaction if no other transaction is using the same installpoint. The install process is transparent, and the user need not care about the process outside of debugging purposes.
+
+To get the status of the install process for all devices in the system, issue the following request. It shows the status and last connect attempt cause:
 
 **CLI devices:**
 
@@ -209,29 +168,34 @@ curl --location --reQuestionuest GET 'http://localhost:8181/rests/data/network-t
 --header 'Content-Type: application/json'
 ```
 
----
+**gNMI devices:**
 
-## What does installation and installing exactly do ?
-
-installing of device:
-:   -   1. Opening IO session to device (TCP session with SSH and/or
-        NETCONF on top of SSH session).
-    -   2.  Exposing installpoint that can be used from internal API and
-            RESTCONF API for interaction with device.
-
-Installation of device contains internally also code for installing of device:
-:   -   1. Opening internal transaction
-    -   2. installing of device with input parameters (CLI / NETCONF)
-    -   3. Syncing configuration from device
-    -   4. Writing configuration and install information into database
-    -   5. Uninstalling device
-    -   6.  Committing transaction
+```bash
+curl --location --reQuestionuest GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=gnmi-topology?content=nonconfig' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json'
+```
 
 ---
 
-## Why I can not install Junos device on UniConfig ?
+## What exactly happens during the installation process ?
 
-If installing Junos devices is not possible and UniConfig gives response :
+The entire installation process includes the following:
+
+1. Open internal transaction.
+2. Install device with input parameters (CLI or NETCONF).
+    1. Open IO session to device (TCP session with SSH and/or NETCONF on top of SSH session).
+    2. Expose mountpoint (via internal API and RESTCONF API).
+3. Sync configuration from device.
+4. Write configuration and store information in database.
+5. Uninstall device.
+6. Commit transaction. 
+
+---
+
+## Why can't I install Junos devices on UniConfig ?
+
+If installing Junos devices is not possible, UniConfig may give this response :
 
 ```
 2020-03-23 03:26:07,174 ERROR [default-pool-5-2] (org.opendaylight.netconf.sal.connect.netconf.NetconfDevice) - RemoteDevice{junos}: Initialization in sal failed, disconnecting from device
@@ -253,8 +217,7 @@ at org.opendaylight.netconf.cache.impl.utils.NetconfSchemaContextFactory.buildSc
 ... 10 more
 ```
 
-It is necessary to set up on Junos device netconf session compliant to
-RFC and Yang schemas (rfc-compliant, yang-compliant)
+To install Junos devices, set up a NetConf session that is compliant with RFC and Yang schemas (`rfc-compliant` and `yang-compliant`) on the Junos device:
 
 ```
 > configure

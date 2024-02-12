@@ -8,7 +8,7 @@ order: 8000
 ## Overview
 
 NETCONF is an Internet Engineering Task Force (IETF) protocol used for
-configuration and monitoring devices in the network. It can be used to
+configuration and monitoring of devices in a network. It can be used to
 “create, recover, update, and delete configurations of network devices”.
 The base NETCONF protocol is described in
 [RFC-6241](https://tools.ietf.org/html/rfc6241).
@@ -283,76 +283,107 @@ $ ssh cisco@192.168.1.216
 
 ### PKI Data persistence in NETCONF
 
-The PKI data from data store are stored in a JSON file in the crypto
-directory and updated each time when the data store is updated. Also the
-data store is updated, when the JSON file with PKI data is updated.
+* PKI data is used for authentication of NETCONF sessions with the provided RSA private key.
+  The corresponding public key must be stored on the device side.
+* Keys are identified using a unique 'key-id'. This key identifier can be specified in the
+  NETCONF installation request.
+* Keys can be managed using the 'remove-keystore-entry' and 'add-keystore-entry' operations.
+  These RPC calls are part of the UniConfig transaction. Changes are not applied until
+  they are committed by the user or the immediate commit model is used to invoke the operation.
+* Keys are stored in the UniConfig database. In a clustered environment, all nodes
+  share the same set of keys.
 
-**Keystore insertion example**
+#### Registration of the new key
 
-**RPC request:**
+The following request demonstrates how to register a new RSA private key with a key-id of 'key1'.
+The private key must be specified in the PKCS#8 format. The passphrase is optional and must
+be specified only if the private key is encrypted.
 
-```
-REST
-    POST
-URL
-    http://localhost:8181/rests/operations/netconf-keystore:add-keystore-entry
-HEAD
-    Accept
-        application/json
-    Content-Type
-        application/json
+Multiple keys can be registered at once if the user provides a list of the 'key-credential' in the input.
 
-BODY
-{
-    "input" :
-    {
+```bash
+
+```bash Registration of the new key
+curl --location 'http://127.0.0.1:8181/rests/operations/netconf-keystore:add-keystore-entry' \
+--header 'Content-Type: application/json' \
+--data '{
+    "input": {
         "key-credential": [
-                {
-                        "netconf-keystore:key-id": "versa2",
-                        "netconf-keystore:private-key": "-----BEGIN RSA PRIVATE KEY-----
-MIICXAIBAAKBgQClEX+nOWXIn51qQffvi1FxM97AQvjdd8Upol1uJxoWzDnQ67h+
-lP9nEnamehPjL3JNsdJOQwWhNE4hVKm4ZC+7PfxGyY4a+sZ3Q+t2KzLlY/i59UUb
-fWlV5tNdE/LHEV4hc3JE+k0NoxtjpQ5DNuiulQX6Pup5zvV2kzCnmJ6pUwIDAQAB
-AoGBAJS08/yRv/mCmkzcy2FZcHB8W0N30j2qpcvBQ0x2G5HIQJnPkjEvR/vybUPD
-HOGBoAcQmLb6uDqnJW/vlsrQLxKcTeVKcWzMLI5LfLXo3VU7VVokagyal/2nCVtp
-R1vKjC6uUw6eY/9zQDTbLAqu7vXIQn4HK48ml6/orYyrAHUxAkEA2nGPwzYzbECv
-fX6Km4+a8abEm0SQ4rV7z48E9PnH5Wmg8fs0AP4chp/Yf3eMohFL1nOXLQfyZl2K
-VjpEFezr6wJBAMFytnfi5bc20OS5pvACEOapDY9wEje37B2Kg/+NBaraCMLp0oRA
-eTC1ANusg90aEeCsTCj5yAbg9KlNqEN75jkCQA64GDfPLyfcM/cAz9YrlwUxd43+
-0MR19iHGQU9AhXev5mhnxNlMRh/MJYpxQ8in4bRRlZ4zKuI661dkFbJkhIECQAcD
-aaofB8UEr74bHPpGmOZD6sHwhjiO6niHtRFmw3XWQcsPPxqcW8hwR3+vWXiCoXNL
-y9cQdzgIn9Yjgp4vt8ECQAD/bkgp3g7+boKcYvKO4uEpzr9bzgDhu1Q66TwApO0k
-6TqFm7lxWCLJROSl/4VvEZpUFsD31zAWosMpo3Oq08c=
+            {
+                "key-id": "key1",
+                "private-key": "-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAyx3eACAkPMRGTKERfjik+hY1fCoY0FEYVshPvqigjILLlFD6
+1phD3Az20gSdrFy6l3x+7IS0Iqy4yhAuj3uSPoE1HWdTxDBG1TpFxNv0kGhOkxwW
+X5teB7/wViqYFu7niCvQHP3+cn+bhJhGN71h9hfYXUzkL4/ZP8Ojt9k+cwADgMy1
+qvoGlYV7I7MbhI3EHSA8R8/a83rqwRk3Q6pfAu1Dko8ypsBe6b1TWFIHJCoHmIwz
+sxbHictzuZKiGuVSb5+dwxH3h3AhV8zjjttwyhCn+220VNfsL49E/1rP+1qODz5H
+xIQbIhyoxmfVnwtFl0tQO7EkpctruSKrX7eq8QIDAQABAoIBAQC/7aYDyltTjEe9
+SwmDkrTZl7jMbd7qoWZ1QmyQBTlH7KO/r1GHC3Q774ge5buzzh+G21330mGAzmMC
+lI3aiPKk22S8NxHhNZkJDTo2DX2oItf0jDrb9qzAd+77DN6P9QmVE4lgi+UufkQO
+4/Cd5Pc3GksZxnlsM+oeJZiDNeWbtXxI+DVGf8goQGpsGLq6rzWMGPnY6PFXyV+O
+zdhWYAZP0qmXNE0BoMqG0AmUYN9O53Mxx4rYeEAF/+znPOatu9FO9W8IbUH23Exv
+JuopiK+8BohKTVQ2Tcuqoq/YZYEbkpBuKdqiao+QOZ4LHKoJ3VnWDgK0xPjR8sI0
+z5xGFE0tAoGBAPb0O5hNat1mGbIlad3pBMd2Nfd6qWUuusT9DP3JeCYRn7Tu6rbq
+Qvvmeamoe0OWaEzS8PfRSOrlL+GPyB98rHiFkvc2ePu9C3BH3yV1z51kOPCH9KKY
+nZHeK4mA/8nQEjDuHR/3bEjZC2J78Rnj00O9JKZDW3k3+poWcZ9f+1pDAoGBANKO
+jq7WrqeDT+Dm01nPut+1lYtyMFOce8JNryyKnEMrpRDlEwbu6Wvk3YuuajznwLQ2
+7ydUCBtDJJkEPmAhZI38439lyp4fzHFrQeptjEClRJkb4qv36+IcUS59c/MNuPaC
+t6FYTjHXZZriTIvXkDWYMPALcV9i3vGb3xTlepS7AoGBAPKe4snwDXS08bvfHBKj
+80kPr1eTkEdTULVmM9RGkp88I178d2b74pFfTtpLJ8cwRwprF8kxOWVlg9QkkaW1
+tDC4crokL1qL0WgfhHFmPHJSW8qcl9EDBZOg5b8zGJqqrKSb28tjJ2SusIuyXx5j
+gVUEx7P9ayo9wByQvlKpVuXHAoGATrhJlAhjZ/FqDdV+sxc88KJ89JOOidP5WR2e
+HnL8FQjeP8DFKlRsJJB+W9irk3W50Caxpux902N47VRu1ZXmeEdR7rFp3VBaKRVG
+oZSvWQPw76VDS7P3FqQrncv9a6N3wYIBkWroYS38qLlukOHY4pCxyy0cB+N5Iq95
+6eAZwj0CgYAz9MWvU/UMnWl958e4Al9Na0PwRWL68Q9pzCkczXODh9/ZqAEMBWUh
+wxRzmXqTmesqqDR7rX/sv2qStEOy4sUrZPh49U+9G2xl2OScXMKnjHNu2A7QdbVm
+KBhDnvxKaos9nXJrezxThvyA7qD0F4ulBw3jg1nYr4z+oriqxDHKEw==
 -----END RSA PRIVATE KEY-----",
-                                "netconf-keystore:passphrase": ""
-                }
+                "passphrase": "pa$$word"
+            }
         ]
     }
+}'
+```
+
+#### Removing of the existing key
+
+The following example shows how to remove the existing key 'key1' from UniConfig.
+It is possible to remove multiple keys at once.
+
+```bash Removing of the existing key
+curl --location 'http://127.0.0.1:8181/rests/operations/netconf-keystore:remove-keystore-entry' \
+--header 'Content-Type: application/json' \
+--data '{
+    "input": {
+        "key-id": [
+            "key1"
+        ]
+    }
+}'
+```
+
+#### Reading list of the existing keys
+
+The following example shows how to read list of the existing keys from UniConfig.
+
+```bash Reading list of the existing keys
+curl --location 'http://127.0.0.1:8181/rests/data/netconf-keystore:keystore/key-credential'
+```
+
+```json Sample response
+{
+  "key-credential": [
+    {
+      "key-id": "key1",
+      "passphrase": "UPII5ErGsvPB7L+2OfI4xQ==",
+      "private-key": "kjTlzs/EpFAQA6xLjmye5uvWdUtpQyD0oQKan49EIdkweABSFY8QQgl8spXDRWBAjoyyfuwKr0Kp5/EnScFIPBmjaPUDpVB5YMfT1sMEGFP/84kLtsaU1zQaLvFLMmJW4SgCKTe/9sTDO/oj3IfOgH+jT070hOgD8NHvQPTSHvQzTmiuNDjMXtkZDVwsA0+lWyL+GPs9tbpgggVuxm8VO+uWuNFqiRUEjfNl7uV+gg7MB/IWiaLqMkUNBNNYrMN1bhfZgtt81I/i/dw/LaJcY64Fy48QwYAv8+UHWh1WczhZGhLYgbNVSLDkYv5ffVMnfLipw8hqT8vrWVlIQNmeeP0IS7ApmXkFueU+xq10l+DaicoPVMhm6IEZjn8RgJhoX/u4vKcVZbMmzDrHfgDNo1MfddgxNsUr/MyqIbZvHXjsCRZWWziXmE7dTl3WWueEnXUmg5rmxxNTg4Bygkw7azDWDshwGnoteRViENZwlaFd3U32GY1RREvoA+3EHYL+0BcLXF9yxlXwNgigWfSyBqEeJFhGpwHaQPgpV5Z098I0Lk1mbg0c13K61Sdv9ryCjPPl7o1hfV4KCrELW+/5S7SeSwIL5WU77tHFN0ym5OQjlhkMdxIdLod3CcgbCWz3XmXx7yXn94OX1QMaSQnracWTCkjey4qA4o8BD4DzsVvP0DSTfEtFXmaPvXLJMlIP7G6P95o9t7TQoZOUuNYFtyYoejnmsBQrYJ4hqpQO96LUoMxgwYQyQVVdJdEzEp/uuq6xePfK+WGQ5WUucrGoRYq3gD8GezOMvRtQk6QppSgKv5M0TyV/jjs1uzV8np693wMtl9sjKaU75gV6OYb4Za2YCLExRRyStdyBJj7hN1ctYwxXDSVyJLl3JJ5yWmK/RHW/82J1si3VOe+eVKURo+D3/KWvJKTzTklyta0a86qbAB9xoF5nroRK7AyesxwPJhSF7H+RkemFT2O6/eg1DUDRRWUN7YJqbwpNWWgIlsM0ejpAh9jbkBqNDAfgYdr1Ld6BF3BDShfZRitwpXsOhGf8Bbc4JyOcPgVkMdtCOP/VsJsn+9UShjZK4RvN/DWc/e74tYfrdBr09o7hHMC6YaGn8Dfh7OPjpL3NvFbkTGYS5kGqBze14EIB+Ioh/1parymTfMzNxiOfrrj1kZkqInS/a2IcRcA25jc7xeaOql5sB5jBPDUd5yyfFwimkCqJnves+r0e7mr0znqj3/rnoJWwCgVdPfLGY3+o3wTX+ZpNE2N+majAv29kxiMNUy+MP5G55lvMh5U0clBHb0JZfta1rWMntkSIROXyMKdGKR9EWf4FIRjEgWeagU2xKdO/ccged4KXBAxmMDMiQueN+EVBRYA+qPj2ttVEgyJXPMZHhULucExlwGw1SaMYOgyTo0gGkuxi7EknBN0qrOZrjMQVtYeMsvTDjJ7GlABH3RlEL8wUTWAXA7b6GsNxj4GNlGYMxFIQwNZT4dbuBp2V8lQu4oqoSBCk2lAMYotaKXi26xqKCDKofwlzAvxHQFfJ+nwXPQ/5qKFR+F+rXT4suuWYeA9In2RBMxOzOIuvXNC1uOQRs3N6ORiNfS6Y7dF3HUHLAwud5cO3xAdFFEXmHBWvz7TJ1MzkYu5ggkNhSaFBGncvWZKuXOjfwvGXVaxZbRU3ORfEz56FC2Mg8Mx1aOO9m9mD7XssrKUZwSqKgrnol0sknva2Tb7+8FleOf7PgzkkDdb8r4y/uNqybjAL7XzI4JCUo66U2eRCGJsGJffMfeJN5vihbbt3Uq6+1FTvSxZa4iRpPeKMk1qLAtZRO78CvRD1/igcgq/0h7tFtiQtGdhkm/hTM55OaeuI1f3BmbIXY3SJVwMOKqkdiSMTDlnRR2hmoN8AFyYzqDK5ZyGmLgwnNO7tuDD7+TYBF8qK4GE6l3pfJ0kmeMeu0UVYrtqaKncMkjxvmaS5lGu2B8wNNa5ka9cS/bCJyaU39lred8C+bhx21oMajDrUaURIBCf6v5QC+X96XEGAB96sNssfEZdlS1zMGaSqmSr3LbFKsm4hI3CZ2NIK+qXKAXO9nCeHxIHMg80vBEXmhbbKviBzcsYUj0lA0Qr0WXz9qe0YjDwUq6RwGP4nHM62jHWEgd87FiYX/+RBiKa3PwJ9OU7ax+3PkOgJZLcjQKiDiHkhPN9ocOnEvQqC8u53qRTG3sSm0AusYri3jgb3IWg5fjOKLT7fLnHdyKwogj+zqfxK"
+    }
+  ]
 }
 ```
 
-**JSON file example**
-
-```
-{"netconf-keystore:keystore":{"key-credential":[{"key-id":"versa2","passphrase":"jKNzkicDKmVrpOehbo/Jtw==",
-"private-key":"kjTlzs/EpFAQA6xLjmye5uvWdUtpQyD0oQKan49EIdlXhpk76FO8QU7kptJpqG8XhREOKkDQpOFw1FYIi92e2czIFS9N8OlOMsXtc
-0GEoYTG+vjkOAx6PIqjelVTcB1doF5YvmZwR3D7aLBSA8EnatWjJ0lPkP6Tq0jFh0qVLURTgAACbx+JkbSYJ45w/+HAwaIBWzcPtcQH3H6rqoMaux5Z7
-C3+XIZRQJszdyj429qlHnordSSe/5mAY1WbrN9YPxpqd87MHLAAn1cdiPXyx3MEPPStAqzDrCThRSK4ViEER/YL1XcKEWpnHIApVlrqaow91m+4cJ3N+
-pJLrlv/hVxohEwNZDJQyS1UFwA5KN2kYA3t8/EIL+IR4lEnm+5/PrvEiD964R+EYQtZNJgC+vaCy85JBl+/M1cFG+kQR7NRypBCwuvlITmPwko9Q9rlY
-/LiISxCzEp8xk1MNu/XQ2t5dGTK/ppEehsCLLt61G3hVIM+0MZVkntHDuW4xtIf33zU0FxnealTPK0fiw2CDgPW4AkS4VYXLEoBFttt4vIGaXLU82i/q
-GnThBA7ZCofYdAnsJmcWK8rZqhuRVzGq5JltHcXaGBp2kY9se8vENKXsA0W7xaf4V3wHIySw+5tn0/lfusgkbGJpTrRJH2nj2q6NWG1isay2E7M9qLjw
-rIOHZHm+he9qQVFptjx7gTRtOF9XV6ImmPqP0dXPeTm4fUwG9vEI40CuIZkyhmQpXqCjOzQIRxWe3Bnxx2iNHIhTDUSMz49q4iv9KHT6BqJ1FkKxX3TG
-HoosuKneWmmtgixFg+48cgRcWFZ2OxAHsBde6YIsuFunPyL70/soQP9UBVcNF4huliknbF4axgkdsIFqm/toz/loRRgNfgjbjEINF4/zLQsHbFOSSlTC
-jUrq0DsR5u/X4glnOk/aAi3RirpCoPZiA+Qx8Cjysy9GaTviejcmBaLnhASksWuncaBQHxd6go6eNxzHE95igus+LvEeJFNJKZb8RFejNsMnIcXptDOi
-6lpL5piPoKT/Hz8ExfDQj17mm8ZLIoAIXS1ZzlkJ6Z59a3eKNHGCsPUXnP7Y/0gQzK6sDnL7C9TKvsPwn5D6G10FK5OA4Mpfnmf+vUDp/gFfsPlsF1cd
-T12+NoAdThcSgaELaWXO329/YiU4GPRnuLHndZDLry84MNCLow="}]}}
-```
-
-**Empty data store JSON file example**
-
-```
-{"netconf-keystore:keystore":{}}
-```
+**Note:** Both 'passphrase' and 'private-key' are additionally encrypted by the UniConfig encryption system
+to protect confidential data.
 
 ### Keepalive settings
 
@@ -747,12 +778,12 @@ curl -X DELETE \
 
 The last element of the URL is the name of the mount-point.
 
-NETCONF test-tool
+NETCONF TESTTOOL
 -----------------
 
-### Test-tool overview
+### Testtool overview
 
-NETCONF test-tool is the Java application that:
+NETCONF testtool is the Java application that:
 
 -   Can be used for simulation of 1 or more NETCONF devices (it is
     suitable for scale testing).
@@ -760,7 +791,7 @@ NETCONF test-tool is the Java application that:
 -   Provides broad configuration options of simulated devices.
 -   Supports YANG notifications.
 
-NETCONF test-tool is available at netconf repository of ODL
+NETCONF testtool is available at netconf repository of ODL
 (<https://git.opendaylight.org/gerrit/admin/repos/netconf under
 'netconf/tools/netconf-testtool' module. After building of this module
 using maven (just invoke command 'mvn clean install' in this directory),
@@ -768,22 +799,82 @@ the java executable can be found in appeared 'target' directory with
 name 'netconf-testtool-[version]-executable.jar' (version placeholder
 depends on used release).
 
-### Starting of the test-tool
+Up-to-date NETCONF testtool is also available at frinx artifactory <https://artifactory.frinx.io/>.  
+Up-to-date NETCONF testtool is also available at DockerHub as Docker Image.  
 
-After NETCONF test-tool has been built, it can be used using the
+### Starting of the NETCONF testtool
+
+After NETCONF testtool has been built, it can be used using the
 following command:
 
 ```
-java -Xmx1G -jar netconf-testtool-[version]-executable.jar --schemas-dir SCHEMAS-DIR --device-count DEVICE-COUNT --debug ENABLED-DEBUGGING --starting-port STARTING-PORT --ssh SSH --md-sal MD-SAL
+java -Djava.security.egd=file:/dev/./urandom \
+     --agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8000 \
+     -Xmx1G \
+     -jar netconf-testtool-[version]-executable.jar \
+     --ssh SSH \
+     --md-sal MD-SAL \
+     --device-count DEVICE-COUNT \
+     --starting-port STARTING-PORT \
+     --schemas-dir SCHEMAS-DIR \
+     --debug ENABLE-DEBUGGING
+```
+Please see used fields and placeholders explained below ...
+
+Multi line example with values replacing placeholders e.g.: 
+```
+java -Djava.security.egd=file:/dev/./urandom \
+     -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8000 \
+     -Xmx1G \
+     -jar netconf-testtool-5.1.5-20230310.105106-8-executable.jar \
+     --ssh true \
+     --md-sal true \
+     --device-count 10 \
+     --starting-port 17830 \
+     --schemas-dir schema-1987709419 \
+     --debug true
+```
+Usually no need to debug (it can be omitted) and long jar executable can be renamed:
+```
+java -Djava.security.egd=file:/dev/./urandom \
+     -Xmx1G \
+     -jar netconf-testtool.jar \
+     --ssh true \
+     --md-sal true \
+     --device-count 10 \
+     --starting-port 17830 \
+     --schemas-dir schema-1987709419
+```
+One liner example:
+```
+java -Djava.security.egd=file:/dev/./urandom -Xmx1G -jar netconf-testtool.jar --ssh true --md-sal true --device-count 10 --starting-port 17830 --schemas-dir schema-1987709419
+```
+The following snippet shows output from successfully simulated NETCONF
+device (notice the last line that shows hint, on which TCP ports
+simulated devices have been started):
+```12:33:32.840 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Starting 10, SSH simulated devices starting on port 17830
+12:33:32.852 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Loading models from directory.
+12:33:42.490 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - using PersistentMdsalOperationProvider.
+12:33:42.491 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - data will be persisted across sessions
+12:33:42.575 [main] INFO  o.a.s.c.u.s.b.BouncyCastleSecurityProviderRegistrar - getOrCreateProvider(BC) created instance of org.bouncycastle.jce.provider.BouncyCastleProvider
+12:33:42.625 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_BACKLOG' for channel '[id: 0x3fb75375]'
+...
+12:33:42.714 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - All simulated devices started successfully from port 17830 to 17839
+```
+You can check occupied ports and netconf-testool process like this:
+```
+sudo ss -tlp
+ps aux | grep java
 ```
 
-Description of the used fields:
+
+Description of some of the used fields and placeholders:
 
 -   **SCHEMAS-DIR** - Path to the directory that contains YANG schemas
     used for simulation of all NETCONF devices.
--   **DEVICE-NETCONF** - Number of NETCONF devices that should be
+-   **DEVICE-COUNT** - Number of NETCONF devices that should be
     simulated at once.
--   **ENABLED-DEBUGGING** - It should be set to 'true', if you want to
+-   **ENABLE-DEBUGGING** - It should be set to 'true', if you want to
     see detailed debugging messages from simulation of NETCONF device
     (for example, received and sent RPC messages); otherwise it should
     be set to 'false' (INFO logging level is used).
@@ -801,23 +892,328 @@ All configurable parameters can be fetched using help modifier:
 ```
 java -jar netconf-testtool-[version]-executable.jar -h
 ```
+e.g. 
+```
+usage: netconf testtool [-h] [--edit-content EDIT-CONTENT] [--async-requests {true,false}] [--thread-amount THREAD-AMOUNT]
+                        [--throttle THROTTLE] [--auth AUTH AUTH] [--controller-destination CONTROLLER-DESTINATION]
+                        [--device-count DEVICES-COUNT] [--devices-per-port DEVICES-PER-PORT] [--schemas-dir SCHEMAS-DIR]
+                        [--notification-file NOTIFICATION-FILE] [--initial-config-xml-file INITIAL-CONFIG-XML-FILE]
+                        [--starting-port STARTING-PORT] [--generate-config-connection-timeout GENERATE-CONFIG-CONNECTION-TIMEOUT]
+                        [--generate-config-address GENERATE-CONFIG-ADDRESS] [--generate-configs-batch-size GENERATE-CONFIGS-BATCH-SIZE]
+                        [--distribution-folder DISTRO-FOLDER] [--ssh {true,false}] [--exi {true,false}] [--debug {true,false}]
+                        [--md-sal {true,false}] [--md-sal-persistent {true,false}] [--time-out TIME-OUT] [-ip IP]
+                        [--thread-pool-size THREAD-POOL-SIZE] [--rpc-config RPC-CONFIG]
 
-The following snippet shows output from successfully simulated NETCONF
-device (notice the last line that shows hint, on which TCP ports
-simulated devices have been started):
+Netconf Testtool
+
+Simulates netconf devices:
+- one device per port
+- can simulate tens of thousands of devices at a time
+- supports basic netconf get-config, edit-config, lock, unlock, discard-changes + notifications
+- 2 modes:
+ - simple: replies with static content to each get-config operation. Edit-config is ignored, filtering doesn't work
+- md-sal: full blown basic netconf device. Starts  with  empty  data  store.  Can  persist  data  across sessions or isolate sessions to a
+device/port
+
+
+Example usage:
+
+- Running a single simulated device emulating IOS XR with fully supported netconf datastore. Wipes out datastore for every session
+
+	java -jar ./netconf-testtool-executable.jar --schemas-dir ~/iosxr/ --md-sal true
+
+
+- Running a single simulated device emulating IOS XR with fully supported netconf datastore. Preserves datastore content across sessions
+
+	java -jar ./netconf-testtool-executable.jar --schemas-dir ~/iosxr/ --md-sal true --md-sal-persistent true
+
+
+- Running a single simulated device emulating IOS XR with  hardcoded  response  to get-config. Netconf subtree filtering is not working in
+this setup
+
+	java -jar ./netconf-testtool-executable.jar --schemas-dir ~/iosxr/ --initial-config-xml-file data.xml --notification-file notif.xml
+
+	Note:  File  data.xml  should  look  like  this:  '<config  xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"><interface-configurations>...
+</interface-configurations></config>' 
+	Note:   File   notif.xml   should   look   like   this:   '<notifications><notification><times>0</times><delay>0</delay><content><![CDATA
+[<eventTime>XXXX</eventTime>]]></content></notification></notifications>' 
+
+
+named arguments:
+  -h, --help             show this help message and exit
+  --edit-content EDIT-CONTENT
+  --async-requests {true,false}
+  --thread-amount THREAD-AMOUNT
+                         The number of threads to use for configuring devices.
+  --throttle THROTTLE    Maximum amount of async requests that can be open at  a  time, with mutltiple threads this gets divided among all
+                         threads
+  --auth AUTH AUTH       Username and password for HTTP basic authentication in order username password.
+  --controller-destination CONTROLLER-DESTINATION
+                         Ip address and port of controller. Must  be  in  following  format  <ip>:<port>  if available it will be used for
+                         spawning  netconf  connectors  via  topology  configuration  as   a  part  of  URI.  Example  (http://<controller
+                         destination>/restconf/config/network-topology:network-topology/topology/topology-netconf/node/<node-id>)
+                         otherwise it will just start simulated devices and skip the execution of PUT requests
+  --device-count DEVICES-COUNT
+                         Number of simulated netconf devices to spin. This is the number of actual ports open for the devices.
+  --devices-per-port DEVICES-PER-PORT
+                         Amount of config files generated per port to spoof more devices then are actually running
+  --schemas-dir SCHEMAS-DIR
+                         Directory containing yang schemas to describe simulated  devices.  Some  schemas e.g. netconf monitoring and inet
+                         types are included by default
+  --notification-file NOTIFICATION-FILE
+                         Xml file containing notifications that should be sent to clients after create subscription is called
+  --initial-config-xml-file INITIAL-CONFIG-XML-FILE
+                         Xml file containing initial simulatted configuration to be returned via get-config rpc
+  --starting-port STARTING-PORT
+                         First port for simulated device. Each other device will have previous+1 port number
+  --generate-config-connection-timeout GENERATE-CONFIG-CONNECTION-TIMEOUT
+                         Timeout to be generated in initial config files
+  --generate-config-address GENERATE-CONFIG-ADDRESS
+                         Address to be placed in generated configs
+  --generate-configs-batch-size GENERATE-CONFIGS-BATCH-SIZE
+                         Number of connector configs per generated file
+  --distribution-folder DISTRO-FOLDER
+                         Directory where the karaf distribution for controller is located
+  --ssh {true,false}     Whether to use ssh for transport or just pure tcp
+  --exi {true,false}     Whether to use exi to transport xml content
+  --debug {true,false}   Whether to use debug log level instead of INFO
+  --md-sal {true,false}  Whether to use md-sal datastore instead of default simulated datastore.
+  --md-sal-persistent {true,false}
+                         Whether to persist data in the md-sal datastore across sessions
+  --time-out TIME-OUT    the maximum time in seconds for executing each PUT request
+  -ip IP                 Ip address which will be used for creating a  socket  address.It  can either be a machine name, such as java.sun.
+                         com, or a textual representation of its IP address.
+  --thread-pool-size THREAD-POOL-SIZE
+                         The number of threads to keep in the pool, when creating a device simulator. Even if they are idle.
+  --rpc-config RPC-CONFIG
+                         Rpc config file. It can be used to  define  custom  rpc  behavior, or override the default one.Usable for testing
+                         buggy device behavior.
 
 ```
-16:31:12.136 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Starting 1, SSH simulated devices starting on port 36000
-16:31:12.164 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - Loading models from directory.
-16:31:12.662 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - using MdsalOperationProvider.
-16:31:12.766 [main] INFO  o.a.s.c.u.s.b.BouncyCastleSecurityProviderRegistrar - getOrCreateProvider(BC) created instance of org.bouncycastle.jce.provider.BouncyCastleProvider
-16:31:12.843 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_BACKLOG' for channel '[id: 0xb366d5d3]'
-16:31:12.933 [main] INFO  o.o.n.t.tool.NetconfDeviceSimulator - All simulated devices started successfully from port 36000 to 36000
+Notes:
+1. while you use --md-sal true devices are started with empty datastore. You can put initial config via netconf session or via uniconfig operations.
+2. --md-sal true --md-sal-persistent true will preserves datastore content across netconf sessions
+3. --initial-config-xml-file data.xml overrides --md-sal true and send hardcoded response to get-config.
+4. --notification-file notif.xml notification support
+
+### Starting of the NETCONF testtool from Docker Image
+
+1. download docker image using download command
 ```
+docker pull frinx/netconf-testtool
+```
+2. run it using docker run command
+```
+docker run -it frinx/netconf-testtool
+```
+3. you can use options of Netconf test tool starting script
+```
+-x or --xmx to set Java heap for test tool
+-p or --port to set starting port
+-d or --devices to set number of simulated devices
+-s or --schemas to set schemas folder (required firstly mount schemas folder to docker container using -v)
+-i or --init-conf to set initial simulated config to be returned by get-config RPC (required firstly mount this config file to docker container using -v)
+--ssh to enable ssh
+--md-sal to enable md-sal
+--debug to run in debug mode
+-h or --help to display help options
+--override to override these options to access all netconf test tool options directly
+```
+**note**  
+To set value of xmx is required to separate -x or --xmx option and value of xmx with space.  
+When using xmx setting option together with override option, it is required to use xmx setting option first before override.  
+All options and their values should be separated with space.  
+Setting to enable ssh or md-sal requires only option ssh or md-sal to be present to enable these functions and no other value is required.  
+When override is used, then it is not possible to set any other option from simple interface except Java specific options, like xmx and partially also debug.  
+After override option there should be Netconf test tool complex interface options.  
+If you want to use external files like schemas or init config file, you should first mount them using -v option of docker.  
+You should use --publish option to publish ports if you want to use them.  
+You can use --rm option after docker run to automatically remove docker container after it is stopped.  
+
+```
+docker run --publish 1024-1123:1024-1123 -v ./schemas:/opt/schemas -v ./i.xml:/opt/i.xml -it frinx/netconf-testtool \
+--xmx 1G --port 1024 --devices 100 --schemas ./schemas --init-conf ./i.xml --ssh --md-sal --debug
+```
+4. you can also use help option to show how to use it using -h or --help
+```
+docker run --rm -it frinx/netconf-testtool --help
+```
+5. you can also override simple interface of starting script and use all options of test tool directly
+```
+docker run --publish 1024-1123:1024-1123 -v ./schemas:/opt/schemas -v ./i.xml:/opt/i.xml -v ./notification.xml:/opt/notification.xml \
+            -it frinx/netconf-testtool --xmx 1G --override \
+            --ssh true \
+            --md-sal true \
+            --starting-port 1024 \
+            --device-count 100 \
+            --schemas-dir ./schemas \
+            --initial-config ./i.xml \
+            --notification-file ./notification.xml \
+            --debug true
+```
+**note**  
+If you override starting script options, you should set Java heap size using -x or --xmx option before --override option.  
+You could not use any other starting script options except xmx and debug option.  
+If you override starting script options, --debug option activate only Java and shell debug mode, but not debug mode of test tool itself.  
+If you want to start debug mode of netconf test tool, you should use debug options of Netconf test tool directly.  
+
+6. you can also override docker entrypoint and run netconf test tool by custom way using all options including java options and run like bellow
+```
+docker run --publish 1024-1123:1024-1123 -v ./schemas:/opt/schemas -v ./i.xml:/opt/i.xml -v ./notifications.xml:/opt/notification.xml \
+-it --entrypoint /bin/bash frinx/netconf-testtool
+```
+and in docker container shell:
+```
+java -Djava.security.egd=file:/dev/./urandom \
+     -Xmx1G \
+     -jar netconf-testtool-executable.jar \
+     --ssh true \
+     --md-sal true \
+     --device-count 100 \
+     --starting-port 1024 \
+     --schemas-dir ./schemas \
+     --initial-config ./i.xml \
+     --notification-file ./notification.xml \
+     --debug true
+```
+7. in custom way of running test tool there are these files, placed in /opt folder
+```
+netconf-testtool-executable.jar   file to run netconf test tool
+run_netconf_testtool.sh           shell script file to start netconf test tool as default entrypoint
+```
+
+### Prepare init config via Uniconfig for simulated netconf-testtool device
+1. start Uniconfig - in cache folder there can be present the folder with device yang models to preload them faster
+2. start netconf-testool with schema-dir folder of device yang models 
+```
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:8000 -Xmx1G -jar testtool.jar --schemas-dir schema-1987709419 --device-count 1 --debug false --starting-port 36000 --ssh true --md-sal true
+```
+3. install device
+```
+curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:install-node' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "node-id": "testtool-setup",
+        "netconf": {
+            "netconf-node-topology:host": "10.19.0.20",
+            "netconf-node-topology:port": 36000,
+            "netconf-node-topology:keepalive-delay": 5,
+            "netconf-node-topology:max-connection-attempts": 1,
+            "netconf-node-topology:connection-timeout-millis": 60000,
+            "netconf-node-topology:default-request-timeout-millis": 60000,
+            "netconf-node-topology:tcp-only": false,
+            "netconf-node-topology:username": "admin",
+            "netconf-node-topology:password": "admin",
+            "netconf-node-topology:sleep-factor": 1.0,
+            "uniconfig-config:install-uniconfig-node-enabled": false,
+            "uniconfig-config:uniconfig-native-enabled": false
+        }
+    }
+}'
+```
+4. send init config to the netconf-testtool device via uniconfig
+```
+curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=testtool-setup/yang-ext:mount/system' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "system:system": {
+        "identification": {
+            "latitude": "31.202149",
+            "name": "Site2Branch2",
+            "longitude": "-96.666829",
+            "location": "Somewhere"
+        },
+        "users": [
+            {
+                "name": "admin",
+                "login": "shell",
+                "role": "admin"
+            },
+            {
+                "name": "my_device",
+                "login": "shell",
+                "role": "admin"
+            }
+        ],
+        "ssh": {
+            "client-alive-count-max": 0,
+            "client-alive-interval": 300
+        },
+        "time-zone": "America/Los_Angeles",
+        "services": {
+            "ssh": "enabled",
+            "sftp": "disabled",
+            "www": "enabled"
+        },
+        "session": {
+            "reevaluate-reverse-flow": false,
+            "tcp-send-reset": false,
+            "check-tcp-syn": false,
+            "tcp-secure-reset": false,
+            "tcp-adjust-mss": {
+                "enable": true,
+                "interface-types": "tunnel"
+            }
+        }
+    }
+}'
+```
+### Example of notification file
+```
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+
+<notifications>
+<!-- Notifications are processed in the order they are defined in XML -->
+<!-- Notification that is sent only once right after create-subscription is called -->
+<notification>
+    <!-- Content of each notification entry must contain the entire notification with event time. Event time can be hardcoded, or generated by testtool if XXXX is set as eventtime in this XML -->
+    <content><![CDATA[
+        <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+            <eventTime>XXXX</eventTime>
+            <random-notification xmlns="urn:ietf:params:xml:ns:netmod:test">
+                <random-content>single no delay</random-content>
+            </random-notification>
+        </notification>
+    ]]></content>
+</notification>
+<!-- Repeated Notification that is sent 5 times with 2 second delay inbetween -->
+<notification>
+    <!-- Delay in seconds from previous notification -->
+    <delay>20</delay>
+    <!-- Number of times this notification should be repeated -->
+    <times>5</times>
+    <content><![CDATA[
+        <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+            <eventTime>XXXX</eventTime>
+            <random-notification xmlns="urn:ietf:params:xml:ns:netmod:test">
+                <random-content>scheduled 5 times 10 seconds each</random-content>
+            </random-notification>
+        </notification>
+    ]]></content>
+</notification>
+<!-- Single notification that is sent only once right after the previous notification -->
+<notification>
+    <delay>20</delay>
+    <content><![CDATA[
+        <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+            <eventTime>XXXX</eventTime>
+            <random-notification xmlns="urn:ietf:params:xml:ns:netmod:test">
+                <random-content>single with delay</random-content>
+            </random-notification>
+        </notification>
+    ]]></content>
+</notification>
+</notifications>
+
+```
+
 
 ### Increasing the maximum number of opened files
 
-Since NETCONF test-tool can be used for simulation of large number of
+Since NETCONF testtool can be used for simulation of large number of
 NETCONF devices, it requires opening a lot of TCP sockets that listen on
 different TCP ports. In Linux systems TCP socket is also represented as
 file - from this reason such simulations can easily exhaust configured
@@ -852,6 +1248,27 @@ depends on occupation by other applications and operating system too).
 **note**
 Configured value should not reach the one that applies for all users -
 "cat /proc/sys/fs/file-max".
+
+see also /etc/sysctl.conf:
+```
+#
+## /etc/sysctl.conf
+## Increase Outbound Connections
+## Good for a service mesh and proxies like 
+## Nginx/Envoy/HAProxy/Varnish and applications that
+## need long-lived connections.
+## Careful not to set the range wider as you will impact
+## running application ports in heavy usage situations.
+net.ipv4.ip_local_port_range = 12000 65535
+
+## Increase Inbound Connections
+## Allows for +1M more FDs
+## An FD is an integer value used as a traffic I/O pointer 
+## on a connection with a Client.  
+## The FD Int value is used to traffic packets between 
+## User and Kernel Space.
+fs.file-max = 1048576
+```
 
 How does the FRINX UniConfig distribution use NETCONF?
 ------------------------------------------------------

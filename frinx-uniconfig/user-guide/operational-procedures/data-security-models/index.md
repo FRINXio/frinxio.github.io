@@ -1,57 +1,69 @@
 # Data Security Models
 
-UniConfig supports encryption and hashing of leaf/leaf-list values on SSH and RESTCONF API.
-Following sections describe supported security models in depth.
+UniConfig supports encryption and hashing of leaf/leaf-list values via SSH and
+RESTCONF API. The following sections describe the supported security models in
+depth.
 
 ## Data encryption
 
-UniConfig uses asymmetric encryption for ensuring confidentiality of selected leaf and leaf-list values. Currently,
-only RSA ciphers are supported (both global UniConfig and device-level key-pairs). Encryption is supported
-in 'uniconfig', 'unistore', and 'templates' topologies.
+UniConfig uses asymmetric encryption to ensure confidentiality of selected leaf
+and leaf-list values. Currently only RSA ciphers are supported, both global
+UniConfig and device-level key-pairs. Encryption is supported for the
+`uniconfig`, `unistore`, and `templates` topologies.
 
 ### Global-device encryption architecture
 
-Both UniConfig and device uses PKI for encryption of data:
+Both the UniConfig and device sides use PKI for data encryption:
 
-* UniConfig side: All selected leaves are encrypted using global public key when this data enters UniConfig via
-  RESTCONF API or UniConfig SSH shell API. Afterwards, data is stored in database in the encrypted format.
-  UniConfig has also access to private key which is used internally for decryption of already encrypted data.
-* Device side: Device exposes public key and UniConfig uses this key for re-encryption of data before it is sent
-  to device ('commit'/'checked-commit' operations). However, device doesn't expose its private key - UniConfig is not
-  able to detect changes done to encrypted data (updated leaves/leaf-lists) - it is only able to detect, if data
-  was removed or created, not updated. Because of this reason, UniConfig assumes that read encrypted data from device
-  has been encrypted using the same public key as it was used by UniConfig.
+* **UniConfig side**: All selected leaves are encrypted using a global public key
+  when the data enters UniConfig via RESTCONF API or UniConfig SSH shell API.
+  Afterwards, the data is stored in the database in encrypted format. UniConfig
+  also has access to a private key used internally for decrypting data that is
+  already encrypted.
+* **Device side**: The device exposes a public key, which UniConfig uses to
+  re-encrypt data before it is sent to the device (**commit** and
+  **checked-commit** operations). However, the device does not expose its
+  private key, and UniConfig is therefore not able to detect changes to
+  encrypted data (updated leaves/leaf-lists) but can only detect if data was
+  removed or created. Because of this, UniConfig assumes that encrypted data
+  read from the device was encrypted using the same public key as that used by
+  UniConfig.
 
-Following picture depicts data transformations done on UniConfig interfaces:
+The figure below depicts data transformations performed on UniConfig
+interfaces:
 
 ![Global-device encryption model](global-device_encryption_model.svg)
 
 ### Global-only encryption architecture
 
-In comparison to Global-device encryption architecture this model uses only global key-pair for encryption of data.
-Devices contain only plaintext data.
+In contrast to the global-device encryption architecture, this model uses only
+a global key-pair to encrypt data. Devices contain only plaintext data.
 
-* Public key is used for encryption of received data via RESTCONF, UniConfig
-  shell API, and when syncing configuration from device to UniConfig transaction ('sync-from-network' operation).
-* Private key is used for decryption of encrypted data before forwarding this configuration to device
-  ('commit'/'checked-commit' operations).
+* A **public key** is used to encrypt data received via RESTCONF, UniConfig shell
+  API and when syncing configurations from device to UniConfig transaction
+  (**sync-from-network** operation).
+* A **private key** is used to decrypt encrypted data before forwarding this
+  configuration to a device (**commit** and **checked-commit** operations).
 
-Next picture depicts data transformations done on UniConfig interfaces:
+The figure below depicts data transformations performed on UniConfig interfaces:
 
 ![Global-only encryption model](global_encryption_model.svg)
 
 !!!
-Reading of operational data from device directly (GET under 'yang-ext:mount') shows data
-in unencrypted format. Application gateways should restrict access to mountpoints in this use-case.
+Reading operational data directly from the device (GET under `yang-ext:mount`)
+shows data in unencrypted format. Application gateways should restrict access to
+mountpoints for such use cases.
 !!!
 
 ### YANG support
 
-Leaves and leaf-lists, which value user would like to store encrypted, must be marked using YANG extension without any
-parameters. Currently, only leaves with 'string' type (direct/indirect with custom type definitions) are supported,
-since encrypted values are base64 encoded. Also, be aware that type constraints must accept encrypted values.
+Leaves and leaf-lists whose values should be encrypted must be marked using a
+YANG extension with no parameters. Currently, only leaves of the `string` type
+are supported (direct/indirect with custom type definitions), as encrypted
+values are base64 encoded. Also, be aware that type constraints must accept
+encrypted values.
 
-Example YANG module that defines one 'encrypt' extension:
+**Example** - YANG module that defines one `encrypt` extension:
 
 ```yang frinx-encrypt@2021-12-15
 module frinx-encrypt {
@@ -68,7 +80,7 @@ module frinx-encrypt {
 }
 ```
 
-Usage of the extension in the 'config' module:
+Using the extension in the `config` module:
 
 ```yang config@2021-12-15
 module config {
@@ -127,11 +139,12 @@ module config {
 }
 ```
 
-Many times, it is not possible to modify existing YANG files because they are already deployed on device, for example
-device running with NETCONF server. In this case, user can still mark what leaves should be encrypted using additional
-YANG module that contains deviations.
+Oftentimes it is not possible to modify existing YANG files, as they are already
+deployed on a device (for example, a device running with a NETCONF server). In
+this case, you can still mark which leaves should be encrypted using an
+additional YANG module that contains deviations.
 
-Example:
+**Example**
 
 ```yang encrypted-paths@2019-11-10
 module encrypted-paths {
@@ -178,68 +191,221 @@ module encrypted-paths {
 }
 ```
 
-Afterwards, user has 2 options how this module can be coupled with modules from device (NETCONF):
+Afterwards, there are two options to couple this module with modules from the
+device (NETCONF):
 
-a. Explicit specification of this side-loaded module in the 'install-node' request - using
-   'netconf-node-topology:yang-module-capabilities' settings (see 'Device installation' section).
-b. Automatic detection of side-loaded module - UniConfig looks for specific capability from NETCONF server,
-   inherits its revision, and then looks for side-loaded module with specific name and inherited revision
-   (see 'Configuration' section). This option is preferred, if deployment contains multiple versions of devices
-   and list of encrypted paths are different on each version.
+1. Explicitly specifying the side-loaded module in the **install-node** request
+   using the `netconf-node-topology:yang-module-capabilities` settings. See
+   **Device installation** section below for more information.
+2. Automatically detecting the side-loaded module - UniConfig looks for the
+   specific capability on the NETCONF server, inherits its revision and looks
+   for a side-loaded module with a specific name and inherited revision (see
+   **Configuration** section below). This option is preferred if the deployment
+   contains multiple versions of devices and the list of encrypted paths is
+   different on each version.
 
 ### Configuration
 
-Global RSA key-pair is stored inside PEM-encoded files in the 'rsa' directory under UniConfig root. Name of the
-private key must be 'encrypt_key' and name of the public key must be 'encrypt_key.pub'. If user doesn't provide
-these files, UniConfig will automatically generate its own key-pair with length of 2048 bits.
-All UniConfig instances in the cluster must use the same key-pair.
+The global RSA key-pair is stored inside PEM-encoded files in the `rsa`
+directory under UniConfig root. The private key must be named `encrypt_key` and
+the public key `encrypt_key.pub`. If these files are not provided, UniConfig
+automatically generates its own key-pair with a length of 2048 bits. All
+UniConfig instances in the cluster must use the same key-pair.
 
-Encryption settings are stored in the 'config/lighty-uniconfig-config.json' file under 'crypto' root object.
+Encryption settings are stored in the **config/application.properties** file.
 
-Example:
+**Example:**
 
-```json settings
-"crypto": {
-    "encryptExtensionId": "frinx-encrypt:encrypt",
-    "netconfReferenceModuleName": "system",
-    "netconfEncryptedPathsModuleName": "encrypted-paths"
+```properties
+crypto.encrypt-enabled=true
+crypto.encrypt-extension-id=frinx-encrypt:encrypt
+crypto.netconf-reference-module-name=system
+crypto.netconf-encrypted-paths-module-name=encrypted-paths
+```
+
+* `encrypt-enabled` - If `false`, encryption is disabled regardless of other
+  settings or **install-node** parameters. If `true`, encryption is enabled. The
+  default value is `true`.
+* `encrypt-extension-id` - If not specified, encryption is disabled regardless
+  of other settings or **install-node** parameters. Uses the format
+  `[module-name]:[extension-name]`, which specifies the extension used to mark
+  encrypted leaves/leaf-lists in YANG modules. The corresponding YANG module
+  containing this extension can be part of device/unistore YANG schemas or,
+  alternatively, can be side-loaded during installation of the NETCONF device as
+  an imported module from the `default` repository.
+* `netconf-reference-module` - Name of the module that the NETCONF client looks
+  for during the mounting process. If UniConfig finds a module with this name in
+  the list of received capabilities, it uses its revision in the lookup process
+  for the correct YANG module with encrypted paths (using deviations).
+* `netconf-encrypted-paths-module-name` - Name of the module which contains
+  deviations with paths to encrypted leaves/leaf-lists. There can be multiple
+  revisions of this file prepared in the `default` NETCONF repository. The
+  NETCONF client in UniConfig chooses the correct revision based on the
+  `netconf-reference-module-name` setting. Together,
+  `netconf-reference-module-name` and `netconf-encrypted-paths-module-name` can
+  be used to autoload encrypted paths for different versions of devices.
+
+!!!
+If the `default` YANG repository contains a module with `encrypted-paths` and
+without defined YANG revision, and the device does not already provide
+encryption capability, the `encrypted-paths` module is used as last resort during
+device installation (`netconfReferenceModuleName` and matching of revisions are
+ignored).
+!!!
+
+### Change encryption status
+
+!!! For this RPC to function correctly, it is necessary to enable notifications
+using the following parameter:
+
+```settings
+notifications.enabled=true
+```
+!!!
+
+Encryption can be enabled or disabled using the following parameter:
+
+```settings
+crypto.encrypt-enabled=true
+```
+
+The value of this parameter can be changed with the **change-encryption-status**
+RPC request.
+
+The following request can be used to enable encryption:
+
+```bash RPC request: change-encryption-status to enable
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    "input": {
+        "encryption-enabled": true
+    }
+}'
+```
+After this command is called, all UniConfig instances will set this parameter
+using the notification service to the value sent via RPC (in this case, `true`).
+
+Correspondingly, the following request can be used to disable encryption:
+
+```bash RPC request: change-encryption-status to disable
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    "input": {
+        "encryption-enabled": false
+    }
+}'
+```
+
+The following request is used to check the current encryption status:
+
+```bash POST request: get encryption-enabled-actual-status
+ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json'
+```
+
+```json POST response
+{
+  "output": {
+    "encryption-enabled-actual-status": true
+  }
+}
+```
+To check the functionality of this RPC after calling the **install-device RPC**,
+you can request the password for the node:
+- If encryption is enabled, the password is returned encrypted.
+- If encryption is disabled, the password is returned as plaintext.
+
+```bash GET request: get netconf-node-topology:password with enabled encryption
+curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=dev01/netconf-node-topology:password' \
+--header 'Accept: application/json'
+```
+
+```json GET response
+{
+    "netconf-node-topology:password": "rsa_gFXLXIxbeA9Vt8p0+JlprK1YUznBjk9DHRVlZ6Bm2nP0Fi/jUjsAUsGU814QyAZhXBiK6MY7ul75bE1EEI4uj0PlWT4xFYTXaKaMwgdHSCOnE/I6CGakuzGVGgzztKcSA/AsP8/bgXO0Rellw/S6z9U6h8blIG4Ff73GJOr53slWqoqMvAaXgSQtSbYB0EsPey1YqcukKuZnufJAazbHNHuxU1TFxcN/Cn1vTUEr8IATCAohfO7k5MOn0Ds/gYKt63RBO6000gcSP5PS9LRWhucSdLYc4b2+3soz0VXUCGEMPNSrmDXyWKUftI1S3qLfHthHoGEN1YXKGll5ccxW9g=="
 }
 ```
 
-* encryptExtensionId - If this setting is not defined, then encryption is disabled despite of other
-  settings or install-node parameters. The value must have the format [module-name]:[extension-name] and specifies
-  extension used for marking of encrypted leaves/leaf-lists in YANG modules. Corresponding YANG module, that contain
-  this extension, can be part of device/unistore YANG schemas or it can be side-loaded during installation of NETCONF
-  device as imported module from 'default' repository.
-* netconfReferenceModuleName - Name of the module for which NETCONF client looks for during mounting process. If
-  UniConfig finds module with this name in the list of received capabilities, then it uses its revision in the lookup
-  process for correct YANG module with encrypted paths (using deviations).
-* netconfEncryptedPathsModuleName - Name of the module which contains deviations with paths to encrypted
-  leaves/leaf-lists. There could be multiple revisions of this file prepared in the 'default' NETCONF repository.
-  NETCONF client in the UniConfig chooses the correct revision based on 'netconfReferenceModuleName' setting.
-  Together, 'netconfReferenceModuleName' and 'netconfEncryptedPathsModuleName' can be used for auto-loading
-  of encrypted paths for different versions of devices.
+### Change encryption keys (private and public)
 
-!!!
-If 'default' YANG repository contains module with encrypted-paths without defined YANG revision and device
-does not already provide encryption capability, then encrypted-paths module is used as the last resort during
-installation of device ('netconfReferenceModuleName' and matching of revisions are ignored).
-!!!
+If it is necessary to change the encryption keys, use the
+**change-encryption-keys RPC**.
+
+The process of changing encryption keys requires rebooting one of the UniConfig
+instances or enabling a new instance of UniConfig after calling the
+**change-encryption-keys RPC**. Rotation of encrypted data in the database for
+new encryption keys occurs if UniConfig is started after the
+**change-encryption-keys RPC** is executed. During key rotation, if some data in
+the database cannot be decrypted with the old key, those data will remain
+unchanged. 
+
+```bash RPC request: change-encryption-keys to new public and private keys
+curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-status' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    "input": {
+        "new-encryption-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAypJ4HB0kpxTvvEtOlT1jmtqTU2iY3m6VRx+xRJfP9UuGMT0qBC8/D5a/MRgTeSyJtZbmn8Jvu5ZNefDcHOgtv0yZ+BqRdew5sXd7xdzFAN0dgaBdvEAT9HXn+dKI9HGh7CMjH3JV1eNRwPLu5u3CbYiIrV3UM/2ogiZwsQsBHZcprbGlpdRa6yy+AXdB61BEGvdBQDvT0ND0q36sQkpG9qQokDxk77HyFx6b3YS8O+LXeb+Aka71sF/voTEhbMiUIF6jaWosoWYse4B0hZ2P0i+3CPtScgCA3n9XCcGXKj6g9wY/tEywsCfnS03KRTpVhpIjZb/xMKEcMOVl2BFA1wIDAQAB",
+        "new-decryption-private-key":"MIIEowIBAAKCAQEAypJ4HB0kpxTvvEtOlT1jmtqTU2iY3m6VRx+xRJfP9UuGMT0qBC8/D5a/MRgTeSyJtZbmn8Jvu5ZNefDcHOgtv0yZ+BqRdew5sXd7xdzFAN0dgaBdvEAT9HXn+dKI9HGh7CMjH3JV1eNRwPLu5u3CbYiIrV3UM/2ogiZwsQsBHZcprbGlpdRa6yy+AXdB61BEGvdBQDvT0ND0q36sQkpG9qQokDxk77HyFx6b3YS8O+LXeb+Aka71sF/voTEhbMiUIF6jaWosoWYse4B0hZ2P0i+3CPtScgCA3n9XCcGXKj6g9wY/tEywsCfnS03KRTpVhpIjZb/xMKEcMOVl2BFA1wIDAQABAoIBAQCSwKWPCHXjLUG4UX4uk/iy2KJejKoiik5O5mDP5oNbm0kuJrdnrKqsqnL8KAsDgAaLrTSKjJvRdEPQkXOE5ZcuvVnV6blzip0JOhxK7XMy+v1DSWBe3rUWJszVqXZaUHAT2Ci7wWL5vuMdO2Fjnt955q3Nmun+eEc5cou1VtmKCwvCIG857+FTzTdlmWcdDXTWIqbE7/OyuLcBYGmqlXnKLGx9+devRDNMwg3vTNDAeDY6b5WJWVtZjIaHLzMtXr3Rjkposu1eF8yFcGVW9AQpwecGsiMmCVOYwIKxGTe0xNOrw2LUnuAcD8unUTpI4y7MRM4tZexhG8+Pb4wSpyjhAoGBAPaMZZUdfVQ/8zQpqgxSYtbYHR3luYO2mDLEgTx7K3whuOFFIr3NrfOMUxhRmCATYZHfLSDVbym7eFn2f5+9XXlB14z8R61wiCpHWtxKyl/Ai4yWcIqxjGgWf0iCe0BDVZuPihM9cTRFDwK/P5BtsU8afH0ufggr4KuhNDxjHyRvAoGBANJWfkcxwq+k5wYn5oEwutyK95LJRx3NcBSdWX5Xb4TVxRQDeLGOEkIm/jochafJg8qkTMZJHXIycD/GNGZuXr16jJZtJix+fpmJ8yHj667QVVd9HWkOmifCfTJVTW5TJVKSKYW5EoX3xja8fgZ0sUiCWEJghCr/+/PhpN7zEW4ZAoGAHh9DHffPYya5CQt6Gi1KpCMdU5TImJ4LdFBr1b7arjzUgLlYqEXj1di0Ikl9w5V6mz7gHZ3WCgw8hQlHyHVzYSg5NKFyBG+2QywansWIejBlHFUZBOjyVZlCDdLbShuv7uSXowgjt5YkYlqJYpT0T8zVntm6TjdGKNH2NtaJbIMCgYA85jwTou2qa0VUe/L6TsCboETEJDDKCTQ9U72Ynfo07Kvt+n9UcT0KGD4dVyq/hNH6tw1fj8XNzZrAbEO5sJUPqU7RMvMNiOZg0BcsJdCUQc+j0B7WzxqFDoOvMhGEMuCogpcxF3+seCvUp0iZ1+mIg+zH8yfxR0KMvzU8NAZE6QKBgFuv6zSsGOCqm7pTdb4YWsd944ZtXWQ3YTFUWl+iRsUJ2le3FLXVZ06oLPLQZyNHzhCr0FRxsmyAXaKZ0JTULYpq5ee63RJFnp5+gxJNNdvzxlw9e29uMz+/o1sRB6tqj2ZunrOtf1W0khKJ1y7U0PAYa0ha9LwERWeoemJqggQ7"
+    }
+}'
+```
+
+* The default value of the `new-encryption-cipher-type` parameter is `RSA`, so
+  there is no need to add this parameter to the request body.
+
+To check if UniConfig must be restarted or if a new UniConfig instance must be
+added, run the following query:
+
+```bash POST request: get need-rotation-of-encryption-certificate
+ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/crypto:change-encryption-keys' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json'
+```
+
+```json POST response
+{
+  "output": {
+    "need-rotation-of-encryption-certificate": true
+  }
+}
+```
+
+After key rotation and when UniConfig is started, data encrypted with the old
+key is overwritten with the new encryption keys and all other UniConfig
+instances in the cluster will use the new keys for encryption.
+
+During key rotation, UniConfig reads and updates encrypted configurations in
+batches. The size of these batches is set by the following parameter:
+
+```settings
+crypto.encryption-rotation-batch-size=10
+```
 
 ### Device installation
 
-There are 2 settings related to encryption in the 'install-node' RPC request:
+There are two settings related to encryption in the **install-node RPC**
+request:
 
-* uniconfig-config:crypto - It allows specifying path to public key on device - 'public-key-path' (leaf with RFC-8040
-  path) and cipher type (by default, RSA is used) - 'public-key-cipher-type'. If path to public key is specified, and it
-  exists on device, then Global-device encryption model is used. Otherwise, Global-only encryption model is selected.
-* netconf-node-topology:yang-module-capabilities - If auto-loading of YANG module with encrypted paths is not used
-  and device itself doesn't specify encrypted leaves, then it is necessary to side-load YANG module with encrypted
-  paths. This parameter is relevant only on NETCONF nodes. Side-loaded modules must be expressed in the format
-  of NETCONF capabilities.
+* `uniconfig-config:crypto` - Specifies a path to the public key on the device:
+    - `public-key-path` - Leaf with RFC-8040 path. If a path to the public key is
+  specified and exists on the device, the global-device encryption model is
+  used. Otherwise, the global-only encryption model is used.
+    - `public-key-cipher-type` - Cipher type (RSA is used by default).
+* `netconf-node-topology:yang-module-capabilities` - If autoloading of YANG
+  modules with encrypted paths is not used and the device itself does not
+  specify encrypted leaves, it is necessary to side-load the YANG module with
+  encrypted paths. This parameter is relevant only for NETCONF nodes. Side-loaded
+  modules must be expressed in the format of NETCONF capabilities.
 
-Following request shows install-node request with specified both path to public key and side-loaded YANG module
-'encrypted-paths' with revision '2021-12-15' and namespace 'urn:ietf:params:xml:ns:yang:encrypted-paths'.
+The following request shows an **install-node** request that specifies a path to the
+public key and the side-loaded YANG module `encrypted-paths` with revision
+`2021-12-15` and namespace `urn:ietf:params:xml:ns:yang:encrypted-paths`.
 
 ```bash RPC request: install device
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connection-manager:install-node' \
@@ -275,10 +441,11 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connectio
 }'
 ```
 
-During installation, UniConfig tries to download public key from device. Public key can be verified using GET request:
+During installation, UniConfig tries to download the public key from the device.
+The public key can be verified using a GET request:
 
 ```bash GET request: reading synced public key from device
-curl --location --request POST 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/crypto:crypto?content=nonconfig' \
+curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/crypto:crypto?content=nonconfig' \
 --header 'Accept: application/json'
 ```
 
@@ -291,14 +458,15 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/data/network-topolog
 }
 ```
 
-### Format of encrypted data
+### Format for encrypted data
 
-- Encrypted values are stored and displayed via RESTCONF or UniConfig shell with the 'rsa_' prefix. The prefix
-  is used by UniConfig to see if posted data is encrypted already or needs to be encrypted.
+- Encrypted values are stored and displayed via RESTCONF or UniConfig shell with
+  the `rsa_` prefix. The prefix is used by UniConfig to see if posted data needs
+  to be encrypted or is encrypted already.
 - The encrypted string is encoded using Base64 encoding.
 
 ```bash GET request: reading encrypted leaf
-curl --location --request POST 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/config/secret' \
+curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/config/secret' \
 --header 'Accept: application/json'
 ```
 
@@ -308,13 +476,14 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/data/network-topolog
 }
 ```
 
-### Example: global-device model
+### Example: Global-device model
 
-The next use-case shows encryption of values marked by 'frinx-encrypt:encrypt' extension on both UniConfig server
-side and device side. NETCONF device directly exposes 'frinx-encrypt' YANG module and leaves with applied extension
-(side-loading of encrypted paths is not necessary).
+This example shows encryption of values marked by the `frinx-encrypt:encrypt`
+extension on both UniConfig server side and device side. The NETCONF device
+directly exposes the `frinx-encrypt` YANG module and leaves with applied
+extension (side-loading of encrypted paths is not necessary).
 
-Used YANG model for simulation of YANG device:
+YANG model used for simulating the YANG device:
 
 ```yang config2021-12-15
 module config {
@@ -393,7 +562,7 @@ module config {
 }
 ```
 
-```bash 1. Installation of new device with specified path to public key
+```bash 1. Install new device with a specified path to public key
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connection-manager:install-node' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
@@ -429,7 +598,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connectio
 }
 ```
 
-```bash 2. Creation of new transaction
+```bash 2. Create new transaction
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction'
 ```
 
@@ -437,7 +606,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 5e75d4e9-382e-4852-905e-9b5c4db57107
 ```
 
-```bash 3. Writing plaintext data with leaves that must be encrypted
+```bash 3. Write plaintext data with leaves that must be encrypted
 curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/properties' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: UNICONFIGTXID=5e75d4e9-382e-4852-905e-9b5c4db57107; Path=/rests/' \
@@ -461,7 +630,7 @@ curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology
 Status: 201
 ```
 
-```bash 4. Reading already encrypted data in the same transaction
+```bash 4. Read already-encrypted data in the same transaction
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/properties?content=config' \
 --header 'Accept: application/json' \
 --header 'Cookie: UNICONFIGTXID=5e75d4e9-382e-4852-905e-9b5c4db57107; Path=/rests/'
@@ -513,7 +682,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 }
 ```
 
-```bash 6. Reading committed configuration from device (immediate-commit model)
+```bash 6. Read committed configuration from device (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=testtool/yang-ext:mount/config/properties?content=config' \
 --header 'Accept: application/json'
 ```
@@ -535,7 +704,7 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 }
 ```
 
-```bash 7. Reading committed configuration from database (immediate-commit model)
+```bash 7. Read committed configuration from database (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/properties?content=config' \
 --header 'Accept: application/json'
 ```
@@ -558,7 +727,7 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 ```
 
 
-```bash 8. Writing plaintext data with leaf-list that must be encrypted (immediate-commit model)
+```bash 8. Write plaintext data with leaf-list that must be encrypted (immediate-commit model)
 curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/routing/neighbor-key' \
 --header 'Content-type: application/json' \
 --data-raw '{
@@ -574,7 +743,7 @@ curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology
 Status: 201
 ```
 
-```bash 9. Reading committed configuration from device (immediate-commit model)
+```bash 9. Read committed configuration from device (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=testtool/yang-ext:mount/config/routing/neighbor-key?content=config' \
 --header 'Accept: application/json'
 ```
@@ -589,7 +758,7 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 }
 ```
 
-```bash 10. Reading committed configuration from database (immediate-commit model)
+```bash 10. Read committed configuration from database (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/routing/neighbor-key?content=config' \
 --header 'Accept: application/json'
 ```
@@ -604,15 +773,17 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 }
 ```
 
-### Example: global-only model
+### Example: Global-only model
 
-The next use-case shows encryption of values marked by 'frinx-encrypt:encrypt' extension only on UniConfig server side.
-NETCONF device directly exposes 'frinx-encrypt' YANG module and leaves with applied extension
-(side-loading of encrypted paths is not necessary).
+This example shows encryption of values marked by the `frinx-encrypt:encrypt`
+extension only on the UniConfig server side. The NETCONF device directly exposes
+the `frinx-encrypt` YANG module and leaves with applied extension (side-loading
+of encrypted paths is not necessary).
 
-Used YANG model for simulation of YANG device is same as in the previous use-case.
+The YANG model used for simulation of the YANG device is the same as in the
+previous example.
 
-```bash 1. Installation of new device without public key
+```bash 1. Install new device without public key
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connection-manager:install-node' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
@@ -645,7 +816,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connectio
 }
 ```
 
-```bash 2. Creation of new transaction
+```bash 2. Create new transaction
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction'
 ```
 
@@ -654,7 +825,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 ```
 
 
-```bash 3. Writing plaintext data with leaves that must be encrypted
+```bash 3. Write plaintext data with leaves that must be encrypted
 curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/properties' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: UNICONFIGTXID=782eb86d-3c11-4c77-bfdf-e8b0bf283830; Path=/rests/' \
@@ -678,7 +849,7 @@ curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology
 Status: 201
 ```
 
-```bash 4. Reading already encrypted data in the same transaction
+```bash 4. Read already-encrypted data in the same transaction
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/properties?content=config' \
 --header 'Accept: application/json' \
 --header 'Cookie: UNICONFIGTXID=782eb86d-3c11-4c77-bfdf-e8b0bf283830; Path=/rests/'
@@ -730,7 +901,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 }
 ```
 
-```bash 6. Reading committed configuration from device (immediate-commit model)
+```bash 6. Read committed configuration from device (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=testtool/yang-ext:mount/config/properties?content=config' \
 --header 'Accept: application/json'
 ```
@@ -752,7 +923,7 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 }
 ```
 
-```bash 7. Reading committed configuration from database (immediate-commit model)
+```bash 7. Read committed configuration from database (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/properties?content=config' \
 --header 'Accept: application/json'
 ```
@@ -774,7 +945,7 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 }
 ```
 
-```bash 8. Writing plaintext data with leaf-list that must be encrypted (immediate-commit model)
+```bash 8. Write plaintext data with leaf-list that must be encrypted (immediate-commit model)
 curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/routing/neighbor-key' \
 --header 'Accept: application/json' \
 --data-raw '{
@@ -790,7 +961,7 @@ curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology
 Status: 201
 ```
 
-```bash 9. Reading committed configuration from device (immediate-commit model)
+```bash 9. Read committed configuration from device (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=testtool/yang-ext:mount/config/routing/neighbor-key?content=config' \
 --header 'Accept: application/json'
 ```
@@ -804,7 +975,7 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 }
 ```
 
-```bash 10. Reading committed configuration from database (immediate-commit model)
+```bash 10. Read committed configuration from database (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=testtool/configuration/config/routing/neighbor-key?content=config' \
 --header 'Accept: application/json'
 ```
@@ -821,36 +992,42 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 
 ## Data hashing
 
-UniConfig supports 'iana-crypt-hash' YANG model for specification of hashed values in data-tree using type definition
-'crypt-hash'. Hashing works in the 'uniconfig' and 'unistore' topologies. Only NETCONF devices are currently supported
-because CLI cannot be natively used for reporting of device capabilities that would contain supported hashing function.
+UniConfig supports the `iana-crypt-hash` YANG model for specificying hashed
+values in the data-tree using the type definition `crypt-hash`. Hashing works in
+the `uniconfig` and `unistore` topologies.
+
+Only NETCONF devices are currently supported, as CLI cannot be natively used to
+report device capabilities that would contain supported the hashing function.
 
 ### Architecture
 
-Hashing is done only in the RESTCONF layer after writing some data that contains leaves/leaf-lists with 'crypt-hash'
-type. Afterwards, UniConfig stores, uses, and writes to device only hashed representation of these values.
+Hashing is done only in the RESTCONF layer after writing data that contains
+leaves/leaf-lists with the `crypt-hash` type. Afterwards, UniConfig stores,
+uses, and writes to the device only the hashed representation of these values.
 
 ![Hashing model](hashing_model.svg)
 
 ### YANG support
 
-YANG module 'iana-crypt-hash':
-
+YANG module `iana-crypt-hash`:
 http://www.iana.org/assignments/yang-parameters/iana-crypt-hash@2014-08-06.yang
 
-All 3 hash functions are implemented - 'MD5', 'SHA-256', 'SHA-512'. In case of 'uniconfig' topology, hashing function
-is selected based on reported feature in the NETCONF capability, in case of 'unistore' topology,
-UniConfig enforces 'SHA-512' hashing function.
+All three hash functions are implemented (`MD5`, `SHA-256` and `SHA-512`). For
+the `uniconfig` topology, the hashing function is selected based on the reported
+feature in the NETCONF capability. For the `unistore` topology, UniConfig
+enforces the `SHA-512` hashing function.
 
 ### Device installation
 
-Hashing is enabled by default on NETCONF devices that reports corresponding 'iana-crypt-hash' model-based capability.
-User doesn't have to add entry setting in the 'install-node' request.
+Hashing is enabled by default on NETCONF devices that report the
+`iana-crypt-hash` model-based capability. It is not necessary to add the entry
+setting in the **install-node** request.
 
-After successful installation of device, it is possible to check loaded hashing function that will be used for storing
-of hashed values. Use following GET request:
+After successfully installing the device, you can check the loaded hashing
+function that will be used to store hashed values. Use the following GET
+request:
 
-```bash Reading synced hashing function from device
+```bash Read synced hashing function from device
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/crypto:hash?content=nonconfi' \
 --header 'Accept: application/json'
 ```
@@ -858,16 +1035,17 @@ curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology
 ```json GET response
 {
     "hash": {
-        "algorithm": "SHA-512",
+        "algorithm": "SHA-512"
     }
 }
 ```
 
-### Example: hashing input values
+### Example: Hashing input values
 
-This example demonstrates hashing of input values with 'crypt-hash' type on RESTCONF API.
+This example demonstrates hashing input values with the `crypt-hash` type using
+the RESTCONF API.
 
-```bash 1. Creation of new transaction
+```bash 1. Create new transaction
 curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig-manager:create-transaction'
 ```
 
@@ -875,7 +1053,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 1ed7ea30-362e-4297-a93f-b1c35b3f376d
 ```
 
-```2. Writing new user with password that has type 'crypt-hash'
+```2. Write new user with password that has type 'crypt-hash'
 curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/configuration/system/users=frinx' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: UNICONFIGTXID=1ed7ea30-362e-4297-a93f-b1c35b3f376d; Path=/rests/' \
@@ -895,7 +1073,7 @@ curl --location --request PUT 'http://127.0.0.1:8181/rests/data/network-topology
 Status: 201
 ```
 
-```bash 3. Reading hashed data from transaction
+```bash 3. Read hashed data from transaction
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=dev01/configuration/system/users=frinx?content=config' \
 --header 'Accept: application/json' \
 --header 'Cookie: UNICONFIGTXID=1ed7ea30-362e-4297-a93f-b1c35b3f376d; Path=/rests/'
@@ -943,7 +1121,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/uniconfig
 }
 ```
 
-```bash 5. Reading committed configuration from device (immediate-commit model)
+```bash 5. Read committed configuration from device (immediate-commit model)
 curl --location --request GET 'http://127.0.0.1:8181/rests/data/network-topology:network-topology/topology=topology-netconf/node=dev01/yang-ext:mount/system/users=frinx?content=config' \
 --header 'Accept: application/json'
 ```
