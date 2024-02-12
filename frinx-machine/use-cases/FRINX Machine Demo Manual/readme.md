@@ -252,10 +252,10 @@ and sub workflows in our workflow.
 ![FRINX Machine dashboard](canvas.png)
 
 3) Click **“+”** on the **http** and **labmda** under **System tasks** and **Post_to_Slack**
-under **Workflows**. All tasks and subworkflows are added on same place in the
-canvas so you need to move them to see them. For connecting all parts of the
-workflow hover over OUT/IN where + sign will appear. Connect all parts in this
-way: START - http - lamda - Post_to_Slack - END. As you can see each task and
+under **Workflows**. All tasks and subworkflows should be arranged and connected in the order you chose them.
+If the tasks are not in the right order (START - http - lamda - Post_to_Slack) it is possible to rearrange them.
+Simply click on the "x" on the connection to remove it and hover over "OUT/IN" where a "+" sign will appear.
+Connect all parts this way: START - http - lambda - Post_to_Slack - END. As you can see each task and
 workflow has its own set of characters after its name - these are reference
 aliases and work as unique identifier.
 
