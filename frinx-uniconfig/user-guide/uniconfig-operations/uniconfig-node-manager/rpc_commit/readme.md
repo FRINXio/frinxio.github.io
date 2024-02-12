@@ -1,56 +1,64 @@
 # RPC commit
 
-The external application stores the intended configuration under nodes
-in the UniConfig topology. The trigger for execution of configuration is
-an RPC commit. Output of the RPC describes the result of the commit and
-matches all modified nodes in the UniConfig transaction.
+The external application stores the intended configuration under nodes in the
+UniConfig topology. The trigger for executing the configuration is an RPC
+commit. RPC output describes the result of the commit.
 
 The configuration of nodes consists of the following phases:
 
-1. Lock and validate configured nodes - Locking all modified nodes
-    using PostgreSQL advisory locks and validation of fingerprints - if
-    another transaction tries to commit overlapping nodes or different
-    transaction has already changed one of the nodes, then commit will
-    fail at this step.
-2. Write configuration into device - Pushing calculated changes into
-    device without committing of this changes.
-3. Validate configuration - Validation of written configuration from
-    the view of constraints and consistency.
-    This phase can be skipped with "do-validate" flag.
-4. Confirmed commit - It is used for locking of device configuration,
-    so no other transaction can touch this device.
-5. Confirming commit (submit configuration) - Persisting all changes on
-    devices and in the PostgreSQL database. UniConfig transaction is
-    closed.
+1. **Lock and validate configured nodes**: Lock all modified nodes using
+   PostgreSQL advisory locks and validate fingerprints. If another transaction
+   attempts to commit overlapping nodes or another transaction has already
+   changed one of the nodes, commit will fail at this step.
+2. **Write configuration to device**: Push calculated changes onto the device
+   without committing these changes.
+3. **Validate configuration**: Validate the written configuration from the view
+   of constraints and consistency. This phase can be skipped with the
+   `do-validate` flag.
+4. **Confirmed commit**: Lock the device configuration so that no other
+   transaction can touch the device. This phase can be skipped with the
+   `do-confirmed-commit` flag.
+5. **Confirming commit (submit configuration)**: Persist all changes on devices
+   and in the PostgreSQL database. The UniConfig transaction is closed.
+6. **Rollback**: Restore the configuration to its previous state if the
+   configuration process fails. When configuring multiple devices in a single
+   transaction and the process fails on one particular device, the rollback
+   procedure is applied to all touched devices. This is done with the auto
+   rollback procedure, which is by enabled by default. The procedure can be
+   disabled with the `do-rollback` flag in the RPC input, in which case only
+   failed devices are rolled back. 
+
+!!!
+The `skip-unreachable-nodes` flag controls whether unreachable nodes are
+skipped when the RPC commit is sent. When set to `true`, nodes that are not
+reachable are skipped and others are configured. The default value is `false`.
+!!!
 
 ![RPC commit](RPC_commit-RPC_commit.svg)
 
-The third and fourth phases take place only on the nodes that support
-these operations. If one node failed in the random phase for any reason
-the RPC will fail entirely. After commit RPC, UniConfig transaction is
-closed regardless of the commit result.
+Commit invokes all nodes touched in the transaction. There are no target nodes
+in the RPC input. Steps 3 and 4 only apply to nodes that support these operations.
+
+If a node fails
+for any reason, the entire RPC fails. After the commit RPC, the UniConfig
+transaction is closed regardless of the result.
 
 !!!
-If one of the nodes uses a confirmed commit (phase 4), which does not
-fail, then it is necessary to issue the submitted configuration (phase
-5) within the timeout period. Otherwise the node configuration issued
-by the confirmed commit will be reverted to its state before the
-confirmed commit (i.e. confirmed commit makes only temporary
-configuration changes). The timeout period is 600 seconds (10 minutes)
-by default, but the user can change it in the installation request.
+If one of the nodes uses a confirmed commit (step 4) that does not fail, it is
+necessary to issue the submitted configuration (step 5) within the timeout
+period. Otherwise the node configuration issued by the confirmed commit is
+reverted to its state before the confirmed commit (i.e., confirmed commit makes
+only temporary configuration changes). The default timeout period is 600 seconds
+(10 minutes), which can be changed in the installation request.
 !!!
 
-Next diagram describe the first phase of commit RPC - locking of changes
-nodes in the PostgreSQL database and verification if other transaction
-has already committed overlapping nodes.
-
-Next diagrams describe all 5 commit phases in detail:
+The following diagrams describe all five commit steps in more detail:
 
 **1. Lock and validate configured nodes**
 
 ![Locking nodes](RPC_commit-locking-phase-Locking_phase.svg)
 
-**2. Write configuration into device**
+**2. Write configuration to device**
 
 ![Configuration phase](RPC_commit-configuration-phase-Configuration_phase.svg)
 
@@ -66,92 +74,18 @@ Next diagrams describe all 5 commit phases in detail:
 
 ![Confirming commit](RPC_commit-confirming-commit-Confirming_commit_phase.svg)
 
-The last diagram shows rollback procedure that must be executed after
-failed commit on nodes that have already been configured and don't
-support 'candidate' datastore.
+The next diagram shows the rollback procedure that must be executed after a
+failed commit on nodes that have already been configured and do not support the
+`candidate` datastore.
 
 ![Rollback operation](RPC_commit_rollback-Rollback_changes.svg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-RPC commit input has 2 target nodes and the output describes the result
-of the commit.
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "complete"
-                }
-            ]
-        }
-    }
-}
-```
-
-### Successful Example
-
-If the RPC input does not contain the target nodes, all touched nodes
-will be invoked.
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "output": {
-        "overall-status": "complete",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "complete"
-                }
-            ]
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete"
-    }
-}
-```
-
-### Failed Example
-
-RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed because failed validation (IOSXRN).
+UniConfig commits nodes R1 and R2 that have been changed in the actual
+transaction.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -159,42 +93,86 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR", "IOSXRN"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail",
-                    "error-message": "RemoteDevice{IOSXRN}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n",
-                    "error-type": "uniconfig-error",
-                    "rollback-status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "complete",
-                    "rollback-status": "complete"
-                }
-            ]
-        }
+```RPC Response, Status: 204
+```
+
+### Successful example
+
+Nodes R1 and R2 have been changed. RPC input includes the flag to disable the
+confirmed-commit phase. UniConfig commits all touched nodes.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "do-confirmed-commit": false,
     }
+}'
+```
+
+```RPC Response, Status: 204
+```
+
+### Successful example
+
+If there are no touched nodes, the request finishes successfully.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+    }
+}'
+```
+
+```RPC Response, Status: 204
+```
+
+### Failed example
+
+Node R1 has failed because it failed the validation step.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+    }
+}'
+```
+
+```json RPC Response, Status: 500
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "validation-failed",
+        "error-message": "RemoteDevice{R2}: Validate failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks",
+        "error-info": {
+          "node-id": "R2",
+          "configuration-status": "fail",
+          "rollback-status": "complete"
+        }
+      }
+    ]
+  }
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed because the confirmed commit failed
-(IOSXRN). Validation phase was skipped due to false "do-validate" flag.
+Node R1 has failed because the confirmed commit failed. The validation step is
+skipped because of the `do-validate` flag.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -203,42 +181,33 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "do-validate" : False,
-        "target-nodes": {
-            "node": ["IOSXR", "IOSXRN"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 500
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail",
-                    "error-message": "RemoteDevice{IOSXRN}: Confirmed commit failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks\n",
-                    "error-type": "uniconfig-error",
-                    "rollback-status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "complete",
-                    "rollback-status": "complete"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-failed",
+        "error-message": "RemoteDevice{R1}: Confirmed commit failed. illegal reference /orgs/org[name='TESTING-PROVIDER']/traffic-identification/using-networks",
+        "error-info": {
+          "node-id": "R1",
+          "configuration-status": "fail",
+          "rollback-status": "complete"
         }
-    }
+      }
+    ]
+  }
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed because of the time delay between the
-confirmed commit and the submitted configuration (IOSXRN).
+Node R1 has failed because of the time delay between confirmed commit and
+submitted configuration.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -246,42 +215,32 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR", "IOSXRN"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 500
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail",
-                    "error-message": "RemoteDevice{IOSXRN}: time delay between confirmed and confirming commit was greater than 300 seconds, the configured changes were rolled back.\n",
-                    "error-type": "uniconfig-error",
-                    "rollback-status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "complete",
-                    "rollback-status": "complete"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-failed",
+        "error-message": "RemoteDevice{R1}: time delay between confirmed and confirming commit was greater than 300 seconds, the configured changes were rolled back.",
+        "error-info": {
+          "node-id": "R1",
+          "configuration-status": "fail",
+          "rollback-status": "complete"
         }
-    }
+      }
+    ]
+  }
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed due to improper configuration
-(IOSXRN).
+Node R1 has failed due to incorrect configuration.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -289,43 +248,32 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 500
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail",
-                    "error-message": "Supplied value \"GigabitEthernet0/0/0/1ghjfhjfhjfghj\" does not match required pattern \"^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\"\n",
-                    "error-type": "uniconfig-error",
-                    "rollback-status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "complete",
-                    "rollback-status": "complete"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-failed",
+        "error-message": "Supplied value \"GigabitEthernet0/0/0/1ghjfhjfhjfghj\" does not match required pattern \"^(([a-zA-Z0-9_]*\\d+/){3,4}\\d+)|(([a-zA-Z0-9_]*\\d+/){3,4}\\d+\\.\\d+)|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]*\\d+))|(([a-zA-Z0-9_]*\\d+/){2}([a-zA-Z0-9_]+))|([a-zA-Z0-9_-]*\\d+)|([a-zA-Z0-9_-]*\\d+\\.\\d+)|(mpls)|(dwdm)$\"",
+        "error-info": {
+          "node-id": "R1",
+          "configuration-status": "fail",
+          "rollback-status": "complete"
         }
-    }
+      }
+    ]
+  }
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC commit input has 3 target nodes and the output describes the result
-of the commit. One node has failed due ot improper configuration
-(IOSXR), the other has not been changed (IOSXRN), and the last has not
-been mounted yet (AAA).
+Node R1 has lost connection.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -333,46 +281,36 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN","AAA"]
-        }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 502
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "AAA",
-                    "error-type": "no-connection",
-                    "error-message": "Node has not been mounted yet.",
-                    "configuration-status": "fail"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail",
-                    "error-type": "uniconfig-error"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "fail",
-                    "error-type": "uniconfig-error"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "southbound_no_connection",
+        "error-message": "Unified Mountpoint not found.",
+        "error-info": {
+          "node-id": "R1",
+          "configuration-status": "fail"
         }
-    }
+      }
+    ]
+  }
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has failed due to improper configuration
-(IOSXRN), the other has not been changed (IOSXR).
+Node R1 has failed because of incorrect configuration. In this case validation,
+confirm-commit and auto-rollback are disabled.
+
+Since auto-rollback is disabled, configuration of R1 was successful. However,
+this can only be done if the validation and confirm-commit phases were
+successful or skipped; otherwise configuration of the R1 device would also fail.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -380,42 +318,39 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
-        }
+        "do-rollback" : false,
+        "do-validate" : false,
+        "do-confirmed-commit" : false
     }
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 500
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "complete",
-                    "rollback-status": "complete"
-                },
-                {
-                    "node-id": "IOSXRN",
-                    "configuration-status": "fail",
-                    "error-message": "Illegal value for key: (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-name, in: (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-configuration[{(http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)active=act, (http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg?revision=2017-09-07)interface-name=GigabitEthernet0/0/0/3}], actual value: GigabitEthernet0/0/0/3/ddd, expected value from key: GigabitEthernet0/0/0/3\n",
-                    "error-type": "uniconfig-error",
-                    "rollback-status": "complete"
-                }
-            ]
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "operation-failed",
+        "error-message": "RemoteDevice{R1}: RPC during tx failed. Error messages: [/alias[name='^new']/expansion is not configured]",
+        "error-info": {
+          "node-id": "R1",
+          "configuration-status": "fail"
         }
-    }
+      }
+    ]
+  }
 }
 ```
 
-### Failed Example
+### Failed example
 
-RPC commit input has 2 target nodes and the output describes the result
-of the commit. One node has lost connection (IOSXR), the other has not
-been mounted yet (AAA).
+Configuration of nodes R1 and R2 have been modified in the transaction, and both
+are in sync with the actual state on the device. Connection to node R2 has been
+lost. RPC input has the flag to skip unreachable nodes set to `true`.
+
+The result of the commit RPC describes success for node R1 and includes a list
+of unreachable nodes.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
@@ -423,59 +358,17 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json' \
 --data-raw '{
     "input": {
-        "target-nodes": {
-            "node": ["IOSXR","AAA"]
-        }
+        "skip-unreachable-nodes": true
     }
 }'
 ```
 
 ```json RPC Response, Status: 200
 {
-    "output": {
-        "overall-status": "fail",
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "AAA",
-                    "error-type": "no-connection",
-                    "error-message": "Node has not been mounted yet.",
-                    "configuration-status": "fail"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "configuration-status": "fail",
-                    "error-message": "Unified Mountpoint not found.",
-                    "error-type": "no-connection"
-                }
-            ]
-        }
-    }
-}
-```
-
-### Failed Example
-
-If the RPC input does not contain the target nodes and there weren't any
-touched nodes, the request will result in an error.
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:commit' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "target-nodes": {
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes.",
-        "overall-status": "fail"
-    }
+  "output": {
+    "unreachable-nodes": [
+      "R2"
+    ]
+  }
 }
 ```

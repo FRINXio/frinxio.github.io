@@ -1,19 +1,15 @@
 # UniConfig - Sending and receiving data (RESTCONF)
 
-## Overview
-
-RESTCONF is described in [RESTCONF RFC
-8040](https://tools.ietf.org/html/rfc8040). Simple said, RESTCONF
-represents a REST API to access datastores and UniConfig operations.
+The RESTCONF protocol is described in [RFC
+8040](https://tools.ietf.org/html/rfc8040). Put simply, RESTCONF represents a
+REST API for accessing datastores and UniConfig operations.
 
 ### Datastores
 
 There are two datastores:
 
-1. **Config**: Contains data representing the intended state, it is
-    possible to read and write it via RESTCONF.
-2. **Operational**: Contains data representing the actual state, it is
-    possible to only read it via RESTCONF.
+1. **Config**: Contains data representing the intended state. Possible to read and write via RESTCONF.
+2. **Operational**: Contains data representing the actual state. Possible only to read via RESTCONF.
 
 !!!
 Each request must start with the URI */rests/*. By default,
@@ -23,7 +19,7 @@ RESTCONF listens on port 8181 for HTTP requests.
 ### REST Operations
 
 RESTCONF supports: **OPTIONS**, **GET**, **PUT**, **POST**, **PATCH**,
-and **DELETE** operations. Request and response data can either be in
+and **DELETE** operations. Request and response data can be either in
 the XML or JSON format.
 
 - XML structures according to YANG are defined at:
@@ -33,18 +29,18 @@ the XML or JSON format.
 
 Data in the request must set the **Content-Type** field correctly in the
 HTTP header with the allowed value of the media type. The media type of
-the requested data has to be set in the **Accept** field. Get the media
+the requested data must be set in the **Accept** field. Get the media
 types for each resource by calling the OPTIONS operation.
 
 Most of the paths use [Instance
 Identifier](https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL:Concepts#Instance_Identifier).
-**\<identifier\>** is used in the explanation of the operations and has
-to keep these rules:
+**\<identifier\>** is used in the explanation of the operations and must
+adhere to these rules:
 
 - Identifier must start with \<moduleName\>:\<nodeName\>\> where
     \<moduleName\> is a name of the YANG module and \<nodeName\> is the
     name of a node in the module. If the next node name is placed in the
-    same namespace like the previous one, it is sufficient to just use
+    same namespace as the previous one, it is sufficient to just use
     \<nodeName\> after the first definition of
     \<moduleName\>:\<nodeName\>. Each \<nodeName\> has to be separated
     by /.
@@ -144,7 +140,7 @@ curl --location --request GET 'http://localhost:8181/rests/data/network-topology
 }
 ```
 
-In this reqeust we are using parameter **content=nonconfig**, this means
+In this request we are using parameter **content=nonconfig**, which means that
 we are reading running NETCONF datastore. Value **nonconfig** is
 translated into get NETCONF RPC. We can compare it with data directly
 from device using show running-config command.
@@ -416,6 +412,251 @@ curl --location --request PATCH 'http://localhost:8181/rests/data/network-topolo
 }'
 ```
 
+#### PATCH /rests/data/\<identifier\>?apply-tags=true
+
+- The patch request with parameter apply-tags=true allows to use tags.
+- Tags allows us to use differrent operation for separate elements instead of
+    merging whole content as without tags.
+- The following tags are supported: merge, replace, delete, create and update.
+- Usage of these tags are explained in Templates manager : [here](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/#tags).
+
+The following example shows PATCH request used for modification of interfaces
+on IOS XE device including creating, deleting, and replacing interface configuration.
+
+```bash PATCH RPC Request with apply-tags parameter
+curl --location --request PATCH 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces?apply-tags=true' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "frinx-openconfig-interfaces:interfaces": {
+        "interface": [
+            {
+                "name": "Loopback0",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": true,
+                    "name": "Loopback0"
+                },
+                "@": {
+                    "operation": "delete"
+                }
+            },
+            {
+                "name": "Loopback1",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": true,
+                    "name": "Loopback1"
+                },
+                "@": {
+                    "operation": "replace"
+                }
+            },
+            {
+                "name": "Loopback2",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": true,
+                    "name": "Loopback2"
+                },
+                "@": {
+                    "operation": "create"
+                }
+            },
+            {
+                "name": "Loopback61",
+                "config": {
+                    "type": "iana-if-type:softwareLoopback",
+                    "enabled": false,
+                    "name": "Loopback61"
+                }
+            },
+            {
+                "name": "GigabitEthernet1",
+                "config": {
+                    "type": "iana-if-type:ethernetCsmacd",
+                    "enabled": true,
+                    "name": "GigabitEthernet1"
+                },
+                "subinterfaces": {
+                    "subinterface": [
+                        {
+                            "index": 0,
+                            "frinx-openconfig-if-ip:ipv4": {
+                                "addresses": {
+                                    "address": [
+                                        {
+                                            "ip": "192.168.1.253",
+                                            "config": {
+                                                "prefix-length": 24,
+                                                "ip": "192.168.1.253"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "GigabitEthernet2",
+                "config": {
+                    "type": "iana-if-type:ethernetCsmacd",
+                    "enabled": false,
+                    "name": "GigabitEthernet2"
+                }
+            }
+        ]
+    }
+}'
+```
+
+```bash GET RPC Request before PATCH
+http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces
+```
+
+``` bash Response
+    {
+        "frinx-openconfig-interfaces:interfaces": {
+            "interface": [
+                {
+                    "name": "Loopback0",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": true,
+                        "name": "Loopback0"
+                    }
+                },
+                {
+                    "name": "Loopback1",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": false,
+                        "name": "Loopback1"
+                    }
+                },
+                {
+                    "name": "Loopback61",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": false,
+                        "name": "Loopback61"
+                    }
+                },
+                {
+                    "name": "GigabitEthernet1",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": true,
+                        "name": "GigabitEthernet1"
+                    },
+                    "subinterfaces": {
+                        "subinterface": [
+                            {
+                                "index": 0,
+                                "frinx-openconfig-if-ip:ipv4": {
+                                    "addresses": {
+                                        "address": [
+                                            {
+                                                "ip": "192.168.1.253",
+                                                "config": {
+                                                    "prefix-length": 24,
+                                                    "ip": "192.168.1.253"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "GigabitEthernet2",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": false,
+                        "name": "GigabitEthernet2"
+                    }
+                }
+            ]
+        }
+    }
+```
+
+```bash GET RPC Request after PATCH
+http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=ASR920/configuration/interfaces
+```
+
+``` bash Response
+    {
+        "frinx-openconfig-interfaces:interfaces": {
+            "interface": [
+                {
+                    "name": "Loopback1",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": true,
+                        "name": "Loopback1"
+                    }
+                },
+                {
+                    "name": "Loopback61",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": false,
+                        "name": "Loopback61"
+                    }
+                },
+                {
+                    "name": "Loopback2",
+                    "config": {
+                        "type": "iana-if-type:softwareLoopback",
+                        "enabled": true,
+                        "name": "Loopback2"
+                    }
+                },
+                {
+                    "name": "GigabitEthernet2",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": false,
+                        "name": "GigabitEthernet2"
+                    }
+                },
+                {
+                    "name": "GigabitEthernet1",
+                    "config": {
+                        "type": "iana-if-type:ethernetCsmacd",
+                        "enabled": true,
+                        "name": "GigabitEthernet1"
+                    },
+                    "subinterfaces": {
+                        "subinterface": [
+                            {
+                                "index": 0,
+                                "frinx-openconfig-if-ip:ipv4": {
+                                    "addresses": {
+                                        "address": [
+                                            {
+                                                "ip": "192.168.1.253",
+                                                "config": {
+                                                    "prefix-length": 24,
+                                                    "ip": "192.168.1.253"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+```
+
 #### POST /rests/operations/\<moduleName\>:\<rpcName\>
 
 - Invokes RPC on the specified path.
@@ -614,54 +855,54 @@ http://localhost:8181/rests/data/network-topology:network-topology/topology=unic
 http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration?fields=frinx-openconfig-interfaces:interfaces/interface/name;config/type&content=nonconfig
 ```
 
-## Filtering Data
+## Data filtering
 
-For filtering data based on specific value is good to use
-**jsonb-filter** query parameter. This parameter has to be used only
-with the **GET** method.
+To filter data based on specific values, use the `jsonb-filter` query parameter.
+This parameter can only be used with the `GET`  method.
 
-### Jsonb-filter
-
-- [JSONB filtering](../jsonb-filtering)
+For more information, see [JSONB filtering](../jsonb-filtering/).
 
 ## Pagination
 
-To further extend the ability to filter data according to our needs, we
-can use pagination in the **GET** method.
+To filter data even further, you can use pagination with the `GET` method.
 
-There are 3 pagination parameters that can be used individually or in
-combination with each other :
+There are three parameters related to pagination, which can be combined or used
+individually:
 
-1.  **offset :** This parameter lets us choose on which list entry value
-    we want data to start rendering.
-2.  **limit :** Limit gives us the option to control how many node
-    values are going to be displayed in our **GET** request.
-3.  **fetch=count :** Used to obtain the amount of children nodes in a
-    specific node.
+- `offset` - The starting point in a list for data rendering, based on the index
+   list of entry values. Indexing begins at 0, so that `offset=2` would start
+   rendering at the third entry. The specified offset index entry is included in
+   the output.
+- `limit` - The number of node values displayed in a `GET` request. Specifies
+  the maximum count for entries included in the response, starting with the
+  entry defined by the `offset` parameter (if provided).
+- `fetch=count` - Retrieves the total number of child nodes under a specific
+  node. Instead of returning node values, provides a count of how many child
+  nodes exist under the specified node.
 
 !!!
-Beware that pagination works only for list nodes.
+Note that pagination only works for list nodes.
 !!!
 
-The example of using individual pagination parameter:
+**Example** - Using one individual pagination parameter:
 
 ```
 http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?offset=1
 ```
 
-The example of using two pagination parameters simultaneously:
+**Example** - Using two pagination parameters simultaneously:
 
 ```
 http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?offset=1&limit=4
 ```
 
-The example of using fetch count parameter:
+**Example** - Using the `fetch=count` parameter:
 
 ```
 http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?fetch=count
 ```
 
-The response body of fetch count parameter with a path from the previous
+Response body for the `fetch=count` parameter with a path from the previous
 example:
 
 ```
@@ -1273,18 +1514,21 @@ The following example demonstrates how to enable schema filters for
 selected extensions and make RESTCONF ignore unknown definitions and
 definitions with a 'deprecated status' attribute.
 
-```json
-"schemaFilters": {
-  "ignoredDataOnWriteByExtensions": [
-    "tailf:hidden full"
-  ],
-  "hiddenDataOnReadByExtensions": [
-    "tailf:hidden deprecated",
-    "tailf:hidden debug"
-  ],
-    "ignoreUnsupportedDefinitionsOnWrite": true,
-    "hideDeprecatedDefinitionsOnRead": true
-}
+```properties RESTCONF Shema Filters Properties
+# Indicates if the data for non-existing schema nodes will be ignored during PUT/POST/PATCH operation
+# or during GET operation in the 'fields' query parameter value.
+restconf.schema-filters.ignore-unsupported-definitions-on-write=true
+# Indicates if the definition with "DEPRECATED" status should be hidden during GET operation.
+restconf.schema-filters.hide-deprecated-definitions-on-read=true
+# Indicates if constraint will throw an exception for an invalid input value.
+# This is used on DB layer (serializing/deserializing), RestConf layer (reading/writing),
+# gNMI layer (serializing/deserializing). Currently, string patterns + enums are ignored.
+restconf.schema-filters.skip-constraint-checking=false
+# List of extension definitions that can be used to filter out data during PUT/POST/PATCH operation.
+restconf.schema-filters.ignored-data-on-write-by-extensions[0]=tailf:hidden full
+# List of extension definitions that can be used to filter out data during GET operation.
+restconf.schema-filters.hidden-data-on-read-by-extensions[0]=tailf:hidden deprecated
+restconf.schema-filters.hidden-data-on-read-by-extensions[1]=tailf:hidden debug
 ```
 
 ### Unhide Parameter for READ/WRITE Operations
@@ -1335,8 +1579,7 @@ curl --location --request DELETE 'http://localhost:8181/rests/data/network-topol
     "errors": {
         "error": [
             {
-                "error-message": "Leafref validation failed. Violated leafref constraint on leaf /network-topology/topology/node/configuration/interfaces/interface/name -
-                                    node is referenced by leaf on path: /network-topology/topology/node/configuration/referencing/path,
+                "error-message": "Leafref validation failed. Violated leafref constraint on leaf /network-topology/topology/node/configuration/interfaces/interface/name - node is referenced by leaf on path: /network-topology/topology/node/configuration/referencing/path",
                 "error-tag": "invalid-value",
                 "error-type": "protocol"
             }
@@ -1423,26 +1666,138 @@ Mappings between special characters and UTF-8 codes can be found on following si
 https://www.urlencoder.org/
 !!!
 
-### Demarcation of key using delimiter
+### Demarcate key using delimiter
 
-UniConfig allows to specify delimiter used for demarcation of list key value. Afterwards, all special characters
-inside key are automatically escaped.
+UniConfig lets you specify a key delimiter used to demarcate list key values.
+Once defined, all special characters inside the key are automatically escaped.
 
-By default, key delimiter is disabled. It must be specified in the 'config/lighty-uniconfig-config.json' file:
+The delimiter is disabled by default. It can be defined in the
+`config/application.properties` file:
 
-```json Configuration of keyDelimiter
-    // RESTCONF and web server settings
-    "restconf": {
-        // delimiter used for escaping of list keys in URI (for example, '%22')
-        // if it is set to 'null' (default), keys cannot be escaped and must be directly encoded according to RFC-8040
-        "keyDelimiter": "%22"
-    }
+```properties RESTCONF Properties
+# RESTCONF settings
+
+# This flag removes namespaces from GET response (only if there are no duplicate localnames)
+# (E.g. if there is: namespace1:test and namespace2:test the namespace won't be removed because
+# there would be two identical localnames).
+restconf.show-namespace-in-json-response=true
+# Trying to parse input body and URI using the latest schema if parsing using another context failed.
+# If parsing using the latest schema is successful, then error returned to user is adjusted.
+restconf.format-error-with-latest-schema=false
+# Flag that if enabled, changes yang-patch responses containing errors into RFC-8040 format.
+restconf.yang-patch-rfc8040-error-response=false
+# Default value 0 makes the behavior as defined in RFC8040 (returns status code 404 [Not Found]),
+# if changed to anything else, that status code will be returned.
+restconf.status-code-for-empty-get-response=0
+# Delimiter used for escaping of list keys in URI (for example, '%22')
+# if it is set to 'null' (default), keys cannot be escaped and must be directly encoded according to RFC-8040.
+restconf.keyDelimiter=%22
 ```
 
-The following request demonstrates demarcation of interface name 'ge0/0/1' using '%22' delimiter.
+The following request demonstrates the demarcation of an interface named
+`ge0/0/1`using the `%22` delimiter.
 
 ```shell Read interface (escaped interface name)
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device/configuration/frinx-openconfig-interfaces:interfaces/interface=%22ge0/0/1%22 \
 --header 'Accept: application/json'
 ```>>>>>>> b208d862 (Encoding key values)
 ```
+
+## Hide Attributes
+
+Query parameter 'hideAttributes' is used to hide composite data-tree nodes attributes in response to GET call.
+Default value is 'false' - nodes attributes are displayed in the GET response.
+
+### Example
+
+``` bash GET request without 'hideAttributes' parameter
+curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=templates/node=tmpl/configuration/service-node-groups' \
+--header 'Accept: application/json'
+```
+
+``` json GET response with empty data-tree nodes
+{
+   "sfc:service-node-groups": {
+       "@": {
+           "template-tags:operation": "replace"
+       },
+       "service-node-group": [
+           {
+               "@": {
+                   "template-tags:operation": "update"
+               },
+               "name": "service-node-group-test-name"
+           }
+       ]
+   }
+}
+```
+
+``` bash GET request with set 'hideAttributes' parameter to 'true'
+curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=templates/node=tmpl/configuration/service-node-groups?hideAttributes=true' \
+--header 'Accept: application/json'
+```
+
+``` json GET response with hidden attributes
+{
+   "sfc:service-node-groups": {
+       "service-node-group": [
+           {
+               "name": "service-node-group-test-name"
+           }
+       ]
+   }
+}
+```
+
+### Callbacks (http-client)
+
+Callbacks include sending GET (call-point) and POST (action) requests to the remote server. They are implemented mainly for UniConfig Shell,
+but can also be used by RESTCONF for UniStore nodes by using the URI prefix:
+
+``` Http-client
+http://localhost:8181/rests/http-client/...
+```
+
+#### Examples
+
+Example - call-point invocation in RESTCONF
+
+``` Call-point request
+curl --location --request GET 'http://localhost:8181/rests/http-client/network-topology:network-topology/topology=unistore/node=node1/configuration/test/get-request'
+```
+
+Response:
+``` Call-point response
+{
+  "response": {
+    "value": "some-value"
+  }
+}
+```
+
+Example - action invocation in RESTCONF
+
+``` Action request
+curl --location --request POST 'http://localhost:8181/rests/http-client/network-topology:network-topology/topology=unistore/node=node1/configuration/post-request/test-action' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "body": {
+            "data": "some-data"
+        }
+    }
+}'
+```
+
+Response:
+``` Action response
+{
+  "response": {
+    "value": "some-data was processed"
+  }
+}
+```
+
+Callbacks must be configured before use. For more details, see [Callbacks](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/#callbacks).

@@ -1,22 +1,28 @@
 # RPC sync-from-network
 
-The purpose of this RPC is to synchronize configuration from network
-devices to the UniConfig nodes in the Operational datastore of UniConfig
-transaction. The RPC input contains a list of the UniConfig nodes where
-the configuration should be refreshed within the network. Output of the
-RPC describes the result of sync-from-network and matches all input
-nodes. Calling RPC with empty list of target nodes results in syncing
-configuration of all nodes that have been modified in the UniConfig
-transaction. If one node failed for any reason, the RPC will fail
-entirely.
+This RPC synchronizes configurations from network devices to UniConfig nodes in
+the `Operational` datastore of the UniConfig transaction.
+
+RPC input contains a list of UniConfig nodes whose configuration should be
+refreshed within the network. RPC output describes the result and matches all
+input nodes.
+
+Calling the RPC with an empty list of target nodes syncs the configuration of
+all nodes modified in the UniConfig transaction. If any node fails, the entire
+RPC also fails.
+
+If the network device was installed as southbound-only (with the
+`uniconfig-config:install-uniconfig-node-enabled` parameter set to `false`), the
+RPC syncs the device to the UniConfig topology and rewrites the above-mentioned
+parameter to `true`.
 
 ![RPC sync-from-network](RPC_sync-from-network-RPC_sync_from_network.svg)
 
-## RPC Examples
+## RPC examples
 
-### Successful Example
+### Successful example
 
-RPC input contains nodes where configuration should be refreshed.
+RPC input contains nodes whose configuration should be refreshed.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -25,100 +31,72 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --data-raw '{
     "input": {
         "target-nodes": {
-            "node": ["IOSXR","IOSXRN"]
+            "node": ["R1","R2"]
         }
     }
 }'
 ```
 
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXRN",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                }
-            ]
-        },
-        "overall-status": "complete"
+```RPC Response, Status: 204
+```
+
+If RPC input contains no target nodes, all nodes touched in the transaction are
+synced.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+        }
     }
+}'
+```
+
+```RPC Response, Status: 204
+```
+
+### Failed example
+
+RPC input contains a list of nodes whose configuration should be refreshed. Node
+R2 is not installed.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "target-nodes": {
+            "node": ["R1","R2"]
+        }
+    }
+}'
+```
+
+```json RPC Response, Status: 404
+{
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "data-missing",
+        "error-message": "Node 'R2' hasn't been installed in Uniconfig database",
+        "error-info": {
+          "node-id": "R2"
+        }
+      }
+    ]
+  }
 }
 ```
 
+### Failed example
 
-RPC input does not contain the target nodes, all touched nodes will be
-invoked.
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "target-nodes": {
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "overall-status": "complete"
-    }
-}
-```
-
-### Failed Example
-
-RPC input contains a list of nodes where the configuration should be
-refreshed. One node has not been mounted yet (AAA).
-
-```bash RPC Request
-curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "input": {
-        "target-nodes": {
-            "node": ["IOSXR","AAA"]
-        }
-    }
-}'
-```
-
-```json RPC Response, Status: 200
-{
-    "output": {
-        "node-results": {
-            "node-result": [
-                {
-                    "node-id": "IOSXR",
-                    "status": "complete"
-                },
-                {
-                    "node-id": "AAA",
-                    "status": "fail",
-                    "error-type": "no-connection",
-                    "error-message": "Unified mountpoint not found."
-                }
-            ]
-        },
-        "overall-status": "fail"
-    }
-}
-```
-
-### Failed Example
-
-If the RPC input does not contain the target nodes and there weren't any
-touched nodes, the request will result in an error.
+If RPC input does not contain any target nodes and there are no touched nodes,
+the request results in an error.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:sync-from-network' \
@@ -132,11 +110,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 }'
 ```
 
-```json RPC Response, Status: 200
+```json RPC Response, Status: 400
 {
-    "output": {
-        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes.",
-        "overall-status": "fail"
-    }
+  "errors": {
+    "error": [
+      {
+        "error-type": "application",
+        "error-tag": "missing-element",
+        "error-message": "There aren't any nodes specified in input RPC and there aren't any touched nodes."
+      }
+    ]
+  }
 }
 ```

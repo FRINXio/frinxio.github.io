@@ -2,266 +2,402 @@
 
 ## Introduction
 
-UniConfig can be easily deployed in the cluster thanks to its stateless architecture and transaction isolation:
+UniConfig can be easily deployed in a cluster owing to its stateless
+architecture and transaction isolation:
 
-* stateless architecture - UniConfig nodes in the cluster don't keep any state that would have to be communicated directly
-  to other Uniconfig nodes in a cluster. All network-topology configuration and state information are stored inside
-  a PostgreSQL database that must be reachable from all UniConfig nodes in the same zone. All Uniconfig nodes share the
-  same database, making the database single source of truth for Uniconfig cluster.
-* transaction isolation - Load-balancing is based on mapping UniConfig transactions to Uniconfig nodes
-  in a cluster (transactions are sticky). One UniConfig transaction cannot span multiple UniConfig nodes in a cluster.
-  Southbound sessions used for device management are ephemeral - they are created when UniConfig needs to access device
-  on the network (like pushing cnfiguration updates) and they are closed as soon as a UniConfig transactions is committed or closed.
+* Stateless architecture - UniConfig nodes in the cluster do not keep any state
+  that needs to be communicated directly to other UniConfig nodes in the
+  cluster. All network-topology configuration and state information is stored
+  inside a PostgreSQL database that must be reachable from all UniConfig nodes
+  in the same zone. All UniConfig nodes share the same database, making the
+  database the single source of truth for the cluster.
+* Transaction isolation - Load-balancing is based on mapping UniConfig
+  transactions to UniConfig nodes in a cluster (transactions are sticky). One
+  UniConfig transaction cannot span multiple UniConfig nodes in a cluster.
+  Southbound sessions used for device management are ephemeral, i.e., they are
+  created when UniConfig needs to access a device on the network (like pushing
+  configuration updates) and are closed as soon as a UniConfig transaction is
+  committed or closed.
 
-There are several advantages of clustered deployment of UniConfig nodes:
+There are several advantages to clustered deployment of UniConfig nodes:
 
-* horizontal scalability - Increasing number of units that can process UniConfig transactions in parallel.
-  Single UniConfig node tends to have limited processing and networking resources - by increasing number of nodes in the
-  cluster, this constraint can be mitigated. The more Uniconfig nodes in a cluster, the more transactions can be executed in parallel.
-  Number of connected UniConfig nodes in the cluster can also be adjusted at the runtime.
-* high-availability - Single UniConfig node doesn't represent single point of failure. If UniConfig node crashes,
-  only UniConfig transactions that are processed by corresponding node, are cancelled. Application can retry failed
-  transaction, and it will be processed by next node in the cluster.
+* Horizontal scalability - Increasing the number of units that can process
+  UniConfig transactions in parallel. A single UniConfig node tends to have
+  limited processing and networking resources - this constraint can be mitigated
+  by increasing the number of nodes in the cluster. The more UniConfig nodes in
+  the cluster, the more transactions can be executed in parallel. The number of
+  connected UniConfig nodes in the cluster can also be adjusted at runtime.
+* High availability - A single UniConfig node does not represent a single point
+  of failure. If a UniConfig node crashes, only transactions processed by the
+  corresponding node are cancelled. The application can retry a failed
+  transaction, which will be processed by the next node in the cluster.
 
 There also are a couple limitations to be considered:
 
-* Parallel execution of transactions is subject to a locking mechanism, where 2 transactions cannot manipulate the same device at the same time.
-* Single transaction is always executed by a single Uniconfig node. This means that a scope of a single transaction is limited by the number devices and   their configuration a single Uniconfig node can handle.
+* Parallel execution of transactions is subject to a locking mechanism, whereby
+  two transactions cannot manipulate the same device at the same time.
+* A single transaction is always executed by a single UniConfig node. This means
+  that the scope of a single transaction is limited by the number of devices and
+  their configurations that a single Uniconfig node can handle.
 
 ## Deployments
 
 ### Single-zone deployment
 
-In the single-zone deployment, all managed network devices are reachable by all UniConfig nodes in the cluster - zone.
-Components of the single-zone deployment and connections between them are depicted by the next diagram.
+In a single-zone deployment, all managed network devices are reachable by all
+UniConfig nodes in the cluster zone. Components of a single-zone deployment and
+connections between them are illustrated in the diagram below.
 
 ![Deployment with single zone](single-zone-architecture.svg)
 
-Description of components:
-* UniConfig controllers - Network controllers that use common PostgreSQL system for persistence of data, communicate
-  with network devices using NETCONF/GNMi/CLI management protocols and propagate notifications into Kafka topics
-  (UniConfig nodes act only as Kafka producers). UniConfig nodes do not communicate with each other directly,
-  their operation can only be coordinated using data stored in the database.
-* Database storage - PostgreSQL is used for persistence of network-topology configuration, mountpoints settings,
-  and selected operational data. PostgreSQL database can also be deployed in the cluster (outside of scope).
-* Message and notification channels - Kafka cluster is used for propagation of notifications that are generated
-  by UniConfig itself (e.g., audit and transaction notifications) or from network devices and only propagated
-  by UniConfig controller.
-* Load-balancers - Load-balancer is used for distributing transactions (HTTP traffic) and SSH sessions
-  from applications to UniConfig nodes. From the view of load-balancer, all UniConfig nodes in a cluster are equall.
-  Currently, only round-robin load-balancing strategy is supported.
-* Managed network devices - Devices that are managed using NETCONF/GNMi/CLI protocols by UniConfig nodes or generate
-  notifications to UniConfig nodes. Sessions between UniConfig nodes and devices are either on-demand/emphemeral
-  (configuration of devices) or long-term (distribution of notifications over streams).
-* HTTP / SSH clients & Kafka consumers - Application layer such as workflow management systems or end-user systems.
-  RESTCONF API is exposed using HTTP protocol, SSH server is exposing UniConfig shell
-  and Kafka brokers allow Kafka consumers to listen to the events on subscribed topics.
+Included components:
+* UniConfig controllers - Network controllers that use a common PostgreSQL
+  system for persistence of data, communicate with network devices using
+  NETCONF/GNMi/CLI management protocols and propagate notifications into Kafka
+  topics (UniConfig nodes act only as Kafka producers). UniConfig nodes do not
+  communicate with each other directly, their operations can only be coordinated
+  using data stored in the database.
+* Database storage - PostgreSQL is used for persistence of network-topology
+  configuration, mountpoints settings and selected operational data. The
+  PostgreSQL database can also be deployed in the cluster (outside of scope).
+* Message and notification channels - The Kafka cluster is used to propagate
+  notifications generated by UniConfig itself (e.g., audit and transaction
+  notifications) or from network devices and only propagated by UniConfig
+  controllers.
+* Load-balancers - Load-balancers are used to distribute transactions (HTTP
+  traffic) and SSH sessions from applications to UniConfig nodes. From the point
+  of view of the load-balancer, all UniConfig nodes in the cluster are equal.
+  Currently only a round-robin load-balancing strategy is supported.
+* Managed network devices - Devices that are managed using NETCONF/GNMi/CLI
+  protocols by UniConfig nodes or generate notifications to UniConfig nodes.
+  Sessions between UniConfig nodes and devices are either on-demand/emphemeral
+  (configuration of devices) or long-term (distribution of notifications over
+  streams).
+* HTTP/SSH clients and Kafka consumers - Application layer, such as workflow
+  management systems or end-user systems. The RESTCONF API is exposed using the
+  HTTP protocol, the SSH server exposes UniConfig shell and Kafka brokers allow
+  Kafka consumers to listen to events on subscribed topics.
 
 ### Multi-zone deployment
 
-In this type of deployment there are multiple zones that manage separate sets of devices because:
+This type of deployment has multiple zones that manage separate sets of devices
+for the following reasons:
 
-* network reachability issues - groups of devices are only reachable and thus manageable from some part
-  of the network (zone) but not from others
-* logical separation - there are different scaling strategies or requirements for different zones
-* legal issues - some devices must be managed separately with split storage, for example, because of the regional
-   restrictions
+* Network reachability issues - Groups of devices are reachable, and thus
+  manageable, only from some part of the network (zone) but not from others
+* Logical separation - Different scaling strategies or requirements for
+  different zones.
+* Legal issues - Some devices must be managed separately with split storage
+   because of, for example, regional restrictions.
 
-The following diagrams represents a sample deployment with 2 zones. The first zone contains 3 UniConfig nodes
-while the second zone contains only 2 UniConfig nodes.
-Multiple zones might share a single Kafka cluster but database instances need to be split (could be running in a single postgres server).
+The following diagrams represents a sample deployment with two zones:
+- Zone 1 contains three UniConfig nodes.
+- Zone 2 contains only two UniConfig nodes.
+
+Multiple zones can share a single Kafka cluster, but database instances must be
+be split (can be running in a single Postgres server).
 
 ![Deployment with multiple zones](multi-zone-architecture.svg)
 
 Description of multi-zone areas:
 
-* Applications - The application layer is responsible for managing mapping between network segments and Uniconfig zones.
-  Typically this is achieved by deploying/using an additional inventory database that contains device <-> zone
-  mappings - based on this information the application decides which zone to use. 
-* Isolated zones - A zone contains one or more UniConfig nodes, load-balancers and managed network devices.
-  The clusters in isolated zones share 0 information.
-* PostgreSQL databases - It is necessary to use dedicated database per zone.
-* Kafka cluster - Kafka cluster can be shared by multiple clusters in different zones or there could be single Kafka cluster per zone.
-  Notifications from different zones can be safely pushed to the common topics since there can be no possible
-  conflicts between Kafka publishers. However it is also possible to achieve isolation of published messages
-  in a shared Kafka deployment by setting different topic names in different zones.
+* Applications - The application layer is responsible for managing mapping
+  between network segments and UniConfig zones. Typically this is achieved by
+  deploying/using an additional inventory database that contains device <-> zone
+  mappings, and based on this information the application decides which zone to
+  use. 
+* Isolated zones - A zone contains one or more UniConfig nodes, load-balancers
+  and managed network devices. Clusters in isolated zones do not share
+  information.
+* PostgreSQL databases - It is necessary to use a dedicated database per zone.
+* Kafka cluster - A Kafka cluster can be shared by multiple clusters in
+  different zones, or alternatively there can be a single Kafka cluster per
+  zone. Notifications from different zones can be safely pushed to common
+  topics, as there can be no conflicts between Kafka publishers. However, it is
+  also possible to achieve isolation of published messages in a shared Kafka
+  deployment by setting different topic names in different zones.
 
 ### Load-balancer operation
 
-The responsibility of a load-balancer is to allocate UniConfig transaction on one of the UniConfig nodes in the cluster.
-It is done by forwarding requests without UniConfig transaction header to one of the UniConfig nodes
-(using round-robin strategy) and afterwards appending a backed identifier to the create-transaction RPC response in form
-of an additional Cookie header ('sticky session' concept). Afterwards, it is the responsibility of an application
-to assure that all requests that belong to the same transaction contain the same backend identifier.
+Load-balancers are responsible for allocating UniConfig transactions to one of
+the UniConfig nodes in the cluster. This is done by forwarding requests without
+a UniConfig transaction header to one of the UniConfig nodes (using round-robin
+strategy) and afterwards appending a backed identifier to the
+**create-transaction RPC** response in the form of an additional Cookie header
+('sticky session' concept). Afterwards, the application is responsible for
+assuring that all requests belonging to the same transaction contain the same
+backend identifier.
 
 !!!
-The application is responsible for preserving transaction and backend identifier cookies throught a transaction lifetime.
+The application is responsible for preserving transaction and backend identifier
+cookies throughout the transaction's lifetime.
 !!!
 
-The next sequence diagram captures a process of creating and using 2 UniConfig transactions with focus
-on load-balancer operation.
+The following sequence diagram captures the process of creating and using two
+UniConfig transactions with a focus on load-balancer operation.
 
 ![Load-balancing UniConfig transactions](load-balancing-transactions.svg)
 
-* The first create-transaction RPC is forwarded to the first UniConfig node (applying round-robin strategy), because
-  it does not contain uniconfig_server_id key in the Cookie header.
-  The response contains both UniConfig transaction ID (UNICONFIGTXID) and uniconfig_server_id that represents
-  'sticky cookie'. Cookie header uniconfig_server_id is appended to the response by load-balancer.
-* The next request that belongs to the created transaction, contains same UNICONFIGTXID and uniconfig_server_id.
-  Load balancer uses the uniconfig_server_id to forward this request to the correct UniConfig node.
-* The last application request represents again create-transaction RPC. This time, request is forwarded to
-  the next registered UniConfig node in the cluster according to the round-robin strategy.
+* The first **create-transaction RPC** is forwarded to the first UniConfig node
+  (applying round-robin strategy), because it does not contain the
+  `uniconfig_server_id` key in the Cookie header. The response contains both the
+  UniConfig transaction ID (`UNICONFIGTXID`) and `uniconfig_server_id` that
+  represents a 'sticky cookie'. The `uniconfig_server_id` cookie header is
+  appended to the response by the load-balancer.
+* The next request that belongs to the created transaction contains the same
+  `UNICONFIGTXID` and `uniconfig_server_id`. The load balancer uses
+  `uniconfig_server_id` to forward this request to the correct UniConfig node.
+* The last application request again represents the **create-transaction RPC**.
+  This time the request is forwarded to the next registered UniConfig node in
+  the cluster according to the round-robin strategy.
 
 ## Configuration
 
 ### UniConfig configuration
 
-All UniConfig nodes in the cluster should be configured with the same parameters. There are several important sections
-of config/lighty-uniconfig-config.json file related to clustered environment.
+All UniConfig nodes in the cluster should be configured using the same
+parameters. There are several important sections in the
+**config/application.properties** file that relate to the clustered environment.
 
 #### Database connection settings
 
-This section contains information how to connect to PostgreSQL database and connection pool settings. It is placed
-under 'dbPersistence.connection' JSON object.
+This section contains information on how to connect to a PostgreSQL database as
+well as connection pool settings. It is located under the
+`dbPersistence.connection` properties object.
 
 Example with essential settings:
 
-```json database connection settings
-// Grouped settings related to database connection.
-"connection": {
-    // name of the database
-    "dbName": "uniconfig",
-    // name of the user that has the remote access to database specified by 'dbName'
-    "username": "uniremote",
-    // user password (it is used only for the password-base authentication)
-    "password": "unipass",
-    // initial size of the connection pool (pre-initialized connections)
-    "initialDbPoolSize": 5,
-    // maximum size of the connection pool, before creation of next connections are blocked
-    "maxDbPoolSize": 20,
-    // maximum number of idle connections before next idle connections are cleaned
-    "maxIdleConnections": 5,
-    /*
-    Timeout value used for socket read operations. If reading from the server takes longer than this value,
-    the connection is closed. This can be used as both a brute force global query timeout and a method of
-    detecting network problems. The timeout is specified in seconds and a value of 0 means that it is disabled.
-    */
-    "socketReadTimeout": 20,
-    // maximum wait time for obtaining of a new connection before fetch request is dropped [milliseconds]
-    "maxWaitTime": 30000,
-    /*
-    List of network locations at which target database resides. The first entry is always tried in the first
-    attempt during creation of database connection. If there are multiple entries specified, then other
-    locations are used as fallback method in the order in which they are specified.
-    */
-    "databaseLocations": [
-        {
-            // database hostname / IP address
-            "host": "uniconfig-db",
-            // TCP port on which target database listens to incoming connections
-            "port": 26257
-        }
-    ]
-}
+```properties database connection settings
+# DB persistence settings
+db-persistence.embedded-database.enabled=true
+db-persistence.embedded-database.data-dir=./data/pg_dir
+db-persistence.embedded-database.clean-data-dir=true
+
+db-persistence.connection.db-name=uniconfig
+db-persistence.connection.username=uniremote
+db-persistence.connection.password=unipass
+db-persistence.connection.uri=jdbc:postgresql://
+db-persistence.connection.driver-class-name=org.postgresql.Driver
+# This property controls the time (in milliseconds) that a client will wait for a connection from the pool.
+# If this value is exceeded without a connection becoming available, a {@link SQLException} is thrown.
+# The lowest acceptable connection timeout is 250 ms. The default value is 30000 (i.e., 30 seconds)
+db-persistence.connection.connection-timeout=30000
+# This property controls the maximum lifetime of a connection in the pool.
+# On a connection-by-connection basis, minor negative attenuation is applied to avoid mass extinction in the pool.
+# We strongly recommend setting this value, and it should be several seconds shorter than any database or
+# infrastructure imposed connection time limit. A value of 0 indicates no maximum lifetime (infinite lifetime),
+# subject to the idleTimeout setting.
+# The minimum allowed value is 30000ms (30 seconds). Default: 1800000 (30 minutes).
+db-persistence.connection.max-lifetime=1800000
+# This property controls the minimum number of idle connections that HikariCP tries to maintain in the pool.
+# If the number of idle connections dips below this value and total connections in the pool are less than maximumPoolSize,
+# HikariCP will attempt to add additional connections quickly and efficiently.
+# However, for maximum performance and responsiveness to spike demands, we recommend not setting this value
+# and instead allowing HikariCP to act as a fixed size connection pool. Default: same as maximumPoolSize
+db-persistence.connection.min-idle-connections=10
+# This property controls the maximum size that the pool is allowed to reach,
+# including both idle and in-use connections. Basically this value will determine the maximum number
+# of actual connections to the database backend. A reasonable value for this is best determined by your
+# execution environment. When the pool reaches this size, and no idle connections are available,
+# calls to getConnection() will block for up to connectionTimeout milliseconds before timing out.
+db-persistence.connection.max-db-pool-size=20
+# Timeout value used for socket read operations. If reading from the server takes longer than this value,
+# the connection is closed. This can be used as both a brute force global query timeout and a method of
+# detecting network problems. The timeout is specified in seconds and a value of 0 means that it is disabled.
+db-persistence.connection.socket-read-timeout=20
+# Enabled TLS authentication (if it is enabled, 'tlsClientCert', 'tlsClientKey', and 'tlsCaCert'
+# are used and 'password' field is not used).
+db-persistence.connection.enabled-tls=false
+db-persistence.connection.tls-client-cert=./client.pks
+db-persistence.connection.tls-client-key=./client.key
+db-persistence.connection.tls-ca-cert=./ca.pks
+# Password to an encrypted SSL certificate key file.
+db-persistence.connection.ssl-password=
+
+# List of network locations at which target database resides. The first entry is always tried in the first
+# attempt during creation of database connection. If there are multiple entries specified, then other
+# locations are used as fallback method in the order in which they are specified.
+
+# database hostname / IP address
+db-persistence.connection.database-locations[0].host=127.0.0.1
+# TCP port on which target database listens to incoming connections
+db-persistence.connection.database-locations[0].port=26257
+
+# Repairs the Flyway schema history table before Flyway migration. This will perform the following actions:
+# 1. Remove any failed migrations on databases.
+# 2. Realign the checksums, descriptions and types of the applied migrations with available migrations.
+db-persistence.connection.repair-schema-history=false
+# Name / unique identifier of local Uniconfig instance.
+#db-persistence.uniconfig-instance.instance-name=
+# Hostname or IP address of a local host that runs Uniconfig.
+db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
 !!!
-Be sure that [number of UniConfig nodes in cluster] * [maxDbPoolSize] does not exceed maximum allowed number
-of open transactions and open connections on PostgreSQL side. Be aware that 'maxDbPoolSize' also caps maximum
-number of open UniConfig transactions (1 UniConfig transaction == 1 database transaction == 1 connection to database).
+Make sure that [number of UniConfig nodes in cluster] * [maxDbPoolSize] does not
+exceed the maximum allowed number of open transactions and open connections on
+the PostgreSQL side. Note that `maxDbPoolSize` also caps the maximum number of
+open UniConfig transactions (1 UniConfig transaction == 1 database transaction
+== 1 connection to database).
 !!!
 
-#### UniConfig node identification and heartbeat
+#### UniConfig node identification
 
-By default, UniConfig node name is generated randomly. This behaviour can be changed by setting
-'dbPersistence.uniconfigInstance.instanceName'. Instance name is leveraged, for example, in the clustering
-of stream subscriptions.
-
-UniConfig nodes reports themselves in the cluster by updating heartbeat timestamp in database. Currently, this
-feature is not used by any other component in the UniConfig cluster. Reporting interval can be adjusted
-by 'dbPersistence.heartBeat.heartbeatInterval' field.
+By default, UniConfig node names are generated randomly. This behavior can be
+modified by setting `db-persistence.uniconfig-instance.instance-name`. The
+instance name is leveraged, for example, in the clustering of stream
+subscriptions.
 
 Example:
 
-```json node identification and heartbeat settings
-// UniConfig instance naming settings.
-"uniconfigInstance": {
-    // Identifier of the local UniConfig instance (name must be unique in the cluster). If it is set to 'null'
-    // then this identifier is tried to be loaded from 'data/instance_name'. If this file doesn't exist, then
-    // name of the UniConfig instance is randomly generated and this file is created with new name of instance.
-    "instanceName": null
-},
-// Heart beat service settings.
-"heartBeat": {
-    // interval between updating of local UniConfig instance heartbeat timestamp [milliseconds]
-    "heartbeatInterval": 1000
-}
+```properties node identification properties
+# Name / unique identifier of local Uniconfig instance.
+db-persistence.uniconfig-instance.instance-name=
+# Hostname or IP address of a local host that runs Uniconfig.
+db-persistence.uniconfig-instance.host=127.0.0.1
 ```
 
-#### Kafka and notification settings
+#### Kafka and notification properties
 
-This section contains settings related to connections to Kafka brokers, Kafka publisher timeouts, authentication, 
-subscription allocation, and rebalancing settings.
+This section contains properties related to connections to Kafka brokers, Kafka
+publisher timeouts, authentication, subscription allocation and rebalancing
+settings.
 
-Example with essential settings:
+Example with essential properties:
 
-```json notification settings
-// Grouped settings that are related to notifications.
-"notifications": {
-    // Flag that determines whether notifications are collected
-    "enabled": true,
-    "kafka": {
-        // Username used for authentication into Kafka brokers (SASL). If it is not set, then authentication
-        // is disabled (PLAINTEXT scheme).
-        // "username": "kafka",
-        // Password used for authentication into Kafka brokers.
-        //"password": "kafka",
-        "kafkaServers": [
-            {
-                // Address / hostname of the interface on which Kafka broker is listening to incoming connections.
-                "brokerHost": "kafka-broker",
-                // TCP port on which Kafka broker is listening to incoming connections.
-                "brokerListeningPort": 9092
-            }
-        ],
-        // Kafka producer settings
-        "kafkaProducer": {
-            // Specifies the number of messages that the Kafka handler processes as a batch
-            "batchSize": 16384
-        },
-        // Configuration of how long the send() method and the creation of connection for
-        // reading of metadata methods will block. (in ms)
-        "blockingTimeout": 60000,
-        // Configuration of how long will the producer wait for the acknowledgement of a request. (in ms)
-        // If the acknowledgement is not received before the timeout elapses, the producer will resend the
-        // request or fail the request if retries are exhausted
-        "requestTimeout": 30000,
-        // Configuration of the upper bound on the time to report success or failure after a
-        // call to send() returns.(in ms)
-        // This limits the total time that a record will be delayed prior to sending, the time to
-        // await acknowledgement from the broker (if expected), and the time allowed for retriable send failures.
-        "deliveryTimeout": 120000
-    }
-    // How often should uniconfig check for unassigned netconf notifications subscriptions (in seconds)
-    "netconfSubscriptionsMonitoringInterval": 5,
-    // How many unassigned netconf subscriptions can be processed within one subscription monitoring interval
-    "maxNetconfSubscriptionsPerInterval": 10,
-    // hard limit for how many subscriptions can a single UniConfig node handle
-    "maxNetconfSubscriptionsHardLimit": 5000,
-    // grace period for a UniConfig node going down. Other nodes will not restart the subscriptions until the grace
-    // period passes from when a dead Uniconfig node has been seen last
-    "rebalanceOnUCNodeGoingDownGracePeriod": 120,
-    // the lower margin to calculate optimal range start
-    "optimalNetconfSubscriptionsApproachingMargin": 0.05,
-    // the higher margin to calculate optimal range end
-    "optimalNetconfSubscriptionsReachedMargin" : 0.10
-}
+```properties notification properties
+# Grouped settings that are related to notifications.
+
+# Flag that determines whether notifications are collected.
+notifications.enabled=false
+# How many unassigned subscriptions can be processed.
+notifications.max-subscriptions-hard-limit=5000
+# How many unassigned subscriptions can be processed within one subscription monitoring interval.
+notifications.max-subscriptions-per-interval=10
+# How often should UniConfig check for unassigned notifications subscriptions (in seconds).
+notifications.subscriptions-monitoring-interval=5
+# If response body should be included in notification.
+notifications.audit-logs.include-response-body=false
+# If calculating the diff result should be included in notification.
+notifications.audit-logs.include-calculate-diff-result=false
+# Maximum count of records, after reaching this count the oldest records will be deleted.
+notifications.notification-db-threshold.max-count=10000
+# Maximum age of records, all older records will be deleted (in hours).
+notifications.notification-db-threshold.max-age=100
+
+# Grouped settings that are related to kafka.
+
+# Flag that determines whether audit logs are enabled.
+notifications.kafka.audit-logs-enabled=true
+# Flag that determines whether netconf notifications are enabled.
+notifications.kafka.netconf-notifications-enabled=true
+# Flag that determines whether gnmi notifications are enabled.
+notifications.kafka.gnmi-notifications-enabled=true
+# Flag that determines whether snmp notifications are enabled.
+notifications.kafka.snmp-notifications-enabled=true
+# Flag that sets the port to listen to notifications.
+notifications.kafka.snmp-notifications-udp-port=50000
+# The time in which the cache entry will expire (in seconds) if not accessed. This cache is used to map addresses
+# from notifications to repository names that is used to parse the specific notification.
+notifications.kafka.snmp-notifications-address-cache-duration=600
+# The time in which the cache entry will expire (in seconds) if not accessed. This cache is used to map object
+# identifiers to translated yang instance identifiers that are used to map them in the UniConfig schema context.
+notifications.kafka.snmp-notifications-oid-cache-duration=600
+# Flag that determines whether transaction notifications are enabled.
+notifications.kafka.transaction-notifications-enabled=true
+# Enabled collection and propagation of data-change-events into Kafka.
+notifications.kafka.data-change-events-enabled=true
+# Enabled collection and propagation of connection notifications into Kafka.
+notifications.kafka.connection-notifications-enabled=true
+# Unique identifier of topic that is used for storing netconf notifications.
+notifications.kafka.netconf-notifications-topic-name=netconf-notifications
+# Unique identifier of topic that is used for storing GNMI notifications.
+notifications.kafka.gnmi-notifications-topic-name=gnmi-notifications
+# Unique identifier of topic that is used for storing SNMP notifications.
+notifications.kafka.snmp-notifications-topic-name=snmp-notifications
+# Unique identifier of topic that is used for storing audit logs.
+notifications.kafka.audit-logs-topic-name=audit-logs
+# Unique identifier of topic that is used for storing transaction notifications.
+notifications.kafka.transactions-topic-name=transactions
+# Unique identifier of the Kafka topic used for distribution of data-change-events.
+notifications.kafka.data-change-events-topic-name=data-change-events
+# Unique identifier of the Kafka topic used for distribution of connection notifications.
+notifications.kafka.connection-notifications-topic-name=connection-notifications
+# If only connection notifications for NETCONF stream are enabled.
+notifications.kafka.connection-notifications-netconf-stream-only=true
+# The maximum thread pool size in the executor.
+# A thread pool executor is needed to send messages to Kafka.
+notifications.kafka.max-thread-pool-size=8
+# The maximum capacity of the work queue in the executor.
+notifications.kafka.queue-capacity=2048
+# Unique identifier of the Kafka topic used for distribution of shell notifications.
+notifications.kafka.shell-notifications-topic-name=shell-notifications
+# Enabled shell notifications into Kafka.
+notifications.kafka.shell-notifications-enabled=true
+# List of Address / hostname of the interface on which Kafka broker is listening to incoming connections and
+# TCP port on which Kafka broker is listening to incoming connections.
+notifications.kafka.kafka-servers[0].broker-host=127.0.0.1
+notifications.kafka.kafka-servers[0].broker-listening-port=9092
+# Specifies the number of messages that the Kafka handler processes as a batch.
+# In kafka is set with the parameter 'batch.size'.
+notifications.kafka.kafka-producer.batch-size=16384
+# Configuration of how long will the producer wait for the acknowledgement of a request. (in ms)
+# If the acknowledgement is not received before the timeout elapses, the producer will resend the
+# request or fail the request if retries are exhausted.
+# In kafka is set with the parameter 'request.timeout.ms'.
+notifications.kafka.kafka-producer.request-timeout=30000
+# Configuration of the upper bound on the time to report success or failure after a
+# call to send() returns.(in ms)
+# This limits the total time that a record will be delayed prior to sending, the time to
+# await acknowledgement from the broker (if expected), and the time allowed for retriable send failures.
+# In kafka is set with the parameter 'delivery.timeout.ms'.
+notifications.kafka.kafka-producer.delivery-timeout=120000
+# Configuration of how long the send() method and the creation of connection for
+# reading of metadata methods will block. (in ms).
+# In kafka is set with the parameter 'max.block.ms'.
+notifications.kafka.kafka-producer.blocking-timeout=60000
+# The producer groups together any records that arrive in between request transmissions into a single batched
+# request. Normally this occurs only under load when records arrive faster than they can be sent out.
+# However, in some circumstances the client may want to reduce the number of requests even under moderate load.
+# This setting accomplishes this by adding a small amount of artificial delay—that is, rather than immediately
+# sending out a record, the producer will wait for up to the given delay to allow other records to be sent so
+# that the sends can be batched together. This can be thought of as analogous to Nagle’s algorithm in TCP.
+# This setting gives the upper bound on the delay for batching: once we get 'batch.size' worth of records for a
+# partition it will be sent immediately regardless of this setting, however if we have fewer than this many
+# bytes accumulated for this partition we will ‘linger’ for the specified time waiting for more records to show
+# up. This setting defaults to 0 (i.e. no delay). Setting linger=5, for example, would have the effect of
+# reducing the number of requests sent but would add up to 5ms of latency to records sent in the absence of
+# load. In kafka is set with the parameter 'linger.ms'.
+notifications.kafka.kafka-producer.linger=0
+# Select compression algorithm for kafka producer.
+# Can be one of: none gzip snappy lz4 zstd
+# Snappy offers good balance and is good for JSON-based documents and logs.
+notifications.kafka.kafka-producer.compression-type=SNAPPY
+# The maximum time to block during receiving of next NETCONF notifications in milliseconds.
+notifications.kafka.kafka-subscriber.netconf-notifications-poll-timeout=100
+# The maximum time to block during receiving of next data-change-events in milliseconds.
+notifications.kafka.kafka-subscriber.data-change-events-poll-timeout=100
+# If this flag is set to 'true', then embedded Kafka is started during boot process.
+# Otherwise, all other settings are effectively ignored.
+notifications.kafka.embedded-kafka.enabled=false
+# Directory to which embedded Kafka is downloaded and extracted.
+notifications.kafka.embedded-kafka.install-dir=/tmp/embedded-kafka
+# URL that is used for download of Kafka, if it hasn't been downloaded yet.
+notifications.kafka.embedded-kafka.archive-url=https://dlcdn.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz
+# Directory to which embedded Kafka is downloaded and extracted.
+notifications.kafka.embedded-kafka.data-dir=./data/embedded-kafka
+# Clean data from previous run before starting of Kafka (= disabled persistence).
+notifications.kafka.embedded-kafka.clean-data-before-start=true
+# Number of partitions used for created topic.
+notifications.kafka.embedded-kafka.partitions=1
 ```
 
 ### Load-balancer configuration
 
-The following YAML code represents sample Traefik configuration that can be used in the clustered UniConfig deployment
-(deployment with 1 Traefik node). There is one registered entry-point with identifier 'uniconfig' and port '8181'.
+The following YAML code represents a sample Traefik configuration that can be
+used in the clustered UniConfig deployment (deployment with a single Traefik
+node). There is one registered entry-point with the `uniconfig` identifier on
+port 8181.
 
 ```yaml traefik configuration
 api:
@@ -275,10 +411,11 @@ providers:
   docker: {}
 ```
 
-Next, it is needed to configure UniConfig docker containers with traefik labels - UniConfig nodes are automatically
-detected by Traefik container as 'uniconfig' service providers. There is also URI prefix '/rests', name of the
-'sticky cookie' 'uniconfig_server_id' and server port number '8181' (UniConfig web server is listening to incoming
-HTTP requests on this port).
+Next, you need to configure UniConfig docker containers with Traefik labels.
+UniConfig nodes are automatically detected by a Traefik container as `uniconfig`
+service providers. There is also a URI prefix (`/rests`), the name of the
+"sticky cookie" (`uniconfig_server_id`) and the server port number (`8181`)
+where the UniConfig web server listens to incoming HTTP requests.
 
 ```yaml configuration of UniConfig docker container
 services:
@@ -292,32 +429,35 @@ services:
       - traefik.http.services.uniconfig.loadbalancer.server.port=8181
 ```
 
-Values of all traefik labels should be same on all nodes in the cluster - scaling of UniConfig service in the cluster
-(for example, using Docker Swarm tools) is simple since container settings do not change.
+Values for all Traefik labels should be the same on all nodes in the cluster.
+Scaling of the UniConfig service in the cluster (for example, using Docker Swarm
+tools) is simple when container settings do not change.
 
 !!!
-The similar configuration, like the presented one with Traefik, can be achieved using other load-balancer tools,
-such as HAProxy.
+A similar configuration to the one presented using Traefik can also be achieved
+using other load-balancer tools, such as HAProxy.
 !!!
 
 ## Clustering of NETCONF subscriptions and notifications
 
-When device is installed with stream property set, subscriptions for all
+When a device is installed with the stream property set, subscriptions for all
 provided streams are created in database. These subscriptions are always
-created with UniConfig instance id set to null, so they can be acquired
-by any UniConfig from cluster. Each UniConfig instance in cluster uses
-its own monitoring system to acquire free subscriptions. Monitoring
-system uses specialized transaction to lock subscriptions which prevents
-more UniConfig instances to lock same subscriptions. While locking
-subscription, UniConfig instance writes its id to subscription table to
-currently locked subscription and which means that this subscription is
-already acquired by this UniConfig instance. Other instances of
-UniConfig will not find this subscription as free anymore.
+created with the UniConfig instance id set to null, so they can be acquired
+by any UniConfig from the cluster.
+
+Each UniConfig instance in a cluster uses its own monitoring system to acquire
+free subscriptions. The monitoring system uses a specialized transaction to lock
+subscriptions, which prevents other UniConfig instances from locking the same
+subscriptions. While locking a subscription, the UniConfig instance writes its
+id into the subscription table for the currently locked subscription, which
+indicates that this subscription is already acquired by this UniConfig instance.
+Other instances of UniConfig will then see that this subscription is not
+available.
 
 ### Optimal subscription count and rebalancing
 
-With multiple UniConfig instances working in a cluster, each instance
-calculates an optimal range of subscriptions to manage.
+With multiple UniConfig instances working in a cluster, each instance calculates
+an optimal range of subscriptions to manage.
 
 ```
 OPTIMAL_RANGE_LOW = (NUMBER_OF_ALL_SUBSCRIPTIONS / NUMBER_OF_LIVE_UC_NODES_IN_CLUSTER) * OPTIMAL_NETCONF_SUBSCRIPTIONS_APPROACHING_MARGIN
@@ -325,30 +465,32 @@ OPTIMAL_RANGE_HIGH = (NUMBER_OF_ALL_SUBSCRIPTIONS / NUMBER_OF_LIVE_UC_NODES_IN_C
 # Example: optimal range for 5000 subscriptions with 3 nodes in the cluster and margins set to 0.05 and 0.10 = (1750, 1834)
 ```
 
-Based on optimal range and a number of currently opened subscriptions,
-each UniConfig node (while performing a monitoring system iteration)
-decides whether it should:
+Based on the optimal range and number of currently opened subscriptions, each
+UniConfig node (while performing a monitoring system iteration) decides whether
+it should:
 
-- Acquire additional subscriptions before optimal range is reached
-- Stay put and not acquire additional subscriptions in case optimal range is reached
-- Release some of its subscriptions to trigger rebalancing until optimal range is reached
+- Acquire additional subscriptions until the optimal range is reached.
+- Once the optimal range is reached, stay put and not acquire any additional
+  subscriptions.
+- Release some of its subscriptions to trigger rebalancing until the optimal
+  range is reached.
 
-When an instance goes down, all of its subscriptions will be immediately
-released and the optimal range for the other living nodes will changemanaged network devices
-and thus the subscriptions will be reopened by the rest of the cluster.
+If an instance goes down, all of its subscriptions are immediately released and
+the optimal ranges of other living nodes are adjusted. Managed network devices,
+and thus subscriptions, are reopened by the rest of the cluster.
 
 !!!
-There is a grace period before the other nodes take over the
-subscriptions. So in case a node goes down and up quickly, it will
-restart the subscriptions on its own.
+Note that there is a grace period before other nodes take over the
+subscriptions. Therefore, if a node goes down and then back up in quick
+succession, it will restart the subscriptions on its own.
 !!!
 
-Following example illustrates a timeline of a 3 node cluster and how
-many subscriptions each node handles:
+The following example illustrates a timeline for a three-node cluster and how
+many subscriptions are handled by each node:
 
 ![notifications-in-cluster-rebalancing](netconf_subs_rebalancing.svg)
 
 !!!
-The hard limit still applies in clustered environment and it will never
-be crossed, regardless of the optimal range.
+The hard limit still applies in clustered environments. It is never exceeded
+regardless of the optimal range.
 !!!

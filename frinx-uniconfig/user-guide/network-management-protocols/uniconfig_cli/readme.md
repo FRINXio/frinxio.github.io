@@ -100,7 +100,7 @@ that actually
 The plugin itself is responsible for defining the mapping between YANG
 and CLI. However, the translation layer into which it plugs in is what
 handles the heavy lifting for it e.g. transactions, rollback, config
-data storage, reconciliation etc. Additionally, the SPIs of the
+data storage etc. Additionally, the SPIs of the
 translation layer are very simple to implement because the translation
 plugin only needs to focus on the translations between YANG \<-\ CLI.
 
@@ -178,34 +178,13 @@ CLI southbound plugin:
 - **RPCs** stand on their own and can encapsulate any command(s) on
     the device.
 
-## Reconciliation
-
-There might be situations where there are inconsistencies between actual
-configuration on the device and the state cached in Frinx UniConfig.
-That's why a reconciliation mechanism was developed to:
-
--   Allows the mountpoint to sync its state when first connecting to the
-    device.
--   Allows apps/users to request synchronization when an inconsistent
-    state is expected e.g. manual configuration of the device.
-
-Reconciliation is performed when issuing any READ operation. If the data
-coming from device is different compared to mountpoint cache, the cache
-will be updated automatically.
-
-Initial reconciliation (after connection has been established) takes
-place automatically on the CLI layer. However it can be disabled with
-attribute "node-extension:reconcile" set to false when installing a
-device. Uniconfig performs its own reconciliation when devices are
-connected so if both the Uniconfig and CLI layer reconcile, the install
-process is unnecessarily prolonged. That's why it is advised to turn off
-reconciliation on the CLI layer when using Uniconfig.
-
 ## RPCs provided by CLI layer
 
-There are multiple RPCs that can be used for sending of commands to CLI
-session and optionally waiting for command output. To use all of these
-RPCs, it is required to have installed CLI device in 'Connected' state.
+There are multiple RPCs that can be used to send commands to a CLI
+session and optionally wait for command output. The CLI layer also provides
+one additional RPC for computing configuration coverage by cli-units. 
+To use all of these RPCs, it is required to have an installed CLI device in 
+the 'Connected' state.
 
 ### RPC: Execute-and-read
 
@@ -317,6 +296,8 @@ Description of RPC-request input body fields:
     which the reply from CLI session should already be available (if it
     won't be available, then command output will be read after execution
     of the next command - outputs can be messed up).
+- **error-check** (optional) - By default, UC does not check for errors in commands.
+    If error-handling is enabled and an error occurs, RPC will fail.
 
 #### Wait-for-echo behaviour
 
@@ -529,3 +510,122 @@ RPC reply - output contains just status message:
     }
 }
 ```
+
+### RPC: config-coverage
+
+#### Description
+
+- RPC reads the entire device configuration, determines the coverage 
+  of the configuration by translation units and returns simple or 
+  complex output. The user can define a preferred output in RPC input.
+  The default is simple output.
+- Simple output contains one string that consists of all lines of the 
+  device configuration. Each line starts with '+' if it is covered or
+  '-' if not and ends with a '\n' marker.
+- Complex output contains a list of commands. Each entry in the list
+  includes the following fields:
+
+  * 'covered', which indicates whether the entire command is covered or not. 
+  Can be either 'true' or 'false'.
+
+  * 'non-parsable-parts', which is visible only if the entire command is not 
+  covered. Contains a list of those command parts that are not covered. If 
+  no parts of the command are covered, only contains the word 'ALL'.
+
+  * 'command', which includes the entire command.
+
+#### Simple output example
+
+```bash
+curl --request POST 'http://127.0.0.1:8181/rests/operations/network-topology:network-topology/topology=cli/node=saos/yang-ext:mount/cli-unit-generic:config-coverage' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "with-details": false
+    }
+}'
+```
+
+RPC reply:
+
+```
+{
+    "output": {
+        "simple-output": "+ access-list create acl-profile act-test default-filter-action deny\n
+        + vlan create vlan 104,147\n
+        + vlan create vlan 190-193,200\n
+        - log flash add filter default ldp-mgr info\n
+        + port set port 5 acceptable-frame-type all\n
+        + port set port 16 max-frame-size 9216 description FREE resolved-cos-remark-l2 true\n
+        - traffic-services queuing congestion-avoidance-profile create profile Q1-BE green-lower-threshold 10\n
+        + traffic-services queuing egress-port-queue-group set queue 0 port 8 eir 1000000 ebs 768 scheduler-weight 40 congestion-avoidance-profile Q0-BE\n"
+    }
+}
+```
+
+#### Complex output example
+
+```bash
+curl --request POST 'http://127.0.0.1:8181/rests/operations/network-topology:network-topology/topology=cli/node=saos/yang-ext:mount/cli-unit-generic:config-coverage' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "with-details": true
+    }
+}'
+```
+
+RPC reply:
+
+```
+{
+    "output": {
+        "complex-output": [
+            {
+                "covered": true,
+                "command": "access-list create acl-profile act-test default-filter-action deny"
+            },    
+            {
+                "covered": true,
+                "command": "vlan create vlan 104,147"
+            },
+            {
+                "covered": true,
+                "command": "vlan create vlan 190-193,200"
+            },
+            {
+                "covered": false,
+                "non-covered-parts": [
+                    "ALL"
+                ],
+                "command": "log flash add filter default ldp-mgr info"
+            },
+            {
+                "covered": true,
+                "command": "port set port 5 acceptable-frame-type all"
+            },    
+            {
+                "covered": true,
+                "command": "port set port 16 max-frame-size 9216 description FREE resolved-cos-remark-l2 true"
+            },   
+            {
+                "covered": false,
+                "non-covered-parts": [
+                    "congestion-avoidance-profile",
+                    "create",
+                    "profile",
+                    "Q1-BE",
+                    "green-lower-threshold",
+                    "10"
+                ],
+                "command": "traffic-services queuing congestion-avoidance-profile create profile Q1-BE green-lower-threshold 10"
+            },
+            {
+                "covered": true,
+                "command": "traffic-services queuing egress-port-queue-group set queue 0 port 8 eir 1000000 ebs 768 scheduler-weight 40 congestion-avoidance-profile Q0-BE"
+            }
+        ]
+    }
+}
+```
+
