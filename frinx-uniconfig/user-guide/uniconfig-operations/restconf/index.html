@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.759479913143">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761040590990">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>UniConfig - Sending and receiving data (RESTCONF) | Frinx docs</title>
     <meta name="title" content="UniConfig - Sending and receiving data (RESTCONF) | Frinx docs">
-    <meta name="description" content="RESTCONF is described in RESTCONF RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations." />
+    <meta name="description" content="The RESTCONF protocol is described in RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/restconf/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/restconf/">
     <meta property="og:title" content="UniConfig - Sending and receiving data (RESTCONF) | Frinx docs">
-    <meta property="og:description" content="RESTCONF is described in RESTCONF RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations.">
+    <meta property="og:description" content="The RESTCONF protocol is described in RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/restconf/">
     <meta property="twitter:title" content="UniConfig - Sending and receiving data (RESTCONF) | Frinx docs">
-    <meta property="twitter:description" content="RESTCONF is described in RESTCONF RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations.">
+    <meta property="twitter:description" content="The RESTCONF protocol is described in RFC 8040. Put simply, RESTCONF represents a REST API for accessing datastores and UniConfig operations.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.759479913143" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.761040590990" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.759479913143" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761040590990" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.759479913143" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.759479913143" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761040590990" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761040590990" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,15 +254,9 @@
         <span>UniConfig - Sending and receiving data (RESTCONF)</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="overview">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#overview">#</doc-anchor-trigger>
-        <span>Overview</span>
-    </h2>
-</doc-anchor-target>
-<p>RESTCONF is described in <a href="https://tools.ietf.org/html/rfc8040">RESTCONF RFC
-8040</a>. Put simply, RESTCONF
-represents a REST API for accessing datastores and UniConfig operations.</p>
+<p>The RESTCONF protocol is described in <a href="https://tools.ietf.org/html/rfc8040">RFC
+8040</a>. Put simply, RESTCONF represents a
+REST API for accessing datastores and UniConfig operations.</p>
 <doc-anchor-target id="datastores">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#datastores">#</doc-anchor-trigger>
@@ -1252,42 +1246,36 @@ http://localhost:8181/rests/data/network-topology:network-topology/topology=unic
 **Using nesting**
 http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration?fields=frinx-openconfig-interfaces:interfaces/interface/name;config/type&amp;content=nonconfig</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="filtering-data">
+<doc-anchor-target id="data-filtering">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#filtering-data">#</doc-anchor-trigger>
-        <span>Filtering Data</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#data-filtering">#</doc-anchor-trigger>
+        <span>Data filtering</span>
     </h2>
 </doc-anchor-target>
-<p>For filtering data based on specific value is good to use
-<strong>jsonb-filter</strong> query parameter. This parameter has to be used only
-with the <strong>GET</strong> method.</p>
-<doc-anchor-target id="jsonb-filter">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#jsonb-filter">#</doc-anchor-trigger>
-        <span>Jsonb-filter</span>
-    </h3>
-</doc-anchor-target>
-<ul>
-<li><a href="../jsonb-filtering/">JSONB filtering</a></li>
-</ul>
+<p>To filter data based on specific values, use the <code v-pre>jsonb-filter</code> query parameter.
+This parameter can only be used with the <code v-pre>GET</code>  method.</p>
+<p>For more information, see <a href="../jsonb-filtering/">JSONB filtering</a>.</p>
 <doc-anchor-target id="pagination">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#pagination">#</doc-anchor-trigger>
         <span>Pagination</span>
     </h2>
 </doc-anchor-target>
-<p>To further extend the ability to filter data according to our needs, we
-can use pagination in the <strong>GET</strong> method.</p>
-<p>There are 3 pagination parameters that can be used individually or in
-combination with each other :</p>
-<ol>
-<li><strong>offset :</strong> This parameter lets us choose on which list entry value
-we want data to start rendering.</li>
-<li><strong>limit :</strong> Limit gives us the option to control how many node
-values are going to be displayed in our <strong>GET</strong> request.</li>
-<li><strong>fetch=count :</strong> Used to obtain the amount of children nodes in a
-specific node.</li>
-</ol>
+<p>To filter data even further, you can use pagination with the <code v-pre>GET</code> method.</p>
+<p>There are three parameters related to pagination, which can be combined or used
+individually:</p>
+<ul>
+<li><code v-pre>offset</code> - The starting point in a list for data rendering, based on the index
+list of entry values. Indexing begins at 0, so that <code v-pre>offset=2</code> would start
+rendering at the third entry. The specified offset index entry is included in
+the output.</li>
+<li><code v-pre>limit</code> - The number of node values displayed in a <code v-pre>GET</code> request. Specifies
+the maximum count for entries included in the response, starting with the
+entry defined by the <code v-pre>offset</code> parameter (if provided).</li>
+<li><code v-pre>fetch=count</code> - Retrieves the total number of child nodes under a specific
+node. Instead of returning node values, provides a count of how many child
+nodes exist under the specified node.</li>
+</ul>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -1301,23 +1289,23 @@ specific node.</li>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Beware that pagination works only for list nodes.</p>
+<p>Note that pagination only works for list nodes.</p>
         </div>
     </div>
 </div>
-<p>The example of using individual pagination parameter:</p>
+<p><strong>Example</strong> - Using one individual pagination parameter:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?offset=1</code></pre>
 </doc-codeblock></div>
-<p>The example of using two pagination parameters simultaneously:</p>
+<p><strong>Example</strong> - Using two pagination parameters simultaneously:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?offset=1&amp;limit=4</code></pre>
 </doc-codeblock></div>
-<p>The example of using fetch count parameter:</p>
+<p><strong>Example</strong> - Using the <code v-pre>fetch=count</code> parameter:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">http://127.0.0.1:8181/restconf/data/network-topology:network-topology/topology=uniconfig/node=iosxr/configuration/frinx-openconfig-interfaces:interfaces?fetch=count</code></pre>
 </doc-codeblock></div>
-<p>The response body of fetch count parameter with a path from the previous
+<p>Response body for the <code v-pre>fetch=count</code> parameter with a path from the previous
 example:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">6</code></pre>
