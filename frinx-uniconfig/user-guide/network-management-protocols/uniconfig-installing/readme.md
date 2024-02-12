@@ -59,104 +59,144 @@ Priority of initial writing default parameters into database:
 2. User defines default parameters into config file
 3. Default values from yang schema file will be saved
 
-Default parameters can be managed (put/read/delete) by user using RESTCONF/Uniconfig-shell.
+Default parameters can be managed (read/update) using RESTCONF/Uniconfig shell
+with [UniConfig Cloud Config](../../uniconfig-operations/uniconfig-properties).
 
-Definition of default parameters can be also done using config file **default-parameters.json**. 
-It is placed in config subdirectory together with lighty-uniconfig-config.json.
+Default parameters can also be defined in the **application.properties.json**
+file located in the `config` directory.
 
-```json
+```properties
+# Netconf default parameters properties.
+netconf-default-parameters.flags.enabled-notifications=true
+netconf-default-parameters.flags.enabled-strict-parsing=true
+netconf-default-parameters.flags.reconnect-on-changed-schema=false
+netconf-default-parameters.flags.streaming-session=false
+
+netconf-default-parameters.session-timers.between-attempts-timeout=2000
+netconf-default-parameters.session-timers.confirm-commit-timeout=600
+netconf-default-parameters.session-timers.initial-connection-timeout=20000
+netconf-default-parameters.session-timers.keepalive-delay=120
+netconf-default-parameters.session-timers.max-connection-attempts=1
+netconf-default-parameters.session-timers.max-reconnection-attempts=0
+netconf-default-parameters.session-timers.reconnection-attempts-multiplier=1.5
+netconf-default-parameters.session-timers.request-transaction-timeout=60000
+
+netconf-default-parameters.other-parameters.concurrent-rpc-limit=0
+netconf-default-parameters.other-parameters.dry-run-journal-size=0
+netconf-default-parameters.other-parameters.custom-connector-factory=default
+netconf-default-parameters.other-parameters.edit-config-test-option=test-then-set
+
+
+# GNMI default parameters
+gnmi-default-parameters.session-timers.request-timeout=30
+gnmi-default-parameters.session-timers.request-max-size=4194304
+gnmi-default-parameters.flags.enabled-notifications=true
+gnmi-default-parameters.other-parameters.dry-run-journal-size=0
+
+
+# CLI default parameters
+cli-default-parameters.max-connection-attempts=1
+cli-default-parameters.max-reconnection-attempts=0
+cli-default-parameters.max-connection-attempts-install=1
+cli-default-parameters.dry-run-journal-size=0
+cli-default-parameters.journal-level=command-only
+cli-default-parameters.journal-size=0
+cli-default-parameters.keepalive-delay=60
+cli-default-parameters.keepalive-initial-delay=120
+cli-default-parameters.keepalive-timeout=60
+cli-default-parameters.command-timeout=60
+cli-default-parameters.connection-establish-timeout=60
+cli-default-parameters.connection-lazy-timeout=60
+cli-default-parameters.parsing-engine=tree-parser
+```
+
+**RPC request - read CLI default parameters:**
+
+```bash
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:read-properties' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "property-keys": [
+          "cli-default-parameters.max-connection-attempts",
+          "cli-default-parameters.max-reconnection-attempts",
+          "cli-default-parameters.max-connection-attempts-install",
+          "cli-default-parameters.dry-run-journal-size",
+          "cli-default-parameters.journal-level",
+          "cli-default-parameters.journal-size",
+          "cli-default-parameters.keepalive-delay",
+          "cli-default-parameters.keepalive-initial-delay",
+          "cli-default-parameters.keepalive-timeout",
+          "cli-default-parameters.command-timeout",
+          "cli-default-parameters.connection-establish-timeout",
+          "cli-default-parameters.connection-lazy-timeout",
+          "cli-default-parameters.parsing-engine"
+        ]
+    }
+}'
+```
+
+```json RPC Response, Status: 200
 {
-    "netconf-default-parameters" : {
-        "session-timers" : {
-            "initial-connection-timeout": 20,
-            "request-transaction-timeout": 60,
-            "between-attempts-timeout" : 2,
-            "max-connection-attempts": 1,
-            "max-reconnection-attempts": 0,
-            "keepalive-delay": 120,
-            "reconnenction-attempts-multiplier": 1.5,
-            "confirm-commit-timeout" : 600
-        },
-        "flags": {
-            "enabled-notifications" : true,
-            "enabled-strict-parsing" : true,
-            "streaming-session" : false,
-            "reconnect-on-changed-schema" : false
-        },
-        "other-parameters" : {
-            "concurrent-rpc-limit" : 0,
-            "dry-run-journal-size" : 0,
-            "custom-connector-factory" : "default",
-            "edit-config-test-option" : "test-then-set"
-        }
-    },
-    "cli-default-parameters" : {
-        "max-connection-attempts": 1,
-        "max-reconnection-attempts": 0,
-        "keepalive-delay" : 60,
-        "keepalive-timeout": 60,
-        "keepalive-initial-delay": 120,
-        "journal-size" : 0,
-        "dry-run-journal-size" : 0,
-        "journal-level" : "command-only",
-        "parsing-engine" : "tree-parser"
-    }
+  "output": {
+    "properties-map": [
+      {
+        "name": "cli-default-parameters.max-connection-attempts-install",
+        "value": "1"
+      },
+      {
+        "name": "cli-default-parameters.max-connection-attempts",
+        "value": "1"
+      },
+      {
+        "name": "cli-default-parameters.max-reconnection-attempts",
+        "value": "0"
+      },
+      {
+        "name": "cli-default-parameters.dry-run-journal-size",
+        "value": "0"
+      },
+      {
+        "name": "cli-default-parameters.journal-level",
+        "value": "command-only"
+      },
+      {
+        "name": "cli-default-parameters.journal-size",
+        "value": "0"
+      },
+      {
+        "name": "cli-default-parameters.keepalive-delay",
+        "value": "60"
+      },
+      {
+        "name": "cli-default-parameters.keepalive-initial-delay",
+        "value": "120"
+      },
+      {
+        "name": "cli-default-parameters.keepalive-timeout",
+        "value": "60"
+      },
+      {
+        "name": "cli-default-parameters.command-timeout",
+        "value": "60"
+      },
+      {
+        "name": "cli-default-parameters.connection-establish-timeout",
+        "value": "60"
+      },
+      {
+        "name": "cli-default-parameters.connection-lazy-timeout",
+        "value": "60"
+      },
+      {
+        "name": "cli-default-parameters.parsing-engine",
+        "value": "tree-parser"
+      }
+    ],
+    "read-properties-status": "There are 13 from 13 properties read successfully. Ignored keys: []"
+  }
 }
-```
-
-**RPC request - CLI default parameters:**
-
-```bash
-curl --location --request PUT 'http://localhost:8181/rests/data/cli-topology:cli-default-parameters' \
---header 'Authorization: Basic YWRtaW46YWRtaW4=' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "cli-topology:cli-default-parameters" : {
-        "cli-topology:max-connection-attempts": 3,
-        "cli-topology:max-reconnection-attempts": 3,
-        "cli-topology:keepalive-delay" : 60,
-        "cli-topology:keepalive-timeout": 60,
-        "cli-topology:keepalive-initial-timeout": 120,
-        "cli-topology:journal-size" : 0,
-        "cli-topology:dry-run-journal-size" : 0,
-        "cli-topology:journal-level" : "command-only",
-        "cli-topology:parsing-engine" : "tree-parser"
-    }
-}'
-```
-
-**RPC request - NETCONF default parameters:**
-
-```bash
-curl --location --request PUT 'http://localhost:8181/rests/data/netconf-node-topology:netconf-default-parameters' \
---header 'Authorization: Basic YWRtaW46YWRtaW4=' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "netconf-node-topology:netconf-default-parameters" : {
-        "session-timers" : {
-            "initial-connection-timeout": 20,
-            "request-transaction-timeout": 60,
-            "between-attempts-timeout" : 2,
-            "max-connection-attempts": 1,
-            "max-reconnection-attempts": 0,
-            "keepalive-delay": 120,
-            "reconnenction-attempts-multiplier": 1.5,
-            "confirm-commit-timeout" : 600
-        },
-        "flags": {
-            "enabled-notifications" : true,
-            "enabled-strict-parsing" : true,
-            "streaming-session" : false,
-            "reconnect-on-changed-schema" : false
-        },
-        "other-parameters" : {
-            "concurrent-rpc-limit" : 0,
-            "dry-run-journal-size" : 0,
-            "custom-connector-factory" : "default",
-            "edit-config-test-option" : "test-then-set"
-        }
-    }
-}'
 ```
 
 ## Installing CLI device
@@ -261,11 +301,11 @@ The keepalive parameters have two main functions:
 For this example let us assume that we are dealing with a prod-like device, which would mean that
 some devices might have a large config. We would set these parameters:
 
-```
-    max-connection-attempts=3
-    max-reconnection-attempts=3
-    keepalive-delay=120
-    keepalive-timeout=120
+```properties
+max-connection-attempts=3
+max-reconnection-attempts=3
+keepalive-delay=120
+keepalive-timeout=120
 ```
 
 Connection attempts would give us more flexibility if we work with unstable devices. It would

@@ -1,9 +1,9 @@
 # Transaction tracker
 
 The transaction tracker is responsible for saving transaction metadata to the
-operational snapshot after a successfully executed commit/checked-commit RPC.
-Transaction metadata contains information about performed transactions, such as
-the following:
+**Operational** snapshot after a successfully executed **commit** or
+**checked-commit RPC**. Transaction metadata contains information about
+performed transactions, such as the following:
 
 - `transaction-id` - Identifier for transaction.
 - `type-of-commit-time` - Timestamp for either `last-commit-time` (if the
@@ -27,26 +27,31 @@ visible only if data was updated or created.
 
 ## Configuration
 
-UniConfig stores transaction metadata only if the
-**lighty-uniconfig-config.json** file contains the `maxStoredTransactions`
-parameter in the `transactions` container with a value greater then `0`. If not
-set before UniConfig is run, the default value of `0` is used and the
-transaction log is disabled.
+By default, UniConfig stores transaction metadata. 
+Their removal depends only on the `transactions.max-transaction-age` parameter.
 
-```json
-{
-  "transactions": {
-    "maxStoredTransactions": 5,
-    "maxTransactionAge": 0,
-    "cleaningInterval": 0,
-    "uniconfigTransactionEnabled": false
-  }
-}
+```properties
+# Grouped settings that are related to UniConfig transactions
+
+# Time after transaction can be closed [seconds] by transaction cleaner.
+transactions.transaction-idle-time-out=300
+# Maximum transaction age before it can be evicted from transaction registry [seconds].
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.max-transaction-age=0
+# Interval at which expired transactions are closed and cleaned [seconds].
+# Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
+# Only dedicated UniConfig transactions (initialized using 'create-transaction' RPC)
+# are cleaned - shared transaction is never removed or invalidated.
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.cleaning-interval=0
+# Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
+# If disabled, only manually created transactions can exist.
+transactions.immediate-commit-enabled=true
 ```
 
 ### Show transaction-metadata
 
-The response to this `GET` request contains all stored transaction metadata,
+The response to this GET request contains all stored transaction metadata,
 transaction ids and other items such as node id, updated data before and after
 update, etc.
 

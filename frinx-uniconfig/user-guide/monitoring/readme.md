@@ -1,43 +1,52 @@
 ## Monitoring using Metrics
 
-UniConfig exposes multiple metrics to monitor the traffic and other useful values to monitor its performance.
-Output can be in form of plaintext log messages in the log file **metrics.log** in the **log** directory in the **root** of the distribution
-or in the form of raw data in CSV format from which it can be further processed by the 3rd party visualization tools.
-CSV files are located in the **metrics** directory in the **root** of the distribution.
+UniConfig exposes multiple metrics for traffic and performance monitoring.
+
+Output is generated in two formats:
+- Plaintext log messages, located in the **metrics.log** file in the **log**
+  directory at the root of the distribution.
+- Raw data in CSV format, located the in **metrics** directory at the root of
+  the distribution. CSV files can be further processed by third-party
+  visualization tools.
+
 
 ## Types of metrics
-- Gauge - reports instantanious value at a point in time (for example queue size)
-- Meter - measures total count of event occurences, total mean rate, mean rates for past 1, 5 and 15 minutes time windows 
+- Gauge - Reports the instantaneous value at a point in time (for example, queue
+  size).
+- Meter - Measures the total count for event occurences, total mean rate and
+  mean rates for time windows of the past 1, 5 or 15 minutes 
 
 ## List of notable metrics exposed by UniConfig
 
 - **Gauges**
-    - io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size - The number of tasks in the queue waiting for execution
-    - org.apache.sshd.server.SshServer.active_sessions - The number of active CLI sessions
-    - org.opendaylight.controller.uniconfig.transaction.manager.api.UniconfigTransactionManager.open_transaction_count - The number of open transactions
+    - `io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size` -
+      Number of tasks in the queue waiting for execution
+    - `org.apache.sshd.server.SshServer.active_sessions` - Number of active CLI
+      sessions
+    - `org.opendaylight.controller.uniconfig.transaction.manager.api.UniconfigTransactionManager.open_transaction_count` - Number of open transactions
 - **Meters**
-    - org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke - All the invoked RPCs by Uniconfig
-    - org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke - All the invoked transactions in Uniconfig
-    - io.frinx.uniconfig.shell.cli.SshTerminal.cli_message - All the invoked commands in Uniconfig CLI shell
+    - `org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke` - All RPCs
+      invoked by UniConfig
+    - `org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke` - All transactions invoked in UniConfig
+    - `io.frinx.uniconfig.shell.cli.SshTerminal.cli_message` - All commands
+      invoked in UniConfig shell
 
 ## Configuration
 
-Configuration is done via a section in "uniconfig-lighty-config.json" file:
+Configuration is performed via a section in the **application.properties** file:
 
-```json
-"metrics": {
-            // flag that determines if metrics will be reported or not
-            "enabled": true,
-            // reporter type (log, csv)
-            "reporter": "log",
-            // reporting rate in seconds
-            "rate": 30
-    }
+```properties
+# flag that determines if metrics will be reported or not
+metrics.enabled=true
+# reporter type (log, csv)
+metrics.reporter-type=LOG
+# reporting rate in seconds
+metrics.rate=30
 ```
 
 ## Example output
 
-- metrics/org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke.csv
+- **metrics/org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke.csv**:
 
 ```csv
 t,count,mean_rate,m1_rate,m5_rate,m15_rate,rate_unit
@@ -50,7 +59,7 @@ t,count,mean_rate,m1_rate,m5_rate,m15_rate,rate_unit
 1650612500,3,0.055825,0.283420,0.516425,0.570738,events/second
 ```
 
-- log/metrics.log
+- **log/metrics.log**:
 
 ```log
 09:27:12.007 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - Starting SFL4J reporter

@@ -1,9 +1,9 @@
 # Build-and-Commit Model
 
-The Build-and-Commit model is based on explicit creation of a transaction,
-invoking operations in the scope of this transaction and, finally,
-committing or closing the transaction. The transaction represents a session
-between client and UniConfig instance.
+The Build-and-Commit model is based on explicitly creating a transaction,
+invoking operations in the scope of this transaction and, finally, committing or
+closing the transaction. The transaction represents a session between client and
+UniConfig instance.
 
 Using explicitly created transactions has multiple advantages in
 comparison to the Immediate Commit Model:
@@ -16,42 +16,31 @@ comparison to the Immediate Commit Model:
 - The transaction allows a client to identify if it still communicates with the
     same UniConfig instance (this property is usable in the clustered
     deployment). If the UniConfig instance does not know about the transaction,
-    the request will fail because the transaction expired, is closed or was
-    never created in the first place.
+    the request fails because the transaction expired, is closed or was never
+    created in the first place.
 
 ## Configuration
 
 Configurations related to UniConfig transactions are placed in the
-**config/lighty-uniconfig-config.json** file under the `transactions` container.
-Note that the Build-and-Commit model is enabled if `uniconfigTransactionEnabled`
-is set to `true` (this is the default value).
+**config/application.properties** file under the `transactions` container.
 
-```
-// Grouped settings that are related to Uniconfig transactions.
-"transactions": {
-    /*
-    Time after transaction can be closed [seconds] by transaction cleaner.
-    */
-    "transactionIdleTimeOut": 300,
-    /*
-    Maximum transaction age before it can be evicted from transaction registry [seconds].
-    Configuring '0' disables cleaning of Uniconfig transactions.
-    */
-    "maxTransactionAge": 1800,
-    /*
-    Interval at which expired transactions are closed and cleaned [seconds].
-    Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
-    Only dedicated Uniconfig transactions (initialized using 'create-transaction' RPC)
-    are cleaned - shared transaction is never removed or invalidated.
-     Configuring '0' disables cleaning of Uniconfig transactions.
-    */
-    "cleaningInterval": 60,
-    /*
-    Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
-    If disabled, only manually created transactions can exist.
-    */
-    "isImmediateCommitEnabled": true
-}
+```properties
+# Grouped settings that are related to UniConfig transactions
+
+# Time after transaction can be closed [seconds] by transaction cleaner.
+transactions.transaction-idle-time-out=300
+# Maximum transaction age before it can be evicted from transaction registry [seconds].
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.max-transaction-age=1800
+# Interval at which expired transactions are closed and cleaned [seconds].
+# Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
+# Only dedicated UniConfig transactions (initialized using 'create-transaction' RPC)
+# are cleaned - shared transaction is never removed or invalidated.
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.cleaning-interval=60
+# Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
+# If disabled, only manually created transactions can exist.
+transactions.immediate-commit-enabled=true
 ```
 
 ## Optimistic locking mechanism
