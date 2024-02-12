@@ -24,6 +24,7 @@
 * [UNIC-1438] Refactoring sal-fallback-provider / fallback-schema-service
 * [UNIC-1495] Refactor mountpoint to JOOQ style
 * Add new Release workflow
+* [UNIC-1502] SNMP v3 notifications
 * [UNIC-1454] Bump revision date in updated logging YANG models.
 * Remove object cache
 ### 🖥️ API Changes
@@ -59,7 +60,6 @@
 * Merge publish release notes into release wf as a separate job
 * Fix release workflow
 * Update release.yml
-* [UNIC-1502] SNMP v3 notifications
 * Fix SNMP bean creation
 * README - Update release process
 * Add distributionSuffix property
@@ -67,3 +67,4 @@
 * Workflows: disable delete_customers_license_server.yml
 * Forgot to remove these
 * Forgot to remove this one as well
+* Release 5.2.4.
