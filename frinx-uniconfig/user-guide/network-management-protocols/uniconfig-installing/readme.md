@@ -241,9 +241,9 @@ This is useful when many devices are being installed in batches and the user doe
 The following parameter lets you store node metadata into the UniConfig database
 without mounting the node:
 
-- `uniconfig-config:store-without-mount`• - When enabled, skip the mount
-    procedure and store node metadata into the UniConfig database with
-    installation status `FAILED`. The default value is `false`.
+- `uniconfig-config:store-without-mount`- When enabled, skip the mount procedure
+    and store node metadata into the UniConfig database with installation status
+    `FAILED`. The default value is `false`.
 
 This flag is primarily intended for scenarios where you want UniConfig to be
 aware of a specific node that is not yet up and reachable. Once the device is
