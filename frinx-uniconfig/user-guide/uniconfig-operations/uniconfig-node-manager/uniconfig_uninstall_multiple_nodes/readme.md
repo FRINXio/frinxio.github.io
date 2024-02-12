@@ -1,7 +1,11 @@
 # RPC uninstall-multiple-nodes
 
 This RPC uninstalls multiple devices at once using the default
-**uninstall-node RPC**. Devices are uninstalled in parallel.
+**uninstall-node RPC**. Devices are uninstalled independently in parallel. 
+
+If two nodes are being uninstalled and one node fails, the second node is still
+uninstalled. If at least one node fails, the response describes the result for
+failed nodes only.
 
 ## RPC examples
 
