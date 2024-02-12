@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,11 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -255,24 +256,33 @@
         <span>Uniconfig properties</span>
     </h1>
 </doc-anchor-target>
-<p>UniConfig can be extensively configured using application properties located in the <em>application.properties</em> file.</p>
+<p>UniConfig can be extensively configured using application properties located in
+the <strong>application.properties</strong> file.</p>
 <p>Application properties can be separated into three groups:</p>
 <ul>
-<li><strong>Runtime mutable properties</strong> can be modified in runtime (using the <em>update-properties</em> RPC), their changes take effect in runtime and the properties are persisted in the database.</li>
-<li><strong>Database persisted properties</strong> include all runtime mutable properties and some additional properties. These properties are stored in the database, which is always their primary source. With UniConfig Cloud Config, they remain constant across UniConfig instances in the same cluster and cannot be overridden via the <em>application properties</em> file.</li>
-<li><strong>Regular UniConfig properties</strong> comprise all the remaining properties. These properties can always be changed using <em>application.properties</em> and can differ between UniConfig instances.</li>
+<li><strong>Runtime mutable properties</strong> can be modified in runtime (using the
+<strong>update-properties</strong> RPC), their changes take effect in runtime and the
+properties are persisted in the database.</li>
+<li><strong>Database persisted properties</strong> include all runtime mutable properties and
+some additional properties. These properties are stored in the database, which
+is always their primary source. With UniConfig Cloud Config, they remain
+constant across UniConfig instances in the same cluster and cannot be
+overridden via the <strong>application.properties</strong> file.</li>
+<li><strong>Regular UniConfig properties</strong> comprise all the remaining properties. These
+properties can always be changed using <strong>application.properties</strong> and can
+differ between UniConfig instances.</li>
 </ul>
 <p>Database persisted properties include the following property prefixes:</p>
 <ul>
-<li><em>crypto</em></li>
-<li><em>schema-settings</em></li>
-<li><em>callbacks</em></li>
-<li><em>notifications.kafka</em></li>
-<li><em>netconf-default-parameters</em></li>
-<li><em>gnmi-default-parameters</em></li>
-<li><em>cli-default-parameters</em></li>
+<li><code v-pre>crypto</code></li>
+<li><code v-pre>schema-settings</code></li>
+<li><code v-pre>callbacks</code></li>
+<li><code v-pre>notifications.kafka</code></li>
+<li><code v-pre>netconf-default-parameters</code></li>
+<li><code v-pre>gnmi-default-parameters</code></li>
+<li><code v-pre>cli-default-parameters</code></li>
 </ul>
-<p>These properties are stored in the <em>properties</em> table and are also known as <strong>default properties</strong>. They can be read and updated using the <em>read-properties RPC</em> and <em>update-properties RPC</em>.</p>
+<p>These properties are stored in the <em>properties</em> table and are also known as <strong>default properties</strong>. They can be read and updated using the <strong>read-properties RPC</strong> and <strong>update-properties RPC</strong>.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -286,7 +296,11 @@
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>After UniConfig is started, if default properties are found in the database, UniConfig will use the values in the database. For properties not found in the database, values from the first UniConfig instance after startup are used (by the <em>application.properties</em> file or env variables) and saved in the database for the next UniConfig instances.</p>
+<p>After UniConfig is started, if default properties are found in the database,
+UniConfig will use the values in the database. For properties not found in the
+database, values from the first UniConfig instance after startup are used (by
+the <strong>application.properties</strong> file or environment variables) and saved in the
+database for the next UniConfig instances.</p>
         </div>
     </div>
 </div>
@@ -296,8 +310,22 @@
         <span>UniConfig Cloud Config</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig Cloud Config is used to retain the same property values between distributed UniConfig instances connected via a message broker. It is largely the same technology as <a href="https://docs.spring.io/spring-cloud-config/reference/4.1/server/environment-repository/jdbc-backend.html">Spring Cloud Config with JDBC backend</a> and <a href="https://docs.spring.io/spring-cloud-bus/docs/current/reference/html/">Spring Cloud Bus</a>. The main difference is that UniConfig Cloud Config Server and Cloud Config Client are in the same project, while Spring requires a separate Cloud Config Server application.</p>
-<p>By calling a special signal (the <em>Refresh Bus Endpoint</em> call) during runtime, the system sets the same value for persisted properties in all UniConfig instances. The signal is called immediately after mutable properties are modified using the <em>update-properties</em> RPC. The specific UniConfig instance calling the signal sends Kafka events containing the changed properties, while other instances read those properties from the database and use the refresh endpoint to update them in runtime.</p>
+<p>UniConfig Cloud Config is used to retain the same property values between
+distributed UniConfig instances connected via a message broker. It is largely
+the same technology as <a href="https://docs.spring.io/spring-cloud-config/reference/4.1/server/environment-repository/jdbc-backend.html">Spring Cloud Config with JDBC
+backend</a>
+and <a href="https://docs.spring.io/spring-cloud-bus/docs/current/reference/html/">Spring Cloud
+Bus</a>. The
+main difference is that UniConfig Cloud Config Server and Cloud Config Client
+are in the same project, while Spring requires a separate Cloud Config Server
+application.</p>
+<p>By calling a special signal (the <strong>Refresh Bus Endpoint</strong> call) during runtime,
+the system sets the same value for persisted properties in all UniConfig
+instances. The signal is called immediately after mutable properties are
+modified using the <strong>update-properties</strong> RPC. The specific UniConfig instance
+calling the signal sends Kafka events containing the changed properties, while
+other instances read those properties from the database and use the refresh
+endpoint to update them in runtime.</p>
 <doc-anchor-target id="uniconfig-startup-with-uniconfig-cloud-config">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-startup-with-uniconfig-cloud-config">#</doc-anchor-trigger>
@@ -314,7 +342,7 @@
 <li>Before starting UniConfig, enable Cloud Config by using the following properties:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># Uniconfig cloud settings - depends on kafka connection
+<pre class="language-properties"><code v-pre class="language-properties"># Uniconfig cloud settings - depends on kafka connection
 uniconfig.cloud.config.enabled=true
 uniconfig.cloud.config.fail-fast=false
 uniconfig.cloud.config.application-name=uniconfig
@@ -326,11 +354,21 @@ management.endpoints.web.exposure.include=bus-refresh
 </doc-codeblock></div>
 <p>On startup, UniConfig checks the database for any default properties to configure:</p>
 <ul>
-<li>If default properties are found in the database, UniConfig manually refreshes its property values to use those in the database.</li>
-<li>If no default properties are found, UniConfig uses its existing properties and, once loaded, saves them in the database for the next UniConfig instances.</li>
+<li>If default properties are found in the database, UniConfig manually refreshes
+its property values to use those in the database.</li>
+<li>If no default properties are found, UniConfig uses its existing properties
+and, once loaded, saves them in the database for the next UniConfig instances.</li>
 </ul>
-<p>At the end of Spring initialisation, the <em>Refresh Bus Endpoint</em> is called. This refreshes default properties with the database values for all UniConfig instances connected via the Kafka refresh topic. A second refresh during the UniConfig startup cycle is required if several instances were started simultaneously and the database contains no property values to synchronize for properties (especially encryption keys).</p>
-<p>At application runtime, if the <em>update-properties</em> RPC is used with default properties on input, UniConfig updates the properties in the database. It also calls the <em>Refresh Bus Endpoint</em>, which reloads properties for all UniConfig instances connected via Kafka.</p>
+<p>At the end of Spring initialisation, the <strong>Refresh Bus Endpoint</strong> is called.
+This refreshes default properties with the database values for all UniConfig
+instances connected via the Kafka refresh topic. A second refresh during the
+UniConfig startup cycle is required if several instances were started
+simultaneously and the database contains no property values to synchronize for
+properties (especially encryption keys).</p>
+<p>At application runtime, if the <strong>update-properties</strong> RPC is used with default
+properties on input, UniConfig updates the properties in the database. It also
+calls the <strong>Refresh Bus Endpoint</strong>, which reloads properties for all UniConfig
+instances connected via Kafka.</p>
 <doc-anchor-target id="uniconfig-startup-without-uniconfig-cloud-config">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-startup-without-uniconfig-cloud-config">#</doc-anchor-trigger>
@@ -344,10 +382,11 @@ management.endpoints.web.exposure.include=bus-refresh
 </figure>
 </p>
 <ul>
-<li>Before starting UniConfig, disable Cloud Config by using the following properties:</li>
+<li>Before starting UniConfig, disable Cloud Config by using the following
+properties:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none"># Uniconfig cloud settings - depends on kafka connection
+<pre class="language-properties"><code v-pre class="language-properties"># Uniconfig cloud settings - depends on kafka connection
 uniconfig.cloud.config.enabled=false
 uniconfig.cloud.config.fail-fast=false
 uniconfig.cloud.config.application-name=uniconfig
@@ -357,13 +396,19 @@ management.endpoints.web.exposure.include=bus-refresh
 # Disable cloud connection to Kafka for testing purpose, property spring.cloud.bus.enabled must be false
 spring.autoconfigure.exclude=org.springframework.cloud.stream.function.FunctionConfiguration</code></pre>
 </doc-codeblock></div>
-<p>On startup, UniConfig checks the database for any default properties to configure:</p>
+<p>On startup, UniConfig checks the database for any default properties to
+configure:</p>
 <ul>
-<li>If default properties are found in the database, UniConfig manually refreshes its property values to those in the database.</li>
-<li>If no default properties are found, UniConfig uses its existing properties and, once loaded, saves them in the database for the next UniConfig instances.</li>
+<li>If default properties are found in the database, UniConfig manually refreshes
+its property values to those in the database.</li>
+<li>If no default properties are found, UniConfig uses its existing properties
+and, once loaded, saves them in the database for the next UniConfig instances.</li>
 </ul>
-<p>At the end of Spring initialisation, the <em>Refresh Bus Endpoint</em> is not called.</p>
-<p>At application runtime, if the <em>update-properties</em> RPC is used with default properties on input, Uniconfig updates the properties in the database but not inside the application. This will therefore only affect the next UniConfig instance started after the properties are updated.</p>
+<p>At the end of Spring initialisation, the <strong>Refresh Bus Endpoint</strong> is not called.</p>
+<p>At application runtime, if the <strong>update-properties</strong> RPC is used with default
+properties on input, Uniconfig updates the properties in the database but not
+inside the application. This will therefore only affect the next UniConfig
+instance started after the properties are updated.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -430,6 +475,6 @@ spring.autoconfigure.exclude=org.springframework.cloud.stream.function.FunctionC
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Uniconfig properties", level: 4, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig properties", level: 4, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

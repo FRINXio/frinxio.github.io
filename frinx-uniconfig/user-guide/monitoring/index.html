@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Monitoring | Frinx docs</title>
     <meta name="title" content="Monitoring | Frinx docs">
-    <meta name="description" content="UniConfig exposes multiple metrics to monitor the traffic and other useful values to monitor its performance." />
+    <meta name="description" content="UniConfig exposes multiple metrics for traffic and performance monitoring." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/monitoring/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/monitoring/">
     <meta property="og:title" content="Monitoring | Frinx docs">
-    <meta property="og:description" content="UniConfig exposes multiple metrics to monitor the traffic and other useful values to monitor its performance.">
+    <meta property="og:description" content="UniConfig exposes multiple metrics for traffic and performance monitoring.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/monitoring/">
     <meta property="twitter:title" content="Monitoring | Frinx docs">
-    <meta property="twitter:description" content="UniConfig exposes multiple metrics to monitor the traffic and other useful values to monitor its performance.">
+    <meta property="twitter:description" content="UniConfig exposes multiple metrics for traffic and performance monitoring.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.761042044388" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -260,10 +260,15 @@
         <span>Monitoring using Metrics</span>
     </h2>
 </doc-anchor-target>
-<p>UniConfig exposes multiple metrics to monitor the traffic and other useful values to monitor its performance.
-Output can be in form of plaintext log messages in the log file <strong>metrics.log</strong> in the <strong>log</strong> directory in the <strong>root</strong> of the distribution
-or in the form of raw data in CSV format from which it can be further processed by the 3rd party visualization tools.
-CSV files are located in the <strong>metrics</strong> directory in the <strong>root</strong> of the distribution.</p>
+<p>UniConfig exposes multiple metrics for traffic and performance monitoring.</p>
+<p>Output is generated in two formats:</p>
+<ul>
+<li>Plaintext log messages, located in the <strong>metrics.log</strong> file in the <strong>log</strong>
+directory at the root of the distribution.</li>
+<li>Raw data in CSV format, located the in <strong>metrics</strong> directory at the root of
+the distribution. CSV files can be further processed by third-party
+visualization tools.</li>
+</ul>
 <doc-anchor-target id="types-of-metrics">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#types-of-metrics">#</doc-anchor-trigger>
@@ -271,8 +276,10 @@ CSV files are located in the <strong>metrics</strong> directory in the <strong>r
     </h2>
 </doc-anchor-target>
 <ul>
-<li>Gauge - reports instantanious value at a point in time (for example queue size)</li>
-<li>Meter - measures total count of event occurences, total mean rate, mean rates for past 1, 5 and 15 minutes time windows</li>
+<li>Gauge - Reports the instantaneous value at a point in time (for example, queue
+size).</li>
+<li>Meter - Measures the total count for event occurences, total mean rate and
+mean rates for time windows of the past 1, 5 or 15 minutes</li>
 </ul>
 <doc-anchor-target id="list-of-notable-metrics-exposed-by-uniconfig">
     <h2>
@@ -283,16 +290,20 @@ CSV files are located in the <strong>metrics</strong> directory in the <strong>r
 <ul>
 <li><strong>Gauges</strong>
 <ul>
-<li>io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size - The number of tasks in the queue waiting for execution</li>
-<li>org.apache.sshd.server.SshServer.active_sessions - The number of active CLI sessions</li>
-<li>org.opendaylight.controller.uniconfig.transaction.manager.api.UniconfigTransactionManager.open_transaction_count - The number of open transactions</li>
+<li><code v-pre>io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size</code> -
+Number of tasks in the queue waiting for execution</li>
+<li><code v-pre>org.apache.sshd.server.SshServer.active_sessions</code> - Number of active CLI
+sessions</li>
+<li><code v-pre>org.opendaylight.controller.uniconfig.transaction.manager.api.UniconfigTransactionManager.open_transaction_count</code> - Number of open transactions</li>
 </ul>
 </li>
 <li><strong>Meters</strong>
 <ul>
-<li>org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke - All the invoked RPCs by Uniconfig</li>
-<li>org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke - All the invoked transactions in Uniconfig</li>
-<li>io.frinx.uniconfig.shell.cli.SshTerminal.cli_message - All the invoked commands in Uniconfig CLI shell</li>
+<li><code v-pre>org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke</code> - All RPCs
+invoked by UniConfig</li>
+<li><code v-pre>org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke</code> - All transactions invoked in UniConfig</li>
+<li><code v-pre>io.frinx.uniconfig.shell.cli.SshTerminal.cli_message</code> - All commands
+invoked in UniConfig shell</li>
 </ul>
 </li>
 </ul>
@@ -302,16 +313,14 @@ CSV files are located in the <strong>metrics</strong> directory in the <strong>r
         <span>Configuration</span>
     </h2>
 </doc-anchor-target>
-<p>Configuration is done via a section in &quot;uniconfig-lighty-config.json&quot; file:</p>
+<p>Configuration is performed via a section in the <strong>application.properties</strong> file:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">&quot;metrics&quot;: {
-            // flag that determines if metrics will be reported or not
-            &quot;enabled&quot;: true,
-            // reporter type (log, csv)
-            &quot;reporter&quot;: &quot;log&quot;,
-            // reporting rate in seconds
-            &quot;rate&quot;: 30
-    }</code></pre>
+<pre class="language-properties"><code v-pre class="language-properties"># flag that determines if metrics will be reported or not
+metrics.enabled=true
+# reporter type (log, csv)
+metrics.reporter-type=LOG
+# reporting rate in seconds
+metrics.rate=30</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="example-output">
     <h2>
@@ -320,7 +329,7 @@ CSV files are located in the <strong>metrics</strong> directory in the <strong>r
     </h2>
 </doc-anchor-target>
 <ul>
-<li>metrics/org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke.csv</li>
+<li><strong>metrics/org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke.csv</strong>:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-csv"><code v-pre class="language-csv">t,count,mean_rate,m1_rate,m5_rate,m15_rate,rate_unit
@@ -333,7 +342,7 @@ CSV files are located in the <strong>metrics</strong> directory in the <strong>r
 1650612500,3,0.055825,0.283420,0.516425,0.570738,events/second</code></pre>
 </doc-codeblock></div>
 <ul>
-<li>log/metrics.log</li>
+<li><strong>log/metrics.log</strong>:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-log"><code v-pre class="language-log">09:27:12.007 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - Starting SFL4J reporter

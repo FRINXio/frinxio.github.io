@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761042044388" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -832,9 +832,12 @@ timestamp: 1692266952617002464</code></pre>
     </h3>
 </doc-anchor-target>
 <p>By default, all logging brokers are disabled and logging is disabled on all devices. To enable per-device logging, you must explicitly specify a list of devices. Additionally, RESTCONF-specific filtering is not configured, all HTTP requests and responses are fully logged and no content is dismissed. By default, only the <code v-pre>SET</code> gNMI message type is set to be logged.</p>
-<p>The initial logging configuration can be adjusted by adding the <code v-pre>loggingController</code> configuration into the
-<strong>config/lighty-uniconfig-config.json</strong> file. The structure of this configuration section conforms to the YANG structure described by the <code v-pre>logging</code> and <code v-pre>restconf-logging</code> modules. It is possible to copy the state of the <code v-pre>Operational</code> datastore under <code v-pre>logging-status</code> into the <code v-pre>loggingController</code> root JSON node.</p>
-<p>The following JSON snippet shows the sample configuration <code v-pre>loggingController</code>. The logging brokers <code v-pre>netconf\_messages</code> and <code v-pre>netconf\_notifications</code> are enabled, (<code v-pre>netconf\_messages</code> for all devices and <code v-pre>netconf\_notifications</code> only for <code v-pre>xr6</code> and <code v-pre>xr7</code> devices).</p>
+<p>The initial logging configuration can be adjusted by adding the <code v-pre>logging-controller</code> configuration to the
+<strong>config/application.properties</strong> file. The structure of this configuration section conforms to the YANG structure described by the <code v-pre>logging</code> and <code v-pre>restconf-logging</code> modules. It is possible to copy the state of the <code v-pre>Operational</code> datastore under <code v-pre>logging-status</code> into the <code v-pre>logging-controller</code> node.</p>
+<p>The following properties snippet shows the sample configuration
+<code v-pre>logging-controller</code>. The logging brokers <code v-pre>netconf\_messages</code> and
+<code v-pre>netconf\_notifications</code> are enabled, (<code v-pre>netconf\_messages</code> for all devices and
+<code v-pre>netconf\_notifications</code> only for <code v-pre>xr6</code> and <code v-pre>xr7</code> devices).</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -853,26 +856,18 @@ timestamp: 1692266952617002464</code></pre>
     </div>
 </div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-  &quot;loggingController&quot;: {
-    &quot;broker&quot;: [
-      {
-        &quot;broker-identifier&quot;: &quot;netconf_messages&quot;,
-        &quot;is-logging-broker-enabled&quot;: true,
-        &quot;is-logging-enabled-on-all-devices&quot;: true
-      },
-      {
-        &quot;broker-identifier&quot;: &quot;netconf_notifications&quot;,
-        &quot;is-logging-broker-enabled&quot;: true,
-        &quot;is-logging-enabled-on-all-devices&quot;: false,
-        &quot;enabled-devices&quot;: [
-          &quot;xr7&quot;,
-          &quot;xr6&quot;
-        ]
-      }
-    ]
-  }
-}</code></pre>
+<pre class="language-properties"><code v-pre class="language-properties"># Logging controller config
+#   Logging all NETCONF messages.
+logging-controller.brokers[0].broker-identifier=netconf_messages
+logging-controller.brokers[0].logging-broker-enabled=true
+logging-controller.brokers[0].logging-enabled-on-all-devices=true
+
+#   Logging all NETCONF notification messages.
+logging-controller.brokers[1].broker-identifier=netconf_notifications
+logging-controller.brokers[1].logging-broker-enabled=true
+logging-controller.brokers[1].logging-enabled-on-all-devices=false
+logging-controller.brokers[1].device-list[0]=xr6
+logging-controller.brokers[1].device-list[1]=xr7</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="control-logging-using-rpc-calls">
     <h3>

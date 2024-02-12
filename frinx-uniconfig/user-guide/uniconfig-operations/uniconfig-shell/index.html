@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761042044388" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -276,24 +276,38 @@ available RPC/action operations).</p>
     </h2>
 </doc-anchor-target>
 <p>UniConfig shell is disabled by default. To enable it, set the configuration
-parameter <code v-pre>cliShell/sshServer/enabled</code> to <code v-pre>true</code> in the
-<strong>config/lighty-uniconfig-config.json</strong> file.</p>
+parameter <code v-pre>cli-shell.ssh-server.enabled</code> to <code v-pre>true</code> in the
+<strong>application.properties</strong> file.</p>
 <p>All available settings and descriptions are listed below:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">UniConfig shell configuration (config/application.properties)</div>
 <pre class="language-properties"><code v-pre class="language-properties"># CLI shell config
+cli-shell.ssh-server.enabled=false
 cli-shell.default-unistore-node-id=system
+cli-shell.default-callbacks-repository=callbacks
 cli-shell.enable-scrolling=false
 cli-shell.history-size=500
 cli-shell.history-file-size=1000
-cli-shell.ssh-server.enabled=false
 cli-shell.ssh-server.port=2022
 cli-shell.ssh-server.inet-address=127.0.0.1
+cli-shell.ssh-server.idle-timeout=600
+cli-shell.ssh-server.auth-timeout=120
 cli-shell.ssh-server.username-password-auth.username=admin
-cli-shell.ssh-server.username-password-auth.password=secret</code></pre>
+cli-shell.ssh-server.username-password-auth.password=secret
+cli-shell.shell-colors.description-color=default
+cli-shell.shell-colors.error-color=default
+cli-shell.shell-colors.info-color=default
+cli-shell.shell-colors.warning-color=default</code></pre>
 </doc-codeblock></div>
 <p>After starting UniConfig, the SSH server listens for connections on port 2022
-and the loopback interface.</p>
+and the loopback interface.
+UniConfig Shell has two connection timeouts:</p>
+<ul>
+<li>Authorization timeout, after which the connection is closed if the other party
+has not been authenticated (in seconds). The default value is 120 seconds.</li>
+<li>Idle timeout, after which the connection is closed if idle (in seconds). The
+default value is 600 seconds.</li>
+</ul>
 <doc-anchor-target id="navigating-in-the-shell">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#navigating-in-the-shell">#</doc-anchor-trigger>
@@ -1267,7 +1281,7 @@ UniStore node name is identical to the YANG repository name.</p>
     </h3>
 </doc-anchor-target>
 <p>By default, callbacks are disabled and the host and port for the remote server
-are empty in <strong>config/lighty-uniconfig-config.json</strong>.</p>
+are empty in <strong>config/application.properties</strong>.</p>
 <p>To enable callbacks, set the configuration parameter <code v-pre>callbacks/enabled</code> to
 <code v-pre>true</code>. It is also necessary to set the host and port for the remote server and
 store an access token in the UniConfig database.</p>
@@ -1390,7 +1404,7 @@ YANG file by using the <strong><a href="mailto:frinx-callpoint@2022-06-22.yang">
 </doc-codeblock></div>
 <p>The argument of the <code v-pre>url</code> extension is <code v-pre>/data/from/remote</code>, which is appended to
 the end of the remote server URI configured in
-<strong>config/lighty-uniconfig-config.json</strong>. Thus the final address for the remote
+<strong>config/application.properties</strong>. Thus the final address for the remote
 call-point is <code v-pre>https://remote.server.io/data/from/remote</code>.</p>
 <doc-anchor-target id="add-action-post-request">
     <h4>

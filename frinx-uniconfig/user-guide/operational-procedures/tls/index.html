@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>TLS-based Authentication | Frinx docs</title>
     <meta name="title" content="TLS-based Authentication | Frinx docs">
-    <meta name="description" content="In the default version of UniConfig TLS authentication is disabled. To enable TLS for RESTCONF you must setup two things:" />
+    <meta name="description" content="TLS authentication is disabled in the default version of UniConfig." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/tls/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/tls/">
     <meta property="og:title" content="TLS-based Authentication | Frinx docs">
-    <meta property="og:description" content="In the default version of UniConfig TLS authentication is disabled. To enable TLS for RESTCONF you must setup two things:">
+    <meta property="og:description" content="TLS authentication is disabled in the default version of UniConfig.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/tls/">
     <meta property="twitter:title" content="TLS-based Authentication | Frinx docs">
-    <meta property="twitter:description" content="In the default version of UniConfig TLS authentication is disabled. To enable TLS for RESTCONF you must setup two things:">
+    <meta property="twitter:description" content="TLS authentication is disabled in the default version of UniConfig.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761042044388" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,61 +254,58 @@
         <span>TLS-based Authentication</span>
     </h1>
 </doc-anchor-target>
-<p>In the default version of UniConfig TLS authentication is disabled. To
-enable TLS for RESTCONF you must setup two things:</p>
+<p>TLS authentication is disabled in the default version of UniConfig.</p>
+<p>To enable TLS for RESTCONF, perform the following two steps:</p>
 <ol>
-<li>Key-store and trust-store that hold all keys and certificates. If
-authentication of individual clients is not required, trust-store
-doesn&#x27;t have to be created at all. Key-store must always be
-initialized.</li>
-<li>Enabling of TLS in UniConfig by editing the lighty configuration
-file.</li>
+<li>Set up key-store and trust-store to hold all keys and certificates. If
+authentication of individual clients is not required, trust-store is not
+required. Key-store must always be initialized.</li>
+<li>Enable TLS in UniConfig via the <strong>lighty</strong> configuration file.</li>
 </ol>
-<doc-anchor-target id="setting-of-key-store-and-trust-store">
+<doc-anchor-target id="set-key-store-and-trust-store">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#setting-of-key-store-and-trust-store">#</doc-anchor-trigger>
-        <span>Setting of Key-store and Trust-store</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#set-key-store-and-trust-store">#</doc-anchor-trigger>
+        <span>Set key-store and trust-store</span>
     </h2>
 </doc-anchor-target>
-<p>Steps required for preparation of key-store and trust-store:</p>
+<p>To prepare key-store and trust-store:</p>
 <ol>
-<li>Create a directory under the UniConfig root directory that will
-contain key-store and optionally trust-store files, for example:</li>
+<li>In the UniConfig root directory, create a new directory that will contain
+key-store and, optionally, trust-store files. For example:</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">mkdir ./tls
 cd ./tls</code></pre>
 </doc-codeblock></div>
 <ol start="2">
-<li>Create a new key-store. There are two options depending on whether
-you already own the certificate that you would like to use for the
-identification of UniConfig on the RESTCONF layer.</li>
-</ol>
+<li><p>Create a new key-store. There are two options depending on whether you
+already own the certificate that you want to use for identification of
+UniConfig on the RESTCONF layer:</p>
 <ol type="a">
-<li><p>Create a new key-store with the generated RSA key-pair (in the
-example the length of 2048 and validity of 365 days is used).
-After execution of the following command, the prompt will ask you
-for information about currently generated certificate that will be
-pushed into the newly generated key-store secured by a password
-(this secret will be used later in the configuration file -
-remember it).</p>
+<li>Create a new key-store with the generated RSA key-pair (the example below
+uses a length of 2048 and validity of 365 days). After executing the
+following command, the prompt will ask you for information about the
+currently generated certificate that is pushed into the newly generated
+key-store secured by a password (this secret will be used later in the
+configuration file - make sure that you remember it).</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">keytool -keystore .keystore -alias jetty -genkey -keyalg RSA -storetype PKCS12 -validity 365 -keysize 2048</code></pre>
 </doc-codeblock></div>
-</li>
-<li><p>Create a new key-store with already generated RSA key-pair (your
-certificate that you would like to use for authentication in ODL).</p>
+<ol type="a" start="2">
+<li>Create a new key-store with the already-generated RSA key-pair (your
+certificate that you want to use for authentication in ODL).</li>
+</ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">keytool -import -file [your-certificate-file] -alias jetty -keystore .keystore</code></pre>
 </doc-codeblock></div>
 </li>
-</ol>
-<ol start="3">
-<li>(Optional step) Create a new trust-store using an existing
-certificate (an empty truststore cannot be created). If you have
-multiple client certificates, they can be pushed to truststore with
-the same command executed multiple times (but alias must be unique
-for each of the imported certificates). Example:</li>
+<li><p>(Optional step) Create a new trust-store using an existing certificate (an
+empty trust-store cannot be created). If you have multiple client
+certificates, they can be pushed to trust-store by executing the same command
+multiple times (the alias must be unique for each of the imported
+certificates). For example:</p>
+</li>
 </ol>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">keytool -import -file [client-app-certificate] -alias [unique-name-of-certificate] -keystore .truststore</code></pre>
@@ -326,8 +323,8 @@ for each of the imported certificates). Example:</li>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>You can easily convert OPENSSL PEM certificates to DER format that is
-supported by keytool:</p>
+<p>You can easily convert OPENSSL PEM certificates to the DER format supported
+by keytool:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">openssl x509 -outform der -in certificate.pem -out certificate.der</code></pre>
 </doc-codeblock></div>
@@ -347,9 +344,9 @@ supported by keytool:</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>If your application needs to own distribution&#x27;s certificate, you can
-export certificate from generated key-pair that we have pushed into
-the keystore (PKCS12 or OPENSSL format):</p>
+<p>If your application must own the distribution&#x27;s certificate, you can export the
+certificate from the generated key-pair that we have pushed into the keystore
+(PKCS12 or OPENSSL format):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">keytool -export -keystore .keystore -alias jetty -file odl.cer
 penssl pkcs12 -in .keystore -out certificate.pem</code></pre>
@@ -357,77 +354,81 @@ penssl pkcs12 -in .keystore -out certificate.pem</code></pre>
         </div>
     </div>
 </div>
-<doc-anchor-target id="enabling-of-tls-in-uniconfig">
+<doc-anchor-target id="enable-tls-in-uniconfig">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#enabling-of-tls-in-uniconfig">#</doc-anchor-trigger>
-        <span>Enabling of TLS in UniConfig</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#enable-tls-in-uniconfig">#</doc-anchor-trigger>
+        <span>Enable TLS in UniConfig</span>
     </h2>
 </doc-anchor-target>
-<p>Preparation of the TLS key-store and trust-store is not enough for
-enabling TLS within the RESTCONF API. It is also required to point
-UniConfig to these created storages and explicitly enable TLS by setting
-a corresponding flag. The configuration file that must be modified can
-be found on the following path relative to the UniConfig root directory:</p>
+<p>After preparing key-store and trust-store, you need to point UniConfig to these
+storages and explicitly enable TLS via a flag.</p>
+<p>Modify the following configuration file at a path relative to the UniConfig root
+directory:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">vim config/lighty-uniconfig-config.json</code></pre>
 </doc-codeblock></div>
-<p>Then, you must append the TLS configuration snippet (it must be placed
-under the root JSON node) to the configuration file. The following
-example snippet enables TLS authentication, disables user-based
-authentication (hence trust-store is not required at all), and points
-UniConfig to the key-store file that we have created in the previous
-section.</p>
+<p>Next, append a TLS configuration snippet to the configuration file (the snippet
+must be placed under the root JSON node).</p>
+<p>The example snippet below enables TLS authentication, disables user-based
+authentication (hence trust-store is not required) and points UniConfig to the
+key-store file created in the previous section:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">&quot;tls&quot;: {
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;tls&quot;: {
     &quot;enabledTls&quot;: true,
     &quot;enabledClientAuthentication&quot;: false,
     &quot;keystorePath&quot;: &quot;tls/.keystore&quot;,
     &quot;keystorePassword&quot;: &quot;key-pass&quot;
+  }
 }</code></pre>
 </doc-codeblock></div>
-<p>If your deployment requires authentication of individual RESTCONF users
-as well, you should also specify the trust-store fields by setting the
-&#x27;enabledClientAuthentication&#x27; field to &#x27;true&#x27;.</p>
+<p>If your deployment requires authentication for individual RESTCONF users, you
+should also specify the trust-store fields by setting
+<code v-pre>enabledClientAuthentication</code> to <code v-pre>true</code>.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">&quot;tls&quot;: {
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;tls&quot;: {
     &quot;enabledTls&quot;: true,
     &quot;enabledClientAuthentication&quot;: true,
     &quot;keystorePath&quot;: &quot;tls/.keystore&quot;,
     &quot;keystorePassword&quot;: &quot;key-pass&quot;,
     &quot;truststorePath&quot;: &quot;tls/.truststore&quot;,
     &quot;truststorePassword&quot;: &quot;trust-pass&quot;
+  }
 }</code></pre>
 </doc-codeblock></div>
-<p>You can also specify included or excluded cipher suites and TLS versions
-that can or cannot be used for establishing a secured tunnel between the
-Jetty server and clients. The following default configuration is based
-on actual recommendations (you should adjust it as needed):</p>
+<p>You can also specify included or excluded cipher suites and TLS versions, which
+then can or cannot be used to establish a secured tunnel between the Jetty
+server and clients.</p>
+<p>The following default configuration is based on actual recommendations (adjust
+as needed):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">&quot;tls&quot;: {
-  ...,
-  &quot;includedProtocols&quot;: [
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;tls&quot;: {
+    &quot;includedProtocols&quot;: [
       &quot;TLSv1.2&quot;,
       &quot;TLSv1.3&quot;
-  ],
-  &quot;excludedProtocols&quot;: [
+    ],
+    &quot;excludedProtocols&quot;: [
       &quot;TLSv1&quot;,
       &quot;TLSv1.1&quot;,
       &quot;SSL&quot;,
       &quot;SSLv2&quot;,
       &quot;SSLv2Hello&quot;,
       &quot;SSLv3&quot;
-  ],
-  &quot;includedCipherSuites&quot;: [
+    ],
+    &quot;includedCipherSuites&quot;: [
       &quot;TLS_ECDHE.*&quot;,
       &quot;TLS_DHE_RSA.*&quot;
-  ],
-  &quot;excludedCipherSuites&quot;: [
+    ],
+    &quot;excludedCipherSuites&quot;: [
       &quot;.*MD5.*&quot;,
       &quot;.*RC4.*&quot;,
       &quot;.*DSS.*&quot;,
       &quot;.*NULL.*&quot;,
       &quot;.*DES.*&quot;
-  ]
+    ]
+  }
 }</code></pre>
 </doc-codeblock></div>
 <div class="flex mb-6">
@@ -443,13 +444,13 @@ on actual recommendations (you should adjust it as needed):</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>It is enough to specify only the included protocols and included
-cipher suites (all other entries are denied), or excluded protocols
-and excluded cipher suites (all other entries are permitted). If you
-specify the same entries under both the included and excluded cipher
-suites or protocols, the excluded entry has higher priority. For
-example, the final set of usable cipher suites is:
-setOf(includedCipherSuites), setOf(excludedCipherSuites).</p>
+<p>It is sufficient to specify only included protocols and cipher suites (so that
+all other entries are denied), or excluded protocols and cipher suites (so that
+all other entries are permitted).</p>
+<p>If you specify the same entries under both included and excluded cipher suites
+or protocols, the excluded entry is given higher priority. For example, the
+final set of usable cipher suites is: setOf(includedCipherSuites),
+setOf(excludedCipherSuites).</p>
         </div>
     </div>
 </div>

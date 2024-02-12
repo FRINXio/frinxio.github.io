@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC install-multiple-nodes | Frinx docs</title>
     <meta name="title" content="RPC install-multiple-nodes | Frinx docs">
-    <meta name="description" content="This RPC installs multiple devices at once using the default install-node RPC. Devices are installed in parallel." />
+    <meta name="description" content="This RPC installs multiple devices at once using the default install-node RPC. Devices are installed independently in parallel." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_install_multiple_nodes/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_install_multiple_nodes/">
     <meta property="og:title" content="RPC install-multiple-nodes | Frinx docs">
-    <meta property="og:description" content="This RPC installs multiple devices at once using the default install-node RPC. Devices are installed in parallel.">
+    <meta property="og:description" content="This RPC installs multiple devices at once using the default install-node RPC. Devices are installed independently in parallel.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/uniconfig_install_multiple_nodes/">
     <meta property="twitter:title" content="RPC install-multiple-nodes | Frinx docs">
-    <meta property="twitter:description" content="This RPC installs multiple devices at once using the default install-node RPC. Devices are installed in parallel.">
+    <meta property="twitter:description" content="This RPC installs multiple devices at once using the default install-node RPC. Devices are installed independently in parallel.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.761042044388" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -255,7 +255,10 @@
     </h1>
 </doc-anchor-target>
 <p>This RPC installs multiple devices at once using the default
-<strong>install-node RPC</strong>. Devices are installed in parallel.</p>
+<strong>install-node RPC</strong>. Devices are installed independently in parallel.</p>
+<p>If two nodes are being installed and one node fails, the second node is still
+installed. If at least one node fails, the RPC response describes the result for
+failed nodes only.</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>

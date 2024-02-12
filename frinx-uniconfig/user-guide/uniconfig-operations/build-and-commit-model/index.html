@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Build-and-Commit Model | Frinx docs</title>
     <meta name="title" content="Build-and-Commit Model | Frinx docs">
-    <meta name="description" content="The Build-and-Commit model is based on explicit creation of a transaction, invoking operations in the scope of this transaction and, finally," />
+    <meta name="description" content="The Build-and-Commit model is based on explicitly creating a transaction, invoking operations in the scope of this transaction and, finally,..." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/" />
@@ -23,25 +23,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/">
     <meta property="og:title" content="Build-and-Commit Model | Frinx docs">
-    <meta property="og:description" content="The Build-and-Commit model is based on explicit creation of a transaction, invoking operations in the scope of this transaction and, finally,">
+    <meta property="og:description" content="The Build-and-Commit model is based on explicitly creating a transaction, invoking operations in the scope of this transaction and, finally,...">
     <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/optimistic-locking.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/">
     <meta property="twitter:title" content="Build-and-Commit Model | Frinx docs">
-    <meta property="twitter:description" content="The Build-and-Commit model is based on explicit creation of a transaction, invoking operations in the scope of this transaction and, finally,">
+    <meta property="twitter:description" content="The Build-and-Commit model is based on explicitly creating a transaction, invoking operations in the scope of this transaction and, finally,...">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/build-and-commit-model/optimistic-locking.svg">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761042044388" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -256,10 +256,10 @@
         <span>Build-and-Commit Model</span>
     </h1>
 </doc-anchor-target>
-<p>The Build-and-Commit model is based on explicit creation of a transaction,
-invoking operations in the scope of this transaction and, finally,
-committing or closing the transaction. The transaction represents a session
-between client and UniConfig instance.</p>
+<p>The Build-and-Commit model is based on explicitly creating a transaction,
+invoking operations in the scope of this transaction and, finally, committing or
+closing the transaction. The transaction represents a session between client and
+UniConfig instance.</p>
 <p>Using explicitly created transactions has multiple advantages in
 comparison to the Immediate Commit Model:</p>
 <ul>
@@ -271,8 +271,8 @@ Model is used.</li>
 <li>The transaction allows a client to identify if it still communicates with the
 same UniConfig instance (this property is usable in the clustered
 deployment). If the UniConfig instance does not know about the transaction,
-the request will fail because the transaction expired, is closed or was
-never created in the first place.</li>
+the request fails because the transaction expired, is closed or was never
+created in the first place.</li>
 </ul>
 <doc-anchor-target id="configuration">
     <h2>
@@ -281,35 +281,24 @@ never created in the first place.</li>
     </h2>
 </doc-anchor-target>
 <p>Configurations related to UniConfig transactions are placed in the
-<strong>config/lighty-uniconfig-config.json</strong> file under the <code v-pre>transactions</code> container.
-Note that the Build-and-Commit model is enabled if <code v-pre>uniconfigTransactionEnabled</code>
-is set to <code v-pre>true</code> (this is the default value).</p>
+<strong>config/application.properties</strong> file under the <code v-pre>transactions</code> container.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">// Grouped settings that are related to Uniconfig transactions.
-&quot;transactions&quot;: {
-    /*
-    Time after transaction can be closed [seconds] by transaction cleaner.
-    */
-    &quot;transactionIdleTimeOut&quot;: 300,
-    /*
-    Maximum transaction age before it can be evicted from transaction registry [seconds].
-    Configuring '0' disables cleaning of Uniconfig transactions.
-    */
-    &quot;maxTransactionAge&quot;: 1800,
-    /*
-    Interval at which expired transactions are closed and cleaned [seconds].
-    Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
-    Only dedicated Uniconfig transactions (initialized using 'create-transaction' RPC)
-    are cleaned - shared transaction is never removed or invalidated.
-     Configuring '0' disables cleaning of Uniconfig transactions.
-    */
-    &quot;cleaningInterval&quot;: 60,
-    /*
-    Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
-    If disabled, only manually created transactions can exist.
-    */
-    &quot;isImmediateCommitEnabled&quot;: true
-}</code></pre>
+<pre class="language-properties"><code v-pre class="language-properties"># Grouped settings that are related to UniConfig transactions
+
+# Time after transaction can be closed [seconds] by transaction cleaner.
+transactions.transaction-idle-time-out=300
+# Maximum transaction age before it can be evicted from transaction registry [seconds].
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.max-transaction-age=1800
+# Interval at which expired transactions are closed and cleaned [seconds].
+# Expired transaction: transaction which age exceeds 'maxTransactionAge' setting.
+# Only dedicated UniConfig transactions (initialized using 'create-transaction' RPC)
+# are cleaned - shared transaction is never removed or invalidated.
+# Configuring '0' disables cleaning of UniConfig transactions.
+transactions.cleaning-interval=60
+# Boolean value if the Immediate Commit Model is enabled or not. Default value is true.
+# If disabled, only manually created transactions can exist.
+transactions.immediate-commit-enabled=true</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="optimistic-locking-mechanism">
     <h2>

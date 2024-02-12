@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761042044388">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,11 +34,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.761042044388" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.761042044388" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -543,6 +543,141 @@ Connect the parts as follows: <strong>START</strong> - <strong>lambda</strong> -
     <figcaption class="caption">FRINX Machine dashboard</figcaption>
 </figure>
 </p>
+<doc-anchor-target id="demo-building-a-workflow-which-sends-a-message-to-slack">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#demo-building-a-workflow-which-sends-a-message-to-slack">#</doc-anchor-trigger>
+        <span>Demo: Building a workflow which sends a message to Slack</span>
+    </h2>
+</doc-anchor-target>
+<p>Now let’s look how to build a workflow. The workflow we’re about build will make a http request, parse desired part of the http response, and post the result in a slack workspace.</p>
+<ol>
+<li>Click on <strong>“Create workflow”</strong> section in the main page of FRINX Machine.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="create_workflow.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<ol start="2">
+<li>In the <strong>Name</strong> type the name of your workflow (please keep in mind that name
+of the workflow cannot be later changed and must be unique.). <strong>Description</strong>
+stands for additional info of the workflow - you can leave it blank. Once the
+workflow is created <strong>Label</strong> can help organizing workflows in <strong>Explore workflows</strong>,
+but you can leave it blank as well. After inserting all data click on <strong>Save changes</strong>.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="create_new_workflow.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<p><strong>“Restartable”</strong> – when checked, in case the workflow fails, in the FRINX UI there
+will be an option to restart the workflow with same inputs without starting it all
+over and without creating a new workflow ID. In this case you can leave it
+checked.</p>
+<p>After saving the changes you will be redirected to canvas. Here we will add tasks
+and sub workflows in our workflow.</p>
+<p><figure class="content-center">
+    <img src="canvas.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<ol start="3">
+<li>Click <strong>“+”</strong> on the <strong>http</strong> and <strong>labmda</strong> under <strong>System tasks</strong> and <strong>Post_to_Slack</strong>
+under <strong>Workflows</strong>. All tasks and subworkflows should be arranged and connected in the order you chose them.
+If the tasks are not in the right order (START - http - lamda - Post_to_Slack) it is possible to rearrange them.
+Simply click on the &quot;x&quot; on the connection to remove it and hover over &quot;OUT/IN&quot; where a &quot;+&quot; sign will appear.
+Connect all parts this way: START - http - lambda - Post_to_Slack - END. As you can see each task and
+workflow has its own set of characters after its name - these are reference
+aliases and work as unique identifier.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="tasks.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<p>Above every task/workflow you can see 2 squares:</p>
+<p><strong>Edit:</strong></p>
+<p><figure class="content-center">
+    <img src="update.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<p><strong>Remove/Expand:</strong></p>
+<p><figure class="content-center">
+    <img src="remove_expand.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<ol start="4">
+<li><strong>http - edit</strong>. This task provides multiple methods for working with data from
+web pages. In this case we will make a http GET request to fetch data which we
+will parse. Click on <strong>edit</strong> above http task. On the right side you can see General
+Settings and Input Parameters. Leave <strong>General Setting</strong> the way they are and
+click on <strong>Input Parameters</strong>.
+Insert: <a href="https://jsonplaceholder.typicode.com/todos/$%7Bworkflow.input.selector%7D">https://jsonplaceholder.typicode.com/todos/${workflow.input.selector}</a>
+in the <strong>URI</strong> and leave other columns unchanged. This set of data will get data
+from JSON database based on selectors input. Now click on <strong>“Save Changes”</strong>.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="http_task.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<ol start="5">
+<li><strong>lambda - edit</strong>. Lambda takes data from previous http task and returns
+parsed data (message text) from JSON Click on <strong>Input parameters</strong> and in the
+<strong>Lambda value</strong> insert: ${http_&lt;unique_id&gt;.output.body}. In our example the
+name is <strong>http_6MZR</strong>. In the <strong>Script expression</strong> copy-paste: return
+JSON.parse($.lambdaValue). Click on <strong>“Save Changes”</strong>.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="lambda_task_edit.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<ol start="6">
+<li><strong>Post_to_Slack - edit</strong>. Post_to_Slack is a workflow that can be used
+standalone or as a part of other workflows. This workflow works as sender of
+messages to specific destination in Slack.
+Click on <strong>Input parameters</strong> and in the <strong>slack_webhook_id</strong> insert:
+T02BFFVUQ/B04MQ2PRWQ1/xw9pWOAm0e4OMPfPxmrI1Jbp.
+In the <strong>message_text</strong> insert: ${lambda_&lt;unique_id&gt;.output.result.title}. Click
+on <strong>“Save Changes”</strong>.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="post_to_slack_edit.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<ol start="7">
+<li>In the upper right corner of the workflow builder click on <strong>“Save and execute”</strong>.
+Now the workflow is ready to be executed. Insert a number between 1 - 200 in
+the <strong>selector</strong> and press <strong>Execute</strong>.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="execute.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<ol start="8">
+<li>Click on <strong>“Executed workflow in detail”</strong>. Here you can see that workflow was
+executed and every task was completed successfully.</li>
+</ol>
+<p><figure class="content-center">
+    <img src="wf_run_detail.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<p>The output (demo Latin JSON) of the workflow in the Slack:</p>
+<p><figure class="content-center">
+    <img src="slack_output.png" alt="FRINX Machine dashboard" />
+    <figcaption class="caption">FRINX Machine dashboard</figcaption>
+</figure>
+</p>
+<p>You can join the slack channel where the message from this workflow is sent
+and check if it was sent successfully:
+<a href="https://join.slack.com/share/enQtNDg2ODM4MDgyMjY3My0zYjdhOTNjMTkxYTk3OTRhMGY3MjQ5YWNmYTJlNGRiNTkwZTNmNGVjMGQ2MGY3ODkwMzY2MmY0ODIwN2ZkMjJj">https://join.slack.com/share/enQtNDg2ODM4MDgyMjY3My0zYjdhOTNjMTkxYTk3OTRhMGY3MjQ5YWNmYTJlNGRiNTkwZTNmNGVjMGQ2MGY3ODkwMzY2MmY0ODIwN2ZkMjJj</a>
+(Entry to this channel may be limited just for @elisapolystar.com accounts.)</p>
 <doc-anchor-target id="demo-creating-a-loopback-address-on-devices-stored-in-the-inventory">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#demo-creating-a-loopback-address-on-devices-stored-in-the-inventory">#</doc-anchor-trigger>
@@ -693,7 +828,7 @@ Connect the parts as follows: <strong>START</strong> - <strong>lambda</strong> -
 </doc-anchor-target>
 <p>Enter the following settings:</p>
 <p><strong>General and Service</strong></p>
-<p><strong>VPN Attachment:</strong> GNS00001002</p>
+<p><strong>VPN Attachment:</strong> GNS00001005</p>
 <p><strong>BTM Circuit Reference:</strong> CES00000000-05</p>
 <p><strong>Devices:</strong> Select one of the CPE devices.</p>
 <p><strong>SVC Input Bandwith (Mbsp):</strong> 1000</p>
@@ -705,7 +840,7 @@ Connect the parts as follows: <strong>START</strong> - <strong>lambda</strong> -
 </p>
 <p><strong>Routing Protocol:</strong></p>
 <ul>
-<li>Select <strong>+ Create Static Protocol</strong>.</li>
+<li>Select <strong>+ Create Static Protocol</strong> and <strong>Configure BGP</strong>.</li>
 </ul>
 <p><strong>Static Routing LAN:</strong> 10.0.0.0/8</p>
 <p><strong>Static Routing Next Hop:</strong> 10.0.0.1</p>
@@ -738,11 +873,6 @@ Connect the parts as follows: <strong>START</strong> - <strong>lambda</strong> -
     </h3>
 </doc-anchor-target>
 <p>Select <strong>Commit Changes</strong>.</p>
-<p><figure class="content-center">
-    <img src="sites_network_accesses_2.png" alt="FRINX Machine dashboard" />
-    <figcaption class="caption">FRINX Machine dashboard</figcaption>
-</figure>
-</p>
 <p>Wait until all tasks are completed.</p>
 <p><figure class="content-center">
     <img src="status_l3vpn.png" alt="FRINX Machine dashboard" />
