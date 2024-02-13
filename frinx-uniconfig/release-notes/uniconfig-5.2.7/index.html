@@ -12,34 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Obtaining snapshots-metadata | Frinx docs</title>
-    <meta name="title" content="Obtaining snapshots-metadata | Frinx docs">
-    <meta name="description" content="Snapshots metadata contains a list of created snapshots with the date of creation and a list of nodes." />
+    <title>Uniconfig 5.2.7 | Frinx docs</title>
+    <meta name="title" content="Uniconfig 5.2.7 | Frinx docs">
+    <meta name="description" content="Fix protocol issues after refactoring." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/snapshot-manager/obtain_snapshot_metadata/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.7/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/snapshot-manager/obtain_snapshot_metadata/">
-    <meta property="og:title" content="Obtaining snapshots-metadata | Frinx docs">
-    <meta property="og:description" content="Snapshots metadata contains a list of created snapshots with the date of creation and a list of nodes.">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.7/">
+    <meta property="og:title" content="Uniconfig 5.2.7 | Frinx docs">
+    <meta property="og:description" content="Fix protocol issues after refactoring.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/snapshot-manager/obtain_snapshot_metadata/">
-    <meta property="twitter:title" content="Obtaining snapshots-metadata | Frinx docs">
-    <meta property="twitter:description" content="Snapshots metadata contains a list of created snapshots with the date of creation and a list of nodes.">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.2.7/">
+    <meta property="twitter:title" content="Uniconfig 5.2.7 | Frinx docs">
+    <meta property="twitter:description" content="Fix protocol issues after refactoring.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.761152261063" rel="stylesheet" />
+    <link href="../../../static/favicon-192x192.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.761152261063" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.761152261063" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.761152261063" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.761152261063" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.761152261063" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.761152261063" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -54,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -70,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -186,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -248,35 +247,101 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="obtaining-snapshots-metadata" class="break-words">
+<doc-anchor-target id="uniconfig-527" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#obtaining-snapshots-metadata">#</doc-anchor-trigger>
-        <span>Obtaining snapshots-metadata</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-527">#</doc-anchor-trigger>
+        <span>Uniconfig 5.2.7</span>
     </h1>
 </doc-anchor-target>
-<p>Snapshots metadata contains a list of created snapshots with the date of
-creation and a list of nodes.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request GET 'http://localhost:8181/rests/data/snapshot-manager:snapshots-metadata?content=config' \
---header 'Accept: application/json'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-  &quot;snapshots-metadata&quot;: {
-    &quot;snapshot&quot;: [
-      {
-        &quot;name&quot;: &quot;snapshot1&quot;,
-        &quot;creation-time&quot;: &quot;2021-10-28 15:24:29.0&quot;,
-        &quot;nodes&quot;: [
-          &quot;R1&quot;
-        ]
-      }
-    ]
-  }
-}</code></pre>
-</doc-codeblock></div>
+<!-- Release notes generated using configuration in .github/release.yml at 5.2.7 -->
+<doc-anchor-target id="whats-changed">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="bug-fixes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Fix protocol issues after refactoring.</li>
+<li>Fix protocol issues after refactoring in cli shell.</li>
+<li>Fix another protocol issues after refactoring.</li>
+<li>Fix sturtup UniConfig</li>
+<li>Fixed InterfaceRpdStateReader and CableMacReader for CER devices</li>
+<li>[UNIC-1587] Incomplete document fix</li>
+<li>[UNIC-1568] Fix sync connection fail handling</li>
+<li>Fix version in restconf dependencies</li>
+<li>Fix logging controller issue caused by previous refactoring.</li>
+<li>Added migration for node.encryption_public_key</li>
+<li>[UNIC-1610] Fix bulk-edit in cluster</li>
+</ul>
+<doc-anchor-target id="new-features">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1583] Add timeout property for UniConfig Shell</li>
+<li>Created CableModemReader and CableModemStateReader for CER devices</li>
+<li>[UNIC-1589] - Install skip mount</li>
+</ul>
+<doc-anchor-target id="improvements">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1569] Refactor template to JOOQ style</li>
+<li>Change protocol table to Enum.</li>
+<li>Add postpone reason to task execution error on timeout</li>
+<li>[UNIC-1578] Support IPv6 addressing</li>
+<li>[UNIC-1384] Refactoring of SNMP read operation</li>
+</ul>
+<doc-anchor-target id="documentation">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#documentation">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F5D2;&#xFE0F;</span> Documentation</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>[UNIC-1596] Expose OpenAPI documentation for Uniconfig models</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>build(deps): bump actions/download-artifact from 3.0.2 to 4.1.1</li>
+<li>build(deps): bump actions/upload-artifact from 3.1.3 to 4.2.0</li>
+<li>Upgrade Spring Boot version</li>
+<li>build(deps): bump dawidd6/action-download-artifact from 2 to 3</li>
+<li>build(deps): bump actions/upload-artifact from 4.2.0 to 4.3.0</li>
+<li>build(deps): bump com.github.spotbugs:spotbugs-annotations from 4.8.2 to 4.8.3</li>
+<li>build(deps): bump org.apache.maven.plugins:maven-failsafe-plugin from 3.2.2 to 3.2.5</li>
+<li>build(deps): bump org.apache.maven.plugins:maven-surefire-plugin from 3.2.2 to 3.2.5</li>
+<li>build(deps): bump org.owasp:dependency-check-maven from 9.0.4 to 9.0.9</li>
+<li>build(deps): bump actions/upload-artifact from 4.3.0 to 4.3.1</li>
+<li>build(deps): bump actions/download-artifact from 4.1.1 to 4.1.2</li>
+</ul>
+<doc-anchor-target id="other-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Bump to 5.2.7-SNAPSHOT.</li>
+<li>workflows: Update README.md</li>
+<li>Release 5.2.7.</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -286,20 +351,20 @@ creation and a list of nodes.</p>
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/snapshot-manager/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.2.6/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Snapshot Manager</span>
+                                                <span class="block mt-1">Uniconfig 5.​2.​6</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/snapshot-manager/rpc_create-snapshot/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/translation-units-docs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">RPC create-​snapshot</span>
+                                                <span class="block mt-1">Translation Units</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -343,6 +408,6 @@ creation and a list of nodes.</p>
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Obtaining snapshots-metadata", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.2.7", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
