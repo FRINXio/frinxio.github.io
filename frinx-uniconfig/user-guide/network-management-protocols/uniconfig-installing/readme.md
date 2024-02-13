@@ -276,6 +276,21 @@ the flag will stay **FAILED**.
 
 This is useful when many devices are being installed in batches and the user doesn't know if they are up or not.
 
+### Installing without mount
+
+The following parameter lets you store node metadata into the UniConfig database
+without mounting the node:
+
+- `uniconfig-config:store-without-mount`- When enabled, skip the mount procedure
+    and store node metadata into the UniConfig database with installation status
+    `FAILED`. The default value is `false`.
+
+This flag is primarily intended for scenarios where you want UniConfig to be
+aware of a specific node that is not yet up and reachable. Once the device is
+up, you can simply call the **sync-from-network RPC** to load the configuration.
+Additionally, this can reduce the lifetime of the **install-node RPC**, as it
+does not need to wait for connection failure.
+
 ### Keepalive strategies
 
 **1. Keepalive reconnection strategy**
