@@ -5,8 +5,8 @@ TLS authentication is disabled in the default version of UniConfig.
 To enable TLS for RESTCONF, perform the following two steps:
 
 1. Set up key-store and trust-store to hold all keys and certificates. If
-    authentication of individual clients is not required, trust-store is not
-    required. Key-store must always be initialized.
+    authentication of individual clients is not required, trust-store is also
+    not required. Key-store must always be initialized.
 2. Enable TLS in UniConfig via the **application.properties** configuration file.
 
 ## Set key-store and trust-store
@@ -25,8 +25,8 @@ cd ./tls
     already own the certificate that you want to use for identification of
     UniConfig on the RESTCONF layer:
 
-    a.  Create a new key-store with the generated RSA key-pair (the example below
-     uses a length of 2048 and validity of 365 days). After executing the
+    a.  Create a new key-store with the generated RSA key-pair (the example
+     below uses a length of 2048 and validity of 365 days). After executing the
      following command, the prompt will ask you for information about the
      currently generated certificate that is pushed into the newly generated
      key-store secured by a password (this secret will be used later in the
@@ -45,8 +45,8 @@ cd ./tls
 
 3. (Optional step) Create a new trust-store using an existing certificate (an
     empty trust-store cannot be created). If you have multiple client
-    certificates, they can be pushed to trust-store by executing the same command
-    multiple times (the alias must be unique for each of the imported
+    certificates, they can be pushed to trust-store by executing the same
+    command multiple times (the alias must be unique for each of the imported
     certificates). For example:
 
 ```
@@ -86,7 +86,8 @@ directory:
 vim config/application.properties
 ```
 
-Next, edit TLS configuration section, uncommenting and editing the necessary properties.
+Next, edit the TLS configuration section, un-commenting and editing the relevant
+properties.
 
 The example snippet below enables TLS authentication, disables user-based
 authentication (hence trust-store is not required) and points UniConfig to the
@@ -109,7 +110,7 @@ server.ssl.key-store-password=passtest
 ```
 
 If your deployment requires authentication for individual RESTCONF users,
-truststore is **required** and you need to set 
+trust-store is **required** and you need to set 
 `server.ssl.client-auth=need`
 
 ```properties
@@ -128,18 +129,19 @@ server.ssl.key-store-password=passtest
 #server.ssl.sni-enabled=true
 ```
 
-JVM provides secure defaults, but you can also specify included cipher suites and TLS version,
-overriding default settings.
-Example configuration
-that includes support for TLS 1.2 and TLS 1.3 with some of the most common and strongest ciphers available:
+JVM provides secure defaults, which you can override by specifying included
+cipher suites and TLS versions.
+
+The following example configuration includes support for TLS 1.2 and TLS 1.3
+with some of the most common and strongest ciphers available:
 
 ```properties
 server.ssl.enabled-protocols=TLSv1.2,TLSv1.3
 server.ssl.ciphers=TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 ```
 
-SNI (Server Name Indication) is disabled by default.
-To enable it, uncomment the line as shown below:
+SNI (Server Name Indication) is disabled by default. To enable it, uncomment the
+line below:
 
 ```properties
 # Enable SNI
