@@ -9,16 +9,21 @@ After logging into FRINX Machine, you can see the **FRINX Machine dashboard**:
 Using the Demo Config Manager:
 
 1) On the FRINX Machine main page, select **Explore & configure devices**.
-2) Make sure that the device you want to configure is installed. If not, select **Install** first.
-3) For this demo, we use the **IOS01** device. Locate the device in the list and select the corresponding gear icon on the right. (If you see a message saying **Transaction expired**, select **Refresh**).
+2) Make sure that the device you want to configure is installed. If not, select
+   **Install** first.
+3) For this demo, we use the **IOS01** device. Locate the device in the list and
+   select the corresponding gear icon on the right. (If you see a message saying
+   **Transaction expired**, select **Refresh**).
 
 ![FRINX Machine dashboard](install_device.png)
 
-4) For the **Loopback0** interface, change the **enabled** status to *false*.
-5) Select **Save** to save your changes.
+4) For the **Loopback0** interface, change the status from **enabled** status to
+   **false**.
+5) To save your changes, select **Save**.
 6) To review your changes, select **Calculate diff**.
 7) To view the set of commands used for the change, select **Dry run**.
-8) To apply changes to the device, select **Commit to network**. You can also see the changes in the Operational data store.
+8) To apply changes to the device, select **Commit to network**. You can also
+   see the changes in the Operational data store.
 
 ![FRINX Machine dashboard](config_dashboard.png)
 
@@ -30,11 +35,16 @@ To revert changes made to the device configuration:
 
 ## Demo workflow UI basics
 
-Workflow Builder is a graphical interface for Workflow Manager and is used to create, modify and manage workflows.
+The Workflow Builder is a graphical interface for Workflow Manager. It is used
+to create, modify and manage workflows.
 
-Workflows are groups of tasks and/or sub-workflows that can be used, for example, to install or delete devices, create loopback interfaces on devices, send messages and much more. You can create your own workflows or edit existing ones by adding or removing tasks or sub-workflows.
+Workflows are groups of tasks and/or sub-workflows that can be used to install
+or delete devices, create loopback interfaces on devices, send messages and much
+more. You can create your own workflows or edit existing ones by adding or
+removing tasks or sub-workflows.
 
-Every task and sub-workflow placed in a workflow has a unique reference alias, and no two workflows can share a name and version.
+Every task and sub-workflow placed in a workflow has a unique reference alias.
+No two workflows can share a name and version.
 
 <!--
 ### Creating a new workflow
@@ -102,7 +112,7 @@ The output (demo Latin JSON) of the workflow in the Slack:
 You can visit Slack directly via https://join.slack.com/t/frinx-community/shared_invite/zt-1esnmbq4l-ui9xLCS4zKGHUXZxz~PdrQ to see your own message. We recommend to use the browser version.
 -->
 
-## How to create a new custom workflow
+## Create a new custom workflow
 
 Now we can create a new workflow from scratch:
 
@@ -110,12 +120,23 @@ Now we can create a new workflow from scratch:
 
 ![FRINX Machine dashboard](WorkFlow_Manager.png)
 
-2) Enter details for the new workflow. Under **Name**, enter a name for your workflow (note that this name cannot be changed later). The **Description** is for additional information about the workflow and can be left empty. **Label** can help you to find your workflow later under **Explore workflows**, but can also be left empty. Select **Save changes** when ready.
+2) Enter details for the new workflow. Under **Name**, enter a name for your
+   workflow (note that this name cannot be changed later). The **Description**
+   is for additional information about the workflow and can be left empty.
+   **Label** can help you to find your workflow later under **Explore
+   workflows**, but can also be left empty. Select **Save changes** when ready.
 
 ![FRINX Machine dashboard](new_wf_name.png)
 
-3) Under **System tasks**, click the **+** sign for the **lambda**, **decision** and **terminate** tasks. Under **Workflows**, click the **+** sign for **Device_identification**. Tasks and sub-workflows are added on top of each other on the canvas and can be dragged around. To connect all parts of the workflow, hover over **IN** and **OUT** where the **+** sign appears.
-Connect the parts as follows: **START** - **lambda** - **decision** - **(other)** to **Device_identification** and **default** to **terminate**. Each task and workflow has a reference alias after its name, which works as unique a identifier.
+3) Under **System tasks**, click the **+** sign for the **lambda**, **decision**
+and **terminate** tasks. Under **Workflows**, click the **+** sign for
+**Device_identification**. Tasks and sub-workflows are added on top of each
+other on the canvas and can be dragged around. To connect all parts of the
+workflow, hover over **IN** and **OUT** where the **+** sign appears. Connect
+the parts as follows: **START** - **lambda** - **decision** - **(other)** to
+**Device_identification** and **default** to **terminate**. Each task and
+workflow has a reference alias after its name, which works as unique a
+identifier.
 
 ![FRINX Machine dashboard](custom_wf_001.PNG)
 
@@ -129,15 +150,28 @@ Above every task or workflow there are two icons:
 
 ![FRINX Machine dashboard](remove_expand.png)
 
-4) **lambda** task: Makes a decision on which status to choose based on the embedded port. In this example we will only consider ports 10000–10004, and others are ignored. The lambda task lets you enter a small code (lambda - function without name) into the workflow builder.
+4) **lambda** task: This task makes a decision about which status to choose
+   based on the embedded port. In this example, we only consider ports
+   10000–10004 while others are ignored. The lambda task lets you enter a small
+   code (lambda function without name) into the workflow builder.
 
-In this case, if the specified port is both greater than or equal to 10000 and less than 10005, the status chosen is *keep working*. Otherwise, the status is *end*. This status is the output of the lambda and the input for the next task or sub-workflow.
+    In this case, if the specified port is both greater than or equal to 10000
+    and less than 10005, the chosen status is *keep working*. Otherwise, the
+    status is *end*. This status is the output of the lambda and the input for
+    the next task or sub-workflow.
 
-> Sub-workflows are similar to classic workflows, but inside of another workflow. The workflow that we are creating can also be used as a building block for another workflow, becoming a sub-workflow itself. In this manner, we can layer and reuse previously created workflows.
+    > Sub-workflows are similar to classic workflows, but inside of another
+    > workflow. The workflow that we are creating can also be used as a building
+    > block for another workflow, becoming a sub-workflow itself. In this
+    > manner, we can layer and reuse previously created workflows.
 
-In the **Input parameters** tab and the **Lambda value** field, enter: `${workflow.input.port}`. This indicates that the task should work with what was entered in the **port** field in the input of this workflow. (We will cover this later, in section 7.)
+    In the **Input parameters** tab and the **Lambda value** field, enter the
+    following: `${workflow.input.port}`. This indicates that the task should use
+    the value entered in the **port** field in the input of this workflow. (We
+    will cover this later, in section 7.)
 
-In the **Script expression** field, enter a small function which we described above.
+    In the **Script expression** field, enter the following function described
+    above:
 ```
 if ($.lambdaValue >= 10000 && $.lambdaValue < 10005) { 
   return {value: 'other'}
@@ -148,35 +182,61 @@ if ($.lambdaValue >= 10000 && $.lambdaValue < 10005) {
 
 ![FRINX Machine dashboard](lambda_1_body.PNG)
 
-5) **decision** task: Makes a different kind of decision from the lambda task discussed above. This task works like a switch on a track, sending the train one way or another. The data needed to make a decision is supplied by the lambda task.
+5) **decision** task: This task makes a different kind of decision from the
+   lambda task discussed above. It operates like a switch on a track, sending
+   the train one way or another. The data needed to make a decision is supplied
+   by the lambda task.
 
-In the **Input parameters** tab, delete the default parameter **foo**. For the **param** parameter, enter `${lambda_IkSu.output.result.value}`. (Note that *IkSu* is an automatically generated reference alias that you must edit to match the one generated for you.) What `${lambda_IkSu.output.result.value}` means is to take the value from *lambda_xyzq* which is in the output, find the result in the output and the value in it.
+    In the **Input parameters** tab, delete the default parameter **foo**. For the
+  **param** parameter, enter `${lambda_IkSu.output.result.value}`. (Note that
+  *IkSu* is an automatically generated reference alias that you must edit to
+  match the one generated for you.) What `${lambda_IkSu.output.result.value}`
+  means is to take the value from *lambda_xyzq* which is in the output, find the
+  result in the output and the value in it.
 
-If the input value for **decision** is **other**, it directs the flow towards **device_identification**. If the input value is false, it directs the flow towards **terminate**. This corresponds to the way we connected the cells in the workflow builder.
+    If the input value for **decision** is **other**, it directs the flow
+    towards **device_identification**. If the input value is **false**, it
+    directs the flow towards **terminate**. This corresponds to the way we
+    connected the cells in the Workflow Builder.
 
 ![FRINX Machine dashboard](decision_1_body.PNG)
 
 6) **terminated** task:
 
-In the **Input parameters** tab, enter *COMPLETED* (or *FAILED*, at your discretion) in the **Termination status** field. You can enter whatever message you want in the **Expected workflow output** field (for example, *Device not supported.*)
+    In the **Input parameters** tab, enter `COMPLETED` (or `FAILED`, at your
+    discretion) in the **Termination status** field. You can enter whatever
+    message you want in the **Expected workflow output** field (for example,
+    `Device not supported`.)
 
 ![FRINX Machine dashboard](terminated_1_body.PNG)
 
 7) **Device_identification** task:
 
-In the **Input parameters** tab under **management_ip**, enter *sample-topology*. This is the name of the topology in this installation, whereas in production you would use a real name. For **port**, enter `${workflow.input.port}`. If you enter a port number manually, the workflow will not ask for one when started (the same goes for **management_ip** and other fields). However, we want the user to be able to select a port they are interested in, as we did with the **lambda** task in section 4.
+    In the **Input parameters** tab under **management_ip**, enter
+    `sample-topology`. This is the name of the topology in this installation,
+    whereas in production you would use a real name. For **port**, enter
+    `${workflow.input.port}`. If you enter a port number manually, the workflow
+    will not ask for one when started (the same goes for **management_ip** and
+    other fields). However, we want the user to be able to select a port they,
+    as we did with the **lambda** task in section 4.
 
-**username** and **password**: For this demo, we assume that the following login credentials are used on all devices: `username: frinx` and `password: frinx`
+    **username** and **password**: For this demo, we assume that the following
+    login credentials are used on all devices:
+    - username: `frinx` 
+    - password: `frinx`
 
-As above, if we enter the username and password directly, the workflow will not ask for credentials at startup.
+    As above, if we enter the username and password directly, the workflow will
+    not ask for credentials at startup.
 
-When working with devices using different login credentials, you need to be able to change or enter them at startup. This can be achieved in the same way as with the **port** parameter:
+    When working with devices using different login credentials, it is useful to
+    to change or enter credentials at startup. This can be done in the same way
+    as with the **port** parameter:
 
-username: `${workflow.input.username}`
+    - username: `${workflow.input.username}`
+    - password: `${workflow.input.password}`
 
-password: `${workflow.input.password}`
-
-Like we mentioned above, in this demo workflow we will assume that login credentials are the same everywhere.
+    As mentioned above, in this demo workflow we will assume that login
+    credentials are identical everywhere.
 
 ![FRINX Machine dashboard](device_identification_1_body.PNG)
 
@@ -186,7 +246,7 @@ Like we mentioned above, in this demo workflow we will assume that login credent
 
 9) Second **lambda**: Enter `${Device_identificationRef_f7I6.output}` as the lambda value, meaning "take the output from the previous **Device_identification** task and use that".
 
-Enter the following into the body:
+    Enter the following into the body:
 ```
 if ($.lambdaValue.sw == 'saos') { 
   var data = $.lambdaValue.sw.toUpperCase()+$.lambdaValue.sw_version+'_1'
@@ -196,15 +256,21 @@ if ($.lambdaValue.sw == 'saos') {
 }
 ```
 
-A translation of what is happening here: "If the identified device is of the type *saos*, then extract the name from the output message of the previous task, change the letters to uppercase, extract the version from the output message of the previous task, glue them together and add `_1` (because that is how devices are named in this demo topology".
+A translation of what is happening here: "If the identified device is of the
+type *saos*, extract the name from the output message of the previous task,
+change the letters to uppercase, extract the version from the output message of
+the previous task, glue them together and add `_1` (since that is how devices
+are named in this demo topology).
 
 ![FRINX Machine dashboard](lambda_2_body.PNG)
 
-10) **Read_journal_cli_device**: In the **Input parameters** tab under **device_id**, enter `${lambda_ZW66.output.result}`.
+10) **Read_journal_cli_device**: In the **Input parameters** tab under
+    **device_id**, enter `${lambda_ZW66.output.result}`.
 
 ![FRINX Machine dashboard](read_journal_body.PNG)
 
-11) The output from **Read_journal_cli_device** is concatenated with *END*, as is the output from **terminated**. Thus we have closed our custom workflow.
+11) The output from **Read_journal_cli_device** is concatenated with **END**, as
+    is the output from **terminated**. Thus we have closed our custom workflow.
 
 ![FRINX Machine dashboard](custom_task_final.PNG)
 ![FRINX Machine dashboard](custom_task_final_all.PNG)
@@ -216,128 +282,238 @@ A translation of what is happening here: "If the identified device is of the typ
 
 Next steps:
 
-Finding your new workflow and running it with multiple different inputs such as 10 000, 10 002, 10 012, etc.
+Find your new workflow and run it with multiple different inputs such as
+`10 000`, `10 002`, `10 012`, etc.
 
 ![FRINX Machine dashboard](find_demo_workflow.png)
 
-For different ports, you can see different devices with other run commands in memory.
+For different ports, you can see different devices with other run commands in
+memory.
 
 ![FRINX Machine dashboard](output_journal_commands.png)
 ![FRINX Machine dashboard](output_journal_commands_3.png)
 
-## Demo: Creating a loopback address on devices stored in the inventory
+## Demo: Build a workflow that sends a message to Slack
 
-This workflow creates a loopback interface on all devices installed in the inventory or on all devices filtered by labels. Labels are markers that serve as a differentiator.
+Now let’s look at building a workflow. Our example workflow will make an HTTP
+request, parse the desired part of the HTTP response, and post the result in a
+Slack workspace.
 
-1) Check if all devices are installed. You can install them manually or by executing the **Install_all_from_inventory / 1** workflow.
+1) Select **Create workflow§** on the main page of FRINX Machine.
+
+![FRINX Machine dashboard](create_workflow.png)
+
+2) Under **Name**, type the name of your workflow (keep in mind that the name
+must be unique and cannot be changed later). **Description** stands for
+additional info of the workflow and can be left blank. Once the workflow is
+created, you can specify a **Label** to help organize workflows under **Explore
+workflows** (this can be left blank as well). After all the data is entered,
+select **Save changes**.
+
+![FRINX Machine dashboard](create_new_workflow.png)
+
+**Restartable** – When checked, if the workflow fails the FRINX UI will
+include an option to restart the workflow with the same inputs, without
+restarting it all over and without creating a new workflow ID. For our case, you
+can leave it checked.
+
+After saving your changes, you are redirected to the canvas. Here we will add
+tasks and sub-workflows to our workflow.
+
+![FRINX Machine dashboard](canvas.png)
+
+3) Click **+** on **http** and **lambda** under **System tasks** and
+**Post_to_Slack** under **Workflows**. All tasks and subworkflows are added in
+the same place on the canvas, so you need to move some to see others. To connect
+all parts of the workflow, hover over OUT/IN where the + sign will appear.
+Connect all parts as follows: **START - http - lamda - Post_to_Slack - END**. As
+you can see, each task and workflow has its own set of characters after its
+name. These are reference aliases that work as unique identifiers.
+
+![FRINX Machine dashboard](tasks.png)
+
+Above every task or workflow, there are two squares:
+
+**Edit:**
+
+![FRINX Machine dashboard](update.png)
+
+**Remove/Expand:**
+
+![FRINX Machine dashboard](remove_expand.png)
+
+4) **http - edit**. This task provides multiple methods for working with data
+from webpages. In this case, we will make an HTTP GET request to fetch data
+which we will then parse. Click on **edit** above the HTTP task. On the right
+side, you can see the **General settings** and **Input parameters** tabs. Select
+**Input Parameters** and under **URI**, enter
+`https://jsonplaceholder.typicode.com/todos/${workflow.input.selector}` and
+leave the other columns unchanged. This set of data will receive data from the
+JSON database based on selector input. Select **Save Changes**.
+
+![FRINX Machine dashboard](http_task.png)
+
+5) **lambda - edit**. Lambda takes data from the http task above and returns
+parsed data (message text) from JSON. Select **Input parameters** and under
+**Lambda value**, insert the following: `${http_<unique_id>.output.body}`. In
+our example, the name is `http_6MZR`. Under **Script expression**, enter the
+following: `return JSON.parse($.lambdaValue)`. Select **Save changes**.
+
+![FRINX Machine dashboard](lambda_task_edit.png)
+
+6) **Post_to_Slack - edit**. Post_to_Slack is a workflow that can be used
+standalone or as a part of other workflows. This workflow sends messages to
+specific destination in Slack. Select **Input parameters** and under
+**slack_webhook_id**, enter the following:
+`T02BFFVUQ/B04MQ2PRWQ1/xw9pWOAm0e4OMPfPxmrI1Jbp`. Under **message_text**, enter
+the following: ${lambda_<unique_id>.output.result.title}. Select 
+**Save Changes**.
+
+![FRINX Machine dashboard](post_to_slack_edit.png)
+
+7) In the upper-right corner of the Workflow Builder, Select
+**Save and execute**. The workflow is now ready to be executed. Under
+**selector**, insert a number between 1 and 200. Select **Execute**.
+
+![FRINX Machine dashboard](execute.png)
+
+8) Select **Executed workflow in detail**. Here you can see that the workflow
+was executed and that every task was completed successfully.
+
+![FRINX Machine dashboard](wf_run_detail.png)
+
+The output (demo Latin JSON) of the workflow in Slack:
+
+![FRINX Machine dashboard](slack_output.png)
+
+You can join the Slack channel where the message about this workflow is sent to
+verify that it was sent successfully:
+https://join.slack.com/share/enQtNDg2ODM4MDgyMjY3My0zYjdhOTNjMTkxYTk3OTRhMGY3MjQ5YWNmYTJlNGRiNTkwZTNmNGVjMGQ2MGY3ODkwMzY2MmY0ODIwN2ZkMjJj
+(Note that entry to this channel may be limited to @elisapolystar.com
+accounts only.)
+
+## Demo: Create a loopback address on devices stored in the inventory
+
+This workflow creates a loopback interface on all devices installed in the
+inventory or, alternatively, on all devices filtered by labels. Labels are
+markers that serve as a differentiator.
+
+1) Check if all devices are installed. You can install them manually or by
+   executing the **Install_all_from_inventory / 1** workflow.
 
 ![FRINX Machine dashboard](devices_dashboard.png)
 
-2) On the main page, select **Explore workflows**. In the **Search by keyword** column, enter *loopback*. The **Create_loopback_all_in_uniconfig / 1** workflow will appear in the list. Under **Actions**, select the corresponding **Run** button for the workflow.
+2) On the main page, select **Explore workflows**. In the **Search by keyword**
+   column, enter `loopback`. The **Create_loopback_all_in_uniconfig / 1**
+   workflow appears in the list. Under **Actions**, select the corresponding
+   **Run** button for the workflow.
 
 ![FRINX Machine dashboard](create_loopback_all_in_uniconfig.png)
 
-4) Under **loopback_id**, insert *77* and select **Execute**. Click on the link that appears.
+3) Under **loopback_id**, enter `77` and select **Execute**. Click on the link
+   that appears.
 
 ![FRINX Machine dashboard](create_loopback_execute.png)
 
-5) All tasks were executed correctly and are completed.
+4) All tasks were executed correctly and are completed.
 
 ![FRINX Machine dashboard](details_of_create_loopback.png)
 
 On the results page, you will see five individual tasks:
 
 ### INVENTORY_get_all_devices_as_dynamic_fork_tasks
-This workflow displays a list of all devices in the inventory or devices filtered by label. It parses the output in the correct format for the dynamic fork, which creates a number of tasks depending on the number of devices in the inventory. 
+This workflow displays a list of all devices in the inventory or devices
+filtered by label. It parses the output in the correct format for the dynamic
+fork, which creates a number of tasks depending on the number of devices in the
+inventory. 
 
 ### SUB_WORKFLOW
-This is the dynamic fork sub-workflow. In this case, it creates **UNICONFIG_write_structured_device_data** for every individual device in the inventory. You can then get detailed information on the progress and succession of every device.
+This is the dynamic fork sub-workflow. In this case, it creates
+**UNICONFIG_write_structured_device_data** for every individual device in the
+inventory. You can then get detailed information on progress and succession for
+every device.
 
 ### UNICONFIG_calculate_diff
-This remote procedure call creates a difference between the actual UniConfig topology devices and the intended UniConfig topology nodes. 
+This remote procedure call creates a difference between the actual UniConfig
+topology devices and the intended UniConfig topology nodes. 
 
 ### UNICONFIG_dryrun_commit
-This remote procedure call resolves the difference between actual and intended device configurations. After all changes are applied, the cli-dryrun journal is read and a remote procedure call output is created and returned. 
+This remote procedure call resolves the difference between actual and intended
+device configurations. After all changes are applied, the cli-dryrun journal is
+read and a remote procedure call output is created and returned. 
 
 ### UNICONFIG_commit
 This is the final task that actually commits the intended configuration to the devices.
 
-## Demo “L3VPN”
+## Demo: L3VPN
 
 <!-- Before running L3VPN, run **Allocate_Root_Pool / 1** workflow and check if lab-vmx1 (device) is already installed.
 
 ![FRINX Machine dashboard](allocate_root_pool_workflow.png)
 -->
 
-- On the FRINX Dashboard, open menu in the top-left corner and select on **L3VPN Automation**.
-- Select **Services**.
-- Select **+ Add service**.
-- Fill in the information as shown below. Select the chain icon to automatically generate the **VPN ID**.
+On the FRINX Dashboard, open the menu in the top-left corner and select
+**L3VPN Automation**.
+
+Select **Services**.
+
+Select **+ Add service**. Fill in the information as shown below. Select the
+chain icon to automatically generate the **VPN ID**.
 
 ![FRINX Machine dashboard](create_vpn_service.png)
 
-- Select **Save changes**.
-- You are redirected to the previous page.
+Select **Save changes**. You are redirected to the previous page.
 
 ![FRINX Machine dashboard](vpn_services.png)
 
-- Select **Commit changes**.
-- Select **Commit changes** again.
-- After committing, you can see all executed tasks and sub-workflows. Select **Go to detail** to review individual processes.
+Select **Commit changes**. Select **Commit changes** again.
+
+After committing, you can see all executed tasks and sub-workflows. Select
+**Go to detail** to review individual processes.
 
 ![FRINX Machine dashboard](l3vpn_status.png)
 
 ### Step 1.
 
-- Navigate back to the **L3VPN Automation** page.
-- Select **Sites**.
-- Locate the **test_site_3b9UQL4i** entry.
+Navigate back to the **L3VPN Automation** page.
+
+Select **Sites**. Locate the `test_site_3b9UQL4i` entry.
 
 ![FRINX Machine dashboard](sites.png)
 
-- For **test_site_3b9UQL4i**, select **Manage** and **Site network access**.
+For `test_site_3b9UQL4i`, select **Manage** and **Site network access**.
 
 ![FRINX Machine dashboard](sites_network_accesses.png)
 
-- Select **Add network access**.
+Select **Add network access**.
 
 ### Step 2.
 
 Enter the following settings:
 
-**General and Service**
-
-**VPN Attachment:** GNS00001002
-
-**BTM Circuit Reference:** CES00000000-05
-
-**Devices:** Select one of the CPE devices.
-
-**SVC Input Bandwith (Mbsp):** 1000
-
-**SVC Output Bandwith (Mbps):** 1000
+**General** and **Service**:
+- **VPN Attachment:** GNS00001005
+- **BTM Circuit Reference:** CES00000000-05
+- **Devices:** Select one of the CPE devices.
+- **SVC Input Bandwith (Mbsp):** 1000
+- **SVC Output Bandwith (Mbps):** 1000
 
 ![FRINX Machine dashboard](create_site_network_access.png)
 
 **Routing Protocol:**
-
-- Select **+ Create Static Protocol**.
-
-**Static Routing LAN:** 10.0.0.0/8
-
-**Static Routing Next Hop:** 10.0.0.1
-
-**Static Routing Lan Tag:** 999
-
-**Bgp Profiles:** 300ms
-
-**Maximum Routes:** 2000
+- Select **+ Create Static Protocol** and **Configure BGP**.
+- **Static Routing LAN:** 10.0.0.0/8
+- **Static Routing Next Hop:** 10.0.0.1
+- **Static Routing Lan Tag:** 999
+- **Bgp Profiles:** 300ms
+- **Maximum Routes:** 2000
 
 ![FRINX Machine dashboard](routing_protocol.png)
 
 **IP Connection**
 
-To automatically generate a provider and customer address, select the chain icon:
+To automatically generate a provider and customer address, select the chain
+icon:
 
 ![FRINX Machine dashboard](ico_chain.png)
 
@@ -350,8 +526,6 @@ Select **Save Changes**.
 ### Step 3.
 
 Select **Commit Changes**.
-
-![FRINX Machine dashboard](sites_network_accesses_2.png)
 
 Wait until all tasks are completed.
 
