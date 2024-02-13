@@ -7,7 +7,7 @@ To enable TLS for RESTCONF, perform the following two steps:
 1. Set up key-store and trust-store to hold all keys and certificates. If
     authentication of individual clients is not required, trust-store is not
     required. Key-store must always be initialized.
-2. Enable TLS in UniConfig via the **lighty** configuration file.
+2. Enable TLS in UniConfig via the **application.properties** configuration file.
 
 ## Set key-store and trust-store
 
@@ -70,7 +70,7 @@ certificate from the generated key-pair that we have pushed into the keystore
 
 ```
 keytool -export -keystore .keystore -alias jetty -file odl.cer
-penssl pkcs12 -in .keystore -out certificate.pem
+openssl pkcs12 -in .keystore -out certificate.pem
 ```
 !!!
 
@@ -83,88 +83,65 @@ Modify the following configuration file at a path relative to the UniConfig root
 directory:
 
 ```
-vim config/lighty-uniconfig-config.json
+vim config/application.properties
 ```
 
-Next, append a TLS configuration snippet to the configuration file (the snippet
-must be placed under the root JSON node).
+Next, edit TLS configuration section, uncommenting and editing the necessary properties.
 
 The example snippet below enables TLS authentication, disables user-based
 authentication (hence trust-store is not required) and points UniConfig to the
 key-store file created in the previous section:
 
-```json
-{
-  "tls": {
-    "enabledTls": true,
-    "enabledClientAuthentication": false,
-    "keystorePath": "tls/.keystore",
-    "keystorePassword": "key-pass"
-  }
-}
+```properties
+# TLS settings
+server.http2.enabled=true
+server.ssl.enabled=true
+server.ssl.protocol=TLS
+server.ssl.client-auth=none
+server.ssl.enabled-protocols=TLSv1.2,TLSv1.3
+#server.ssl.ciphers=
+#server.ssl.trust-store=tls/.truststore
+#server.ssl.trust-store-password=trust-pass
+server.ssl.key-store=tls/.keystore
+server.ssl.key-store-password=passtest
+# Enable SNI
+#server.ssl.sni-enabled=true
 ```
 
-If your deployment requires authentication for individual RESTCONF users, you
-should also specify the trust-store fields by setting
-`enabledClientAuthentication` to `true`.
+If your deployment requires authentication for individual RESTCONF users,
+truststore is **required** and you need to set 
+`server.ssl.client-auth=need`
 
-```json
-{
-  "tls": {
-    "enabledTls": true,
-    "enabledClientAuthentication": true,
-    "keystorePath": "tls/.keystore",
-    "keystorePassword": "key-pass",
-    "truststorePath": "tls/.truststore",
-    "truststorePassword": "trust-pass"
-  }
-}
+```properties
+# TLS settings
+server.http2.enabled=true
+server.ssl.enabled=true
+server.ssl.protocol=TLS
+server.ssl.client-auth=need
+#server.ssl.enabled-protocols=TLSv1.2,TLSv1.3
+#server.ssl.ciphers=
+server.ssl.trust-store=tls/.truststore
+server.ssl.trust-store-password=trust-pass
+server.ssl.key-store=tls/.keystore
+server.ssl.key-store-password=passtest
+# Enable SNI
+#server.ssl.sni-enabled=true
 ```
 
-You can also specify included or excluded cipher suites and TLS versions, which
-then can or cannot be used to establish a secured tunnel between the Jetty
-server and clients.
+JVM provides secure defaults, but you can also specify included cipher suites and TLS version,
+overriding default settings.
+Example configuration
+that includes support for TLS 1.2 and TLS 1.3 with some of the most common and strongest ciphers available:
 
-The following default configuration is based on actual recommendations (adjust
-as needed):
-
-```json
-{
-  "tls": {
-    "includedProtocols": [
-      "TLSv1.2",
-      "TLSv1.3"
-    ],
-    "excludedProtocols": [
-      "TLSv1",
-      "TLSv1.1",
-      "SSL",
-      "SSLv2",
-      "SSLv2Hello",
-      "SSLv3"
-    ],
-    "includedCipherSuites": [
-      "TLS_ECDHE.*",
-      "TLS_DHE_RSA.*"
-    ],
-    "excludedCipherSuites": [
-      ".*MD5.*",
-      ".*RC4.*",
-      ".*DSS.*",
-      ".*NULL.*",
-      ".*DES.*"
-    ]
-  }
-}
+```properties
+server.ssl.enabled-protocols=TLSv1.2,TLSv1.3
+server.ssl.ciphers=TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 ```
 
-!!!
-It is sufficient to specify only included protocols and cipher suites (so that
-all other entries are denied), or excluded protocols and cipher suites (so that
-all other entries are permitted).
+SNI (Server Name Indication) is disabled by default.
+To enable it, uncomment the line as shown below:
 
-If you specify the same entries under both included and excluded cipher suites
-or protocols, the excluded entry is given higher priority. For example, the
-final set of usable cipher suites is: setOf(includedCipherSuites),
-setOf(excludedCipherSuites).
-!!!
+```properties
+# Enable SNI
+server.ssl.sni-enabled=true
+```
