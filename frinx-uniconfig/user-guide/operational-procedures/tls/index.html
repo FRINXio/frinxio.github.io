@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761057589085">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.761149012036">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.761057589085" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.761149012036" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.761149012036" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761057589085" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761057589085" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.761149012036" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.761149012036" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -258,9 +258,9 @@
 <p>To enable TLS for RESTCONF, perform the following two steps:</p>
 <ol>
 <li>Set up key-store and trust-store to hold all keys and certificates. If
-authentication of individual clients is not required, trust-store is not
-required. Key-store must always be initialized.</li>
-<li>Enable TLS in UniConfig via the <strong>lighty</strong> configuration file.</li>
+authentication of individual clients is not required, trust-store is also
+not required. Key-store must always be initialized.</li>
+<li>Enable TLS in UniConfig via the <strong>application.properties</strong> configuration file.</li>
 </ol>
 <doc-anchor-target id="set-key-store-and-trust-store">
     <h2>
@@ -282,8 +282,8 @@ cd ./tls</code></pre>
 already own the certificate that you want to use for identification of
 UniConfig on the RESTCONF layer:</p>
 <ol type="a">
-<li>Create a new key-store with the generated RSA key-pair (the example below
-uses a length of 2048 and validity of 365 days). After executing the
+<li>Create a new key-store with the generated RSA key-pair (the example
+below uses a length of 2048 and validity of 365 days). After executing the
 following command, the prompt will ask you for information about the
 currently generated certificate that is pushed into the newly generated
 key-store secured by a password (this secret will be used later in the
@@ -302,8 +302,8 @@ certificate that you want to use for authentication in ODL).</li>
 </li>
 <li><p>(Optional step) Create a new trust-store using an existing certificate (an
 empty trust-store cannot be created). If you have multiple client
-certificates, they can be pushed to trust-store by executing the same command
-multiple times (the alias must be unique for each of the imported
+certificates, they can be pushed to trust-store by executing the same
+command multiple times (the alias must be unique for each of the imported
 certificates). For example:</p>
 </li>
 </ol>
@@ -349,7 +349,7 @@ certificate from the generated key-pair that we have pushed into the keystore
 (PKCS12 or OPENSSL format):</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">keytool -export -keystore .keystore -alias jetty -file odl.cer
-penssl pkcs12 -in .keystore -out certificate.pem</code></pre>
+openssl pkcs12 -in .keystore -out certificate.pem</code></pre>
 </doc-codeblock></div>
         </div>
     </div>
@@ -365,95 +365,60 @@ storages and explicitly enable TLS via a flag.</p>
 <p>Modify the following configuration file at a path relative to the UniConfig root
 directory:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">vim config/lighty-uniconfig-config.json</code></pre>
+<pre class="language-none"><code v-pre class="language-none">vim config/application.properties</code></pre>
 </doc-codeblock></div>
-<p>Next, append a TLS configuration snippet to the configuration file (the snippet
-must be placed under the root JSON node).</p>
+<p>Next, edit the TLS configuration section, un-commenting and editing the relevant
+properties.</p>
 <p>The example snippet below enables TLS authentication, disables user-based
 authentication (hence trust-store is not required) and points UniConfig to the
 key-store file created in the previous section:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-  &quot;tls&quot;: {
-    &quot;enabledTls&quot;: true,
-    &quot;enabledClientAuthentication&quot;: false,
-    &quot;keystorePath&quot;: &quot;tls/.keystore&quot;,
-    &quot;keystorePassword&quot;: &quot;key-pass&quot;
-  }
-}</code></pre>
+<pre class="language-properties"><code v-pre class="language-properties"># TLS settings
+server.http2.enabled=true
+server.ssl.enabled=true
+server.ssl.protocol=TLS
+server.ssl.client-auth=none
+server.ssl.enabled-protocols=TLSv1.2,TLSv1.3
+#server.ssl.ciphers=
+#server.ssl.trust-store=tls/.truststore
+#server.ssl.trust-store-password=trust-pass
+server.ssl.key-store=tls/.keystore
+server.ssl.key-store-password=passtest
+# Enable SNI
+#server.ssl.sni-enabled=true</code></pre>
 </doc-codeblock></div>
-<p>If your deployment requires authentication for individual RESTCONF users, you
-should also specify the trust-store fields by setting
-<code v-pre>enabledClientAuthentication</code> to <code v-pre>true</code>.</p>
+<p>If your deployment requires authentication for individual RESTCONF users,
+trust-store is <strong>required</strong> and you need to set
+<code v-pre>server.ssl.client-auth=need</code></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-  &quot;tls&quot;: {
-    &quot;enabledTls&quot;: true,
-    &quot;enabledClientAuthentication&quot;: true,
-    &quot;keystorePath&quot;: &quot;tls/.keystore&quot;,
-    &quot;keystorePassword&quot;: &quot;key-pass&quot;,
-    &quot;truststorePath&quot;: &quot;tls/.truststore&quot;,
-    &quot;truststorePassword&quot;: &quot;trust-pass&quot;
-  }
-}</code></pre>
+<pre class="language-properties"><code v-pre class="language-properties"># TLS settings
+server.http2.enabled=true
+server.ssl.enabled=true
+server.ssl.protocol=TLS
+server.ssl.client-auth=need
+#server.ssl.enabled-protocols=TLSv1.2,TLSv1.3
+#server.ssl.ciphers=
+server.ssl.trust-store=tls/.truststore
+server.ssl.trust-store-password=trust-pass
+server.ssl.key-store=tls/.keystore
+server.ssl.key-store-password=passtest
+# Enable SNI
+#server.ssl.sni-enabled=true</code></pre>
 </doc-codeblock></div>
-<p>You can also specify included or excluded cipher suites and TLS versions, which
-then can or cannot be used to establish a secured tunnel between the Jetty
-server and clients.</p>
-<p>The following default configuration is based on actual recommendations (adjust
-as needed):</p>
+<p>JVM provides secure defaults, which you can override by specifying included
+cipher suites and TLS versions.</p>
+<p>The following example configuration includes support for TLS 1.2 and TLS 1.3
+with some of the most common and strongest ciphers available:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-  &quot;tls&quot;: {
-    &quot;includedProtocols&quot;: [
-      &quot;TLSv1.2&quot;,
-      &quot;TLSv1.3&quot;
-    ],
-    &quot;excludedProtocols&quot;: [
-      &quot;TLSv1&quot;,
-      &quot;TLSv1.1&quot;,
-      &quot;SSL&quot;,
-      &quot;SSLv2&quot;,
-      &quot;SSLv2Hello&quot;,
-      &quot;SSLv3&quot;
-    ],
-    &quot;includedCipherSuites&quot;: [
-      &quot;TLS_ECDHE.*&quot;,
-      &quot;TLS_DHE_RSA.*&quot;
-    ],
-    &quot;excludedCipherSuites&quot;: [
-      &quot;.*MD5.*&quot;,
-      &quot;.*RC4.*&quot;,
-      &quot;.*DSS.*&quot;,
-      &quot;.*NULL.*&quot;,
-      &quot;.*DES.*&quot;
-    ]
-  }
-}</code></pre>
+<pre class="language-properties"><code v-pre class="language-properties">server.ssl.enabled-protocols=TLSv1.2,TLSv1.3
+server.ssl.ciphers=TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</code></pre>
 </doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>It is sufficient to specify only included protocols and cipher suites (so that
-all other entries are denied), or excluded protocols and cipher suites (so that
-all other entries are permitted).</p>
-<p>If you specify the same entries under both included and excluded cipher suites
-or protocols, the excluded entry is given higher priority. For example, the
-final set of usable cipher suites is: setOf(includedCipherSuites),
-setOf(excludedCipherSuites).</p>
-        </div>
-    </div>
-</div>
+<p>SNI (Server Name Indication) is disabled by default. To enable it, uncomment the
+line below:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-properties"><code v-pre class="language-properties"># Enable SNI
+server.ssl.sni-enabled=true</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
