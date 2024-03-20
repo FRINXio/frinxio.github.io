@@ -392,7 +392,7 @@ crypto.encryption-rotation-batch-size=10
 There are two settings related to encryption in the **install-node RPC**
 request:
 
-* `uniconfig-config:crypto` - Specifies a path to the public key on the device:
+* `uniconfig-config:device-crypto` - Specifies a path to the public key on the device:
     - `public-key-path` - Leaf with RFC-8040 path. If a path to the public key is
   specified and exists on the device, the global-device encryption model is
   used. Otherwise, the global-only encryption model is used.
@@ -427,7 +427,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connectio
             "netconf-node-topology:sleep-factor": 1.0,
             "uniconfig-config:uniconfig-native-enabled": true,
             "netconf-node-topology:edit-config-test-option": "set",
-            "uniconfig-config:crypto": {
+            "uniconfig-config:device-crypto": {
                 "public-key-path": "/crypto/pki/config-keys=config_key/pub-key",
                 "public-key-cipher-type": "RSA"
             },
@@ -582,7 +582,7 @@ curl --location --request POST 'http://127.0.0.1:8181/rests/operations/connectio
             "netconf-node-topology:sleep-factor": 1.0,
             "uniconfig-config:install-uniconfig-node-enabled": true,
             "uniconfig-config:uniconfig-native-enabled": true,
-            "uniconfig-config:crypto": {
+            "uniconfig-config:device-crypto": {
                 "public-key-path": "/keys/public-key"
             }
         }
