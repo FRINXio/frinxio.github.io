@@ -15,6 +15,8 @@ To start installing devices open up FRINX Machine UI.
 
 ## Open FRINX Machine UI
 
+Note: you can use our demo at https://demo.frinx.io 
+
 Open your browser and go to `[host_ip]` if installed locally go to
 `https://localhost`. This is the GUI (UniConfig UI) for managing all of
 your devices. You should see a screen like this:
