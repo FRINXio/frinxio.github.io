@@ -141,7 +141,7 @@ Note: following snippets refer to devices present in sample-topology demo
 After the device is added we can install it to UniConfig.
 At the FRINX Machine **Dashboard** under **Device Inventory** section click on **Explore & configure devices** panel. The page titled **Devices** opens - it lists all devices from Device inventory.
 
-Click **Install** button located on the row next to a device which you want to install - after successful installation button changed to green button with the text **Installed**.  
+Click blue **Install** button located on the row next to a device which you want to install - after successful installation button will change to green button with the text **Installed**.  
 
 ![Install device from inventory](fm_install_from_inventory.gif)
 
