@@ -52,33 +52,36 @@ output from all of the tasks completed within this workflow.
 
 ![Executed Workflow Details](workflows_detailswindows.png)
 
-This following sections are available within the output window:
+This following sections are available within the output window or on the page with details for executed workflow:
 
-`Task Details`: This tab gives a detailed list of the individual tasks
-executed within the conductor, a log of each tasks start and end time,
-and a status of 'Completed' or 'Failed'.
+`Task Details`: This tab gives a detailed list of the individual tasks (ordered list of tasks - **task type**)
+executed within the conductor, a log of each tasks **start time** and **end time**,
+and a **status** of 'Completed' or 'Failed'. If task is a workflow (that is the parent workflow is calling another workflow)
+we refer to is as **subworkflow** and there is an icon which navigate us to display a detailed list of the individual tasks from which consist the subworkflow. 
 
-`Input/Output`: This is the input of the API call and the results from
-the API call.
+`Input/Output`: This tab contains **Workflow Input** which can be e.g. inputs for some API call and **Workflow Output** which can be e.g. result from
+some API call.
 
 `JSON`: This tab gives a detailed output in JSON format of all
-executed tasks from within the workflow. Select the `Unescape` button
+executed tasks from which consist the workflow. Click the **Unescape** button
 to make the output more user-friendly to read.
 
-`Edit & Rerun`: Allows you to make changes to your initial workflow,
-creating a new workflow without effecting the original.
+`Edit & Rerun`: This tab allows you to change the inputs of the previously executed workflow and execute the new instance by clicking of **Rerun** button.
 
 `Execution Flow`: A structured map from the conductor lays out the
 path of tasks executed from start to finish, any forks in the path are
 also shown here.
 
-If you click on any of the tasks you will receive a pop-up window that
-gives:
+`Task Details`: As we already explained this tab lists tasks from which the workflow consists - 
+if you click on any of the tasks you will receive a pop-up window that
+contains these tabs:
 
-1. The option to review a summary of input and output of the API call.
-2. JSON output of the completed task with that goes into greater detail
-    about the task execution.
-3. Log status.
+1. `Summary`: Provide a summary for executed task e.g. **Task Ref. Name**, **Description**, **Input**, **Output**...
+2. `JSON`: JSON output of the completed task with that goes into greater detail. 
+    about the task execution. Click the **Unescape** button to make the output more user-friendly to read.
+3. `Logs`: Log status.
+
+Pop-up window can be exited via clicking close-task-details icon.
 
 ### Sub-Workflows
 
