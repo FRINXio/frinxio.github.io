@@ -112,6 +112,7 @@ Note: this device is not present in sample-topology
 ```
 
 ### Nokia (netconf)
+Note: this device is not present in sample-topology
 
 ```json
 {
