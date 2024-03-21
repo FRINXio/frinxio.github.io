@@ -5,7 +5,7 @@ creates a Layer 2 VPN Point-to-Point connection within Workflow Manager.
 
 ## Navigating through Workflow Manager
 
-From the FRINX Machine **Dashboard** you can either select
+From the FRINX Machine **Dashboard** you can either
 under section **Workflow Manager** click panel **Explore workflows**
 or select the menu tab in
 the upper left-hand corner and click the menu item **Workflow manager**.
