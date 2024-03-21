@@ -43,7 +43,9 @@ link **Executed workflow in detail** to see the details of the executed workflow
 
 ### Output of the Executed Workflow
 
-On the `Workflows` page you will see your executed workflows.
+You can see the detail of executed workflow after clicking link **Executed workflow in detail** immediatelly after executing of workflow.
+If you do not use this opportunity you can navigate to **Executed workflows** page and to find executed workflow in the list of executed workflows.
+(From the FRINX Machine **Dashboard** under section **Workflow Manager** click panel **Executed workflows**)
 
 Select the workflow **Create_L2VPN_P2P_OC_uniconfig** to see the
 output from all of the tasks completed within this workflow.
