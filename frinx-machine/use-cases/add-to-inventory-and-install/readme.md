@@ -88,6 +88,7 @@ Note: following snippets refer to devices present in sample-topology demo
 ```
 
 ### CALIX (netconf)
+Note: this device is not present in sample-topology
 
 ```json
 {
