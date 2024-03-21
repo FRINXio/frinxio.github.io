@@ -137,6 +137,45 @@ Note: this device is not present in sample-topology
 }
 ```
 
+### SAOS 6 (cli)
+
+```json
+{
+	"cli": {
+		"cli-topology:host": "sample-topology",
+		"cli-topology:port": "10001",
+		"cli-topology:password": "frinx",
+		"cli-topology:username": "frinx",
+		"cli-topology:device-type": "saos",
+		"cli-topology:journal-size": 500,
+		"cli-topology:device-version": "6",
+		"cli-topology:parsing-engine": "one-line-parser",
+		"cli-topology:transport-type": "ssh",
+		"cli-topology:dry-run-journal-size": 180
+	}
+}
+```
+
+### SAOS 8 (cli)
+
+```json
+{
+	"cli": {
+		"cli-topology:host": "sample-topology",
+		"cli-topology:port": "10002",
+		"cli-topology:password": "frinx",
+		"cli-topology:username": "frinx",
+		"cli-topology:device-type": "saos",
+		"cli-topology:journal-size": 500,
+		"cli-topology:device-version": "8",
+		"cli-topology:parsing-engine": "one-line-parser",
+		"cli-topology:transport-type": "ssh",
+		"cli-topology:dry-run-journal-size": 180
+	}
+}
+```
+
+
 
 ## Install the new device from Inventory
 
