@@ -98,7 +98,7 @@ standardized workflows
 
 A detailed description of how to run workflows and tasks, along with
 examples, can be found in the official [Netflix Conductor
-documentation](https://netflix.github.io/conductor/configuration/workflowdef)
+documentation](https://conductor-oss.github.io/conductor/documentation/configuration/workflowdef/index.html)
 
 ## Operating FRINX Machine
 
