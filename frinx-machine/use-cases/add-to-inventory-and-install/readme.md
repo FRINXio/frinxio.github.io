@@ -40,10 +40,10 @@ Note: following snippets refer to devices present in sample-topology demo
 {
     "netconf":{
         "netconf-node-topology:host":"sample-topology",
-        "netconf-node-topology:port":17200,
+        "netconf-node-topology:port":17000,
         "netconf-node-topology:tcp-only":false,
-        "netconf-node-topology:username":"USERNAME",
-        "netconf-node-topology:password":"PASSWORD",
+        "netconf-node-topology:username":"cisco",
+        "netconf-node-topology:password":"cisco",
         "netconf-node-topology:session-timers": {
             "netconf-node-topology:keepalive-delay":5
         },
