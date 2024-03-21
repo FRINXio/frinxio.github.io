@@ -5,24 +5,25 @@ creates a Layer 2 VPN Point-to-Point connection within Workflow Manager.
 
 ## Navigating through Workflow Manager
 
-From the FRINX Machine dashboard you can either select
-`Workflow Manager` --> `Explore Workflows` --> `Explore`, or select the menu tab in
-the upper left-hand corner and select `Workflow Manager`.
+From the FRINX Machine **Dashboard** you can either select
+under section **Workflow Manager** click panel **Explore workflows**
+or select the menu tab in
+the upper left-hand corner and click the menu item **Workflow manager**.
 
-You can then search for **Create_L2VPN_P2P_OC_uniconfig** or scroll
-down to find it within the inventory of prebuilt workflows.
+On the page **Workflow definitions** fill in search box **Search workflow by name** the name of workflow: **Create_L2VPN_P2P_OC_uniconfig** and click **Search** button or scroll
+down to find it in the list of prebuilt worflows.
 
 ![Frinx Machine Dashboard](FM_dashboard_menu.png)
 
-![Workflows Dashboard](workflows_dash.png)
+![Workflows definitions page](workflows_dash.png)
 
-Once you have located the workflow press the **Play** button to the
-right of the workflow, this will navigate you to the workflow
+Once you have located the workflow press the **Play** button located to the
+right of the workflow, this will open the form with the title **Create_L2VPN_P2P_OC_uniconfig** - the workflow
 configuration window.
 
 ## Configuring the Workflow
 
-Input is pre-filled with following data:
+The configuring form for workflow **Create_L2VPN_P2P_OC_uniconfig** contains inputs pre-filled with following data:
 
 ```
 node01: IOS01
@@ -30,15 +31,15 @@ node02: IOS02
 interface01: GigabitEthernet1
 interface02: GigabitEthernet3
 vcid: 444
+zone: http://{uniconfig_host}/rests
 ```
 
-![L2 VPN Configuration](create-L2-vpn-config.png)
+![Workflow Create_L2VPN_P2P_OC_uniconfig: L2 VPN Configuration](create-L2-vpn-config.png)
 
-Once you have completed, press the **Execute** button, a numeric link
-will populate to the left of the **Execute** button. Click on this
-numeric link to see the output of the executed workflow.
+Once you have completed, press the **Execute workflow** button, to the left of the **Execute workflow** button will appear the link **Executed workflow in detail**. Click on this
+link **Executed workflow in detail** to see the details of the executed workflow.
 
-![Numeric Link](create-L2-vpn-numericlink.png)
+![Executed workflow in detail - Link](create-L2-vpn-numericlink.png)
 
 ### Output of the Executed Workflow
 
