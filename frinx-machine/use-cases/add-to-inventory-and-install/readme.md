@@ -2,18 +2,18 @@
 
 ## Adding device to inventory
 
-To add a new device to inventory, click on the **Add device** button in the
-**Device inventory** tab.
+At the FRINX Machine **Dashboard** under **Device Inventory** section click on **Add new device** panel. The page with the form titled **Add device** opens.
 
 ![Add device to inventory](Add_and_install_new_device.gif)
 
 ## JSON examples
 
-New devices are added to inventory by JSON code snippets. They are similar to [Blueprints](/frinx-workflow-manager/blueprints)
-with one addition: **device_id** must be specified in the snippet.
+New devices added to Device inventory are defined by JSON code snippets. (These snippets are part of UniConfig RPC connection-manager:install-node.) They are similar to [Blueprints](/frinx-workflow-manager/blueprints). This snippet is going to be filled into **Mount parameters** field.
 
-To add a new device from Blueprint, toggle the "Blueprints" switch in the form and
-choose the blueprint that you want to use.
+Another way is to add a new device from blueprint: toggle the **Use blueprint?** switch in the form and
+choose the blueprint that you want to use from **Select blueprint** drop-down list.
+
+Note: following snippets refer to devices present in sample-topology demo
 
 ### Cisco classic IOS (cli)
 
@@ -138,9 +138,9 @@ choose the blueprint that you want to use.
 
 ## Install the new device from Inventory
 
-Now that the device is added we can install it. We used to need dedicated workflow to install device form inventory, but now
-it can be done purely via UI. Click on **Explore** in **Explore & configure devices** tab, under **Device Inventory** section.
+After the device is added we can install it to UniConfig.
+At the FRINX Machine **Dashboard** under **Device Inventory** section click on **Explore & configure devices** panel. The page titled **Devices** opens - it lists all devices from Device inventory.
 
 ![Install device from inventory](fm_install_from_inventory.gif)
 
-If you did everything correctly, your devices is now in inventory and installed, ready to be operated through Frinx Machine.
+If you follow instruction properly, your devices are now listed in Device inventory and installed, ready to be operated through Frinx Machine.
