@@ -4,19 +4,19 @@ This workflow creates a loopback interface on all devices installed in the inven
 
 1) Check if all devices are installed. You can install them manually or by executing the **Install_all_from_inventory / 1** workflow.
 
-![FRINX Machine dashboard](devices_dashboard.png)
+![FRINX Machine dashboard](../demo_pics/devices_dashboard.png)
 
 2) On the main page, select **Explore workflows**. In the **Search by keyword** column, enter *loopback*. The **Create_loopback_all_in_uniconfig / 1** workflow will appear in the list. Under **Actions**, select the corresponding **Run** button for the workflow.
 
-![FRINX Machine dashboard](create_loopback_all_in_uniconfig.png)
+![FRINX Machine dashboard](../demo_pics/create_loopback_all_in_uniconfig.png)
 
 4) Under **loopback_id**, insert *77* and select **Execute**. Click on the link that appears.
 
-![FRINX Machine dashboard](create_loopback_execute.png)
+![FRINX Machine dashboard](../demo_pics/create_loopback_execute.png)
 
 5) All tasks were executed correctly and are completed.
 
-![FRINX Machine dashboard](details_of_create_loopback.png)
+![FRINX Machine dashboard](../demo_pics/details_of_create_loopback.png)
 
 On the results page, you will see five individual tasks:
 
