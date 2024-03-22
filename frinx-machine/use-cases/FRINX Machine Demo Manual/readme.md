@@ -12,7 +12,7 @@ Using the Demo Config Manager:
 2) Make sure that the device you want to configure is installed. If not, select **Install** first.
 3) For this demo, we use the **IOS01** device. Locate the device in the list and select the corresponding gear icon on the right. (If you see a message saying **Transaction expired**, select **Refresh**).
 
-![FRINX Machine dashboard](install_device.png)
+![Device Inventory - Devices - list of devices](install_device.png)
 
 4) For the **Loopback0** interface, change the **enabled** status to *false*.
 5) Select **Save** to save your changes.
@@ -20,7 +20,7 @@ Using the Demo Config Manager:
 7) To view the set of commands used for the change, select **Dry run**.
 8) To apply changes to the device, select **Commit to network**. You can also see the changes in the Operational data store.
 
-![FRINX Machine dashboard](config_dashboard.png)
+![Device Inventory - configure device IOS01](config_dashboard.png)
 
 To revert changes made to the device configuration:
 
@@ -47,11 +47,11 @@ Now we will take a look at how to create a new workflow. The new workflow will b
 
 2) In the **Name** type the name of your workflow (please keep in mind that name of the workflow cannot be later changed). **Description** stands for additional info of the workflow - you can leave it blank. Once the workflow is created **Label** can help you find your workflow in **Explore workflows** faster but you can leave it blank as well. After inserting all data click on **Save changes**.
 
-![FRINX Machine dashboard](create_new_workflov.png)
+![The form - Create new workflow](create_new_workflov.png)
 
 After saving changes you will be redirected to canvas. Here we will add tasks and subworkflow in our workflow.
 
-![FRINX Machine dashboard](workflow_map.png)
+![Workflow builder UI - create or update workflow](workflow_map.png)
 
 3) Click + on the **http** and **labmda** under **System tasks** and **Post_to_Slack** under **Workflows**. All tasks and subworkflows are added on same place in the canvas so you need to move them to actually see them. For connecting all parts of the workflow hower over OUT/IN where + sign will appear. Connect all parts in this way: START - http - lamda - Post_to_Slack - END. As you can see each task and workflow has its own set of characters after its name - these are reference aliases and work as unique identifier.
 
@@ -112,22 +112,22 @@ Now we can create a new workflow from scratch:
 
 2) Enter details for the new workflow. Under **Name**, enter a name for your workflow (note that this name cannot be changed later). The **Description** is for additional information about the workflow and can be left empty. **Label** can help you to find your workflow later under **Explore workflows**, but can also be left empty. Select **Save changes** when ready.
 
-![FRINX Machine dashboard](new_wf_name.png)
+![The form - Create new workflow](new_wf_name.png)
 
 3) Under **System tasks**, click the **+** sign for the **lambda**, **decision** and **terminate** tasks. Under **Workflows**, click the **+** sign for **Device_identification**. Tasks and sub-workflows are added on top of each other on the canvas and can be dragged around. To connect all parts of the workflow, hover over **IN** and **OUT** where the **+** sign appears.
 Connect the parts as follows: **START** - **lambda** - **decision** - **(other)** to **Device_identification** and **default** to **terminate**. Each task and workflow has a reference alias after its name, which works as unique a identifier.
 
-![FRINX Machine dashboard](custom_wf_001.PNG)
+![Workflow builder UI - create or update workflow](custom_wf_001.PNG)
 
 Above every task or workflow there are two icons:
 
 **Update:**
 
-![FRINX Machine dashboard](update.png)
+![Workflow builder UI - icon Edit task](update.png)
 
 **Remove/Expand:**
 
-![FRINX Machine dashboard](remove_expand.png)
+![[Workflow builder UI - icon Menu](remove_expand.png)
 
 4) **lambda** task: Makes a decision on which status to choose based on the embedded port. In this example we will only consider ports 10000–10004, and others are ignored. The lambda task lets you enter a small code (lambda - function without name) into the workflow builder.
 
@@ -146,7 +146,7 @@ if ($.lambdaValue >= 10000 && $.lambdaValue < 10005) {
 }
 ```
 
-![FRINX Machine dashboard](lambda_1_body.PNG)
+![Workflow builder UI - icon Edit task clicked - form for editing of lambda task](lambda_1_body.PNG)
 
 5) **decision** task: Makes a different kind of decision from the lambda task discussed above. This task works like a switch on a track, sending the train one way or another. The data needed to make a decision is supplied by the lambda task.
 
@@ -154,13 +154,13 @@ In the **Input parameters** tab, delete the default parameter **foo**. For the *
 
 If the input value for **decision** is **other**, it directs the flow towards **device_identification**. If the input value is false, it directs the flow towards **terminate**. This corresponds to the way we connected the cells in the workflow builder.
 
-![FRINX Machine dashboard](decision_1_body.PNG)
+![Workflow builder UI - icon Edit task clicked - form for editing of desision task](decision_1_body.PNG)
 
 6) **terminated** task:
 
 In the **Input parameters** tab, enter *COMPLETED* (or *FAILED*, at your discretion) in the **Termination status** field. You can enter whatever message you want in the **Expected workflow output** field (for example, *Device not supported.*)
 
-![FRINX Machine dashboard](terminated_1_body.PNG)
+![Workflow builder UI - icon Edit task clicked - form for editing of terminate task](terminated_1_body.PNG)
 
 7) **Device_identification** task:
 
@@ -178,11 +178,11 @@ password: `${workflow.input.password}`
 
 Like we mentioned above, in this demo workflow we will assume that login credentials are the same everywhere.
 
-![FRINX Machine dashboard](device_identification_1_body.PNG)
+![Workflow builder UI - icon Edit task clicked - form for editing of subworkflow](device_identification_1_body.PNG)
 
 8) Now we can add more tasks. In the left column under **System tasks**, we can add another **lambda**. In the **Workflows** section, you can find **Read_journal_cli_device**. Let us place them next to each other after **Device_identification** and concatenate them:
 
-![FRINX Machine dashboard](new_lambda_and_read_journal.PNG)
+![Workflow builder UI - adding more tasks](new_lambda_and_read_journal.PNG)
 
 9) Second **lambda**: Enter `${Device_identificationRef_f7I6.output}` as the lambda value, meaning "take the output from the previous **Device_identification** task and use that".
 
@@ -198,21 +198,21 @@ if ($.lambdaValue.sw == 'saos') {
 
 A translation of what is happening here: "If the identified device is of the type *saos*, then extract the name from the output message of the previous task, change the letters to uppercase, extract the version from the output message of the previous task, glue them together and add `_1` (because that is how devices are named in this demo topology".
 
-![FRINX Machine dashboard](lambda_2_body.PNG)
+![Workflow builder UI - icon Edit task clicked - form for editing of second lambda task](lambda_2_body.PNG)
 
 10) **Read_journal_cli_device**: In the **Input parameters** tab under **device_id**, enter `${lambda_ZW66.output.result}`.
 
-![FRINX Machine dashboard](read_journal_body.PNG)
+![Workflow builder UI - icon Edit task clicked - form for editing of second subworkflow](read_journal_body.PNG)
 
 11) The output from **Read_journal_cli_device** is concatenated with *END*, as is the output from **terminated**. Thus we have closed our custom workflow.
 
-![FRINX Machine dashboard](custom_task_final.PNG)
-![FRINX Machine dashboard](custom_task_final_all.PNG)
+![Workflow builder UI - final workflow design](custom_task_final.PNG)
+![Workflow builder UI - final workflow design](custom_task_final_all.PNG)
 
 12) Save and run your workflow.
 
-![FRINX Machine dashboard](save_and_run.png)
-![FRINX Machine dashboard](save_and_run_2.png)
+![Workflow builder UI - Actions - Save workflow](save_and_run.png)
+![Workflow builder UI - clicked Save and execute button - form for the workflow](save_and_run_2.png)
 
 Next steps:
 
