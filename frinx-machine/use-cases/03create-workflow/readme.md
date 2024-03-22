@@ -97,7 +97,7 @@ Above every task or workflow there are two icons:
 
 **Remove/Expand:**
 
-![[Workflow builder UI - icon Menu](../demo_pics/remove_expand.png)
+![Workflow builder UI - icon Menu](../demo_pics/remove_expand.png)
 
 4) **lambda** task: Makes a decision on which status to choose based on the embedded port. In this example we will only consider ports 10000–10004, and others are ignored. The lambda task lets you enter a small code (lambda - function without name) into the workflow builder.
 
