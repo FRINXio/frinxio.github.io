@@ -23,7 +23,7 @@ repository](https://github.com/FRINXio/FRINX-machine)
 FRINX-machine can be installed in Kubernetes using the [Helm chart](https://artifacthub.io/packages/helm/frinx-helm-charts/frinx-machine)
 !!!
 
-## FRINX Machine components
+## FRINX Machine core components
 
 ### FRINX UniConfig
 
@@ -41,7 +41,7 @@ FRINX-machine can be installed in Kubernetes using the [Helm chart](https://arti
 -   Ensures high availability, reducing network outages and down time
 -   Executes commands on multiple devices simultaneously
 
-### Netflix Conductor (workflow engine)
+### Netflix Conductor (workflow engine) - core of Workflow manager
 
 -   Atomic tasks are chained together into more complex workflows
 -   Defines, executes and monitors workflows (via REST or UI)
@@ -51,15 +51,20 @@ be highly scalable open-source technology that integrates very well with
 FRINX UniConfig. Further information about conductor can be found at:
 
 -   **Sources:** https://github.com/Netflix/conductor
--   **Docs:** https://netflix.github.io/conductor/
+-   **FRINXio sources:** https://github.com/FRINXio/conductor-community
+-   **Docs:** https://conductor-oss.github.io/conductor/index.html
 
-### Elasticsearch (inventory and logs)
+### Postgres database - core of Device inventory
 
--   Stores inventory data in near real-time
+-   Stores inventory data
+
+### Monitoring software: loki + grafana + influxdb + telegraf - core of Monitoring
+
 -   Stores workflow execution and meta data
 -   Stores UniConfig logs
+-   Stores docker container logs
 
-### UniConfig UI (user interface)
+### UniConfig UI (user interface) aka Frinx frontend
 
 -   This is the primary user interface for the FRINX Machine
 -   Allows users to create, edit or run workflows and monitor any open
@@ -67,9 +72,8 @@ FRINX UniConfig. Further information about conductor can be found at:
 -   Allows users to mount devices and view their status. The UI allows
     users to execute UniConfig operations such as read, edit, and
     commit. Configurations can be pushed to or synced from the network
--   Inventory, workflow execution, metadata and UniConfig log files are
+-   Device inventory, workflow execution, resource manager are
     all accessible through the UI
--   View inventory, workflow execution, metadata and UniConfig log files
 
 ## High Level Architecture
 
@@ -94,7 +98,7 @@ standardized workflows
 
 A detailed description of how to run workflows and tasks, along with
 examples, can be found in the official [Netflix Conductor
-documentation](https://netflix.github.io/conductor/configuration/workflowdef)
+documentation](https://conductor-oss.github.io/conductor/documentation/configuration/workflowdef/index.html)
 
 ## Operating FRINX Machine
 
