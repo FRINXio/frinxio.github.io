@@ -15,3 +15,5 @@ The list of workflows narrows down to two items - workflows Install_all_from_inv
 ![Execute workflow Install_all_from_inventory](install_all_from_inventory_pop_up_window.png)
 
 After you click the link **Executed workflow in detail** you will be navigated to a page with details of the executed workflow - it displays individual tasks for this workflow, it is possible to click whatever task and examine its inputs and outputs, whether it was successful or unsuccessful etc. 
+
+Note: Similarily you can use workflow **Uninstall_all_from_inventory** to uninstall all devices at once.
