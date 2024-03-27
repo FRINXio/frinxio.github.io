@@ -34,15 +34,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
     "input": {
        "properties-map": [
             {
-                "key": "netconf-default-parameters.session-timers.between-attempts-timeout",
+                "name": "netconf-default-parameters.session-timers.between-attempts-timeout",
                 "value": "1500"
             },
             {
-                "key": "gnmi-default-parameters.session-timers.internal-transaction-timeout",
+                "name": "gnmi-default-parameters.session-timers.internal-transaction-timeout",
                 "value": "1000"
             },
             {
-                "key": "notifications.kafka.transaction-notifications-enabled",
+                "name": "notifications.kafka.transaction-notifications-enabled",
                 "value": "false"
             }
        ]
@@ -70,11 +70,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
     "input": {
        "properties-map": [
             {
-                "key": "crypto.encrypt-enabled",
+                "name": "crypto.encrypt-enabled",
                 "value": "true"
             },
             {
-                "key": "crypto.actual-encryption-public-key",
+                "name": "crypto.actual-encryption-public-key",
                 "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             }
        ]
@@ -92,7 +92,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 
 ### Successful example
 
-RPC input contains an incorrect property key.
+RPC input contains an incorrect property name.
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:update-properties' \
@@ -102,7 +102,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
     "input": {
        "properties-map": [
             {
-                "key": "aaa",
+                "name": "aaa",
                 "value": "1000"
             }
        ]
@@ -130,11 +130,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
     "input": {
        "properties-map": [
             {
-                "key": "netconf-default-parameters.session-timers.between-attempts-timeout",
+                "name": "netconf-default-parameters.session-timers.between-attempts-timeout",
                 "value": "1500"
             },
             {
-                "key": "gnmi-default-parameters.session-timers.internal-transaction-timeout",
+                "name": "gnmi-default-parameters.session-timers.internal-transaction-timeout",
                 "value": "true"
             }
        ]
@@ -169,7 +169,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
     "input": {
        "properties-map": [
             {
-                "key": "notifications.kafka.transaction-notifications-enabled",
+                "name": "notifications.kafka.transaction-notifications-enabled",
                 "value": "1000"
             }
        ]
