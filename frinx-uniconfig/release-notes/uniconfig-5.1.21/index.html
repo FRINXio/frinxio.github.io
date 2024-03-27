@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.764838422292">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.764855731643">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Uniconfig 5.1.21 | Frinx docs</title>
     <meta name="title" content="Uniconfig 5.1.21 | Frinx docs">
-    <meta name="description" content="Migration for updated logging configuration parameters - 5.1.x-stable" />
+    <meta name="description" content="[UNIC-1604] Fix synchronous RPCs - stable" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.21/" />
@@ -23,22 +23,22 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.21/">
     <meta property="og:title" content="Uniconfig 5.1.21 | Frinx docs">
-    <meta property="og:description" content="Migration for updated logging configuration parameters - 5.1.x-stable">
+    <meta property="og:description" content="[UNIC-1604] Fix synchronous RPCs - stable">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.21/">
     <meta property="twitter:title" content="Uniconfig 5.1.21 | Frinx docs">
-    <meta property="twitter:description" content="Migration for updated logging configuration parameters - 5.1.x-stable">
+    <meta property="twitter:description" content="[UNIC-1604] Fix synchronous RPCs - stable">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.764838422292" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.764855731643" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.764838422292" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.764855731643" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.764838422292" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.764855731643" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -267,58 +267,6 @@
     </h3>
 </doc-anchor-target>
 <ul>
-<li>Migration for updated logging configuration parameters - 5.1.x-stable</li>
-<li>Fixed unmounting of node that is in connecting state 5.1.x</li>
-<li>Swagger: Fix generation of operational data from Uniconfig schemas</li>
-<li>Swagger: Adjust filter-path for uniconfig models</li>
-<li>Fix deleting existing yang_repository from db</li>
-<li>Fix inserting many yang repositories concurrently</li>
-<li>Fix key delimiter in URI</li>
-<li>Swagger: Fix RPCs placed after mountpoint (#1582)</li>
-<li>[UNIC-1410] Fix tx cleanup when request fails</li>
-<li>[UNIC-1413] Fixed updating snapshot in immediate-commit model (#1629)</li>
-<li>[UNIC-1420] Fix cli ssh session reconnect</li>
-<li>[UNIC-1425] Fix crypto bug (#1664)</li>
-<li>[UNIC-1352, UNIC-1254] Fix cluster issues (#1670)</li>
-<li>[UNIC-1340] Fixed releasing of used YANG modules from memory (#1667)</li>
-<li>[UNIC-1429] Fix replace is sent using delete operation</li>
-<li>[UNIC-1432] Swagger: Fix generation of post list endpoints (#1674)</li>
-<li>[UNIC-1430] - fix replace yang-patch for gnmi mountpoint</li>
-<li>[UNIC-1404] UniConfig Shell - fix system augmentation</li>
-<li>Fixed loading of YANG from path in client diff tool</li>
-<li>[UNIC-1429] Fix replace operation in GNMI set</li>
-<li>[UNIC-1471] : Fix sync fail after failed installation was stored STABLE</li>
-<li>[UNIC-1474] Improve performance of YANG repository loading process during mounting process (#1785)</li>
-<li>UniConfig Shell - fix prompt callbacks bug</li>
-<li>[UNIC-1492] - Fix rate-limiting</li>
-<li>Fixed loading of gNMI YANG repository during MountNodeTask</li>
-<li>[UNIC-1471] Add schema-cache storing into sync impl</li>
-<li>Prevented sending no description command if there is no change for rpd description</li>
-<li>Gnmi sb netconf cache loader stable</li>
-<li>[UNIC-1494] - add migration for replace-paths</li>
-<li>Fix get fallback schema context in cli shell.</li>
-<li>Fix settings / callbacks cache</li>
-<li>[UNIC-1481] Add With-Default to Java client</li>
-<li>[UNIC-1490] - Fix delete requests not send</li>
-<li>[UNIC-1517] Fix pagination</li>
-<li>[UNIC-1521] Fix reading list nodes in augmentations</li>
-<li>[UNIC-1422] Fixed transaction is closed issue</li>
-<li>[UNIC-1512] Fix ordering of operations on gnmi topology</li>
-<li>Cover more errors in connect node RPC responses</li>
-<li>[UNIC-1526] - increase gnmi executor queue size</li>
-<li>[UNIC-1534] Swagger: fix bad types for numeric attributes (#2018)</li>
-<li>[UNIC-1537] - Fix failing install sync stable</li>
-<li>[UNIC-1547] Fix sync-from-network RPC</li>
-<li>[UNIC-1557] Fix MountPointListenerException</li>
-<li>CVE-2023-51074 stable</li>
-<li>add missing docker dependency</li>
-<li>[UNIC-1573] CLI shell: Fix Connect/Disconnect RPC suggestions</li>
-<li>UniConfig Shell - fixing show mode bugs</li>
-<li>[UNIC-1550] - mount/unmount synchronization (#2061)</li>
-<li>[UNIC-1481] Fix with-defaults query parameter</li>
-<li>Fixed removing mac-address command issue in InterfaceRpdConfigWriter</li>
-<li>[UNIC-1601] Fix loading fallback context.</li>
-<li>Get-template-nodes replace module in var.</li>
 <li>[UNIC-1604] Fix synchronous RPCs - stable</li>
 <li>[UNIC-1620] UC Shell: Fix leaf-list parsing (#2244)</li>
 <li>[UNIC-1629] Fix replace-paths grouping distinct list entries</li>
@@ -332,16 +280,6 @@
     </h3>
 </doc-anchor-target>
 <ul>
-<li>[UNIC-1394] Client side diff</li>
-<li>[UNIC-1402] UC Shell - default callbacks repository (#1701)</li>
-<li>[UNIC-1075] Uniconfig shell hide / unhide command implementation</li>
-<li>[UNIC-1028] Connect/Disconnect node RPC</li>
-<li>[UNIC-1486] + [UNIC-1509] - Skip yang constraints</li>
-<li>[UNIC-1507] : One uniconfig tx for (un)install-multiple-nodes RPC</li>
-<li>[UNIC-1533] - skip length &amp; range constraints</li>
-<li>Support tailf&#x27;s comment and label audit params in netconf southbound</li>
-<li>[UNIC-1583] Add timeout property for Uniconfig Shell</li>
-<li>Created CableModemReader and CableModemStateReader for CER devices</li>
 <li>Made local-priority attribute optional in RpdPtpPortConfigWriter</li>
 </ul>
 <doc-anchor-target id="improvements">
@@ -351,79 +289,10 @@
     </h3>
 </doc-anchor-target>
 <ul>
-<li>checkstyle fixes - 5.1.x-stable</li>
-<li>add ValueCase to gnmi codec - 5.1.x-stable</li>
-<li>Merged mdsal-dom-spi to sal-dom-spi module (5.1.x)</li>
-<li>Enable checkstyle ERROR level by default - 5.1.x-stable</li>
-<li>Removed sal-common-impl module 5.1.x</li>
-<li>Remove stylecheck-logging - 5.1.x-stable</li>
-<li>Swagger: Unit tests</li>
-<li>5.1.x shell mutable extraction</li>
-<li>Migration to JUnit 5 - part 1 - 5.1.x-stable</li>
-<li>5.1.x stable verify cancel</li>
-<li>UNIC-1318 - Add option to report yang-patch errors in RFC8040 format - 5.1.x-stable</li>
-<li>JUnit5 migration - part 2 - 5.1.x-stable</li>
-<li>JUnit5 migration - part3 - 5.1.x-stable</li>
-<li>Swagger: Code cleanup - 5.1.x-stable</li>
-<li>5.1.x stable build speedup</li>
-<li>Shell caching data - 5.1.x-stable</li>
-<li>Shell explicit show in config state (#1484)</li>
-<li>Use native git in git-commit-id plugin - 5.1.x-stable</li>
-<li>Add maven wrapper - 5.1.x-stable</li>
-<li>[UNIC-981] UniconfigShell: Remove explicit show submode from root mod…</li>
-<li>[UNIC-1411] Add mapping to request/response log message</li>
-<li>[UNIC-1394] Add overloaded build methods to client side diff</li>
-<li>[UNIC-1394] exclude gnmi depenendecies from java client</li>
-<li>[UNIC-1401] UniConfig Shell - one line SET / DELETE command (#1621)</li>
-<li>[UNIC-1403] Unified format of shell audit logs (#1658)</li>
-<li>[PANT-83] add logs for pant83 - STABLE</li>
-<li>[UNIC-1408] UniConfig Shell - adjust cached data (#1745)</li>
-<li>[UNIC-1405] UniConfig shell: set nested JSON data (#1752)</li>
-<li>Improved logging (#1798)</li>
-<li>[UNIC-1487] Uniconfig Shell: prompt mode should be the same after config transaction expiration</li>
-<li>[UNIC-1514] Add support CER device version 12.* (#1903)</li>
-<li>Fixed logging in TaskExecutorImpl</li>
-<li>Stable task executor refactoring</li>
-<li>[UNIC-1505] - Parallel syncFromNetwork (stable)</li>
-<li>[UNIC-1102] Improve logging for schema context building</li>
-<li>[UNIC-1499] Swagger: disable generation of POST list entries</li>
-<li>Add postpone reason to task execution error on timeout</li>
-<li>[UNIC-1122] DCE duplicate subscription check.</li>
-<li>Rate limiting for user uniconfig transactions</li>
 <li>[UNIC-1626] Add missing request tags into client.</li>
 <li>Add Docker dependencies for collect_diag_info script</li>
 <li>Added one more command into the update template to remove RPD connection from fiber-node</li>
 <li>Move dependency-check into separate maven profile</li>
-</ul>
-<doc-anchor-target id="api-changes">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#api-changes">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F5A5;&#xFE0F;</span> API Changes</span>
-    </h3>
-</doc-anchor-target>
-<ul>
-<li>add gnmi-messages logging broker</li>
-</ul>
-<doc-anchor-target id="dependency-upgrades">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
-    </h3>
-</doc-anchor-target>
-<ul>
-<li>build(deps): dependabot updates 5.1.x-stable</li>
-<li>Bump Spring Boot to 3.1.x - 5.1.x-stable</li>
-<li>Dependabot cherry-picks into 5.1.x-stable</li>
-<li>Suppress FP</li>
-<li>Dependabot cherry-picks - 5.1.x-stable</li>
-<li>Fix Jetty CVEs</li>
-<li>5.1.x-stable - Maven 3.9.5</li>
-<li>build(deps): bump kotlin.version from 1.9.0 to 1.9.20</li>
-<li>Bump Spring Boot to 3.1.6</li>
-<li>Bump owasp-dependency-check</li>
-<li>Bump logback.classic.version from 1.4.8 to 1.4.14</li>
-<li>Security - bump dependencies and cleanup suppressions</li>
-<li>Security - bump commons-compress to 1.26.0</li>
 </ul>
 <doc-anchor-target id="other-changes">
     <h3>
@@ -432,63 +301,10 @@
     </h3>
 </doc-anchor-target>
 <ul>
-<li>5.1.11-SNAPSHOT</li>
-<li>Gnmi all paths fix 5.1.x</li>
-<li>I did not mean to cherry-pick these</li>
-<li>Unifying, renaming and increasing readability of UC-shell</li>
-<li>Enabling and cleaning up SHELL checkstyles - 5.1.x-stable</li>
-<li>Do not block merge job on main</li>
-<li>Changing use case of prompt stylization</li>
-<li>Release 5.1.11</li>
-<li>5.1.12-SNAPSHOT</li>
-<li>Workflows: update postgres tests and enable schedule for weekend.</li>
-<li>Shell fix output writing</li>
-<li>Shell fix callbacks set state (#1531)</li>
-<li>Shell fix multiple keys (#1536)</li>
-<li>Add ncurses package to dockerfile</li>
-<li>fix_regex_matching_of_identity</li>
-<li>Release 5.1.12</li>
-<li>5.1.13-SNAPSHOT</li>
-<li>UniconfigShell: Improving suggestions menu</li>
-<li>[FI-1693] Remove Jenkins-test from merge workflow</li>
-<li>[UNIC-1439] Speed up Device discovery RPC (#1684)</li>
-<li>Revert &quot;[UNIC-1439] Speed up Device discovery RPC (#1684)&quot;</li>
-<li>Release 5.1.13</li>
-<li>5.1.14-SNAPSHOT</li>
-<li>Release notes workflow for stable branch</li>
-<li>Suppress CVEs</li>
-<li>[UNIC-1475] changing information about expired transaction in root mode</li>
-<li>Release 5.1.14</li>
-<li>New snapshot release 5.1.15</li>
-<li>Do not generate release notes</li>
-<li>[UNIC-1488] Uniconfig Shell: add option to refresh the transaction</li>
-<li>Release version 5.1.15</li>
-<li>Release new snapshot version 5.1.16-SNAPSHOT</li>
-<li>Release workflow stable</li>
-<li>Add distributionSuffix property</li>
-<li>Build distro without units on release (#1955)</li>
-<li>Release 5.1.16.</li>
-<li>Bump to 5.1.17-SNAPSHOT.</li>
-<li>Rename UniConfig distribution name from bin to without TU</li>
-<li>[UNIC-1453] UniConfig Shell - one-liner show/set/delete for callbacks…</li>
-<li>Suppress logback</li>
-<li>[UNIC-1539] Fix some typos</li>
-<li>Maven 3.9.6</li>
-<li>Revert &quot;[UNIC-1547] Fix sync-from-network RPC (#2044)&quot;</li>
-<li>Revert &quot;Revert &quot;[UNIC-1547] Fix sync-from-network RPC (#2044)&quot; (#2050)&quot;</li>
-<li>Suppress sshd vulnerability and old vulnerabilities.</li>
-<li>Release 5.1.17.</li>
-<li>Bump to 5.1.18-SNAPSHOT.</li>
-<li>Add default values to connect-node RPC</li>
-<li>Fixed InterfaceRpdStateReader and CableMacReader for CER devices</li>
-<li>Release 5.1.18.</li>
-<li>Bump to 5.1.19-SNAPSHOT.</li>
-<li>Release 5.1.19.</li>
-<li>Bump to 5.1.20-SNAPSHOT.</li>
-<li>Fix testtool tag</li>
-<li>Release 5.1.20</li>
 <li>Bump to 5.1.21-SNAPSHOT.</li>
 <li>Release 5.1.21</li>
+<li>Bump to 5.1.22-SNAPSHOT.</li>
+<li>Fix release workflow</li>
 </ul>
 
                                 
