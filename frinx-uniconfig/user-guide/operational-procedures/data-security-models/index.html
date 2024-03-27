@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.762538939740">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.764838347733">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.762538939740" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.764838347733" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.762538939740" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.764838347733" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.762538939740" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.762538939740" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.764838347733" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.764838347733" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -707,7 +707,7 @@ batches. The size of these batches is set by the following parameter:</p>
 <p>There are two settings related to encryption in the <strong>install-node RPC</strong>
 request:</p>
 <ul>
-<li><code v-pre>uniconfig-config:crypto</code> - Specifies a path to the public key on the device:
+<li><code v-pre>uniconfig-config:device-crypto</code> - Specifies a path to the public key on the device:
 <ul>
 <li><code v-pre>public-key-path</code> - Leaf with RFC-8040 path. If a path to the public key is
 specified and exists on the device, the global-device encryption model is
@@ -745,7 +745,7 @@ public key and the side-loaded YANG module <code v-pre>encrypted-paths</code> wi
             &quot;netconf-node-topology:sleep-factor&quot;: 1.0,
             &quot;uniconfig-config:uniconfig-native-enabled&quot;: true,
             &quot;netconf-node-topology:edit-config-test-option&quot;: &quot;set&quot;,
-            &quot;uniconfig-config:crypto&quot;: {
+            &quot;uniconfig-config:device-crypto&quot;: {
                 &quot;public-key-path&quot;: &quot;/crypto/pki/config-keys=config_key/pub-key&quot;,
                 &quot;public-key-cipher-type&quot;: &quot;RSA&quot;
             },
@@ -906,7 +906,7 @@ extension (side-loading of encrypted paths is not necessary).</p>
             &quot;netconf-node-topology:sleep-factor&quot;: 1.0,
             &quot;uniconfig-config:install-uniconfig-node-enabled&quot;: true,
             &quot;uniconfig-config:uniconfig-native-enabled&quot;: true,
-            &quot;uniconfig-config:crypto&quot;: {
+            &quot;uniconfig-config:device-crypto&quot;: {
                 &quot;public-key-path&quot;: &quot;/keys/public-key&quot;
             }
         }
