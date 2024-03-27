@@ -12,35 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>FRINX UniConfig introduction | Frinx docs</title>
-    <meta name="title" content="FRINX UniConfig introduction | Frinx docs">
-    <meta name="description" content="The purpose of UniConfig is to manage the configuration state and retrieve the operational state of physical and virtual networking devices." />
+    <title>Uniconfig 5.1.21 | Frinx docs</title>
+    <meta name="title" content="Uniconfig 5.1.21 | Frinx docs">
+    <meta name="description" content="Migration for updated logging configuration parameters - 5.1.x-stable" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/getting-started/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.21/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/getting-started/">
-    <meta property="og:title" content="FRINX UniConfig introduction | Frinx docs">
-    <meta property="og:description" content="The purpose of UniConfig is to manage the configuration state and retrieve the operational state of physical and virtual networking devices.">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/uc_features.png">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.21/">
+    <meta property="og:title" content="Uniconfig 5.1.21 | Frinx docs">
+    <meta property="og:description" content="Migration for updated logging configuration parameters - 5.1.x-stable">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/getting-started/">
-    <meta property="twitter:title" content="FRINX UniConfig introduction | Frinx docs">
-    <meta property="twitter:description" content="The purpose of UniConfig is to manage the configuration state and retrieve the operational state of physical and virtual networking devices.">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/uc_features.png">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-5.1.21/">
+    <meta property="twitter:title" content="Uniconfig 5.1.21 | Frinx docs">
+    <meta property="twitter:description" content="Migration for updated logging configuration parameters - 5.1.x-stable">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.764838422292" rel="stylesheet" />
+    <link href="../../../static/favicon-192x192.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.764838422292" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.764838422292" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.764838422292" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.764838422292" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.764838422292" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -55,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -71,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -187,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -249,158 +247,249 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="frinx-uniconfig-introduction" class="break-words">
+<doc-anchor-target id="uniconfig-5121" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#frinx-uniconfig-introduction">#</doc-anchor-trigger>
-        <span>FRINX UniConfig introduction</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-5121">#</doc-anchor-trigger>
+        <span>Uniconfig 5.1.21</span>
     </h1>
 </doc-anchor-target>
-<p>The purpose of UniConfig is to manage the configuration state and retrieve the operational state of physical and virtual networking devices.</p>
-<p>UniConfig provides a single API for many different devices in the network. It can be run as an application on bare metal in a VM or a container, stand-alone, or as part of our automation solution, FRINX Machine. UniConfig has a built-in data store that can be run in-memory or with an external database.</p>
-<p><figure class="content-center">
-    <img src="../uc_features.png" alt="UniConfig features" />
-    <figcaption class="caption">UniConfig features</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="uniconfig-key-features">
+<!-- Release notes generated using configuration in .github/release.yml at 5.1.21 -->
+<doc-anchor-target id="whats-changed">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-key-features">#</doc-anchor-trigger>
-        <span>UniConfig key features</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
     </h2>
+</doc-anchor-target>
+<doc-anchor-target id="bug-fixes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li>Retrieves and stores current startup and running configuration from mounted network devices</li>
-<li>Pushes configuration data to devices via NETCONF, CLI or gNMI</li>
-<li>Allows for diffs to be built between actual and intended execution of atomic configuration changes</li>
-<li>Retrieves operational data from devices via NETCONF, CLI or gNMI</li>
-<li>Provides subtree filtering capabilities in NETCONF</li>
-<li>Transactions can be managed on one or multiple devices</li>
-<li>Offers the ability to do a dry-commit to evaluate the functionality of a configuration before it is executed on devices</li>
-<li>Provides snapshots of previous configurations for rollback</li>
-<li>Translates between CLI, native model and standard data models (i.e., OpenConfig) via our open-source <a href="https://github.com/FRINXio/cli-units">device library</a></li>
-<li>A &quot;Lazy CLI&quot; feature to suspend and resume connections without having to maintain keepalives</li>
-<li>Can read and store proprietary data models from network devices that follow the YANG data model</li>
-<li>Data export and import via blacklist and whitelist functions</li>
-<li>Provides templates for device configuration</li>
-<li>Supports PostgreSQL as an external database</li>
-<li>Support for YANG 1.1 and Tail-f actions</li>
-<li>Subscribe to NETCONF notifications via web sockets</li>
-<li>Subscribe to gNMI notifications</li>
-<li>Support for gNOI</li>
-<li>Support for 3-phase commit by using NETCONF confirmed-commit</li>
-<li>High availability</li>
-<li>The ability to log specific devices as needed</li>
-<li>Can execute commands in parallel on multiple devices</li>
-<li>Choose between NETCONF or RESTCONF to connect to devices</li>
-<li>The UniConfig client allows for simple, full-service access to UniConfig features</li>
-<li>Python microservices are used to integrate with the FRINX machine</li>
-<li>The UniConfig UI allows users to interact with the network controller using a web-based user interface</li>
+<li>Migration for updated logging configuration parameters - 5.1.x-stable</li>
+<li>Fixed unmounting of node that is in connecting state 5.1.x</li>
+<li>Swagger: Fix generation of operational data from Uniconfig schemas</li>
+<li>Swagger: Adjust filter-path for uniconfig models</li>
+<li>Fix deleting existing yang_repository from db</li>
+<li>Fix inserting many yang repositories concurrently</li>
+<li>Fix key delimiter in URI</li>
+<li>Swagger: Fix RPCs placed after mountpoint (#1582)</li>
+<li>[UNIC-1410] Fix tx cleanup when request fails</li>
+<li>[UNIC-1413] Fixed updating snapshot in immediate-commit model (#1629)</li>
+<li>[UNIC-1420] Fix cli ssh session reconnect</li>
+<li>[UNIC-1425] Fix crypto bug (#1664)</li>
+<li>[UNIC-1352, UNIC-1254] Fix cluster issues (#1670)</li>
+<li>[UNIC-1340] Fixed releasing of used YANG modules from memory (#1667)</li>
+<li>[UNIC-1429] Fix replace is sent using delete operation</li>
+<li>[UNIC-1432] Swagger: Fix generation of post list endpoints (#1674)</li>
+<li>[UNIC-1430] - fix replace yang-patch for gnmi mountpoint</li>
+<li>[UNIC-1404] UniConfig Shell - fix system augmentation</li>
+<li>Fixed loading of YANG from path in client diff tool</li>
+<li>[UNIC-1429] Fix replace operation in GNMI set</li>
+<li>[UNIC-1471] : Fix sync fail after failed installation was stored STABLE</li>
+<li>[UNIC-1474] Improve performance of YANG repository loading process during mounting process (#1785)</li>
+<li>UniConfig Shell - fix prompt callbacks bug</li>
+<li>[UNIC-1492] - Fix rate-limiting</li>
+<li>Fixed loading of gNMI YANG repository during MountNodeTask</li>
+<li>[UNIC-1471] Add schema-cache storing into sync impl</li>
+<li>Prevented sending no description command if there is no change for rpd description</li>
+<li>Gnmi sb netconf cache loader stable</li>
+<li>[UNIC-1494] - add migration for replace-paths</li>
+<li>Fix get fallback schema context in cli shell.</li>
+<li>Fix settings / callbacks cache</li>
+<li>[UNIC-1481] Add With-Default to Java client</li>
+<li>[UNIC-1490] - Fix delete requests not send</li>
+<li>[UNIC-1517] Fix pagination</li>
+<li>[UNIC-1521] Fix reading list nodes in augmentations</li>
+<li>[UNIC-1422] Fixed transaction is closed issue</li>
+<li>[UNIC-1512] Fix ordering of operations on gnmi topology</li>
+<li>Cover more errors in connect node RPC responses</li>
+<li>[UNIC-1526] - increase gnmi executor queue size</li>
+<li>[UNIC-1534] Swagger: fix bad types for numeric attributes (#2018)</li>
+<li>[UNIC-1537] - Fix failing install sync stable</li>
+<li>[UNIC-1547] Fix sync-from-network RPC</li>
+<li>[UNIC-1557] Fix MountPointListenerException</li>
+<li>CVE-2023-51074 stable</li>
+<li>add missing docker dependency</li>
+<li>[UNIC-1573] CLI shell: Fix Connect/Disconnect RPC suggestions</li>
+<li>UniConfig Shell - fixing show mode bugs</li>
+<li>[UNIC-1550] - mount/unmount synchronization (#2061)</li>
+<li>[UNIC-1481] Fix with-defaults query parameter</li>
+<li>Fixed removing mac-address command issue in InterfaceRpdConfigWriter</li>
+<li>[UNIC-1601] Fix loading fallback context.</li>
+<li>Get-template-nodes replace module in var.</li>
+<li>[UNIC-1604] Fix synchronous RPCs - stable</li>
+<li>[UNIC-1620] UC Shell: Fix leaf-list parsing (#2244)</li>
+<li>[UNIC-1629] Fix replace-paths grouping distinct list entries</li>
+<li>[UNIC-1664] Fix confirm-commit race-conditions</li>
+<li>[UNIC-1680] Fix dryrun-commit mount/unmount process</li>
 </ul>
-<p>UniConfig allows users to communicate with their network infrastructure in four different ways:</p>
+<doc-anchor-target id="new-features">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-features">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x2705;</span> New Features</span>
+    </h3>
+</doc-anchor-target>
 <ul>
-<li><strong>Execute &amp; Read API</strong> - Unstructured data via SSH and Telnet</li>
-<li><strong>OpenConfig API</strong> – Translation provided by our open source device library</li>
-<li><strong>UniConfig Native API</strong> – Direct access to vendor specific YANG data models that are native to the connected devices as well as UniConfig functions (diff, commit, snapshots, etc.)</li>
-<li><strong>UniConfig Native CLI API</strong> – Programmatic access to the CLI without the need for translation units (experimental)</li>
+<li>[UNIC-1394] Client side diff</li>
+<li>[UNIC-1402] UC Shell - default callbacks repository (#1701)</li>
+<li>[UNIC-1075] Uniconfig shell hide / unhide command implementation</li>
+<li>[UNIC-1028] Connect/Disconnect node RPC</li>
+<li>[UNIC-1486] + [UNIC-1509] - Skip yang constraints</li>
+<li>[UNIC-1507] : One uniconfig tx for (un)install-multiple-nodes RPC</li>
+<li>[UNIC-1533] - skip length &amp; range constraints</li>
+<li>Support tailf&#x27;s comment and label audit params in netconf southbound</li>
+<li>[UNIC-1583] Add timeout property for Uniconfig Shell</li>
+<li>Created CableModemReader and CableModemStateReader for CER devices</li>
+<li>Made local-priority attribute optional in RpdPtpPortConfigWriter</li>
 </ul>
-<p><strong>Execute &amp; Read capable API:</strong> Like Ansible, TCL Scripting or similar products, strings can be passed and received through SSH or Telnet via REST API. UniConfig provides the authentication and transportation of data without interpreting it.</p>
-<p><strong>OpenConfig API:</strong> An API that is translated into device-specific CLI or YANG data models. The installation of &quot;translation units&quot; on devices is required. FRINX provides an open-source library of devices from a variety of network vendors. The open-source framework allows anyone to contribute or consume the contents of the expanding list of supported network devices.</p>
-<p><strong>UniConfig Native API:</strong> Vendor-specific YANG data models are absorbed by UniConfig to allow configuration of mounted devices. UniConfig maps vendor-specific &quot;native&quot; models into it&#x27;s data store to provide stateful configuration capabilities to applications and users.</p>
-<p><strong>UniConfig Native CLI API:</strong> Allows for programmatic interaction with a device&#x27;s CLI via the API and without the use of &#x27;translation units&#x27;. Only a schema file is needed. (This option is currently experimental. Contact FRINX for more information.)</p>
-<p><figure class="content-center">
-    <img src="../frinx_uniconfig_solution.jpg" alt="UniConfig solution" />
-    <figcaption class="caption">UniConfig solution</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="uniconfig-in-a-docker-container">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-in-a-docker-container">#</doc-anchor-trigger>
-        <span>UniConfig in a Docker container</span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="download-and-activate-frinx-uniconfig">
+<doc-anchor-target id="improvements">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#download-and-activate-frinx-uniconfig">#</doc-anchor-trigger>
-        <span>Download and activate FRINX UniConfig</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#improvements">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F4A1;</span> Improvements</span>
     </h3>
 </doc-anchor-target>
-<p>To download, activate and start UniConfig in a Docker container:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">docker pull frinx/uniconfig:5.0.7
-docker pull postgres:12.2
-docker run -it -d --hostname postgres --name postgres -p 26257:5432 -e POSTGRES_PASSWORD=unipass -e POSTGRES_USER=uniremote -e POSTGRES_DB=uniconfig postgres:12.2
-docker run -it --hostname uniconfig --name uniconfig -p 8181:8181 --network host frinx/uniconfig:5.0.7</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="stop-the-container">
+<ul>
+<li>checkstyle fixes - 5.1.x-stable</li>
+<li>add ValueCase to gnmi codec - 5.1.x-stable</li>
+<li>Merged mdsal-dom-spi to sal-dom-spi module (5.1.x)</li>
+<li>Enable checkstyle ERROR level by default - 5.1.x-stable</li>
+<li>Removed sal-common-impl module 5.1.x</li>
+<li>Remove stylecheck-logging - 5.1.x-stable</li>
+<li>Swagger: Unit tests</li>
+<li>5.1.x shell mutable extraction</li>
+<li>Migration to JUnit 5 - part 1 - 5.1.x-stable</li>
+<li>5.1.x stable verify cancel</li>
+<li>UNIC-1318 - Add option to report yang-patch errors in RFC8040 format - 5.1.x-stable</li>
+<li>JUnit5 migration - part 2 - 5.1.x-stable</li>
+<li>JUnit5 migration - part3 - 5.1.x-stable</li>
+<li>Swagger: Code cleanup - 5.1.x-stable</li>
+<li>5.1.x stable build speedup</li>
+<li>Shell caching data - 5.1.x-stable</li>
+<li>Shell explicit show in config state (#1484)</li>
+<li>Use native git in git-commit-id plugin - 5.1.x-stable</li>
+<li>Add maven wrapper - 5.1.x-stable</li>
+<li>[UNIC-981] UniconfigShell: Remove explicit show submode from root mod…</li>
+<li>[UNIC-1411] Add mapping to request/response log message</li>
+<li>[UNIC-1394] Add overloaded build methods to client side diff</li>
+<li>[UNIC-1394] exclude gnmi depenendecies from java client</li>
+<li>[UNIC-1401] UniConfig Shell - one line SET / DELETE command (#1621)</li>
+<li>[UNIC-1403] Unified format of shell audit logs (#1658)</li>
+<li>[PANT-83] add logs for pant83 - STABLE</li>
+<li>[UNIC-1408] UniConfig Shell - adjust cached data (#1745)</li>
+<li>[UNIC-1405] UniConfig shell: set nested JSON data (#1752)</li>
+<li>Improved logging (#1798)</li>
+<li>[UNIC-1487] Uniconfig Shell: prompt mode should be the same after config transaction expiration</li>
+<li>[UNIC-1514] Add support CER device version 12.* (#1903)</li>
+<li>Fixed logging in TaskExecutorImpl</li>
+<li>Stable task executor refactoring</li>
+<li>[UNIC-1505] - Parallel syncFromNetwork (stable)</li>
+<li>[UNIC-1102] Improve logging for schema context building</li>
+<li>[UNIC-1499] Swagger: disable generation of POST list entries</li>
+<li>Add postpone reason to task execution error on timeout</li>
+<li>[UNIC-1122] DCE duplicate subscription check.</li>
+<li>Rate limiting for user uniconfig transactions</li>
+<li>[UNIC-1626] Add missing request tags into client.</li>
+<li>Add Docker dependencies for collect_diag_info script</li>
+<li>Added one more command into the update template to remove RPD connection from fiber-node</li>
+<li>Move dependency-check into separate maven profile</li>
+</ul>
+<doc-anchor-target id="api-changes">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#stop-the-container">#</doc-anchor-trigger>
-        <span>Stop the container</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#api-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F5A5;&#xFE0F;</span> API Changes</span>
     </h3>
 </doc-anchor-target>
-<p>To stop the container:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">docker stop uniconfig</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="uniconfig-as-a-java-process-in-a-vm-or-on-a-host">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-as-a-java-process-in-a-vm-or-on-a-host">#</doc-anchor-trigger>
-        <span>UniConfig as a Java process in a VM or on a host</span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="download-frinx-uniconfig">
+<ul>
+<li>add gnmi-messages logging broker</li>
+</ul>
+<doc-anchor-target id="dependency-upgrades">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#download-frinx-uniconfig">#</doc-anchor-trigger>
-        <span>Download FRINX UniConfig</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependency-upgrades">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F528;</span> Dependency Upgrades</span>
     </h3>
 </doc-anchor-target>
-<p>Download a ZIP archive of the latest FRINX UniConfig: <a href="https://license.frinx.io/download/uniconfig-5.0.7.zip">uniconfig-5.0.7.zip</a></p>
-<p>By downloading, you accept the <a href="https://frinx.io/eula">FRINX software agreement</a>.</p>
-<doc-anchor-target id="activate-frinx-uniconfig">
+<ul>
+<li>build(deps): dependabot updates 5.1.x-stable</li>
+<li>Bump Spring Boot to 3.1.x - 5.1.x-stable</li>
+<li>Dependabot cherry-picks into 5.1.x-stable</li>
+<li>Suppress FP</li>
+<li>Dependabot cherry-picks - 5.1.x-stable</li>
+<li>Fix Jetty CVEs</li>
+<li>5.1.x-stable - Maven 3.9.5</li>
+<li>build(deps): bump kotlin.version from 1.9.0 to 1.9.20</li>
+<li>Bump Spring Boot to 3.1.6</li>
+<li>Bump owasp-dependency-check</li>
+<li>Bump logback.classic.version from 1.4.8 to 1.4.14</li>
+<li>Security - bump dependencies and cleanup suppressions</li>
+<li>Security - bump commons-compress to 1.26.0</li>
+</ul>
+<doc-anchor-target id="other-changes">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#activate-frinx-uniconfig">#</doc-anchor-trigger>
-        <span>Activate FRINX UniConfig</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
     </h3>
 </doc-anchor-target>
-<p>To activate UniConfig, unzip the file, open the directory and run the following command:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">./run_uniconfig.sh</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>For more information on the different arguments, run the startup script with the <code v-pre>-h</code> flag</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="openapi">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#openapi">#</doc-anchor-trigger>
-        <span>OpenAPI</span>
-    </h2>
-</doc-anchor-target>
-<p>UniConfig distributions contain a <strong>.yaml</strong> file that generates a list of all usable RPCs and their examples. You can view it locally or on our hosted version that always shows the latest OpenAPI version.</p>
-<p>The file can be found here:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">/uniconfig-x.x.x/openapi</code></pre>
-</doc-codeblock></div>
-<p>See <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/openapi/">OpenAPI</a> for more information.</p>
-<doc-anchor-target id="offline-activation">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#offline-activation">#</doc-anchor-trigger>
-        <span>Offline Activation</span>
-    </h2>
-</doc-anchor-target>
-<p>For offline activation of UniConfig, please contact <strong><a href="mailto:support@frinx.io">support@frinx.io</a></strong>.</p>
+<ul>
+<li>5.1.11-SNAPSHOT</li>
+<li>Gnmi all paths fix 5.1.x</li>
+<li>I did not mean to cherry-pick these</li>
+<li>Unifying, renaming and increasing readability of UC-shell</li>
+<li>Enabling and cleaning up SHELL checkstyles - 5.1.x-stable</li>
+<li>Do not block merge job on main</li>
+<li>Changing use case of prompt stylization</li>
+<li>Release 5.1.11</li>
+<li>5.1.12-SNAPSHOT</li>
+<li>Workflows: update postgres tests and enable schedule for weekend.</li>
+<li>Shell fix output writing</li>
+<li>Shell fix callbacks set state (#1531)</li>
+<li>Shell fix multiple keys (#1536)</li>
+<li>Add ncurses package to dockerfile</li>
+<li>fix_regex_matching_of_identity</li>
+<li>Release 5.1.12</li>
+<li>5.1.13-SNAPSHOT</li>
+<li>UniconfigShell: Improving suggestions menu</li>
+<li>[FI-1693] Remove Jenkins-test from merge workflow</li>
+<li>[UNIC-1439] Speed up Device discovery RPC (#1684)</li>
+<li>Revert &quot;[UNIC-1439] Speed up Device discovery RPC (#1684)&quot;</li>
+<li>Release 5.1.13</li>
+<li>5.1.14-SNAPSHOT</li>
+<li>Release notes workflow for stable branch</li>
+<li>Suppress CVEs</li>
+<li>[UNIC-1475] changing information about expired transaction in root mode</li>
+<li>Release 5.1.14</li>
+<li>New snapshot release 5.1.15</li>
+<li>Do not generate release notes</li>
+<li>[UNIC-1488] Uniconfig Shell: add option to refresh the transaction</li>
+<li>Release version 5.1.15</li>
+<li>Release new snapshot version 5.1.16-SNAPSHOT</li>
+<li>Release workflow stable</li>
+<li>Add distributionSuffix property</li>
+<li>Build distro without units on release (#1955)</li>
+<li>Release 5.1.16.</li>
+<li>Bump to 5.1.17-SNAPSHOT.</li>
+<li>Rename UniConfig distribution name from bin to without TU</li>
+<li>[UNIC-1453] UniConfig Shell - one-liner show/set/delete for callbacks…</li>
+<li>Suppress logback</li>
+<li>[UNIC-1539] Fix some typos</li>
+<li>Maven 3.9.6</li>
+<li>Revert &quot;[UNIC-1547] Fix sync-from-network RPC (#2044)&quot;</li>
+<li>Revert &quot;Revert &quot;[UNIC-1547] Fix sync-from-network RPC (#2044)&quot; (#2050)&quot;</li>
+<li>Suppress sshd vulnerability and old vulnerabilities.</li>
+<li>Release 5.1.17.</li>
+<li>Bump to 5.1.18-SNAPSHOT.</li>
+<li>Add default values to connect-node RPC</li>
+<li>Fixed InterfaceRpdStateReader and CableMacReader for CER devices</li>
+<li>Release 5.1.18.</li>
+<li>Bump to 5.1.19-SNAPSHOT.</li>
+<li>Release 5.1.19.</li>
+<li>Bump to 5.1.20-SNAPSHOT.</li>
+<li>Fix testtool tag</li>
+<li>Release 5.1.20</li>
+<li>Bump to 5.1.21-SNAPSHOT.</li>
+<li>Release 5.1.21</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -410,20 +499,20 @@ docker run -it --hostname uniconfig --name uniconfig -p 8181:8181 --network host
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-machine/use-cases/policy-filter-xr/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.1.20/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Policy filter XR</span>
+                                                <span class="block mt-1">Uniconfig 5.​1.​20</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../frinx-uniconfig/user-guide/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-5.2.0/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">User Guide</span>
+                                                <span class="block mt-1">Uniconfig 5.​2.​0 Release Notes</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -467,6 +556,6 @@ docker run -it --hostname uniconfig --name uniconfig -p 8181:8181 --network host
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Getting started", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 5.1.21", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
