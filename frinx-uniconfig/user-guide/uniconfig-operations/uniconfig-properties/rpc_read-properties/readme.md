@@ -38,15 +38,15 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
     "read-properties-status": "There are 3 from 3 properties read successfully. Ignored keys: []",
     "properties-map": [
       {
-        "key": "notifications.kafka.audit-logs-enabled",
+        "name": "notifications.kafka.audit-logs-enabled",
         "value": "true"
       },
       {
-        "key": "notifications.kafka.netconf-notifications-enabled",
+        "name": "notifications.kafka.netconf-notifications-enabled",
         "value": "true"
       },
       {
-        "key": "notifications.kafka.gnmi-notifications-enabled",
+        "name": "notifications.kafka.gnmi-notifications-enabled",
         "value": "true"
       }
     ]
@@ -76,7 +76,7 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
     "read-properties-status": "There are 1 from 2 properties read successfully. Ignored keys: [crypto.actual-encryption-cipher-type]",
     "properties-map": [
       {
-        "key": "crypto.encrypt-enabled",
+        "name": "crypto.encrypt-enabled",
         "value": "true"
       }
     ]
