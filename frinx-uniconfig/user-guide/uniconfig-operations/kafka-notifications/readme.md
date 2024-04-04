@@ -101,6 +101,8 @@ This type of notification is generated after each RESTCONF operation.
 It contains the following:
 
 - transaction id
+- comment
+- label
 - request data
     - uri
     - http method
@@ -143,6 +145,8 @@ calculation difference result.
         "http-method": "PUT"
       }
     },
+    "label": "user-123",
+    "comment": "manual tx created by user-123",
     "transaction-id": "e0956588-bb94-46a3-a0e0-adecca318dfe",
     "response": {
       "status-code": 201
@@ -186,6 +190,7 @@ calculation difference result.
         "http-method": "DELETE"
       }
     },
+    "label": "user-123",
     "transaction-id": "e0956588-bb94-46a3-a0e0-adecca318dfe",
     "response": {
       "status-code": 204
