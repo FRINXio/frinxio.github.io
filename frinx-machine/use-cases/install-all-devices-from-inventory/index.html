@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.766156162426">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.767104378745">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Install all devices from inventory | Frinx docs</title>
     <meta name="title" content="Install all devices from inventory | Frinx docs">
-    <meta name="description" content="When adding multiple devices to your inventory, it can be tedious to install them individually. To make things easier, we have built a workflow to..." />
+    <meta name="description" content="When Device Inventory contains a lot of devices, it can be tedious to install them one by one. To make things easier, there is a workflow which allows..." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-machine/use-cases/install-all-devices-from-inventory/" />
@@ -23,24 +23,24 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-machine/use-cases/install-all-devices-from-inventory/">
     <meta property="og:title" content="Install all devices from inventory | Frinx docs">
-    <meta property="og:description" content="When adding multiple devices to your inventory, it can be tedious to install them individually. To make things easier, we have built a workflow to...">
+    <meta property="og:description" content="When Device Inventory contains a lot of devices, it can be tedious to install them one by one. To make things easier, there is a workflow which allows...">
     <meta property="og:image" content="https://docs.frinx.io/frinx-machine/use-cases/install-all-devices-from-inventory/install_all_from_inventory_search.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-machine/use-cases/install-all-devices-from-inventory/">
     <meta property="twitter:title" content="Install all devices from inventory | Frinx docs">
-    <meta property="twitter:description" content="When adding multiple devices to your inventory, it can be tedious to install them individually. To make things easier, we have built a workflow to...">
+    <meta property="twitter:description" content="When Device Inventory contains a lot of devices, it can be tedious to install them one by one. To make things easier, there is a workflow which allows...">
     <meta property="twitter:image" content="https://docs.frinx.io/frinx-machine/use-cases/install-all-devices-from-inventory/install_all_from_inventory_search.png">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.766156162426" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.767104378745" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.766156162426" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.767104378745" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.766156162426" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.767104378745" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -255,27 +255,24 @@
         <span>Install all devices from inventory</span>
     </h1>
 </doc-anchor-target>
-<p>When adding multiple devices to your inventory, it can be tedious to install them individually.
-To make things easier, we have built a workflow to install all devices present in the inventory.</p>
+<p>When <strong>Device Inventory</strong> contains a lot of devices, it can be tedious to install them one by one.
+To make things easier, there is a workflow which allows to install all devices present in the inventory.</p>
 <p>Follow these instructions to use the workflow:</p>
-<p>On the landing page,  select <code v-pre>Workflow Manager</code>. Then select <code v-pre>Explore</code> and search for the workflow called <strong>Install_all_from_inventory</strong>.</p>
+<p>At the FRINX Machine <strong>Dashboard</strong> under <strong>Workflow Manage</strong> section click on <strong>Explore workflows</strong> panel. The page titled <strong>Workflow definitions</strong> opens.
+Use <strong>Search workflow by name</strong> input box and fill in <strong>Install_all_from_inventory</strong> and click <strong>Search</strong> button.</p>
 <p><figure class="content-center">
-    <img src="install_all_from_inventory_search.png" alt="Search for install_all_from_inventory" />
-    <figcaption class="caption">Search for install_all_from_inventory</figcaption>
+    <img src="install_all_from_inventory_search.png" alt="Search for workflow Install_all_from_inventory" />
+    <figcaption class="caption">Search for workflow Install_all_from_inventory</figcaption>
 </figure>
 </p>
-<p>After searching, select the <code v-pre>Execute</code> button (blue play icon). A window appears where you can enter the input parameter. This workflow does not require any input if you want to install all uninstalled devices. If you specified a device label when adding devices, you can use this label to determine which devices should be bulk installed. Select &quot;Execute&quot; again.</p>
+<p>The list of workflows narrows down to two items - workflows Install_all_from_inventory and Uninstall_all_from_inventory. Click blue <code v-pre>Execute</code> button (blue play icon) located on the row next to the workflow. The form titled with the name of workflow <strong>Install_all_from_inventory</strong> appears and optionally you can fill in the input parameter <strong>labels</strong> which allows to select a subset of devices to install. (You can specify a device label while adding devices to Device Inventory.) We want to install all uninstalled devices - do not fill in the input <strong>labels</strong> and click <strong>Execute workflow</strong> button. As a result to the left of the <strong>Execute workflow</strong> button will appear the link <strong>Executed workflow in detail</strong>.</p>
 <p><figure class="content-center">
-    <img src="install_all_from_inventory_pop_up_window.png" alt="Execute install_all_from_inventory" />
-    <figcaption class="caption">Execute install_all_from_inventory</figcaption>
+    <img src="install_all_from_inventory_pop_up_window.png" alt="Execute workflow Install_all_from_inventory" />
+    <figcaption class="caption">Execute workflow Install_all_from_inventory</figcaption>
 </figure>
 </p>
-<p>After you execute, a numeric link appears to the left of the <code v-pre>Execute</code> button. The link takes you to a page that shows individual tasks for this workflow, its inputs and outputs, and whether it was successful or unsuccessful. In the &quot;Input/Output&quot; tab, you can see both devices that were installed as a result of this workflow and those that were already installed.</p>
-<p><figure class="content-center">
-    <img src="install_all_from_inventory_result.png" alt="Results of the workflow" />
-    <figcaption class="caption">Results of the workflow</figcaption>
-</figure>
-</p>
+<p>After you click the link <strong>Executed workflow in detail</strong> you will be navigated to a page with details of the executed workflow - it displays individual tasks for this workflow, it is possible to click whatever task and examine its inputs and outputs, whether it was successful or unsuccessful etc.</p>
+<p>Note: Similarily you can use workflow <strong>Uninstall_all_from_inventory</strong> to uninstall all devices at once.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -285,7 +282,7 @@ To make things easier, we have built a workflow to install all devices present i
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-machine/use-cases/frinx-machine-demo-manual/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-machine/use-cases/01dashboard/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>

@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.766156162426">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.767104378745">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,11 +36,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.766156162426" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.767104378745" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.766156162426" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.767104378745" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.766156162426" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.767104378745" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -297,10 +297,10 @@ repository</a></p>
         </div>
     </div>
 </div>
-<doc-anchor-target id="frinx-machine-components">
+<doc-anchor-target id="frinx-machine-core-components">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#frinx-machine-components">#</doc-anchor-trigger>
-        <span>FRINX Machine components</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#frinx-machine-core-components">#</doc-anchor-trigger>
+        <span>FRINX Machine core components</span>
     </h2>
 </doc-anchor-target>
 <doc-anchor-target id="frinx-uniconfig">
@@ -324,10 +324,10 @@ devices (i.e YANG models)</li>
 <li>Ensures high availability, reducing network outages and down time</li>
 <li>Executes commands on multiple devices simultaneously</li>
 </ul>
-<doc-anchor-target id="netflix-conductor-workflow-engine">
+<doc-anchor-target id="netflix-conductor-workflow-engine---core-of-workflow-manager">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#netflix-conductor-workflow-engine">#</doc-anchor-trigger>
-        <span>Netflix Conductor (workflow engine)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#netflix-conductor-workflow-engine---core-of-workflow-manager">#</doc-anchor-trigger>
+        <span>Netflix Conductor (workflow engine) - core of Workflow manager</span>
     </h3>
 </doc-anchor-target>
 <ul>
@@ -339,23 +339,33 @@ be highly scalable open-source technology that integrates very well with
 FRINX UniConfig. Further information about conductor can be found at:</p>
 <ul>
 <li><strong>Sources:</strong> <a href="https://github.com/Netflix/conductor">https://github.com/Netflix/conductor</a></li>
-<li><strong>Docs:</strong> <a href="https://netflix.github.io/conductor/">https://netflix.github.io/conductor/</a></li>
+<li><strong>FRINXio sources:</strong> <a href="https://github.com/FRINXio/conductor-community">https://github.com/FRINXio/conductor-community</a></li>
+<li><strong>Docs:</strong> <a href="https://conductor-oss.github.io/conductor/index.html">https://conductor-oss.github.io/conductor/index.html</a></li>
 </ul>
-<doc-anchor-target id="elasticsearch-inventory-and-logs">
+<doc-anchor-target id="postgres-database---core-of-device-inventory">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#elasticsearch-inventory-and-logs">#</doc-anchor-trigger>
-        <span>Elasticsearch (inventory and logs)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#postgres-database---core-of-device-inventory">#</doc-anchor-trigger>
+        <span>Postgres database - core of Device inventory</span>
     </h3>
 </doc-anchor-target>
 <ul>
-<li>Stores inventory data in near real-time</li>
+<li>Stores inventory data</li>
+</ul>
+<doc-anchor-target id="monitoring-software-loki--grafana--influxdb--telegraf---core-of-monitoring">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#monitoring-software-loki--grafana--influxdb--telegraf---core-of-monitoring">#</doc-anchor-trigger>
+        <span>Monitoring software: loki + grafana + influxdb + telegraf - core of Monitoring</span>
+    </h3>
+</doc-anchor-target>
+<ul>
 <li>Stores workflow execution and meta data</li>
 <li>Stores UniConfig logs</li>
+<li>Stores docker container logs</li>
 </ul>
-<doc-anchor-target id="uniconfig-ui-user-interface">
+<doc-anchor-target id="uniconfig-ui-user-interface-aka-frinx-frontend">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-ui-user-interface">#</doc-anchor-trigger>
-        <span>UniConfig UI (user interface)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-ui-user-interface-aka-frinx-frontend">#</doc-anchor-trigger>
+        <span>UniConfig UI (user interface) aka Frinx frontend</span>
     </h3>
 </doc-anchor-target>
 <ul>
@@ -365,9 +375,8 @@ tasks</li>
 <li>Allows users to mount devices and view their status. The UI allows
 users to execute UniConfig operations such as read, edit, and
 commit. Configurations can be pushed to or synced from the network</li>
-<li>Inventory, workflow execution, metadata and UniConfig log files are
+<li>Device inventory, workflow execution, resource manager are
 all accessible through the UI</li>
-<li>View inventory, workflow execution, metadata and UniConfig log files</li>
 </ul>
 <doc-anchor-target id="high-level-architecture">
     <h2>
@@ -397,7 +406,7 @@ file) that are executed on a remote device.</p>
 <p>The FRINX Machine distribution comes pre-loaded with a number of
 standardized workflows</p>
 <p>A detailed description of how to run workflows and tasks, along with
-examples, can be found in the official <a href="https://netflix.github.io/conductor/configuration/workflowdef">Netflix Conductor
+examples, can be found in the official <a href="https://conductor-oss.github.io/conductor/documentation/configuration/workflowdef/index.html">Netflix Conductor
 documentation</a></p>
 <doc-anchor-target id="operating-frinx-machine">
     <h2>
