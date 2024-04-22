@@ -2,18 +2,18 @@
 
 ## Adding device to inventory
 
-To add a new device to inventory, click on the **Add device** button in the
-**Device inventory** tab.
+At the FRINX Machine **Dashboard** under **Device Inventory** section click on **Add new device** panel. The page with the form titled **Add device** opens.
 
 ![Add device to inventory](Add_and_install_new_device.gif)
 
 ## JSON examples
 
-New devices are added to inventory by JSON code snippets. They are similar to [Blueprints](/frinx-workflow-manager/blueprints)
-with one addition: **device_id** must be specified in the snippet.
+New devices added to Device inventory are defined by JSON code snippets. (These snippets are part of UniConfig RPC connection-manager:install-node.) They are similar to [Blueprints](/frinx-workflow-manager/blueprints). This snippet is going to be filled into **Mount parameters** field.
 
-To add a new device from Blueprint, toggle the "Blueprints" switch in the form and
-choose the blueprint that you want to use.
+Another way is to add a new device from blueprint: toggle the **Use blueprint?** switch in the form and
+choose the blueprint that you want to use from **Select blueprint** drop-down list.
+
+Note: following snippets refer to devices present in sample-topology demo
 
 ### Cisco classic IOS (cli)
 
@@ -40,10 +40,10 @@ choose the blueprint that you want to use.
 {
     "netconf":{
         "netconf-node-topology:host":"sample-topology",
-        "netconf-node-topology:port":17200,
+        "netconf-node-topology:port":17000,
         "netconf-node-topology:tcp-only":false,
-        "netconf-node-topology:username":"USERNAME",
-        "netconf-node-topology:password":"PASSWORD",
+        "netconf-node-topology:username":"cisco",
+        "netconf-node-topology:password":"cisco",
         "netconf-node-topology:session-timers": {
             "netconf-node-topology:keepalive-delay":5
         },
@@ -88,6 +88,7 @@ choose the blueprint that you want to use.
 ```
 
 ### CALIX (netconf)
+Note: this device is not present in sample-topology
 
 ```json
 {
@@ -111,6 +112,7 @@ choose the blueprint that you want to use.
 ```
 
 ### Nokia (netconf)
+Note: this device is not present in sample-topology
 
 ```json
 {
@@ -135,12 +137,53 @@ choose the blueprint that you want to use.
 }
 ```
 
+### SAOS 6 (cli)
+
+```json
+{
+	"cli": {
+		"cli-topology:host": "sample-topology",
+		"cli-topology:port": "10001",
+		"cli-topology:password": "frinx",
+		"cli-topology:username": "frinx",
+		"cli-topology:device-type": "saos",
+		"cli-topology:journal-size": 500,
+		"cli-topology:device-version": "6",
+		"cli-topology:parsing-engine": "one-line-parser",
+		"cli-topology:transport-type": "ssh",
+		"cli-topology:dry-run-journal-size": 180
+	}
+}
+```
+
+### SAOS 8 (cli)
+
+```json
+{
+	"cli": {
+		"cli-topology:host": "sample-topology",
+		"cli-topology:port": "10002",
+		"cli-topology:password": "frinx",
+		"cli-topology:username": "frinx",
+		"cli-topology:device-type": "saos",
+		"cli-topology:journal-size": 500,
+		"cli-topology:device-version": "8",
+		"cli-topology:parsing-engine": "one-line-parser",
+		"cli-topology:transport-type": "ssh",
+		"cli-topology:dry-run-journal-size": 180
+	}
+}
+```
+
+
 
 ## Install the new device from Inventory
 
-Now that the device is added we can install it. We used to need dedicated workflow to install device form inventory, but now
-it can be done purely via UI. Click on **Explore** in **Explore & configure devices** tab, under **Device Inventory** section.
+After the device is added we can install it to UniConfig.
+At the FRINX Machine **Dashboard** under **Device Inventory** section click on **Explore & configure devices** panel. The page titled **Devices** opens - it lists all devices from Device inventory.
+
+Click blue **Install** button located on the row next to a device which you want to install - after successful installation button will change to green button with the text **Installed**.  
 
 ![Install device from inventory](fm_install_from_inventory.gif)
 
-If you did everything correctly, your devices is now in inventory and installed, ready to be operated through Frinx Machine.
+If you follow instruction properly, your devices are now listed in Device inventory and installed, ready to be operated through Frinx Machine.

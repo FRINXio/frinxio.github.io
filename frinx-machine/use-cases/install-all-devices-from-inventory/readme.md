@@ -1,18 +1,19 @@
 # Install all devices from inventory
 
-When adding multiple devices to your inventory, it can be tedious to install them individually.
-To make things easier, we have built a workflow to install all devices present in the inventory.
+When **Device Inventory** contains a lot of devices, it can be tedious to install them one by one.
+To make things easier, there is a workflow which allows to install all devices present in the inventory.
 
 Follow these instructions to use the workflow:
 
-On the landing page,  select `Workflow Manager`. Then select `Explore` and search for the workflow called **Install_all_from_inventory**.
+At the FRINX Machine **Dashboard** under **Workflow Manage** section click on **Explore workflows** panel. The page titled **Workflow definitions** opens.
+Use **Search workflow by name** input box and fill in **Install_all_from_inventory** and click **Search** button.
 
-![Search for install_all_from_inventory](install_all_from_inventory_search.png)
+![Search for workflow Install_all_from_inventory](install_all_from_inventory_search.png)
 
-After searching, select the `Execute` button (blue play icon). A window appears where you can enter the input parameter. This workflow does not require any input if you want to install all uninstalled devices. If you specified a device label when adding devices, you can use this label to determine which devices should be bulk installed. Select "Execute" again.
+The list of workflows narrows down to two items - workflows Install_all_from_inventory and Uninstall_all_from_inventory. Click blue `Execute` button (blue play icon) located on the row next to the workflow. The form titled with the name of workflow **Install_all_from_inventory** appears and optionally you can fill in the input parameter **labels** which allows to select a subset of devices to install. (You can specify a device label while adding devices to Device Inventory.) We want to install all uninstalled devices - do not fill in the input **labels** and click **Execute workflow** button. As a result to the left of the **Execute workflow** button will appear the link **Executed workflow in detail**. 
 
-![Execute install_all_from_inventory](install_all_from_inventory_pop_up_window.png)
+![Execute workflow Install_all_from_inventory](install_all_from_inventory_pop_up_window.png)
 
-After you execute, a numeric link appears to the left of the `Execute` button. The link takes you to a page that shows individual tasks for this workflow, its inputs and outputs, and whether it was successful or unsuccessful. In the "Input/Output" tab, you can see both devices that were installed as a result of this workflow and those that were already installed.
+After you click the link **Executed workflow in detail** you will be navigated to a page with details of the executed workflow - it displays individual tasks for this workflow, it is possible to click whatever task and examine its inputs and outputs, whether it was successful or unsuccessful etc. 
 
-![Results of the workflow](install_all_from_inventory_result.png)
+Note: Similarily you can use workflow **Uninstall_all_from_inventory** to uninstall all devices at once.
