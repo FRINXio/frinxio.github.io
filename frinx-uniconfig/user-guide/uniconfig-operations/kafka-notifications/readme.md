@@ -425,6 +425,22 @@ Sample connection notifications captured by Kafka console consumer:
 }
 ```
 
+**gNMI connect notification:**
+
+```json
+{
+  "eventTime": "2022-02-17T10:09:51.41777-00:00",
+  "nodeId": "UC-5b4d0cec-6493-4e3d-bd1c-348a3ce83600",
+  "streamName": "CONNECTION",
+  "identifier": "connection-notification",
+  "body": {
+    "node-id": "R3",
+    "topology": "gnmi-topology",
+    "connection-status": "connecting",
+    "connection-message": "connecting"
+  }
+}
+```
 ## Database entities
 
 The following **three tables** in the database are related to notifications:
@@ -1025,6 +1041,8 @@ notifications.kafka.data-change-events-topic-name=data-change-events
 notifications.kafka.connection-notifications-topic-name=connection-notifications
 # If only connection notifications for NETCONF stream are enabled.
 notifications.kafka.connection-notifications-netconf-stream-only=true
+# If only connection notifications for gNMI stream are enabled.
+notifications.kafka.connection-notifications-gnmi-stream-only=true
 # The maximum thread pool size in the executor.
 # A thread pool executor is needed to send messages to Kafka.
 notifications.kafka.max-thread-pool-size=8
