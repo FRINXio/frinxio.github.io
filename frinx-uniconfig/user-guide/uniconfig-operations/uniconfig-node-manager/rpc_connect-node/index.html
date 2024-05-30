@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.769170483061">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.770386846932">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC connect-node | Frinx docs</title>
     <meta name="title" content="RPC connect-node | Frinx docs">
-    <meta name="description" content="This RPC is similar to the mount-node RPC in that it creates a connection to a device that is already installed. The connection is created outside of a" />
+    <meta name="description" content="This RPC creates a connection to a device that is already installed. The connection is created outside of a transaction," />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_connect-node/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_connect-node/">
     <meta property="og:title" content="RPC connect-node | Frinx docs">
-    <meta property="og:description" content="This RPC is similar to the mount-node RPC in that it creates a connection to a device that is already installed. The connection is created outside of a">
+    <meta property="og:description" content="This RPC creates a connection to a device that is already installed. The connection is created outside of a transaction,">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_connect-node/">
     <meta property="twitter:title" content="RPC connect-node | Frinx docs">
-    <meta property="twitter:description" content="This RPC is similar to the mount-node RPC in that it creates a connection to a device that is already installed. The connection is created outside of a">
+    <meta property="twitter:description" content="This RPC creates a connection to a device that is already installed. The connection is created outside of a transaction,">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.769170483061" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.770386846932" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.769170483061" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.770386846932" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.769170483061" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.769170483061" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.770386846932" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.770386846932" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,9 +254,9 @@
         <span>RPC connect-node</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC is similar to the <strong>mount-node RPC</strong> in that it creates a connection to
-a device that is already installed. The connection is created outside of a
-transaction, so that the connection stays up even without active transactions.</p>
+<p>This RPC creates a connection to a device that is already installed.
+The connection is created outside of a transaction,
+so that the connection stays up even without active transactions.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -303,8 +303,9 @@ reconnection is required.</p>
     </h2>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>node-id</code> (mandatory) - ID of stream node. Consists of a device node and
-stream name (<code v-pre>&lt;device node&gt;_&lt;stream name&gt;</code>, for example <code v-pre>R1_NETCONF</code>).</li>
+<li><code v-pre>node-id</code> (mandatory) - ID of a node. In case of a stream node, the node
+consists of a device node and a stream name (<code v-pre>&lt;device node&gt;_&lt;stream name&gt;</code>,
+for example <code v-pre>R1_NETCONF</code>).</li>
 <li><code v-pre>max-connection-attempts</code> - Maximum number of connection attempts. The default
 value is 1.</li>
 <li><code v-pre>between-attempts-timeout</code> - Timeout between connection attempts in seconds.
@@ -319,8 +320,7 @@ The default value is 60 seconds.</li>
 <p>The <strong>connect-node RPC</strong> is also included in
 <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">UniConfig shell</a>.
 As it takes <code v-pre>node-id</code> as input, the shell only suggests nodes that are relevant
-to this RPC (for example, nodes that are installed in UniConfig but are not yet
-connected).</p>
+to this RPC (nodes that are installed in UniConfig but are not yet connected).</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>

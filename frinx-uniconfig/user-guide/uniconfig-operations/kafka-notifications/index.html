@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.769170483061">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.770386846932">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.769170483061" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.770386846932" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.769170483061" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.770386846932" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.769170483061" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.769170483061" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.770386846932" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.770386846932" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -371,6 +371,8 @@ try to recreate the session.</p>
 <p>It contains the following:</p>
 <ul>
 <li>transaction id</li>
+<li>comment</li>
+<li>label</li>
 <li>request data
 <ul>
 <li>uri</li>
@@ -416,6 +418,8 @@ calculation difference result.</p>
         &quot;http-method&quot;: &quot;PUT&quot;
       }
     },
+    &quot;label&quot;: &quot;user-123&quot;,
+    &quot;comment&quot;: &quot;manual tx created by user-123&quot;,
     &quot;transaction-id&quot;: &quot;e0956588-bb94-46a3-a0e0-adecca318dfe&quot;,
     &quot;response&quot;: {
       &quot;status-code&quot;: 201
@@ -457,6 +461,7 @@ calculation difference result.</p>
         &quot;http-method&quot;: &quot;DELETE&quot;
       }
     },
+    &quot;label&quot;: &quot;user-123&quot;,
     &quot;transaction-id&quot;: &quot;e0956588-bb94-46a3-a0e0-adecca318dfe&quot;,
     &quot;response&quot;: {
       &quot;status-code&quot;: 204
@@ -695,6 +700,21 @@ for the YANG notification is <code v-pre>connection-notification</code>.</p>
     &quot;node-id&quot;: &quot;R2&quot;,
     &quot;connection-message&quot;: &quot;Connecting&quot;,
     &quot;topology&quot;: &quot;topology-netconf&quot;
+  }
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>gNMI connect notification:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;eventTime&quot;: &quot;2022-02-17T10:09:51.41777-00:00&quot;,
+  &quot;nodeId&quot;: &quot;UC-5b4d0cec-6493-4e3d-bd1c-348a3ce83600&quot;,
+  &quot;streamName&quot;: &quot;CONNECTION&quot;,
+  &quot;identifier&quot;: &quot;connection-notification&quot;,
+  &quot;body&quot;: {
+    &quot;node-id&quot;: &quot;R3&quot;,
+    &quot;topology&quot;: &quot;gnmi-topology&quot;,
+    &quot;connection-status&quot;: &quot;connecting&quot;,
+    &quot;connection-message&quot;: &quot;connecting&quot;
   }
 }</code></pre>
 </doc-codeblock></div>
@@ -1349,6 +1369,8 @@ notifications.kafka.data-change-events-topic-name=data-change-events
 notifications.kafka.connection-notifications-topic-name=connection-notifications
 # If only connection notifications for NETCONF stream are enabled.
 notifications.kafka.connection-notifications-netconf-stream-only=true
+# If only connection notifications for gNMI stream are enabled.
+notifications.kafka.connection-notifications-gnmi-stream-only=true
 # The maximum thread pool size in the executor.
 # A thread pool executor is needed to send messages to Kafka.
 notifications.kafka.max-thread-pool-size=8

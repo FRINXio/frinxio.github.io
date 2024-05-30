@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.769170483061">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.770386846932">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC disconnect-node | Frinx docs</title>
     <meta name="title" content="RPC disconnect-node | Frinx docs">
-    <meta name="description" content="This RPC is similar to the unmount-node RPC in that it closes a connection to a device." />
+    <meta name="description" content="This RPC closes connection to a device. If a node is associated with multiple transactions, it will be removed from all of them." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_disconnect-node/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_disconnect-node/">
     <meta property="og:title" content="RPC disconnect-node | Frinx docs">
-    <meta property="og:description" content="This RPC is similar to the unmount-node RPC in that it closes a connection to a device.">
+    <meta property="og:description" content="This RPC closes connection to a device. If a node is associated with multiple transactions, it will be removed from all of them.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_disconnect-node/">
     <meta property="twitter:title" content="RPC disconnect-node | Frinx docs">
-    <meta property="twitter:description" content="This RPC is similar to the unmount-node RPC in that it closes a connection to a device.">
+    <meta property="twitter:description" content="This RPC closes connection to a device. If a node is associated with multiple transactions, it will be removed from all of them.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.769170483061" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.770386846932" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.769170483061" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.770386846932" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.769170483061" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.769170483061" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.770386846932" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.770386846932" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,8 +254,8 @@
         <span>RPC disconnect-node</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC is similar to the <strong>unmount-node RPC</strong> in that it closes a connection
-to a device.</p>
+<p>This RPC closes connection to a device. If a node is associated with multiple
+transactions, it will be removed from all of them.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -288,8 +288,11 @@ user-created transactions are used.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-            <h5>Note that the <strong>disconnect-node RPC</strong> only works on local Uniconfig nodes in</h5>
-<p>a cluster. !!!</p>
+<p>Note that the <strong>disconnect-node RPC</strong> only works on local Uniconfig nodes in
+a cluster.</p>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="rpc-parameters">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-parameters">#</doc-anchor-trigger>
@@ -297,8 +300,9 @@ user-created transactions are used.</p>
     </h2>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>node-id</code> (mandatory) - ID of stream node. Consists of a device node and
-stream name (<code v-pre>&lt;device node&gt;_&lt;stream name&gt;</code>, for example <code v-pre>R1_NETCONF</code>).</li>
+<li><code v-pre>node-id</code> (mandatory) - ID of a node. In case of a stream node, the node
+consists of a device node and a stream name (<code v-pre>&lt;device node&gt;_&lt;stream name&gt;</code>,
+for example <code v-pre>R1_NETCONF</code>).</li>
 </ul>
 <doc-anchor-target id="uniconfig-shell">
     <h2>
@@ -308,8 +312,8 @@ stream name (<code v-pre>&lt;device node&gt;_&lt;stream name&gt;</code>, for exa
 </doc-anchor-target>
 <p>The <strong>disconnect-node RPC</strong> is also included in
 <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">UniConfig shell</a>.
-As it takes <code v-pre>node-id</code> as input, the shell only suggests nodes user that are
-relevant to this RPC (for example, connected nodes).</p>
+As it takes <code v-pre>node-id</code> as input, the shell only suggests nodes that are relevant
+to this RPC (nodes that are already connected).</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
@@ -423,9 +427,6 @@ parameters:</p>
     }
 }</code></pre>
 </doc-codeblock></div>
-        </div>
-    </div>
-</div>
 
                                 
                                 <!-- Required only on API pages -->
