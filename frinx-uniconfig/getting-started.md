@@ -111,6 +111,3 @@ The file can be found here:
 
 See [OpenAPI](https://docs.frinx.io/frinx-uniconfig/user-guide/operational-procedures/openapi/) for more information.
 
-## Offline Activation
-
-For offline activation of UniConfig, please contact **support@frinx.io**.
