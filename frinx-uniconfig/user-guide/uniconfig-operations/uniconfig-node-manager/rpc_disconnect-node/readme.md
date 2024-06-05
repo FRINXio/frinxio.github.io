@@ -1,14 +1,14 @@
 # RPC disconnect-node
 
-This RPC closes connection to a device. If a node is associated with multiple
-transactions, it will be removed from all of them.
+This RPC terminates connection to all notification streams belonging to an installed nodes.
 
 !!!
-Note that the transaction used in this RPC is created internally, so that no
+Note that the transaction used in this RPC is created internally, so no
 user-created transactions are used.
 !!!
 
-The **disconnect-node RPC** also supports disconnecting stream nodes.
+The **disconnect-node RPC** also supports terminating connection of a specific stream node by specifying
+the stream node name in the RPC. Examples are shown below.
 
 !!!
 Note that the **disconnect-node RPC** only works on local Uniconfig nodes in
@@ -17,20 +17,19 @@ a cluster.
 
 ## RPC parameters
 
-- `node-id` (mandatory) - ID of a node. In case of a stream node, the node
-  consists of a device node and a stream name (`<device node>_<stream name>`,
-  for example `R1_NETCONF`).
+- `node-id` (mandatory) - ID of a node.
+- `stream-name` (optional) - Name of a stream.
 
-## UniConfig shell
+## UniConfig Shell
 
 The **disconnect-node RPC** is also included in 
 [UniConfig shell](https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/). 
 As it takes `node-id` as input, the shell only suggests nodes that are relevant
-to this RPC (nodes that are already connected).
+to this RPC (nodes that are installed in UniConfig topology).
 
 ## RPC examples
 
-For all examples, assume that the **install RPC** request included the following
+For all examples, assume that the **install-node RPC** request included the following
 parameters:
 
 ```json
@@ -53,7 +52,7 @@ parameters:
 }
 ```
 
-### Successful example - Request for a device node
+### Successful example - Request to disconnect all notification streams
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:disconnect-node' \
@@ -71,7 +70,43 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 ```RPC Response, Status: 200
 ```
 
-### Successful example - Request for a stream node
+### Failed example - Already disconnected
+
+The specified node is not connected or does not exist in the database.
+
+```json RPC Response, Status: 502
+{
+    "errors": {
+        "error": [
+            {
+                "error-tag": "southbound-no-connection",
+                "error-type": "application",
+                "error-message": "All connections for node R1 are already disconnected."
+            }
+        ]
+    }
+}
+```
+
+### Failed example - Can't disconnect because some connections are in the process of connecting
+
+The specified node is not connected or does not exist in the database.
+
+```json RPC Response, Status: 502
+{
+    "errors": {
+        "error": [
+            {
+                "error-tag": "southbound-no-connection",
+                "error-type": "application",
+                "error-message": "Some connections are in the process of connecting or aren't connected. Try again later."
+            }
+        ]
+    }
+}
+```
+
+### Successful example - Request to disconnect a specific notification stream
 
 ```bash RPC Request
 curl --location --request POST 'http://localhost:8181/rests/operations/connection-manager:disconnect-node' \
@@ -81,7 +116,8 @@ curl --location --request POST 'http://localhost:8181/rests/operations/connectio
 --header 'Cookie: Cookie_1=value' \
 --data-raw '{
     "input": {
-        "node-id": "R1_NETCONF"
+        "node-id": "R1",
+        "stream-name": "NETCONF"
     }
 }'
 ```
@@ -100,22 +136,7 @@ The specified node is not connected or does not exist in the database.
             {
                 "error-tag": "southbound-no-connection",
                 "error-type": "application",
-                "error-message": "Node vnf20_NETCONF isn't connected"
-            }
-        ]
-    }
-}
-```
-
-### Failed example - Node does not exist
-```json
-{
-    "errors": {
-        "error": [
-            {
-                "error-tag": "data-missing",
-                "error-type": "application",
-                "error-message": "Node R1 doesn't exist in database"
+                "error-message": "Notification stream NETCONF for node R1 is already disconnected."
             }
         ]
     }
