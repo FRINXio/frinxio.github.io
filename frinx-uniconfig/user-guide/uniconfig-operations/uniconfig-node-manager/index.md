@@ -26,4 +26,5 @@ See below for additional information on individual RPCs:
 - [RPC replace-config-with-operational](../uniconfig-node-manager/rpc_replace-config-with-oper)
 - [RPC sync-from-network](../uniconfig-node-manager/rpc_sync-from-network)
 - [RPC validate](../uniconfig-node-manager/rpc_validate)
+- [RPC bulk-get](../uniconfig-node-manager/rpc_bulk-get)
 - [RPC uninstall-multiple-nodes](../uniconfig-node-manager/uniconfig_uninstall_multiple_nodes)
