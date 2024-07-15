@@ -9,13 +9,14 @@ on southbound topology (if multiple mount-points with the same node-id exist, us
 or just stored in uniconfig database.
 
 RPC input contains a list of node inputs where each consists of mandatory fields such as `node-id` (UniConfig node identifier) and
-`path`, which points to specific subtree. Optional fields are `content` and `connection-type`. Content determines that the call will be 
+`path`, which points to specific subtree. Optional fields are `content`, `connection-type` and `ignore-missing-data-error`. Content determines that the call will be 
 over mount-point to target device datastore `config, operational, state, all`, where `state, all` are only for gnmi node. 
 Connection type is needed only in a scenario where multiple southbound mount-points are defined with the same `node-id`. 
+If data-missing error is not wanted, user may add `ignore-missing-data-error` and set it to true (default is false) which will display empty config in `data` leaf.
 
 If get operation on any nodes failed (node is not installed, connection lost, data is not present, ...)  the response 
 will display only failed nodes in common RFC8040 errors container. In a success case, the result is structured in 
-node-results format. Each node-result consists of `node-id`, `content` (if over mount-point) and 
+node-results format. Each node-result consists of `node-id`, `content` (if over mount-point) `path` and 
 `data` that contains wanted subtree config.
 
 ## RPC examples
@@ -52,11 +53,13 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
       "node-result": [
         {
           "node-id": "R1",
-          "data": "{\"interface\": [{\"name\": \"GigabitEthernet0/0/0/1\", \"config\": { ... } }, ... ]}"
+          "data": "{\"interface\": [{\"name\": \"GigabitEthernet0/0/0/1\", \"config\": { ... } }, ... ]}",
+          "path": "frinx-openconfig-interfaces:interfaces/interface"
         },
         {
           "node-id": "R2",
-          "data": "{\"interface-configuration\": [{\"name\": \"GigabitEthernet0/0/0/1\", \"act\": \"active\" }, ... ]}"
+          "data": "{\"interface-configuration\": [{\"name\": \"GigabitEthernet0/0/0/1\", \"act\": \"active\" }, ... ]}",
+          "path": "Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration"
         }
       ]
     }
@@ -99,11 +102,62 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
         {
           "node-id": "R1",
           "data": "{\"interface\": [{\"name\": \"GigabitEthernet0/0/0/1\", \"config\": { ... } }, ... ]}",
+          "path": "frinx-openconfig-interfaces:interfaces/interface",
           "content": "config"
         },
         {
           "node-id": "R2",
           "data": "{\"interface-configuration\": [{\"name\": \"GigabitEthernet0/0/0/1\", \"act\": \"active\" }, ... ]}",
+          "path": "Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration",
+          "content": "operational"
+        }
+      ]
+    }
+  }
+}
+```
+
+### Successful example
+
+RPC input contains two nodes, where R1 is successful and R2 does not provide any config on given path, but `ignore-missing-data-error` is present.
+
+```bash RPC Request
+curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:bulk-get' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "nodes": [
+            {
+                "node-id": "R1",
+                "path": "frinx-openconfig-interfaces:interfaces/interface",
+                "content": "config"
+            },
+            {
+                "node-id": "R2",
+                "path": "Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration",
+                "content": "operational"
+            }
+        ]
+    }
+}'
+```
+
+```json RPC Response, Status: 200
+{
+  "output": {
+    "node-results": {
+      "node-result": [
+        {
+          "node-id": "R1",
+          "data": "{\"interface\": [{\"name\": \"GigabitEthernet0/0/0/1\", \"config\": { ... } }, ... ]}",
+          "path": "frinx-openconfig-interfaces:interfaces/interface",
+          "content": "config"
+        },
+        {
+          "node-id": "R2",
+          "data": "{}",
+          "path": "Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration",
           "content": "operational"
         }
       ]
