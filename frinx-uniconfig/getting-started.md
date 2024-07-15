@@ -83,7 +83,7 @@ docker stop uniconfig
 
 ### Download FRINX UniConfig
 
-Download a ZIP archive of the latest FRINX UniConfig: [uniconfig-5.0.7.zip](https://license.frinx.io/download/uniconfig-5.0.7.zip)
+To download UniConfig, please contact: marketing@elisapolystar.com
 
 By downloading, you accept the [FRINX software agreement](https://frinx.io/eula).
 
