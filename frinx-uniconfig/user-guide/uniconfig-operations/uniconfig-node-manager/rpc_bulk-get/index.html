@@ -12,24 +12,24 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Database JSONB Filtering | Frinx docs</title>
-    <meta name="title" content="Database JSONB Filtering | Frinx docs">
-    <meta name="description" content="The example of using the jsonb-filter query parameter: parent-path?jsonb-filter=expression" />
+    <title>RPC bulk-get | Frinx docs</title>
+    <meta name="title" content="RPC bulk-get | Frinx docs">
+    <meta name="description" content="This RPC provides multiple get operations on multiple nodes, paths and contents. It is possible to get data from 'Operational' datastore of UniConfig..." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/jsonb-filtering/database-jsonb-filtering/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_bulk-get/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/jsonb-filtering/database-jsonb-filtering/">
-    <meta property="og:title" content="Database JSONB Filtering | Frinx docs">
-    <meta property="og:description" content="The example of using the jsonb-filter query parameter: parent-path?jsonb-filter=expression">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_bulk-get/">
+    <meta property="og:title" content="RPC bulk-get | Frinx docs">
+    <meta property="og:description" content="This RPC provides multiple get operations on multiple nodes, paths and contents. It is possible to get data from 'Operational' datastore of UniConfig...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/jsonb-filtering/database-jsonb-filtering/">
-    <meta property="twitter:title" content="Database JSONB Filtering | Frinx docs">
-    <meta property="twitter:description" content="The example of using the jsonb-filter query parameter: parent-path?jsonb-filter=expression">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_bulk-get/">
+    <meta property="twitter:title" content="RPC bulk-get | Frinx docs">
+    <meta property="twitter:description" content="This RPC provides multiple get operations on multiple nodes, paths and contents. It is possible to get data from 'Operational' datastore of UniConfig...">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -39,6 +39,7 @@
     <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.774427407820" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
     <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.774427407820" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.774427407820" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -247,209 +248,348 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="database-jsonb-filtering" class="break-words">
+<doc-anchor-target id="rpc-bulk-get" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#database-jsonb-filtering">#</doc-anchor-trigger>
-        <span>Database JSONB Filtering</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-bulk-get">#</doc-anchor-trigger>
+        <span>RPC bulk-get</span>
     </h1>
 </doc-anchor-target>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>The example of using the jsonb-filter query parameter: <strong>parent-path?jsonb-filter=expression</strong></p>
-<p>PostgreSQL documentation: <a href="https://www.postgresql.org/docs/13/functions-json.html">JSON Functions and Operators</a></p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="jsonb-filter-expression">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#jsonb-filter-expression">#</doc-anchor-trigger>
-        <span>Jsonb-filter expression</span>
-    </h4>
+<p>This RPC provides multiple get operations on multiple nodes, paths and contents.
+It is possible to get data from &#x27;Operational&#x27; datastore of UniConfig topology if no content is specified,
+otherwise data is retrieved from the device directly (over mount-point).
+Operation is executed over actual/existing UniConfig transaction (immediate-commit model / manual user transaction).
+Each GET operation is executed in parallel. For mount-point read, it is enough to have node installed
+on southbound topology (if multiple mount-points with the same node-id exist, user need to specify also connection-type)
+or just stored in uniconfig database.</p>
+<p>RPC input contains a list of node inputs where each consists of mandatory fields such as <code v-pre>node-id</code> (UniConfig node identifier) and
+<code v-pre>path</code>, which points to specific subtree. Optional fields are <code v-pre>content</code>, <code v-pre>connection-type</code> and <code v-pre>ignore-missing-data-error</code>. Content determines that the call will be
+over mount-point to target device datastore <code v-pre>config, operational, state, all</code>, where <code v-pre>state, all</code> are only for gnmi node.
+Connection type is needed only in a scenario where multiple southbound mount-points are defined with the same <code v-pre>node-id</code>.
+If data-missing error is not wanted, user may add <code v-pre>ignore-missing-data-error</code> and set it to true (default is false) which will display empty config in <code v-pre>data</code> leaf.</p>
+<p>If get operation on any nodes failed (node is not installed, connection lost, data is not present, ...)  the response
+will display only failed nodes in common RFC8040 errors container. In a success case, the result is structured in
+node-results format. Each node-result consists of <code v-pre>node-id</code>, <code v-pre>content</code> (if over mount-point) <code v-pre>path</code> and
+<code v-pre>data</code> that contains wanted subtree config.</p>
+<doc-anchor-target id="rpc-examples">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
+        <span>RPC examples</span>
+    </h2>
 </doc-anchor-target>
-<p>The base expression must contain <strong>path</strong>, <strong>operator</strong> and <strong>value</strong>.
-The jsonb-filter can contain one or more expressions joined with AND
-(&amp;&amp;) or OR (||) operator. if the &amp;&amp; operator is used it must be encoded.</p>
-<p><strong>Path</strong></p>
-<p>The path to the data that the users want to filter. The path can be:</p>
-<ol>
-<li><strong>Relative path</strong></li>
-</ol>
-<p>In this case, the path must be prefixed with &lt;<strong>@</strong>&gt;. This path is relative to the <strong>parent-path</strong></p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">{@/description}</code></pre>
-</doc-codeblock></div>
-<ol start="2">
-<li><strong>Absolute path</strong></li>
-</ol>
-<p>In this case, a path must be prefixed with <strong>$</strong>. This path must start with a top-level parent container</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">{$/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=act,Bundle-Ether1/description}</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Sometimes especially absolute paths can contain a key of some item
-with special characters. In this case it is necessary wrap this key in
-a special syntax <strong>(#example-key-name)</strong> and also encode these
-wrapping symbols - <strong>%28%23example-key-name%29</strong>. If the key is a
-composite key, it is necessary to wrap the whole key with these
-symbols. If the user is not sure if the path contains special
-characters, it is always recommended to use this special syntax.</p>
-        </div>
-    </div>
-</div>
-<p><strong>Single key:</strong></p>
-<p>{$/frinx-openconfig-interfaces:interfaces/interface=%28%23MgmtEth0/RP0/CPU0/0%29}</p>
-<p><strong>Composite key:</strong></p>
-<p>{$/Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration=%28%23act,GigabitEthernet0/0/0/2%29}</p>
-<p><strong>Operator</strong></p>
-<p>When the path is constructed then the user can use one of the operators
-in the table below</p>
-<div class="table-wrapper scrollbar overflow-hidden">
-<table class="comfortable">
-<thead>
-<tr>
-<th>Value/Predicate Description</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>==</td>
-<td>Equality operator</td>
-</tr>
-<tr>
-<td>!=</td>
-<td>Non-equality operator</td>
-</tr>
-<tr>
-<td>&lt;&gt;</td>
-<td>Non-equality operator (same as !=)</td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td>Less-than operator</td>
-</tr>
-<tr>
-<td>&lt;=</td>
-<td>Less-than-or-equal-to operator</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>Greater-than operator</td>
-</tr>
-<tr>
-<td>&gt;=</td>
-<td>Greater-than-or-equal-to operator</td>
-</tr>
-<tr>
-<td>true</td>
-<td>Value used to perform a comparison with JSON true literal</td>
-</tr>
-<tr>
-<td>false</td>
-<td>Value used to perform a comparison with JSON false literal</td>
-</tr>
-<tr>
-<td>null</td>
-<td>Value used to perform a comparison with JSON null value</td>
-</tr>
-<tr>
-<td>&amp;&amp;</td>
-<td>Boolean AND</td>
-</tr>
-<tr>
-<td>||</td>
-<td>Boolean OR</td>
-</tr>
-<tr>
-<td>!</td>
-<td>Boolean NOT</td>
-</tr>
-<tr>
-<td>like_regex</td>
-<td>Tests whether the first operand matches the regular expression given by the second operand</td>
-</tr>
-<tr>
-<td>starts with</td>
-<td>Equality operator</td>
-</tr>
-<tr>
-<td>exists</td>
-<td>Equality operator</td>
-</tr>
-<tr>
-<td>is unknown</td>
-<td>Equality operator</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Value</strong></p>
-<p>The last element of the jsonb-filter expression is a value based on
-which the user wants to filter the data.</p>
-<doc-anchor-target id="jsonb-filter-examples">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#jsonb-filter-examples">#</doc-anchor-trigger>
-        <span>Jsonb-filter examples</span>
-    </h4>
+<doc-anchor-target id="successful-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
 </doc-anchor-target>
-<p><strong>1. Examples of using the relative paths in the jsonb-filter</strong></p>
-<p>Example of filtering the list of interfaces based on the enabled
-parameter where the <strong>equality operator</strong> is used as the operator</p>
+<p>RPC input contains valid nodes that are installed in UniConfig topology. Bulk-get will read config on following paths
+from UniConfig operational datastore.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface?jsonb-filter={@/config/enabled} == true&amp;content=nonconfig</code></pre>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:bulk-get' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: [
+            {
+                &quot;node-id&quot;: &quot;R1&quot;,
+                &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;R2&quot;,
+                &quot;path&quot;: &quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration&quot;
+            }
+        ]
+    }
+}'</code></pre>
 </doc-codeblock></div>
-<p>Example of filtering the list of interfaces based on the mtu parameter
-where the <strong>less-than</strong> is used as the operator</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface?jsonb-filter={@/config/mtu} &lt; 1600&amp;content=nonconfig</code></pre>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;data&quot;: &quot;{\&quot;interface\&quot;: [{\&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/1\&quot;, \&quot;config\&quot;: { ... } }, ... ]}&quot;,
+          &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;
+        },
+        {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;data&quot;: &quot;{\&quot;interface-configuration\&quot;: [{\&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/1\&quot;, \&quot;act\&quot;: \&quot;active\&quot; }, ... ]}&quot;,
+          &quot;path&quot;: &quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration&quot;
+        }
+      ]
+    }
+  }
+}</code></pre>
 </doc-codeblock></div>
-<p>Example of filtering the list of interfaces based on the name parameter
-where the <strong>like_regex</strong> is used as the operator</p>
+<doc-anchor-target id="successful-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-1">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains valid nodes, from which Ri is installed in UniConfig topology, and R2 is installed as southbound only.
+Bulk-get will read config on following paths from following content target datastores.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface?jsonb-filter={@/config/name} like_regex &quot;Bundle.*&quot;&amp;content=nonconfig</code></pre>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:bulk-get' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: [
+            {
+                &quot;node-id&quot;: &quot;R1&quot;,
+                &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;,
+                &quot;content&quot;: &quot;config&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;R2&quot;,
+                &quot;path&quot;: &quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration&quot;,
+                &quot;content&quot;: &quot;operational&quot;
+            }
+        ]
+    }
+}'</code></pre>
 </doc-codeblock></div>
-<p>Example of filtering the list of interfaces where a combination of
-expressions is used</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface?jsonb-filter=({@/config/name} != &quot;Bundle-Ether1&quot; %26%26 {@/config/name} starts with &quot;Bundle-Ether&quot;) || ({@/config/name} like_regex &quot;Gigabit.*&quot; %26%26 {@/config/enabled} == true)&amp;content=nonconfig</code></pre>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;data&quot;: &quot;{\&quot;interface\&quot;: [{\&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/1\&quot;, \&quot;config\&quot;: { ... } }, ... ]}&quot;,
+          &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;,
+          &quot;content&quot;: &quot;config&quot;
+        },
+        {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;data&quot;: &quot;{\&quot;interface-configuration\&quot;: [{\&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/1\&quot;, \&quot;act\&quot;: \&quot;active\&quot; }, ... ]}&quot;,
+          &quot;path&quot;: &quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration&quot;,
+          &quot;content&quot;: &quot;operational&quot;
+        }
+      ]
+    }
+  }
+}</code></pre>
 </doc-codeblock></div>
-<p>Example of filtering the list of interfaces where the <strong>exists</strong>
-operator is used</p>
+<doc-anchor-target id="successful-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example-2">#</doc-anchor-trigger>
+        <span>Successful example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains two nodes, where R1 is successful and R2 does not provide any config on given path, but <code v-pre>ignore-missing-data-error</code> is present.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface?jsonb-filter=(exists({@/subinterfaces}))&amp;content=nonconfig</code></pre>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:bulk-get' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: [
+            {
+                &quot;node-id&quot;: &quot;R1&quot;,
+                &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;,
+                &quot;content&quot;: &quot;config&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;R2&quot;,
+                &quot;path&quot;: &quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration&quot;,
+                &quot;content&quot;: &quot;operational&quot;
+            }
+        ]
+    }
+}'</code></pre>
 </doc-codeblock></div>
-<p><strong>2. Example of using the absolute path in the jsonb-filter</strong></p>
-<p>Example of filtering the list of interfaces based on the name parameter
-where <strong>equality operator</strong> is used as the operator. Interface name
-&quot;GigabitEthernet0/0/0/2&quot; is a key value that contains slashes. For this
-reason, it is necessary to wrap this key into wrapping symbols
-(#GigabitEthernet0/0/0/) and also encode these symbols
-%28%23GigabitEthernet0/0/0/2%29.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F2?jsonb-filter={$/frinx-openconfig-interfaces:interfaces/interface=%28%23GigabitEthernet0/0/0/2%29/config/enabled}==false&amp;content=nonconfig</code></pre>
+<div class="codeblock-title">RPC Response, Status: 200</div>
+<pre class="language-json"><code v-pre class="language-json">{
+  &quot;output&quot;: {
+    &quot;node-results&quot;: {
+      &quot;node-result&quot;: [
+        {
+          &quot;node-id&quot;: &quot;R1&quot;,
+          &quot;data&quot;: &quot;{\&quot;interface\&quot;: [{\&quot;name\&quot;: \&quot;GigabitEthernet0/0/0/1\&quot;, \&quot;config\&quot;: { ... } }, ... ]}&quot;,
+          &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;,
+          &quot;content&quot;: &quot;config&quot;
+        },
+        {
+          &quot;node-id&quot;: &quot;R2&quot;,
+          &quot;data&quot;: &quot;{}&quot;,
+          &quot;path&quot;: &quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration&quot;,
+          &quot;content&quot;: &quot;operational&quot;
+        }
+      ]
+    }
+  }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
+        <span>Failed example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains valid node R1 and an invalid node R2, which is not installed in uniconfig topology
+and content is not specified for that node.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:bulk-get' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: [
+            {
+                &quot;node-id&quot;: &quot;R1&quot;,
+                &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;
+            },
+            {
+                &quot;node-id&quot;: &quot;R2&quot;,
+                &quot;path&quot;: &quot;Cisco-IOS-XR-ifmgr-cfg:interface-configurations/interface-configuration&quot;
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 404</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;data-missing&quot;,
+                &quot;error-info&quot;: {
+                    &quot;node-id&quot;: &quot;R2&quot;
+                },
+                &quot;error-message&quot;: &quot;Node 'R2' is not installed in uniconfig topology&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-1">#</doc-anchor-trigger>
+        <span>Failed example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains one node with node-id R1 that has two mount-points (one is mounted over cli and the other over netconf)
+and no connection-type is specified.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:bulk-get' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: [
+            {
+                &quot;node-id&quot;: &quot;R1&quot;,
+                &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;,
+                &quot;content&quot;: &quot;operational&quot;
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 409</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;protocol-conflict&quot;,
+                &quot;error-info&quot;: {
+                    &quot;node-id&quot;: &quot;R1&quot;,
+                    &quot;error&quot;: &quot;Specify connection-type [cli, netconf, gnmi, snmp]&quot;
+                },
+                &quot;error-message&quot;: &quot;Node 'R1' is installed in multiple southbound topologies 'netconf, cli'&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-2">#</doc-anchor-trigger>
+        <span>Failed example</span>
+    </h3>
+</doc-anchor-target>
+<p>RPC input contains one node with node-id R3 that is not installed in uniconfig under any southbound topology.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:bulk-get' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: [
+            {
+                &quot;node-id&quot;: &quot;R3&quot;,
+                &quot;path&quot;: &quot;frinx-openconfig-interfaces:interfaces/interface&quot;,
+                &quot;content&quot;: &quot;operational&quot;
+            }
+        ]
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 404</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;data-missing&quot;,
+                &quot;error-info&quot;: {
+                    &quot;node-id&quot;: &quot;R3&quot;
+                },
+                &quot;error-message&quot;: &quot;Node 'R3' is not installed in any southbound topology&quot;,
+                &quot;error-type&quot;: &quot;application&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example-3">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example-3">#</doc-anchor-trigger>
+        <span>Failed example</span>
+    </h3>
+</doc-anchor-target>
+<p>If RPC input does not contain any node inputs</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Request</div>
+<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig-manager:is-in-sync' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    &quot;input&quot;: {
+        &quot;nodes&quot;: []
+    }
+}'</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 400</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;missing-element&quot;,
+                &quot;error-type&quot;: &quot;application&quot;,
+                &quot;error-message&quot;: &quot;Input cannot be empty!&quot;
+            }
+        ]
+    }
+}</code></pre>
 </doc-codeblock></div>
 
                                 
@@ -460,20 +600,20 @@ reason, it is necessary to wrap this key into wrapping symbols
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/jsonb-filtering/application-jsonb-filtering/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Application JSONB Filtering</span>
+                                                <span class="block mt-1">Uni​Config Node Manager</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/snapshot-manager/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_calculate-diff/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Snapshot Manager</span>
+                                                <span class="block mt-1">RPC calculate-​diff</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -517,6 +657,6 @@ reason, it is necessary to wrap this key into wrapping symbols
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Database JSONB Filtering", level: 5, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "RPC bulk-get", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
