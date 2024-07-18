@@ -124,7 +124,7 @@ To create subscriptions, the following are required in **application.properties*
 The install request must specify the parameters necessary to create a subscription for a specific device.
 Mandatory fields are `stream-name` (a marker for the particular subscription) and `paths` 
 (a list of paths to which the gNMI souhtbound plugin will be subscribed, with at least one path).
-Non-mandatory fields specify a time range of the subscription or subscription mode. Both `start-time` and `stop-time` are in [RFC339 format](https://datatracker.ietf.org/doc/html/rfc3339).
+Non-mandatory fields specify a time range of the subscription or subscription mode. Both `start-time` and `stop-time` are in [RFC3339 format](https://datatracker.ietf.org/doc/html/rfc3339).
 Subscription mode can be SAMPLE, ON_CHANGE or TARGET_DEFINED
 
 ```json stream inside of install-node RPC request
