@@ -1,24 +1,21 @@
-# NOKIA device
+# IosXR 7 device
 
 ## Install device
 
-A Nokia device can be installed through gNMI with the following request:
+A IosXR7 device can be installed through gNMI with the following request:
 
 ```bash
 curl --location 'http://localhost:8181/rests/operations/connection-manager:install-node' \
 --header 'Content-Type: application/json' \
 --data '{
     "input": {
-        "node-id": "nokia",
+        "node-id": "iosxr7",
         "gnmi": {
+            "schema-cache-directory": "{cache-directory}",
             "uniconfig-config:whitelist": {
                 "path": [
-                    "openconfig-interfaces:interfaces",
-                    "openconfig-network-instance:network-instances",
-                    "openconfig-relay-agent:relay-agent",
-                    "openconfig-port-group:port-groups",
-                    "openconfig-mclag:mclag",
-                    "openconfig-lldp:lldp"
+                    "Cisco-IOS-XR-ifmgr-cfg:interface-configurations",
+                    "openconfig-interfaces:interfaces"
                 ]
             },
             "uniconfig-config:uniconfig-native-enabled": true,
@@ -26,15 +23,15 @@ curl --location 'http://localhost:8181/rests/operations/connection-manager:insta
             "connection-parameters": {
                 "host": "127.0.0.1",
                 "port": 57400,
-                "device-type": "nokia",
-                "connection-type": "PLAINTEXT",
+                "connection-type": "INSECURE",
+                "device-type": "iosxr7",
                 "credentials": {
-                    "username": "<username>",
-                    "password": "<password>"
+                    "username": "admin",
+                    "password": "admin"
                 }
             },
             "session-timers": {
-                "request-timeout": 100,
+                "request-timeout": 100
             },
             "extensions-parameters": {
                 "gnmi-parameters": {
@@ -58,7 +55,7 @@ curl --location 'http://localhost:8181/rests/operations/connection-manager:unins
 --header 'Content-Type: application/json' \
 --data '{
     "input": {
-        "node-id": "nokia",
+        "node-id": "iosxr7",
         "connection-type": "gnmi"
     }
 }'

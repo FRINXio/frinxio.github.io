@@ -720,7 +720,7 @@ Basic connection parameters used to identify a remote device:
 - `node-id` - Name of the node that represents the device/mountpoint in the topology.
 - `gnmi-topology:host` - IP address or domain name of the target device running the gNMI server.
 - `gnmi-topology:port` - TCP port where the gNMI server is listening to incoming connections.
-- `gnmi-topology:device-type` - Specific device type. For now, only the `sonic` device type is supported. This parameter is used to create a device-type specific gNOI session. By default, this parameter is not specified.
+- `gnmi-topology:device-type` - Specific device type, which enables some device-specific behavior. By default, this parameter is not specified.
 - `gnmi-topology:connection-type` - If specified, an insecure connection is created. The insecure connection is available only for DEBUG reasons. To establish a gRPC connection without TLS, choose the insecure connection type `PLAINTEXT`. The connection type `PLAINTEXT` indicates that the target should skip the signature verification steps if a secure connection is used.
 - `gnmi-topology:keystore-id` - If specified, a secure connection is created. Also requires `keystore-id` (identifier of the keystore), which is defined in the `gnmi-certificate-storage` model.
 
