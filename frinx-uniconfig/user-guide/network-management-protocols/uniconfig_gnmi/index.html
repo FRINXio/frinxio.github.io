@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.774620369771">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.774682097021">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.774620369771" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.774682097021" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.774620369771" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.774682097021" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.774620369771" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.774620369771" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.774682097021" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.774682097021" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -406,7 +406,11 @@ it is processed as a gNMI SET message - Delete operation. Essentially, it is ski
 <li><code v-pre>notifications.kafka.gnmi-notifications-topic-name=gnmi-notifications</code></li>
 <li><code v-pre>notifications.kafka.embedded-kafka.enabled=true</code> (or its own Kafka, in which case kafka-servers needs to be adjusted)</li>
 </ul>
-<p>The install request must specify the parameters necessary to create a subscription for a specific device. Mandatory fields are <code v-pre>stream-name</code> (a marker for the particular subscription) and <code v-pre>paths</code> (a list of paths to which the gNMI souhtbound plugin will be subscribed, with at least one path). Non-mandatory fields specify a time range of the subscription. Both <code v-pre>start-time</code> and <code v-pre>stop-time</code> are in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC339 format</a>.</p>
+<p>The install request must specify the parameters necessary to create a subscription for a specific device.
+Mandatory fields are <code v-pre>stream-name</code> (a marker for the particular subscription) and <code v-pre>paths</code>
+(a list of paths to which the gNMI souhtbound plugin will be subscribed, with at least one path).
+Non-mandatory fields specify a time range of the subscription or subscription mode. Both <code v-pre>start-time</code> and <code v-pre>stop-time</code> are in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC3339 format</a>.
+Subscription mode can be SAMPLE, ON_CHANGE or TARGET_DEFINED</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">stream inside of install-node RPC request</div>
 <pre class="language-json"><code v-pre class="language-json">{
@@ -426,14 +430,15 @@ it is processed as a gNMI SET message - Delete operation. Essentially, it is ski
         &quot;stream-name&quot;: &quot;GNMI_lldp&quot;,
         &quot;paths&quot;: [
           &quot;openconfig-lldp:lldp&quot;
-        ]
+        ],
+        &quot;mode&quot;: &quot;SAMPLE&quot;
       }
     ]
   }
 }</code></pre>
 </doc-codeblock></div>
 <p>Subscriptions are created independently from node installation. The result of the install-node RPC relates only to node installation, and that RPC will only invoke the telemetry stream subscription process.</p>
-<p>Subscriptions are created in the gNMI southbound plugin using the Subscribe RPC from the gNMI service defined in the proto3 file. The gNMI southbound plugin can subscribe to wildcarded paths as well as multiple paths at once. It only supports the <code v-pre>STREAM</code> subscription mode and <code v-pre>ON_CHANGE</code> stream mode.</p>
+<p>Subscriptions are created in the gNMI southbound plugin using the Subscribe RPC from the gNMI service defined in the proto3 file. The gNMI southbound plugin can subscribe to wildcarded paths as well as multiple paths at once. It supports only the <code v-pre>STREAM</code> subscription mode with <code v-pre>SAMPLE</code>, <code v-pre>ON_CHANGE</code> and <code v-pre>TARGET_DEFINED</code> stream mode.</p>
 <p>If a time range is specified, it is part of the Subscribe request. If the device does not support time ranges on its server side, the gNMI southbound plugin can handle them. Note that if the timestamp of the received message is outside of the specified time range, the message is not saved to the database or published to the Kafka topic.</p>
 <p>If the specified path is marked as disabled for the <code v-pre>ON_CHANGE</code> mode in YANG schemas, the gNMI southbound plugin fails with a log message stating that the path is marked as disabled for the subscription.</p>
 <p>The session is open until it is closed either on the UniConfig side (releasing the subscription) or the device side (error). The result of telemetry streaming can be seen in the specified Kafka topic or in the notification database table.</p>
@@ -483,6 +488,20 @@ it is processed as a gNMI SET message - Delete operation. Essentially, it is ski
     <a href="nokia/" class="absolute block inset-0"></a>
 </div>
 </li>
+<li>
+<div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
+    <div class="flex items-center text-blue-500 dark:text-blue-400">
+        <span class="inline-block mb-px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
+        </span>
+        <span class="inline-block font-medium ml-2">IosXR 7 device</span>
+    </div>
+    <div class="flex items-center text-xs text-gray-400 dark:text-dark-400">
+        <span>iosxr7/</span>
+    </div>
+    <a href="iosxr7/" class="absolute block inset-0"></a>
+</div>
+</li>
 </ul>
 
                                 
@@ -503,10 +522,10 @@ it is processed as a gNMI SET message - Delete operation. Essentially, it is ski
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/nokia/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../frinx-uniconfig/user-guide/network-management-protocols/uniconfig_gnmi/iosxr7/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">NOKIA device</span>
+                                                <span class="block mt-1">Ios​XR 7 device</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
