@@ -1,58 +1,60 @@
 ---
 label: Demo Use Cases
 icon: briefcase
-order: 1000
+order: 100
 ---
 
 # Demo Use Cases
 
-There are several ways of installing device/devices in FRINX Machine. You
-can run a pre-packaged workflow to install a network device. You can
-add devices to Device inventory and install devices from there - you can install a single device
-or you can install several selected devices simultaneously.
+The following use cases demonstrate the basic usage of FRINX Machine. 
+These examples will help you explore the platform's capabilities, including executing prepared workflows, creating custom workflows via the workflow builder, and manually managing your device inventory.
 
-To start installing devices open up FRINX Machine UI.
+#### 1. Executing Prepared Workflows
+- Experience the power of automation by running pre-configured workflows.
+- Learn how to efficiently manage network tasks using automated processes.
 
-## Open FRINX Machine UI
+#### 2. Creating Custom Workflows
+- Utilize the workflow builder to create and customize your workflows.
+- Tailor processes to your specific needs, enhancing operational efficiency.
 
-Note: you can use our demo at https://demo.frinx.io 
+#### 3. Managing Device Inventory
+- Add devices to your inventory manually, providing flexibility to experiment with different configurations.
+- This feature is particularly useful for testing and deploying your own networking devices.
 
-Open your browser and go to `[host_ip]` if installed locally go to
-`https://localhost`. This is the GUI (UniConfig UI) for managing all of
-your devices. You should see a screen like this:
+#### 4. Controlling Devices
+- Manage devices in your inventory through the user interface (UI).
+- Execute operations using prepared workflows, ensuring streamlined control and management.
 
-[![FM 2.0 Dashboard](fm2.0_dashboard.png)](fm2.0_dashboard.png)
+#### 5. Configuring Network Services
+- Set up L2VPNs between virtual devices, enhancing network connectivity and performance.
+- Create loopbacks on device interfaces either manually or through automated workflows, demonstrating the versatility of FRINX Machine.
 
-!!!
-For Demo Use Cases, please download repository [fm-workflows](https://github.com/FRINXio/fm-workflows)
+These use cases serve as a starting point for exploring the extensive capabilities of FRINX Machine. 
+They illustrate how the platform can be utilized for a variety of networking tasks, from basic device management to complex network configurations.
 
-Make sure FRINX-machine is running, navigate to
 
+## Install Demo Use Case workflows
+
+Use [demo-worklows helm chart](https://artifacthub.io/packages/helm/frinx-helm-charts/demo-workflows) to run sample-topology and frinx-demo-workflows conducor worker.
+
+### Install Frinx Machine
+Make sure your Frinx Machine is running.
+[!ref](../installation/basic/readme.md)
+
+### Install Demo workflows and Sample Topology
+
+
+```bash
+helm repo add frinx https://FRINXio.github.io/helm-charts
+helm repo update
 ```
- cd fm-workflows
+
+```bash
+helm install -n frinx frinx-demo-workflows frinx/demo-workflows
 ```
 
-and execute
-
+```bash
+NAME                                    READY   STATUS    RESTARTS   AGE
+sample-topology-5d677db769-zxbzs        1/1     Running   0          8h
+frinx-demo-workflows-6f8c7666b8-nzmd9   1/1     Running   0          8h
 ```
- ./startup.sh
-```
-
-Imported workflows and tasks will appear in FRINX-Machine UI,
-immediately after the import finishes.
-!!!
-
-In the following articles, you will learn how to install a device to
-UniConfig and how to install all devices from Device inventory to UniConfig. 
-Device inventory is automatically filled with sample devices for you when you start FRINX Machine with [fm-workflows](https://github.com/FRINXio/fm-workflows).
-
-Later we will learn how to create a loopback address on the devices
-that we previously stored in Device inventory and how to read the journals
-of these devices.
-
-Then we will take a look at how to obtain data from the
-devices that you have in the network.
-
-Lastly  we will take a look at how you can add devices to your inventory
-manually. This might be useful if you want to play around with the
-FRINX Machine a bit and try to install your own networking devices.
