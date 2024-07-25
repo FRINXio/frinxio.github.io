@@ -47,7 +47,7 @@ frinx-machine-operators-cloudnative-pg-d9566444c-85w8g     1/1     Running   0  
 
 ## Step 3: Create Docker Registry Secret
 
-Please complete this step before continue [!ref icon="briefcase" text="Create docker regitry secret"](../docker-registry-secret/readme.md)
+Please complete this step before continue [!ref icon="briefcase" text="Create docker regitry secret"](/frinx-machine/installation/docker-registry-secret/readme.md)
 
 ## Step 4: Customize FRINX Machine
 

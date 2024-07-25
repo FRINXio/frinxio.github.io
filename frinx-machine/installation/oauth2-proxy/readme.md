@@ -148,9 +148,9 @@ helm install -n frinx oauth2-proxy . -f values.yaml
 
 Rbac functionality can be configured on subchart level.
 
-https://artifacthub.io/packages/helm/frinx-helm-charts/krakend?modal=values&path=rbac
-https://artifacthub.io/packages/helm/frinx-helm-charts/workflow-manager?modal=values&path=rbac
-https://artifacthub.io/packages/helm/frinx-helm-charts/topology-discovery?modal=values&path=rbac
+- https://artifacthub.io/packages/helm/frinx-helm-charts/krakend?modal=values&path=rbac
+- https://artifacthub.io/packages/helm/frinx-helm-charts/workflow-manager?modal=values&path=rbac
+- https://artifacthub.io/packages/helm/frinx-helm-charts/topology-discovery?modal=values&path=rbac
 
 
   env:
