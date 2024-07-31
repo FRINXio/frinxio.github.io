@@ -39,7 +39,7 @@ build-backend = "poetry.core.masonry.api"
 
 In worker.py we want to create some piece of logic, which will be used in workflows to solve complex problems.
 Our worker has predefined interface, where you can define conductor task definitions, inputs and outpus.
-In method execute, you can make any your custom logic. For example call to our service, parse data from previous task or any other code you want.
+In method execute, you can implement your custom logic. For example call to our service, parse data from previous task or any other code you want.
 
 
 ```python
@@ -87,6 +87,7 @@ class TestWorkers(ServiceWorkersImpl):
                 logs=['Echo worker invoked successfully'],
                 output=self.WorkerOutput(output=worker_input.input)
             )
+            
 ```
 
 ### Workflow definition
@@ -130,6 +131,8 @@ class TestWorkflows(ServiceWorkflowsImpl):
             )
 
         # WorkflowImpl.WorkflowOutput: Define workflow outputs
+        # Parameters in workflowOutput are still strings, because they keep only
+        # reference to task output
         class WorkflowOutput(WorkflowImpl.WorkflowOutput):
             text: str
 
@@ -150,11 +153,15 @@ class TestWorkflows(ServiceWorkflowsImpl):
             )
             self.tasks.append(echo_task)
 
+            self.output_parameters = self.WorkflowOutput(
+                text=echo_task.output_ref('output')
+            )
+
 ```
 
 ### Start worker
 
-Now make conductor client, which register our workflow and will be executing custom worker logic. 
+Now implement conductor client, which registers our workflow and executes custom worker logic. 
 
 ```python
 # main.py

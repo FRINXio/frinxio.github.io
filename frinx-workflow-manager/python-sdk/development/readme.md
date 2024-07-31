@@ -18,6 +18,9 @@ This guide provides the step-by-step instructions for preparing develoment envir
 
 Install Frinx Machine with ingress enabled [!ref icon="briefcase"](/frinx-machine/installation/customization/frinx-machine-customization/readme.md)
 
+
+Check out gitops-boilerplate repository to run Frinx Machine locally [!ref target="blank" icon="mark-github" text="frinx-workers-boilerplate"](https://github.com/FRINXio/gitops-boilerplate)
+
 Make sure you have enabled workflow-manager and krakend ingress, because it's required for local development.
 
 ```bash

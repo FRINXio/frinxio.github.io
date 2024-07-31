@@ -337,6 +337,8 @@ expression = "function e() { if ($.value){return {\"result\": true}} else { retu
 
 ### JOIN TASK
 
+Read more on [conductor-oss docs](https://docs.conductor-oss.org/documentation/configuration/workflowdef/operators/join-task.html)
+
 +++ Default
 ```python
 self.tasks.append(JoinTask(

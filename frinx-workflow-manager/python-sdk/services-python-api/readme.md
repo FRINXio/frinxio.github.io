@@ -110,7 +110,7 @@ class CreateTransaction(WorkerImpl):
 ```
 
 In this example, we used frinx-python-sdk and frinx-services-python-api to create conductor worker compatible with Frinx Machine 6.1.0 release.
-For more detail, how to inport and execute this worke, please visit SDK part. 
+For more details, how to import and execute this worker, please visit SDK part. 
 
 ### Versioning
 
