@@ -12,36 +12,33 @@
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>RPC copy-one-to-one | Frinx docs</title>
-    <meta name="title" content="RPC copy-one-to-one | Frinx docs">
-    <meta name="description" content="This RPC is used to perform operations with a configuration from a single source path to a single target path." />
+    <title>Uniconfig 6.0.7 | Frinx docs</title>
+    <meta name="title" content="Uniconfig 6.0.7 | Frinx docs">
+    <meta name="description" content="[UNIC-1798] - Complex changes in SkipConstraintJSONCodecFactory (#2607)" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-one/" />
+    <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-6.0.7/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-one/">
-    <meta property="og:title" content="RPC copy-one-to-one | Frinx docs">
-    <meta property="og:description" content="This RPC is used to perform operations with a configuration from a single source path to a single target path.">
-    <meta property="og:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-one/copy-one-to-one.svg">
+    <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-6.0.7/">
+    <meta property="og:title" content="Uniconfig 6.0.7 | Frinx docs">
+    <meta property="og:description" content="[UNIC-1798] - Complex changes in SkipConstraintJSONCodecFactory (#2607)">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-one/">
-    <meta property="twitter:title" content="RPC copy-one-to-one | Frinx docs">
-    <meta property="twitter:description" content="This RPC is used to perform operations with a configuration from a single source path to a single target path.">
-    <meta property="twitter:image" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-one/copy-one-to-one.svg">
+    <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/release-notes/uniconfig-6.0.7/">
+    <meta property="twitter:title" content="Uniconfig 6.0.7 | Frinx docs">
+    <meta property="twitter:description" content="[UNIC-1798] - Complex changes in SkipConstraintJSONCodecFactory (#2607)">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.775838059950" rel="stylesheet" />
+    <link href="../../../static/favicon-192x192.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.775838059950" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.775838059950" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.775838059950" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.775838059950" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.775838059950" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.775838059950" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -56,10 +53,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../../../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../../../static/frinx_logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../../../../static/frinx_logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/frinx_logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/frinx_logo.png">
                             </span>
                         </a>
                     </div>
@@ -72,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -188,7 +185,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -250,96 +247,39 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="rpc-copy-one-to-one" class="break-words">
+<doc-anchor-target id="uniconfig-607" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-copy-one-to-one">#</doc-anchor-trigger>
-        <span>RPC copy-one-to-one</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-607">#</doc-anchor-trigger>
+        <span>Uniconfig 6.0.7</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC is used to perform operations with a configuration from a single source path to a single target path.</p>
-<p>RPC input contains the following:</p>
-<ul>
-<li><strong>type of operation</strong>: <code v-pre>merge</code> or <code v-pre>replace</code></li>
-<li><strong>type of source datastore</strong>: <code v-pre>CONFIGURATION</code> or <code v-pre>OPERATIONAL</code></li>
-<li><strong>type of target datastore</strong>: <code v-pre>CONFIGURATION</code> or <code v-pre>OPERATIONAL</code></li>
-<li><strong>source path</strong> in RFC-8040 URI format</li>
-<li><strong>target path</strong> in RFC-8040 URI format (target path denotes parent entities under which the configuration is copied)</li>
-</ul>
-<p>Target datastore is an optional input field. By default, it is the same as the source datastore. All other fields are mandatory.</p>
-<p>RPC output describes the result of the operation. If the RPC fails, no changes are made to the target datastore.</p>
-<p><figure class="content-center">
-    <img src="copy-one-to-one.svg" alt="RPC copy-one-to-one" />
-    <figcaption class="caption">RPC copy-one-to-one</figcaption>
-</figure>
-</p>
-<doc-anchor-target id="rpc-examples">
+<!-- Release notes generated using configuration in .github/release.yml at 6.0.7 -->
+<doc-anchor-target id="whats-changed">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
-        <span>RPC examples</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whats-changed">#</doc-anchor-trigger>
+        <span>What&#x27;s Changed</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="successful-example">
+<doc-anchor-target id="bug-fixes">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example">#</doc-anchor-trigger>
-        <span>Successful example</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-fixes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F41E;</span> Bug Fixes</span>
     </h3>
 </doc-anchor-target>
-<p>This example demonstrates how to copy the entire <code v-pre>org:orgs</code> container from <code v-pre>dev01</code> to the <code v-pre>dev02</code> node under the <code v-pre>uniconfig</code> topology using the <code v-pre>replace</code> operation.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-one' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;source-datastore&quot;: &quot;CONFIGURATION&quot;,
-        &quot;target-datastore&quot;: &quot;OPERATIONAL&quot;,
-        &quot;source-path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=dev01/configuration/org:orgs&quot;,
-        &quot;target-path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=dev02/configuration&quot;,
-        &quot;operation&quot;: &quot;replace&quot;
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 204</div>
-<pre class="language-none"><code v-pre class="language-none"></code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example">
+<ul>
+<li>[UNIC-1798] - Complex changes in SkipConstraintJSONCodecFactory (#2607)</li>
+<li>Fix cleaning expired tasks</li>
+</ul>
+<doc-anchor-target id="other-changes">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example">#</doc-anchor-trigger>
-        <span>Failed example</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#other-changes">#</doc-anchor-trigger>
+        <span><span class="docs-emoji">&#x1F527;</span> Other Changes</span>
     </h3>
 </doc-anchor-target>
-<p>This example shows a failed copy-one-to-one operation.</p>
-<p>RPC input contains the source datastore (same as the target datastore), merge operation, source path, and target path. The target path is invalid because it does not contain the <code v-pre>org:orgs</code> container in the schema tree.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Request</div>
-<pre class="language-bash"><code v-pre class="language-bash">curl --location --request POST 'http://localhost:8181/rests/operations/subtree-manager:copy-one-to-one' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-    &quot;input&quot;: {
-        &quot;source-datastore&quot;: &quot;CONFIGURATION&quot;,
-        &quot;source-path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=vnf01/configuration/org:orgs&quot;,
-        &quot;target-path&quot;: &quot;/network-topology:network-topology/topology=uniconfig/node=vnf02&quot;,
-        &quot;operation&quot;: &quot;merge&quot;
-    }
-}'</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 400</div>
-<pre class="language-json"><code v-pre class="language-json">{
-  &quot;errors&quot;: {
-    &quot;error&quot;: [
-      {
-        &quot;error-type&quot;: &quot;application&quot;,
-        &quot;error-tag&quot;: &quot;unknown-element&quot;,
-        &quot;error-message&quot;: &quot;Failed to find schema node with identifier '(example-services?revision=2010-01-01)orgs' under: NodeList(originalListSchemaNode=list node)&quot;
-      }
-    ]
-  }
-}</code></pre>
-</doc-codeblock></div>
+<ul>
+<li>Bump to 6.0.7-SNAPSHOT.</li>
+<li>Release 6.0.7.</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -349,20 +289,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/subtree-manager/rpc_copy-one-to-many/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-6.0.6/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">RPC copy-​one-​to-​many</span>
+                                                <span class="block mt-1">Uniconfig 6.​0.​6</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../../../frinx-uniconfig/user-guide/uniconfig-operations/templates-manager/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../frinx-uniconfig/release-notes/uniconfig-6.1.0/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Templates Manager</span>
+                                                <span class="block mt-1">Uniconfig 6.​1.​0</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -406,6 +346,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "RPC copy-one-to-one", level: 5, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Uniconfig 6.0.7", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
