@@ -2,61 +2,56 @@
 
 ## Monitoring Uniconfig performance
 
-[Dropwizard Metrics](https://metrics.dropwizard.io/) is the framework of choice to monitor performance.
+[Micrometer Metrics](https://micrometer.io/) is the framework of choice to monitor performance.
 
 ## Registry naming
 
-All the metrics are currently stored in the *uniconfig* registry.
+All the metrics are currently stored in the global registry.
 It can be accessed like so:
 ```java
-import com.codahale.metrics.SharedMetricRegistries;
+import io.micrometer.core.instrument.Metrics;
 
-SharedMetricRegistries.getOrCreate("uniconfig");
+Metrics.globalRegistry();
 ```
 
 ## Metric types
 
-All the available metric types can be seen in the [documentation](https://metrics.dropwizard.io/4.2.0/manual/core.html).
+All the available metric types can be seen in the [documentation](https://docs.micrometer.io/micrometer/reference/concepts.html).
 
 ## Naming convention
 
 There are various best practice articles on how to name metrics but one thing is common: It should be clear what is measured.
 
 ```java
-MetricRegistry.name(TaskExecutorImpl.class, "queue_size");
+Metrics.globalRegistry.counter(RpcResult.class.getName() + ".rpc_invoke")
 ```
 
 ## Adding new metrics
 
-### Adding a Meter
+### Adding a Counter
 
-Obtain a Meter and then mark all the method calls you want to measure.
+Obtain a Counter and then increment all the method calls you want to measure.
 
 ```java
-private final Meter rpcMeter = SharedMetricRegistries.getOrCreate("uniconfig")
-            .meter(MetricRegistry.name(RpcResult.class, "rpc_invoke"));
+private final Counter rpcCounter = Metrics.globalRegistry.counter(RpcResult.class.getName() + ".rpc_invoke");
 
 private void foo() {
-    rpcMeter.mark();
+    rpcCounter.increment();
 }
 ```
 
 ### Adding a Gauge
 
-For Gauge method **getValue()** needs to be implemented.
-It can be done less verbously with lambda expressions so that we avoid writing boilerplate code for an anonymous class:
+Here we create a **Gauge** that returns Integer value, access is synchronized in this case to avoid race conditions.
 
 ```java
-private final Gauge<Integer> openTransactionsCount = SharedMetricRegistries.getOrCreate("uniconfig").gauge(
-            MetricRegistry.name(UniconfigTransactionManager.class, "open_transaction_count"), () -> () -> {
-                synchronized (UniconfigTransactionManagerImpl.this) {
-                    return UniconfigTransactionManagerImpl.this.uniconfigTransactions.size();
-                }
+Metrics.globalRegistry.gauge(UniconfigTransactionManager.class.getName() + ".open_transaction_count",
+        this, uniconfigTransactionManager -> {
+            synchronized (UniconfigTransactionManagerImpl.this) {
+                return UniconfigTransactionManagerImpl.this.uniconfigTransactions.size();
             }
-    );
+        });
 ```
-
-Here we create a **Gauge** that returns Integer value, access is synchronized in this case to avoid race conditions.
 
 ## Tags 
 
@@ -64,4 +59,4 @@ Tags are currently not available in the version *4.2.x*, although support for th
 
 ## Reporters 
 
-Current available reporters are reports to CSV files and reporting via Slf4j to log file.
+Metrics are available at /actuator/prometheus endpoint.
