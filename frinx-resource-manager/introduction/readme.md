@@ -88,26 +88,21 @@ need for modifications. To achieve flexibility we are allowing:
 - Custom pool grouping to represent logical network parts (subnet,
     region, datacenter etc.)
 
-### Multitenancy and RBAC
+### RBAC
 
-Multitenancy and Role Based Access Control is supported by Resource Manager.
+Role Based Access Control is supported by Resource Manager.
 
 A simple RBAC model is implemented where only super-users (based on
 their role and user groups) can manipulate resource types, resource
 pools and labels. Regular users will only be able to read the above
 entities, allocate and free resources.
 
-Resource Manager does not manage list tenants/users/roles/groups and relies
+Resource Manager does not manage list users/roles/groups and relies
 on external ID provider. Following headers are expected by Resource Manager
 graphQL server:
 
 ```
-    x-tenant-id:        name or ID of a tenant. This name is also used as part of PSQL DB instance name.
     from:               name or ID of current user.
     x-auth-user-roles:  list of roles associated with current user.
     x-auth-user-groups: list of groups associated with current user.
 ```
-
-Resource Manager does not store any information about users or tenants in the
-database, **except the name or ID of a tenant provided in `x-tenant-id`
-header**.

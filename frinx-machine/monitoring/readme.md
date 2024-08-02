@@ -1,7 +1,7 @@
 ---
 label: Monitoring with Grafana
 icon: pulse
-order: 1500
+order: 100
 ---
 
 # Grafana 
@@ -24,7 +24,6 @@ Grafana in FRINX Machine monitors multitude of metrics. At this time, these are:
 - Device monitoring
 - FRINX Machine logs
 - Node monitoring
-- Swarm monitoring
 - SSL monitoring
 - UniConfig-controller monitoring
 - Workflows monitoring
@@ -46,20 +45,6 @@ This dashboard monitors the state of VM/System where FRINX Machine is running.
 It reports info like **CPU utilisation**, **Memory utilisation**, **Disk usage**, **Up-time** etc.
 
 ![Node Monitoring](nodemonitoring.png)
-
-### FRINX Machine Swarm Monitoring
-
-This dashboard monitors metrics specifically tied to FM within the VM/System.  
-Metrics like **Up-time**, **Available/Utilised memory**, **Number of running/stopped containers**, **CPU usage per container**, **Memory usage per container**, I**ncoming/Outcoming network traffic**, etc.
-
-![Swarm Monitoring](swarmmonitoring.png)
-
-
-### SSL Monitoring
-
-This dashboard displays data about your SSL certificates. It displays dates until your certificates are valid.
-
-![SSL Monitoring](sslmonitoring2.png)
 
 ### UniConfig Controller Monitoring
 

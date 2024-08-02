@@ -1,4 +1,4 @@
-# Workflow Builder
+# UI Workflow Builder
 
 Workflow Builder is the graphical interface for Workflow Manager and is used to create, modify and manage workflows.
 

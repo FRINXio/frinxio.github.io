@@ -8,7 +8,7 @@ At the FRINX Machine **Dashboard** under **Device Inventory** section click on *
 
 ## JSON examples
 
-New devices added to Device inventory are defined by JSON code snippets. (These snippets are part of UniConfig RPC connection-manager:install-node.) They are similar to [Blueprints](/frinx-workflow-manager/blueprints). This snippet is going to be filled into **Mount parameters** field.
+New devices added to Device inventory are defined by JSON code snippets. (These snippets are part of UniConfig RPC connection-manager:install-node.) They are similar to [Blueprints](/frinx-device-inventory/blueprints). This snippet is going to be filled into **Mount parameters** field.
 
 Another way is to add a new device from blueprint: toggle the **Use blueprint?** switch in the form and
 choose the blueprint that you want to use from **Select blueprint** drop-down list.
