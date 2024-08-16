@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.775915671876">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.777121107494">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>Metrics | Frinx docs</title>
     <meta name="title" content="Metrics | Frinx docs">
-    <meta name="description" content="Dropwizard Metrics is the framework of choice to monitor performance." />
+    <meta name="description" content="Micrometer Metrics is the framework of choice to monitor performance." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/developer-guide/metrics/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/developer-guide/metrics/">
     <meta property="og:title" content="Metrics | Frinx docs">
-    <meta property="og:description" content="Dropwizard Metrics is the framework of choice to monitor performance.">
+    <meta property="og:description" content="Micrometer Metrics is the framework of choice to monitor performance.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/developer-guide/metrics/">
     <meta property="twitter:title" content="Metrics | Frinx docs">
-    <meta property="twitter:description" content="Dropwizard Metrics is the framework of choice to monitor performance.">
+    <meta property="twitter:description" content="Micrometer Metrics is the framework of choice to monitor performance.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.775915671876" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.777121107494" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.775915671876" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.777121107494" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.775915671876" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.775915671876" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.777121107494" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.777121107494" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -260,19 +260,19 @@
         <span>Monitoring Uniconfig performance</span>
     </h2>
 </doc-anchor-target>
-<p><a href="https://metrics.dropwizard.io/">Dropwizard Metrics</a> is the framework of choice to monitor performance.</p>
+<p><a href="https://micrometer.io/">Micrometer Metrics</a> is the framework of choice to monitor performance.</p>
 <doc-anchor-target id="registry-naming">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#registry-naming">#</doc-anchor-trigger>
         <span>Registry naming</span>
     </h2>
 </doc-anchor-target>
-<p>All the metrics are currently stored in the <em>uniconfig</em> registry.
+<p>All the metrics are currently stored in the global registry.
 It can be accessed like so:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">import com.codahale.metrics.SharedMetricRegistries;
+<pre class="language-java"><code v-pre class="language-java">import io.micrometer.core.instrument.Metrics;
 
-SharedMetricRegistries.getOrCreate(&quot;uniconfig&quot;);</code></pre>
+Metrics.globalRegistry();</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="metric-types">
     <h2>
@@ -280,7 +280,7 @@ SharedMetricRegistries.getOrCreate(&quot;uniconfig&quot;);</code></pre>
         <span>Metric types</span>
     </h2>
 </doc-anchor-target>
-<p>All the available metric types can be seen in the <a href="https://metrics.dropwizard.io/4.2.0/manual/core.html">documentation</a>.</p>
+<p>All the available metric types can be seen in the <a href="https://docs.micrometer.io/micrometer/reference/concepts.html">documentation</a>.</p>
 <doc-anchor-target id="naming-convention">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#naming-convention">#</doc-anchor-trigger>
@@ -289,7 +289,7 @@ SharedMetricRegistries.getOrCreate(&quot;uniconfig&quot;);</code></pre>
 </doc-anchor-target>
 <p>There are various best practice articles on how to name metrics but one thing is common: It should be clear what is measured.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">MetricRegistry.name(TaskExecutorImpl.class, &quot;queue_size&quot;);</code></pre>
+<pre class="language-java"><code v-pre class="language-java">Metrics.globalRegistry.counter(RpcResult.class.getName() + &quot;.rpc_invoke&quot;)</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="adding-new-metrics">
     <h2>
@@ -297,19 +297,18 @@ SharedMetricRegistries.getOrCreate(&quot;uniconfig&quot;);</code></pre>
         <span>Adding new metrics</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="adding-a-meter">
+<doc-anchor-target id="adding-a-counter">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-a-meter">#</doc-anchor-trigger>
-        <span>Adding a Meter</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-a-counter">#</doc-anchor-trigger>
+        <span>Adding a Counter</span>
     </h3>
 </doc-anchor-target>
-<p>Obtain a Meter and then mark all the method calls you want to measure.</p>
+<p>Obtain a Counter and then increment all the method calls you want to measure.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">private final Meter rpcMeter = SharedMetricRegistries.getOrCreate(&quot;uniconfig&quot;)
-            .meter(MetricRegistry.name(RpcResult.class, &quot;rpc_invoke&quot;));
+<pre class="language-java"><code v-pre class="language-java">private final Counter rpcCounter = Metrics.globalRegistry.counter(RpcResult.class.getName() + &quot;.rpc_invoke&quot;);
 
 private void foo() {
-    rpcMeter.mark();
+    rpcCounter.increment();
 }</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="adding-a-gauge">
@@ -318,18 +317,15 @@ private void foo() {
         <span>Adding a Gauge</span>
     </h3>
 </doc-anchor-target>
-<p>For Gauge method <strong>getValue()</strong> needs to be implemented.
-It can be done less verbously with lambda expressions so that we avoid writing boilerplate code for an anonymous class:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">private final Gauge&lt;Integer&gt; openTransactionsCount = SharedMetricRegistries.getOrCreate(&quot;uniconfig&quot;).gauge(
-            MetricRegistry.name(UniconfigTransactionManager.class, &quot;open_transaction_count&quot;), () -&gt; () -&gt; {
-                synchronized (UniconfigTransactionManagerImpl.this) {
-                    return UniconfigTransactionManagerImpl.this.uniconfigTransactions.size();
-                }
-            }
-    );</code></pre>
-</doc-codeblock></div>
 <p>Here we create a <strong>Gauge</strong> that returns Integer value, access is synchronized in this case to avoid race conditions.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">Metrics.globalRegistry.gauge(UniconfigTransactionManager.class.getName() + &quot;.open_transaction_count&quot;,
+        this, uniconfigTransactionManager -&gt; {
+            synchronized (UniconfigTransactionManagerImpl.this) {
+                return UniconfigTransactionManagerImpl.this.uniconfigTransactions.size();
+            }
+        });</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="tags">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#tags">#</doc-anchor-trigger>
@@ -343,7 +339,7 @@ It can be done less verbously with lambda expressions so that we avoid writing b
         <span>Reporters</span>
     </h2>
 </doc-anchor-target>
-<p>Current available reporters are reports to CSV files and reporting via Slf4j to log file.</p>
+<p>Metrics are available at /actuator/prometheus endpoint.</p>
 
                                 
                                 <!-- Required only on API pages -->
