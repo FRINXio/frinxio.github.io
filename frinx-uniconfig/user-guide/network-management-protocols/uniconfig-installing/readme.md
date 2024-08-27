@@ -246,15 +246,15 @@ Following parameters adjust maintaining of CLI session state.
 None of these parameters are mandatory (default values will be used).
 
 -   **cli-topology:max-connection-attempts** - Maximum number of initial connection attempts 
-    (default value: 1). If there are unstable devices in the network it might be useful 
+    (default value: 1, non-positive value or null is interpreted as infinity). If there are unstable devices in the network it might be useful 
     to provide `max-connection-attempts` higher than the default value. It would try to connect
     `n` times before throwing an ssh connection exception.
 -   **cli-topology:max-connection-attempts-install** - Maximum number of initial connection attempts during install
-    process (default value: 1). If there are unstable devices in the network it might be useful
+    process (default value: 1, non-positive value or null is interpreted as infinity). If there are unstable devices in the network it might be useful
     to provide `max-connection-attempts-install` higher than the default value. It would try to connect
     `n` times before throwing an ssh connection exception.
 -   **cli-topology:max-reconnection-attempts** - Maximum number of reconnection attempts
-    (default value: 1). `max-reconnection-attempts` is not that necessary to set. Uniconfig does
+    (default value: 0, non-positive value or null is interpreted as infinity). It is used when open and established session dropped. `max-reconnection-attempts` is not that necessary to set. Uniconfig does
     not keep idle sessions open longer than it is necessary.
 
 ### Storing failed installations
@@ -543,8 +543,8 @@ of NETCONF session state. None of these parameters are mandatory
 
 - **netconf-node-topology:initial-connection-timeout** - Specifies timeout in seconds after which initial connection to the NETCONF server must be established (default value: 20 s).
 - **netconf-node-topology:request-transaction-timeout** - Timeout for blocking RPC operations within transactions (default value: 60 s).
-- **netconf-node-topology:max-connection-attempts** - Maximum number of connection attempts (default value: 1).
-- **netconf-node-topology:max-reconnection-attempts** - Maximum number of reconnection attempts (default value: 0 - disabled).
+- **netconf-node-topology:max-connection-attempts** - Maximum number of connection attempts (default value: 1, non-positive value or null is interpreted as infinity).
+- **netconf-node-topology:max-reconnection-attempts** - Maximum number of reconnection attempts. It is used when ongoing session dropped (default value: 0, non-positive value or null is interpreted as infinity).
 - **netconf-node-topology:between-attempts-timeout** - Initial timeout between reconnection attempts (default value: 2 s).
 - **netconf-node-topology:reconnenction-attempts-multiplier** - Multiplier between subsequent delays of reconnection attempts (default value: 1.5).
 - **netconf-node-topology:keepalive-delay** - Delay between sending of keepalive RPC messages (default value: 120 sec).

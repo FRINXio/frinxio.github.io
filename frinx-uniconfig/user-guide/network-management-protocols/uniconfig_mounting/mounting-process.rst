@@ -222,8 +222,8 @@ The following parameters adjust timers that are related with maintaining of NETC
 
 * **netconf-node-topology:initial-connection-timeout** - Specifies timeout in seconds after which initial connection to the NETCONF server must be established (default value: 20 s).
 * **netconf-node-topology:request-transaction-timeout** - Timeout for blocking RPC operations within transactions (default value: 60 s).
-* **netconf-node-topology:max-connection-attempts** - Maximum number of connection attempts (default value: 1).
-* **netconf-node-topology:max-reconnection-attempts** - Maximum number of reconnection attempts (default value: 0 - disabled).
+* **netconf-node-topology:max-connection-attempts** - Maximum number of connection attempts (default value: 1, non-positive value or null is interpreted as infinity).
+* **netconf-node-topology:max-reconnection-attempts** - Maximum number of reconnection attempts (default value: 0, non-positive value or null is interpreted as infinity).
 * **netconf-node-topology:between-attempts-timeout** - Initial timeout between reconnection attempts (default value: 2 s).
 * **netconf-node-topology:reconnenction-attempts-multiplier** - Multiplier between subsequent delays of reconnection attempts (default value: 1.5).
 * **netconf-node-topology:keepalive-delay** - Delay between sending of keepalive RPC messages (default value: 120 sec).
