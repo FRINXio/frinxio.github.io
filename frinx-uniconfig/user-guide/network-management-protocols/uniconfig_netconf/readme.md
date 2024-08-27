@@ -445,10 +445,12 @@ to the NETCONF server. The behaviour of the reconnection can be
 described by 3 configurable mount-request parameters:
 
 1.  **Maximum number of connection attempts [count]** - Maximum number
-    of initial connection retries; when it is reached, the NETCONF won't
+    of initial connection retries. This is used when no connection is 
+    yet established for given node inside uniconfig transaction; when it is reached, the NETCONF won't
     try to connect to device anymore. By default, this value is set to 1.
 2.  **Maximum number of reconnection attempts [count]** - Maximum number
-    of reconnection retries; when it is reached, the NETCONF won't try
+    of reconnection retries. This is used when connection was already successfully established and ongoing (not yet closed),
+    but it dropped (from device side); when it is reached, the NETCONF won't try
     to reconnect to device anymore. By default, this value is set to 1.
 3.  **Initial timeout between attempts [seconds]** - The first
     timeout between reconnection attempts in milliseconds. The default
