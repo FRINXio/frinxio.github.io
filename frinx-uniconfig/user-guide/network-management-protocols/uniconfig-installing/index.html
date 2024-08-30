@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.777124250220">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.778324302434">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -36,12 +36,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.777124250220" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.778324302434" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.777124250220" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.778324302434" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.777124250220" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.777124250220" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.778324302434" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.778324302434" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -531,15 +531,15 @@ from single group. By default, keepalive strategy is used.</p>
 None of these parameters are mandatory (default values will be used).</p>
 <ul>
 <li><strong>cli-topology:max-connection-attempts</strong> - Maximum number of initial connection attempts
-(default value: 1). If there are unstable devices in the network it might be useful
+(default value: 1, non-positive value or null is interpreted as infinity). If there are unstable devices in the network it might be useful
 to provide <code v-pre>max-connection-attempts</code> higher than the default value. It would try to connect
 <code v-pre>n</code> times before throwing an ssh connection exception.</li>
 <li><strong>cli-topology:max-connection-attempts-install</strong> - Maximum number of initial connection attempts during install
-process (default value: 1). If there are unstable devices in the network it might be useful
+process (default value: 1, non-positive value or null is interpreted as infinity). If there are unstable devices in the network it might be useful
 to provide <code v-pre>max-connection-attempts-install</code> higher than the default value. It would try to connect
 <code v-pre>n</code> times before throwing an ssh connection exception.</li>
 <li><strong>cli-topology:max-reconnection-attempts</strong> - Maximum number of reconnection attempts
-(default value: 1). <code v-pre>max-reconnection-attempts</code> is not that necessary to set. Uniconfig does
+(default value: 0, non-positive value or null is interpreted as infinity). It is used when open and established session dropped. <code v-pre>max-reconnection-attempts</code> is not that necessary to set. Uniconfig does
 not keep idle sessions open longer than it is necessary.</li>
 </ul>
 <doc-anchor-target id="storing-failed-installations">
@@ -916,8 +916,8 @@ of NETCONF session state. None of these parameters are mandatory
 <ul>
 <li><strong>netconf-node-topology:initial-connection-timeout</strong> - Specifies timeout in seconds after which initial connection to the NETCONF server must be established (default value: 20 s).</li>
 <li><strong>netconf-node-topology:request-transaction-timeout</strong> - Timeout for blocking RPC operations within transactions (default value: 60 s).</li>
-<li><strong>netconf-node-topology:max-connection-attempts</strong> - Maximum number of connection attempts (default value: 1).</li>
-<li><strong>netconf-node-topology:max-reconnection-attempts</strong> - Maximum number of reconnection attempts (default value: 0 - disabled).</li>
+<li><strong>netconf-node-topology:max-connection-attempts</strong> - Maximum number of connection attempts (default value: 1, non-positive value or null is interpreted as infinity).</li>
+<li><strong>netconf-node-topology:max-reconnection-attempts</strong> - Maximum number of reconnection attempts. It is used when ongoing session dropped (default value: 0, non-positive value or null is interpreted as infinity).</li>
 <li><strong>netconf-node-topology:between-attempts-timeout</strong> - Initial timeout between reconnection attempts (default value: 2 s).</li>
 <li><strong>netconf-node-topology:reconnenction-attempts-multiplier</strong> - Multiplier between subsequent delays of reconnection attempts (default value: 1.5).</li>
 <li><strong>netconf-node-topology:keepalive-delay</strong> - Delay between sending of keepalive RPC messages (default value: 120 sec).</li>
