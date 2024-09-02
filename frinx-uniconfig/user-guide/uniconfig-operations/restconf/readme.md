@@ -1649,15 +1649,35 @@ Following characters must be escaped, if they are contained in a list key value:
 There are 2 ways how to escape special characters in a key value: by encoding reserved UTF-8 characters using '%HH'
 patten or using key delimiter.
 
+!!!
+Using key delimiter should be the preferred way
+of dealing with reserved characters in keys
+since it avoids various issues with URL parsing constraints imposed by the web server.
+!!!
+
 ### Encoding reserved characters
 
 RESTCONF RFC-8040 natively allows to specify reserved characters in a key value, if they are encoded using
 '%HH' pattern, where 'HH' refers to hexadecimal representation of UTF-8 character.
 
-The following request demonstrates encoding of special characters in the 'ge0/0/1' interface name.
+!!!
+Starting with Uniconfig 7.0.0,
+it is not possible
+to URL-encode / as %2F because the web server will throw away the request due to stricter URL parsing rules.
+!!!
+
+The following request demonstrates encoding of special characters in the 'ge0/0/1' interface name,
+which does not work anymore starting with Uniconfig 7.0.0.
 
 ```shell Read interface (escaped interface name)
     curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device/configuration/frinx-openconfig-interfaces:interfaces/interface=ge0%2F0%2F1 \
+--header 'Accept: application/json'
+```
+
+You should use the following request:
+
+```shell Read interface (Using key delimiter)
+curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device/configuration/frinx-openconfig-interfaces:interfaces/interface=%22ge0/0/1%22 \
 --header 'Accept: application/json'
 ```
 
@@ -1671,7 +1691,8 @@ https://www.urlencoder.org/
 UniConfig lets you specify a key delimiter used to demarcate list key values.
 Once defined, all special characters inside the key are automatically escaped.
 
-The delimiter is disabled by default. It can be defined in the
+The delimiter is enabled by default.
+It can be defined in the
 `config/application.properties` file:
 
 ```properties RESTCONF Properties
@@ -1700,7 +1721,6 @@ The following request demonstrates the demarcation of an interface named
 ```shell Read interface (escaped interface name)
 curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=device/configuration/frinx-openconfig-interfaces:interfaces/interface=%22ge0/0/1%22 \
 --header 'Accept: application/json'
-```>>>>>>> b208d862 (Encoding key values)
 ```
 
 ## Hide Attributes
