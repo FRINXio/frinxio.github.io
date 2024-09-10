@@ -119,11 +119,11 @@ go test -run Integration ./pools/...
 
 ### Additional info
 
-#### Telementry
+#### Telemetry
 
 Support for tracing (distributed tracing). Streams data into a collector
 such as Jaeger. Default is Nop. See main parameters or
-telementry/config.go for further details to enable jaeger tracing
+telemetry/config.go for further details to enable jaeger tracing
 
 #### Health
 
@@ -131,12 +131,12 @@ Basic health info of the app (also checks if mysql connection is
 healthy)
 
     # server can serve requests
-    http://localhost:8884/healthz/liveness
+    http://<server-address>:<server-port>/actuator/health/liveness
     # server works fine
-    http://localhost:8884/healthz/readiness
+    http://<server-address>:<server-port>/actuator/health/readiness
 
 ### Metrics
 
 Prometheus style metrics are exposed at:
 
-    http://localhost:8884/metrics
+    http://<server-address>:<server-port>/actuator/metrics
