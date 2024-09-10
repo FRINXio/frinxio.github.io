@@ -13,24 +13,16 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 --header 'Content-Type: application/json'
 ```
 
-**Response if database persistence is disabled:**
-
-```json RPC Response, Status: 200
-{
-  "output": {
-    "healthy": true,
-    "message": "DB persistence is disabled"
-  }
-}
-```
-
 **Response if database persistence is enabled and the database connection is valid:**
 
 ```json RPC Response, Status: 200
 {
   "output": {
-    "healthy": true,
-    "message": "DB connection is alive"
+    "status": "UP",
+    "details": {
+      "state": "ACCEPTING_TRAFFIC",
+      "reason": "The application is ready to receive traffic and DB connection is alive"
+    }
   }
 }
 ```
@@ -40,8 +32,11 @@ curl --location --request POST 'http://localhost:8181/rests/operations/uniconfig
 ```json RPC Response, Status: 200
 {
   "output": {
-    "healthy": false,
-    "message": "Error connecting to DB"
+    "status": "DOWN",
+    "details": {
+      "state": "ACCEPTING_TRAFFIC",
+      "reason": "Error connecting to DB"
+    }
   }
 }
 ```
