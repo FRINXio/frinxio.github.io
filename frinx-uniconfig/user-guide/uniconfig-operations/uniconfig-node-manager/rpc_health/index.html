@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.778589119528">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.780412741380">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.778589119528" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.780412741380" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.778589119528" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.780412741380" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.778589119528" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.778589119528" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.780412741380" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.780412741380" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -269,23 +269,16 @@ also checks the database connection.</p>
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'</code></pre>
 </doc-codeblock></div>
-<p><strong>Response if database persistence is disabled:</strong></p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">RPC Response, Status: 200</div>
-<pre class="language-json"><code v-pre class="language-json">{
-  &quot;output&quot;: {
-    &quot;healthy&quot;: true,
-    &quot;message&quot;: &quot;DB persistence is disabled&quot;
-  }
-}</code></pre>
-</doc-codeblock></div>
 <p><strong>Response if database persistence is enabled and the database connection is valid:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;output&quot;: {
-    &quot;healthy&quot;: true,
-    &quot;message&quot;: &quot;DB connection is alive&quot;
+    &quot;status&quot;: &quot;UP&quot;,
+    &quot;details&quot;: {
+      &quot;state&quot;: &quot;ACCEPTING_TRAFFIC&quot;,
+      &quot;reason&quot;: &quot;The application is ready to receive traffic and DB connection is alive&quot;
+    }
   }
 }</code></pre>
 </doc-codeblock></div>
@@ -294,8 +287,11 @@ also checks the database connection.</p>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-json"><code v-pre class="language-json">{
   &quot;output&quot;: {
-    &quot;healthy&quot;: false,
-    &quot;message&quot;: &quot;Error connecting to DB&quot;
+    &quot;status&quot;: &quot;DOWN&quot;,
+    &quot;details&quot;: {
+      &quot;state&quot;: &quot;ACCEPTING_TRAFFIC&quot;,
+      &quot;reason&quot;: &quot;Error connecting to DB&quot;
+    }
   }
 }</code></pre>
 </doc-codeblock></div>
