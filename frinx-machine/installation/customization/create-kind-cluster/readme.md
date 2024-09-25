@@ -77,7 +77,7 @@ Create a Cilium configuration file named cilium-helm-values.yaml with the follow
 
 ```yaml
 # cilium-helm-values.yaml
-kubeProxyReplacement: strict
+kubeProxyReplacement: true
 k8sServiceHost: kind-control-plane 
 k8sServicePort: 6443 
 hostServices:

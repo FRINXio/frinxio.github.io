@@ -13,84 +13,25 @@ This guide provides the step-by-step instructions for preparing develoment envir
 - `Helm`: Make sure that Helm is installed. Follow the Helm installation guide if necessary.
 - `Python`: Make sure that your environment have Python ^3.10 interpretter installed.
 - `Poetry`: Make sure that you have installed Poetry. Follow the Poetry installation guide if necessary.
+- `Mirrord`: Make sure that you have installed Mirrord. Follow the [mirrord installation quide ](https://github.com/metalbear-co/mirrord) if necessary
 
 ## Step 1: Start Frinx Machine
 
-Install Frinx Machine with ingress enabled [!ref icon="briefcase"](/frinx-machine/installation/customization/frinx-machine-customization/readme.md)
+Install Frinx Machine [!ref icon="briefcase"](/frinx-machine/installation/customization/frinx-machine-customization/readme.md)
 
-
-Check out gitops-boilerplate repository to run Frinx Machine locally [!ref target="blank" icon="mark-github" text="frinx-workers-boilerplate"](https://github.com/FRINXio/gitops-boilerplate)
-
-Make sure you have enabled workflow-manager and krakend ingress, because it's required for local development.
-
-```bash
-frinx-machine:
-  krakend:
-    ingress:s
-      enabled: true
-      className: nginx
-      annotations:
-        # force-ssl-redirect must be disabled in case you are using a self-signed certificate
-        # nginx.ingress.kubernetes.io/force-ssl-redirect: "true" 
-        nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-        nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-      hosts:
-        - host: krakend.127.0.0.1.nip.io
-          paths:
-            - path: "/"
-              pathType: ImplementationSpecific
-
-  workflow-manager:
-    ingress:
-      enabled: true
-      hosts:
-        - host: workflow-manager.127.0.0.1.nip.io
-          paths:
-            - path: "/"
-              pathType: ImplementationSpecific
-
-  uniconfig:
-    image:
-      repository: "frinxio/uniconfig"
-
-  performance-monitor:
-    image:
-      repository: "frinxio/performance-monitor"
-```
-
-In case, you using minikube, get minikube ip
-
-```bash
-minikube ip
-
-192.168.49.2
-```
-
-add map that ip with ingres hosts to your /etc/hosts
-
-```bash
-#/etc/hosts
-192.168.49.2 krakend.127.0.0.1.nip.io
-192.168.49.2 workflow-manager.127.0.0.1.nip.io
-```
-
-To verify ingresses
-
-```bash
-$kubectl get ingress -n frinx 
-
-NAME               CLASS   HOSTS                                                                          ADDRESS        PORTS   AGE
-conductor-server   nginx   workflow-manager.127.0.0.1.nip.io                                              192.168.49.2   80      161m
-krakend            nginx   krakend.127.0.0.1.nip.io                                                       192.168.49.2   80      161m
-```
+Check out gitops-boilerplate repository to run Frinx Machine locally [!ref target="blank" icon="icon-mark-github" text="frinx-workers-boilerplate"](https://github.com/FRINXio/gitops-boilerplate)
 
 ## Step 2: Clone worker-example repository
 
 Clone repository and follow instructions in README.md
 
-[!ref target="blank" icon="mark-github" text="frinx-workers-boilerplate"](https://github.com/FRINXio/frinx-workers-boilerplate)
+[!ref icon="icon-mark-github" target="blank" text="frinx-workers-boilerplate"](https://github.com/FRINXio/frinx-workers-boilerplate)
 
+### Step 3: Local development with Mirrord
+
+Mirrord is great tool, which simplifies development of workflows on local/remove kubernetes cluster.
+Is only needed to install it to the IDE (CLI), set connection to the correct kubeconfig/namespace and run python worker in targetless pod. 
+No more need to workaround connection via ingress.
 
 ## Step 3: Deploy to cluster
 

@@ -66,13 +66,13 @@ name: frinx-machine
 description: Kubernetes deployment of FRINX-machine
 icon: https://avatars.githubusercontent.com/u/23452093?s=200&v=4
 type: application
-version: 6.1.0
+version: 6.2.0
 maintainers:
   - name: FRINX
 dependencies:
   - name: frinx-machine
     repository: https://FRINXio.github.io/helm-charts
-    version: 9.0.0
+    version: 10.0.1
 ```
 
 This configuration sets up the basic information about the Helm chart and defines FRINX Machine as a dependency, pulling it from the specified repository.
@@ -91,18 +91,9 @@ For mapping the Helm chart release to the product release and more details on th
 # values.yaml
 frinx-machine:
   krakend:
-    ingress:
-      enabled: true
-      className: nginx
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-        nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-      hosts:
-        - host: krakend.127.0.0.1.nip.io
-          paths:
-            - path: "/"
-              pathType: ImplementationSpecific
+    nginx:
+      ingress:
+        hostname: krakend.127.0.0.1.nip.io
 
   uniconfig:
     image:
@@ -113,7 +104,7 @@ frinx-machine:
       repository: "frinxio/performance-monitor"
 ```
 
-  - krakend: Configures the Ingress settings for the KrakenD API Gateway. It enables the Ingress, sets the class to nginx, and includes custom annotations for proxy timeouts. The host is set to krakend.127.0.0.1.nip.io with the path /.
+  - krakend.nginx.ingress.hostname: Configures the Ingress settings for the KrakenD API Gateway.
 
   - uniconfig: Specifies the Docker image repository for the Uniconfig component.
 
