@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.780412816665">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.780575774113">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.780412816665" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.780575774113" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.780412816665" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.780575774113" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.780412816665" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.780412816665" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.780575774113" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -266,6 +265,7 @@
 <li><code v-pre>Helm</code>: Make sure that Helm is installed. Follow the Helm installation guide if necessary.</li>
 <li><code v-pre>Python</code>: Make sure that your environment have Python ^3.10 interpretter installed.</li>
 <li><code v-pre>Poetry</code>: Make sure that you have installed Poetry. Follow the Poetry installation guide if necessary.</li>
+<li><code v-pre>Mirrord</code>: Make sure that you have installed Mirrord. Follow the <a href="https://github.com/metalbear-co/mirrord">mirrord installation quide </a> if necessary</li>
 </ul>
 <doc-anchor-target id="step-1-start-frinx-machine">
     <h2>
@@ -273,7 +273,7 @@
         <span>Step 1: Start Frinx Machine</span>
     </h2>
 </doc-anchor-target>
-<p>Install Frinx Machine with ingress enabled 
+<p>Install Frinx Machine 
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
     <div class="flex items-center text-blue-500 dark:text-blue-400">
         <span class="inline-block mb-px">
@@ -291,7 +291,7 @@
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
     <div class="flex items-center text-blue-500 dark:text-blue-400">
         <span class="inline-block mb-px">
-            <img width="20" src="%3Csymbol%20id=%22mark-github-icon-symbol%22%20viewBox=%220%200%2016%2016%22%3E%3Cpath%20fill-rule=%22evenodd%22%20d=%22M8%200C3.58%200%200%203.58%200%208c0%203.54%202.29%206.53%205.47%207.59.4.07.55-.17.55-.38%200-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01%201.08.58%201.23.82.72%201.21%201.87.87%202.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95%200-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12%200%200%20.67-.21%202.2.82.64-.18%201.32-.27%202-.27.68%200%201.36.09%202%20.27%201.53-1.04%202.2-.82%202.2-.82.44%201.1.16%201.92.08%202.12.51.56.82%201.27.82%202.15%200%203.07-1.87%203.75-3.65%203.95.29.25.54.73.54%201.48%200%201.07-.01%201.93-.01%202.2%200%20.21.15.46.55.38A8.013%208.013%200%200016%208c0-4.42-3.58-8-8-8z%22/%3E%3C/symbol%3E%3Cuse%20xlink:href=%22#mark-github-icon-symbol%22%20/%3E" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
         </span>
         <span class="inline-block font-medium ml-2">frinx-workers-boilerplate</span>
     </div>
@@ -301,62 +301,6 @@
     <a href="https://github.com/FRINXio/gitops-boilerplate" target="_blank" class="absolute block inset-0"></a>
 </div>
 </p>
-<p>Make sure you have enabled workflow-manager and krakend ingress, because it&#x27;s required for local development.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">frinx-machine:
-  krakend:
-    ingress:s
-      enabled: true
-      className: nginx
-      annotations:
-        # force-ssl-redirect must be disabled in case you are using a self-signed certificate
-        # nginx.ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot; 
-        nginx.ingress.kubernetes.io/proxy-connect-timeout: &quot;3600&quot;
-        nginx.ingress.kubernetes.io/proxy-read-timeout: &quot;3600&quot;
-        nginx.ingress.kubernetes.io/proxy-send-timeout: &quot;3600&quot;
-      hosts:
-        - host: krakend.127.0.0.1.nip.io
-          paths:
-            - path: &quot;/&quot;
-              pathType: ImplementationSpecific
-
-  workflow-manager:
-    ingress:
-      enabled: true
-      hosts:
-        - host: workflow-manager.127.0.0.1.nip.io
-          paths:
-            - path: &quot;/&quot;
-              pathType: ImplementationSpecific
-
-  uniconfig:
-    image:
-      repository: &quot;frinxio/uniconfig&quot;
-
-  performance-monitor:
-    image:
-      repository: &quot;frinxio/performance-monitor&quot;</code></pre>
-</doc-codeblock></div>
-<p>In case, you using minikube, get minikube ip</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">minikube ip
-
-192.168.49.2</code></pre>
-</doc-codeblock></div>
-<p>add map that ip with ingres hosts to your /etc/hosts</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">#/etc/hosts
-192.168.49.2 krakend.127.0.0.1.nip.io
-192.168.49.2 workflow-manager.127.0.0.1.nip.io</code></pre>
-</doc-codeblock></div>
-<p>To verify ingresses</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">$kubectl get ingress -n frinx 
-
-NAME               CLASS   HOSTS                                                                          ADDRESS        PORTS   AGE
-conductor-server   nginx   workflow-manager.127.0.0.1.nip.io                                              192.168.49.2   80      161m
-krakend            nginx   krakend.127.0.0.1.nip.io                                                       192.168.49.2   80      161m</code></pre>
-</doc-codeblock></div>
 <doc-anchor-target id="step-2-clone-worker-example-repository">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#step-2-clone-worker-example-repository">#</doc-anchor-trigger>
@@ -368,7 +312,7 @@ krakend            nginx   krakend.127.0.0.1.nip.io                             
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded transition-colors duration-150">
     <div class="flex items-center text-blue-500 dark:text-blue-400">
         <span class="inline-block mb-px">
-            <img width="20" src="%3Csymbol%20id=%22mark-github-icon-symbol%22%20viewBox=%220%200%2016%2016%22%3E%3Cpath%20fill-rule=%22evenodd%22%20d=%22M8%200C3.58%200%200%203.58%200%208c0%203.54%202.29%206.53%205.47%207.59.4.07.55-.17.55-.38%200-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01%201.08.58%201.23.82.72%201.21%201.87.87%202.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95%200-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12%200%200%20.67-.21%202.2.82.64-.18%201.32-.27%202-.27.68%200%201.36.09%202%20.27%201.53-1.04%202.2-.82%202.2-.82.44%201.1.16%201.92.08%202.12.51.56.82%201.27.82%202.15%200%203.07-1.87%203.75-3.65%203.95.29.25.54.73.54%201.48%200%201.07-.01%201.93-.01%202.2%200%20.21.15.46.55.38A8.013%208.013%200%200016%208c0-4.42-3.58-8-8-8z%22/%3E%3C/symbol%3E%3Cuse%20xlink:href=%22#mark-github-icon-symbol%22%20/%3E" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z"/></svg>
         </span>
         <span class="inline-block font-medium ml-2">frinx-workers-boilerplate</span>
     </div>
@@ -378,6 +322,15 @@ krakend            nginx   krakend.127.0.0.1.nip.io                             
     <a href="https://github.com/FRINXio/frinx-workers-boilerplate" target="_blank" class="absolute block inset-0"></a>
 </div>
 </p>
+<doc-anchor-target id="step-3-local-development-with-mirrord">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#step-3-local-development-with-mirrord">#</doc-anchor-trigger>
+        <span>Step 3: Local development with Mirrord</span>
+    </h3>
+</doc-anchor-target>
+<p>Mirrord is great tool, which simplifies development of workflows on local/remove kubernetes cluster.
+Is only needed to install it to the IDE (CLI), set connection to the correct kubeconfig/namespace and run python worker in targetless pod.
+No more need to workaround connection via ingress.</p>
 <doc-anchor-target id="step-3-deploy-to-cluster">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#step-3-deploy-to-cluster">#</doc-anchor-trigger>
@@ -464,6 +417,6 @@ krakend            nginx   krakend.127.0.0.1.nip.io                             
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Developent environment", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Developent environment", level: 3, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

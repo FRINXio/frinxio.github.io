@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.780412816665">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.780575774113">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.780412816665" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.780575774113" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.780412816665" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.780575774113" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.780412816665" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.780412816665" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.780575774113" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.780575774113" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -319,17 +319,6 @@ oauth2-proxy:
     enabled: true
     architecture: standalone
 
-  ingress:
-    enabled: true
-    className: nginx
-    hosts:
-      - &quot;fm.127.0.0.1.nip.io&quot;
-    annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
-      nginx.ingress.kubernetes.io/proxy-connect-timeout: &quot;3600&quot;
-      nginx.ingress.kubernetes.io/proxy-read-timeout: &quot;3600&quot;
-      nginx.ingress.kubernetes.io/proxy-send-timeout: &quot;3600&quot;
-
   sessionStorage:
     type: redis
     redis:
@@ -344,7 +333,7 @@ oauth2-proxy:
       # https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview
 
       custom_sign_in_logo = &quot;/tmp/frinx/frinx.png&quot;
-      upstreams = [&quot;http://krakend:8080&quot;]
+      upstreams = &quot;file:///dev/null&quot;
 
       cookie_secure = true
       cookie_expire = 0
@@ -368,8 +357,9 @@ oauth2-proxy:
 
       ssl_insecure_skip_verify = false
       pass_access_token = false
-
+      set_xauthrequest = true
       skip_jwt_bearer_tokens = true
+      reverse_proxy = true
 
   extraArgs:
     azure-graph-group-field: displayName

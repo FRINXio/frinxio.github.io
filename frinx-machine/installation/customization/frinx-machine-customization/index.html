@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.780412816665">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.780575774113">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.780412816665" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.780575774113" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.780412816665" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.780575774113" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.780412816665" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.780412816665" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.780575774113" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.780575774113" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -341,13 +341,13 @@ name: frinx-machine
 description: Kubernetes deployment of FRINX-machine
 icon: https://avatars.githubusercontent.com/u/23452093?s=200&amp;v=4
 type: application
-version: 6.1.0
+version: 6.2.0
 maintainers:
   - name: FRINX
 dependencies:
   - name: frinx-machine
     repository: https://FRINXio.github.io/helm-charts
-    version: 9.0.0</code></pre>
+    version: 10.0.1</code></pre>
 </doc-codeblock></div>
 <p>This configuration sets up the basic information about the Helm chart and defines FRINX Machine as a dependency, pulling it from the specified repository.</p>
 <ol start="2">
@@ -369,18 +369,9 @@ dependencies:
 <pre class="language-yaml"><code v-pre class="language-yaml"># values.yaml
 frinx-machine:
   krakend:
-    ingress:
-      enabled: true
-      className: nginx
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-connect-timeout: &quot;3600&quot;
-        nginx.ingress.kubernetes.io/proxy-read-timeout: &quot;3600&quot;
-        nginx.ingress.kubernetes.io/proxy-send-timeout: &quot;3600&quot;
-      hosts:
-        - host: krakend.127.0.0.1.nip.io
-          paths:
-            - path: &quot;/&quot;
-              pathType: ImplementationSpecific
+    nginx:
+      ingress:
+        hostname: krakend.127.0.0.1.nip.io
 
   uniconfig:
     image:
@@ -391,7 +382,7 @@ frinx-machine:
       repository: &quot;frinxio/performance-monitor&quot;</code></pre>
 </doc-codeblock></div>
 <ul>
-<li><p>krakend: Configures the Ingress settings for the KrakenD API Gateway. It enables the Ingress, sets the class to nginx, and includes custom annotations for proxy timeouts. The host is set to krakend.127.0.0.1.nip.io with the path /.</p>
+<li><p>krakend.nginx.ingress.hostname: Configures the Ingress settings for the KrakenD API Gateway.</p>
 </li>
 <li><p>uniconfig: Specifies the Docker image repository for the Uniconfig component.</p>
 </li>
