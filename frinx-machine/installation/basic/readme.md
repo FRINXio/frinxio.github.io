@@ -67,7 +67,7 @@ Please complete this step before continue [!ref icon="briefcase" text="Create do
 Install the FRINX Machine using Helm:
 
 ```bash
-helm install -n frinx frinx-machine frinx/frinx-machine
+helm install -n frinx frinx-machine frinx/frinx-machine --timeout 10m
 ```
 
 Verify the installation by checking the pods in the frinx namespace:
@@ -110,7 +110,20 @@ uniconfig-postgresql-2                                     1/1     Running   0  
 
 ## Step 6: Access the UI
 
-Add the following entries to your /etc/hosts file:
+To access ui, use krakend-nginx ingress hostname. 
+
+```bash
+kubectl get ingress -n frinx
+```
+
+You should see output similar to:
+
+```bash
+NAME            CLASS   HOSTS                      ADDRESS        PORTS   AGE
+krakend-nginx   nginx   krakend.127.0.0.1.nip.io   192.168.49.2   80      56m
+```
+
+In case of minikube is required to add the following entries to your /etc/hosts file:
 
 ```
 # /etc/hosts
@@ -118,10 +131,4 @@ Add the following entries to your /etc/hosts file:
 192.168.49.2 krakend.127.0.0.1.nip.io fm.127.0.0.1.nip.io
 ```
 
-Enable the KrakenD ingress for the FRINX Machine:
-
-```
-helm upgrade --install -n frinx frinx-machine frinx/frinx-machine --set krakend.ingress.enabled=true
-```
-
-Visit Frinx Machine page in your browser on `https://krakend.127.0.0.1.nip.io/frinxui`
+and visit Frinx Machine page in your browser on `https://krakend.127.0.0.1.nip.io/frinxui`

@@ -74,17 +74,6 @@ oauth2-proxy:
     enabled: true
     architecture: standalone
 
-  ingress:
-    enabled: true
-    className: nginx
-    hosts:
-      - "fm.127.0.0.1.nip.io"
-    annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
-      nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-      nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-
   sessionStorage:
     type: redis
     redis:
@@ -99,7 +88,7 @@ oauth2-proxy:
       # https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview
 
       custom_sign_in_logo = "/tmp/frinx/frinx.png"
-      upstreams = ["http://krakend:8080"]
+      upstreams = "file:///dev/null"
 
       cookie_secure = true
       cookie_expire = 0
@@ -123,8 +112,9 @@ oauth2-proxy:
 
       ssl_insecure_skip_verify = false
       pass_access_token = false
-
+      set_xauthrequest = true
       skip_jwt_bearer_tokens = true
+      reverse_proxy = true
 
   extraArgs:
     azure-graph-group-field: displayName
