@@ -11,7 +11,7 @@ It can be accessed like so:
 ```java
 import io.micrometer.core.instrument.Metrics;
 
-Metrics.globalRegistry();
+Metrics.globalRegistry;
 ```
 
 ## Metric types
@@ -23,7 +23,9 @@ All the available metric types can be seen in the [documentation](https://docs.m
 There are various best practice articles on how to name metrics but one thing is common: It should be clear what is measured.
 
 ```java
-Metrics.globalRegistry.counter(RpcResult.class.getName() + ".rpc_invoke")
+import io.micrometer.core.instrument.Metrics;
+
+Metrics.globalRegistry.counter(RpcResult.class.getName() + ".rpc_invoke");
 ```
 
 ## Adding new metrics
@@ -52,10 +54,6 @@ Metrics.globalRegistry.gauge(UniconfigTransactionManager.class.getName() + ".ope
             }
         });
 ```
-
-## Tags 
-
-Tags are currently not available in the version *4.2.x*, although support for them is planned for future major release.
 
 ## Reporters 
 
