@@ -494,7 +494,7 @@ Reading specific subtree under 'interface\_template' - unit with name
 'eth-0/{\$interface-id}'.
 
 ```bash RPC Request
-curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=templates/node=interface_template/frinx-uniconfig-topology:configuration/interfaces:interfaces=eth-0%2F%7B%24interface-id%7D/unit=%7B%24unit-id%7D?content=config' \
+curl --location --request GET 'http://localhost:8181/rests/data/network-topology:network-topology/topology=templates/node=interface_template/frinx-uniconfig-topology:configuration/interfaces:interfaces=%22eth-0/{$interface-id}%22/unit=%7B%24unit-id%7D?content=config' \
 --header 'Accept: application/json'
 ```
 
@@ -527,7 +527,7 @@ Changing 'update' tag of the 'address' list entry to 'create' tag using
 PLAIN-PATCH RESTCONF method.
 
 ```bash RPC Request
-curl --location --request PUT 'http://localhost:8181/rests/data/network-topology:network-topology/topology=templates/node=interface_template/frinx-uniconfig-topology:configuration/interfaces:interfaces=eth-0%2F%7B%24interface-id%7D/unit=%7B%24unit-id%7D/family-inet/address=%7B%24ip-address%7D' \
+curl --location --request PUT 'http://localhost:8181/rests/data/network-topology:network-topology/topology=templates/node=interface_template/frinx-uniconfig-topology:configuration/interfaces:interfaces=%22eth-0/{$interface-id}%22/unit=%7B%24unit-id%7D/family-inet/address=%7B%24ip-address%7D' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{

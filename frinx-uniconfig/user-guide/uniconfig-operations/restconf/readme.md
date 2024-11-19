@@ -51,9 +51,9 @@ list, there must be defined ordered keys of the list behind the data
 node name, for example, \<nodeName\>=\<valueOfKey1\>,\<valueOfKey2\>. ..
 
 !!!
-The following example shows how reserved characters are percent-encoded within a key value. The value of "key1" contains a comma, single-quote, double-quote, colon, double-quote, space, and forward slash (,'":" /). Note that double-quote is not a reserved character and does not need to be percent-encoded. The value of "key2" is the empty string, and the value of "key3" is the string "foo". 
+The following example shows how reserved characters are percent-encoded within a key value. The value of "key1" contains a comma, single-quote, double-quote, colon, double-quote, and space (,'":" ). Note that double-quote is not a reserved character and does not need to be percent-encoded. The value of "key2" is the empty string, and the value of "key3" is the string "foo". 
 
-Example URL: /rests/data/example-top:top/list1=%2C%27"%3A"%20%2F,,foo
+Example URL: /rests/data/example-top:top/list1=%2C%27"%3A"%20,,foo
 !!!
 
 - The format \<moduleName\>:\<nodeName\> has to be used in this case
