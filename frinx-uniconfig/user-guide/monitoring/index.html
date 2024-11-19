@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.784823214620">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.785333201966">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.784823214620" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.785333201966" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.784823214620" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.785333201966" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -261,13 +261,9 @@
     </h2>
 </doc-anchor-target>
 <p>UniConfig exposes multiple metrics for traffic and performance monitoring.</p>
-<p>Output is generated in two formats:</p>
+<p>Output is generated in plaintext format:</p>
 <ul>
-<li>Plaintext log messages, located in the <strong>metrics.log</strong> file in the <strong>log</strong>
-directory at the root of the distribution.</li>
-<li>Raw data in CSV format, located the in <strong>metrics</strong> directory at the root of
-the distribution. CSV files can be further processed by third-party
-visualization tools.</li>
+<li>Plaintext response output from actuator/prometheus endpoint.</li>
 </ul>
 <doc-anchor-target id="types-of-metrics">
     <h2>
@@ -276,10 +272,8 @@ visualization tools.</li>
     </h2>
 </doc-anchor-target>
 <ul>
-<li>Gauge - Reports the instantaneous value at a point in time (for example, queue
-size).</li>
-<li>Meter - Measures the total count for event occurences, total mean rate and
-mean rates for time windows of the past 1, 5 or 15 minutes</li>
+<li>Gauge - Reports the instantaneous value at a point in time (for example, queue size).</li>
+<li>Counter - Measures the total count for event occurrences.</li>
 </ul>
 <doc-anchor-target id="list-of-notable-metrics-exposed-by-uniconfig">
     <h2>
@@ -292,18 +286,20 @@ mean rates for time windows of the past 1, 5 or 15 minutes</li>
 <ul>
 <li><code v-pre>io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size</code> -
 Number of tasks in the queue waiting for execution</li>
-<li><code v-pre>org.apache.sshd.server.SshServer.active_sessions</code> - Number of active CLI
-sessions</li>
-<li><code v-pre>org.opendaylight.controller.uniconfig.transaction.manager.api.UniconfigTransactionManager.open_transaction_count</code> - Number of open transactions</li>
+<li><code v-pre>org.apache.sshd.server.SshServer.active_sessions</code> -
+Number of active CLI sessions</li>
+<li><code v-pre>org.opendaylight.controller.uniconfig.transaction.manager.api.UniconfigTransactionManager.open_transaction_count</code> -
+Number of open transactions</li>
 </ul>
 </li>
-<li><strong>Meters</strong>
+<li><strong>Counters</strong>
 <ul>
-<li><code v-pre>org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke</code> - All RPCs
-invoked by UniConfig</li>
-<li><code v-pre>org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke</code> - All transactions invoked in UniConfig</li>
-<li><code v-pre>io.frinx.uniconfig.shell.cli.SshTerminal.cli_message</code> - All commands
-invoked in UniConfig shell</li>
+<li><code v-pre>org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke</code> -
+All RPCs invoked by UniConfig</li>
+<li><code v-pre>org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke</code> -
+All transactions invoked in UniConfig</li>
+<li><code v-pre>io.frinx.uniconfig.shell.cli.SshTerminal.cli_message</code> -
+All commands invoked in UniConfig shell</li>
 </ul>
 </li>
 </ul>
@@ -316,11 +312,7 @@ invoked in UniConfig shell</li>
 <p>Configuration is performed via a section in the <strong>application.properties</strong> file:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-properties"><code v-pre class="language-properties"># flag that determines if metrics will be reported or not
-metrics.enabled=true
-# reporter type (log, csv)
-metrics.reporter-type=LOG
-# reporting rate in seconds
-metrics.rate=30</code></pre>
+management.endpoint.prometheus.enabled=true</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="example-output">
     <h2>
@@ -329,32 +321,13 @@ metrics.rate=30</code></pre>
     </h2>
 </doc-anchor-target>
 <ul>
-<li><strong>metrics/org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke.csv</strong>:</li>
+<li><strong>example prometheus endpoint output, <a href="http://127.0.0.1:8181/actuator/prometheus">http://127.0.0.1:8181/actuator/prometheus</a></strong>:</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-csv"><code v-pre class="language-csv">t,count,mean_rate,m1_rate,m5_rate,m15_rate,rate_unit
-1650557436,3,0.182204,0.507889,0.580330,0.593370,events/second
-1650557466,3,0.064564,0.308050,0.525104,0.573917,events/second
-1650557496,3,0.039233,0.186842,0.475134,0.555102,events/second
-1650557526,3,0.028178,0.113325,0.429919,0.536904,events/second
-1650557534,3,0.026281,0.104264,0.422813,0.533929,events/second
-1650557927,3,0.015632,0.027484,0.323844,0.488517,events/second
-1650612500,3,0.055825,0.283420,0.516425,0.570738,events/second</code></pre>
-</doc-codeblock></div>
-<ul>
-<li><strong>log/metrics.log</strong>:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-log"><code v-pre class="language-log">09:27:12.007 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - Starting SFL4J reporter
-09:27:42.018 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=GAUGE, name=io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size, value=0
-09:27:42.025 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=METER, name=org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke, count=0, m1_rate=0.0, m5_rate=0.0, m15_rate=0.0, mean_rate=0.0, rate_unit=events/second
-09:27:42.026 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=METER, name=org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke, count=3, m1_rate=0.5078890349343685, m5_rate=0.5803296602892035, m15_rate=0.5933702335763534, mean_rate=0.19861560202310877, rate_unit=events/second
-09:28:12.026 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=GAUGE, name=io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size, value=0
-09:28:12.026 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=METER, name=org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke, count=0, m1_rate=0.0, m5_rate=0.0, m15_rate=0.0, mean_rate=0.0, rate_unit=events/second
-09:28:12.027 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=METER, name=org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke, count=3, m1_rate=0.3080502714195554, m5_rate=0.5251039914257685, m15_rate=0.5739172434618175, mean_rate=0.06651106239706056, rate_unit=events/second
-09:28:20.659 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=GAUGE, name=io.frinx.uniconfig.manager.impl.task.TaskExecutorImpl.queue_size, value=0
-09:28:20.659 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=METER, name=org.opendaylight.controller.uniconfig.transaction.manager.impl.UniconfigTransactionManagerImpl.transaction_invoke, count=0, m1_rate=0.0, m5_rate=0.0, m15_rate=0.0, mean_rate=0.0, rate_unit=events/second
-09:28:20.659 INFO io.frinx.uniconfig.metrics.impl.ReporterImpl - type=METER, name=org.opendaylight.yangtools.yang.common.RpcResult.rpc_invoke, count=3, m1_rate=0.28341993164460894, m5_rate=0.5164247858550347, m15_rate=0.5707376547004283, mean_rate=0.05582675920800621, rate_unit=events/second</code></pre>
+<pre class="language-none"><code v-pre class="language-none">org_opendaylight_controller_uniconfig_transaction_manager_impl_UniconfigTransactionManagerImpl_transaction_invoke_total 125.0
+org_opendaylight_controller_uniconfig_transaction_manager_api_UniconfigTransactionManager_open_transaction_count 57.0
+org_opendaylight_yangtools_yang_common_RpcResult_rpc_invoke_total 103.0
+io_frinx_uniconfig_manager_impl_task_exec_UniconfigTaskExecutor_queue_size 54.0</code></pre>
 </doc-codeblock></div>
 
                                 

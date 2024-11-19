@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.784823214620">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.785333201966">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC connect-node | Frinx docs</title>
     <meta name="title" content="RPC connect-node | Frinx docs">
-    <meta name="description" content="This RPC creates a connection to a device that is already installed. The connection is created outside of a transaction," />
+    <meta name="description" content="This RPC establishes connection to all notification streams belonging to an installed nodes. The connection is created outside a transaction," />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_connect-node/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_connect-node/">
     <meta property="og:title" content="RPC connect-node | Frinx docs">
-    <meta property="og:description" content="This RPC creates a connection to a device that is already installed. The connection is created outside of a transaction,">
+    <meta property="og:description" content="This RPC establishes connection to all notification streams belonging to an installed nodes. The connection is created outside a transaction,">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_connect-node/">
     <meta property="twitter:title" content="RPC connect-node | Frinx docs">
-    <meta property="twitter:description" content="This RPC creates a connection to a device that is already installed. The connection is created outside of a transaction,">
+    <meta property="twitter:description" content="This RPC establishes connection to all notification streams belonging to an installed nodes. The connection is created outside a transaction,">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.784823214620" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.785333201966" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.784823214620" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.785333201966" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,8 +254,8 @@
         <span>RPC connect-node</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC creates a connection to a device that is already installed.
-The connection is created outside of a transaction,
+<p>This RPC establishes connection to all notification streams belonging to an installed nodes.
+The connection is created outside a transaction,
 so that the connection stays up even without active transactions.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
@@ -270,15 +270,13 @@ so that the connection stays up even without active transactions.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Note that the transaction used in this RPC is created internally, so that no
+<p>Note that the transaction used in this RPC is created internally, so no
 user-created transactions are used.</p>
         </div>
     </div>
 </div>
-<p>The <strong>connect-node RPC</strong> also supports connections to stream nodes. These are
-possible only if a stream node is already defined in the <strong>install-node RPC</strong>.
-The most common use case is when a subscription stream is disconnected and a
-reconnection is required.</p>
+<p>The <strong>connect-node RPC</strong> also supports connection to a specific stream node by specifying
+the stream node name in the RPC. Examples are shown below.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -303,31 +301,30 @@ reconnection is required.</p>
     </h2>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>node-id</code> (mandatory) - ID of a node. In case of a stream node, the node
-consists of a device node and a stream name (<code v-pre>&lt;device node&gt;_&lt;stream name&gt;</code>,
-for example <code v-pre>R1_NETCONF</code>).</li>
-<li><code v-pre>max-connection-attempts</code> - Maximum number of connection attempts. The default
+<li><code v-pre>node-id</code> (mandatory) - ID of a node.</li>
+<li><code v-pre>stream-name</code> (optional) - Name of a stream.</li>
+<li><code v-pre>max-connection-attempts</code> (optional) - Maximum number of connection attempts. The default
 value is 1.</li>
-<li><code v-pre>between-attempts-timeout</code> - Timeout between connection attempts in seconds.
+<li><code v-pre>between-attempts-timeout</code> (optional) - Timeout between connection attempts in seconds.
 The default value is 60 seconds.</li>
 </ul>
-<doc-anchor-target id="cli-shell">
+<doc-anchor-target id="uniconfig-shell">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#cli-shell">#</doc-anchor-trigger>
-        <span>CLI Shell</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-shell">#</doc-anchor-trigger>
+        <span>UniConfig Shell</span>
     </h2>
 </doc-anchor-target>
 <p>The <strong>connect-node RPC</strong> is also included in
 <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">UniConfig shell</a>.
 As it takes <code v-pre>node-id</code> as input, the shell only suggests nodes that are relevant
-to this RPC (nodes that are installed in UniConfig but are not yet connected).</p>
+to this RPC (nodes that are installed in UniConfig topology).</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
         <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
-<p>For all examples, assume that the <strong>install RPC</strong> request included the following
+<p>For all examples, assume that the <strong>install-node RPC</strong> request included the following
 parameters:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
@@ -348,10 +345,10 @@ parameters:</p>
     }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="successful-example---request-for-a-device-node">
+<doc-anchor-target id="successful-example---request-to-establish-connection-to-all-notification-streams">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-for-a-device-node">#</doc-anchor-trigger>
-        <span>Successful example - Request for a device node</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-to-establish-connection-to-all-notification-streams">#</doc-anchor-trigger>
+        <span>Successful example - Request to establish connection to all notification streams.</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -373,10 +370,50 @@ parameters:</p>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="successful-example---request-for-a-stream-node">
+<doc-anchor-target id="failed-example---all-notification-streams-are-already-connected">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-for-a-stream-node">#</doc-anchor-trigger>
-        <span>Successful example - Request for a stream node</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example---all-notification-streams-are-already-connected">#</doc-anchor-trigger>
+        <span>Failed example - All notification streams are already connected</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 409</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;in-use&quot;,
+                &quot;error-type&quot;: &quot;application&quot;,
+                &quot;error-message&quot;: &quot;All connections for node R1 are already established.&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example---no-available-subscriptions-to-notification-streams">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example---no-available-subscriptions-to-notification-streams">#</doc-anchor-trigger>
+        <span>Failed example - No available subscriptions to notification streams</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 404</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;in-use&quot;,
+                &quot;error-type&quot;: &quot;application&quot;,
+                &quot;error-message&quot;: &quot;There are no available connections for node: R1&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example---request-for-a-specific-stream-node">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-for-a-specific-stream-node">#</doc-anchor-trigger>
+        <span>Successful example - Request for a specific stream node</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -388,7 +425,8 @@ parameters:</p>
 --header 'Cookie: Cookie_1=value' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;node-id&quot;: &quot;R1_NETCONF&quot;,
+        &quot;node-id&quot;: &quot;R1&quot;,
+        &quot;stream-name&quot;: &quot;NETCONF&quot;,
         &quot;max-connection-attempts&quot;: 1,
         &quot;between-attempts-timeout&quot;: 1
     }
@@ -411,7 +449,8 @@ parameters:</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Note that waiting for a stream node to be connected is currently not supported. This means that even if the response code is 200, the connection is not
+<p>Note that waiting for a stream node to be connected is currently not supported.
+This means that even if the response code is 200, the connection is not
 necessarily successful as well. To test if the connection is successful or in
 the process of connecting, call the RPC again (see example below) or examine the
 UniConfig logs.</p>
@@ -432,7 +471,7 @@ UniConfig logs.</p>
             {
                 &quot;error-tag&quot;: &quot;in-use&quot;,
                 &quot;error-type&quot;: &quot;application&quot;,
-                &quot;error-message&quot;: &quot;Node R1_NETCONF is already connected&quot;
+                &quot;error-message&quot;: &quot;Notification stream NETCONF for node R1 is already connected.&quot;
             }
         ]
     }
@@ -452,26 +491,21 @@ UniConfig logs.</p>
             {
                 &quot;error-tag&quot;: &quot;in-use&quot;,
                 &quot;error-type&quot;: &quot;application&quot;,
-                &quot;error-message&quot;: &quot;Stream node R1_NETCONF is in connection process.&quot;
+                &quot;error-message&quot;: &quot;Some connections are in the process of connecting. Try again later.&quot;
             }
         ]
     }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="failed-example---node-does-not-exist">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example---node-does-not-exist">#</doc-anchor-trigger>
-        <span>Failed example - Node does not exist</span>
-    </h3>
-</doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 409</div>
 <pre class="language-json"><code v-pre class="language-json">{
     &quot;errors&quot;: {
         &quot;error&quot;: [
             {
-                &quot;error-tag&quot;: &quot;data-missing&quot;,
+                &quot;error-tag&quot;: &quot;in-use&quot;,
                 &quot;error-type&quot;: &quot;application&quot;,
-                &quot;error-message&quot;: &quot;Node R1 doesn't exist in database&quot;
+                &quot;error-message&quot;: &quot;Some connections are in the process of connecting or failed to connect. Try again later.&quot;
             }
         ]
     }

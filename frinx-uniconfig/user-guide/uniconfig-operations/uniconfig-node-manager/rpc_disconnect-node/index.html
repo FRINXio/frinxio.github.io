@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.784823214620">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.785333201966">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags -->
     <title>RPC disconnect-node | Frinx docs</title>
     <meta name="title" content="RPC disconnect-node | Frinx docs">
-    <meta name="description" content="This RPC closes connection to a device. If a node is associated with multiple transactions, it will be removed from all of them." />
+    <meta name="description" content="This RPC terminates connection to all notification streams belonging to an installed nodes." />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_disconnect-node/" />
@@ -23,23 +23,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_disconnect-node/">
     <meta property="og:title" content="RPC disconnect-node | Frinx docs">
-    <meta property="og:description" content="This RPC closes connection to a device. If a node is associated with multiple transactions, it will be removed from all of them.">
+    <meta property="og:description" content="This RPC terminates connection to all notification streams belonging to an installed nodes.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-node-manager/rpc_disconnect-node/">
     <meta property="twitter:title" content="RPC disconnect-node | Frinx docs">
-    <meta property="twitter:description" content="This RPC closes connection to a device. If a node is associated with multiple transactions, it will be removed from all of them.">
+    <meta property="twitter:description" content="This RPC terminates connection to all notification streams belonging to an installed nodes.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../../resources/css/retype.css?v=2.4.0.784823214620" rel="stylesheet" />
+    <link href="../../../../../resources/css/retype.css?v=2.4.0.785333201966" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../../resources/js/config.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.784823214620" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../../resources/js/lunr.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../../resources/js/prism.js?v=2.4.0.785333201966" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -254,8 +254,7 @@
         <span>RPC disconnect-node</span>
     </h1>
 </doc-anchor-target>
-<p>This RPC closes connection to a device. If a node is associated with multiple
-transactions, it will be removed from all of them.</p>
+<p>This RPC terminates connection to all notification streams belonging to an installed nodes.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -269,12 +268,13 @@ transactions, it will be removed from all of them.</p>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>Note that the transaction used in this RPC is created internally, so that no
+<p>Note that the transaction used in this RPC is created internally, so no
 user-created transactions are used.</p>
         </div>
     </div>
 </div>
-<p>The <strong>disconnect-node RPC</strong> also supports disconnecting stream nodes.</p>
+<p>The <strong>disconnect-node RPC</strong> also supports terminating connection of a specific stream node by specifying
+the stream node name in the RPC. Examples are shown below.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -300,27 +300,26 @@ a cluster.</p>
     </h2>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>node-id</code> (mandatory) - ID of a node. In case of a stream node, the node
-consists of a device node and a stream name (<code v-pre>&lt;device node&gt;_&lt;stream name&gt;</code>,
-for example <code v-pre>R1_NETCONF</code>).</li>
+<li><code v-pre>node-id</code> (mandatory) - ID of a node.</li>
+<li><code v-pre>stream-name</code> (optional) - Name of a stream.</li>
 </ul>
 <doc-anchor-target id="uniconfig-shell">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#uniconfig-shell">#</doc-anchor-trigger>
-        <span>UniConfig shell</span>
+        <span>UniConfig Shell</span>
     </h2>
 </doc-anchor-target>
 <p>The <strong>disconnect-node RPC</strong> is also included in
 <a href="https://docs.frinx.io/frinx-uniconfig/user-guide/uniconfig-operations/uniconfig-shell/">UniConfig shell</a>.
 As it takes <code v-pre>node-id</code> as input, the shell only suggests nodes that are relevant
-to this RPC (nodes that are already connected).</p>
+to this RPC (nodes that are installed in UniConfig topology).</p>
 <doc-anchor-target id="rpc-examples">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rpc-examples">#</doc-anchor-trigger>
         <span>RPC examples</span>
     </h2>
 </doc-anchor-target>
-<p>For all examples, assume that the <strong>install RPC</strong> request included the following
+<p>For all examples, assume that the <strong>install-node RPC</strong> request included the following
 parameters:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
@@ -341,10 +340,10 @@ parameters:</p>
     }
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="successful-example---request-for-a-device-node">
+<doc-anchor-target id="successful-example---request-to-disconnect-all-notification-streams">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-for-a-device-node">#</doc-anchor-trigger>
-        <span>Successful example - Request for a device node</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-to-disconnect-all-notification-streams">#</doc-anchor-trigger>
+        <span>Successful example - Request to disconnect all notification streams</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -364,10 +363,52 @@ parameters:</p>
 <div class="codeblock-title">RPC Response, Status: 200</div>
 <pre class="language-none"><code v-pre class="language-none"></code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="successful-example---request-for-a-stream-node">
+<doc-anchor-target id="failed-example---already-disconnected">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-for-a-stream-node">#</doc-anchor-trigger>
-        <span>Successful example - Request for a stream node</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example---already-disconnected">#</doc-anchor-trigger>
+        <span>Failed example - Already disconnected</span>
+    </h3>
+</doc-anchor-target>
+<p>The specified node is not connected or does not exist in the database.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 502</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;southbound-no-connection&quot;,
+                &quot;error-type&quot;: &quot;application&quot;,
+                &quot;error-message&quot;: &quot;All connections for node R1 are already disconnected.&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="failed-example---cant-disconnect-because-some-connections-are-in-the-process-of-connecting">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example---cant-disconnect-because-some-connections-are-in-the-process-of-connecting">#</doc-anchor-trigger>
+        <span>Failed example - Can&#x27;t disconnect because some connections are in the process of connecting</span>
+    </h3>
+</doc-anchor-target>
+<p>The specified node is not connected or does not exist in the database.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">RPC Response, Status: 502</div>
+<pre class="language-json"><code v-pre class="language-json">{
+    &quot;errors&quot;: {
+        &quot;error&quot;: [
+            {
+                &quot;error-tag&quot;: &quot;southbound-no-connection&quot;,
+                &quot;error-type&quot;: &quot;application&quot;,
+                &quot;error-message&quot;: &quot;Some connections are in the process of connecting or aren't connected. Try again later.&quot;
+            }
+        ]
+    }
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="successful-example---request-to-disconnect-a-specific-notification-stream">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#successful-example---request-to-disconnect-a-specific-notification-stream">#</doc-anchor-trigger>
+        <span>Successful example - Request to disconnect a specific notification stream</span>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -379,7 +420,8 @@ parameters:</p>
 --header 'Cookie: Cookie_1=value' \
 --data-raw '{
     &quot;input&quot;: {
-        &quot;node-id&quot;: &quot;R1_NETCONF&quot;
+        &quot;node-id&quot;: &quot;R1&quot;,
+        &quot;stream-name&quot;: &quot;NETCONF&quot;
     }
 }'</code></pre>
 </doc-codeblock></div>
@@ -402,26 +444,7 @@ parameters:</p>
             {
                 &quot;error-tag&quot;: &quot;southbound-no-connection&quot;,
                 &quot;error-type&quot;: &quot;application&quot;,
-                &quot;error-message&quot;: &quot;Node vnf20_NETCONF isn't connected&quot;
-            }
-        ]
-    }
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="failed-example---node-does-not-exist">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#failed-example---node-does-not-exist">#</doc-anchor-trigger>
-        <span>Failed example - Node does not exist</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-json"><code v-pre class="language-json">{
-    &quot;errors&quot;: {
-        &quot;error&quot;: [
-            {
-                &quot;error-tag&quot;: &quot;data-missing&quot;,
-                &quot;error-type&quot;: &quot;application&quot;,
-                &quot;error-message&quot;: &quot;Node R1 doesn't exist in database&quot;
+                &quot;error-message&quot;: &quot;Notification stream NETCONF for node R1 is already disconnected.&quot;
             }
         ]
     }

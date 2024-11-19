@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.784823214620">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.785333201966">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.784823214620" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.785333201966" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.784823214620" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.784823214620" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.785333201966" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.785333201966" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -272,7 +272,7 @@ It can be accessed like so:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-java"><code v-pre class="language-java">import io.micrometer.core.instrument.Metrics;
 
-Metrics.globalRegistry();</code></pre>
+Metrics.globalRegistry;</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="metric-types">
     <h2>
@@ -289,7 +289,9 @@ Metrics.globalRegistry();</code></pre>
 </doc-anchor-target>
 <p>There are various best practice articles on how to name metrics but one thing is common: It should be clear what is measured.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">Metrics.globalRegistry.counter(RpcResult.class.getName() + &quot;.rpc_invoke&quot;)</code></pre>
+<pre class="language-java"><code v-pre class="language-java">import io.micrometer.core.instrument.Metrics;
+
+Metrics.globalRegistry.counter(RpcResult.class.getName() + &quot;.rpc_invoke&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="adding-new-metrics">
     <h2>
@@ -326,13 +328,6 @@ private void foo() {
             }
         });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="tags">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#tags">#</doc-anchor-trigger>
-        <span>Tags</span>
-    </h2>
-</doc-anchor-target>
-<p>Tags are currently not available in the version <em>4.2.x</em>, although support for them is planned for future major release.</p>
 <doc-anchor-target id="reporters">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#reporters">#</doc-anchor-trigger>
