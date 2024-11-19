@@ -130,5 +130,5 @@ reason, it is necessary to wrap this key into wrapping symbols
 %28%23GigabitEthernet0/0/0/2%29.
 
 ```
-http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface=GigabitEthernet0%2F0%2F0%2F2?jsonb-filter={$/frinx-openconfig-interfaces:interfaces/interface=%28%23GigabitEthernet0/0/0/2%29/config/enabled}==false&content=nonconfig
+http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=IOSXR/configuration/frinx-openconfig-interfaces:interfaces/interface=%22GigabitEthernet0/0/0/2%22?jsonb-filter={$/frinx-openconfig-interfaces:interfaces/interface=%28%23GigabitEthernet0/0/0/2%29/config/enabled}==false&content=nonconfig
 ```

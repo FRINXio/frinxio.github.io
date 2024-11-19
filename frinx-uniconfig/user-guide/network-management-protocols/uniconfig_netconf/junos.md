@@ -121,7 +121,7 @@ To show the configuration related to a specific interface, in this case
 
 ```bash
 curl -X GET \
- http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/configuration:configuration/interfaces/interface=ge-0%2F0%2F2?content=config
+ http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/configuration:configuration/interfaces/interface=%22ge-0/0/2%22?content=config
 ```
 
 The response will show the status of the interface:
@@ -144,7 +144,7 @@ To enable the interface “ge-0/0/2” in config datastore, run:
 
 ```bash
 curl -X PUT \
- http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/configuration:configuration/interfaces/interface=ge-0%2F0%2F2 \
+ http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/configuration:configuration/interfaces/interface=%22ge-0/0/2%22 \
  -d '{
    "interface": [
        {
@@ -160,7 +160,7 @@ To disable the interface “ge-0/0/2” in config datastore, run:
 
 ```bash
 curl -X PUT \
- http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/configuration:configuration/interfaces/interface=ge-0%2F0%2F2 \
+ http://localhost:8181/rests/data/network-topology:network-topology/topology=uniconfig/node=junos/frinx-uniconfig-topology:configuration/configuration:configuration/interfaces/interface=%22ge-0/0/2%22 \
  -d '{
    "interface": [
        {

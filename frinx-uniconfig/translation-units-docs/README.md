@@ -150,7 +150,7 @@ GET operation can be issued on both config/operational datastore. Config datasto
 Example of a case where the information is not the same (the only difference in requests is config vs operational):
 
 ```
-GET http://{{odl_ip}}:8181/rests/data/network-topology:network-topology/topology=cli/node={{node_id}}/yang-ext:mount/frinx-openconfig-network-instance:network-instances/network-instance=default/protocols/protocol=frinx-openconfig-policy-types:STATIC,default/static-routes/static=10.255.1.0%2F24?content=config
+GET http://{{odl_ip}}:8181/rests/data/network-topology:network-topology/topology=cli/node={{node_id}}/yang-ext:mount/frinx-openconfig-network-instance:network-instances/network-instance=default/protocols/protocol=frinx-openconfig-policy-types:STATIC,default/static-routes/static=%2210.255.1.0/24%22?content=config
 ```
 ```json
 {
@@ -176,7 +176,7 @@ GET http://{{odl_ip}}:8181/rests/data/network-topology:network-topology/topology
 ```
 
 ```
-GET http://{{odl_ip}}:8181/rests/data/network-topology:network-topology/topology=cli/node={{node_id}}/yang-ext:mount/frinx-openconfig-network-instance:network-instances/network-instance=default/protocols/protocol=frinx-openconfig-policy-types:STATIC,default/static-routes/static=10.255.1.0%2F24?content=nonconfig
+GET http://{{odl_ip}}:8181/rests/data/network-topology:network-topology/topology=cli/node={{node_id}}/yang-ext:mount/frinx-openconfig-network-instance:network-instances/network-instance=default/protocols/protocol=frinx-openconfig-policy-types:STATIC,default/static-routes/static=%2210.255.1.0/24%22?content=nonconfig
 ```
 
 ```json
