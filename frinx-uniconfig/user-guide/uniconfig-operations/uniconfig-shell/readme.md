@@ -619,6 +619,84 @@ uniconfig-topology-iosxr>show interfaces interface GigabitEthernet0/0/0/1
 }
 ```
 
+### Tag template
+
+The `tag` operation for adding or removing tags from template.
+
+Options: `add` and `remove`
+
+Then pick `template` under `template-topology`
+
+Base command pattern:
+tag add/remove template-topology <template-name>
+
+After base command 
+
+**Example** - Tag a leaf-list:
+
+```shell Show untagged services leaf-list
+config>show template-topology test-template service-node-groups service-node-group default-sng services 
+[
+  "cgnat",
+  "nextgen-firewall",
+  "test",
+  "sdwan"
+]
+```
+
+```shell Add Tag services leaf-list
+config>tag 
+add   (invoke add tag explicitly)   remove (invoke remove tag explicitly)
+
+config>tag add template-topology test-template
+alarms                          dhcp-profiles                   service-node-groups
+alias                           event                           snmp
+confdConfig                     merge-tag     (add merge tag)   update-tag   (add update tag)
+create-tag   (add create tag)   networks
+delete-tag   (add delete tag)   replace-tag (add replace tag)
+
+config>tag add template-topology test-template service-node-groups service-node-group default-value services replace-tag
+```
+
+```shell Show tagged services leaf-list
+config>show template-topology test-template service-node-groups service-node-group default-sng services 
+{
+  "@": {
+    "template-tags:operation": "replace-tag"
+  },
+  "#": [
+    "cgnat",
+    "nextgen-firewall",
+    "test",
+    "sdwan"
+  ]
+}
+```
+
+```shell Remove Tag services leaf-list
+config>tag 
+add   (invoke add tag explicitly)   remove (invoke remove tag explicitly)
+
+config>tag add template-topology test-template
+alarms                          dhcp-profiles                   service-node-groups
+alias                           event                           snmp
+confdConfig                     merge-tag     (add merge tag)   update-tag   (add update tag)
+create-tag   (add create tag)   networks
+delete-tag   (add delete tag)   replace-tag (add replace tag)
+
+config>tag remove template-topology test-template service-node-groups service-node-group default-value services replace-tag
+```
+
+```shell Show untagged services leaf-list
+config>show template-topology test-template service-node-groups service-node-group default-sng services 
+[
+  "cgnat",
+  "nextgen-firewall",
+  "test",
+  "sdwan"
+]
+```
+
 ### Execute UniConfig operation
 
 The `request` command is used to execute UniConfig operations such as `commit`
