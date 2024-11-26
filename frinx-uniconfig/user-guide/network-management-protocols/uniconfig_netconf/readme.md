@@ -114,9 +114,9 @@ The response will contain the whole configuration of NETCONF device. You
 can fetch smaller slice of configuration using more specific URLs under
 'yang-ext:mount' too.
 
-### Authentification with private/public key
+### Authentication with private/public key
 
-This type of authentification is used when you want to connect to the
+This type of authentication is used when you want to connect to the
 NETCONF device via private/public key, it is necessary to save public
 key into device, then put private key into UniConfig and when trying to
 configure NETCONF mount-point to connect via ssh key and not password.
@@ -132,7 +132,7 @@ $ ssh-keygen -b 1024 -t rsa -f sshkey -m pem
 **2.** Change .pub format into .bin format
 
 ```
-$ cat sshkey.pub | cut -f 2 -d ' ' | base64 -d sshkey.bin
+$ cat sshkey.pub | cut -f 2 -d ' ' | base64 -d > sshkey.bin
 ```
 
 **3.** Copy public key into device directory. Password of the device
