@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.785515877874">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.786012297890">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,12 +34,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.785515877874" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.786012297890" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.785515877874" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.786012297890" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.785515877874" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.785515877874" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.786012297890" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../../resources/js/prism.js?v=2.4.0.786012297890" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -365,13 +365,13 @@ node. The new netconf-connector will now be present there. Just invoke:</p>
 <p>The response will contain the whole configuration of NETCONF device. You
 can fetch smaller slice of configuration using more specific URLs under
 &#x27;yang-ext:mount&#x27; too.</p>
-<doc-anchor-target id="authentification-with-privatepublic-key">
+<doc-anchor-target id="authentication-with-privatepublic-key">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#authentification-with-privatepublic-key">#</doc-anchor-trigger>
-        <span>Authentification with private/public key</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#authentication-with-privatepublic-key">#</doc-anchor-trigger>
+        <span>Authentication with private/public key</span>
     </h3>
 </doc-anchor-target>
-<p>This type of authentification is used when you want to connect to the
+<p>This type of authentication is used when you want to connect to the
 NETCONF device via private/public key, it is necessary to save public
 key into device, then put private key into UniConfig and when trying to
 configure NETCONF mount-point to connect via ssh key and not password.</p>
@@ -382,7 +382,7 @@ configure NETCONF mount-point to connect via ssh key and not password.</p>
 </doc-codeblock></div>
 <p><strong>2.</strong> Change .pub format into .bin format</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">$ cat sshkey.pub | cut -f 2 -d ' ' | base64 -d sshkey.bin</code></pre>
+<pre class="language-none"><code v-pre class="language-none">$ cat sshkey.pub | cut -f 2 -d ' ' | base64 -d &gt; sshkey.bin</code></pre>
 </doc-codeblock></div>
 <p><strong>3.</strong> Copy public key into device directory. Password of the device
 will be required.</p>
