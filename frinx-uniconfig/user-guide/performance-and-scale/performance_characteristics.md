@@ -259,3 +259,121 @@ Update rate:
 > After update each device has config of 1.2k json lines each
 
 20 threads were used. No delay among successive updating RPCs
+
+
+## GNMI devices
+
+We use gnmi-testtool to simulate devices.
+
+Important caveats:
+- Measurement were performed on simulated devices = no device overhead
+- Measured on Uniconfig version 5.2.5
+- Simulated devices were with small configuration (~ 1144 json lines)
+- Devices were installed using optimized RPC connection-manager:install-multiple-nodes (up to 250 devices)
+
+Tests:
+- A. Single node deployment of Uniconfig resources: CPU 12 cores and RAM 4 GB
+
+### Device installation & synchronization 
+```
+{  
+    "input": {  
+        "nodes": [  
+            {
+              'node-id': 'node-36100',
+              'gnmi': {
+                'schema-cache-directory': 'gnmi-topology-testtool',
+                'update-paths': [
+                  '.+'
+                ],
+                'uniconfig-config:whitelist': {
+                  'path': [
+                    'openconfig-interfaces:interfaces',
+                    'openconfig-system:system',
+                    'openconfig-openflow:openflow'
+                  ]
+                },
+                'uniconfig-config:uniconfig-native-enabled': True,
+                'uniconfig-config:install-uniconfig-node-enabled': True,
+                'uniconfig-config:sequence-read-active': True,
+                'connection-parameters': {
+                  'host': '10.19.0.253',
+                  'port': '36100',
+                  'connection-type': 'PLAINTEXT',
+                  'credentials': {
+                    'username': 'admin',
+                    'password': 'password'
+                  }
+                },
+                'session-timers': {
+                  'request-timeout': 100,
+                  'internal-transaction-timeout': 100
+                },
+                'extensions-parameters': {
+                  'gnmi-parameters': {
+                    'use-model-name-prefix': False
+                  },
+                  'force-cached-capabilities': [
+                    'null'
+                  ]
+                },
+                'stream': [
+                  {
+                    'stream-name': 'GNMI_testtool',
+                    'paths': [
+                      'openconfig-system:system/config',
+                      'openconfig-system:system/aaa',
+                      'openconfig-interfaces:interfaces/interface',
+                      'openconfig-lldp:lldp'
+                    ]
+                  }
+                ]
+              }
+            }
+        ]  
+    }  
+}  
+```
+
+### Test A - one node Uniconfig
+
+Inputs:  
+6000 x GNMI devices simulated:
+1144 json lines
+
+Evaluation 1:
+6000 devices were registered in 5.2 minutes on single node Uniconfig using 12 cores  
+Average one device instalation duration = 5.2 minutes / 6000 devices ~ 0.00087 minutes  
+Average number of json lines per device = 1144 lines  
+lines of json / per core / per minute = 1144 lines / 12 cores / 0.00087 minutes = 109578
+
+Installation & sync rate:
+
+**109,578** *lines of json / per core / per minute*
+
+> A single uniconfig node is capable of installing (and fully syncing)
+> **6000 GNMI devices with config of 1.1k lines each of formatted json (in Uniconfig)**
+> in **5.2 minutes** using **12 CPU cores**
+
+RPC were sent serially - *connection-manager:install-multiple-nodes* RPC was used (with 100 devices each).
+
+
+Evaluation 2:
+Devices were PATCHED - after PATCH they contain 10 more interfaces - which is 1234 json lines.  
+Then 6000 devices were updated in 4.3 minutes on single node Uniconfig using 12 cores.  
+Update process consisted of RPCs: sync-from-network  
+After sync-from-network each configuration was increased from 1144 to 1234 json lines  
+Average one device update duration = 4.3 minutes / 6000 devices = 0,00072 minutes  
+Average number of json lines per device = 1234 lines  
+lines of json / per core / per minute = 1234 lines / 12 cores / 0,00072 minutes = 142824
+
+Update rate:
+
+**142,824** *lines of json / per core / per minute*
+
+> A single uniconfig node is capable of updating (and fully syncing)
+> **6000 GNMI devices with config of 1.1k json lines each (of formatted json in Uniconfig)**
+> in **4.3 minutes** using **12 CPU cores**
+> After update each device has config of 1.2k json lines each
+
+10 threads were used. No delay among successive updating RPCs. RPC sync-from-network with 60 devices each RPC. 
