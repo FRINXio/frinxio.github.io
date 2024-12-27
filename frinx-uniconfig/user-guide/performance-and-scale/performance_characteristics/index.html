@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.786012297890">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.788607022330">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -34,11 +34,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../../static/favicon-192x192.png" rel="icon" />
-    <link href="../../../../resources/css/retype.css?v=2.4.0.786012297890" rel="stylesheet" />
+    <link href="../../../../resources/css/retype.css?v=2.4.0.788607022330" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.786012297890" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../../resources/js/config.js?v=2.4.0.788607022330" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.786012297890" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../../resources/js/lunr.js?v=2.4.0.788607022330" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -536,6 +536,132 @@ in <strong>12.4 minutes</strong> using <strong>12 CPU cores</strong>
 After update each device has config of 1.2k json lines each</p>
 </blockquote>
 <p>20 threads were used. No delay among successive updating RPCs</p>
+<doc-anchor-target id="gnmi-devices">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gnmi-devices">#</doc-anchor-trigger>
+        <span>GNMI devices</span>
+    </h2>
+</doc-anchor-target>
+<p>We use gnmi-testtool to simulate devices.</p>
+<p>Important caveats:</p>
+<ul>
+<li>Measurement were performed on simulated devices = no device overhead</li>
+<li>Measured on Uniconfig version 5.2.5</li>
+<li>Simulated devices were with small configuration (~ 1144 json lines)</li>
+<li>Devices were installed using optimized RPC connection-manager:install-multiple-nodes (up to 250 devices)</li>
+</ul>
+<p>Tests:</p>
+<ul>
+<li>
+<ol type="A">
+<li>Single node deployment of Uniconfig resources: CPU 12 cores and RAM 4 GB</li>
+</ol>
+</li>
+</ul>
+<doc-anchor-target id="device-installation--synchronization-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#device-installation--synchronization-2">#</doc-anchor-trigger>
+        <span>Device installation &amp; synchronization</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">{  
+    &quot;input&quot;: {  
+        &quot;nodes&quot;: [  
+            {
+              'node-id': 'node-36100',
+              'gnmi': {
+                'schema-cache-directory': 'gnmi-topology-testtool',
+                'update-paths': [
+                  '.+'
+                ],
+                'uniconfig-config:whitelist': {
+                  'path': [
+                    'openconfig-interfaces:interfaces',
+                    'openconfig-system:system',
+                    'openconfig-openflow:openflow'
+                  ]
+                },
+                'uniconfig-config:uniconfig-native-enabled': True,
+                'uniconfig-config:install-uniconfig-node-enabled': True,
+                'uniconfig-config:sequence-read-active': True,
+                'connection-parameters': {
+                  'host': '10.19.0.253',
+                  'port': '36100',
+                  'connection-type': 'PLAINTEXT',
+                  'credentials': {
+                    'username': 'admin',
+                    'password': 'password'
+                  }
+                },
+                'session-timers': {
+                  'request-timeout': 100,
+                  'internal-transaction-timeout': 100
+                },
+                'extensions-parameters': {
+                  'gnmi-parameters': {
+                    'use-model-name-prefix': False
+                  },
+                  'force-cached-capabilities': [
+                    'null'
+                  ]
+                },
+                'stream': [
+                  {
+                    'stream-name': 'GNMI_testtool',
+                    'paths': [
+                      'openconfig-system:system/config',
+                      'openconfig-system:system/aaa',
+                      'openconfig-interfaces:interfaces/interface',
+                      'openconfig-lldp:lldp'
+                    ]
+                  }
+                ]
+              }
+            }
+        ]  
+    }  
+}  </code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="test-a---one-node-uniconfig-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#test-a---one-node-uniconfig-2">#</doc-anchor-trigger>
+        <span>Test A - one node Uniconfig</span>
+    </h3>
+</doc-anchor-target>
+<p>Inputs:<br />
+6000 x GNMI devices simulated:
+1144 json lines</p>
+<p>Evaluation 1:
+6000 devices were registered in 5.2 minutes on single node Uniconfig using 12 cores<br />
+Average one device instalation duration = 5.2 minutes / 6000 devices ~ 0.00087 minutes<br />
+Average number of json lines per device = 1144 lines<br />
+lines of json / per core / per minute = 1144 lines / 12 cores / 0.00087 minutes = 109578</p>
+<p>Installation &amp; sync rate:</p>
+<p><strong>109,578</strong> <em>lines of json / per core / per minute</em></p>
+<blockquote>
+<p>A single uniconfig node is capable of installing (and fully syncing)
+<strong>6000 GNMI devices with config of 1.1k lines each of formatted json (in Uniconfig)</strong>
+in <strong>5.2 minutes</strong> using <strong>12 CPU cores</strong></p>
+</blockquote>
+<p>RPC were sent serially - <em>connection-manager:install-multiple-nodes</em> RPC was used (with 100 devices each).</p>
+<p>Evaluation 2:
+Devices were PATCHED - after PATCH they contain 10 more interfaces - which is 1234 json lines.<br />
+Then 6000 devices were updated in 4.3 minutes on single node Uniconfig using 12 cores.<br />
+Update process consisted of RPCs: sync-from-network<br />
+After sync-from-network each configuration was increased from 1144 to 1234 json lines<br />
+Average one device update duration = 4.3 minutes / 6000 devices = 0,00072 minutes<br />
+Average number of json lines per device = 1234 lines<br />
+lines of json / per core / per minute = 1234 lines / 12 cores / 0,00072 minutes = 142824</p>
+<p>Update rate:</p>
+<p><strong>142,824</strong> <em>lines of json / per core / per minute</em></p>
+<blockquote>
+<p>A single uniconfig node is capable of updating (and fully syncing)
+<strong>6000 GNMI devices with config of 1.1k json lines each (of formatted json in Uniconfig)</strong>
+in <strong>4.3 minutes</strong> using <strong>12 CPU cores</strong>
+After update each device has config of 1.2k json lines each</p>
+</blockquote>
+<p>10 threads were used. No delay among successive updating RPCs. RPC sync-from-network with 60 devices each RPC.</p>
 
                                 
                                 <!-- Required only on API pages -->
